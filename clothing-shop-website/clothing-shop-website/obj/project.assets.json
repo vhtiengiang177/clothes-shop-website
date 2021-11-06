@@ -6256,11 +6256,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+      "projectUniqueName": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
       "projectName": "clothing-shop-website",
-      "projectPath": "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+      "projectPath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
       "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
-      "outputPath": "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\clothing-shop-website\\obj\\",
+      "outputPath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\clothing-shop-website\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6277,8 +6277,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
+            "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }

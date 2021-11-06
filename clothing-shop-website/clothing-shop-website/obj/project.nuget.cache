@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ODGb3fu03JyxArpzOUHQ3J5pKRiIt3jIJ0LSaJqUphwjrcVc3oZBQq7LyUaGLOvY641/AefIhUR5d/0FsgYmQQ==",
+  "dgSpecHash": "jXtVYEzzK1xF8zTEnFHk+CzwV5EDKiul79Awb1NBrIoETjLMb7Cro/QelKdp4WGIPkEgIwXvqcy9lg4VOXE7UQ==",
   "success": true,
-  "projectFilePath": "D:\\TienGiang\\KLTN\\Clothing Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+  "projectFilePath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vhtie\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vhtie\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
