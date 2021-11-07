@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211106071137_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20211107064918_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -280,10 +280,10 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdCustomer")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPromotion")
+                    b.Property<int?>("IdPromotion")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdShipper")
+                    b.Property<int?>("IdShipper")
                         .HasColumnType("int");
 
                     b.Property<int>("IdStaff")
@@ -474,8 +474,11 @@ namespace clothing_shop_website.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("State")
-                        .HasColumnType("bit");
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -703,8 +706,7 @@ namespace clothing_shop_website.Migrations
                     b.HasOne("Domain.Entity.Promotion", "Promotion")
                         .WithMany("Orders")
                         .HasForeignKey("IdPromotion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Entity.Staff", "Staff")
                         .WithOne("Order")

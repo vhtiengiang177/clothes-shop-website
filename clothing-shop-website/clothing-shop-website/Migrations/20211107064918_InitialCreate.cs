@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clothing_shop_website.Migrations
 {
-    public partial class InitialDatabase : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,9 +60,10 @@ namespace clothing_shop_website.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<double>(type: "float", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    State = table.Column<bool>(type: "bit", nullable: false),
+                    State = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
@@ -436,9 +437,9 @@ namespace clothing_shop_website.Migrations
                     FeeDelivery = table.Column<double>(type: "float", nullable: false),
                     IdAddress = table.Column<int>(type: "int", nullable: false),
                     IdCustomer = table.Column<int>(type: "int", nullable: false),
-                    IdPromotion = table.Column<int>(type: "int", nullable: false),
+                    IdPromotion = table.Column<int>(type: "int", nullable: true),
                     IdStaff = table.Column<int>(type: "int", nullable: false),
-                    IdShipper = table.Column<int>(type: "int", nullable: false),
+                    IdShipper = table.Column<int>(type: "int", nullable: true),
                     DeliveryAddressId = table.Column<int>(type: "int", nullable: true),
                     CustomerIdAccount = table.Column<int>(type: "int", nullable: true)
                 },
