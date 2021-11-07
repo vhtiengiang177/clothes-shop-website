@@ -11,7 +11,7 @@ namespace Domain.Entity
         public string Sku { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool State { get; set; }
+        public int State { get; set; }
         public double Price { get; set; }
         public int TotalBuy { get; set; } = 0;
         public int Stock { get; set; }
