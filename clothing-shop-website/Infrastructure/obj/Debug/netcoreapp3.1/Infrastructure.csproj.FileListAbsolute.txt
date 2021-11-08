@@ -35,7 +35,18 @@ D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netc
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
-<<<<<<< HEAD
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
@@ -49,17 +60,3 @@ D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcore
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
-=======
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.pdb
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
->>>>>>> 42230a69acb2231dd6267b2f301bc74496ebafb3

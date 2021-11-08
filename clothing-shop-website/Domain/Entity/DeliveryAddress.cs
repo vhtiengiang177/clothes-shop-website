@@ -16,7 +16,7 @@ namespace Domain.Entity
         public string District { get; set; }
         public string Wards { get; set; }
         public int IdCustomer { get; set; }
-        public int State { get; set; }
+        public int State { get; set; } = 1;
         public Customer Customer { get; set; }
     }
 }
