@@ -10,6 +10,6 @@ namespace Domain.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public int State { get; set; }
-        public virtual ICollection<Product_Size> Product_Sizes { get; set; }
+        public virtual ICollection<Product_Size_Color> Product_Sizes { get; set; }
     }
 }

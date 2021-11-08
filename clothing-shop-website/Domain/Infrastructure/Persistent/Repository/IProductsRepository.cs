@@ -12,13 +12,9 @@ namespace Domain.Infrastructure.Persistent.Repository
         Task<IQueryable<Product>> GetAllProducts();
         Product GetProductByID(int productID);
         IQueryable<Product> GetAllProductsByIDCategory(int categoryID);
-        IQueryable<Product_Color> GetProductColorByIdProduct(int productID);
-        IQueryable<Product_Size> GetProductSizeByIdProduct(int productID);
-        IQueryable<Product_Material> GetProductMaterialByIdProduct(int productID);
         Product CreateProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
         IQueryable<Product> SortListProducts(string sort, IQueryable<Product> lProduct);
-        //IQueryable<Product> FilterProduct(FilterParamsProduct searchParams, IQueryable<Product> lProductItems);
     }
 }

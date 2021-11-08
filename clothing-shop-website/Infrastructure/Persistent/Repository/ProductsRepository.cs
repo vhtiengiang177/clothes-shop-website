@@ -30,8 +30,6 @@ namespace Infrastructure.Persistent.Repository
             return lProduct.AsQueryable();
         }
 
-       
-
         public Product GetProductByID(int productID)
         {
             return _dbContext.Products.FirstOrDefault(p => p.Id == productID);
@@ -98,25 +96,12 @@ namespace Infrastructure.Persistent.Repository
             return lProduct;
         }
 
-        public IQueryable<Product_Color> GetProductColorByIdProduct(int productID)
-        {
-            var lProductColor = _dbContext.Product_Colors.Where(p => p.IdProduct == productID).ToList();
-
-            return lProductColor.AsQueryable();
-        }
-
-        public IQueryable<Product_Size> GetProductSizeByIdProduct(int productID)
+        public IQueryable<Product_Size_Color> GetProductSizeByIdProduct(int productID)
         {
             var lProductSize = _dbContext.Product_Sizes.Where(p => p.IdProduct == productID).ToList();
 
             return lProductSize.AsQueryable();
         }
-
-        public IQueryable<Product_Material> GetProductMaterialByIdProduct(int productID)
-        {
-            var lProductMaterial = _dbContext.Product_Materials.Where(p => p.IdProduct == productID).ToList();
-
-            return lProductMaterial.AsQueryable();
-        }
+        
     }
 }

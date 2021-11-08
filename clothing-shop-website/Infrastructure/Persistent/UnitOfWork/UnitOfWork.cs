@@ -12,10 +12,9 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IRepository<Style> _stylesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
-        private IRepository<Material> _materialsRepository;
-        private IRepository<Product_Color> _productColorsRepository;
-        private IRepository<Product_Size> _productSizesRepository;
-        private IRepository<Product_Material> _productMaterialsRepository;
+        //private IRepository<Material> _materialsRepository;
+        private IRepository<Product_Size_Color> _productSizesRepository;
+        //private IRepository<Product_Material> _productMaterialsRepository;
 
 
         public UnitOfWork(DataDbContext dbContext)
@@ -37,33 +36,15 @@ namespace Infrastructure.Persistent.UnitOfWork
                 return _categoriesRepository;
             }
         }
-        public IRepository<Product_Color> ProductColorsRepository
-        {
-            get
-            {
-                if (_productColorsRepository == null)
-                    _productColorsRepository = new GenericRepository<Product_Color>(_dbContext);
-                return _productColorsRepository;
-            }
-        }
+       
 
-        public IRepository<Product_Size> ProductSizesRepository
+        public IRepository<Product_Size_Color> ProductSizesRepository
         {
             get
             {
                 if (_productSizesRepository == null)
-                    _productSizesRepository = new GenericRepository<Product_Size>(_dbContext);
+                    _productSizesRepository = new GenericRepository<Product_Size_Color>(_dbContext);
                 return _productSizesRepository;
-            }
-        }
-
-        public IRepository<Product_Material> ProductMaterialsRepository
-        {
-            get
-            {
-                if (_productMaterialsRepository == null)
-                    _productMaterialsRepository = new GenericRepository<Product_Material>(_dbContext);
-                return _productMaterialsRepository;
             }
         }
 
@@ -89,13 +70,13 @@ namespace Infrastructure.Persistent.UnitOfWork
                 return _sizesRepository;
             }
         }
-        public IRepository<Material> MaterialsRepository {
-            get {
-                if (_materialsRepository == null)
-                    _materialsRepository = new GenericRepository<Material>(_dbContext);
-                return _materialsRepository;
-            }
-        }
+        //public IRepository<Material> MaterialsRepository {
+        //    get {
+        //        if (_materialsRepository == null)
+        //            _materialsRepository = new GenericRepository<Material>(_dbContext);
+        //        return _materialsRepository;
+        //    }
+        //}
 
         public bool Save()
         {

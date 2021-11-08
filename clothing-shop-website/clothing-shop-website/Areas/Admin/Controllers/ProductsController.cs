@@ -60,7 +60,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] Product product, [FromQuery] int[] idColors, [FromQuery] int[] idMaterials, [FromQuery] int[] idSizes )
+        public IActionResult CreateProduct(Product product )
         {
             if (ModelState.IsValid)
             {
@@ -68,45 +68,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 if (_unitOfWork.Save())
                 {
-
-                    Product_Color pcObj = new Product_Color();
-                    pcObj.IdProduct = result.Id;
-                    int[] distinctIdColors = idColors.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdColors.Count(); i++)
-                    {
-                        pcObj.IdColor = distinctIdColors[i];
-                        _unitOfWork.ProductColorsRepository.Insert(pcObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
-
-                    Product_Size psObj = new Product_Size();
-                    pcObj.IdProduct = result.Id;
-                    int[] distinctIdSizes = idSizes.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdSizes.Count(); i++)
-                    {
-                        psObj.IdSize = distinctIdSizes[i];
-                        _unitOfWork.ProductSizesRepository.Insert(psObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
-
-                    Product_Material pmObj = new Product_Material();
-                    pcObj.IdProduct = result.Id;
-                    int[] distinctIdMaterials = idMaterials.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdMaterials.Count(); i++)
-                    {
-                        pmObj.IdMaterial = distinctIdMaterials[i];
-                        _unitOfWork.ProductMaterialsRepository.Insert(pmObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
 
                     return Ok(result);
                 }
@@ -119,7 +80,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateProduct([FromBody] Product productObj, [FromQuery] int[] idColors, [FromQuery] int[] idMaterials, [FromQuery] int[] idSizes)
+        public IActionResult UpdateProduct(Product productObj)
         {
             if (ModelState.IsValid)
             {
@@ -130,67 +91,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     {
                         return BadRequest();
                     }
-
-
-                    var lPC = _unitOfWork.ProductsRepository.GetProductColorByIdProduct(productObj.Id);
-
-                    foreach (var item in lPC)
-                    {
-                        _unitOfWork.ProductColorsRepository.Delete(item);
-                    }
-                    Product_Color pcObj = new Product_Color();
-                    pcObj.IdProduct = productObj.Id;
-                    int[] distinctIdColors = idColors.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdColors.Count(); i++)
-                    {
-                        pcObj.IdColor = distinctIdColors[i];
-                        _unitOfWork.ProductColorsRepository.Insert(pcObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
-
-                    var lPS = _unitOfWork.ProductsRepository.GetProductSizeByIdProduct(productObj.Id);
-
-                    foreach (var item in lPS)
-                    {
-                        _unitOfWork.ProductSizesRepository.Delete(item);
-                    }
-                    Product_Size psObj = new Product_Size();
-                    psObj.IdProduct = productObj.Id;
-                    int[] distinctIdSizes = idSizes.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdSizes.Count(); i++)
-                    {
-                        pcObj.IdColor = distinctIdSizes[i];
-                        _unitOfWork.ProductSizesRepository.Insert(psObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
-
-                    var lPM = _unitOfWork.ProductsRepository.GetProductMaterialByIdProduct(productObj.Id);
-                    foreach (var item in lPM)
-                    {
-                        _unitOfWork.ProductMaterialsRepository.Delete(item);
-                    }
-                    Product_Material pmObj = new Product_Material();
-                    pmObj.IdProduct = productObj.Id;
-                    int[] distinctIdMaterials = idMaterials.Distinct().ToArray();
-                    for (int i = 0; i < distinctIdMaterials.Count(); i++)
-                    {
-                        pcObj.IdColor = distinctIdMaterials[i];
-                        _unitOfWork.ProductMaterialsRepository.Insert(pmObj);
-                        if (!_unitOfWork.Save())
-                        {
-                            break;
-                        }
-                    }
-
-
-
-
 
                     return Ok(productObj);
                 }
