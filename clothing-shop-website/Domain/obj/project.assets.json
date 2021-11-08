@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\Domain\\Domain.csproj",
+      "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
-      "outputPath": "D:\\TienGiang\\KLTN\\New folder\\clothing-shop-website\\Domain\\obj\\",
+      "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",

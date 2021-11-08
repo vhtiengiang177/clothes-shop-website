@@ -25,3 +25,12 @@ D:\TienGiang\KLTN\New folder\clothing-shop-website\Domain\obj\Debug\netcoreapp3.
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
