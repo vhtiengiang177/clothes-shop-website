@@ -63,24 +63,24 @@ namespace Infrastructure.Persistent.Repository
                 case "sku:desc":
                     lProduct = lProduct.OrderByDescending(p => p.Sku).AsQueryable();
                     break;
-                case "totalbuy:asc":
-                    lProduct = lProduct.OrderBy(p => p.TotalBuy).AsQueryable();
-                    break;
-                case "totalbuy:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.TotalBuy).AsQueryable();
-                    break;
-                case "stock:asc":
-                    lProduct = lProduct.OrderBy(p => p.Stock).AsQueryable();
-                    break;
-                case "stock:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.Stock).AsQueryable();
-                    break;
-                case "price:asc":
-                    lProduct = lProduct.OrderBy(p => p.Price).AsQueryable();
-                    break;
-                case "price:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.Price).AsQueryable();
-                    break;
+                //case "totalbuy:asc":
+                //    lProduct = lProduct.OrderBy(p => p.TotalBuy).AsQueryable();
+                //    break;
+                //case "totalbuy:desc":
+                //    lProduct = lProduct.OrderByDescending(p => p.TotalBuy).AsQueryable();
+                //    break;
+                //case "stock:asc":
+                //    lProduct = lProduct.OrderBy(p => p.Stock).AsQueryable();
+                //    break;
+                //case "stock:desc":
+                //    lProduct = lProduct.OrderByDescending(p => p.Stock).AsQueryable();
+                //    break;
+                //case "price:asc":
+                //    lProduct = lProduct.OrderBy(p => p.Price).AsQueryable();
+                //    break;
+                //case "price:desc":
+                //    lProduct = lProduct.OrderByDescending(p => p.Price).AsQueryable();
+                //    break;
                 case "name:desc":
                     lProduct = lProduct.OrderByDescending(p => p.Name).AsQueryable();
                     break;
@@ -96,6 +96,27 @@ namespace Infrastructure.Persistent.Repository
             }
 
             return lProduct;
+        }
+
+        public IQueryable<Product_Color> GetProductColorByIdProduct(int productID)
+        {
+            var lProductColor = _dbContext.Product_Colors.Where(p => p.IdProduct == productID).ToList();
+
+            return lProductColor.AsQueryable();
+        }
+
+        public IQueryable<Product_Size> GetProductSizeByIdProduct(int productID)
+        {
+            var lProductSize = _dbContext.Product_Sizes.Where(p => p.IdProduct == productID).ToList();
+
+            return lProductSize.AsQueryable();
+        }
+
+        public IQueryable<Product_Material> GetProductMaterialByIdProduct(int productID)
+        {
+            var lProductMaterial = _dbContext.Product_Materials.Where(p => p.IdProduct == productID).ToList();
+
+            return lProductMaterial.AsQueryable();
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Domain.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public bool State { get; set; }
-        public double Price { get; set; }
-        public int TotalBuy { get; set; } = 0;
-        public int Stock { get; set; }
+        //public double Price { get; set; }
+        //public int TotalBuy { get; set; } = 0;
+        //public int Stock { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }
         public int CreatedById { get; set; }
