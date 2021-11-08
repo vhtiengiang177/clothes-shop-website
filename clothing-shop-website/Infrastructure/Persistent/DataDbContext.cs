@@ -25,7 +25,7 @@ namespace Infrastructure.Persistent
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Product_Size_Color> Product_Sizes { get; set; }
+        public DbSet<Product_Size_Color> Product_Size_Colors { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<ShopInfo> ShopInfos { get; set; }
         public DbSet<Size> Sizes { get; set; }

@@ -12,9 +12,9 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IRepository<Style> _stylesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
-        //private IRepository<Material> _materialsRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
-        //private IRepository<Product_Material> _productMaterialsRepository;
+        private IRepository<Log_Product> _logProductsRepository;
+
 
 
         public UnitOfWork(DataDbContext dbContext)
@@ -38,13 +38,23 @@ namespace Infrastructure.Persistent.UnitOfWork
         }
        
 
-        public IRepository<Product_Size_Color> ProductSizesRepository
+        public IRepository<Product_Size_Color> ProductSizeColorsRepository
         {
             get
             {
                 if (_productSizesRepository == null)
                     _productSizesRepository = new GenericRepository<Product_Size_Color>(_dbContext);
                 return _productSizesRepository;
+            }
+        }
+
+        public IRepository<Log_Product> LogProductsRepository
+        {
+            get
+            {
+                if (_logProductsRepository == null)
+                    _logProductsRepository = new GenericRepository<Log_Product>(_dbContext);
+                return _logProductsRepository;
             }
         }
 
@@ -70,13 +80,6 @@ namespace Infrastructure.Persistent.UnitOfWork
                 return _sizesRepository;
             }
         }
-        //public IRepository<Material> MaterialsRepository {
-        //    get {
-        //        if (_materialsRepository == null)
-        //            _materialsRepository = new GenericRepository<Material>(_dbContext);
-        //        return _materialsRepository;
-        //    }
-        //}
 
         public bool Save()
         {

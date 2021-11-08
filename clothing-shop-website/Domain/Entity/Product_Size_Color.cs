@@ -10,7 +10,6 @@ namespace Domain.Entity
         public int IdProduct { get; set; }
         public int IdSize { get; set; }
         public int IdColor { get; set; } = 1;
-        public int Quantity { get; set; }
         public int UnitPrice { get; set; }
         public int Stock { get; set; }
         public int State { get; set; }

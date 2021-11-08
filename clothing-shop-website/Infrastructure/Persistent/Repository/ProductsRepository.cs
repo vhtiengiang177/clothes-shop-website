@@ -18,21 +18,21 @@ namespace Infrastructure.Persistent.Repository
 
         public async Task<IQueryable<Product>> GetAllProducts()
         {
-            var lProduct = await _dbContext.Products.ToListAsync();
+            var lProduct = await _dbContext.Products.Where(p => p.State > 0).ToListAsync();
 
             return lProduct.AsQueryable();
         }
 
         public IQueryable<Product> GetAllProductsByIDCategory(int CategoryID)
         {
-            var lProduct =  _dbContext.Products.Where(p => p.IdCategory == CategoryID).ToList();
+            var lProduct =  _dbContext.Products.Where(p => p.IdCategory == CategoryID && p.State > 0).ToList();
 
             return lProduct.AsQueryable();
         }
 
         public Product GetProductByID(int productID)
         {
-            return _dbContext.Products.FirstOrDefault(p => p.Id == productID);
+            return _dbContext.Products.FirstOrDefault(p => p.Id == productID && p.State > 0);
         }
         public Product CreateProduct(Product product)
         {
@@ -96,12 +96,27 @@ namespace Infrastructure.Persistent.Repository
             return lProduct;
         }
 
-        public IQueryable<Product_Size_Color> GetProductSizeByIdProduct(int productID)
+        public async Task<IQueryable<Product_Size_Color>> GetListItemByIdProduct(int productID)
         {
-            var lProductSize = _dbContext.Product_Sizes.Where(p => p.IdProduct == productID).ToList();
+            var lProductItems =  await _dbContext.Product_Size_Colors.Where(p => p.IdProduct == productID && p.State > 0).ToListAsync();
 
-            return lProductSize.AsQueryable();
+            return lProductItems.AsQueryable();
         }
-        
+
+        public bool CheckItemInList(Log_Product logproduct)
+        {
+            bool check = false;
+            var count = _dbContext.Product_Size_Colors.Where(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0).ToList().Count;
+            if (count > 0)
+                check = true;
+            
+            return check;
+        }
+
+        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct)
+        {
+            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0);
+        }
+
     }
 }

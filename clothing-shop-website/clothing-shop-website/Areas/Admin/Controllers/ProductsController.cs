@@ -44,7 +44,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+
+        [HttpGet("GetProductByID/{id}", Name = "GetProductByID")]
         public IActionResult GetProductByID(int id)
         {
             var product = _unitOfWork.ProductsRepository.GetProductByID(id);
@@ -59,8 +60,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateProduct(Product product )
+        [HttpPost("CreateProduct")]
+        public IActionResult CreateProduct(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateProduct/{id}", Name = "UpdateProduct")]
         public IActionResult UpdateProduct(Product productObj)
         {
             if (ModelState.IsValid)
@@ -102,7 +103,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("DeleteProduct/{id}", Name = "DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
             try
@@ -112,15 +113,68 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (product == null)
                     return NotFound();
 
-                _unitOfWork.ProductsRepository.DeleteProduct(product);
+                product.State = 0;
+                _unitOfWork.ProductsRepository.UpdateProduct(product);
                 _unitOfWork.Save();
 
-                return Ok();
+                return Ok(product);
             }
             catch
             {
                 return BadRequest();
             }
+        }
+
+
+        // Product-Size-Color
+        [HttpGet("GetAllItemOfProduct/{id}", Name = "GetAllItemOfProduct")]
+        public async Task<IActionResult> GetAllItemOfProduct(Product product)
+        {
+
+            IQueryable<Product_Size_Color> lProductItems;
+
+            lProductItems = await _unitOfWork.ProductsRepository.GetListItemByIdProduct(product.Id);
+
+            return Ok();
+        }
+
+
+
+        [HttpPost("AddItemOfProduct")]
+        public IActionResult AddItemOfProduct(Log_Product logproduct)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.LogProductsRepository.Insert(logproduct);
+
+                Product_Size_Color item = new Product_Size_Color();
+
+                if (_unitOfWork.ProductsRepository.CheckItemInList(logproduct))
+                {
+                    item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
+                    if (item != null)
+                    {
+                        item.Stock += logproduct.Quantity;
+                        _unitOfWork.ProductSizeColorsRepository.Update(item);
+                        if (_unitOfWork.Save())
+                        {
+                            return Ok();
+                        }
+                    }
+                    return BadRequest();
+                }
+                else
+                {
+                    item.IdProduct = logproduct.IdProduct;
+                    item.IdSize = logproduct.IdSize;
+                    item.IdColor = logproduct.IdColor;
+                    item.Stock = logproduct.Quantity;
+                    item.State = 1;
+                    _unitOfWork.ProductSizeColorsRepository.Insert(item);
+                    return Ok(item);
+                }
+            }
+            return BadRequest(ModelState);
         }
     }
 }

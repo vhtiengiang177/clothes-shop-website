@@ -234,13 +234,12 @@ namespace clothing_shop_website.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product_Sizes",
+                name: "Product_Size_Colors",
                 columns: table => new
                 {
                     IdProduct = table.Column<int>(type: "int", nullable: false),
                     IdSize = table.Column<int>(type: "int", nullable: false),
                     IdColor = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<int>(type: "int", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false),
@@ -248,21 +247,21 @@ namespace clothing_shop_website.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product_Sizes", x => new { x.IdProduct, x.IdSize, x.IdColor });
+                    table.PrimaryKey("PK_Product_Size_Colors", x => new { x.IdProduct, x.IdSize, x.IdColor });
                     table.ForeignKey(
-                        name: "FK_Product_Sizes_Colors_ColorId",
+                        name: "FK_Product_Size_Colors_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Product_Sizes_Products_IdProduct",
+                        name: "FK_Product_Size_Colors_Products_IdProduct",
                         column: x => x.IdProduct,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Product_Sizes_Sizes_IdSize",
+                        name: "FK_Product_Size_Colors_Sizes_IdSize",
                         column: x => x.IdSize,
                         principalTable: "Sizes",
                         principalColumn: "Id",
@@ -653,26 +652,26 @@ namespace clothing_shop_website.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Product_Sizes",
-                columns: new[] { "IdColor", "IdProduct", "IdSize", "ColorId", "Quantity", "State", "Stock", "UnitPrice" },
+                table: "Product_Size_Colors",
+                columns: new[] { "IdColor", "IdProduct", "IdSize", "ColorId", "State", "Stock", "UnitPrice" },
                 values: new object[,]
                 {
-                    { 1, 11, 1, null, 0, 1, 100, 4000 },
-                    { 1, 10, 1, null, 0, 1, 100, 4000 },
-                    { 1, 8, 1, null, 0, 1, 100, 4000 },
-                    { 1, 7, 1, null, 0, 1, 100, 4000 },
-                    { 1, 6, 1, null, 0, 1, 100, 4000 },
-                    { 1, 9, 1, null, 0, 1, 100, 4000 },
-                    { 3, 5, 2, null, 0, 1, 100, 4000 },
-                    { 1, 1, 2, null, 0, 1, 100, 2000 },
-                    { 1, 1, 3, null, 0, 1, 100, 3000 },
-                    { 4, 5, 2, null, 0, 1, 100, 4000 },
-                    { 2, 2, 2, null, 0, 1, 100, 3000 },
-                    { 1, 1, 1, null, 0, 1, 100, 1000 },
-                    { 4, 3, 1, null, 0, 1, 100, 4000 },
-                    { 2, 4, 1, null, 0, 1, 100, 4000 },
-                    { 3, 4, 1, null, 0, 1, 100, 4000 },
-                    { 3, 2, 2, null, 0, 1, 100, 3000 }
+                    { 1, 11, 1, null, 1, 100, 4000 },
+                    { 1, 10, 1, null, 1, 100, 4000 },
+                    { 1, 8, 1, null, 1, 100, 4000 },
+                    { 1, 7, 1, null, 1, 100, 4000 },
+                    { 1, 6, 1, null, 1, 100, 4000 },
+                    { 1, 9, 1, null, 1, 100, 4000 },
+                    { 3, 5, 2, null, 1, 100, 4000 },
+                    { 1, 1, 2, null, 1, 100, 2000 },
+                    { 1, 1, 3, null, 1, 100, 3000 },
+                    { 4, 5, 2, null, 1, 100, 4000 },
+                    { 2, 2, 2, null, 1, 100, 3000 },
+                    { 1, 1, 1, null, 1, 100, 1000 },
+                    { 4, 3, 1, null, 1, 100, 4000 },
+                    { 2, 4, 1, null, 1, 100, 4000 },
+                    { 3, 4, 1, null, 1, 100, 4000 },
+                    { 3, 2, 2, null, 1, 100, 3000 }
                 });
 
             migrationBuilder.InsertData(
@@ -680,14 +679,14 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "IdAccount", "CardIdentity", "DateOfBirth", "FirstName", "Image", "LastName", "Phone", "State" },
                 values: new object[,]
                 {
-                    { 1, "123456786", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Võ Hồng Tiên", null, "Giang", "0328807778", 0 },
-                    { 2, "123456787", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị", null, "Thảo", "0328807776", 0 },
-                    { 4, "123456788", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807775", 0 },
-                    { 10, "123456783", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gian Thiệu", null, "Quân", "0328807771", 0 },
-                    { 11, "123456782", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Minh", null, "Thư", "0328807770", 0 },
-                    { 5, "123456785", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thủy", null, "Tiên", "0328807773", 0 },
-                    { 6, "123456784", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807772", 0 },
-                    { 3, "123456789", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Nguyễn Gia", null, "Bảo", "0328807774", 0 }
+                    { 1, "123456786", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Võ Hồng Tiên", null, "Giang", "0328807778", 1 },
+                    { 2, "123456787", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị", null, "Thảo", "0328807776", 1 },
+                    { 4, "123456788", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807775", 1 },
+                    { 10, "123456783", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gian Thiệu", null, "Quân", "0328807771", 1 },
+                    { 11, "123456782", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Minh", null, "Thư", "0328807770", 1 },
+                    { 5, "123456785", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thủy", null, "Tiên", "0328807773", 1 },
+                    { 6, "123456784", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807772", 1 },
+                    { 3, "123456789", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Nguyễn Gia", null, "Bảo", "0328807774", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -827,13 +826,13 @@ namespace clothing_shop_website.Migrations
                 column: "IdStaff");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_Sizes_ColorId",
-                table: "Product_Sizes",
+                name: "IX_Product_Size_Colors_ColorId",
+                table: "Product_Size_Colors",
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_Sizes_IdSize",
-                table: "Product_Sizes",
+                name: "IX_Product_Size_Colors_IdSize",
+                table: "Product_Size_Colors",
                 column: "IdSize");
 
             migrationBuilder.CreateIndex(
@@ -876,7 +875,7 @@ namespace clothing_shop_website.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "Product_Sizes");
+                name: "Product_Size_Colors");
 
             migrationBuilder.DropTable(
                 name: "ShopInfos");

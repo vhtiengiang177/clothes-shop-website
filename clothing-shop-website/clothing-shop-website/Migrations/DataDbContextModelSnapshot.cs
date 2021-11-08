@@ -1303,9 +1303,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("State")
                         .HasColumnType("int");
 
@@ -1321,7 +1318,7 @@ namespace clothing_shop_website.Migrations
 
                     b.HasIndex("IdSize");
 
-                    b.ToTable("Product_Sizes");
+                    b.ToTable("Product_Size_Colors");
 
                     b.HasData(
                         new
@@ -1329,7 +1326,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 1,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 1000
@@ -1339,7 +1335,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 1,
                             IdSize = 2,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 2000
@@ -1349,7 +1344,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 1,
                             IdSize = 3,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 3000
@@ -1359,7 +1353,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 2,
                             IdSize = 2,
                             IdColor = 2,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 3000
@@ -1369,7 +1362,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 2,
                             IdSize = 2,
                             IdColor = 3,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 3000
@@ -1379,7 +1371,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 3,
                             IdSize = 1,
                             IdColor = 4,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1389,7 +1380,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 4,
                             IdSize = 1,
                             IdColor = 2,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1399,7 +1389,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 4,
                             IdSize = 1,
                             IdColor = 3,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1409,7 +1398,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 5,
                             IdSize = 2,
                             IdColor = 3,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1419,7 +1407,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 5,
                             IdSize = 2,
                             IdColor = 4,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1429,7 +1416,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 6,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1439,7 +1425,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 7,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1449,7 +1434,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 8,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1459,7 +1443,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 9,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1469,7 +1452,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 10,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1479,7 +1461,6 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 11,
                             IdSize = 1,
                             IdColor = 1,
-                            Quantity = 0,
                             State = 1,
                             Stock = 100,
                             UnitPrice = 4000
@@ -1721,7 +1702,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Võ Hồng Tiên",
                             LastName = "Giang",
                             Phone = "0328807778",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1731,7 +1712,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Nguyễn Thị",
                             LastName = "Thảo",
                             Phone = "0328807776",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1741,7 +1722,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Nguyễn Gia",
                             LastName = "Bảo",
                             Phone = "0328807774",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1751,7 +1732,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
                             Phone = "0328807775",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1761,7 +1742,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Trần Thủy",
                             LastName = "Tiên",
                             Phone = "0328807773",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1771,7 +1752,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
                             Phone = "0328807772",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1781,7 +1762,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Gian Thiệu",
                             LastName = "Quân",
                             Phone = "0328807771",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1791,7 +1772,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Nguyễn Thị Minh",
                             LastName = "Thư",
                             Phone = "0328807770",
-                            State = 0
+                            State = 1
                         });
                 });
 

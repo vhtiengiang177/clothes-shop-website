@@ -12,7 +12,7 @@ namespace Domain.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public int TotalBuy { get; set; } = 0;
-        public int State { get; set; }
+        public int State { get; set; } = 1;
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }
         public int CreatedById { get; set; }
@@ -21,8 +21,6 @@ namespace Domain.Entity
         public int? IdStyle { get; set; }
         public Category Category { get; set; }
         public Style Style { get; set; }
-       
-
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Product_Size_Color> Product_Sizes { get; set; }
     }
