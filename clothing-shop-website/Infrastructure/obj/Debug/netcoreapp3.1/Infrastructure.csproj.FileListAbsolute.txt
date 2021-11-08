@@ -35,3 +35,16 @@ D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netc
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 D:\TienGiang\KLTN\New folder\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.AssemblyReference.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
