@@ -16,8 +16,7 @@ namespace Domain.Entity
         public string Image { get; set; }
         public int State { get; set; }
         public int IdAccount { get; set; }
-        public int IdOrder { get; set; }
         public Account Account { get; set; }
-        public Order Order { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }
