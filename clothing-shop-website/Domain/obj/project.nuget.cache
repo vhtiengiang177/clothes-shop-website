@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "0VJhPJBSIaexAcUIlJ0SLS6GaJA2j0yxCEzIj3cTcF6p9celu/omzZErcCOf7Byx5lDkAfHXy76TvNGUgBI2vQ==",
   "success": true,
   "projectFilePath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj",
+=======
+  "dgSpecHash": "tSFe500rMswRXd9EBVWQnOWA+iFbZqNbOQXH6CUPAFLrBOFyJor0CCeL5aiJEGV8/4w+VQPNj16n/3mvvx9FZQ==",
+  "success": true,
+  "projectFilePath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
+>>>>>>> 42230a69acb2231dd6267b2f301bc74496ebafb3
   "expectedPackageFiles": [],
   "logs": []
 }

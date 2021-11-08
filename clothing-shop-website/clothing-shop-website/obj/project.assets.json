@@ -6256,11 +6256,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
       "projectName": "clothing-shop-website",
       "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
       "packagesPath": "C:\\Users\\Thao\\.nuget\\packages\\",
       "outputPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\obj\\",
+=======
+      "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+      "projectName": "clothing-shop-website",
+      "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+      "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
+      "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\obj\\",
+>>>>>>> 42230a69acb2231dd6267b2f301bc74496ebafb3
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Thao\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6277,8 +6285,13 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+<<<<<<< HEAD
             "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
               "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
+=======
+            "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
+>>>>>>> 42230a69acb2231dd6267b2f301bc74496ebafb3
             }
           }
         }

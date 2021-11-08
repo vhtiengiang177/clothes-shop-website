@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "4vTPftCViD0fN2SxD9lxOHiP6l95OdTo9fBkKrhXKfMn8RmX0kSXC7X77m+1+q3Ae+PAJbSicArdJy5rld+GRA==",
   "success": true,
   "projectFilePath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
+=======
+  "dgSpecHash": "OG1wg24rsNLuz6P2e3M0NTmiSvZPw6EvqBoJnBoG37H68cdka+mMb+eiyWXrbgHaKVQq1bR9j5e99RA7URAhmg==",
+  "success": true,
+  "projectFilePath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
+>>>>>>> 42230a69acb2231dd6267b2f301bc74496ebafb3
   "expectedPackageFiles": [
     "C:\\Users\\Thao\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.11\\microsoft.entityframeworkcore.5.0.11.nupkg.sha512",
     "C:\\Users\\Thao\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.11\\microsoft.entityframeworkcore.abstractions.5.0.11.nupkg.sha512",
