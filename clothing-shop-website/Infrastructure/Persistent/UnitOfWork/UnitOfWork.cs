@@ -57,13 +57,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         }
 
 
-        public IRepository<Style> StylesRepository {
-            get {
-                if (_stylesRepository == null)
-                    _stylesRepository = new GenericRepository<Style>(_dbContext);
-                return _stylesRepository;
-            }
-        }
+   
         public IRepository<Color> ColorsRepository {
             get {
                 if (_colorsRepository == null)
