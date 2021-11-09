@@ -18,9 +18,7 @@ namespace Domain.Entity
         public int CreatedById { get; set; }
         public int? ModifiedById { get; set; }
         public int? IdCategory { get; set; }
-        public int? IdStyle { get; set; }
         public Category Category { get; set; }
-        public Style Style { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Product_Size_Color> Product_Sizes { get; set; }
     }

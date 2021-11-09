@@ -78,7 +78,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("{id}")]
         public IActionResult DeleteStyle(int id)
         {
             try {

@@ -30,7 +30,6 @@ namespace Infrastructure.Persistent
         public DbSet<ShopInfo> ShopInfos { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Staff> Staff { get; set; }
-        public DbSet<Style> Styles { get; set; }
         public DbSet<TypeAccount> TypeAccounts { get; set; }
         public DbSet<TypeCustomer> TypeCustomers { get; set; }
 
@@ -149,10 +148,6 @@ namespace Infrastructure.Persistent
                         .WithMany(category => category.Products)
                         .HasForeignKey(e => e.IdCategory);
 
-                entity.HasOne<Style>(e => e.Style)
-                        .WithMany(style => style.Products)
-                        .HasForeignKey(e => e.IdStyle);
-
                 entity.HasMany<Image>(e => e.Images)
                       .WithOne(image => image.Product);
 
@@ -194,12 +189,6 @@ namespace Infrastructure.Persistent
                        .IsUnique();
             });
 
-            modelBuilder.Entity<Style>(entity => {
-                entity.HasKey(e => e.Id);
-
-                entity.HasMany<Product>(e => e.Products)
-                      .WithOne(product => product.Style);
-            });
 
             modelBuilder.Entity<TypeAccount>(entity => {
                 entity.HasKey(e => e.Id);
@@ -298,31 +287,18 @@ namespace Infrastructure.Persistent
                new Size() { Id = 4, Name = "XL", State = 1 },
                new Size() { Id = 5, Name = "XXL", State = 1 });
 
-            modelBuilder.Entity<Style>().HasData(
-               new Style() { Id = 1, Name = "Shift Dress", State = 1 },
-               new Style() { Id = 2, Name = "Midi Dress", State = 1 },
-               new Style() { Id = 3, Name = "Long Jeans", State = 1 },
-               new Style() { Id = 4, Name = "Short Jeans", State = 1 },
-               new Style() { Id = 5, Name = "Basic Shirt", State = 1 },
-               new Style() { Id = 6, Name = "Fussily Shirt", State = 1 },
-               new Style() { Id = 7, Name = "Basic Sweater", State = 1 },
-               new Style() { Id = 8, Name = "Fussily Sweater", State = 1 },
-               new Style() { Id = 9, Name = "Basic Trousers", State = 1 },
-               new Style() { Id = 10, Name = "Fussily Trousers", State = 1 },
-               new Style() { Id = 11, Name = "T-Shirt", State = 1 });
-
             modelBuilder.Entity<Product>().HasData(
-              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 1, IdCategory = 1 },
-              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 2, IdCategory = 1 },
-              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdStyle = 3, IdCategory = 2 },
-              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdStyle = 4, IdCategory = 2 },
-              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 5, IdCategory = 3 },
-              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 6, IdCategory = 3 },
-              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 7, IdCategory = 4 },
-              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 8, IdCategory = 4 },
-              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 9, IdCategory = 5 },
-              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdStyle = 10, IdCategory = 5 },
-              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdStyle = 11, IdCategory = 3 });
+              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
+              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
+              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
+              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
+              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 5 },
+              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 5 },
+              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 });
 
 
             modelBuilder.Entity<Product_Size_Color>().HasData(
