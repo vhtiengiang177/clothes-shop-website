@@ -9,7 +9,6 @@ namespace Infrastructure.Persistent.UnitOfWork
         private DataDbContext _dbContext;
         private IProductsRepository _productsRepository;
         private IRepository<Category> _categoriesRepository;
-        private IRepository<Style> _stylesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
@@ -59,13 +58,6 @@ namespace Infrastructure.Persistent.UnitOfWork
         }
 
 
-        public IRepository<Style> StylesRepository {
-            get {
-                if (_stylesRepository == null)
-                    _stylesRepository = new GenericRepository<Style>(_dbContext);
-                return _stylesRepository;
-            }
-        }
         public IRepository<Color> ColorsRepository {
             get {
                 if (_colorsRepository == null)
