@@ -22,18 +22,14 @@ namespace Infrastructure.Persistent
         public DbSet<DeliveryAddress> DeliveryAddresses { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Log_Product> Log_Products { get; set; }
-        public DbSet<Material> Materials { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Product_Color> Product_Colors { get; set; }
-        public DbSet<Product_Material> Product_Materials { get; set; }
-        public DbSet<Product_Size> Product_Sizes { get; set; }
+        public DbSet<Product_Size_Color> Product_Size_Colors { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<ShopInfo> ShopInfos { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Staff> Staff { get; set; }
-        public DbSet<Style> Styles { get; set; }
         public DbSet<TypeAccount> TypeAccounts { get; set; }
         public DbSet<TypeCustomer> TypeCustomers { get; set; }
 
@@ -63,7 +59,7 @@ namespace Infrastructure.Persistent
             });
 
             modelBuilder.Entity<Cart>(entity => {
-                entity.HasKey(e => new { e.IdCustomer, e.IdProduct });
+                entity.HasKey(e => new { e.IdCustomer, e.IdProduct, e.IdSize, e.IdColor });
 
                 entity.HasOne<Customer>(e => e.Customer)
                     .WithMany(c => c.Carts)
@@ -114,11 +110,7 @@ namespace Infrastructure.Persistent
             });
 
             modelBuilder.Entity<Log_Product>(entity => {
-                entity.HasKey(e => e.Id);
-            });
-
-            modelBuilder.Entity<Material>(entity => {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => new { e.Id});
             });
 
             modelBuilder.Entity<Order>(entity => {
@@ -138,7 +130,7 @@ namespace Infrastructure.Persistent
             });
 
             modelBuilder.Entity<OrderDetail>(entity => {
-                entity.HasKey(e => new { e.IdOrder, e.IdProduct });
+                entity.HasKey(e => new { e.IdOrder, e.IdProduct, e.IdSize, e.IdColor });
 
                 entity.HasOne<Order>(e => e.Order)
                        .WithMany(order => order.OrderDetails)
@@ -156,44 +148,14 @@ namespace Infrastructure.Persistent
                         .WithMany(category => category.Products)
                         .HasForeignKey(e => e.IdCategory);
 
-                entity.HasOne<Style>(e => e.Style)
-                        .WithMany(style => style.Products)
-                        .HasForeignKey(e => e.IdStyle);
-
                 entity.HasMany<Image>(e => e.Images)
                       .WithOne(image => image.Product);
 
-                entity.HasOne<Log_Product>(e => e.Log_Product)
-                      .WithOne(logproduct => logproduct.Product)
-                      .HasForeignKey<Log_Product>(logproduct => logproduct.IdProduct);
             });
 
-            modelBuilder.Entity<Product_Color>(entity => {
-                entity.HasKey(e => new { e.IdProduct, e.IdColor });
 
-                entity.HasOne<Product>(e => e.Product)
-                        .WithMany(product => product.Product_Colors)
-                        .HasForeignKey(e => e.IdProduct);
-
-                entity.HasOne<Color>(e => e.Color)
-                        .WithMany(color => color.Product_Colors)
-                        .HasForeignKey(e => e.IdColor);
-            });
-
-            modelBuilder.Entity<Product_Material>(entity => {
-                entity.HasKey(e => new { e.IdProduct, e.IdMaterial });
-
-                entity.HasOne<Product>(e => e.Product)
-                        .WithMany(product => product.Product_Materials)
-                        .HasForeignKey(e => e.IdProduct);
-
-                entity.HasOne<Material>(e => e.Material)
-                        .WithMany(material => material.Product_Material)
-                        .HasForeignKey(e => e.IdMaterial);
-            });
-
-            modelBuilder.Entity<Product_Size>(entity => {
-                entity.HasKey(e => new { e.IdProduct, e.IdSize });
+            modelBuilder.Entity<Product_Size_Color>(entity => {
+                entity.HasKey(e => new { e.IdProduct, e.IdSize, e.IdColor });
 
                 entity.HasOne<Product>(e => e.Product)
                         .WithMany(product => product.Product_Sizes)
@@ -227,12 +189,6 @@ namespace Infrastructure.Persistent
                        .IsUnique();
             });
 
-            modelBuilder.Entity<Style>(entity => {
-                entity.HasKey(e => e.Id);
-
-                entity.HasMany<Product>(e => e.Products)
-                      .WithOne(product => product.Style);
-            });
 
             modelBuilder.Entity<TypeAccount>(entity => {
                 entity.HasKey(e => e.Id);
@@ -331,90 +287,55 @@ namespace Infrastructure.Persistent
                new Size() { Id = 4, Name = "XL", State = 1 },
                new Size() { Id = 5, Name = "XXL", State = 1 });
 
-            modelBuilder.Entity<Material>().HasData(
-               new Material() { Id = 1, Name = "Cotton", State = 1 },
-               new Material() { Id = 2, Name = "Wool", State = 1 },
-               new Material() { Id = 3, Name = "Silk", State = 1 },
-               new Material() { Id = 4, Name = "Leather", State = 1 },
-               new Material() { Id = 5, Name = "Cellulosic fibres", State = 1 });
-
-            modelBuilder.Entity<Style>().HasData(
-               new Style() { Id = 1, Name = "Shift Dress", State = 1 },
-               new Style() { Id = 2, Name = "Midi Dress", State = 1 },
-               new Style() { Id = 3, Name = "Long Jeans", State = 1 },
-               new Style() { Id = 4, Name = "Short Jeans", State = 1 },
-               new Style() { Id = 5, Name = "Basic Shirt", State = 1 },
-               new Style() { Id = 6, Name = "Fussily Shirt", State = 1 },
-               new Style() { Id = 7, Name = "Basic Sweater", State = 1 },
-               new Style() { Id = 8, Name = "Fussily Sweater", State = 1 },
-               new Style() { Id = 9, Name = "Basic Trousers", State = 1 },
-               new Style() { Id = 10, Name = "Fussily Trousers", State = 1 },
-               new Style() { Id = 11, Name = "T-Shirt", State = 1 });
-
             modelBuilder.Entity<Product>().HasData(
-              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", State = 1, Price = 320000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 1, IdCategory = 1 },
-              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", State = 1, Price = 280000, TotalBuy = 900, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 2, IdCategory = 1 },
-              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", State = 1, Price = 250000, TotalBuy = 80, Stock = 200, CreatedDate = createdDate, CreatedById = 4, IdStyle = 3, IdCategory = 2 },
-              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", State = 1, Price = 320000, TotalBuy = 70, Stock = 200, CreatedDate = createdDate, CreatedById = 4, IdStyle = 4, IdCategory = 2 },
-              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", State = 1, Price = 220000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 5, IdCategory = 3 },
-              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", State = 1, Price = 195000, TotalBuy = 50, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 6, IdCategory = 3 },
-              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", State = 1, Price = 320000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 7, IdCategory = 4 },
-              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", State = 1, Price = 320000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 8, IdCategory = 4 },
-              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", State = 1, Price = 225000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 9, IdCategory = 5 },
-              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", State = 1, Price = 220000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 10, IdCategory = 5 },
-              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", State = 0, Price = 220000, TotalBuy = 100, Stock = 200, CreatedDate = createdDate, CreatedById = 3, IdStyle = 11, IdCategory = 3 });
+              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
+              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
+              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
+              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
+              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 5 },
+              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 5 },
+              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 });
 
-            modelBuilder.Entity<Product_Color>().HasData(
-               new Product_Color() { IdProduct = 1, IdColor = 1 },
-               new Product_Color() { IdProduct = 2, IdColor = 2 },
-               new Product_Color() { IdProduct = 3, IdColor = 3 },
-               new Product_Color() { IdProduct = 4, IdColor = 4 },
-               new Product_Color() { IdProduct = 5, IdColor = 5 },
-               new Product_Color() { IdProduct = 6, IdColor = 1 },
-               new Product_Color() { IdProduct = 7, IdColor = 2 },
-               new Product_Color() { IdProduct = 8, IdColor = 3 },
-               new Product_Color() { IdProduct = 9, IdColor = 4 },
-               new Product_Color() { IdProduct = 10, IdColor = 5 },
-               new Product_Color() { IdProduct = 11, IdColor = 1 });
 
-            modelBuilder.Entity<Product_Size>().HasData(
-               new Product_Size() { IdProduct = 1, IdSize = 1 },
-               new Product_Size() { IdProduct = 2, IdSize = 2 },
-               new Product_Size() { IdProduct = 3, IdSize = 3 },
-               new Product_Size() { IdProduct = 4, IdSize = 4 },
-               new Product_Size() { IdProduct = 5, IdSize = 5 },
-               new Product_Size() { IdProduct = 6, IdSize = 1 },
-               new Product_Size() { IdProduct = 7, IdSize = 2 },
-               new Product_Size() { IdProduct = 8, IdSize = 3 },
-               new Product_Size() { IdProduct = 9, IdSize = 4 },
-               new Product_Size() { IdProduct = 10, IdSize = 5 },
-               new Product_Size() { IdProduct = 11, IdSize = 1 });
-
-            modelBuilder.Entity<Product_Material>().HasData(
-               new Product_Material() { IdProduct = 1, IdMaterial = 1 },
-               new Product_Material() { IdProduct = 2, IdMaterial = 2 },
-               new Product_Material() { IdProduct = 3, IdMaterial = 3 },
-               new Product_Material() { IdProduct = 4, IdMaterial = 4 },
-               new Product_Material() { IdProduct = 5, IdMaterial = 5 },
-               new Product_Material() { IdProduct = 6, IdMaterial = 1 },
-               new Product_Material() { IdProduct = 7, IdMaterial = 2 },
-               new Product_Material() { IdProduct = 8, IdMaterial = 3 },
-               new Product_Material() { IdProduct = 9, IdMaterial = 4 },
-               new Product_Material() { IdProduct = 10, IdMaterial = 5 },
-               new Product_Material() { IdProduct = 11, IdMaterial = 1 });
+            modelBuilder.Entity<Product_Size_Color>().HasData(
+               new Product_Size_Color() { IdProduct = 1, IdSize = 1 ,IdColor = 1, UnitPrice = 1000, Stock = 100,State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1, UnitPrice = 2000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1, UnitPrice = 3000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2, UnitPrice = 3000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3, UnitPrice = 3000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 });
 
             modelBuilder.Entity<Log_Product>().HasData(
-               new Log_Product() { Id = 1, IdProduct = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 2, IdProduct = 2, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 3, IdProduct = 3, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 4, IdProduct = 4, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 5, IdProduct = 5, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 6, IdProduct = 6, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 7, IdProduct = 7, CreatedDate = createdDate, CreatedById = 2, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 8, IdProduct = 8, CreatedDate = createdDate, CreatedById = 2, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 9, IdProduct = 9, CreatedDate = createdDate, CreatedById = 2, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 10, IdProduct = 10, CreatedDate = createdDate, CreatedById = 2, ImportPrice = 150000, Quantity = 300 },
-               new Log_Product() { Id = 11, IdProduct = 11, CreatedDate = createdDate, CreatedById = 2, ImportPrice = 150000, Quantity = 300 });
+              new Log_Product() { Id = 1, IdProduct = 1, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 2, IdProduct = 1, IdSize = 2, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 3, IdProduct = 1, IdSize = 3, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 4, IdProduct = 2, IdSize = 2, IdColor = 2, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 5, IdProduct = 2, IdSize = 2, IdColor = 3, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 6, IdProduct = 3, IdSize = 1, IdColor = 4, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 7, IdProduct = 4, IdSize = 1, IdColor = 2, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 8, IdProduct = 5, IdSize = 2, IdColor = 3, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 9, IdProduct = 5, IdSize = 2, IdColor = 4, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 10, IdProduct = 6, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 11, IdProduct = 7, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 12, IdProduct = 8, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 13, IdProduct = 9, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 14, IdProduct = 10, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },
+              new Log_Product() { Id = 15, IdProduct = 11, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 });
+
 
             modelBuilder.Entity<Promotion>().HasData(
                new Promotion() { Id = 1, Name = "Tết Dương Lịch", Description = "Tết Dương Lịch", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
@@ -424,15 +345,15 @@ namespace Infrastructure.Persistent
                new Promotion() { Id = 5, Name = "Phụ Nữ Việt Nam 20-10", Description = "Phụ Nữ Việt Nam 20-10", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 3, CreatedDate = createdDate, CreatedById = 3 });
 
             modelBuilder.Entity<Cart>().HasData(
-               new Cart() { IdCustomer = 7, IdProduct = 1, Quantity = 20 },
-               new Cart() { IdCustomer = 7, IdProduct = 2, Quantity = 20 },
-               new Cart() { IdCustomer = 7, IdProduct = 3, Quantity = 20 },
-               new Cart() { IdCustomer = 8, IdProduct = 4, Quantity = 20 },
-               new Cart() { IdCustomer = 8, IdProduct = 5, Quantity = 20 },
-               new Cart() { IdCustomer = 8, IdProduct = 6, Quantity = 20 },
-               new Cart() { IdCustomer = 9, IdProduct = 7, Quantity = 20 },
-               new Cart() { IdCustomer = 9, IdProduct = 8, Quantity = 20 },
-               new Cart() { IdCustomer = 9, IdProduct = 9, Quantity = 20 });
+               new Cart() { IdCustomer = 7, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 20 },
+               new Cart() { IdCustomer = 7, IdProduct = 2, IdSize = 2, IdColor = 2, Quantity = 20 },
+               new Cart() { IdCustomer = 7, IdProduct = 3, IdSize = 1, IdColor = 4, Quantity = 20 },
+               new Cart() { IdCustomer = 8, IdProduct = 4, IdSize = 1, IdColor = 2, Quantity = 20 },
+               new Cart() { IdCustomer = 8, IdProduct = 5, IdSize = 2, IdColor = 3, Quantity = 20 },
+               new Cart() { IdCustomer = 8, IdProduct = 6, IdSize = 1, IdColor = 1, Quantity = 20 },
+               new Cart() { IdCustomer = 9, IdProduct = 7, IdSize = 1, IdColor = 1, Quantity = 20 },
+               new Cart() { IdCustomer = 9, IdProduct = 8, IdSize = 1, IdColor = 1, Quantity = 20 },
+               new Cart() { IdCustomer = 9, IdProduct = 9, IdSize = 1, IdColor = 1, Quantity = 20 });
 
             modelBuilder.Entity<Order>().HasData(
                new Order() { Id = 1, DateOrder = createdDate, TotalQuantity = 20, TotalProductPrice = 12000000, TotalAmount = 10830000, State = 1, FeeDelivery = 30000, IdAddress = 1, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
@@ -442,17 +363,16 @@ namespace Infrastructure.Persistent
                new Order() { Id = 5, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 3, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 9, IdPromotion = 1, IdStaff = 3, IdShipper = 5 });
 
             modelBuilder.Entity<OrderDetail>().HasData(
-               new OrderDetail() { IdOrder = 1, IdProduct = 1, Quantity = 10, UnitPrice = 320000 },
-               new OrderDetail() { IdOrder = 1, IdProduct = 2, Quantity = 10, UnitPrice = 280000 },
-               new OrderDetail() { IdOrder = 2, IdProduct = 3, Quantity = 15, UnitPrice = 250000 },
-               new OrderDetail() { IdOrder = 2, IdProduct = 4, Quantity = 15, UnitPrice = 320000 },
-               new OrderDetail() { IdOrder = 3, IdProduct = 5, Quantity = 10, UnitPrice = 220000 },
-               new OrderDetail() { IdOrder = 3, IdProduct = 6, Quantity = 10, UnitPrice = 195000 },
-               new OrderDetail() { IdOrder = 4, IdProduct = 7, Quantity = 15, UnitPrice = 320000 },
-               new OrderDetail() { IdOrder = 4, IdProduct = 8, Quantity = 15, UnitPrice = 320000 },
-               new OrderDetail() { IdOrder = 5, IdProduct = 3, Quantity = 15, UnitPrice = 250000 },
-               new OrderDetail() { IdOrder = 5, IdProduct = 4, Quantity = 15, UnitPrice = 320000 });
-
+               new OrderDetail() { IdOrder = 1, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 10, UnitPrice = 320000 },
+               new OrderDetail() { IdOrder = 1, IdProduct = 2, IdSize = 2, IdColor = 2, Quantity = 10, UnitPrice = 280000 },
+               new OrderDetail() { IdOrder = 2, IdProduct = 3, IdSize = 1, IdColor = 4, Quantity = 15, UnitPrice = 250000 },
+               new OrderDetail() { IdOrder = 2, IdProduct = 4, IdSize = 1, IdColor = 2, Quantity = 15, UnitPrice = 320000 },
+               new OrderDetail() { IdOrder = 3, IdProduct = 5, IdSize = 2, IdColor = 3, Quantity = 10, UnitPrice = 220000 },
+               new OrderDetail() { IdOrder = 3, IdProduct = 6, IdSize = 1, IdColor = 1, Quantity = 10, UnitPrice = 195000 },
+               new OrderDetail() { IdOrder = 4, IdProduct = 7, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 320000 },
+               new OrderDetail() { IdOrder = 4, IdProduct = 8, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 320000 },
+               new OrderDetail() { IdOrder = 5, IdProduct = 3, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 250000 },
+               new OrderDetail() { IdOrder = 5, IdProduct = 4, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 320000 });
         }
 
 

@@ -13,7 +13,7 @@ namespace Domain.Entity
         public double Value { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int State { get; set; }
+        public int State { get; set; } = 1;
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }
         public int CreatedById { get; set; }

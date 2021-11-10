@@ -82,7 +82,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         public IActionResult DeleteSize(int id)
         {
             try {
-                var size = _unitOfWork.StylesRepository.GetByID(id);
+                var size = _unitOfWork.SizesRepository.GetByID(id);
 
                 if (size == null)
                     return NotFound();

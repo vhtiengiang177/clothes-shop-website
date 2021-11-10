@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211107104953_Database")]
-    partial class Database
+    [Migration("20211108180531_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,15 +159,31 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdProduct")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdColor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ColorId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("IdCustomer", "IdProduct");
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdCustomer", "IdProduct", "IdSize", "IdColor");
+
+                    b.HasIndex("ColorId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("Carts");
 
@@ -176,54 +192,72 @@ namespace clothing_shop_website.Migrations
                         {
                             IdCustomer = 7,
                             IdProduct = 1,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 7,
                             IdProduct = 2,
+                            IdSize = 2,
+                            IdColor = 2,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 7,
                             IdProduct = 3,
+                            IdSize = 1,
+                            IdColor = 4,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 8,
                             IdProduct = 4,
+                            IdSize = 1,
+                            IdColor = 2,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 8,
                             IdProduct = 5,
+                            IdSize = 2,
+                            IdColor = 3,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 8,
                             IdProduct = 6,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 9,
                             IdProduct = 7,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 9,
                             IdProduct = 8,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 20
                         },
                         new
                         {
                             IdCustomer = 9,
                             IdProduct = 9,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 20
                         });
                 });
@@ -601,7 +635,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdColor")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdProduct")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSize")
                         .HasColumnType("int");
 
                     b.Property<double>("ImportPrice")
@@ -612,9 +652,6 @@ namespace clothing_shop_website.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdProduct")
-                        .IsUnique();
-
                     b.ToTable("Log_Products");
 
                     b.HasData(
@@ -623,149 +660,165 @@ namespace clothing_shop_website.Migrations
                             Id = 1,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = 1,
                             IdProduct = 1,
+                            IdSize = 1,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 2,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 2,
+                            IdColor = 1,
+                            IdProduct = 1,
+                            IdSize = 2,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 3,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 3,
+                            IdColor = 1,
+                            IdProduct = 1,
+                            IdSize = 3,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 4,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 4,
+                            IdColor = 2,
+                            IdProduct = 2,
+                            IdSize = 2,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 5,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 5,
+                            IdColor = 3,
+                            IdProduct = 2,
+                            IdSize = 2,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 6,
                             CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 6,
+                            IdColor = 4,
+                            IdProduct = 3,
+                            IdSize = 1,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 7,
-                            CreatedById = 2,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 7,
+                            IdColor = 2,
+                            IdProduct = 4,
+                            IdSize = 1,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 8,
-                            CreatedById = 2,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 8,
+                            IdColor = 3,
+                            IdProduct = 5,
+                            IdSize = 2,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 9,
-                            CreatedById = 2,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 9,
+                            IdColor = 4,
+                            IdProduct = 5,
+                            IdSize = 2,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 10,
-                            CreatedById = 2,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 10,
+                            IdColor = 1,
+                            IdProduct = 6,
+                            IdSize = 1,
                             ImportPrice = 150000.0,
-                            Quantity = 300
+                            Quantity = 120
                         },
                         new
                         {
                             Id = 11,
-                            CreatedById = 2,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdProduct = 11,
+                            IdColor = 1,
+                            IdProduct = 7,
+                            IdSize = 1,
                             ImportPrice = 150000.0,
-                            Quantity = 300
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entity.Material", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Materials");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Cotton",
-                            State = 1
+                            Quantity = 120
                         },
                         new
                         {
-                            Id = 2,
-                            Name = "Wool",
-                            State = 1
+                            Id = 12,
+                            CreatedById = 1,
+                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = 1,
+                            IdProduct = 8,
+                            IdSize = 1,
+                            ImportPrice = 150000.0,
+                            Quantity = 120
                         },
                         new
                         {
-                            Id = 3,
-                            Name = "Silk",
-                            State = 1
+                            Id = 13,
+                            CreatedById = 1,
+                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = 1,
+                            IdProduct = 9,
+                            IdSize = 1,
+                            ImportPrice = 150000.0,
+                            Quantity = 120
                         },
                         new
                         {
-                            Id = 4,
-                            Name = "Leather",
-                            State = 1
+                            Id = 14,
+                            CreatedById = 1,
+                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = 1,
+                            IdProduct = 10,
+                            IdSize = 1,
+                            ImportPrice = 150000.0,
+                            Quantity = 120
                         },
                         new
                         {
-                            Id = 5,
-                            Name = "Cellulosic fibres",
-                            State = 1
+                            Id = 15,
+                            CreatedById = 1,
+                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = 1,
+                            IdProduct = 11,
+                            IdSize = 1,
+                            ImportPrice = 150000.0,
+                            Quantity = 120
                         });
                 });
 
@@ -913,8 +966,14 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdProduct")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdColor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ColorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Material")
                         .HasColumnType("nvarchar(max)");
@@ -925,15 +984,19 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("int");
 
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.HasKey("IdOrder", "IdProduct");
+                    b.HasKey("IdOrder", "IdProduct", "IdSize", "IdColor");
+
+                    b.HasIndex("ColorId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("OrderDetails");
 
@@ -942,6 +1005,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 1,
                             IdProduct = 1,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 10,
                             UnitPrice = 320000.0
                         },
@@ -949,6 +1014,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 1,
                             IdProduct = 2,
+                            IdSize = 2,
+                            IdColor = 2,
                             Quantity = 10,
                             UnitPrice = 280000.0
                         },
@@ -956,6 +1023,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 2,
                             IdProduct = 3,
+                            IdSize = 1,
+                            IdColor = 4,
                             Quantity = 15,
                             UnitPrice = 250000.0
                         },
@@ -963,6 +1032,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 2,
                             IdProduct = 4,
+                            IdSize = 1,
+                            IdColor = 2,
                             Quantity = 15,
                             UnitPrice = 320000.0
                         },
@@ -970,6 +1041,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 3,
                             IdProduct = 5,
+                            IdSize = 2,
+                            IdColor = 3,
                             Quantity = 10,
                             UnitPrice = 220000.0
                         },
@@ -977,6 +1050,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 3,
                             IdProduct = 6,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 10,
                             UnitPrice = 195000.0
                         },
@@ -984,6 +1059,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 4,
                             IdProduct = 7,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 15,
                             UnitPrice = 320000.0
                         },
@@ -991,6 +1068,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 4,
                             IdProduct = 8,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 15,
                             UnitPrice = 320000.0
                         },
@@ -998,6 +1077,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 5,
                             IdProduct = 3,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 15,
                             UnitPrice = 250000.0
                         },
@@ -1005,6 +1086,8 @@ namespace clothing_shop_website.Migrations
                         {
                             IdOrder = 5,
                             IdProduct = 4,
+                            IdSize = 1,
+                            IdColor = 1,
                             Quantity = 15,
                             UnitPrice = 320000.0
                         });
@@ -1041,16 +1124,10 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<string>("Sku")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalBuy")
@@ -1078,11 +1155,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 1,
                             IdStyle = 1,
                             Name = "Avocado Dress Set",
-                            Price = 320000.0,
                             Sku = "123456789",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1093,11 +1168,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 1,
                             IdStyle = 2,
                             Name = "Ally Babydoll Dress",
-                            Price = 280000.0,
                             Sku = "123456788",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 900
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1108,11 +1181,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 2,
                             IdStyle = 3,
                             Name = "Baggy Jean",
-                            Price = 250000.0,
                             Sku = "123456787",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 80
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1123,11 +1194,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 2,
                             IdStyle = 4,
                             Name = "Short Jean",
-                            Price = 320000.0,
                             Sku = "123456786",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 70
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1138,11 +1207,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 3,
                             IdStyle = 5,
                             Name = "Mori Shirt",
-                            Price = 220000.0,
                             Sku = "123456785",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1153,11 +1220,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 3,
                             IdStyle = 6,
                             Name = "Yasmin Shirt",
-                            Price = 195000.0,
                             Sku = "123456784",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 50
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1168,11 +1233,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 4,
                             IdStyle = 7,
                             Name = "Aokosor Sweaters",
-                            Price = 320000.0,
                             Sku = "123456783",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1183,11 +1246,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 4,
                             IdStyle = 8,
                             Name = "Hoodie",
-                            Price = 320000.0,
                             Sku = "123456782",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1198,11 +1259,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 5,
                             IdStyle = 9,
                             Name = "Mella Khaki Pant",
-                            Price = 225000.0,
                             Sku = "123456781",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1213,11 +1272,9 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 5,
                             IdStyle = 10,
                             Name = "Mochi Pants",
-                            Price = 220000.0,
                             Sku = "123456780",
                             State = 1,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         },
                         new
                         {
@@ -1228,159 +1285,13 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 3,
                             IdStyle = 11,
                             Name = "T-Shirts",
-                            Price = 220000.0,
                             Sku = "123456779",
                             State = 0,
-                            Stock = 200,
-                            TotalBuy = 100
+                            TotalBuy = 10
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entity.Product_Color", b =>
-                {
-                    b.Property<int>("IdProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdColor")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdProduct", "IdColor");
-
-                    b.HasIndex("IdColor");
-
-                    b.ToTable("Product_Colors");
-
-                    b.HasData(
-                        new
-                        {
-                            IdProduct = 1,
-                            IdColor = 1
-                        },
-                        new
-                        {
-                            IdProduct = 2,
-                            IdColor = 2
-                        },
-                        new
-                        {
-                            IdProduct = 3,
-                            IdColor = 3
-                        },
-                        new
-                        {
-                            IdProduct = 4,
-                            IdColor = 4
-                        },
-                        new
-                        {
-                            IdProduct = 5,
-                            IdColor = 5
-                        },
-                        new
-                        {
-                            IdProduct = 6,
-                            IdColor = 1
-                        },
-                        new
-                        {
-                            IdProduct = 7,
-                            IdColor = 2
-                        },
-                        new
-                        {
-                            IdProduct = 8,
-                            IdColor = 3
-                        },
-                        new
-                        {
-                            IdProduct = 9,
-                            IdColor = 4
-                        },
-                        new
-                        {
-                            IdProduct = 10,
-                            IdColor = 5
-                        },
-                        new
-                        {
-                            IdProduct = 11,
-                            IdColor = 1
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entity.Product_Material", b =>
-                {
-                    b.Property<int>("IdProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdMaterial")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdProduct", "IdMaterial");
-
-                    b.HasIndex("IdMaterial");
-
-                    b.ToTable("Product_Materials");
-
-                    b.HasData(
-                        new
-                        {
-                            IdProduct = 1,
-                            IdMaterial = 1
-                        },
-                        new
-                        {
-                            IdProduct = 2,
-                            IdMaterial = 2
-                        },
-                        new
-                        {
-                            IdProduct = 3,
-                            IdMaterial = 3
-                        },
-                        new
-                        {
-                            IdProduct = 4,
-                            IdMaterial = 4
-                        },
-                        new
-                        {
-                            IdProduct = 5,
-                            IdMaterial = 5
-                        },
-                        new
-                        {
-                            IdProduct = 6,
-                            IdMaterial = 1
-                        },
-                        new
-                        {
-                            IdProduct = 7,
-                            IdMaterial = 2
-                        },
-                        new
-                        {
-                            IdProduct = 8,
-                            IdMaterial = 3
-                        },
-                        new
-                        {
-                            IdProduct = 9,
-                            IdMaterial = 4
-                        },
-                        new
-                        {
-                            IdProduct = 10,
-                            IdMaterial = 5
-                        },
-                        new
-                        {
-                            IdProduct = 11,
-                            IdMaterial = 1
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entity.Product_Size", b =>
+            modelBuilder.Entity("Domain.Entity.Product_Size_Color", b =>
                 {
                     b.Property<int>("IdProduct")
                         .HasColumnType("int");
@@ -1388,67 +1299,173 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdSize")
                         .HasColumnType("int");
 
-                    b.HasKey("IdProduct", "IdSize");
+                    b.Property<int>("IdColor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProduct", "IdSize", "IdColor");
+
+                    b.HasIndex("ColorId");
 
                     b.HasIndex("IdSize");
 
-                    b.ToTable("Product_Sizes");
+                    b.ToTable("Product_Size_Colors");
 
                     b.HasData(
                         new
                         {
                             IdProduct = 1,
-                            IdSize = 1
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 1000
+                        },
+                        new
+                        {
+                            IdProduct = 1,
+                            IdSize = 2,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 2000
+                        },
+                        new
+                        {
+                            IdProduct = 1,
+                            IdSize = 3,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 3000
                         },
                         new
                         {
                             IdProduct = 2,
-                            IdSize = 2
+                            IdSize = 2,
+                            IdColor = 2,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 3000
+                        },
+                        new
+                        {
+                            IdProduct = 2,
+                            IdSize = 2,
+                            IdColor = 3,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 3000
                         },
                         new
                         {
                             IdProduct = 3,
-                            IdSize = 3
+                            IdSize = 1,
+                            IdColor = 4,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 4,
-                            IdSize = 4
+                            IdSize = 1,
+                            IdColor = 2,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
+                        },
+                        new
+                        {
+                            IdProduct = 4,
+                            IdSize = 1,
+                            IdColor = 3,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 5,
-                            IdSize = 5
+                            IdSize = 2,
+                            IdColor = 3,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
+                        },
+                        new
+                        {
+                            IdProduct = 5,
+                            IdSize = 2,
+                            IdColor = 4,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 6,
-                            IdSize = 1
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 7,
-                            IdSize = 2
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 8,
-                            IdSize = 3
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 9,
-                            IdSize = 4
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 10,
-                            IdSize = 5
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         },
                         new
                         {
                             IdProduct = 11,
-                            IdSize = 1
+                            IdSize = 1,
+                            IdColor = 1,
+                            State = 1,
+                            Stock = 100,
+                            UnitPrice = 4000
                         });
                 });
 
@@ -1687,7 +1704,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Võ Hồng Tiên",
                             LastName = "Giang",
                             Phone = "0328807778",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1697,7 +1714,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Nguyễn Thị",
                             LastName = "Thảo",
                             Phone = "0328807776",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1707,7 +1724,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Nguyễn Gia",
                             LastName = "Bảo",
                             Phone = "0328807774",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1717,7 +1734,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
                             Phone = "0328807775",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1727,7 +1744,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Trần Thủy",
                             LastName = "Tiên",
                             Phone = "0328807773",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1737,7 +1754,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
                             Phone = "0328807772",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1747,7 +1764,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Gian Thiệu",
                             LastName = "Quân",
                             Phone = "0328807771",
-                            State = 0
+                            State = 1
                         },
                         new
                         {
@@ -1757,7 +1774,7 @@ namespace clothing_shop_website.Migrations
                             FirstName = "Nguyễn Thị Minh",
                             LastName = "Thư",
                             Phone = "0328807770",
-                            State = 0
+                            State = 1
                         });
                 });
 
@@ -1948,6 +1965,10 @@ namespace clothing_shop_website.Migrations
 
             modelBuilder.Entity("Domain.Entity.Cart", b =>
                 {
+                    b.HasOne("Domain.Entity.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId");
+
                     b.HasOne("Domain.Entity.Customer", "Customer")
                         .WithMany("Carts")
                         .HasForeignKey("IdCustomer")
@@ -1958,9 +1979,17 @@ namespace clothing_shop_website.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
+                    b.HasOne("Domain.Entity.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId");
+
+                    b.Navigation("Color");
+
                     b.Navigation("Customer");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Domain.Entity.Customer", b =>
@@ -2004,17 +2033,6 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Log_Product", b =>
-                {
-                    b.HasOne("Domain.Entity.Product", "Product")
-                        .WithOne("Log_Product")
-                        .HasForeignKey("Domain.Entity.Log_Product", "IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Domain.Entity.Order", b =>
                 {
                     b.HasOne("Domain.Entity.Customer", "Customer")
@@ -2047,6 +2065,10 @@ namespace clothing_shop_website.Migrations
 
             modelBuilder.Entity("Domain.Entity.OrderDetail", b =>
                 {
+                    b.HasOne("Domain.Entity.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId");
+
                     b.HasOne("Domain.Entity.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("IdOrder")
@@ -2057,9 +2079,17 @@ namespace clothing_shop_website.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
+                    b.HasOne("Domain.Entity.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId");
+
+                    b.Navigation("Color");
+
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Domain.Entity.Product", b =>
@@ -2078,46 +2108,12 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Style");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Product_Color", b =>
+            modelBuilder.Entity("Domain.Entity.Product_Size_Color", b =>
                 {
                     b.HasOne("Domain.Entity.Color", "Color")
-                        .WithMany("Product_Colors")
-                        .HasForeignKey("IdColor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ColorId");
 
-                    b.HasOne("Domain.Entity.Product", "Product")
-                        .WithMany("Product_Colors")
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Domain.Entity.Product_Material", b =>
-                {
-                    b.HasOne("Domain.Entity.Material", "Material")
-                        .WithMany("Product_Material")
-                        .HasForeignKey("IdMaterial")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entity.Product", "Product")
-                        .WithMany("Product_Materials")
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Material");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Domain.Entity.Product_Size", b =>
-                {
                     b.HasOne("Domain.Entity.Product", "Product")
                         .WithMany("Product_Sizes")
                         .HasForeignKey("IdProduct")
@@ -2129,6 +2125,8 @@ namespace clothing_shop_website.Migrations
                         .HasForeignKey("IdSize")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Color");
 
                     b.Navigation("Product");
 
@@ -2158,11 +2156,6 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entity.Color", b =>
-                {
-                    b.Navigation("Product_Colors");
-                });
-
             modelBuilder.Entity("Domain.Entity.Customer", b =>
                 {
                     b.Navigation("Carts");
@@ -2170,11 +2163,6 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("DeliveryAddresses");
 
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Domain.Entity.Material", b =>
-                {
-                    b.Navigation("Product_Material");
                 });
 
             modelBuilder.Entity("Domain.Entity.Order", b =>
@@ -2185,12 +2173,6 @@ namespace clothing_shop_website.Migrations
             modelBuilder.Entity("Domain.Entity.Product", b =>
                 {
                     b.Navigation("Images");
-
-                    b.Navigation("Log_Product");
-
-                    b.Navigation("Product_Colors");
-
-                    b.Navigation("Product_Materials");
 
                     b.Navigation("Product_Sizes");
                 });

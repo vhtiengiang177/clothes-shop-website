@@ -14,7 +14,7 @@ namespace Domain.Entity
         public string CardIdentity { get; set; } //CMND
         public string Phone { get; set; }
         public string Image { get; set; }
-        public int State { get; set; }
+        public int State { get; set; } = 1;
         public int IdAccount { get; set; }
         public Account Account { get; set; }
         public ICollection<Order> Orders { get; set; }

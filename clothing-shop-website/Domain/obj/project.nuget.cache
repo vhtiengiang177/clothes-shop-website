@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "tSFe500rMswRXd9EBVWQnOWA+iFbZqNbOQXH6CUPAFLrBOFyJor0CCeL5aiJEGV8/4w+VQPNj16n/3mvvx9FZQ==",
+  "dgSpecHash": "g73RpK0KWeAam2vlHbx144gX2tvIYwH5gg7MfLZXvfiipu+8VU2Bz5T3zVckswXdvzt5sCO1Bl85pKY8iTFIpw==",
   "success": true,
   "projectFilePath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
