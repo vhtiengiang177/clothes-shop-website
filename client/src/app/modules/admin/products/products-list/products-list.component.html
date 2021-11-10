@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+      <!-- <div>
+        <search-product 
+          (search-event)="searchEvent($event)">
+        </search-product>
+      </div> -->
+  
+      <!-- <div class="button-add">
+        <button 
+        mat-raised-button 
+        (click)="reloadProduct()"
+        class="btn btn-secondary">Reload</button>
+        &nbsp;
+        <button 
+        mat-raised-button 
+        (click)="addProduct()"
+        class="btn btn-primary btn-add">Add Product</button>
+      </div> -->
+          
+      <table id="producttable" class="table table-striped table-hover table-sm ">
+        <thead class="dt-header">
+          <tr>
+            <th>ID</th>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Created Date</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <!-- <tbody class="table-body">
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.sku }}</td>
+            <td><a>{{ product.name }}</a></td>
+            <td>{{ product.createdDate | date: 'longDate' }}</td>
+            <td><fa name="edit"></fa></td>
+            <td><fa name="trash"></fa></td>
+          </tr>
+        </tbody> -->
+        <tbody>
+          <tr>
+            <td class="no-data" colspan="8">No data available in table</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <!-- <div class="pb-0 pt-3 paging-custom">
+      <mat-paginator #paginator
+        [length]="productsStore.totalPage"
+        [(pageSize)]="filter.pagesize"
+        [pageSizeOptions]="[5, 10, 15]"
+        (page)="onPaginate($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div> -->
+</div>
+

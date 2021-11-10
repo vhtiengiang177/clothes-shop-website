@@ -9,6 +9,10 @@ import { NavbarComponent } from './modules/admin/layout/navbar/navbar.component'
 import { SidebarComponent } from './modules/admin/layout/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './modules/admin/products/products-list/products-list.component';
+import { ToastrModule } from 'ngx-toastr';
+import { AppErrorHandling } from './_shared/errors/app-error-handling';
+import { AngularMaterialModule } from './_shared/components/angular-material/angular-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,17 @@ import { ProductsListComponent } from './modules/admin/products/products-list/pr
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularMaterialModule,
     AngularFontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
     
   ],
   providers: [
+    { provide: ErrorHandler, useClass: AppErrorHandling}
   ],
   bootstrap: [AppComponent]
 })
