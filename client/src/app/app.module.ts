@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { DashboardComponent } from './modules/admin/layout/dashboard/dashboard.component';
 import { NavbarComponent } from './modules/admin/layout/navbar/navbar.component';
 import { SidebarComponent } from './modules/admin/layout/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +12,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppErrorHandling } from './_shared/errors/app-error-handling';
 import { AngularMaterialModule } from './_shared/components/angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BodyComponent } from './modules/admin/layout/body/body.component';
+import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
+import { SearchProductComponent } from './modules/admin/products/search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     NavbarComponent,
     SidebarComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    BodyComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule,

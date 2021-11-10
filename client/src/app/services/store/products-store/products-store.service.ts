@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { ProductService } from '../../data/product/product.service';
@@ -15,11 +15,16 @@ export class ProductsStoreService {
   private readonly _products = new BehaviorSubject<Product[]>([])
   readonly products$ = this._products.asObservable()
 
-  private readonly _totalPage = new BehaviorSubject<number>(0);
-  readonly totalPage$ = this._totalPage.asObservable();
+  private readonly _totalData = new BehaviorSubject<number>(0);
+  readonly totalData$ = this._totalData.asObservable();
 
   constructor(private productService: ProductService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) { 
+      if(this.products.length == 0) {
+        let filter: FilterParamsProduct = {};
+        this.getAll(filter);
+      }
+    }
 
   get products(): Product[] {
     return this._products.getValue();
@@ -29,24 +34,24 @@ export class ProductsStoreService {
     this._products.next(val);
   }
 
-  get totalPage(): number {
-    return this._totalPage.getValue();
+  get totalData(): number {
+    return this._totalData.getValue();
   }
 
-  set totalPage(val: number) {
-    this._totalPage.next(val);
+  set totalData(val: number) {
+    this._totalData.next(val);
   }
 
   async getAll(filterParams: FilterParamsProduct) {
     await this.productService.get(filterParams)
               .subscribe(res => {
                 this.products = res.data;
-                this.totalPage = res.totalPage;
+                this.totalData = res.totalData;
               } ,
               (error: AppError) => {
                 if(error instanceof BadRequestError)
                   this.toastr.error("That's an error", "Bad Request")
-                else throwError(error)
+                else throw error
               });
   }
 }

@@ -25,23 +25,32 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProducts([FromQuery] FilterParamsProduct filterParams)
         {
-            int currentPageIndex = filterParams.PageIndex ?? 1;
-            int currentPageSize = filterParams.PageSize ?? 5;
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
 
-            IQueryable<Product> lProductItems;
+                IQueryable<Product> lProductItems;
 
-            lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
 
-            // lProductItems = _unitOfWork.ProductsRepository.FilterProduct(filterParams, lProductItems);
+                // lProductItems = _unitOfWork.ProductsRepository.FilterProduct(filterParams, lProductItems);
 
-            var lProduct = _unitOfWork.ProductsRepository.SortListProducts(filterParams.Sort, lProductItems);
+                var lProduct = _unitOfWork.ProductsRepository.SortListProducts(filterParams.Sort, lProductItems);
 
-            var response = new ResponseJSON<Product> {
-                TotalData = lProduct.Count(),
-                Data = lProduct.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
-            };
+                var response = new ResponseJSON<Product>
+                {
+                    TotalData = lProduct.Count(),
+                    Data = lProduct.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
 
-            return Ok(response);
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            } 
+            
         }
 
 

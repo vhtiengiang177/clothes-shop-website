@@ -6,9 +6,7 @@ import { MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
-  imports: [
-    MatPaginatorModule
-
-  ]
+  imports: [],
+  exports: [MatPaginatorModule]
 })
 export class AngularMaterialModule { }

@@ -55,30 +55,18 @@ namespace Infrastructure.Persistent.Repository
         public IQueryable<Product> SortListProducts(string sort, IQueryable<Product> lProduct)
         {
             switch (sort) {
+                case "createddate:asc":
+                    lProduct = lProduct.OrderBy(p => p.CreatedDate).AsQueryable();
+                    break;
+                case "createddate:desc":
+                    lProduct = lProduct.OrderByDescending(p => p.CreatedDate).AsQueryable();
+                    break;
                 case "sku:asc":
                     lProduct = lProduct.OrderBy(p => p.Sku).AsQueryable();
                     break;
                 case "sku:desc":
                     lProduct = lProduct.OrderByDescending(p => p.Sku).AsQueryable();
                     break;
-                //case "totalbuy:asc":
-                //    lProduct = lProduct.OrderBy(p => p.TotalBuy).AsQueryable();
-                //    break;
-                //case "totalbuy:desc":
-                //    lProduct = lProduct.OrderByDescending(p => p.TotalBuy).AsQueryable();
-                //    break;
-                //case "stock:asc":
-                //    lProduct = lProduct.OrderBy(p => p.Stock).AsQueryable();
-                //    break;
-                //case "stock:desc":
-                //    lProduct = lProduct.OrderByDescending(p => p.Stock).AsQueryable();
-                //    break;
-                //case "price:asc":
-                //    lProduct = lProduct.OrderBy(p => p.Price).AsQueryable();
-                //    break;
-                //case "price:desc":
-                //    lProduct = lProduct.OrderByDescending(p => p.Price).AsQueryable();
-                //    break;
                 case "name:desc":
                     lProduct = lProduct.OrderByDescending(p => p.Name).AsQueryable();
                     break;
