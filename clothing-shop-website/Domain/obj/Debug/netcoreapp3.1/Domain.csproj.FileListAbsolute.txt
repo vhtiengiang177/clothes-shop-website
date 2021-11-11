@@ -6,3 +6,4 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache

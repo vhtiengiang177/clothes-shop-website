@@ -9,3 +9,7 @@ _ReSharper.*
 bin
 obj
 clothing-shop-website/clothing-shop-website/obj/Debug/netcoreapp3.1/clothing-shop-website.csprojAssemblyReference.cache
+clothing-shop-website/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.csprojAssemblyReference.cache
+clothing-shop-website/Domain/obj/Debug/netcoreapp3.1/Domain.csproj.FileListAbsolute.txt
+clothing-shop-website/clothing-shop-website/obj/Debug/netcoreapp3.1/clothing-shop-website.csprojAssemblyReference.cache
+clothing-shop-website/.vs/clothing-shop-website/v16/.suo
