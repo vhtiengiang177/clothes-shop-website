@@ -16,7 +16,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         Product CreateProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
-        IQueryable<Product> SortListProducts(string sort, IQueryable<Product> lProduct);
+        IQueryable<Product> GetProductsByCategoriesID(int[] idCategories);
         bool CheckItemInList(Log_Product logproduct);
         public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
     }

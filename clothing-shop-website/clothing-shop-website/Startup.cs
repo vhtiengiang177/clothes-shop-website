@@ -1,3 +1,4 @@
+using clothing_shop_website.Services;
 using Infrastructure.Persistent;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,8 @@ namespace clothing_shop_website
                     Description = "Description for the API."
                 });
             });
+
+            services.AddSingleton(new ProductsService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

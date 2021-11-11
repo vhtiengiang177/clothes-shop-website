@@ -1,3 +1,7 @@
+.row {
+  display: inline !important;
+}
+
 .input-search {
     font-size: 14px !important;
 }
@@ -16,8 +20,8 @@
 
 .btn-reset {
   background-color: salmon;
-  color: white;
-  font-size: small;
+  color: #fafafa;
+  padding-bottom: 10px;
 }
 
 .icon-size {

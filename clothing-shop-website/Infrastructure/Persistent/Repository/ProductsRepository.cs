@@ -52,37 +52,6 @@ namespace Infrastructure.Persistent.Repository
             }
             _dbContext.Remove(product);
         }
-        public IQueryable<Product> SortListProducts(string sort, IQueryable<Product> lProduct)
-        {
-            switch (sort) {
-                case "createddate:asc":
-                    lProduct = lProduct.OrderBy(p => p.CreatedDate).AsQueryable();
-                    break;
-                case "createddate:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.CreatedDate).AsQueryable();
-                    break;
-                case "sku:asc":
-                    lProduct = lProduct.OrderBy(p => p.Sku).AsQueryable();
-                    break;
-                case "sku:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.Sku).AsQueryable();
-                    break;
-                case "name:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.Name).AsQueryable();
-                    break;
-                case "name:asc":
-                    lProduct = lProduct.OrderBy(p => p.Name).AsQueryable();
-                    break;
-                case "id:asc":
-                    lProduct = lProduct.OrderBy(p => p.Id).AsQueryable();
-                    break;
-                default:
-                    lProduct = lProduct.OrderByDescending(p => p.Id).AsQueryable();
-                    break;
-            }
-
-            return lProduct;
-        }
 
         public async Task<IQueryable<Product_Size_Color>> GetListItemByIdProduct(int productID)
         {
@@ -106,5 +75,14 @@ namespace Infrastructure.Persistent.Repository
             return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0);
         }
 
+        public IQueryable<Product> GetProductsByCategoriesID(int[] idCategories)
+        {
+            int[] distinctIdCategories = idCategories.Distinct().ToArray();
+
+            var lProductItem = _dbContext.Products
+                                    .Where(p => distinctIdCategories.Contains((int)p.IdCategory)).ToList();
+
+            return lProductItem.AsQueryable();
+        }
     }
 }

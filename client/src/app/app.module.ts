@@ -9,7 +9,6 @@ import { SidebarComponent } from './modules/admin/layout/sidebar/sidebar.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './modules/admin/products/products-list/products-list.component';
 import { ToastrModule } from 'ngx-toastr';
-import { AppErrorHandling } from './_shared/errors/app-error-handling';
 import { AngularMaterialModule } from './_shared/components/angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './modules/admin/layout/body/body.component';
@@ -39,7 +38,6 @@ import { SearchProductComponent } from './modules/admin/products/search-product/
     
   ],
   providers: [
-    { provide: ErrorHandler, useClass: AppErrorHandling}
   ],
   bootstrap: [AppComponent]
 })

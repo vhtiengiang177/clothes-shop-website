@@ -1,12 +1,10 @@
-export interface Product {
+export interface Category {
     id: number,
-    sku: number,
     name: string,
-    totalBuy: number,
+    image: string,
     state: number,
     createdDate: Date,
     lastModified: Date,
     createdById: number,
-    modifiedById: number,
-    categoryId: number
+    modifiedById: number
 }

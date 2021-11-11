@@ -34,6 +34,19 @@ export class ProductsListComponent implements OnInit {
     this.productsStore.getAll(this.filter);
   }
 
+  searchEvent($event) {
+    this.filter = {
+      pageindex: 1,
+      pagesize: this.filter.pagesize,
+      sort: this.filter.sort,
+      content: $event.content,
+      idcategories: $event.idcategories
+    }
+    this.paginator.pageIndex = 0;
+
+    this.fetchData()
+}
+
   sortID() {
     if(this.productsStore.totalData !== 0) {
       if(this.filter.sort != 'id:asc') {
@@ -65,6 +78,18 @@ export class ProductsListComponent implements OnInit {
       }
       else {
         this.filter.sort = 'sku:desc';
+      }
+      this.fetchData()
+    }
+  }
+
+  sortTotalBuy() {
+    if(this.productsStore.totalData !== 0) {
+      if(this.filter.sort != 'totalbuy:asc') {
+        this.filter.sort = 'totalbuy:asc';
+      }
+      else {
+        this.filter.sort = 'totalbuy:desc';
       }
       this.fetchData()
     }

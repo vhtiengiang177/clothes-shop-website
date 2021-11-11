@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-      <!-- <div>
-        <app-search-product 
-          (search-event)="searchEvent($event)">
-        </app-search-product>
-      </div> -->
+      <app-search-product 
+        (search-event)="searchEvent($event)">
+      </app-search-product>
+    </div>
+    <div class="row">
   
       <!-- <div class="button-add">
         <button 
@@ -33,6 +33,10 @@
               <fa *ngIf="filter.sort == 'name:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'name:asc'" name="sort-up"></fa>
             </th>
+            <th (click)="sortTotalBuy()">Total Buy
+              <fa *ngIf="filter.sort == 'totalbuy:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'totalbuy:asc'" name="sort-up"></fa>
+            </th>
             <th (click)="sortCreatedDate()">Created Date
               <fa *ngIf="filter.sort == 'createddate:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'createddate:asc'" name="sort-up"></fa>
@@ -45,6 +49,7 @@
             <td>{{ product.id }}</td>
             <td>{{ product.sku }}</td>
             <td><a>{{ product.name }}</a></td>
+            <td>{{ product.totalbuy }}</td>
             <td>{{ product.createdDate | date: 'longDate' }}</td>
             <td><fa class="edit-icon" name="edit"></fa></td>
             <td><fa class="delete-icon" name="trash"></fa></td>

@@ -1,4 +1,5 @@
 ﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
@@ -16,10 +17,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class ProductsController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
+        private ProductsService _productsService;
 
-        public ProductsController(DataDbContext dbContext)
+        public ProductsController(DataDbContext dbContext, ProductsService productsService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _productsService = productsService;
         }
 
         [HttpGet]
@@ -32,11 +35,20 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 IQueryable<Product> lProductItems;
 
-                lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                if (filterParams.IdCategories != null)
+                {
+                    if (filterParams.IdCategories.Count() != 0
+                        || filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
+                    {
+                        lProductItems = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(filterParams.IdCategories);
+                    }
+                    else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                }
+                else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
 
-                // lProductItems = _unitOfWork.ProductsRepository.FilterProduct(filterParams, lProductItems);
+                lProductItems = _productsService.FilterProduct(filterParams, lProductItems);
 
-                var lProduct = _unitOfWork.ProductsRepository.SortListProducts(filterParams.Sort, lProductItems);
+                var lProduct = _productsService.SortListProducts(filterParams.Sort, lProductItems);
 
                 var response = new ResponseJSON<Product>
                 {

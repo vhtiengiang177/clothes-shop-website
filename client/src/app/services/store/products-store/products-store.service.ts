@@ -51,7 +51,7 @@ export class ProductsStoreService {
               (error: AppError) => {
                 if(error instanceof BadRequestError)
                   this.toastr.error("That's an error", "Bad Request")
-                else throw error
+                else this.toastr.error("An unexpected error occurred.")
               });
   }
 }

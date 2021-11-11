@@ -14,14 +14,21 @@ export class DataService {
 
   constructor(protected routeAPI: string, protected http: HttpClient) { }
 
-  get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + '?' + this.convertToQueryString(params))
+  get(params? : any) {
+    if(params != undefined) {
+      return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + '?' + this.convertToQueryString(params))
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
         return throwError(new AppError(error))
-        
       }))
+    }
+    else return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI)
+    .pipe(catchError((error: Response) => {
+      if(error.status == 400)
+        return throwError(new BadRequestError(error))
+      return throwError(new AppError(error))
+    }))
   }
 
   convertToQueryString(params) : string {
