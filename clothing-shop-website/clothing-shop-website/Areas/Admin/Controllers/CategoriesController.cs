@@ -46,6 +46,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         public IActionResult CreateCategory(Category category)
         {
             if (ModelState.IsValid) {
+                category.CreatedDate = DateTime.Now;
                  _unitOfWork.CategoriesRepository.Insert(category);
 
                 if (_unitOfWork.Save()) {
@@ -58,11 +59,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateCategory/{id}", Name = "UpdateCategory")]
         public IActionResult UpdateCategory(Category category)
         {
             if (ModelState.IsValid) {
                 try {
+                    category.LastModified = DateTime.Now;
                     _unitOfWork.CategoriesRepository.Update(category);
                     if (_unitOfWork.Save()) {
                         return Ok(category);
@@ -78,7 +80,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("DeleteCategory/{id}", Name = "DeleteCategory")]
         public IActionResult DeleteCategory(int id)
         {
             try {
@@ -87,7 +89,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (category == null)
                     return NotFound();
 
-                _unitOfWork.CategoriesRepository.Delete(category);
+                category.State = 0;
+                _unitOfWork.CategoriesRepository.Update(category);
                 _unitOfWork.Save();
 
                 return Ok();

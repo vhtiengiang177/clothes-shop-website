@@ -7,3 +7,13 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.AssemblyReference.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb

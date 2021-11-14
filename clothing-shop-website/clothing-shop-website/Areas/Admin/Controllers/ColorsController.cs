@@ -46,6 +46,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         public IActionResult CreateColor(Color color)
         {
             if (ModelState.IsValid) {
+               
                 _unitOfWork.ColorsRepository.Insert(color);
 
                 if (_unitOfWork.Save()) {
@@ -58,7 +59,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateColor/{id}", Name = "UpdateColor")]
         public IActionResult UpdateColor(Color color)
         {
             if (ModelState.IsValid) {
@@ -78,7 +79,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("DeleteColor/{id}", Name = "DeleteColor")]
         public IActionResult DeleteColor(int id)
         {
             try {
@@ -86,8 +87,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 if (color == null)
                     return NotFound();
-
-                _unitOfWork.ColorsRepository.Delete(color);
+                color.State = 0;
+                _unitOfWork.ColorsRepository.Update(color);
                 _unitOfWork.Save();
 
                 return Ok();
