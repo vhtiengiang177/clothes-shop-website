@@ -66,7 +66,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var result = _unitOfWork.ProductsRepository.CreateProduct(product);
-
                 if (_unitOfWork.Save())
                 {
 
