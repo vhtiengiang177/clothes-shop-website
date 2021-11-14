@@ -36,12 +36,14 @@ namespace Infrastructure.Persistent.Repository
         }
         public Product CreateProduct(Product product)
         {
+            product.CreatedDate = System.DateTime.Now;
             var result = _dbContext.Products.Add(product);
 
             return result.Entity;
         }
         public void UpdateProduct(Product product)
         {
+            product.LastModified = System.DateTime.Now;
             _dbContext.Attach(product);
             _dbContext.Entry(product).State = EntityState.Modified;
         }

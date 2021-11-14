@@ -58,7 +58,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateSize/{id}", Name = "UpdateSize")]
         public IActionResult UpdateSize(Size size)
         {
             if (ModelState.IsValid) {
@@ -78,7 +78,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("DeleteSize/{id}", Name = "DeleteSize")]
         public IActionResult DeleteSize(int id)
         {
             try {
@@ -87,7 +87,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (size == null)
                     return NotFound();
 
-                _unitOfWork.SizesRepository.Delete(size);
+                size.State = 0;
+                _unitOfWork.SizesRepository.Update(size);
                 _unitOfWork.Save();
 
                 return Ok();
