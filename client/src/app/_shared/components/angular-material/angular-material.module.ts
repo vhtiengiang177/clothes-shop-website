@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatPaginatorModule, MatSelect, MatSelectModule } from '@angular/material';
+import { MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatStepperModule } from '@angular/material';
 
 
 
@@ -9,7 +8,13 @@ import { MatPaginatorModule, MatSelect, MatSelectModule } from '@angular/materia
   imports: [],
   exports: [
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class AngularMaterialModule { }
