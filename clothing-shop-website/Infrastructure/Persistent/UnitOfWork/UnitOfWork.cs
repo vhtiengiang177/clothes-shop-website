@@ -36,7 +36,6 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
        
-
         public IRepository<Product_Size_Color> ProductSizeColorsRepository
         {
             get
@@ -58,6 +57,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         }
 
 
+   
         public IRepository<Color> ColorsRepository {
             get {
                 if (_colorsRepository == null)
