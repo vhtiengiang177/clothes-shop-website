@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './modules/admin/layout/body/body.component';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
 import { SearchProductComponent } from './modules/admin/products/search-product/search-product.component';
+import { ProductFormComponent } from './modules/admin/products/product-form/product-form.component';
+import { LogproductFormComponent } from './modules/admin/products/logproduct-form/logproduct-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import { SearchProductComponent } from './modules/admin/products/search-product/
     SidebarComponent,
     ProductsListComponent,
     BodyComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    ProductFormComponent,
+    LogproductFormComponent
+  ],
+  entryComponents: [
+    ProductFormComponent,
+    LogproductFormComponent
   ],
   imports: [
     BrowserModule,

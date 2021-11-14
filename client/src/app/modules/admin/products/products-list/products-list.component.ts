@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material';
+import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-products-list',
@@ -17,9 +18,12 @@ export class ProductsListComponent implements OnInit {
     pagesize: 5,
     sort: null
   };
+  static readonly addForm = 0;
+  static readonly editForm = 1;
+  static readonly deleteForm = 2;
 
   constructor(private productsStore: ProductsStoreService,
-    private toastr: ToastrService) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -32,6 +36,45 @@ export class ProductsListComponent implements OnInit {
 
   fetchData() {
     this.productsStore.getAll(this.filter);
+  }
+
+  addProduct() {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '500px',
+      data: { 
+        typeform: ProductsListComponent.addForm, 
+        product: { }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        if(this.filter.sort == null && this.filter.pageindex == 1) {
+          this.productsStore.products.splice(this.filter.pagesize - 1,1);
+          this.productsStore.products.splice(0,0,res);
+          this.productsStore.totalData = this.productsStore.totalData + 1;
+        }
+        else {
+          this.filter = {
+            pageindex: 1,
+            pagesize: this.filter.pagesize,
+            sort: null
+          }
+          this.fetchData()
+        }
+        this.paginator.pageIndex = 0;
+      }
+    });
+  }
+
+  reloadProduct() {
+    this.filter = {
+      pageindex: 1,
+      pagesize: this.filter.pagesize,
+      sort: this.filter.sort
+    }
+    this.paginator.pageIndex = 0;
+    this.fetchData()
   }
 
   searchEvent($event) {
