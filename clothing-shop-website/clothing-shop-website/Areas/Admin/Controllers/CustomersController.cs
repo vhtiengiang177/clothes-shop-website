@@ -1,4 +1,6 @@
-﻿using Domain.Entity;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
+using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
 using Microsoft.AspNetCore.Http;
@@ -14,17 +16,40 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class CustomersController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
+        private CustomersService _customersService;
         public CustomersController(DataDbContext dbContext)
         {
             _unitOfWork = new UnitOfWork(dbContext);
         }
 
         [HttpGet]
-        public IActionResult GetAllCustomer()
+        public IActionResult GetAllCustomers([FromQuery] FilterParamsCustomer filterParams)
         {
-            var lCustomers = _unitOfWork.CustomersRepository.Get();
 
-            return Ok(lCustomers);
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
+
+                IQueryable<Customer> lCustomerItems;
+
+                lCustomerItems = _unitOfWork.CustomersRepository.Get();
+                lCustomerItems = _customersService.FilterCustomer(filterParams, lCustomerItems);
+
+                var lCustomer = _customersService.SortListCustomer(filterParams.Sort, lCustomerItems);
+
+                var response = new ResponseJSON<Customer>
+                {
+                    TotalData = lCustomer.Count(),
+                    Data = lCustomer.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 
