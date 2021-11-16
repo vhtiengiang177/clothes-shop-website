@@ -1,0 +1,45 @@
+<h2 *ngIf="this.data.typeform === 0" mat-dialog-title>Add Product</h2>
+<h2 *ngIf="this.data.typeform === 1" mat-dialog-title>Edit Product <strong>#{{ data.product.id }}</strong></h2>
+<mat-dialog-content class="mat-typography">
+    <div class="form-group custom-form">
+        <mat-form-field appearance="fill" class="col-md-8">
+            <mat-label>SKU</mat-label>
+            <input [(ngModel)]="data.product.name" #name="ngModel" matInput type="text" required>
+            <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
+                SKU is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group custom-form">
+        <mat-form-field appearance="fill" class="col-md-8">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="data.product.name" #name="ngModel" matInput type="text" required>
+            <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group custom-form">
+        <mat-form-field appearance="fill" class="col-md-8">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="data.product.description" matInput></textarea>
+        </mat-form-field>
+    </div>
+    <div class="form-group custom-form">
+        <mat-form-field appearance="fill" class="col-md-8">
+            <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="data.product.categoryId" [compareWith]="compareCategory" #selectCategory="ngModel" name="category">
+                <mat-option>None</mat-option>
+                <mat-option (click)="selectedCategory(category)" 
+                    *ngFor="let category of categoriesStore.categories$ | async" 
+                    [value]="category.id">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="btn btn-cancel">Cancel</button> &nbsp;
+    <button mat-button (click)="next()" cdkFocusInitial class="btn btn-save">Next</button>
+</mat-dialog-actions>

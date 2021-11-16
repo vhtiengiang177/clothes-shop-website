@@ -6,7 +6,7 @@
     </div>
     <div class="row">
   
-      <!-- <div class="button-add">
+      <div class="button-add">
         <button 
         mat-raised-button 
         (click)="reloadProduct()"
@@ -16,7 +16,7 @@
         mat-raised-button 
         (click)="addProduct()"
         class="btn btn-primary btn-add">Add Product</button>
-      </div> -->
+      </div>
           
       <table id="producttable" class="table table-striped table-hover table-sm ">
         <thead class="dt-header">
@@ -49,7 +49,7 @@
             <td>{{ product.id }}</td>
             <td>{{ product.sku }}</td>
             <td><a>{{ product.name }}</a></td>
-            <td>{{ product.totalbuy }}</td>
+            <td>{{ product.totalBuy }}</td>
             <td>{{ product.createdDate | date: 'longDate' }}</td>
             <td><fa class="edit-icon" name="edit"></fa></td>
             <td><fa class="delete-icon" name="trash"></fa></td>

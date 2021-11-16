@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, Event, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,14 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  isClickProducts: boolean = false
+  isDashboardActive: boolean = true
+  isProductShow: boolean = false
+  isProductsListActive: boolean = false
+  currentRouter: string
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if(event instanceof NavigationEnd ){
+        this.currentRouter = event.url;
+        if(this.currentRouter == "/admin/products")
+          this.clickProductsList()
+        else this.clickDashboard()
+      }
+  });
+   }
 
   ngOnInit() {
+    
   }
 
   clickProductsNavItem() {
-    this.isClickProducts = !this.isClickProducts
+    this.isProductShow = !this.isProductShow
+  }
+
+  clickDashboard() {
+    this.isDashboardActive = true
+    // false
+    this.isProductShow = false
+    this.isProductsListActive = false
+  }
+
+  clickProductsList() {
+    this.isProductShow = true
+    this.isProductsListActive = true
+    // false
+    this.isDashboardActive = false
   }
 }
