@@ -46,7 +46,7 @@ namespace Infrastructure.Persistent.Repository
             return dbSet.Find(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             dbSet.Add(entity);
         }

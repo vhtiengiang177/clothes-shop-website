@@ -165,7 +165,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.LogProductsRepository.Insert(logproduct);
+                _unitOfWork.LogProductsRepository.Create(logproduct);
 
                 Product_Size_Color item = new Product_Size_Color();
 
@@ -190,7 +190,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     item.IdColor = logproduct.IdColor;
                     item.Stock = logproduct.Quantity;
                     item.State = 1;
-                    _unitOfWork.ProductSizeColorsRepository.Insert(item);
+                    _unitOfWork.ProductSizeColorsRepository.Create(item);
                     return Ok(item);
                 }
             }
