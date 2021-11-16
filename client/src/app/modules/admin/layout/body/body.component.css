@@ -11279,3 +11279,6 @@
     width: 100%;
   }
   
+  .nav-color {
+    background: transparent !important;
+  }

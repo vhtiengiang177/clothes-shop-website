@@ -40,6 +40,7 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close class="btn btn-cancel">Cancel</button> &nbsp;
-    <button mat-button (click)="next()" cdkFocusInitial class="btn btn-save">Next</button>
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Cancel</button> &nbsp;
+    <button mat-button (click)="next()" class="btn btn-save">Save & Next</button>
+    <button mat-button (click)="save()" class="btn btn-save">Save & Close</button>
 </mat-dialog-actions>

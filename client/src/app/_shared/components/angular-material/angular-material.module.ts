@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatStepperModule } from '@angular/material';
+import { MatAutocompleteModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatStepperModule } from '@angular/material';
 
 
 
@@ -14,7 +14,9 @@ import { MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatInputModul
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ]
 })
 export class AngularMaterialModule { }

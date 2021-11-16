@@ -16,7 +16,7 @@
     <li (click)="clickDashboard()" 
         [ngClass]="{ 'active': isDashboardActive }" 
         [routerLink]="['admin']"
-        class="nav-item">
+        class="nav-item nav-color">
         <a class="nav-link">
             <fa name="tachometer"></fa>
             <span>Dashboard</span></a>
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li [ngClass]="{ 'active': isProductsListActive }" class="nav-item">
+    <li [ngClass]="{ 'active': isProductsListActive }" class="nav-item nav-color">
         <a (click)="clickProductsNavItem()" class="nav-link collapsed" >
             <fa name="cubes"></fa>
             <span>Products</span>
@@ -50,7 +50,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item nav-color">
         <a class="nav-link collapsed" href="#" >
             <span>Utilities</span>
         </a>
@@ -74,7 +74,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item nav-color">
         <a class="nav-link collapsed" href="#" >
             <fa name="folder"></fa>
             <span>Pages</span>
@@ -94,13 +94,13 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
+    <li class="nav-item nav-color">
         <a class="nav-link" href="charts.html">
             <span>Charts</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <li class="nav-item nav-color">
         <a class="nav-link" href="tables.html">
             <span>Tables</span></a>
     </li>
