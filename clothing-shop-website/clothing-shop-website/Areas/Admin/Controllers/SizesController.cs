@@ -46,7 +46,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         public IActionResult CreateSize(Size size)
         {
             if (ModelState.IsValid) {
-                _unitOfWork.SizesRepository.Insert(size);
+                _unitOfWork.SizesRepository.Create(size);
 
                 if (_unitOfWork.Save()) {
                         return Ok();

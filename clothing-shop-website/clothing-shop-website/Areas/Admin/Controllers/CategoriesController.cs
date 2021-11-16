@@ -25,7 +25,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             var lCategories = _unitOfWork.CategoriesRepository.Get();
 
-            return Ok(lCategories);
+            return Ok(lCategories.Where(c => c.State != 0));
         }
 
 
@@ -47,7 +47,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid) {
                 category.CreatedDate = DateTime.Now;
-                 _unitOfWork.CategoriesRepository.Insert(category);
+                 _unitOfWork.CategoriesRepository.Create(category);
 
                 if (_unitOfWork.Save()) {
                         return Ok();

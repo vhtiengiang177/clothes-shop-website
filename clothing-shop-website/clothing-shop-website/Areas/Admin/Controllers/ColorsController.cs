@@ -23,9 +23,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAllColors()
         {
-            var lColor = _unitOfWork.ColorsRepository.Get();
+            var lColors = _unitOfWork.ColorsRepository.Get();
 
-            return Ok(lColor);
+            return Ok(lColors.Where(c => c.State != 0));
         }
 
 
@@ -47,7 +47,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid) {
                
-                _unitOfWork.ColorsRepository.Insert(color);
+                _unitOfWork.ColorsRepository.Create(color);
 
                 if (_unitOfWork.Save()) {
                         return Ok();
