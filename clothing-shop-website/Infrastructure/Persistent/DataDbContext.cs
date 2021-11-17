@@ -289,36 +289,36 @@ namespace Infrastructure.Persistent
                new Size() { Id = 5, Name = "XXL", State = 1 });
 
             modelBuilder.Entity<Product>().HasData(
-              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 100, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
-              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
-              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 200, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
-              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 300, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
-              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 400, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
-              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 500, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
-              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
-              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 4 },
-              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5 },
-              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5 },
-              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 });
+              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 100, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 100000 },
+              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 200000 },
+              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 200, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 300000 },
+              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 300, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 400000 },
+              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 400, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 500000 },
+              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 500, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 600000 },
+              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4, UnitPrice = 700000 },
+              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 4, UnitPrice = 100000 },
+              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 800000 },
+              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 900000 },
+              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 100000 });
 
 
             modelBuilder.Entity<Product_Size_Color>().HasData(
-               new Product_Size_Color() { IdProduct = 1, IdSize = 1 ,IdColor = 1, UnitPrice = 1000, Stock = 100,State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1, UnitPrice = 2000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1, UnitPrice = 3000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2, UnitPrice = 3000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3, UnitPrice = 3000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1, UnitPrice = 4000, Stock = 100, State = 1 });
+               new Product_Size_Color() { IdProduct = 1, IdSize = 1 ,IdColor = 1,  Stock = 100,State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 });
 
             modelBuilder.Entity<Log_Product>().HasData(
               new Log_Product() { Id = 1, IdProduct = 1, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, ImportPrice = 150000, Quantity = 120 },

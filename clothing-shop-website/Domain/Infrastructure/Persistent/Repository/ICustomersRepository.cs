@@ -15,6 +15,7 @@ namespace Domain.Infrastructure.Persistent.Repository
          Customer CreateCustomer(Customer Customer);
          void UpdateCustomer(Customer Customer);
          public Customer GetCustomerByID(int CustomerID);
+        
 
     }
 }

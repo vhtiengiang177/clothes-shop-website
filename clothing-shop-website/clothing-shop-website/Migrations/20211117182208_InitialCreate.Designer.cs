@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211117174041_InitialCreate")]
+    [Migration("20211117182208_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1130,6 +1130,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("TotalBuy")
                         .HasColumnType("int");
 
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdCategory");
@@ -1151,7 +1154,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Avocado Dress Set",
                             Sku = "123456789",
                             State = 1,
-                            TotalBuy = 100
+                            TotalBuy = 100,
+                            UnitPrice = 100000.0
                         },
                         new
                         {
@@ -1163,7 +1167,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Ally Babydoll Dress",
                             Sku = "123456788",
                             State = 1,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 200000.0
                         },
                         new
                         {
@@ -1175,7 +1180,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Baggy Jean",
                             Sku = "123456787",
                             State = 1,
-                            TotalBuy = 200
+                            TotalBuy = 200,
+                            UnitPrice = 300000.0
                         },
                         new
                         {
@@ -1187,7 +1193,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Short Jean",
                             Sku = "123456786",
                             State = 1,
-                            TotalBuy = 300
+                            TotalBuy = 300,
+                            UnitPrice = 400000.0
                         },
                         new
                         {
@@ -1199,7 +1206,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Mori Shirt",
                             Sku = "123456785",
                             State = 1,
-                            TotalBuy = 400
+                            TotalBuy = 400,
+                            UnitPrice = 500000.0
                         },
                         new
                         {
@@ -1211,7 +1219,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Yasmin Shirt",
                             Sku = "123456784",
                             State = 1,
-                            TotalBuy = 500
+                            TotalBuy = 500,
+                            UnitPrice = 600000.0
                         },
                         new
                         {
@@ -1223,7 +1232,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Aokosor Sweaters",
                             Sku = "123456783",
                             State = 1,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 700000.0
                         },
                         new
                         {
@@ -1235,7 +1245,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Hoodie",
                             Sku = "123456782",
                             State = 1,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 100000.0
                         },
                         new
                         {
@@ -1247,7 +1258,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Mella Khaki Pant",
                             Sku = "123456781",
                             State = 1,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 800000.0
                         },
                         new
                         {
@@ -1259,7 +1271,8 @@ namespace clothing_shop_website.Migrations
                             Name = "Mochi Pants",
                             Sku = "123456780",
                             State = 1,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 900000.0
                         },
                         new
                         {
@@ -1271,7 +1284,8 @@ namespace clothing_shop_website.Migrations
                             Name = "T-Shirts",
                             Sku = "123456779",
                             State = 0,
-                            TotalBuy = 10
+                            TotalBuy = 10,
+                            UnitPrice = 100000.0
                         });
                 });
 
@@ -1295,9 +1309,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<double>("UnitPrice")
-                        .HasColumnType("float");
-
                     b.HasKey("IdProduct", "IdSize", "IdColor");
 
                     b.HasIndex("ColorId");
@@ -1313,8 +1324,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 1000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1322,8 +1332,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 2,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 2000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1331,8 +1340,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 3,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 3000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1340,8 +1348,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 2,
                             IdColor = 2,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 3000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1349,8 +1356,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 2,
                             IdColor = 3,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 3000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1358,8 +1364,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 4,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1367,8 +1372,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 2,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1376,8 +1380,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 3,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1385,8 +1388,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 2,
                             IdColor = 3,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1394,8 +1396,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 2,
                             IdColor = 4,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1403,8 +1404,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1412,8 +1412,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1421,8 +1420,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1430,8 +1428,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1439,8 +1436,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         },
                         new
                         {
@@ -1448,8 +1444,7 @@ namespace clothing_shop_website.Migrations
                             IdSize = 1,
                             IdColor = 1,
                             State = 1,
-                            Stock = 100,
-                            UnitPrice = 4000.0
+                            Stock = 100
                         });
                 });
 

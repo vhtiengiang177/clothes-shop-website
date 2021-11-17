@@ -22,21 +22,13 @@ namespace Infrastructure.Persistent.Repository
             return lCustomer.AsQueryable();
         }
 
-        //public IQueryable<Customer> GetAllCustomersByIDType(int TypeID)
-        //{
-        //    var query = _dbContext.Customers.Join(_dbContext.Accounts, cus => cus.IdAccount, acc => acc.Id, (cus, acc) => new
-        //    {
-        //        Id = cus.IdAccount,
-        //        FirstName = cus.FirstName,
-        //        LastName = cus.LastName,
-        //        VerifyEmail = cus.VerifyEmail,
-        //        IdTypeCustomer = cus.IdTypeCustomer,
-        //        Point = cus.Point,
-        //        State = acc.State
-        //    }).Where(customer => customer.State > 0 && customer.IdTypeCustomer==TypeID);
+        public IQueryable<Customer> GetAllCustomersByIDType(int TypeID)
+        {
+            var lAccount = _dbContext.Accounts.Where(a => a.State > 0 && a.IdTypeAccount == 4).Select(a => a.Id).ToList();
+            var lCustomer = _dbContext.Customers.Where(c => lAccount.Contains(c.IdAccount) && c.IdTypeCustomer== TypeID);
 
-        //    return query;
-        //}
+            return lCustomer.AsQueryable();
+        }
 
         public Customer GetCustomerByID(int CustomerID)
         {
@@ -54,9 +46,6 @@ namespace Infrastructure.Persistent.Repository
             _dbContext.Entry(Customer).State = EntityState.Modified;
         }
 
-        IQueryable<Customer> ICustomersRepository.GetAllCustomersByIDType(int TypeID)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

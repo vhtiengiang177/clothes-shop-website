@@ -168,6 +168,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.LogProductsRepository.Create(logproduct);
 
                 Product_Size_Color item = new Product_Size_Color();
+                Product product = new Product();
 
                 if (_unitOfWork.ProductsRepository.CheckItemInList(logproduct))
                 {
@@ -176,12 +177,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     {
                         item.Stock += logproduct.Quantity;
                         _unitOfWork.ProductSizeColorsRepository.Update(item);
-                        if (_unitOfWork.Save())
-                        {
-                            return Ok();
-                        }
+                        _unitOfWork.Save();
+                       
                     }
-                    return BadRequest();
+                    
                 }
                 else
                 {
@@ -191,8 +190,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     item.Stock = logproduct.Quantity;
                     item.State = 1;
                     _unitOfWork.ProductSizeColorsRepository.Create(item);
-                    return Ok(item);
                 }
+
+                product = _unitOfWork.ProductsRepository.GetProductByID(logproduct.IdProduct);
+                if (product != null && product.UnitPrice != logproduct.ImportPrice)
+                {
+                    product.UnitPrice = logproduct.ImportPrice;
+                    product.LastModified = logproduct.CreatedDate;
+                    _unitOfWork.ProductsRepository.UpdateProduct(product);
+                    _unitOfWork.Save();
+                }
+                return Ok();
             }
             return BadRequest(ModelState);
         }
