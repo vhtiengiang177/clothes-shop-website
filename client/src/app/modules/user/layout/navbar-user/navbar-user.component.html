@@ -1,1 +1,23 @@
-<p>navbar-user works!</p>
+<div class="nav-item">
+    <div class="container nav-center">
+        <div class="nav-depart">
+            <div class="depart-btn">
+                <i class="ti-menu"></i>
+                <span>All categories</span>
+                <ul class="depart-hover">
+                    <li *ngFor="let category of categoriesStore.categories$ | async">
+                        <a> {{ category.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <nav class="nav-menu mobile-menu">
+            <ul>
+                <li class="active"><a [routerLink]="">Home</a></li>
+                <li><a href="./shop.html">Products</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</div>
