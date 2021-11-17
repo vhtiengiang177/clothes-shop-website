@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
@@ -27,6 +27,16 @@ export class DataService {
     .pipe(catchError((error: Response) => {
       if(error.status == 400)
         return throwError(new BadRequestError(error))
+      return throwError(new AppError(error))
+    }))
+  }
+
+  create(routeName: string, object: any) {
+    return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + routeName, object)
+    .pipe(catchError((error: Response) => {
+      if(error.status == 400) {
+        return throwError(new BadRequestError())
+      }
       return throwError(new AppError(error))
     }))
   }

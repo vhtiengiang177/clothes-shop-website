@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { ProductService } from '../../data/product/product.service';
@@ -53,5 +53,18 @@ export class ProductsStoreService {
                   this.toastr.error("That's an error", "Bad Request")
                 else this.toastr.error("An unexpected error occurred.")
               });
+  }
+
+  create (productObj) {
+    let result = new Subject<Product>();
+    this.productService.create("/createproduct",productObj).subscribe(res => {
+      result.next(res)
+      this.toastr.success("Added successfully", "Product #" + res.id)
+    }, (error: AppError) => {
+      if(error instanceof BadRequestError)
+        return this.toastr.error("Add product failed")
+      else this.toastr.error("An unexpected error occurred.", "Add Product")
+    });
+    return result.asObservable();
   }
 }

@@ -16,8 +16,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 })
 export class BodyComponent implements OnInit {
 
-  bodyItem: string = ""
-
   constructor() {
     
   }

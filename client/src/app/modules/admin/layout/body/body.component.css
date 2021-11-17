@@ -11281,4 +11281,5 @@
   
   .nav-color {
     background: transparent !important;
+    display: unset !important;
   }
