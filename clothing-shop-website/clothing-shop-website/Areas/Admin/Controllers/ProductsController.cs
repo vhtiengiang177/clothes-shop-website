@@ -160,11 +160,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
 
 
-        [HttpPost("AddItemOfProduct")]
-        public IActionResult AddItemOfProduct(Log_Product logproduct)
+        [HttpPost("LogAProduct")]
+        public IActionResult LogAProduct(Log_Product logproduct)
         {
             if (ModelState.IsValid)
             {
+                logproduct.CreatedDate = DateTime.Now;
                 _unitOfWork.LogProductsRepository.Create(logproduct);
 
                 Product_Size_Color item = new Product_Size_Color();
@@ -174,7 +175,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
                     if (item != null)
                     {
-                        item.Stock += logproduct.Quantity;
+                        if(item.State == 0)
+                        {
+                            item.State = 1;
+                            item.Stock = logproduct.Quantity;
+                        }
+                        else item.Stock += logproduct.Quantity;
+                        item.UnitPrice = logproduct.ImportPrice;
+                        
                         _unitOfWork.ProductSizeColorsRepository.Update(item);
                         if (_unitOfWork.Save())
                         {
@@ -189,10 +197,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     item.IdSize = logproduct.IdSize;
                     item.IdColor = logproduct.IdColor;
                     item.Stock = logproduct.Quantity;
+                    item.UnitPrice = logproduct.ImportPrice;
                     item.State = 1;
                     _unitOfWork.ProductSizeColorsRepository.Create(item);
-                    return Ok(item);
+                    if (_unitOfWork.Save())
+                        return Ok(item);
+                    else return BadRequest();
                 }
+
             }
             return BadRequest(ModelState);
         }

@@ -1,2 +1,4 @@
-<!-- <app-body></app-body> -->
-<app-body-user></app-body-user>
+<div *ngIf="isAdmin">
+    <app-body *ngIf="isAdmin"></app-body>
+</div>
+<app-body-user *ngIf="!isAdmin"></app-body-user> 

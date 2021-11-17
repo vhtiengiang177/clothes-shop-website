@@ -25,7 +25,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             var lSizes = _unitOfWork.SizesRepository.Get();
 
-            return Ok(lSizes);
+            return Ok(lSizes.Where(s => s.State != 0));
         }
 
 

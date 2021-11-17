@@ -22,6 +22,7 @@ export class ProductsListComponent implements OnInit {
   static readonly editForm = 1;
   static readonly deleteForm = 2;
 
+
   constructor(private productsStore: ProductsStoreService,
     public dialog: MatDialog) { }
 

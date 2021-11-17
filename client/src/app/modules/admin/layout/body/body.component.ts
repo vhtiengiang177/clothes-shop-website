@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @Component({
   selector: 'app-body',
@@ -7,9 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./body.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class BodyComponent implements OnInit {
 
-  bodyItem: string = ""
+@NgModule({
+  declarations: [
+    AngularFontAwesomeModule
+  ]
+})
+export class BodyComponent implements OnInit {
 
   constructor() {
     

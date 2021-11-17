@@ -65,7 +65,10 @@ namespace Infrastructure.Persistent.Repository
         public bool CheckItemInList(Log_Product logproduct)
         {
             bool check = false;
-            var count = _dbContext.Product_Size_Colors.Where(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0).ToList().Count;
+            var count = _dbContext.Product_Size_Colors
+                .Where(i => i.IdProduct == logproduct.IdProduct && 
+                i.IdSize == logproduct.IdSize && 
+                i.IdColor == logproduct.IdColor).ToList().Count;
             if (count > 0)
                 check = true;
             
