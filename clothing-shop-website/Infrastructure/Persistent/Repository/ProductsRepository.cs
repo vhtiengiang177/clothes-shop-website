@@ -65,10 +65,7 @@ namespace Infrastructure.Persistent.Repository
         public bool CheckItemInList(Log_Product logproduct)
         {
             bool check = false;
-            var count = _dbContext.Product_Size_Colors
-                .Where(i => i.IdProduct == logproduct.IdProduct && 
-                i.IdSize == logproduct.IdSize && 
-                i.IdColor == logproduct.IdColor).ToList().Count;
+            var count = _dbContext.Product_Size_Colors.Where(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0).ToList().Count;
             if (count > 0)
                 check = true;
             
@@ -88,6 +85,20 @@ namespace Infrastructure.Persistent.Repository
                                     .Where(p => distinctIdCategories.Contains((int)p.IdCategory)).ToList();
 
             return lProductItem.AsQueryable();
+        }
+
+        public IQueryable<Product> GetTopProductBestSellers()
+        {
+            var lProduct =  _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.TotalBuy).Take(3).ToList();
+
+            return lProduct.AsQueryable();
+        }
+
+        public IQueryable<Product> GetTopNewProducts()
+        {
+            var lProduct = _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.CreatedDate).Take(3).ToList();
+
+            return lProduct.AsQueryable();
         }
     }
 }

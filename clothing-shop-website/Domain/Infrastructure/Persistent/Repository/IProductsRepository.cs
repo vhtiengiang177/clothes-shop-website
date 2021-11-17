@@ -19,5 +19,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         IQueryable<Product> GetProductsByCategoriesID(int[] idCategories);
         bool CheckItemInList(Log_Product logproduct);
         public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
+        IQueryable<Product> GetTopProductBestSellers();
+        IQueryable<Product> GetTopNewProducts();
     }
 }
