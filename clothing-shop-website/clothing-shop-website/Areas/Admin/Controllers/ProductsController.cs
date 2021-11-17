@@ -25,7 +25,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _productsService = productsService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts([FromQuery] FilterParamsProduct filterParams)
         {
             try
@@ -160,36 +160,27 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
 
 
-        [HttpPost("LogAProduct")]
-        public IActionResult LogAProduct(Log_Product logproduct)
+        [HttpPost("AddItemOfProduct")]
+        public IActionResult AddItemOfProduct(Log_Product logproduct)
         {
             if (ModelState.IsValid)
             {
-                logproduct.CreatedDate = DateTime.Now;
                 _unitOfWork.LogProductsRepository.Create(logproduct);
 
                 Product_Size_Color item = new Product_Size_Color();
+                Product product = new Product();
 
                 if (_unitOfWork.ProductsRepository.CheckItemInList(logproduct))
                 {
                     item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
                     if (item != null)
                     {
-                        if(item.State == 0)
-                        {
-                            item.State = 1;
-                            item.Stock = logproduct.Quantity;
-                        }
-                        else item.Stock += logproduct.Quantity;
-                        item.UnitPrice = logproduct.ImportPrice;
-                        
+                        item.Stock += logproduct.Quantity;
                         _unitOfWork.ProductSizeColorsRepository.Update(item);
-                        if (_unitOfWork.Save())
-                        {
-                            return Ok();
-                        }
+                        _unitOfWork.Save();
+                       
                     }
-                    return BadRequest();
+                    
                 }
                 else
                 {
@@ -197,16 +188,51 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     item.IdSize = logproduct.IdSize;
                     item.IdColor = logproduct.IdColor;
                     item.Stock = logproduct.Quantity;
-                    item.UnitPrice = logproduct.ImportPrice;
                     item.State = 1;
                     _unitOfWork.ProductSizeColorsRepository.Create(item);
-                    if (_unitOfWork.Save())
-                        return Ok(item);
-                    else return BadRequest();
                 }
 
+                product = _unitOfWork.ProductsRepository.GetProductByID(logproduct.IdProduct);
+                if (product != null && product.UnitPrice != logproduct.ImportPrice)
+                {
+                    product.UnitPrice = logproduct.ImportPrice;
+                    product.LastModified = logproduct.CreatedDate;
+                    _unitOfWork.ProductsRepository.UpdateProduct(product);
+                    _unitOfWork.Save();
+                }
+                return Ok();
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpGet("GetTopProductBestSellers")]
+        public IActionResult GetTopProductBestSellers()
+        {
+            try
+            {
+                var lProduct = _unitOfWork.ProductsRepository.GetTopProductBestSellers();
+                return Ok(lProduct);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpGet("GetTopNewProducts")]
+        public IActionResult GetTopNewProducts()
+        {
+            try
+            {
+                var lProduct = _unitOfWork.ProductsRepository.GetTopNewProducts();
+                return Ok(lProduct);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
         }
     }
 }

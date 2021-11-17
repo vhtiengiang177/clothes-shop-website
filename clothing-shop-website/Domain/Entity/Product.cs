@@ -12,6 +12,7 @@ namespace Domain.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public int TotalBuy { get; set; } = 0;
+        public double UnitPrice { get; set; }
         public int State { get; set; } = 1;
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }

@@ -8,13 +8,14 @@ namespace Infrastructure.Persistent.UnitOfWork
     {
         private DataDbContext _dbContext;
         private IProductsRepository _productsRepository;
+        private ICustomersRepository _customersRepository;
         private IRepository<Category> _categoriesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
         private IRepository<Promotion> _promotionsRepository;
-        private IRepository<Customer> _customersRepository;
+        //private IRepository<Customer> _customersRepository;
         private IRepository<Staff> _staffRepository;
         private IRepository<Account> _accountsRepository;
 
@@ -24,11 +25,22 @@ namespace Infrastructure.Persistent.UnitOfWork
         {
             _dbContext = dbContext;
         }
-        public IProductsRepository ProductsRepository {
+        public IProductsRepository ProductsRepository 
+        {
             get {
                 if (_productsRepository == null)
                     _productsRepository = new ProductsRepository(_dbContext);
                 return _productsRepository;
+            }
+        }
+
+        public ICustomersRepository CustomersRepository
+        {
+            get
+            {
+                if (_customersRepository == null)
+                    _customersRepository = new CustomersRepository(_dbContext);
+                return _customersRepository;
             }
         }
 
@@ -87,15 +99,15 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
 
-        public IRepository<Customer> CustomersRepository
-        {
-            get
-            {
-                if (_customersRepository == null)
-                    _customersRepository = new GenericRepository<Customer>(_dbContext);
-                return _customersRepository;
-            }
-        }
+        //public IRepository<Customer> CustomersRepository
+        //{
+        //    get
+        //    {
+        //        if (_customersRepository == null)
+        //            _customersRepository = new GenericRepository<Customer>(_dbContext);
+        //        return _customersRepository;
+        //    }
+        //}
 
         public IRepository<Staff> StaffRepository
         {
