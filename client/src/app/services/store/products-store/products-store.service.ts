@@ -19,12 +19,12 @@ export class ProductsStoreService {
   readonly totalData$ = this._totalData.asObservable();
 
   constructor(private productService: ProductService,
-    private toastr: ToastrService) { 
-      if(this.products.length == 0) {
-        let filter: FilterParamsProduct = {};
-        this.getAll(filter);
-      }
+    private toastr: ToastrService) {
+    if (this.products.length == 0) {
+      let filter: FilterParamsProduct = {};
+      this.getAll(filter);
     }
+  }
 
   get products(): Product[] {
     return this._products.getValue();
@@ -44,27 +44,43 @@ export class ProductsStoreService {
 
   async getAll(filterParams: FilterParamsProduct) {
     await this.productService.get(filterParams)
-              .subscribe(res => {
-                this.products = res.data;
-                this.totalData = res.totalData;
-              } ,
-              (error: AppError) => {
-                if(error instanceof BadRequestError)
-                  this.toastr.error("That's an error", "Bad Request")
-                else this.toastr.error("An unexpected error occurred.")
-              });
+      .subscribe(res => {
+        this.products = res.data;
+        this.totalData = res.totalData;
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
   }
 
-  create (productObj) {
+  getTopBestSellers() {
+    let result = new Subject<Product[]>();
+    this.productService.getTopBestSellers()
+      .subscribe(res => {
+        result.next(res)
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        })
+
+      return result.asObservable()
+  }
+
+  create(productObj) {
     let result = new Subject<Product>();
-    this.productService.create("/createproduct",productObj).subscribe(res => {
+    this.productService.create("/createproduct", productObj).subscribe(res => {
       result.next(res)
       this.toastr.success("Added successfully", "Product #" + res.id)
     }, (error: AppError) => {
-      if(error instanceof BadRequestError)
+      if (error instanceof BadRequestError)
         return this.toastr.error("Add product failed")
       else this.toastr.error("An unexpected error occurred.", "Add Product")
-    });
-    return result.asObservable();
+    })
+
+    return result.asObservable()
   }
 }

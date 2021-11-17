@@ -18,13 +18,21 @@ export class ProductService extends DataService {
   }
 
   get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + this.convertToQueryStringProduct(params))
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllProducts" + this.convertToQueryStringProduct(params))
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
         return throwError(new AppError(error))
-        
       }))
+  }
+
+  getTopBestSellers() {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopProductBestSellers")
+    .pipe(catchError((error: Response) => {
+      if(error.status == 400)
+        return throwError(new BadRequestError(error))
+      return throwError(new AppError(error))
+    }))
   }
 
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {

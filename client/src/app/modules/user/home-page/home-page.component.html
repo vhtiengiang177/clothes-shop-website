@@ -37,7 +37,7 @@
                     BEST SELLER
                 </div>
                 <div class="product-slider owl-carousel1">
-                    <div class="product-item" *ngFor="let product of productsStore.products$ | async">
+                    <div class="product-item" *ngFor="let product of productTopBestSellers">
                         <div class="pi-pic">
                             <img src="assets/product.jpg" alt="">
                             <ul>
@@ -50,11 +50,10 @@
                                 <h5>{{ product.name }}</h5>
                             </a>
                             <div class="product-price">
-                                {{ product.unitprice }}
+                                {{ product.unitPrice | currency: 'VND' }}
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
