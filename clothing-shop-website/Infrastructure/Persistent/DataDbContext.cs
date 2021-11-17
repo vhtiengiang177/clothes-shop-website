@@ -209,7 +209,7 @@ namespace Infrastructure.Persistent
 
         public void SeedData(ModelBuilder modelBuilder)
         {
-            DateTime createdDate = new DateTime(2021,07,10);
+            DateTime createdDate = new DateTime(2021, 07, 10);
             DateTime endDate = new DateTime(2022, 7, 15);
 
             modelBuilder.Entity<ShopInfo>().HasData(
@@ -240,9 +240,9 @@ namespace Infrastructure.Persistent
                 new Staff() { IdAccount = 2, FirstName = "Nguyễn Thị", LastName = "Thảo", CardIdentity = "123456787", Phone = "0328807776" },
                 new Staff() { IdAccount = 3, FirstName = "Lê Nguyễn Gia", LastName = "Bảo", CardIdentity = "123456789", Phone = "0328807774" },
                 new Staff() { IdAccount = 4, FirstName = "Lê Thị Ngọc", LastName = "Yến", CardIdentity = "123456788", Phone = "0328807775" },
-                new Staff() { IdAccount = 5, FirstName = "Trần Thủy", LastName = "Tiên", CardIdentity = "123456785", Phone = "0328807773"},
-                new Staff() { IdAccount = 6, FirstName = "Lê Thị Ngọc", LastName = "Yến", CardIdentity = "123456784", Phone = "0328807772"},
-                new Staff() { IdAccount = 10, FirstName = "Gian Thiệu", LastName = "Quân", CardIdentity = "123456783", Phone = "0328807771"},
+                new Staff() { IdAccount = 5, FirstName = "Trần Thủy", LastName = "Tiên", CardIdentity = "123456785", Phone = "0328807773" },
+                new Staff() { IdAccount = 6, FirstName = "Lê Thị Ngọc", LastName = "Yến", CardIdentity = "123456784", Phone = "0328807772" },
+                new Staff() { IdAccount = 10, FirstName = "Gian Thiệu", LastName = "Quân", CardIdentity = "123456783", Phone = "0328807771" },
                 new Staff() { IdAccount = 11, FirstName = "Nguyễn Thị Minh", LastName = "Thư", CardIdentity = "123456782", Phone = "0328807770" });
 
             modelBuilder.Entity<TypeCustomer>().HasData(
@@ -287,13 +287,18 @@ namespace Infrastructure.Persistent
                new Size() { Id = 4, Name = "XL", State = 1 },
                new Size() { Id = 5, Name = "XXL", State = 1 });
 
+            modelBuilder.Entity<Image>().HasData(
+              new Image() { Id = 1, IdProduct = 1, Name = "./clothing-shop-website/Asset/image.png", State = 1 });
+             
+             
+
             modelBuilder.Entity<Product>().HasData(
-              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
+              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 100, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
               new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1 },
-              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
-              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
-              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
-              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 200, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 300, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2 },
+              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 400, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
+              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 500, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3 },
               new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
               new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4 },
               new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 5 },
