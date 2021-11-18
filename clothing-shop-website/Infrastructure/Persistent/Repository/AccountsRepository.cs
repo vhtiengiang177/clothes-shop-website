@@ -63,10 +63,10 @@ namespace Infrastructure.Persistent.Repository
         }
         public IQueryable<Account> GetAccountsByTypeAccountsID(int[] IdTypeAccouts)
         {
-            int[] distinctIdCategories = IdTypeAccouts.Distinct().ToArray();
+            int[] distinctIdypeAccouts = IdTypeAccouts.Distinct().ToArray();
 
             var lAccount = _dbContext.Accounts
-                                    .Where(p => distinctIdCategories.Contains((int)p.IdTypeAccount)).ToList();
+                                    .Where(p => distinctIdypeAccouts.Contains((int)p.IdTypeAccount)).ToList();
 
             return lAccount.AsQueryable();
         }
