@@ -46,7 +46,7 @@ namespace Infrastructure.Persistent.Repository
             _dbContext.Entry(customer).State = EntityState.Modified;
         }
 
-        public IQueryable<Customer> GetlCustomersByCategoriesID(int[] idTypeCustomers)
+        public IQueryable<Customer> GetlCustomersByTypeCustomerID(int[] idTypeCustomers)
         {
             int[] distinctIdTypeCustomers = idTypeCustomers.Distinct().ToArray();
 
