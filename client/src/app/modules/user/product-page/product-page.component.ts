@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
+import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 
@@ -25,7 +26,8 @@ export class ProductPageComponent implements OnInit {
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
-    private sizesStore: SizesStoreService) {
+    private sizesStore: SizesStoreService,
+    private colorsStore: ColorsStoreService) {
       if(this.productsStore.products.length != 6) {
         this.fetchData()
       }
