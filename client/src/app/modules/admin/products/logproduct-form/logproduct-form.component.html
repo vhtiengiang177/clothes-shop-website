@@ -24,15 +24,6 @@
     </div>
     <div class="form-group custom-form">
         <mat-form-field appearance="fill">
-            <mat-label>Import Price</mat-label>
-            <input [(ngModel)]="logProduct.importprice" #importprice="ngModel" matInput type="text" required>
-            <mat-error class="error-required" *ngIf="importprice.touched && importprice.invalid && importprice.errors?.required">
-                Import Price is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group custom-form">
-        <mat-form-field appearance="fill">
             <mat-label>Quantity</mat-label>
             <input [(ngModel)]="logProduct.quantity" #quantity="ngModel" matInput type="text">
         </mat-form-field>
