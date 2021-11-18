@@ -39,6 +39,8 @@ namespace clothing_shop_website
             });
 
             services.AddSingleton(new ProductsService());
+            services.AddSingleton(new AccountsService());
+            services.AddSingleton(new CustomersService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
