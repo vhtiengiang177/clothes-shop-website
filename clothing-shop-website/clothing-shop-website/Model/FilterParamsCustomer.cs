@@ -12,8 +12,6 @@ namespace clothing_shop_website.Model
         public string Sort { get; set; }
         public int IdCustomer { get; set; }
         public int []IdTypeCustomers { get; set; }
-        public int MaxPoint { get; set; }
-        public int MinPoint { get; set; }
         public string Content { get; set; }
     }
 }
