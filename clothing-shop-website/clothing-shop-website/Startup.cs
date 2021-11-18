@@ -24,11 +24,11 @@ namespace clothing_shop_website
         {
             services.AddControllers();
 
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
-            b => b.MigrationsAssembly("clothing-shop-website")));
-
-            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
             //b => b.MigrationsAssembly("clothing-shop-website")));
+
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            b => b.MigrationsAssembly("clothing-shop-website")));
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
@@ -39,6 +39,8 @@ namespace clothing_shop_website
             });
 
             services.AddSingleton(new ProductsService());
+            services.AddSingleton(new AccountService());
+            services.AddSingleton(new CustomersService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
