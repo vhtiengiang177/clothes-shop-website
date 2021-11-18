@@ -51,10 +51,25 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("GetlCustomerByID/{id}", Name = "GetlCustomerByID")]
         public IActionResult GetlCustomerByID(int id)
         {
             var Customer = _unitOfWork.CustomersRepository.GetCustomerByID(id);
+
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(Customer);
+            }
+        }
+
+        [HttpGet("GetAllCustomersByIDType/{id}", Name = "GetAllCustomersByIDType")]
+        public IActionResult GetAllCustomersByIDType(int id)
+        {
+            var Customer = _unitOfWork.CustomersRepository.GetAllCustomersByIDType(id);
 
             if (Customer == null)
             {

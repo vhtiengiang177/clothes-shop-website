@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211117182208_InitialCreate")]
+    [Migration("20211118160131_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,14 +29,12 @@ namespace clothing_shop_website.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("IdTypeAccount")
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -46,7 +44,8 @@ namespace clothing_shop_website.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("IdTypeAccount");
 
@@ -344,6 +343,9 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ColorCode")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -352,36 +354,45 @@ namespace clothing_shop_website.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ColorCode")
+                        .IsUnique()
+                        .HasFilter("[ColorCode] IS NOT NULL");
+
                     b.ToTable("Colors");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            ColorCode = "#FFFFFF",
                             Name = "White",
                             State = 1
                         },
                         new
                         {
                             Id = 2,
+                            ColorCode = "#000000",
                             Name = "Black",
                             State = 1
                         },
                         new
                         {
                             Id = 3,
+                            ColorCode = "#0000FF",
                             Name = "Blue",
                             State = 1
                         },
                         new
                         {
                             Id = 4,
+                            ColorCode = "#FF0000",
                             Name = "Red",
                             State = 1
                         },
                         new
                         {
                             Id = 5,
+                            ColorCode = "#808080",
                             Name = "Gray",
                             State = 0
                         });
@@ -1663,9 +1674,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
                     b.HasKey("IdAccount");
 
                     b.HasIndex("CardIdentity", "Phone")
@@ -1682,8 +1690,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Võ Hồng Tiên",
                             LastName = "Giang",
-                            Phone = "0328807778",
-                            State = 1
+                            Phone = "0328807778"
                         },
                         new
                         {
@@ -1692,8 +1699,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Nguyễn Thị",
                             LastName = "Thảo",
-                            Phone = "0328807776",
-                            State = 1
+                            Phone = "0328807776"
                         },
                         new
                         {
@@ -1702,8 +1708,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Lê Nguyễn Gia",
                             LastName = "Bảo",
-                            Phone = "0328807774",
-                            State = 1
+                            Phone = "0328807774"
                         },
                         new
                         {
@@ -1712,8 +1717,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
-                            Phone = "0328807775",
-                            State = 1
+                            Phone = "0328807775"
                         },
                         new
                         {
@@ -1722,8 +1726,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Trần Thủy",
                             LastName = "Tiên",
-                            Phone = "0328807773",
-                            State = 1
+                            Phone = "0328807773"
                         },
                         new
                         {
@@ -1732,8 +1735,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Lê Thị Ngọc",
                             LastName = "Yến",
-                            Phone = "0328807772",
-                            State = 1
+                            Phone = "0328807772"
                         },
                         new
                         {
@@ -1742,8 +1744,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Gian Thiệu",
                             LastName = "Quân",
-                            Phone = "0328807771",
-                            State = 1
+                            Phone = "0328807771"
                         },
                         new
                         {
@@ -1752,8 +1753,7 @@ namespace clothing_shop_website.Migrations
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Nguyễn Thị Minh",
                             LastName = "Thư",
-                            Phone = "0328807770",
-                            State = 1
+                            Phone = "0328807770"
                         });
                 });
 
