@@ -77,6 +77,9 @@ namespace Infrastructure.Persistent
 
             modelBuilder.Entity<Color>(entity => {
                 entity.HasKey(e => e.Id);
+
+                entity.HasIndex(e => e.ColorCode)
+                     .IsUnique();
             });
 
             modelBuilder.Entity<Customer>(entity => {
@@ -275,11 +278,11 @@ namespace Infrastructure.Persistent
                 new Category() { Id = 5, Name = "Trousers", CreatedById = 2, CreatedDate = createdDate, State = 0 });
 
             modelBuilder.Entity<Color>().HasData(
-               new Color() { Id = 1, Name = "White", State = 1 },
-               new Color() { Id = 2, Name = "Black", State = 1 },
-               new Color() { Id = 3, Name = "Blue", State = 1 },
-               new Color() { Id = 4, Name = "Red", State = 1 },
-               new Color() { Id = 5, Name = "Gray", State = 0 });
+               new Color() { Id = 1, Name = "White", ColorCode = "#FFFFFF", State = 1 },
+               new Color() { Id = 2, Name = "Black", ColorCode = "#000000", State = 1 },
+               new Color() { Id = 3, Name = "Blue", ColorCode = "#0000FF", State = 1 },
+               new Color() { Id = 4, Name = "Red", ColorCode = "#FF0000", State = 1 },
+               new Color() { Id = 5, Name = "Gray", ColorCode = "#808080", State = 0 });
 
             modelBuilder.Entity<Size>().HasData(
                new Size() { Id = 1, Name = "S", State = 1 },

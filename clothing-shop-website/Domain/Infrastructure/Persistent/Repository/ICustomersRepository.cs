@@ -12,10 +12,12 @@ namespace Domain.Infrastructure.Persistent.Repository
     {
          IQueryable<Customer> GetAllCustomers();
          IQueryable<Customer>  GetAllCustomersByIDType(int TypeID);
-         Customer CreateCustomer(Customer Customer);
          void UpdateCustomer(Customer Customer);
+         void DeleteCustomer(int accountId);
          public Customer GetCustomerByID(int CustomerID);
-        
+         IQueryable<Customer> GetlCustomersByTypeCustomerID(int[] idTypeCustomers);
+
+
 
     }
 }

@@ -24,7 +24,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             var lStaff = _unitOfWork.StaffRepository.Get();
 
-            return Ok(lStaff.Where(s=>s.State !=0));
+            return Ok(lStaff);
         }
 
 
@@ -97,7 +97,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (Staff == null)
                     return NotFound();
 
-                Staff.State = 0;
+                
                 _unitOfWork.StaffRepository.Update(Staff);
                 _unitOfWork.Save();
 

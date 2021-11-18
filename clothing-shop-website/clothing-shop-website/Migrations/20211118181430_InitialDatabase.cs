@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clothing_shop_website.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,7 @@ namespace clothing_shop_website.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ColorCode = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     State = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -176,8 +177,8 @@ namespace clothing_shop_website.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
                     IdTypeAccount = table.Column<int>(type: "int", nullable: false)
                 },
@@ -285,8 +286,7 @@ namespace clothing_shop_website.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CardIdentity = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<int>(type: "int", nullable: false)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -475,14 +475,14 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Colors",
-                columns: new[] { "Id", "Name", "State" },
+                columns: new[] { "Id", "ColorCode", "Name", "State" },
                 values: new object[,]
                 {
-                    { 5, "Gray", 0 },
-                    { 3, "Blue", 1 },
-                    { 4, "Red", 1 },
-                    { 1, "White", 1 },
-                    { 2, "Black", 1 }
+                    { 5, "#808080", "Gray", 0 },
+                    { 3, "#0000FF", "Blue", 1 },
+                    { 4, "#FF0000", "Red", 1 },
+                    { 1, "#FFFFFF", "White", 1 },
+                    { 2, "#000000", "Black", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -634,17 +634,17 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Staff",
-                columns: new[] { "IdAccount", "CardIdentity", "DateOfBirth", "FirstName", "Image", "LastName", "Phone", "State" },
+                columns: new[] { "IdAccount", "CardIdentity", "DateOfBirth", "FirstName", "Image", "LastName", "Phone" },
                 values: new object[,]
                 {
-                    { 1, "123456786", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Võ Hồng Tiên", null, "Giang", "0328807778", 1 },
-                    { 2, "123456787", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị", null, "Thảo", "0328807776", 1 },
-                    { 4, "123456788", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807775", 1 },
-                    { 10, "123456783", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gian Thiệu", null, "Quân", "0328807771", 1 },
-                    { 11, "123456782", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Minh", null, "Thư", "0328807770", 1 },
-                    { 5, "123456785", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thủy", null, "Tiên", "0328807773", 1 },
-                    { 6, "123456784", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807772", 1 },
-                    { 3, "123456789", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Nguyễn Gia", null, "Bảo", "0328807774", 1 }
+                    { 1, "123456786", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Võ Hồng Tiên", null, "Giang", "0328807778" },
+                    { 2, "123456787", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị", null, "Thảo", "0328807776" },
+                    { 4, "123456788", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807775" },
+                    { 10, "123456783", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gian Thiệu", null, "Quân", "0328807771" },
+                    { 11, "123456782", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Minh", null, "Thư", "0328807770" },
+                    { 5, "123456785", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thủy", null, "Tiên", "0328807773" },
+                    { 6, "123456784", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807772" },
+                    { 3, "123456789", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Nguyễn Gia", null, "Bảo", "0328807774" }
                 });
 
             migrationBuilder.InsertData(
@@ -711,7 +711,8 @@ namespace clothing_shop_website.Migrations
                 name: "IX_Accounts_Email",
                 table: "Accounts",
                 column: "Email",
-                unique: true);
+                unique: true,
+                filter: "[Email] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_IdTypeAccount",
@@ -732,6 +733,13 @@ namespace clothing_shop_website.Migrations
                 name: "IX_Carts_SizeId",
                 table: "Carts",
                 column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Colors_ColorCode",
+                table: "Colors",
+                column: "ColorCode",
+                unique: true,
+                filter: "[ColorCode] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_IdTypeCustomer",

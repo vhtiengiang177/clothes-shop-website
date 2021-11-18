@@ -1,4 +1,6 @@
-﻿using Domain.Entity;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
+using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
@@ -14,24 +17,57 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class AccountsController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
-        public AccountsController(DataDbContext dbContext)
+        private AccountService _accountsService;
+        public AccountsController(DataDbContext dbContext, AccountService accountsService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _accountsService = accountsService;
         }
 
         [HttpGet]
-        public IActionResult GetAllAccount()
+        public async Task<IActionResult> GetAllAccount([FromQuery] FilterParamsAccount filterParams)
         {
-            var lAccounts = _unitOfWork.AccountsRepository.Get();
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
 
-            return Ok(lAccounts.Where(a => a.State != 0));
+                IQueryable<Account> lAccountItems;
+
+                if (filterParams.IdTypeAccount != null)
+                {
+                    if (filterParams.IdTypeAccount.Count() != 0
+                        || filterParams.IdTypeAccount.Count() != 4)
+                    {
+                        lAccountItems = _unitOfWork.AccountsRepository.GetAccountsByTypeAccountsID(filterParams.IdTypeAccount);
+                    }
+                    else lAccountItems = await _unitOfWork.AccountsRepository.GetAllAccounts();
+                }
+                else lAccountItems = await _unitOfWork.AccountsRepository.GetAllAccounts();
+
+                lAccountItems = _accountsService.FilterAccount(filterParams, lAccountItems);
+
+                var lAccount = _accountsService.SortListAccount(filterParams.Sort, lAccountItems);
+
+                var response = new ResponseJSON<Account>
+                {
+                    TotalData = lAccount.Count(),
+                    Data = lAccountItems.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpGet("{id}")]
         public IActionResult GetlAccountByID(int id)
         {
-            var account = _unitOfWork.AccountsRepository.GetByID(id);
+            var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
 
             if (account == null)
             {
@@ -44,23 +80,21 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAccount(Account account)
+        public IActionResult CreateAccount([FromBody] CreateAccountParams createAccountParams)
         {
             if (ModelState.IsValid)
             {
-                
-                _unitOfWork.AccountsRepository.Create(account);
-
-                if (_unitOfWork.Save())
+                try
                 {
+                    _unitOfWork.AccountsRepository.CreateAccount(createAccountParams.Account, createAccountParams.Customer, createAccountParams.Staff);
                     return Ok();
                 }
-                else
+                catch 
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
             }
-            return BadRequest(ModelState);
+            else return BadRequest(ModelState);
         }
 
         [HttpPut("UpdateAccount/{id}", Name = "UpdateAccount")]
@@ -70,7 +104,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 try
                 {
-                    _unitOfWork.AccountsRepository.Update(account);
+                    account.State = 0;
+                    _unitOfWork.AccountsRepository.UpdateAccount(account);
                     if (_unitOfWork.Save())
                     {
                         return Ok(account);
@@ -86,6 +121,28 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpPut("DeleteAccount/{id}", Name = "DeleteAccount")]
+        public IActionResult DeleteAccount(int id)
+        {
+            try
+            {
+                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+
+                if (Account == null)
+                    return NotFound();
+
+                Account.State = 0;
+                _unitOfWork.AccountsRepository.UpdateAccount(Account);
+                _unitOfWork.Save();
+
+                return Ok(Account);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
