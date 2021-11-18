@@ -17,21 +17,33 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private CustomersService _customersService;
-        public CustomersController(DataDbContext dbContext)
+        public CustomersController(DataDbContext dbContext, CustomersService customersService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _customersService = customersService;
         }
 
         [HttpGet]
         public IActionResult GetAllCustomers([FromQuery] FilterParamsCustomer filterParams)
         {
-
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
                 int currentPageSize = filterParams.PageSize ?? 5;
 
-                var lCustomerItems = _unitOfWork.CustomersRepository.GetAllCustomers();
+                IQueryable<Customer> lCustomerItems;
+
+                if (filterParams.IdTypeCustomers != null)
+                {
+                    if (filterParams.IdTypeCustomers.Count() != 0
+                        || filterParams.IdTypeCustomers.Count() != 3)
+                    {
+                        lCustomerItems = _unitOfWork.CustomersRepository.GetlCustomersByTypeCustomerID(filterParams.IdTypeCustomers);
+                    }
+                    else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllCustomers();
+                }
+                else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllCustomers();
+
                 lCustomerItems = _customersService.FilterCustomer(filterParams, lCustomerItems);
 
                 var lCustomer = _customersService.SortListCustomer(filterParams.Sort, lCustomerItems);
@@ -81,25 +93,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateCustomer(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.CustomersRepository.CreateCustomer(customer);
-
-                if (_unitOfWork.Save())
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            return BadRequest(ModelState);
-        }
-
         [HttpPut("UpdateCustomer/{id}", Name = "UpdateCustomer")]
         public IActionResult UpdateCustomer(Customer customer)
         {
@@ -125,7 +118,32 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-       
+        [HttpPut("DeleteCustomer/{id}", Name = "DeleteCustomer")]
+        public IActionResult DeleteCustomer(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _unitOfWork.CustomersRepository.DeleteCustomer(id);
+                    if (_unitOfWork.Save())
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest(ModelState);
+        }
+
+
     }
 
     

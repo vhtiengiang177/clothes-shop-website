@@ -16,9 +16,8 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
         private IRepository<Promotion> _promotionsRepository;
-        //private IRepository<Customer> _customersRepository;
         private IRepository<Staff> _staffRepository;
-     
+       
         public UnitOfWork(DataDbContext dbContext)
         {
             _dbContext = dbContext;

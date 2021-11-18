@@ -34,18 +34,20 @@ namespace Infrastructure.Persistent.Repository
         {
             return _dbContext.Customers.FirstOrDefault(p => p.IdAccount == customerID);
         }
-        public Customer CreateCustomer(Customer customer)
-        {
-            var result = _dbContext.Customers.Add(customer);
 
-            return result.Entity;
-        }
         public void UpdateCustomer(Customer customer)
         {
             _dbContext.Attach(customer);
             _dbContext.Entry(customer).State = EntityState.Modified;
         }
-
+        
+        public void DeleteCustomer(int accountId)
+        {
+            var account = _dbContext.Accounts.Where(a => a.Id == accountId).FirstOrDefault();
+            account.State = 0;
+            _dbContext.Attach(account);
+            _dbContext.Entry(account).State = EntityState.Modified;
+        }
         public IQueryable<Customer> GetlCustomersByTypeCustomerID(int[] idTypeCustomers)
         {
             int[] distinctIdTypeCustomers = idTypeCustomers.Distinct().ToArray();
@@ -56,6 +58,6 @@ namespace Infrastructure.Persistent.Repository
             return lCustomer.AsQueryable();
         }
 
-
+    
     }
 }

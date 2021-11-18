@@ -37,7 +37,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (filterParams.IdTypeAccount != null)
                 {
                     if (filterParams.IdTypeAccount.Count() != 0
-                        || filterParams.IdTypeAccount.Count() != _unitOfWork.CategoriesRepository.Count())
+                        || filterParams.IdTypeAccount.Count() != 4)
                     {
                         lAccountItems = _unitOfWork.AccountsRepository.GetAccountsByTypeAccountsID(filterParams.IdTypeAccount);
                     }
