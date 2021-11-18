@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Services
 {
-    public class AccountsService
+    public class AccountService
     {
         public IQueryable<Account> SortListAccount(string sort, IQueryable<Account> lAccount)
         {
@@ -29,13 +29,11 @@ namespace clothing_shop_website.Services
 
             return lAccount;
         }
-        //public IQueryable<Account> FilterAccount(FilterParamsAccount filterParams, IQueryable<Account> lAccountItems)
-        //{
-        //    if (filterParams.Content != null)
-        //        lAccountItems = lAccountItems.Where(p => p.LastName.ToLower().Contains(filterParams.Content.ToLower())
-        //        || p.Point.ToString().Contains(filterParams.Content));
-
-        //    return lAccountItems.AsQueryable();
-        //}
+        public IQueryable<Account> FilterAccount(FilterParamsAccount filterParams, IQueryable<Account> lAccount)
+        {
+            if (filterParams.Content != null)
+                lAccount = lAccount.Where(p => p.Email.ToLower().Contains(filterParams.Content.ToLower()));
+            return lAccount.AsQueryable();
+        }
     }
 }

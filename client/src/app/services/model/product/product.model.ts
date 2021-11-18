@@ -3,6 +3,7 @@ export interface Product {
     sku: number,
     name: string,
     totalBuy: number,
+    unitPrice: number,
     state: number,
     createdDate: Date,
     lastModified: Date,

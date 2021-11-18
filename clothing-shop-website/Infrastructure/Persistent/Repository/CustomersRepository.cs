@@ -30,22 +30,32 @@ namespace Infrastructure.Persistent.Repository
             return lCustomer.AsQueryable();
         }
 
-        public Customer GetCustomerByID(int CustomerID)
+        public Customer GetCustomerByID(int customerID)
         {
-            return _dbContext.Customers.FirstOrDefault(p => p.IdAccount == CustomerID);
+            return _dbContext.Customers.FirstOrDefault(p => p.IdAccount == customerID);
         }
-        public Customer CreateCustomer(Customer Customer)
+        public Customer CreateCustomer(Customer customer)
         {
-            var result = _dbContext.Customers.Add(Customer);
+            var result = _dbContext.Customers.Add(customer);
 
             return result.Entity;
         }
-        public void UpdateCustomer(Customer Customer)
+        public void UpdateCustomer(Customer customer)
         {
-            _dbContext.Attach(Customer);
-            _dbContext.Entry(Customer).State = EntityState.Modified;
+            _dbContext.Attach(customer);
+            _dbContext.Entry(customer).State = EntityState.Modified;
         }
 
-        
+        public IQueryable<Customer> GetlCustomersByCategoriesID(int[] idTypeCustomers)
+        {
+            int[] distinctIdTypeCustomers = idTypeCustomers.Distinct().ToArray();
+
+            var lCustomer = _dbContext.Customers
+                                    .Where(p => distinctIdTypeCustomers.Contains((int)p.IdTypeCustomer)).ToList();
+
+            return lCustomer.AsQueryable();
+        }
+
+
     }
 }

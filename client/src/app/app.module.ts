@@ -20,6 +20,7 @@ import { HomePageComponent } from './modules/user/home-page/home-page.component'
 import { BodyUserComponent } from './modules/user/layout/body-user/body-user.component';
 import { NavbarUserComponent } from './modules/user/layout/navbar-user/navbar-user.component';
 import { HeaderUserComponent } from './modules/user/layout/header-user/header-user.component';
+import { ProductPageComponent } from './modules/user/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HeaderUserComponent } from './modules/user/layout/header-user/header-us
     HomePageComponent,
     BodyUserComponent,
     NavbarUserComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    ProductPageComponent
   ],
   entryComponents: [
     ProductFormComponent,

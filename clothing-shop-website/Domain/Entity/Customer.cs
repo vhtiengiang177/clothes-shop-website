@@ -12,7 +12,7 @@ namespace Domain.Entity
         public int VerifyEmail { get; set; }
         public int Point { get; set; }
         public int IdAccount { get; set; }
-        public int IdTypeCustomer { get; set; }
+        public int IdTypeCustomer { get; set; } = 3;
         public virtual Account Account { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual TypeCustomer TypeCustomer { get; set; }
