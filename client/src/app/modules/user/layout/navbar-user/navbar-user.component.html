@@ -13,9 +13,21 @@
         </div>
         <nav class="nav-menu mobile-menu">
             <ul>
-                <li class="active"><a [routerLink]="">Home</a></li>
-                <li><a href="./shop.html">Products</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li (click)="clickHomePage()" 
+                    [ngClass]="{ 'active': isHomeActive }" 
+                    [routerLink]="['']">
+                    <a>Home</a>
+                </li>
+                <li (click)="clickProductsPage()" 
+                    [ngClass]="{ 'active': isProductsActive }"
+                    [routerLink]="['/products']">
+                    <a>Products</a>
+                </li>
+                <li (click)="clickContactPage()" 
+                   [ngClass]="{ 'active': isContactActive }"
+                   [routerLink]="['/contact']">
+                    <a>Contact</a>
+                </li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>

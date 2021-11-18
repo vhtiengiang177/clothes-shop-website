@@ -4,6 +4,7 @@ import { DashboardComponent } from './modules/admin/dashboard/dashboard.componen
 import { ProductsListComponent } from './modules/admin/products/products-list/products-list.component';
 import { HomePageComponent } from './modules/user/home-page/home-page.component';
 import { BodyUserComponent } from './modules/user/layout/body-user/body-user.component';
+import { ProductPageComponent } from './modules/user/product-page/product-page.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomePageComponent
+  },
+  {
+    path: 'products',
+    component: ProductPageComponent
   }
 ];
 

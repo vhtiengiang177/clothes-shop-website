@@ -9,5 +9,6 @@ export interface Product {
     lastModified: Date,
     createdById: number,
     modifiedById: number,
-    categoryId: number
+    idCategory: number,
+    category?: string
 }

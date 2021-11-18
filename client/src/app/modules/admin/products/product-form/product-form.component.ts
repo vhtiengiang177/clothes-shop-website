@@ -7,7 +7,6 @@ import { CategoriesStoreService } from 'src/app/services/store/categories-store/
 import { LogProductsStoreService } from 'src/app/services/store/log-products-store/log-products-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { LogproductFormComponent } from '../logproduct-form/logproduct-form.component';
-import { ProductsListComponent } from '../products-list/products-list.component';
 
 @Component({
   selector: 'app-product-form',
@@ -57,7 +56,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   selectedCategory(selected) {
-    this.data.product.categoryId = selected.id;
+    this.data.product.idCategory = selected.id;
   }
 
   // compare category in data with content in select

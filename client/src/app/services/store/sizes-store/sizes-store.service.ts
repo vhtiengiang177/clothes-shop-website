@@ -13,7 +13,9 @@ export class SizesStoreService {
   readonly sizes$ = this._sizes.asObservable();
 
   constructor(private sizeService: SizeService, private toastr: ToastrService) {
-    this.get()
+    if (this.sizes.length == 0) {
+      this.get()
+    }
    }
 
   get sizes() : Size[] {

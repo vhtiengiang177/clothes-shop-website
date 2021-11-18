@@ -1787,7 +1787,7 @@ ol {
 	top: 13px;
 	height: 1px;
 	width: 17px;
-	background: #ebebeb;
+	background: #121212;
 	content: "";
 }
 
@@ -1796,7 +1796,7 @@ ol {
 	color: #252525;
 	max-width: 20%;
 	text-align: center;
-	border: 1px solid #ebebeb;
+	border: 1px solid #121212;
 	border-radius: 2px;
 }
 

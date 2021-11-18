@@ -12,23 +12,31 @@ import { ProductsStoreService } from 'src/app/services/store/products-store/prod
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  filterParams: FilterParamsProduct = {
-    pageindex: 1,
-    pagesize: 3
-  }
-
   productTopBestSellers: Product[]
+  productTopNew: Product[]
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService) { 
-    this.productsStore.getAll(this.filterParams)
 
     this.productsStore.getTopBestSellers().subscribe(p => {
       this.productTopBestSellers = p
-      console.log(this.productTopBestSellers);
-      
-    }
-    )
+      this.productTopBestSellers.forEach(pc => {
+        var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
+        if(categories.length == 1) {
+          pc.category = categories[0].name
+        }
+      });
+    })
+
+    this.productsStore.getTopNewProducts().subscribe(p => {
+      this.productTopNew = p
+      this.productTopNew.forEach(pc => {
+        var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
+        if(categories.length == 1) {
+          pc.category = categories[0].name
+        }
+      });
+    })
   }
 
   ngOnInit() {

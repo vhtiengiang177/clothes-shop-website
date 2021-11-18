@@ -13,7 +13,9 @@ export class ColorsStoreService {
   readonly colors$ = this._colors.asObservable();
 
   constructor(private colorService: ColorService, private toastr: ToastrService) {
-    this.get()
+    if (this.colors.length == 0) {
+      this.get()
+    }
    }
 
   get colors() : Color[] {
