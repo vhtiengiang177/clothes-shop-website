@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "fm0eIDmckE+4xpTvoOVEwihMsTkhpvr2jn9Keqymlo2f4TykhNZuWU+mJ1BWKyKCcGac75EFCFoWef/1svhbQg==",
+  "dgSpecHash": "vISdI+d1aF+nSMFqxPU7AKPXcNV1I5sb5Qq/4j2aGPbRdNRSbFY632ElYOAVlriN6jETPEmnGzhQbht457vwAQ==",
   "success": true,
   "projectFilePath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vhtie\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\vhtie\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.21\\microsoft.aspnetcore.authentication.jwtbearer.3.1.21.nupkg.sha512",
     "C:\\Users\\vhtie\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\vhtie\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\vhtie\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",

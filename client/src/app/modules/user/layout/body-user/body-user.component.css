@@ -1783,7 +1783,7 @@ ol {
 
 .filter-widget .filter-range-wrap .range-slider .price-input:after {
 	position: absolute;
-	left: 58px;
+	left: 40%;
 	top: 13px;
 	height: 1px;
 	width: 17px;
@@ -1794,7 +1794,7 @@ ol {
 .filter-widget .filter-range-wrap .range-slider .price-input input {
 	font-size: 16px;
 	color: #252525;
-	max-width: 20%;
+	max-width: 38%;
 	text-align: center;
 	border: 1px solid #121212;
 	border-radius: 2px;

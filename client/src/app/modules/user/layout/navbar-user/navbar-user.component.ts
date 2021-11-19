@@ -22,6 +22,8 @@ export class NavbarUserComponent implements OnInit {
             this.clickProductsPage()
           else if (this.currentRouter == "/contact")
             this.clickContactPage()
+          else if (this.currentRouter == "/login" || this.currentRouter == "/register")
+            this.clickLogin()
           else this.clickHomePage()
         }
       });
@@ -33,15 +35,23 @@ export class NavbarUserComponent implements OnInit {
   clickProductsPage() {
     this.isProductsActive = true
     this.isHomeActive = false
+    this.isContactActive = false
   }
 
   clickHomePage() {
     this.isHomeActive = true
     this.isProductsActive = false
+    this.isContactActive = false
   }
 
   clickContactPage() {
     this.isContactActive = true
+    this.isHomeActive = false
+    this.isProductsActive = false
+  }
+
+  clickLogin() {
+    this.isContactActive = false
     this.isHomeActive = false
     this.isProductsActive = false
   }

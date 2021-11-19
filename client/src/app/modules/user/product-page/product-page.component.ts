@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material';
+import { Category } from 'src/app/services/model/category/category.model';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
@@ -22,7 +23,11 @@ export class ProductPageComponent implements OnInit {
     idcategories: []
   };
 
-  sortSelected = 'name:asc'
+  categoriesOptions: Category[] = []
+  removable = true;
+  sortSelected = 'name:asc' 
+  minPrice: number;
+  maxPrice: number;
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
@@ -54,9 +59,58 @@ export class ProductPageComponent implements OnInit {
   }
 
   getProductByCategory(value) {
-    this.filter.pageindex = 1
-    this.filter.idcategories.push(value)
-    this.paginator.pageIndex = 0;
-    this.fetchData()
+    if(this.categoriesOptions.indexOf(value) == -1) {
+      this.categoriesOptions.push(value)
+      this.filter.idcategories.push(value.id)
+      this.filter.pageindex = 1
+      this.paginator.pageIndex = 0;
+      this.fetchData()
+    }
+  }
+
+  remove(value: Category): void {
+    const index = this.categoriesOptions.indexOf(value);
+
+    if (index >= 0) {
+      this.categoriesOptions.splice(index, 1);
+      this.filter.idcategories.splice(index, 1);
+      this.filter.pageindex = 1
+      this.paginator.pageIndex = 0;
+      this.fetchData()
+    }
+  }
+
+  filterPrice() {
+    if (this.minPrice >= 0 && this.maxPrice <= 1000000) {
+      this.filter.minprice = this.minPrice
+      this.filter.maxprice = this.maxPrice
+      this.filter.pageindex = 1
+      this.paginator.pageIndex = 0;
+      this.fetchData()
+    }
+  }
+
+  checkMinPrice() {
+    if(this.minPrice < 0) 
+    {
+      this.minPrice = null;
+    }
+    if(this.maxPrice) {
+      if(this.minPrice > this.maxPrice) {
+        this.minPrice = this.maxPrice;
+      }
+    }
+  }
+  
+  checkMaxPrice() {
+    if(this.maxPrice < 0) 
+    {
+      this.maxPrice = null;
+    }
+    if(this.minPrice) {
+      if(this.maxPrice < this.minPrice) {
+        this.maxPrice = this.minPrice;
+      }
+    }
   }
 }
