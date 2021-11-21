@@ -143,3 +143,6 @@ D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.pdb
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.genruntimeconfig.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
