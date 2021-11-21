@@ -27,7 +27,6 @@ namespace Infrastructure.Persistent.Repository
         {
             return _dbContext.Accounts.FirstOrDefault(p => p.Id == accountID && p.State > 0);
         }
-
         public Account CreateAccount(Account account, Customer customer, Staff staff)
         {
             try
@@ -77,5 +76,6 @@ namespace Infrastructure.Persistent.Repository
             Account account = await _dbContext.Accounts.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
             return account;
         }
+
     }
 }
