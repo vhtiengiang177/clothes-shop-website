@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj": {}
+    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj": {}
   },
   "projects": {
-    "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj": {
+    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+        "projectUniqueName": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
         "projectName": "clothing-shop-website",
-        "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
-        "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
-        "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\obj\\",
+        "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
+        "packagesPath": "C:\\Users\\Thao\\.nuget\\packages\\",
+        "outputPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\clothing-shop-website\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thao\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
+              "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -51,6 +51,10 @@
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.10, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -107,21 +111,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.209\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj": {
+    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
-        "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\obj\\",
+        "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Thao\\.nuget\\packages\\",
+        "outputPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thao\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -161,21 +165,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.209\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
-        "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Infrastructure\\obj\\",
+        "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Thao\\.nuget\\packages\\",
+        "outputPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thao\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -189,8 +193,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj"
+              "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj"
               }
             }
           }
@@ -225,7 +229,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.209\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

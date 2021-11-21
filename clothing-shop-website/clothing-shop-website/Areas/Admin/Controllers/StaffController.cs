@@ -1,4 +1,6 @@
-﻿using Domain.Entity;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
+using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
 using Microsoft.AspNetCore.Http;
@@ -14,24 +16,57 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class StaffController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
-        public StaffController(DataDbContext dbContext)
+        private StaffService _staffService;
+        public StaffController(DataDbContext dbContext, StaffService staffService )
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _staffService = staffService;
         }
 
         [HttpGet]
-        public IActionResult GetAllStaff()
+        public IActionResult GetAllStaff([FromQuery] FilterParamsStaff filterParams)
         {
-            var lStaff = _unitOfWork.StaffRepository.Get();
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
 
-            return Ok(lStaff);
+                IQueryable<Staff> lStaffItems;
+
+                if (filterParams.IdTypeStaff != null)
+                {
+                    if (filterParams.IdTypeStaff.Count() != 0
+                        || filterParams.IdTypeStaff.Count() != 3)
+                    {
+                        lStaffItems = _unitOfWork.StaffRepository.GetlStaffByTypeStaffID(filterParams.IdTypeStaff);
+                    }
+                    else lStaffItems = _unitOfWork.StaffRepository.GetAllStaff();
+                }
+                else lStaffItems = _unitOfWork.StaffRepository.GetAllStaff();
+
+                lStaffItems = _staffService.FilterStaff(filterParams, lStaffItems);
+
+                var lStaff = _staffService.SortListStaff(filterParams.Sort, lStaffItems);
+
+                var response = new ResponseJSON<Staff>
+                {
+                    TotalData = lStaff.Count(),
+                    Data = lStaff.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpGet("{id}")]
         public IActionResult GetlStaffByID(int id)
         {
-            var staff = _unitOfWork.StaffRepository.GetByID(id);
+            var staff = _unitOfWork.StaffRepository.GetStaffByID(id);
 
             if (staff == null)
             {
@@ -43,24 +78,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateStaff(Staff staff)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.StaffRepository.Create(staff);
-
-                if (_unitOfWork.Save())
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            return BadRequest(ModelState);
-        }
 
         [HttpPut("UpdateStaff/{id}", Name = "UpdateStaff")]
         public IActionResult UpdateStaff(Staff staff)
@@ -69,7 +86,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 try
                 {
-                    _unitOfWork.StaffRepository.Update(staff);
+                    _unitOfWork.StaffRepository.UpdateStaff(staff);
                     if (_unitOfWork.Save())
                     {
                         return Ok(staff);
@@ -90,23 +107,26 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpPut("DeleteStaff/{id}", Name = "DeleteStaff")]
         public IActionResult DeleteStaff(int id)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var Staff = _unitOfWork.StaffRepository.GetByID(id);
-
-                if (Staff == null)
-                    return NotFound();
-
-                
-                _unitOfWork.StaffRepository.Update(Staff);
-                _unitOfWork.Save();
-
-                return Ok();
+                try
+                {
+                    _unitOfWork.StaffRepository.DeleteStaff(id);
+                    if (_unitOfWork.Save())
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                catch
+                {
+                    return BadRequest();
+                }
             }
-            catch
-            {
-                return BadRequest();
-            }
+            return BadRequest(ModelState);
         }
     }
 }

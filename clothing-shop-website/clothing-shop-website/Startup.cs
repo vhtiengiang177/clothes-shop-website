@@ -25,7 +25,10 @@ namespace clothing_shop_website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(x =>
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
             b => b.MigrationsAssembly("clothing-shop-website")));
@@ -37,7 +40,7 @@ namespace clothing_shop_website
                 c.SwaggerDoc("v1", new OpenApiInfo {
                     Title = "Web API",
                     Version = "v1",
-                    Description = "Description for the API."
+                    Description = "Description for the API."    
                 });
             });
 

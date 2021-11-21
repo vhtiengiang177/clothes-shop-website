@@ -10,13 +10,14 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IProductsRepository _productsRepository;
         private ICustomersRepository _customersRepository;
         private IAccountsRepository _accountsRepository;
+        private IStaffRepository _staffRepository;
         private IRepository<Category> _categoriesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
         private IRepository<Promotion> _promotionsRepository;
-        private IRepository<Staff> _staffRepository;
+       
        
         public UnitOfWork(DataDbContext dbContext)
         {
@@ -31,6 +32,15 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
 
+        public IStaffRepository StaffRepository
+        {
+            get
+            {
+                if (_staffRepository == null)
+                    _staffRepository = new StaffRepository(_dbContext);
+                return _staffRepository;
+            }
+        }
         public ICustomersRepository CustomersRepository
         {
             get
@@ -104,16 +114,6 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
       
-        public IRepository<Staff> StaffRepository
-        {
-            get
-            {
-                if (_staffRepository == null)
-                    _staffRepository = new GenericRepository<Staff>(_dbContext);
-                return _staffRepository;
-            }
-        }
-
         public bool Save()
         {
             try {
