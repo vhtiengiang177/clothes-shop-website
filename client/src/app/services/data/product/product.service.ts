@@ -35,6 +35,15 @@ export class ProductService extends DataService {
     }))
   }
 
+  getTopNewProducts() {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopNewProducts")
+    .pipe(catchError((error: Response) => {
+      if(error.status == 400)
+        return throwError(new BadRequestError(error))
+      return throwError(new AppError(error))
+    }))
+  }
+
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {
     const cloneParams = { ...filterParams };
     let query = '?';

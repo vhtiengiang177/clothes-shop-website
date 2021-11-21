@@ -66,7 +66,20 @@ export class ProductsStoreService {
             this.toastr.error("That's an error", "Bad Request")
           else this.toastr.error("An unexpected error occurred.")
         })
+      return result.asObservable()
+  }
 
+  getTopNewProducts() {
+    let result = new Subject<Product[]>();
+    this.productService.getTopNewProducts()
+      .subscribe(res => {
+        result.next(res)
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        })
       return result.asObservable()
   }
 
@@ -80,7 +93,6 @@ export class ProductsStoreService {
         return this.toastr.error("Add product failed")
       else this.toastr.error("An unexpected error occurred.", "Add Product")
     })
-
     return result.asObservable()
   }
 }

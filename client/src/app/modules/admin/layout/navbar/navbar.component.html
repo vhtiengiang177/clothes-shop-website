@@ -120,7 +120,7 @@
         <li class="nav-item nav-color dropdown no-arrow">
             <a (click)="clickUserInformation()" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Tien Giang</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ authService.getCurrentUser()["firstNameUser"] }}</span>
             </a>
             <!-- Dropdown - User Information -->
             <div *ngIf="isUserInformation" class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">

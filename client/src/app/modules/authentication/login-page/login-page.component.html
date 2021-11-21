@@ -1,0 +1,36 @@
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>Login</h2>
+                    <form #form="ngForm" (ngSubmit)="login(form)">
+                        <div class="group-input">
+                            <label for="username">Email address *</label>
+                            <input ngModel name="email" #email="ngModel" type="text" required>
+                            <div class="alert alert-danger" *ngIf="email?.touched && email?.invalid">
+                                <div *ngIf="email?.errors?.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="group-input">
+                            <label for="pass">Password *</label>
+                            <input ngModel name="password" type="password" #password="ngModel" >
+                            <div class="alert alert-danger" *ngIf="password?.touched && password?.invalid">
+                                <div *ngIf="password?.errors?.required">Password is required</div>
+                            </div>
+                        </div>
+                        <div class="group-input gi-check">
+                            <div class="gi-more">
+                                <a href="#" class="forget-pass">Forget your Password</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="site-btn login-btn">Sign In</button>
+                    </form>
+                    <div class="switch-login">
+                        <a [routerLink]="['/register']" class="or-login">Or Create An Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

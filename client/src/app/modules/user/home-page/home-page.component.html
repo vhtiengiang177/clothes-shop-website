@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 btn-shop-now">
-                         <button class="primary-btn-custom">Shop Now!!</button>
+                         <button [routerLink]="['/products']" class="primary-btn-custom">Shop Now!!</button>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                         <div class="pi-text">
-                            <div class="catagory-name">Coat</div>
+                            <div class="catagory-name">{{ product.category }}</div>
                             <a href="#">
                                 <h5>{{ product.name }}</h5>
                             </a>
@@ -60,3 +60,36 @@
     </div>
 </section>
 <!-- Women Banner Section End -->
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="filter-control">
+                    NEW PRODUCT
+                </div>
+                <div class="product-slider owl-carousel1">
+                    <div class="product-item" *ngFor="let product of productTopNew">
+                        <div class="pi-pic">
+                            <img src="assets/product.jpg" alt="">
+                            <ul>
+                                <li class="quick-view"><a href="#">ADD TO CART</a></li>
+                            </ul>
+                        </div>
+                        <div class="pi-text">
+                            <div class="catagory-name">{{ product.category }}</div>
+                            <a href="#">
+                                <h5>{{ product.name }}</h5>
+                            </a>
+                            <div class="product-price">
+                                {{ product.unitPrice | currency: 'VND' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3  offset-lg-1">
+                <div class="product-large set-poster2"></div>
+            </div>
+        </div>
+    </div>
+</section>

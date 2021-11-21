@@ -14,7 +14,9 @@ export class CategoriesStoreService {
   readonly categories$ = this._categories.asObservable();
 
   constructor(private categoryService: CategoryService, private toastr: ToastrService) {
-    this.get()
+    if (this.categories.length == 0) {
+      this.get()
+    }
    }
 
   get categories() : Category[] {

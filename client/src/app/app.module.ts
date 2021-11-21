@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,9 @@ import { BodyUserComponent } from './modules/user/layout/body-user/body-user.com
 import { NavbarUserComponent } from './modules/user/layout/navbar-user/navbar-user.component';
 import { HeaderUserComponent } from './modules/user/layout/header-user/header-user.component';
 import { ProductPageComponent } from './modules/user/product-page/product-page.component';
+import { LoginPageComponent } from './modules/authentication/login-page/login-page.component';
+import { AuthService } from './services/auth/auth.service';
+import { RegisterPageComponent } from './modules/authentication/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { ProductPageComponent } from './modules/user/product-page/product-page.c
     BodyUserComponent,
     NavbarUserComponent,
     HeaderUserComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -56,6 +61,7 @@ import { ProductPageComponent } from './modules/user/product-page/product-page.c
     
   ],
   providers: [
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -14,5 +14,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Account CreateAccount(Account account, Customer customer, Staff staff);
         void UpdateAccount(Account account);
         IQueryable<Account> GetAccountsByTypeAccountsID(int[] IdTypeAccouts);
+        Task<Account> Login(string username, string password);
     }
 }

@@ -49,6 +49,12 @@ namespace clothing_shop_website.Services
         }
         public IQueryable<Product> FilterProduct(FilterParamsProduct filterParams, IQueryable<Product> lProductItems)
         {
+            if (filterParams.MinPrice.HasValue)
+                lProductItems = lProductItems.Where(x => x.UnitPrice >= filterParams.MinPrice);
+
+            if (filterParams.MaxPrice.HasValue)
+                lProductItems = lProductItems.Where(x => x.UnitPrice <= filterParams.MaxPrice);
+
             if (filterParams.Content != null)
                 lProductItems = lProductItems.Where(p => p.Name.ToLower().Contains(filterParams.Content.ToLower())
                 || p.TotalBuy.ToString().Contains(filterParams.Content));
