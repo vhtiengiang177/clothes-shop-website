@@ -117,11 +117,10 @@
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
-        <li class="nav-item nav-color dropdown no-arrow">
-            <a (click)="clickUserInformation()" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ authService.getCurrentUser()["firstNameUser"] }}</span>
-            </a>
+        <li class="nav-item nav-color dropdown no-arrow getuser">
+            <button (click)="clickUserInformation()" class="btn" id="userDropdown">
+                <span class="mr-2 d-none d-lg-inline">{{ authService.getCurrentUser().firstNameUser }}</span>
+        </button>
             <!-- Dropdown - User Information -->
             <div *ngIf="isUserInformation" class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">

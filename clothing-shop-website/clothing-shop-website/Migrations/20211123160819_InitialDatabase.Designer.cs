@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211118181430_InitialDatabase")]
+    [Migration("20211123160819_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("State")
                         .HasColumnType("int");
 
+                    b.Property<string>("VerificationCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -57,7 +60,7 @@ namespace clothing_shop_website.Migrations
                             Id = 1,
                             Email = "Admin@gmail.com",
                             IdTypeAccount = 1,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -65,7 +68,7 @@ namespace clothing_shop_website.Migrations
                             Id = 2,
                             Email = "Admin2@gmail.com",
                             IdTypeAccount = 1,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -73,7 +76,7 @@ namespace clothing_shop_website.Migrations
                             Id = 3,
                             Email = "Staff@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -81,7 +84,7 @@ namespace clothing_shop_website.Migrations
                             Id = 4,
                             Email = "Staff2@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -89,7 +92,7 @@ namespace clothing_shop_website.Migrations
                             Id = 5,
                             Email = "Shipper@gmail.com",
                             IdTypeAccount = 3,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -97,7 +100,7 @@ namespace clothing_shop_website.Migrations
                             Id = 6,
                             Email = "Shipper2@gmail.com",
                             IdTypeAccount = 3,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -105,7 +108,7 @@ namespace clothing_shop_website.Migrations
                             Id = 7,
                             Email = "Customer@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -113,7 +116,7 @@ namespace clothing_shop_website.Migrations
                             Id = 8,
                             Email = "Custome2@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -121,7 +124,7 @@ namespace clothing_shop_website.Migrations
                             Id = 9,
                             Email = "Custome3@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 1
                         },
                         new
@@ -129,7 +132,7 @@ namespace clothing_shop_website.Migrations
                             Id = 10,
                             Email = "Staff3@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 0
                         },
                         new
@@ -137,7 +140,7 @@ namespace clothing_shop_website.Migrations
                             Id = 11,
                             Email = "Shipper3@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 0
                         },
                         new
@@ -145,7 +148,7 @@ namespace clothing_shop_website.Migrations
                             Id = 12,
                             Email = "Custome4@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc",
+                            Password = "123456789Abc!",
                             State = 0
                         });
                 });
@@ -415,9 +418,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
-                    b.Property<int>("VerifyEmail")
-                        .HasColumnType("int");
-
                     b.HasKey("IdAccount");
 
                     b.HasIndex("IdTypeCustomer");
@@ -428,38 +428,34 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             IdAccount = 7,
-                            FirstName = "Võ Anh",
+                            FirstName = "Tuấn",
                             IdTypeCustomer = 3,
-                            LastName = "Tuấn",
-                            Point = 100,
-                            VerifyEmail = 1
+                            LastName = "Võ Anh",
+                            Point = 100
                         },
                         new
                         {
                             IdAccount = 8,
-                            FirstName = "Huỳnh",
+                            FirstName = "Như",
                             IdTypeCustomer = 2,
-                            LastName = "Như",
-                            Point = 200,
-                            VerifyEmail = 1
+                            LastName = "Huỳnh",
+                            Point = 200
                         },
                         new
                         {
                             IdAccount = 9,
-                            FirstName = "Trần Văn",
+                            FirstName = "Ân",
                             IdTypeCustomer = 1,
-                            LastName = "Ân",
-                            Point = 300,
-                            VerifyEmail = 1
+                            LastName = "Trần Văn",
+                            Point = 300
                         },
                         new
                         {
                             IdAccount = 12,
-                            FirstName = "Nguyễn Đức",
+                            FirstName = "Hiệp",
                             IdTypeCustomer = 1,
-                            LastName = "Hiệp",
-                            Point = 300,
-                            VerifyEmail = 1
+                            LastName = "Nguyễn Đức",
+                            Point = 300
                         });
                 });
 
@@ -509,9 +505,9 @@ namespace clothing_shop_website.Migrations
                             Id = 1,
                             Address = "50/1 Đặng Văn Bi",
                             District = "TP.Thủ Đức",
-                            FirstName = "Võ Anh",
+                            FirstName = "Tuấn",
                             IdCustomer = 7,
-                            LastName = "Tuấn",
+                            LastName = "Võ Anh",
                             Phone = "0324407774",
                             Province = "TP.HCM",
                             State = 1,
@@ -522,9 +518,9 @@ namespace clothing_shop_website.Migrations
                             Id = 2,
                             Address = "KTX Khu B",
                             District = "TP.Thủ Đức",
-                            FirstName = "Võ Anh",
+                            FirstName = "Tú",
                             IdCustomer = 7,
-                            LastName = "Tú",
+                            LastName = "Võ Anh",
                             Phone = "0324407773",
                             Province = "TP.HCM",
                             State = 1,
@@ -535,9 +531,9 @@ namespace clothing_shop_website.Migrations
                             Id = 3,
                             Address = "KTX D2",
                             District = "TP.Thủ Đức",
-                            FirstName = "Huỳnh",
+                            FirstName = "Như",
                             IdCustomer = 8,
-                            LastName = "Như",
+                            LastName = "Huỳnh",
                             Phone = "0324407772",
                             Province = "TP.HCM",
                             State = 1,
@@ -548,9 +544,9 @@ namespace clothing_shop_website.Migrations
                             Id = 4,
                             Address = "46/64",
                             District = "Quận 1",
-                            FirstName = "Lê Nguyễn Gia",
+                            FirstName = "Bảo",
                             IdCustomer = 8,
-                            LastName = "Bảo",
+                            LastName = "Lê Nguyễn Gia",
                             Phone = "0324407771",
                             Province = "Đồng Nai",
                             State = 1,
@@ -561,9 +557,9 @@ namespace clothing_shop_website.Migrations
                             Id = 5,
                             Address = "50/1 Đặng Văn Bi",
                             District = "TP.Thủ Đức",
-                            FirstName = "Trần Văn",
+                            FirstName = "Ân",
                             IdCustomer = 9,
-                            LastName = "Ân",
+                            LastName = "Trần Văn",
                             Phone = "0324407775",
                             Province = "TP.HCM",
                             State = 1,
@@ -574,9 +570,9 @@ namespace clothing_shop_website.Migrations
                             Id = 6,
                             Address = "KTX Khu B",
                             District = "TP.Thủ Đức",
-                            FirstName = "Trần Thi Mai",
+                            FirstName = "Anh",
                             IdCustomer = 9,
-                            LastName = "Anh",
+                            LastName = "Trần Thi Mai",
                             Phone = "0324407776",
                             Province = "TP.HCM",
                             State = 1,
@@ -587,9 +583,9 @@ namespace clothing_shop_website.Migrations
                             Id = 7,
                             Address = "KTX D2",
                             District = "TP.Thủ Đức",
-                            FirstName = "Nguyễn Đức",
+                            FirstName = "Hiệp",
                             IdCustomer = 12,
-                            LastName = "Hiệp",
+                            LastName = "Nguyễn Đức",
                             Phone = "0324407777",
                             Province = "TP.HCM",
                             State = 1,
@@ -600,9 +596,9 @@ namespace clothing_shop_website.Migrations
                             Id = 8,
                             Address = "56/16",
                             District = "Long Điền",
-                            FirstName = "Nguyễn Đức",
+                            FirstName = "Hiệp",
                             IdCustomer = 12,
-                            LastName = "Hiệp",
+                            LastName = "Nguyễn Đức",
                             Phone = "0324407777",
                             Province = "Bà Rịa-Vũng Tàu",
                             State = 1,
@@ -1659,7 +1655,7 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("CardIdentity")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -1687,72 +1683,64 @@ namespace clothing_shop_website.Migrations
                         {
                             IdAccount = 1,
                             CardIdentity = "123456786",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Võ Hồng Tiên",
-                            LastName = "Giang",
+                            FirstName = "Giang",
+                            LastName = "Võ Hồng Tiên",
                             Phone = "0328807778"
                         },
                         new
                         {
                             IdAccount = 2,
                             CardIdentity = "123456787",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Nguyễn Thị",
-                            LastName = "Thảo",
+                            FirstName = "Thảo",
+                            LastName = "Nguyễn Thị",
                             Phone = "0328807776"
                         },
                         new
                         {
                             IdAccount = 3,
                             CardIdentity = "123456789",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Lê Nguyễn Gia",
-                            LastName = "Bảo",
+                            FirstName = "Bảo",
+                            LastName = "Lê Nguyễn Gia",
                             Phone = "0328807774"
                         },
                         new
                         {
                             IdAccount = 4,
                             CardIdentity = "123456788",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Lê Thị Ngọc",
-                            LastName = "Yến",
+                            FirstName = "Yến",
+                            LastName = "Lê Thị Ngọc",
                             Phone = "0328807775"
                         },
                         new
                         {
                             IdAccount = 5,
                             CardIdentity = "123456785",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Trần Thủy",
-                            LastName = "Tiên",
+                            FirstName = "Tiên",
+                            LastName = "Trần Thủy",
                             Phone = "0328807773"
                         },
                         new
                         {
                             IdAccount = 6,
                             CardIdentity = "123456784",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Lê Thị Ngọc",
-                            LastName = "Yến",
+                            FirstName = "Nam",
+                            LastName = "Phạm Hoài",
                             Phone = "0328807772"
                         },
                         new
                         {
                             IdAccount = 10,
                             CardIdentity = "123456783",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Gian Thiệu",
-                            LastName = "Quân",
+                            FirstName = "Quân",
+                            LastName = "Gian Thiệu",
                             Phone = "0328807771"
                         },
                         new
                         {
                             IdAccount = 11,
                             CardIdentity = "123456782",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Nguyễn Thị Minh",
-                            LastName = "Thư",
+                            FirstName = "Thư",
+                            LastName = "Nguyễn Thị Minh",
                             Phone = "0328807770"
                         });
                 });

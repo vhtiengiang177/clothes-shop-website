@@ -67,15 +67,19 @@
                         </div>
                     </li>
                     <li *ngIf="authService.isLoggedIn()" (click)="clickUserInformation()" class="cart-icon">
-                        <button class="btn">Hi, {{ authService.getCurrentUser()["firstNameUser"] }}!</button>
+                        <button class="btn">Hi, {{ authService.getCurrentUser().firstNameUser }}!</button>
                     </li>
                     <div *ngIf="isUserInformation" class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">
                             <fa class="mr-2 text-gray-400" name="user" size="sm"></fa>
                             Profile
                         </a>
+                        <button *ngIf="authService.getCurrentUser().idTypeAccount != 4" class="dropdown-item" [routerLink]="['/admin']">
+                            <fa class="mr-2 text-gray-400" name="sitemap" size="sm"></fa>
+                            Admin
+                        </button>
                         <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" (click) = "logout()">
+                        <button class="dropdown-item" (click)="logout()">
                             <fa class="mr-2 text-gray-400" name="sign-out" size="sm"></fa>
                             Logout
                         </button>

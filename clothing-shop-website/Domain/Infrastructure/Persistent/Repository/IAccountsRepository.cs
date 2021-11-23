@@ -15,5 +15,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         void UpdateAccount(Account account);
         IQueryable<Account> GetAccountsByTypeAccountsID(int[] IdTypeAccouts);
         Task<Account> Login(string username, string password);
+        bool IsExistEmail(string email);
     }
 }

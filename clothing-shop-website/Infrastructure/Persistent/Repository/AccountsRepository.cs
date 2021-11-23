@@ -27,6 +27,7 @@ namespace Infrastructure.Persistent.Repository
         {
             return _dbContext.Accounts.FirstOrDefault(p => p.Id == accountID && p.State > 0);
         }
+
         public Account CreateAccount(Account account, Customer customer, Staff staff)
         {
             try
@@ -77,5 +78,12 @@ namespace Infrastructure.Persistent.Repository
             return account;
         }
 
+        public bool IsExistEmail(string email)
+        {
+            // Kiểm tra tồn tại email cho việc tạo tài khoản mới nên không xét State
+            if (_dbContext.Accounts.Where(a => a.Email == email).Count() > 0)
+                return true;
+            return false;
+        }
     }
 }

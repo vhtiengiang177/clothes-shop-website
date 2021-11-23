@@ -226,28 +226,28 @@ namespace Infrastructure.Persistent
                 new TypeAccount() { Id = 4, Name = "Customer", State = 1 });
 
             modelBuilder.Entity<Account>().HasData(
-                new Account() { Id = 1, Email = "Admin@gmail.com", Password = "123456789Abc", IdTypeAccount = 1, State = 1 },
-                new Account() { Id = 2, Email = "Admin2@gmail.com", Password = "123456789Abc", IdTypeAccount = 1, State = 1 },
-                new Account() { Id = 3, Email = "Staff@gmail.com", Password = "123456789Abc", IdTypeAccount = 2, State = 1 },
-                new Account() { Id = 4, Email = "Staff2@gmail.com", Password = "123456789Abc", IdTypeAccount = 2, State = 1 },
-                new Account() { Id = 5, Email = "Shipper@gmail.com", Password = "123456789Abc", IdTypeAccount = 3, State = 1 },
-                new Account() { Id = 6, Email = "Shipper2@gmail.com", Password = "123456789Abc", IdTypeAccount = 3, State = 1 },
-                new Account() { Id = 7, Email = "Customer@gmail.com", Password = "123456789Abc", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 8, Email = "Custome2@gmail.com", Password = "123456789Abc", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 9, Email = "Custome3@gmail.com", Password = "123456789Abc", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc", IdTypeAccount = 2, State = 0 },
-                new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc", IdTypeAccount = 2, State = 0 },
-                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc", IdTypeAccount = 4, State = 0 });
+                new Account() { Id = 1, Email = "Admin@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1 },
+                new Account() { Id = 2, Email = "Admin2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1 },
+                new Account() { Id = 3, Email = "Staff@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1 },
+                new Account() { Id = 4, Email = "Staff2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1 },
+                new Account() { Id = 5, Email = "Shipper@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1 },
+                new Account() { Id = 6, Email = "Shipper2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1 },
+                new Account() { Id = 7, Email = "Customer@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
+                new Account() { Id = 8, Email = "Custome2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
+                new Account() { Id = 9, Email = "Custome3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
+                new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0 },
+                new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0 },
+                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0 });
 
             modelBuilder.Entity<Staff>().HasData(
-                new Staff() { IdAccount = 1, FirstName = "Võ Hồng Tiên", LastName = "Giang", CardIdentity = "123456786", Phone = "0328807778" },
-                new Staff() { IdAccount = 2, FirstName = "Nguyễn Thị", LastName = "Thảo", CardIdentity = "123456787", Phone = "0328807776" },
-                new Staff() { IdAccount = 3, FirstName = "Lê Nguyễn Gia", LastName = "Bảo", CardIdentity = "123456789", Phone = "0328807774" },
-                new Staff() { IdAccount = 4, FirstName = "Lê Thị Ngọc", LastName = "Yến", CardIdentity = "123456788", Phone = "0328807775" },
-                new Staff() { IdAccount = 5, FirstName = "Trần Thủy", LastName = "Tiên", CardIdentity = "123456785", Phone = "0328807773" },
-                new Staff() { IdAccount = 6, FirstName = "Lê Thị Ngọc", LastName = "Yến", CardIdentity = "123456784", Phone = "0328807772" },
-                new Staff() { IdAccount = 10, FirstName = "Gian Thiệu", LastName = "Quân", CardIdentity = "123456783", Phone = "0328807771" },
-                new Staff() { IdAccount = 11, FirstName = "Nguyễn Thị Minh", LastName = "Thư", CardIdentity = "123456782", Phone = "0328807770" });
+                new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Võ Hồng Tiên", CardIdentity = "123456786", Phone = "0328807778" },
+                new Staff() { IdAccount = 2, FirstName = "Thảo", LastName = "Nguyễn Thị", CardIdentity = "123456787", Phone = "0328807776" },
+                new Staff() { IdAccount = 3, FirstName = "Bảo", LastName = "Lê Nguyễn Gia", CardIdentity = "123456789", Phone = "0328807774" },
+                new Staff() { IdAccount = 4, FirstName = "Yến", LastName = "Lê Thị Ngọc", CardIdentity = "123456788", Phone = "0328807775" },
+                new Staff() { IdAccount = 5, FirstName = "Tiên", LastName = "Trần Thủy", CardIdentity = "123456785", Phone = "0328807773" },
+                new Staff() { IdAccount = 6, FirstName = "Nam", LastName = "Phạm Hoài", CardIdentity = "123456784", Phone = "0328807772" },
+                new Staff() { IdAccount = 10, FirstName = "Quân", LastName = "Gian Thiệu", CardIdentity = "123456783", Phone = "0328807771" },
+                new Staff() { IdAccount = 11, FirstName = "Thư", LastName = "Nguyễn Thị Minh", CardIdentity = "123456782", Phone = "0328807770" });
 
             modelBuilder.Entity<TypeCustomer>().HasData(
                 new TypeCustomer() { Id = 1, Name = "Gold", State = 1 },
@@ -255,20 +255,20 @@ namespace Infrastructure.Persistent
                 new TypeCustomer() { Id = 3, Name = "Bronze", State = 1 });
 
             modelBuilder.Entity<Customer>().HasData(
-               new Customer() { IdAccount = 7, FirstName = "Võ Anh", LastName = "Tuấn", VerifyEmail = 1, IdTypeCustomer = 3, Point = 100 },
-               new Customer() { IdAccount = 8, FirstName = "Huỳnh", LastName = "Như", VerifyEmail = 1, IdTypeCustomer = 2, Point = 200 },
-               new Customer() { IdAccount = 9, FirstName = "Trần Văn", LastName = "Ân", VerifyEmail = 1, IdTypeCustomer = 1, Point = 300 },
-               new Customer() { IdAccount = 12, FirstName = "Nguyễn Đức", LastName = "Hiệp", VerifyEmail = 1, IdTypeCustomer = 1, Point = 300 });
+               new Customer() { IdAccount = 7, FirstName = "Tuấn", LastName = "Võ Anh", IdTypeCustomer = 3, Point = 100 },
+               new Customer() { IdAccount = 8, FirstName = "Như", LastName = "Huỳnh", IdTypeCustomer = 2, Point = 200 },
+               new Customer() { IdAccount = 9, FirstName = "Ân", LastName = "Trần Văn", IdTypeCustomer = 1, Point = 300 },
+               new Customer() { IdAccount = 12, FirstName = "Hiệp", LastName = "Nguyễn Đức", IdTypeCustomer = 1, Point = 300 });
 
             modelBuilder.Entity<DeliveryAddress>().HasData(
-              new DeliveryAddress() { Id = 1, FirstName = "Võ Anh", LastName = "Tuấn", Phone = "0324407774", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 2, FirstName = "Võ Anh", LastName = "Tú", Phone = "0324407773", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 3, FirstName = "Huỳnh", LastName = "Như", Phone = "0324407772", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 4, FirstName = "Lê Nguyễn Gia", LastName = "Bảo", Phone = "0324407771", Address = "46/64", Wards = "Phường 1", District = "Quận 1", Province = "Đồng Nai", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 5, FirstName = "Trần Văn", LastName = "Ân", Phone = "0324407775", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 6, FirstName = "Trần Thi Mai", LastName = "Anh", Phone = "0324407776", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 7, FirstName = "Nguyễn Đức", LastName = "Hiệp", Phone = "0324407777", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 12, State = 1 },
-              new DeliveryAddress() { Id = 8, FirstName = "Nguyễn Đức", LastName = "Hiệp", Phone = "0324407777", Address = "56/16", Wards = "Phước Hưng", District = "Long Điền", Province = "Bà Rịa-Vũng Tàu", IdCustomer = 12, State = 1 });
+              new DeliveryAddress() { Id = 1, FirstName = "Tuấn", LastName = "Võ Anh", Phone = "0324407774", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 2, FirstName = "Tú", LastName = "Võ Anh", Phone = "0324407773", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 3, FirstName = "Như", LastName = "Huỳnh", Phone = "0324407772", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 4, FirstName = "Bảo", LastName = "Lê Nguyễn Gia", Phone = "0324407771", Address = "46/64", Wards = "Phường 1", District = "Quận 1", Province = "Đồng Nai", IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 5, FirstName = "Ân", LastName = "Trần Văn", Phone = "0324407775", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 6, FirstName = "Anh", LastName = "Trần Thi Mai", Phone = "0324407776", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 7, FirstName = "Hiệp", LastName = "Nguyễn Đức", Phone = "0324407777", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 12, State = 1 },
+              new DeliveryAddress() { Id = 8, FirstName = "Hiệp", LastName = "Nguyễn Đức", Phone = "0324407777", Address = "56/16", Wards = "Phước Hưng", District = "Long Điền", Province = "Bà Rịa-Vũng Tàu", IdCustomer = 12, State = 1 });
 
             modelBuilder.Entity<Category>().HasData(
                 new Category() { Id = 1, Name = "Dress", CreatedById = 1, CreatedDate = createdDate, State = 1 },

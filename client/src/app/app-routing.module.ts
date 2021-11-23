@@ -7,16 +7,21 @@ import { HomePageComponent } from './modules/user/home-page/home-page.component'
 import { ActivatedLogin } from './services/activated-login/activated-login.service';
 import { ProductPageComponent } from './modules/user/product-page/product-page.component';
 import { RegisterPageComponent } from './modules/authentication/register-page/register-page.component';
+import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
 
 
 const routes: Routes = [
   {
     path: 'admin', 
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: 'admin/products',
-    component: ProductsListComponent
+    component: ProductsListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: '',
@@ -35,6 +40,9 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPageComponent,
     canActivate: [ActivatedLogin]
+  }, {
+    path: 'no-access',
+    component: NoAccessComponent
   }
 ];
 

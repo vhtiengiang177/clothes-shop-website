@@ -15,7 +15,8 @@ namespace Domain.Entity
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 12)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public int State { get; set; } = 1;
+        public int State { get; set; } = 1; // 0: Invalid, 1: Valid
+        public string VerificationCode { get; set; }
         public int IdTypeAccount { get; set; }
         public TypeAccount TypeAccount { get; set; }
         public Customer Customer { get; set; }

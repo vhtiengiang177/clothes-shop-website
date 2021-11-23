@@ -180,6 +180,7 @@ namespace clothing_shop_website.Migrations
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
+                    VerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdTypeAccount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -255,7 +256,6 @@ namespace clothing_shop_website.Migrations
                     IdAccount = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VerifyEmail = table.Column<int>(type: "int", nullable: false),
                     Point = table.Column<int>(type: "int", nullable: false),
                     IdTypeCustomer = table.Column<int>(type: "int", nullable: false)
                 },
@@ -283,7 +283,7 @@ namespace clothing_shop_website.Migrations
                     IdAccount = table.Column<int>(type: "int", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CardIdentity = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -563,21 +563,21 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "Id", "Email", "IdTypeAccount", "Password", "State" },
+                columns: new[] { "Id", "Email", "IdTypeAccount", "Password", "State", "VerificationCode" },
                 values: new object[,]
                 {
-                    { 1, "Admin@gmail.com", 1, "123456789Abc", 1 },
-                    { 8, "Custome2@gmail.com", 4, "123456789Abc", 1 },
-                    { 7, "Customer@gmail.com", 4, "123456789Abc", 1 },
-                    { 6, "Shipper2@gmail.com", 3, "123456789Abc", 1 },
-                    { 5, "Shipper@gmail.com", 3, "123456789Abc", 1 },
-                    { 11, "Shipper3@gmail.com", 2, "123456789Abc", 0 },
-                    { 10, "Staff3@gmail.com", 2, "123456789Abc", 0 },
-                    { 4, "Staff2@gmail.com", 2, "123456789Abc", 1 },
-                    { 3, "Staff@gmail.com", 2, "123456789Abc", 1 },
-                    { 2, "Admin2@gmail.com", 1, "123456789Abc", 1 },
-                    { 9, "Custome3@gmail.com", 4, "123456789Abc", 1 },
-                    { 12, "Custome4@gmail.com", 4, "123456789Abc", 0 }
+                    { 1, "Admin@gmail.com", 1, "123456789Abc!", 1, null },
+                    { 8, "Custome2@gmail.com", 4, "123456789Abc!", 1, null },
+                    { 7, "Customer@gmail.com", 4, "123456789Abc!", 1, null },
+                    { 6, "Shipper2@gmail.com", 3, "123456789Abc!", 1, null },
+                    { 5, "Shipper@gmail.com", 3, "123456789Abc!", 1, null },
+                    { 11, "Shipper3@gmail.com", 2, "123456789Abc!", 0, null },
+                    { 10, "Staff3@gmail.com", 2, "123456789Abc!", 0, null },
+                    { 4, "Staff2@gmail.com", 2, "123456789Abc!", 1, null },
+                    { 3, "Staff@gmail.com", 2, "123456789Abc!", 1, null },
+                    { 2, "Admin2@gmail.com", 1, "123456789Abc!", 1, null },
+                    { 9, "Custome3@gmail.com", 4, "123456789Abc!", 1, null },
+                    { 12, "Custome4@gmail.com", 4, "123456789Abc!", 0, null }
                 });
 
             migrationBuilder.InsertData(
@@ -600,13 +600,13 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "IdAccount", "FirstName", "IdTypeCustomer", "LastName", "Point", "VerifyEmail" },
+                columns: new[] { "IdAccount", "FirstName", "IdTypeCustomer", "LastName", "Point" },
                 values: new object[,]
                 {
-                    { 12, "Nguyễn Đức", 1, "Hiệp", 300, 1 },
-                    { 8, "Huỳnh", 2, "Như", 200, 1 },
-                    { 7, "Võ Anh", 3, "Tuấn", 100, 1 },
-                    { 9, "Trần Văn", 1, "Ân", 300, 1 }
+                    { 12, "Hiệp", 1, "Nguyễn Đức", 300 },
+                    { 8, "Như", 2, "Huỳnh", 200 },
+                    { 7, "Tuấn", 3, "Võ Anh", 100 },
+                    { 9, "Ân", 1, "Trần Văn", 300 }
                 });
 
             migrationBuilder.InsertData(
@@ -637,14 +637,14 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "IdAccount", "CardIdentity", "DateOfBirth", "FirstName", "Image", "LastName", "Phone" },
                 values: new object[,]
                 {
-                    { 1, "123456786", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Võ Hồng Tiên", null, "Giang", "0328807778" },
-                    { 2, "123456787", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị", null, "Thảo", "0328807776" },
-                    { 4, "123456788", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807775" },
-                    { 10, "123456783", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gian Thiệu", null, "Quân", "0328807771" },
-                    { 11, "123456782", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Minh", null, "Thư", "0328807770" },
-                    { 5, "123456785", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thủy", null, "Tiên", "0328807773" },
-                    { 6, "123456784", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Thị Ngọc", null, "Yến", "0328807772" },
-                    { 3, "123456789", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Nguyễn Gia", null, "Bảo", "0328807774" }
+                    { 1, "123456786", null, "Giang", null, "Võ Hồng Tiên", "0328807778" },
+                    { 2, "123456787", null, "Thảo", null, "Nguyễn Thị", "0328807776" },
+                    { 4, "123456788", null, "Yến", null, "Lê Thị Ngọc", "0328807775" },
+                    { 10, "123456783", null, "Quân", null, "Gian Thiệu", "0328807771" },
+                    { 11, "123456782", null, "Thư", null, "Nguyễn Thị Minh", "0328807770" },
+                    { 5, "123456785", null, "Tiên", null, "Trần Thủy", "0328807773" },
+                    { 6, "123456784", null, "Nam", null, "Phạm Hoài", "0328807772" },
+                    { 3, "123456789", null, "Bảo", null, "Lê Nguyễn Gia", "0328807774" }
                 });
 
             migrationBuilder.InsertData(
@@ -668,14 +668,14 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "Address", "District", "FirstName", "IdCustomer", "LastName", "Phone", "Province", "State", "Wards" },
                 values: new object[,]
                 {
-                    { 6, "KTX Khu B", "TP.Thủ Đức", "Trần Thi Mai", 9, "Anh", "0324407776", "TP.HCM", 1, "Linh Trung" },
-                    { 5, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Trần Văn", 9, "Ân", "0324407775", "TP.HCM", 1, "Trường Thọ" },
-                    { 4, "46/64", "Quận 1", "Lê Nguyễn Gia", 8, "Bảo", "0324407771", "Đồng Nai", 1, "Phường 1" },
-                    { 3, "KTX D2", "TP.Thủ Đức", "Huỳnh", 8, "Như", "0324407772", "TP.HCM", 1, "Tăng Nhơn Phú" },
-                    { 8, "56/16", "Long Điền", "Nguyễn Đức", 12, "Hiệp", "0324407777", "Bà Rịa-Vũng Tàu", 1, "Phước Hưng" },
-                    { 2, "KTX Khu B", "TP.Thủ Đức", "Võ Anh", 7, "Tú", "0324407773", "TP.HCM", 1, "Linh Trung" },
-                    { 1, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Võ Anh", 7, "Tuấn", "0324407774", "TP.HCM", 1, "Trường Thọ" },
-                    { 7, "KTX D2", "TP.Thủ Đức", "Nguyễn Đức", 12, "Hiệp", "0324407777", "TP.HCM", 1, "Tăng Nhơn Phú" }
+                    { 6, "KTX Khu B", "TP.Thủ Đức", "Anh", 9, "Trần Thi Mai", "0324407776", "TP.HCM", 1, "Linh Trung" },
+                    { 5, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Ân", 9, "Trần Văn", "0324407775", "TP.HCM", 1, "Trường Thọ" },
+                    { 4, "46/64", "Quận 1", "Bảo", 8, "Lê Nguyễn Gia", "0324407771", "Đồng Nai", 1, "Phường 1" },
+                    { 3, "KTX D2", "TP.Thủ Đức", "Như", 8, "Huỳnh", "0324407772", "TP.HCM", 1, "Tăng Nhơn Phú" },
+                    { 8, "56/16", "Long Điền", "Hiệp", 12, "Nguyễn Đức", "0324407777", "Bà Rịa-Vũng Tàu", 1, "Phước Hưng" },
+                    { 2, "KTX Khu B", "TP.Thủ Đức", "Tú", 7, "Võ Anh", "0324407773", "TP.HCM", 1, "Linh Trung" },
+                    { 1, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Tuấn", 7, "Võ Anh", "0324407774", "TP.HCM", 1, "Trường Thọ" },
+                    { 7, "KTX D2", "TP.Thủ Đức", "Hiệp", 12, "Nguyễn Đức", "0324407777", "TP.HCM", 1, "Tăng Nhơn Phú" }
                 });
 
             migrationBuilder.InsertData(

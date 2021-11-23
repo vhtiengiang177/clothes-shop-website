@@ -144,5 +144,39 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("CreateCustomerAccount")]
+        public IActionResult CreateCustomerAccount([FromBody] CustomerAccount customerAccountParams)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if(_unitOfWork.AccountsRepository.IsExistEmail(customerAccountParams.Email))
+                    {
+                        return BadRequest("Email already exist!");
+                    }
+                    else
+                    {
+                        Account account = new Account();
+                        account.Email = customerAccountParams.Email;
+                        account.Password = customerAccountParams.Password;
+                        account.IdTypeAccount = 4;
+
+                        Customer customer = new Customer();
+                        customer.LastName = customerAccountParams.LastName;
+                        customer.FirstName = customerAccountParams.FirstName;
+
+                        _unitOfWork.AccountsRepository.CreateAccount(account, customer, null);
+                    }
+                    return Ok();
+                }
+                catch
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            else return BadRequest(ModelState);
+        }
     }
 }

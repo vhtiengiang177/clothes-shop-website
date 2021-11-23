@@ -35,10 +35,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             string firstNameUser = "";
             if (user != null)
             {
-                if (user.IdTypeAccount == 4) // Customer
+                if (user.IdTypeAccount == 4 && user.State == 1) // Customer
                 {
                     var customer = _unitOfWork.CustomersRepository.GetCustomerByID(user.Id);
                     firstNameUser = customer.FirstName;
+                }
+                else if (user.IdTypeAccount != 4)
+                {
+                    var staff = _unitOfWork.StaffRepository.GetStaffByID(user.Id);
+                    firstNameUser = staff.FirstName;
                 }
 
                 var claims = new[] {

@@ -24,8 +24,8 @@ export class AuthService {
       }));
   }
 
-  register(account:AccountParams) {
-    return this.http.post(GlobalConstants.apiUrl + '/accounts', account)
+  register(account) {
+    return this.http.post(GlobalConstants.apiUrl + '/accounts' + '/createcustomeraccount', account)
   }
 
   logout(){

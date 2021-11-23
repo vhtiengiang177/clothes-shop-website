@@ -4,26 +4,54 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="register-form">
                     <h2>Register</h2>
-                    <form  (ngSubmit)="register(form)">
-                        <div class="group-input">
-                            <label for="username">Email address *</label>
-                            <input type="text" ngModel name="email" #email="ngModel">
+                    <form [formGroup]="form" (ngSubmit)="register(form)">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="username">Last Name</label>
+                                    <input type="text" formControlName="lastName">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="username">First Name <strong class="required">*</strong></label>
+                                    <input type="text" formControlName="firstName">
+                                    <mat-error
+                                        *ngIf="form.get('firstName')?.touched && form.get('firstName')?.errors?.required || form.get('firstName').value?.trim() == ''">
+                                        First name is required
+                                    </mat-error>
+                                </div>
+                            </div>
                         </div>
                         <div class="group-input">
-                            <label for="username">Last Name</label>
-                            <input type="text" ngModel name="lastName" #lastName="ngModel">
+                            <label for="email">Email address <strong class="required">*</strong></label>
+                            <input type="text" formControlName="email">
+                            <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.errors?.invalidEmail">
+                                {{ form.get('email').errors?.invalidEmail.message }}
+                            </mat-error>
                         </div>
                         <div class="group-input">
-                            <label for="username">First Name *</label>
-                            <input type="text" ngModel name="firstName" #firstName="ngModel">
+                            <label for="pass">Password <strong class="required">*</strong></label>
+                            <input #password type="password" formControlName="password">
+                            <mat-error
+                                *ngIf="form.get('password')?.touched && form.get('password').errors?.invalidPassword">
+                                {{ form.get('password').errors?.invalidPassword.message }}
+                            </mat-error>
                         </div>
                         <div class="group-input">
-                            <label for="pass">Password *</label>
-                            <input type="password" ngModel name="password" #password="ngModel">
-                        </div>
-                        <div class="group-input">
-                            <label for="con-pass">Confirm Password *</label>
-                            <input type="password" ngModel name="confirmpassword" #password="ngModel">
+                            <label for="con-pass">Confirm Password <strong class="required">*</strong></label>
+                            <input #confirmPassword type="password" formControlName="confirmPassword"
+                                (change)="matchPassword(password.value, confirmPassword.value)">
+                            <mat-error *ngIf="form.get('confirmPassword')?.touched 
+                                && form.get('confirmPassword')?.invalid
+                                && form.get('confirmPassword').errors?.required">
+                                Confirm password is required
+                            </mat-error>
+                            <mat-error *ngIf="form.get('confirmPassword')?.touched 
+                                && !form.get('confirmPassword').errors?.required
+                                && !isMatchPassword">
+                                Password and Confirm password must be matched
+                            </mat-error>
                         </div>
                         <button type="submit" class="site-btn register-btn">REGISTER</button>
                     </form>

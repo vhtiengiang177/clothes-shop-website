@@ -6,18 +6,19 @@
                     <h2>Login</h2>
                     <form #form="ngForm" (ngSubmit)="login(form)">
                         <div class="group-input">
-                            <label for="username">Email address *</label>
-                            <input ngModel name="email" #email="ngModel" type="text" required>
-                            <div class="alert alert-danger" *ngIf="email?.touched && email?.invalid">
-                                <div *ngIf="email?.errors?.required">Email is required</div>
-                            </div>
+                            <label for="username">Email address</label>
+                            <input [(ngModel)]="email" name="email" type="text" required>
+                            <mat-error *ngIf="email?.touched && email?.invalid && email?.errors?.required">
+                                Email is required
+                            </mat-error>
                         </div>
                         <div class="group-input">
-                            <label for="pass">Password *</label>
-                            <input ngModel name="password" type="password" #password="ngModel" >
-                            <div class="alert alert-danger" *ngIf="password?.touched && password?.invalid">
-                                <div *ngIf="password?.errors?.required">Password is required</div>
-                            </div>
+                            <label for="pass">Password</label>
+                            <input ngModel name="password" [type]="passwordVisibility ? 'text' : 'password'" #password="ngModel" >
+                            <fa (click)="passwordVisibility = !passwordVisibility" [name]="passwordVisibility ? 'eye' : 'eye-slash'"></fa>
+                            <mat-error class="alert alert-danger" *ngIf="password?.touched && password?.invalid && password?.errors?.required">
+                                Password is required
+                            </mat-error>
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">

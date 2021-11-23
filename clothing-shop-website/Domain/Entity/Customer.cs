@@ -9,7 +9,6 @@ namespace Domain.Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int VerifyEmail { get; set; }
         public int Point { get; set; }
         public int IdAccount { get; set; }
         public int IdTypeCustomer { get; set; } = 3;

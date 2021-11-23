@@ -20,7 +20,7 @@ export class HeaderUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  logout(){
+  logout() {
     this.isUserInformation = false
     this.authService.logout();
     if(this.route.snapshot['_routerState'].url != '/')    

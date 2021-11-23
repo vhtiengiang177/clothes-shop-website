@@ -9,7 +9,7 @@ import { SidebarComponent } from './modules/admin/layout/sidebar/sidebar.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './modules/admin/products/products-list/products-list.component';
 import { ToastrModule } from 'ngx-toastr';
-import { AngularMaterialModule } from './_shared/components/angular-material/angular-material.module';
+import { AngularMaterialModule } from './_shared/library/angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './modules/admin/layout/body/body.component';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -24,6 +24,7 @@ import { ProductPageComponent } from './modules/user/product-page/product-page.c
 import { LoginPageComponent } from './modules/authentication/login-page/login-page.component';
 import { AuthService } from './services/auth/auth.service';
 import { RegisterPageComponent } from './modules/authentication/register-page/register-page.component';
+import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RegisterPageComponent } from './modules/authentication/register-page/re
     HeaderUserComponent,
     ProductPageComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    NoAccessComponent
   ],
   entryComponents: [
     ProductFormComponent,

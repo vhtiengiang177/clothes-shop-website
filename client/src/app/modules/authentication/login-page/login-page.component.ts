@@ -11,11 +11,15 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   invalidLogin: boolean;
+  email: string;
+  passwordVisibility: boolean = false
   
   constructor(private authService: AuthService, 
     private router: Router,
     private route: ActivatedRoute, 
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) { 
+      this.email = history.state.email;
+    }
 
   ngOnInit() {
   }
