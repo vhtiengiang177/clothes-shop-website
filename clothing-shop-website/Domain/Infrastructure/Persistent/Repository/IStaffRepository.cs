@@ -11,6 +11,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         IQueryable<Staff> GetAllStaff();
         Staff GetStaffByID(int staffID);
         public void UpdateStaff(Staff staff);
+        Staff CreateStaff(Staff staff);
         void DeleteStaff(int accountId);
         IQueryable<Staff> GetlStaffByTypeStaffID(int[] idTypeStaff);
     }

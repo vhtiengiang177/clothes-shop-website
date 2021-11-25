@@ -37,6 +37,20 @@ namespace Infrastructure.Persistent.Repository
             return _dbContext.Staff.FirstOrDefault(p => p.IdAccount == staffID);
         }
 
+        public Staff CreateStaff(Staff staff)
+        {
+            try
+            {
+                var result = _dbContext.Staff.Add(staff);
+                _dbContext.SaveChanges();
+                return result.Entity;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public void UpdateStaff(Staff staff)
         {
             _dbContext.Attach(staff);
