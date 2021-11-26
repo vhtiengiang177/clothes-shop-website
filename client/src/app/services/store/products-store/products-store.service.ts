@@ -55,6 +55,10 @@ export class ProductsStoreService {
         });
   }
 
+  delete(productId) {
+    return this.productService.delete(productId)
+  }
+
   getTopBestSellers() {
     let result = new Subject<Product[]>();
     this.productService.getTopBestSellers()

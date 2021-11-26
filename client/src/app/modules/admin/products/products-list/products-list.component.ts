@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -24,7 +25,8 @@ export class ProductsListComponent implements OnInit {
 
 
   constructor(private productsStore: ProductsStoreService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -37,6 +39,20 @@ export class ProductsListComponent implements OnInit {
 
   fetchData() {
     this.productsStore.getAll(this.filter);
+  }
+
+  deleteProduct(productId) {
+    this.productsStore.delete(productId).subscribe(() => {
+      this.toastr.success("Delete product #" + productId + " successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 400) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 404) {
+        this.toastr.error("Not found product #" + productId)
+      }
+    })
   }
 
   addProduct() {
