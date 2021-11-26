@@ -38,12 +38,6 @@ export class AuthService {
 
   isVerificationAccount(account) {
     return this.http.post<any>(GlobalConstants.apiUrl + '/authentication/IsVerificationAccount', account)
-    .pipe(catchError((error: Response) => {
-      if(error.status == 400) {
-        return throwError(new BadRequestError())
-      }
-      return throwError(new AppError(error))
-    }))
   }
 
   verifyAccount(verificationCode, idAccount) {

@@ -44,6 +44,8 @@ export class LoginPageComponent implements OnInit {
           let account = form.value
           this.router.navigate(['/verification'], {state: { idaccount, account }});
         }
+      }, (error: HttpErrorResponse) => {
+        this.toastr.error(error.error)
       })
     }
   }
