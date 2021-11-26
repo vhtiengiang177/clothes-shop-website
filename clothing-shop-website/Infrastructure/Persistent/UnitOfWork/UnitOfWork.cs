@@ -11,6 +11,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         private ICustomersRepository _customersRepository;
         private IAccountsRepository _accountsRepository;
         private IStaffRepository _staffRepository;
+        private ICartsRepository _cartsRepository;
         private IRepository<Category> _categoriesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
@@ -32,15 +33,6 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
 
-        public IStaffRepository StaffRepository
-        {
-            get
-            {
-                if (_staffRepository == null)
-                    _staffRepository = new StaffRepository(_dbContext);
-                return _staffRepository;
-            }
-        }
         public ICustomersRepository CustomersRepository
         {
             get
@@ -58,6 +50,26 @@ namespace Infrastructure.Persistent.UnitOfWork
                 if (_accountsRepository == null)
                     _accountsRepository = new AccountsRepository(_dbContext);
                 return _accountsRepository;
+            }
+        }
+
+        public IStaffRepository StaffRepository
+        {
+            get
+            {
+                if (_staffRepository == null)
+                    _staffRepository = new StaffRepository(_dbContext);
+                return _staffRepository;
+            }
+        }
+
+        public ICartsRepository CartsRepository
+        {
+            get
+            {
+                if (_cartsRepository == null)
+                    _cartsRepository = new CartsRepository(_dbContext);
+                return _cartsRepository;
             }
         }
 
@@ -114,6 +126,8 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
       
+        
+
         public bool Save()
         {
             try {
