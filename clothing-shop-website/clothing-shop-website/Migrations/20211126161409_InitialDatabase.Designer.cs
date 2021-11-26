@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211124162823_InitialDatabase")]
+    [Migration("20211126161409_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,8 +35,7 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
@@ -62,7 +61,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 1,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -71,7 +70,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 1,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -80,7 +79,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -89,7 +88,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -98,7 +97,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 3,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -107,7 +106,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 3,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -116,7 +115,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -125,7 +124,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -134,7 +133,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 1,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -143,7 +142,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
                             State = 0,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -152,7 +151,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
                             State = 0,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -161,7 +160,7 @@ namespace clothing_shop_website.Migrations
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 0,
-                            VerificationCode = 0
+                            VerificationCode = 1
                         });
                 });
 

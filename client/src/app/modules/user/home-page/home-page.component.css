@@ -4,13 +4,6 @@
 	background-image: url("../../../../assets/landingpage1.png");
 }
 
-.set-bg1 {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: top center;
-	background-image: url("../../../../assets/landingpage2.png");
-}
-
 .set-poster1 {
 	background-repeat: no-repeat;
 	background-size: cover;

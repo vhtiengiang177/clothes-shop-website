@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
@@ -12,7 +13,7 @@ import { AccountsStoreService } from 'src/app/services/store/accounts-store/acco
   styleUrls: ['./verification.component.css']
 })
 export class VerificationComponent implements OnInit {
-  idaccount: number
+  idAccount: number
   account: Account
   code: number
 
@@ -20,13 +21,13 @@ export class VerificationComponent implements OnInit {
     private router: Router, 
     private authService: AuthService,
     private toastr: ToastrService) { 
-    this.idaccount = history.state.idaccount
-    this.account = history.state.account
-    this.account.id = this.idaccount
 
-    if(this.account.email == "") {
-      this.router.navigate(['/not-found'])
-    }
+      this.account = history.state.account
+      if(this.account == null) {
+        this.router.navigate(['/not-found'])
+      }
+      this.idAccount = history.state.idAccount
+      this.account.id = this.idAccount
   }
 
   ngOnInit() {
@@ -34,20 +35,14 @@ export class VerificationComponent implements OnInit {
 
   clickVerify() {
     if(this.code) {
-      this.authService.verifyAccount(this.code, this.idaccount).subscribe(res => {
-        if(res) {
-          this.authService.login(this.account).subscribe(res => {
-            if (res) {
-              let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-              this.router.navigate([returnUrl || '/'])
-            }
-          }, (error: HttpErrorResponse) => {
-            this.toastr.error(error.error)
-          });
+      this.authService.verifyAccount(this.code, this.idAccount).subscribe(res => {
+        if (res) {
+          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/'])
         }
-        else this.toastr.error("Verification Code is wrong!")
+      }, (error: HttpErrorResponse) => {
+        this.toastr.error(error.error)
       })
     }
   }
-
 }

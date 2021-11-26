@@ -26,27 +26,45 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(form) {
-    if(form.valid) {
-      this.authService.isVerificationAccount(form.value).subscribe(res => {
+    // if(form.valid) {
+    //   this.authService.isVerificationAccount(form.value).subscribe(res => {
+    //     if (res.isVerify) {
+    //       this.authService.login(form.value).subscribe(res => {
+    //         if (res) {
+    //           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    //           this.router.navigate([returnUrl || '/']);
+    //         }
+    //         else this.invalidLogin = true;
+    //       }, (error: HttpErrorResponse) => {
+    //         this.toastr.error(error.error);
+    //       });
+    //     }
+    //     else {
+    //       let idaccount = res.id
+    //       let account = form.value
+    //       this.router.navigate(['/verification'], {state: { idaccount, account }});
+    //     }
+    //   }, (error: HttpErrorResponse) => {
+    //     this.toastr.error(error.error)
+    //   })
+    // }
+
+    if (form.valid) {
+      this.authService.login(form.value).subscribe(res => {
         if (res.isVerify) {
-          this.authService.login(form.value).subscribe(res => {
-            if (res) {
-              let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-              this.router.navigate([returnUrl || '/']);
-            }
-            else this.invalidLogin = true;
-          }, (error: HttpErrorResponse) => {
-            this.toastr.error(error.error);
-          });
+          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/']);
         }
         else {
-          let idaccount = res.id
+          let idAccount = res.id
           let account = form.value
-          this.router.navigate(['/verification'], {state: { idaccount, account }});
+          this.router.navigate(['/verification'], {state: { idAccount, account }});
         }
       }, (error: HttpErrorResponse) => {
-        this.toastr.error(error.error)
-      })
+        console.log(error);
+        
+        this.toastr.error(error.error);
+      });
     }
   }
 
