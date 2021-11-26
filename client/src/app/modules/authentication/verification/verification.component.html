@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row content-center">
+        <div class="col-lg-6">
+            <p>
+                Enter the code we just send on your email [email]
+            </p>
+            <br/>
+            <input [(ngModel)]="code" type="number" required/>
+            <mat-error *ngIf="code?.touched && code?.error?.required">
+                Verify code is required
+            </mat-error>
+            <button (click)="clickVerify()" class="btn btn-primary">Verify</button>
+            <p>
+                <a>Click here</a> if you did not receive an email.
+            </p>
+            
+        </div>
+    </div>
+</div>

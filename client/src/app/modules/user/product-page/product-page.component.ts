@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/services/model/category/category.model';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { Product } from 'src/app/services/model/product/product.model';
@@ -32,7 +33,8 @@ export class ProductPageComponent implements OnInit {
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
     private sizesStore: SizesStoreService,
-    private colorsStore: ColorsStoreService) {
+    private colorsStore: ColorsStoreService,
+    private toastr: ToastrService) {
       if(this.productsStore.products.length != 6) {
         this.fetchData()
       }
@@ -81,12 +83,17 @@ export class ProductPageComponent implements OnInit {
   }
 
   filterPrice() {
-    if (this.minPrice >= 0 && this.maxPrice <= 1000000) {
-      this.filter.minprice = this.minPrice
-      this.filter.maxprice = this.maxPrice
-      this.filter.pageindex = 1
-      this.paginator.pageIndex = 0;
-      this.fetchData()
+    if (this.minPrice > this.maxPrice) {
+      this.toastr.warning("Minimum price should not be greater than maximum")
+    }
+    else {
+      if (this.minPrice >= 0 && this.maxPrice <= 1000000) {
+        this.filter.minprice = this.minPrice
+        this.filter.maxprice = this.maxPrice
+        this.filter.pageindex = 1
+        this.paginator.pageIndex = 0;
+        this.fetchData()
+      }
     }
   }
 

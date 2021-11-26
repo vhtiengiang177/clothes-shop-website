@@ -178,9 +178,9 @@ namespace clothing_shop_website.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
-                    VerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VerificationCode = table.Column<int>(type: "int", nullable: false),
                     IdTypeAccount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -566,18 +566,18 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "Email", "IdTypeAccount", "Password", "State", "VerificationCode" },
                 values: new object[,]
                 {
-                    { 1, "Admin@gmail.com", 1, "123456789Abc!", 1, null },
-                    { 8, "Custome2@gmail.com", 4, "123456789Abc!", 1, null },
-                    { 7, "Customer@gmail.com", 4, "123456789Abc!", 1, null },
-                    { 6, "Shipper2@gmail.com", 3, "123456789Abc!", 1, null },
-                    { 5, "Shipper@gmail.com", 3, "123456789Abc!", 1, null },
-                    { 11, "Shipper3@gmail.com", 2, "123456789Abc!", 0, null },
-                    { 10, "Staff3@gmail.com", 2, "123456789Abc!", 0, null },
-                    { 4, "Staff2@gmail.com", 2, "123456789Abc!", 1, null },
-                    { 3, "Staff@gmail.com", 2, "123456789Abc!", 1, null },
-                    { 2, "Admin2@gmail.com", 1, "123456789Abc!", 1, null },
-                    { 9, "Custome3@gmail.com", 4, "123456789Abc!", 1, null },
-                    { 12, "Custome4@gmail.com", 4, "123456789Abc!", 0, null }
+                    { 1, "Admin@gmail.com", 1, "123456789Abc!", 1, 1 },
+                    { 8, "Custome2@gmail.com", 4, "123456789Abc!", 1, 1 },
+                    { 7, "Customer@gmail.com", 4, "123456789Abc!", 1, 1 },
+                    { 6, "Shipper2@gmail.com", 3, "123456789Abc!", 1, 1 },
+                    { 5, "Shipper@gmail.com", 3, "123456789Abc!", 1, 1 },
+                    { 11, "Shipper3@gmail.com", 2, "123456789Abc!", 0, 1 },
+                    { 10, "Staff3@gmail.com", 2, "123456789Abc!", 0, 1 },
+                    { 4, "Staff2@gmail.com", 2, "123456789Abc!", 1, 1 },
+                    { 3, "Staff@gmail.com", 2, "123456789Abc!", 1, 1 },
+                    { 2, "Admin2@gmail.com", 1, "123456789Abc!", 1, 1 },
+                    { 9, "Custome3@gmail.com", 4, "123456789Abc!", 1, 1 },
+                    { 12, "Custome4@gmail.com", 4, "123456789Abc!", 0, 1 }
                 });
 
             migrationBuilder.InsertData(

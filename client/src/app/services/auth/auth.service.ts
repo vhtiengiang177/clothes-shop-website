@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
+import { AppError } from 'src/app/_shared/errors/app-error';
+import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { AccountParams } from '../model/account/account-params.model';
+import { VerifyResponse } from '../model/account/verify-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +18,12 @@ export class AuthService {
   }
 
   login(account) {
-    return this.http.post(GlobalConstants.apiUrl + '/authentication', account, { responseType: 'text'})
+    return this.http.post<any>(GlobalConstants.apiUrl + '/authentication', account)
       .pipe(map(res => {
-        if(res){
-          localStorage.setItem('token', res);
-          return true;
+        if(res.isVerify){
+          localStorage.setItem('token', res.token)
         }
-        return false;
+        return res
       }));
   }
 
@@ -30,6 +33,21 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+  }
+
+  isVerificationAccount(account) {
+    return this.http.post<any>(GlobalConstants.apiUrl + '/authentication/IsVerificationAccount', account)
+  }
+
+  verifyAccount(verificationCode, idAccount) {
+    return this.http.get(GlobalConstants.apiUrl + "/authentication/VerifyAccount/" + idAccount + "?verificationcode=" + verificationCode, { responseType: 'text'})
+    .pipe(map(res => {
+      if(res){
+        localStorage.setItem('token', res)
+        return true
+      }
+      return false
+    }));
   }
 
   isLoggedIn() {

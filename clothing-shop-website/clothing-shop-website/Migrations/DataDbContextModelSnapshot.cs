@@ -33,14 +33,13 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
-                    b.Property<string>("VerificationCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("VerificationCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -59,7 +58,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Admin@gmail.com",
                             IdTypeAccount = 1,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -67,7 +67,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Admin2@gmail.com",
                             IdTypeAccount = 1,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -75,7 +76,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Staff@gmail.com",
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -83,7 +85,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Staff2@gmail.com",
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -91,7 +94,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Shipper@gmail.com",
                             IdTypeAccount = 3,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -99,7 +103,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Shipper2@gmail.com",
                             IdTypeAccount = 3,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -107,7 +112,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Customer@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -115,7 +121,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Custome2@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -123,7 +130,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Custome3@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
-                            State = 1
+                            State = 1,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -131,7 +139,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Staff3@gmail.com",
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
-                            State = 0
+                            State = 0,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -139,7 +148,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Shipper3@gmail.com",
                             IdTypeAccount = 2,
                             Password = "123456789Abc!",
-                            State = 0
+                            State = 0,
+                            VerificationCode = 1
                         },
                         new
                         {
@@ -147,7 +157,8 @@ namespace clothing_shop_website.Migrations
                             Email = "Custome4@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
-                            State = 0
+                            State = 0,
+                            VerificationCode = 1
                         });
                 });
 

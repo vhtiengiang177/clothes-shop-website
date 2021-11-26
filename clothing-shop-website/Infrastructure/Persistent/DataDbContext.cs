@@ -226,18 +226,18 @@ namespace Infrastructure.Persistent
                 new TypeAccount() { Id = 4, Name = "Customer", State = 1 });
 
             modelBuilder.Entity<Account>().HasData(
-                new Account() { Id = 1, Email = "Admin@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1 },
-                new Account() { Id = 2, Email = "Admin2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1 },
-                new Account() { Id = 3, Email = "Staff@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1 },
-                new Account() { Id = 4, Email = "Staff2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1 },
-                new Account() { Id = 5, Email = "Shipper@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1 },
-                new Account() { Id = 6, Email = "Shipper2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1 },
-                new Account() { Id = 7, Email = "Customer@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 8, Email = "Custome2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 9, Email = "Custome3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1 },
-                new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0 },
-                new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0 },
-                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0 });
+                new Account() { Id = 1, Email = "Admin@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1, VerificationCode = 1 },
+                new Account() { Id = 2, Email = "Admin2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 1, State = 1, VerificationCode = 1 },
+                new Account() { Id = 3, Email = "Staff@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1, VerificationCode = 1 },
+                new Account() { Id = 4, Email = "Staff2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 1, VerificationCode = 1 },
+                new Account() { Id = 5, Email = "Shipper@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1, VerificationCode = 1 },
+                new Account() { Id = 6, Email = "Shipper2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1, VerificationCode = 1 },
+                new Account() { Id = 7, Email = "Customer@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
+                new Account() { Id = 8, Email = "Custome2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
+                new Account() { Id = 9, Email = "Custome3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
+                new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
+                new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
+                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
 
             modelBuilder.Entity<Staff>().HasData(
                 new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Võ Hồng Tiên", CardIdentity = "123456786", Phone = "0328807778" },
