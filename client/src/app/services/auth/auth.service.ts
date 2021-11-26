@@ -18,13 +18,12 @@ export class AuthService {
   }
 
   login(account) {
-    return this.http.post(GlobalConstants.apiUrl + '/authentication', account, { responseType: 'text'})
+    return this.http.post<any>(GlobalConstants.apiUrl + '/authentication', account)
       .pipe(map(res => {
-        if(res){
-          localStorage.setItem('token', res);
-          return true;
+        if(res.isVerify){
+          localStorage.setItem('token', res.token)
         }
-        return false;
+        return res
       }));
   }
 
@@ -41,13 +40,14 @@ export class AuthService {
   }
 
   verifyAccount(verificationCode, idAccount) {
-    return this.http.get(GlobalConstants.apiUrl + "/authentication/VerifyAccount/" + idAccount + "?verificationcode=" + verificationCode)
-    .pipe(catchError((error: Response) => {
-      if(error.status == 400) {
-        return throwError(new BadRequestError())
+    return this.http.get(GlobalConstants.apiUrl + "/authentication/VerifyAccount/" + idAccount + "?verificationcode=" + verificationCode, { responseType: 'text'})
+    .pipe(map(res => {
+      if(res){
+        localStorage.setItem('token', res)
+        return true
       }
-      return throwError(new AppError(error))
-    }))
+      return false
+    }));
   }
 
   isLoggedIn() {

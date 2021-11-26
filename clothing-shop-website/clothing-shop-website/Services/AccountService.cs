@@ -42,13 +42,17 @@ namespace clothing_shop_website.Services
         public void SendVerificationCode(Account account, string firstName)
         {
             var subject = "[MANGO CLOTHES] Verify your account";
-            var body = "Hello" + firstName + ", /n /n" +
+            var body = "<div> Hello " + firstName + ",</div> <br/>" +
 
-                        "You registered an account on Mango Clothes, before being able to use your account" +
-                        "you need to verify account. Your code: /n" +
-              account.VerificationCode + "/n /n /n" +
+                        "<div> You registered an account on Mango Clothes, before being able to use your account " 
+                        + "you need to verify account. </div>" 
+                        + "<br/>"
+                        + "Your code: <strong>" + account.VerificationCode + "</strong>"
+                        + "<br/>"
+                        + "Have a nice day!"
+                        + "<br/><br/>" +
 
-            "Kind Regards, Mango Clothes";
+            "Thanks & Best Regards, <br/> Mango Clothes.";
             SendEmail(account.Email, body, subject);
         }
 

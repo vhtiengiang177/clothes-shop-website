@@ -7,7 +7,8 @@ interface PasswordValidationErrors {
       | 'too-short'
       | 'no-digit'
       | 'no-lowercase'
-      | 'no-uppercase';
+      | 'no-uppercase'
+      | 'no-non-alphanumeric';
     message: string;
   };
 }
@@ -17,7 +18,8 @@ const PASSWORD_MIN_LENGTH = 8;
 const PASSWORD_VALIDATING_REGEXES = {
   lowercases: /[a-z]/,
   uppercases: /[A-Z]/,
-  digits: /[0-9]/
+  digits: /[0-9]/,
+  nonalphanumerics: /[~!@#\$%^&\*\(\)\-\+=\?\/<>\|\[\]{}_ :;\.,\\`]/,
 };
 
 export function passwordValidator(
@@ -62,6 +64,14 @@ export function passwordValidator(
       invalidPassword: {
         type: 'no-uppercase',
         message: 'Password must have at least one uppercase letter.',
+      },
+    };
+
+    if (!PASSWORD_VALIDATING_REGEXES.nonalphanumerics.test(password))
+    return {
+      invalidPassword: {
+        type: 'no-non-alphanumeric',
+        message: 'Password must have at least one non-alphanumeric character.',
       },
     };
 
