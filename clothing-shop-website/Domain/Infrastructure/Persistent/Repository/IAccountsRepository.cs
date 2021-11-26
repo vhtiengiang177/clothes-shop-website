@@ -16,5 +16,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         IQueryable<Account> GetAccountsByTypeAccountsID(int[] IdTypeAccouts);
         Task<Account> Login(string username, string password);
         bool IsExistEmail(string email);
+        bool VerifyAccount(int VerificationCode, Account account);
     }
 }

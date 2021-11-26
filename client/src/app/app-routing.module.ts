@@ -10,6 +10,8 @@ import { RegisterPageComponent } from './modules/authentication/register-page/re
 import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
+import { VerificationComponent } from './modules/authentication/verification/verification.component';
+import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -43,6 +45,14 @@ const routes: Routes = [
   }, {
     path: 'no-access',
     component: NoAccessComponent
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: 'verification',
+    component: VerificationComponent
   }
 ];
 

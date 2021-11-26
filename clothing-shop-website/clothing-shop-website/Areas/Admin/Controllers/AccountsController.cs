@@ -97,14 +97,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             else return BadRequest(ModelState);
         }
 
-        [HttpPut("UpdateAccount/{id}", Name = "UpdateAccount")]
+        [HttpPatch("UpdateAccount/{id}", Name = "UpdateAccount")]
         public IActionResult UpdateAccount(Account account)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    account.State = 0;
                     _unitOfWork.AccountsRepository.UpdateAccount(account);
                     if (_unitOfWork.Save())
                     {
@@ -158,16 +157,22 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     }
                     else
                     {
+                        Random generator = new Random();
+                        int verificationCode = generator.Next(100000, 1000000);
+
                         Account account = new Account();
                         account.Email = customerAccountParams.Email;
                         account.Password = customerAccountParams.Password;
                         account.IdTypeAccount = 4;
+                        account.VerificationCode = verificationCode;
 
                         Customer customer = new Customer();
                         customer.LastName = customerAccountParams.LastName;
                         customer.FirstName = customerAccountParams.FirstName;
 
+
                         _unitOfWork.AccountsRepository.CreateAccount(account, customer, null);
+                        _unitOfWork.Save();
                     }
                     return Ok();
                 }

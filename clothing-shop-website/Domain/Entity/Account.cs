@@ -8,15 +8,14 @@ namespace Domain.Entity
         [Display(Name = "Email address")]
         //[Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
 
        // [Required(ErrorMessage = "Password is required")]
-        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 12)]
+        [StringLength(255, ErrorMessage = "Must be between 6 and 255 characters", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public int State { get; set; } = 1; // 0: Invalid, 1: Valid
-        public string VerificationCode { get; set; }
+        public int State { get; set; } = 1; // 0: Delete, 1: Active
+        public int VerificationCode { get; set; } = 0; // 1: Activate, another: No Activate
         public int IdTypeAccount { get; set; }
         public TypeAccount TypeAccount { get; set; }
         public Customer Customer { get; set; }
