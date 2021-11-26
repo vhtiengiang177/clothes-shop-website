@@ -26,6 +26,7 @@ export class VerificationComponent implements OnInit {
       if(this.account == null) {
         this.router.navigate(['/not-found'])
       }
+      
       this.idAccount = history.state.idAccount
       this.account.id = this.idAccount
   }

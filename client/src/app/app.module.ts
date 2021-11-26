@@ -27,6 +27,8 @@ import { RegisterPageComponent } from './modules/authentication/register-page/re
 import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
 import { VerificationComponent } from './modules/authentication/verification/verification.component';
 import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
+import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
+import { FooterUserComponent } from './modules/user/layout/footer-user/footer-user.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NotFoundComponent } from './_shared/components/not-found/not-found.comp
     RegisterPageComponent,
     NoAccessComponent,
     VerificationComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ContactPageComponent,
+    FooterUserComponent
   ],
   entryComponents: [
     ProductFormComponent,
