@@ -12,13 +12,14 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IAccountsRepository _accountsRepository;
         private IStaffRepository _staffRepository;
         private ICartsRepository _cartsRepository;
+        private IOrdersRepository _ordersRepository;
+        private IDeliveryAddressRepository _deliveryAddressRepository;
+        private IPromotionsRepository _promotionsRepository;
         private IRepository<Category> _categoriesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
-        private IRepository<Promotion> _promotionsRepository;
-       
        
         public UnitOfWork(DataDbContext dbContext)
         {
@@ -73,6 +74,34 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
 
+        public IOrdersRepository OrdersRepository
+        {
+            get
+            {
+                if (_ordersRepository == null)
+                    _ordersRepository = new OrdersRepository(_dbContext);
+                return _ordersRepository;
+            }
+        }
+        public IDeliveryAddressRepository DeliveryAddressRepository
+        {
+            get
+            {
+                if (_deliveryAddressRepository == null)
+                    _deliveryAddressRepository = new DeliveryAddressRepository(_dbContext);
+                return _deliveryAddressRepository;
+            }
+        }
+        public IPromotionsRepository PromotionsRepository
+        {
+            get
+            {
+                if (_promotionsRepository == null)
+                    _promotionsRepository = new PromotionsRepository(_dbContext);
+                return _promotionsRepository;
+            }
+        }
+
         public IRepository<Category> CategoriesRepository {
             get {
                 if (_categoriesRepository == null)
@@ -116,15 +145,7 @@ namespace Infrastructure.Persistent.UnitOfWork
             }
         }
 
-        public IRepository<Promotion> PromotionsRepository
-        {
-            get
-            {
-                if (_promotionsRepository == null)
-                    _promotionsRepository = new GenericRepository<Promotion>(_dbContext);
-                return _promotionsRepository;
-            }
-        }
+       
       
         
 

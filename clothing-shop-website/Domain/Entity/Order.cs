@@ -12,12 +12,12 @@ namespace Domain.Entity
         public int TotalQuantity { get; set; }
         public double TotalProductPrice { get; set; }
         public double TotalAmount { get; set; }
-        public int State { get; set; }
+        public int State { get; set; } = 1;
         public double FeeDelivery { get; set; }  
         public int IdAddress { get; set; }
         public int IdCustomer { get; set; }
         public int? IdPromotion { get; set; }
-        public int IdStaff { get; set; }
+        public int? IdStaff { get; set; }
         public int? IdShipper { get; set; }
 
         public DeliveryAddress DeliveryAddress { get; set; }
