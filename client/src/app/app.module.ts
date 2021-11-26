@@ -25,6 +25,8 @@ import { LoginPageComponent } from './modules/authentication/login-page/login-pa
 import { AuthService } from './services/auth/auth.service';
 import { RegisterPageComponent } from './modules/authentication/register-page/register-page.component';
 import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
+import { VerificationComponent } from './modules/authentication/verification/verification.component';
+import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { NoAccessComponent } from './_shared/components/no-access/no-access.comp
     ProductPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    VerificationComponent,
+    NotFoundComponent
   ],
   entryComponents: [
     ProductFormComponent,

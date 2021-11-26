@@ -62,6 +62,7 @@ namespace Infrastructure.Persistent.Repository
             _dbContext.Attach(account);
             _dbContext.Entry(account).State = EntityState.Modified;
         }
+
         public IQueryable<Account> GetAccountsByTypeAccountsID(int[] IdTypeAccouts)
         {
             int[] distinctIdypeAccouts = IdTypeAccouts.Distinct().ToArray();
@@ -84,6 +85,17 @@ namespace Infrastructure.Persistent.Repository
             if (_dbContext.Accounts.Where(a => a.Email == email).Count() > 0)
                 return true;
             return false;
+        }
+
+        public bool VerifyAccount(int VerificationCode, Account account)
+        {
+            if (account.VerificationCode == VerificationCode)
+            {
+                account.VerificationCode = 1;
+                _dbContext.Accounts.Attach(account);
+                return true;
+            }
+            else return false;
         }
     }
 }
