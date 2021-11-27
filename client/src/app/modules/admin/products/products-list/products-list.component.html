@@ -52,7 +52,7 @@
             <td>{{ product.totalBuy }}</td>
             <td>{{ product.createdDate | date: 'longDate' }}</td>
             <td><fa class="edit-icon" name="edit"></fa></td>
-            <td><fa class="delete-icon" name="trash"></fa></td>
+            <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>
         <tbody *ngIf="productsStore.totalData == 0">

@@ -1,3 +1,4 @@
+import { CategoriesComponent } from './modules/admin/categories/categories.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'admin/products',
     component: ProductsListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/categories',
+    component: CategoriesComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {

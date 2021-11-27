@@ -26,6 +26,10 @@ export class ProductService extends DataService {
       }))
   }
 
+  delete(productId) {
+    return this.http.put(GlobalConstants.apiUrl + "/products" + "/DeleteProduct/" + productId, productId)
+  }
+
   getTopBestSellers() {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopProductBestSellers")
     .pipe(catchError((error: Response) => {

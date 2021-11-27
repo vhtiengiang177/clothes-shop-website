@@ -1,4 +1,6 @@
-﻿using Domain.Entity;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
+using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
 using Microsoft.AspNetCore.Http;
@@ -15,24 +17,76 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class PromotionsController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
-        public PromotionsController(DataDbContext dbContext)
+        private PromotionsService _promotionsService;
+
+        public PromotionsController(DataDbContext dbContext, PromotionsService promotionsService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _promotionsService = promotionsService;
         }
 
-        [HttpGet]
-        public IActionResult GetAllPromotion()
+        [HttpGet("GetAllPromotions")]
+        public async Task<IActionResult> GetAllPromotions([FromQuery] FilterParamsPromotion filterParams)
         {
-            var lPromotions = _unitOfWork.PromotionsRepository.Get();
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
 
-            return Ok(lPromotions.Where(p => p.State != 0));
+                IQueryable<Promotion> lPromotionItems;
+
+                lPromotionItems = await _unitOfWork.PromotionsRepository.GetAllPromotions();
+
+                lPromotionItems = _promotionsService.FilterPromotion(filterParams, lPromotionItems);
+
+                var lPromotion = _promotionsService.SortListPromotion(filterParams.Sort, lPromotionItems);
+
+                var response = new ResponseJSON<Promotion>
+                {
+                    TotalData = lPromotion.Count(),
+                    Data = lPromotion.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpGet("GetPromotionsEffective")]
+        public async Task<IActionResult> GetPromotionsEffective()
+        {
+            try
+            {
+               
+                IQueryable<Promotion> lPromotionItems;
+
+                lPromotionItems = await _unitOfWork.PromotionsRepository.GetPromotionsEffective();
+
+                var response = new ResponseJSON<Promotion>
+                {
+                    TotalData = lPromotionItems.Count(),
+                    Data = lPromotionItems.ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
         }
 
 
-        [HttpGet("{id}")]
-        public IActionResult GetlPromotionByID(int id)
+        [HttpGet("{Code}")]
+        public IActionResult GetlPromotionByID(string Code)
         {
-            var Promotion = _unitOfWork.PromotionsRepository.GetByID(id);
+            Code = Code.ToUpper();
+            var Promotion = _unitOfWork.PromotionsRepository.GetPromotionByName(Code);
 
             if (Promotion == null)
             {
@@ -50,7 +104,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 promotion.CreatedDate = DateTime.Now;
-                _unitOfWork.PromotionsRepository.Create(promotion);
+                _unitOfWork.PromotionsRepository.CreatePromotion(promotion);
 
                 if (_unitOfWork.Save())
                 {
@@ -64,23 +118,28 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("UpdatePromotion/{id}", Name = "UpdatePromotion")]
+        [HttpPut("UpdatePromotion", Name = "UpdatePromotion")]
         public IActionResult UpdatePromotion(Promotion promotion)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    promotion.LastModified = DateTime.Now;
-                    _unitOfWork.PromotionsRepository.Update(promotion);
-                    if (_unitOfWork.Save())
+                    if (promotion != null )
                     {
-                        return Ok(promotion);
+                        promotion.LastModified = DateTime.Now;
+                  
+                        _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
+                        if (_unitOfWork.Save())
+                        {
+                            return Ok(promotion);
+                        }
+                        else
+                        {
+                            return BadRequest();
+                        }
                     }
-                    else
-                    {
-                        return BadRequest();
-                    }
+                    else return NotFound();
                 }
                 catch
                 {
@@ -95,13 +154,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             try
             {
-                var promotion = _unitOfWork.PromotionsRepository.GetByID(id);
+                var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(id);
 
                 if (promotion == null)
                     return NotFound();
 
                 promotion.State = 0;
-                _unitOfWork.PromotionsRepository.Update(promotion);
+                _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
                 _unitOfWork.Save();
 
                 return Ok();

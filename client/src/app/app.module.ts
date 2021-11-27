@@ -29,6 +29,7 @@ import { VerificationComponent } from './modules/authentication/verification/ver
 import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
 import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
 import { FooterUserComponent } from './modules/user/layout/footer-user/footer-user.component';
+import { CategoriesComponent } from './modules/admin/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FooterUserComponent } from './modules/user/layout/footer-user/footer-us
     VerificationComponent,
     NotFoundComponent,
     ContactPageComponent,
-    FooterUserComponent
+    FooterUserComponent,
+    CategoriesComponent
   ],
   entryComponents: [
     ProductFormComponent,

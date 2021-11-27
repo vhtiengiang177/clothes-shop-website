@@ -137,7 +137,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.ProductsRepository.UpdateProduct(product);
                 _unitOfWork.Save();
 
-                return Ok(product);
+                return Ok();
             }
             catch
             {
