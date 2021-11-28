@@ -105,7 +105,7 @@ export class ProductsListComponent implements OnInit {
     this.paginator.pageIndex = 0;
 
     this.fetchData()
-}
+  }
 
   sortID() {
     if(this.productsStore.totalData !== 0) {

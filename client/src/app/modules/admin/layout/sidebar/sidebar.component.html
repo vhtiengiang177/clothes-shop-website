@@ -52,6 +52,43 @@
         </div>
     </li>
 
+    <li [ngClass]="{ 'active': isAccountsListActive }" class="nav-item nav-color">
+        <a (click)="clickAccountsNavItem()" class="nav-link collapsed" >
+            <fa name="cubes"></fa>
+            <span>Accounts</span>
+        </a>
+        <div [ngClass]="{ 'show': isAccountShow }" id="collapseThree" class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Cutomers:</h6>
+                <a class="collapse-item" 
+                    (click)="clickProductsList()"  
+                    [ngClass]="{ 'active': isAccountsListActive }"
+                    [routerLink]="['/admin/products']"> List Customers</a>
+                <h6 class="collapse-header">Staff:</h6>
+                <a class="collapse-item"
+                    (click)="clickCategoriesList()" 
+                    [routerLink]="['/admin/categories']" 
+                    href="">List Staff</a>
+            </div>
+        </div>
+    </li>
+
+    <li [ngClass]="{ 'active': isOrdersListActive }" class="nav-item nav-color">
+        <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
+            <fa name="cubes"></fa>
+            <span>Orders</span>
+        </a>
+        <div [ngClass]="{ 'show': isOrderShow }" id="collapseFour" class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Orders:</h6>
+                <a class="collapse-item" 
+                    (click)="clickOrdersList()"  
+                    [ngClass]="{ 'active': isOrdersListActive }"
+                    [routerLink]="['/admin/products']"> List Orders</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item nav-color">
         <a class="nav-link collapsed" href="#" >
