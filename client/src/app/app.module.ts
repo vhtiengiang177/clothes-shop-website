@@ -30,6 +30,8 @@ import { NotFoundComponent } from './_shared/components/not-found/not-found.comp
 import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
 import { FooterUserComponent } from './modules/user/layout/footer-user/footer-user.component';
 import { CategoriesComponent } from './modules/admin/categories/categories.component';
+import { CustomersComponent } from './modules/admin/customers/customers.component';
+import { StaffComponent } from './modules/admin/staff/staff.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { CategoriesComponent } from './modules/admin/categories/categories.compo
     NotFoundComponent,
     ContactPageComponent,
     FooterUserComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CustomersComponent,
+    StaffComponent
   ],
   entryComponents: [
     ProductFormComponent,
