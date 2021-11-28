@@ -70,7 +70,8 @@ import { ProductDetailComponent } from './modules/admin/products/product-detail/
   ],
   entryComponents: [
     ProductFormComponent,
-    LogproductFormComponent
+    LogproductFormComponent,
+    CategoriesFormComponent
   ],
   imports: [
     BrowserModule,
