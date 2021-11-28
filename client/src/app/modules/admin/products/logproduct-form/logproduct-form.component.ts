@@ -73,9 +73,10 @@ export class LogproductFormComponent implements OnInit {
   }
 
   save() {
-    console.log(this.sizeInput);
-    
-    if(this.checkValidate) {
+    if(this.checkValidate()) {
+      console.log(this.sizesStore.sizes);
+      // if (this.sizesStore.sizes.)
+      // Check
       this.logProduct.idsize = this.sizeInput.value
       this.logProduct.idsize = this.colorInput.value
       
@@ -86,10 +87,7 @@ export class LogproductFormComponent implements OnInit {
 
   }
 
-  checkValidate() {
-    // check dang sai
-    console.log("size " + this.sizeInput.value);
-    
+  checkValidate() : boolean {
     if(!this.logProduct.importprice || this.sizeInput.value === null || this.colorInput.value == null) {
       this.toastr.error("Please fill in all the required fields.")
       return false
@@ -97,4 +95,12 @@ export class LogproductFormComponent implements OnInit {
     return true
   }
 
+  quantityValidate() {
+    if (this.logProduct.importprice < 0) {
+      this.logProduct.importprice = 0
+    }
+    else if (this.logProduct.importprice > 200) {
+      this.logProduct.importprice = 200
+    }
+  }
 }

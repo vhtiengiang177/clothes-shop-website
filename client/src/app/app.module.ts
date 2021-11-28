@@ -29,9 +29,9 @@ import { VerificationComponent } from './modules/authentication/verification/ver
 import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
 import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
 import { FooterUserComponent } from './modules/user/layout/footer-user/footer-user.component';
-import { CategoriesComponent } from './modules/admin/categories/categories.component';
-import { CustomersComponent } from './modules/admin/customers/customers.component';
-import { StaffComponent } from './modules/admin/staff/staff.component';
+import { CategoriesListComponent } from './modules/admin/categories/categories-list/categories-list.component';
+import { StaffListComponent } from './modules/admin/staff/staff-list/staff-list.component';
+import { CustomersListComponent } from './modules/admin/customers/customers-list/customers-list.component';
 
 @NgModule({
   declarations: [
@@ -56,9 +56,9 @@ import { StaffComponent } from './modules/admin/staff/staff.component';
     NotFoundComponent,
     ContactPageComponent,
     FooterUserComponent,
-    CategoriesComponent,
-    CustomersComponent,
-    StaffComponent
+    CategoriesListComponent,
+    CustomersListComponent,
+    StaffListComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -74,7 +74,6 @@ import { StaffComponent } from './modules/admin/staff/staff.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
-    
   ],
   providers: [
     AuthService

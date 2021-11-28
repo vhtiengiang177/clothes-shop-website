@@ -1,19 +1,15 @@
-
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { FilterParamsCategories } from 'src/app/services/model/category/filter-params-categories.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 
-
-
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-categories-list',
+  templateUrl: './categories-list.component.html',
+  styleUrls: ['./categories-list.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesListComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsCategories = {
     pageindex: 1,
@@ -48,12 +44,12 @@ export class CategoriesComponent implements OnInit {
     this.fetchData()
   }
 
-  searchEvent($event) {
+  searchEvent(content) {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
       sort: this.filter.sort,
-      content: $event.content,
+      content: content
     }
     this.paginator.pageIndex = 0;
 
@@ -95,6 +91,7 @@ export class CategoriesComponent implements OnInit {
       this.fetchData()
     }
   }
+  
   sortCreatedDate() {
     if(this.categoriesStore.totalData !== 0) {
       if(this.filter.sort != 'createddate:asc') {
