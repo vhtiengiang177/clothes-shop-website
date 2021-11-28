@@ -1,11 +1,6 @@
-mat-dialog-content {
-    text-align: center;
+.img-right {
+    text-align: right;
 }
-
-mat-form-field {
-    width: 100%;
-}
-
 
 .btn-add {
     background-color: #0093c9;
@@ -18,4 +13,10 @@ mat-form-field {
     background-color: #b3ebff;
     color: #000;
     border: 1px solid #b3ebff;
+  }
+
+  .button-add {
+    display: flex;
+    justify-content: end;
+    padding: 4px;
   }

@@ -23,13 +23,6 @@ namespace Infrastructure.Persistent.Repository
             return lProduct.AsQueryable();
         }
 
-        public IQueryable<Product> GetAllProductsByIDCategory(int CategoryID)
-        {
-            var lProduct =  _dbContext.Products.Where(p => p.IdCategory == CategoryID && p.State > 0).ToList();
-
-            return lProduct.AsQueryable();
-        }
-
         public Product GetProductByID(int productID)
         {
             return _dbContext.Products.FirstOrDefault(p => p.Id == productID && p.State > 0);
@@ -41,12 +34,14 @@ namespace Infrastructure.Persistent.Repository
 
             return result.Entity;
         }
+
         public void UpdateProduct(Product product)
         {
             product.LastModified = System.DateTime.Now;
             _dbContext.Attach(product);
             _dbContext.Entry(product).State = EntityState.Modified;
         }
+
         public void DeleteProduct(Product product)
         {
             if (_dbContext.Entry(product).State == EntityState.Detached) {
@@ -82,7 +77,7 @@ namespace Infrastructure.Persistent.Repository
             int[] distinctIdCategories = idCategories.Distinct().ToArray();
 
             var lProductItem = _dbContext.Products
-                                    .Where(p => distinctIdCategories.Contains((int)p.IdCategory)).ToList();
+                                    .Where(p => distinctIdCategories.Contains((int)p.IdCategory) && p.State > 0).ToList();
 
             return lProductItem.AsQueryable();
         }

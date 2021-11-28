@@ -5,6 +5,7 @@ import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { ProductService } from '../../data/product/product.service';
 import { FilterParamsProduct } from '../../model/product/filter-params-product.model';
+import { LogProduct } from '../../model/product/log-product.model';
 import { Product } from '../../model/product/product.model';
 
 @Injectable({
@@ -55,8 +56,12 @@ export class ProductsStoreService {
         });
   }
 
-  delete(productId) {
-    return this.productService.delete(productId)
+  getById(id) {
+    return this.productService.getById("/GetProductByID", id)
+  }
+
+  delete(id) {
+    return this.productService.delete(id)
   }
 
   getTopBestSellers() {
@@ -98,5 +103,13 @@ export class ProductsStoreService {
       else this.toastr.error("An unexpected error occurred.", "Add Product")
     })
     return result.asObservable()
+  }
+
+  update(productObj) {
+    return this.productService.update("/UpdateProduct", productObj.id, productObj)
+  }
+
+  addItemOfProduct(log_product: LogProduct) {
+    return this.productService.addItemOfProduct(log_product)
   }
 }

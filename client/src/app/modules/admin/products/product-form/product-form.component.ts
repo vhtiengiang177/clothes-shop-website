@@ -1,10 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSelect, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { LogProduct } from 'src/app/services/model/product/log-product.model';
 import { ProductForm } from 'src/app/services/model/product/product-form.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
-import { LogProductsStoreService } from 'src/app/services/store/log-products-store/log-products-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { LogproductFormComponent } from '../logproduct-form/logproduct-form.component';
 
@@ -21,34 +21,42 @@ export class ProductFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ProductForm,
     private categoriesStore: CategoriesStoreService,
     private productsStore: ProductsStoreService,
-    private logProductsStore: LogProductsStoreService,
     public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) { 
+      console.log(data);
+      
+    }
 
   ngOnInit() {
     
   }
 
-  addItem() {
-    if(this.checkValidate) {
+  save() {
+    if (this.checkValidate()) {
       if (this.data.typeform === 0) {
-        const dialogRefLog = this.dialog.open(LogproductFormComponent, {
-          data: {
-            product: this.data.product
+        this.productsStore.create(this.data.product).subscribe(res => {
+          this.dialogRef.close(res);
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
           }
-        });
-  
-        dialogRefLog.afterClosed().subscribe(res => {
-          if(res) {
-          }
-        });
+        })
       }
-      
+      else if (this.data.typeform === 1) {
+        this.productsStore.update(this.data.product).subscribe(res => {
+          this.dialogRef.close(res)
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
+          }
+        })
+      }
+      else this.toastr.warning("It looks like something went wrong")
     }
   }
 
   checkValidate() {
-    if(!this.data.product.sku || !this.data.product.name) {
+    if(!this.data.product.sku || !this.data.product.name || !this.data.product.unitPrice || !this.data.product.idCategory) {
       this.toastr.error("Please fill in all the required fields.")
       return false
     }

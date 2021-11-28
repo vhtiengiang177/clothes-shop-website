@@ -2,7 +2,7 @@
 <h2 *ngIf="this.data.typeform === 1" mat-dialog-title>Edit Product <strong>#{{ data.product.id }}</strong></h2>
 <mat-dialog-content class="mat-typography">
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>SKU</mat-label>
                 <input [(ngModel)]="data.product.sku" #sku="ngModel" matInput type="text" required>
@@ -11,9 +11,6 @@
                 </mat-error>
             </mat-form-field>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
@@ -23,6 +20,9 @@
                 </mat-error>
             </mat-form-field>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Unit Price</mat-label>
@@ -33,12 +33,10 @@
                 </mat-error>
             </mat-form-field>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Category</mat-label>
-                <mat-select [(ngModel)]="data.product.categoryId" [compareWith]="compareCategory"
+                <mat-select [(ngModel)]="data.product.idCategory" [compareWith]="compareCategory"
                     #selectCategory="ngModel" name="category" required>
                     <mat-option (click)="selectedCategory(category)"
                         *ngFor="let category of categoriesStore.categories$ | async" [value]="category.id">
@@ -51,36 +49,16 @@
             </mat-form-field>
         </div>
     </div>
-    <button mat-button (click)="addItem()" class="btn btn-save">Add Item Product</button>
-    <div *ngIf="logProductsStore.logproducts.length > 0" class="form-group custom-form">
-        <table id="producttable" class="table table-striped table-hover table-sm ">
-            <thead class="dt-header">
-                <tr>
-                    <th>Size</th>
-                    <th>Color</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th colspan="2">Action</th>
-                </tr>
-            </thead>
-            <tbody class="table-body">
-                <tr *ngFor="let item of logProductsStore.logproducts | async">
-                    <td>{{ product.size }}</td>
-                    <td>{{ product.color }}</td>
-                    <td>{{ product.importprice }}</td>
-                    <td>{{ product.quantity }}</td>
-                    <td>
-                        <fa class="edit-icon" name="edit"></fa>
-                    </td>
-                    <td>
-                        <fa class="delete-icon" name="trash"></fa>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-12">
+            <mat-form-field appearance="fill" class="col-md-8">
+                <mat-label>Description</mat-label>
+                <textarea [(ngModel)]="product.description" matInput></textarea>
+            </mat-form-field>
+        </div>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Cancel</button> &nbsp;
-    <button mat-button (click)="save()" class="btn btn-save">Save & Close</button>
+    <button mat-button (click)="save()" class="btn btn-add">Save</button>
 </mat-dialog-actions>

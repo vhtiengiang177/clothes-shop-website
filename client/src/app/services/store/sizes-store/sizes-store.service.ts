@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { SizeService } from '../../data/size/size.service';
 import { Size } from '../../model/product/size.model';
 
@@ -28,9 +28,14 @@ export class SizesStoreService {
 
   async get(){
     await this.sizeService.get()
-            .subscribe(res => this.sizes = res,
-              () => {
-                this.toastr.error("An unexpected error occurred.", "List Sizes")
-              });
+            .subscribe(res => this.sizes = res);
+  }
+
+  create(size) {
+    let result = new Subject<Size>();
+    this.sizeService.create("/CreateSize", size).subscribe(res => {
+      result.next(res)
+    });
+    return result.asObservable();
   }
 }

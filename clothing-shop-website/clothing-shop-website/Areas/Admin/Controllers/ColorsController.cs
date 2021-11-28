@@ -42,15 +42,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateColor")]
         public IActionResult CreateColor(Color color)
         {
             if (ModelState.IsValid) {
                
-                _unitOfWork.ColorsRepository.Create(color);
+                var result = _unitOfWork.ColorsRepository.Create(color);
 
                 if (_unitOfWork.Save()) {
-                        return Ok();
+                    return Ok(result);
                 }
                 else {
                     return BadRequest();

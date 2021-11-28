@@ -1,6 +1,8 @@
 export interface ProductSizeColor {
-    idproduct: number,
-    idsize: number,
-    idcolor: number,
-    stock: number
+    idProduct: number,
+    idSize: number,
+    idColor: number,
+    stock: number,
+    size?: string,
+    color?: string
 }

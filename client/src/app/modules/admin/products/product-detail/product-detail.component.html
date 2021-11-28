@@ -1,0 +1,84 @@
+<div class="container" *ngIf="isVisible">
+    <div class="row detail-center">
+        <div class="col-md-4 img-right">
+            <img src="../../../../../assets/product.jpg">
+        </div>
+        <div class="col-md-6">
+            <h3>Product <strong>#{{ product.id }}</strong></h3>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    SKU:
+                </div>
+                <div *ngIf="product.sku" class="col-md-8">
+                    {{ product.sku }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Name:
+                </div>
+                <div *ngIf="product.name" class="col-md-8">
+                    {{ product.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Description:
+                </div>
+                <div *ngIf="product?.description" class="col-md-8">
+                    {{ product?.description }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Unit price:
+                </div>
+                <div *ngIf="product.unitPrice" class="col-md-8">
+                    {{ product.unitPrice | currency: 'VND' }}
+                </div>
+                <div *ngIf="!product.unitPrice" class="col-md-8">
+                    N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Categories:
+                </div>
+                <div *ngIf="product?.category" class="col-md-8">
+                    {{ product?.category }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row button-add">
+        <button mat-button (click)="addItem()" class="btn btn-add">Add Item Product</button>
+    </div>
+    <br/>
+    <div class="form-group custom-form">
+        <table id="producttable" class="table table-striped table-hover table-sm ">
+            <thead class="dt-header">
+                <tr>
+                    <th></th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Stock</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr *ngFor="let item of productSizeColorsStore.productitems$ | async; index as i">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ item?.size }}</td>
+                    <td>{{ item?.color }}</td>
+                    <td>{{ item.stock }}</td>
+                    <td>
+                        <fa (click)="import(item)" class="edit-icon" name="edit"></fa>
+                    </td>
+                    <td>
+                        <fa class="delete-icon" name="trash"></fa>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

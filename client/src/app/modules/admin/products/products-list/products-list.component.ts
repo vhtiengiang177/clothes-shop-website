@@ -84,6 +84,32 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
+  editProduct(idProduct) {
+    if(!this.productsStore.products.find(p => p.id == idProduct)) {
+      this.toastr.error("Cannot find the product #" + idProduct)
+    }
+    else {
+      this.productsStore.getById(idProduct).subscribe(res => {
+        if(res) {
+          const dialogRef = this.dialog.open(ProductFormComponent, {
+            width: '500px',
+            data: { 
+              typeform: ProductsListComponent.editForm, 
+              product: res
+            }
+          });
+          
+          dialogRef.afterClosed().subscribe(res => {
+            if(res) {
+              var index = this.productsStore.products.findIndex(p => p.id == res.id)
+              this.productsStore.products.splice(index, 1, res)
+            }
+          });
+        }
+      })
+    }
+  }
+
   reloadProduct() {
     this.filter = {
       pageindex: 1,

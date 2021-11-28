@@ -31,6 +31,10 @@ export class DataService {
     }))
   }
 
+  getById(routeName: string, id: number) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id)
+  }
+
   create(routeName: string, object: any) {
     return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + routeName, object)
     .pipe(catchError((error: Response) => {
@@ -39,6 +43,10 @@ export class DataService {
       }
       return throwError(new AppError(error))
     }))
+  }
+
+  update(routeName: string, id: number, object: any) {
+    return this.http.put<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id, object)
   }
 
   convertToQueryString(params) : string {

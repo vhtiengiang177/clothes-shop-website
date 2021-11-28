@@ -32,6 +32,7 @@ import { FooterUserComponent } from './modules/user/layout/footer-user/footer-us
 import { CategoriesListComponent } from './modules/admin/categories/categories-list/categories-list.component';
 import { StaffListComponent } from './modules/admin/staff/staff-list/staff-list.component';
 import { CustomersListComponent } from './modules/admin/customers/customers-list/customers-list.component';
+import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CustomersListComponent } from './modules/admin/customers/customers-list
     FooterUserComponent,
     CategoriesListComponent,
     CustomersListComponent,
-    StaffListComponent
+    StaffListComponent,
+    ProductDetailComponent
   ],
   entryComponents: [
     ProductFormComponent,

@@ -6,6 +6,7 @@ import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { FilterParamsProduct } from '../../model/product/filter-params-product.model';
+import { LogProduct } from '../../model/product/log-product.model';
 import { DataService } from '../data.service';
 
 @Injectable({
@@ -46,6 +47,14 @@ export class ProductService extends DataService {
         return throwError(new BadRequestError(error))
       return throwError(new AppError(error))
     }))
+  }
+
+  getAllItemOfProduct(id) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllItemOfProduct/" + id)
+  }
+
+  addItemOfProduct(log_product: LogProduct) {
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddItemOfProduct", log_product)
   }
 
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {

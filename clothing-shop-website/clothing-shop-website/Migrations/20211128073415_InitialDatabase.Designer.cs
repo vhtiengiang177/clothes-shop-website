@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211126161409_InitialDatabase")]
+    [Migration("20211128073415_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -662,9 +662,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdSize")
                         .HasColumnType("int");
 
-                    b.Property<double>("ImportPrice")
-                        .HasColumnType("float");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -681,7 +678,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -692,7 +688,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 2,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -703,7 +698,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 3,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -714,7 +708,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 2,
                             IdProduct = 2,
                             IdSize = 2,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -725,7 +718,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 3,
                             IdProduct = 2,
                             IdSize = 2,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -736,7 +728,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 4,
                             IdProduct = 3,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -747,7 +738,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 2,
                             IdProduct = 4,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -758,7 +748,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 3,
                             IdProduct = 5,
                             IdSize = 2,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -769,7 +758,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 4,
                             IdProduct = 5,
                             IdSize = 2,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -780,7 +768,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 6,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -791,7 +778,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 7,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -802,7 +788,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 8,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -813,7 +798,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 9,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -824,7 +808,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 10,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         },
                         new
@@ -835,7 +818,6 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 11,
                             IdSize = 1,
-                            ImportPrice = 150000.0,
                             Quantity = 120
                         });
                 });
@@ -871,7 +853,7 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("IdShipper")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdStaff")
+                    b.Property<int?>("IdStaff")
                         .HasColumnType("int");
 
                     b.Property<int>("State")
@@ -1942,9 +1924,7 @@ namespace clothing_shop_website.Migrations
 
                     b.HasOne("Domain.Entity.Staff", "Staff")
                         .WithMany("Orders")
-                        .HasForeignKey("IdStaff")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdStaff");
 
                     b.Navigation("Customer");
 

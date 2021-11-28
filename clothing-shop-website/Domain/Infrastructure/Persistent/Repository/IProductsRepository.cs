@@ -11,7 +11,6 @@ namespace Domain.Infrastructure.Persistent.Repository
     {
         Task<IQueryable<Product>> GetAllProducts();
         Product GetProductByID(int productID);
-        IQueryable<Product> GetAllProductsByIDCategory(int categoryID);
         Task<IQueryable<Product_Size_Color>> GetListItemByIdProduct(int productID);
         Product CreateProduct(Product product);
         void UpdateProduct(Product product);

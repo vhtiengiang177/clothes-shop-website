@@ -83,10 +83,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid) {
                 category.CreatedDate = DateTime.Now;
-                 _unitOfWork.CategoriesRepository.Create(category);
+                _unitOfWork.CategoriesRepository.Create(category);
 
                 if (_unitOfWork.Save()) {
-                        return Ok();
+                    return Ok();
                 }
                 else {
                     return BadRequest();
@@ -127,6 +127,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 category.State = 0;
                 _unitOfWork.CategoriesRepository.Update(category);
+
+                int[] idCategories = new int[1];
+                idCategories[0] = category.Id;
+                var lProduct = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(idCategories);
+                foreach (var item in lProduct)
+                {
+                    item.State = 0;
+                    _unitOfWork.ProductsRepository.UpdateProduct(item);
+                }
+
                 _unitOfWork.Save();
 
                 return Ok();

@@ -48,10 +48,10 @@
           <tr *ngFor="let product of productsStore.products$ | async">
             <td>{{ product.id }}</td>
             <td>{{ product.sku }}</td>
-            <td><a>{{ product.name }}</a></td>
+            <td><a class="btn" [routerLink]="['/admin/products', product.id]">{{ product.name }}</a></td>
             <td>{{ product.totalBuy }}</td>
             <td>{{ product.createdDate | date: 'longDate' }}</td>
-            <td><fa class="edit-icon" name="edit"></fa></td>
+            <td (click)="editProduct(product.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>

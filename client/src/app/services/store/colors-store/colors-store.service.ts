@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ColorService } from '../../data/color/color.service';
 import { Color } from '../../model/product/color.model';
 
@@ -28,9 +28,14 @@ export class ColorsStoreService {
 
   async get(){
     await this.colorService.get()
-            .subscribe(res => this.colors = res,
-              () => {
-                this.toastr.error("An unexpected error occurred.", "List Colors")
-              });
+            .subscribe(res => this.colors = res);
+  }
+
+  create(color: Color) {
+    let result = new Subject<Color>();
+    this.colorService.create("/CreateColor", color).subscribe(res => {
+      result.next(res)
+    });
+    return result.asObservable();
   }
 }

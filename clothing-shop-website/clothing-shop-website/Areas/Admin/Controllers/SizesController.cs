@@ -42,14 +42,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateSize")]
         public IActionResult CreateSize(Size size)
         {
             if (ModelState.IsValid) {
-                _unitOfWork.SizesRepository.Create(size);
+                var result = _unitOfWork.SizesRepository.Create(size);
 
                 if (_unitOfWork.Save()) {
-                        return Ok();
+                    return Ok(result);
                 }
                 else {
                     return BadRequest();

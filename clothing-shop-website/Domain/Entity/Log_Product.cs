@@ -13,7 +13,6 @@ namespace Domain.Entity
         public int IdColor { get; set; } = 1;
         public DateTime CreatedDate { get; set; }
         public int Quantity { get; set; }
-        public double ImportPrice { get; set; }
         public int CreatedById { get; set; }
     }
 }
