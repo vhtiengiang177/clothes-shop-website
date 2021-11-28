@@ -1,8 +1,26 @@
 <div class="container">
     <div class="row">
-      <app-search-product 
-        (search-event)="searchEvent($event)">
-      </app-search-product>
+      <!-- Search -->
+      <div class="searchFilter searchFilter-center">
+        <div class="input-group">
+            <input id="table_filter" 
+                [(ngModel)]="search" 
+                #searchInput 
+                type="text" 
+                class="form-control input-search"> &nbsp;
+            <div class="input-group-btn">
+                <button name="searchBtn" 
+                    type="button" 
+                    class="btn btn-secondary btn-search"
+                    (click)="searchEvent(searchInput.value)">
+                    <fa class="icon-size" name="search"></fa>
+                    <span class="label-icon">
+                        &nbsp; Search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
     </div>
     <div class="row">
   

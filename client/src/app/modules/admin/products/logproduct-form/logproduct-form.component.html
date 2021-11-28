@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Log Product</h2>
+<h2 mat-dialog-title>Add Item Product</h2>
 <mat-dialog-content class="mat-typography">
     <div class="form-group custom-form">
         <mat-form-field appearance="fill">
@@ -14,7 +14,7 @@
     <div class="form-group custom-form">
         <mat-form-field appearance="fill">
             <mat-label>Color</mat-label>
-            <input type="text" matInput [formControl]="colorInput" [matAutocomplete]="autocolor">
+            <input type="text" matInput [formControl]="colorInput" [matAutocomplete]="autocolor" required>
             <mat-autocomplete #autocolor="matAutocomplete" [displayWith]="displayFnColor">
                 <mat-option *ngFor="let color of colorsStore.colors$ | async" [value]="color">
                     {{ color.name }}
@@ -25,7 +25,7 @@
     <div class="form-group custom-form">
         <mat-form-field appearance="fill">
             <mat-label>Quantity</mat-label>
-            <input [(ngModel)]="logProduct.quantity" #quantity="ngModel" matInput type="text">
+            <input [(ngModel)]="logProduct.quantity" #quantity="ngModel" matInput type="number" min="0" max="200" (change)="quantityValidate()">
         </mat-form-field>
     </div>
 </mat-dialog-content>

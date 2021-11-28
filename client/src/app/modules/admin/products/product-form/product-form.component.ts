@@ -29,7 +29,7 @@ export class ProductFormComponent implements OnInit {
     
   }
 
-  next() {
+  addItem() {
     if(this.checkValidate) {
       if (this.data.typeform === 0) {
         const dialogRefLog = this.dialog.open(LogproductFormComponent, {

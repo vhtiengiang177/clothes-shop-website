@@ -1,4 +1,3 @@
-import { CategoriesComponent } from './modules/admin/categories/categories.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -13,8 +12,9 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
 import { VerificationComponent } from './modules/authentication/verification/verification.component';
 import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
-import { CustomersComponent } from './modules/admin/customers/customers.component';
-import { StaffComponent } from './modules/admin/staff/staff.component';
+import { CategoriesListComponent } from './modules/admin/categories/categories-list/categories-list.component';
+import { StaffListComponent } from './modules/admin/staff/staff-list/staff-list.component';
+import { CustomersListComponent } from './modules/admin/customers/customers-list/customers-list.component';
 
 
 const routes: Routes = [
@@ -30,17 +30,17 @@ const routes: Routes = [
   },
   {
     path: 'admin/categories',
-    component: CategoriesComponent,
+    component: CategoriesListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: 'admin/customers',
-    component: CustomersComponent,
+    component: CustomersListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: 'admin/staff',
-    component: StaffComponent,
+    component: StaffListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {

@@ -1,0 +1,9 @@
+mat-dialog-content {
+    text-align: center;
+}
+
+mat-form-field {
+    /* padding-left: 2px;
+    padding-right: 2px; */
+    width: 100%;
+}
