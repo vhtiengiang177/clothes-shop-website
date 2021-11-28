@@ -1,4 +1,6 @@
-﻿using Domain.Entity;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
+using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
 using Microsoft.AspNetCore.Http;
@@ -15,19 +17,53 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     public class CategoriesController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
-        public CategoriesController(DataDbContext dbContext)
+        private CategoriesService _categoriesService;
+        public CategoriesController(DataDbContext dbContext, CategoriesService categoriesService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
+            _categoriesService = categoriesService;
         }
 
-        [HttpGet]
-        public IActionResult GetAllCategories()
+        //[HttpGet]
+        //public IActionResult GetAllCategories()
+        //{
+        //    var lCategories = _unitOfWork.CategoriesRepository.Get();
+
+        //    return Ok(lCategories.Where(c => c.State != 0));
+        //}
+
+        [HttpGet("GetAllCategories")]
+        public async Task<IActionResult> GetAllCategories([FromQuery] FilterParamsCategories filterParams)
         {
-            var lCategories = _unitOfWork.CategoriesRepository.Get();
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
 
-            return Ok(lCategories.Where(c => c.State != 0));
+                IQueryable<Category> lCatesgories;
+
+                lCatesgories =  _unitOfWork.CategoriesRepository.Get();
+
+                lCatesgories = lCatesgories.Where(c => c.State == 1);
+
+                lCatesgories = _categoriesService.FilterCategory(filterParams, lCatesgories);
+
+                var lCategory = _categoriesService.SortListCategory(filterParams.Sort, lCatesgories);
+
+                var response = new ResponseJSON<Category>
+                {
+                    TotalData = lCategory.Count(),
+                    Data = lCategory.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
         }
-
 
         [HttpGet("{id}")]
         public IActionResult GetCategoryByID(int id)

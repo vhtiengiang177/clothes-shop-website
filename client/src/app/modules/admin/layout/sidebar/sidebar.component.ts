@@ -11,6 +11,12 @@ export class SidebarComponent implements OnInit {
   isDashboardActive: boolean = true
   isProductShow: boolean = false
   isProductsListActive: boolean = false
+
+  isAccountsListActive: boolean = false
+  isAccountShow:boolean =false;
+
+  isOrdersListActive: boolean = false
+  isOrderShow:boolean =false;
   currentRouter: string
 
   constructor(private router: Router) {
@@ -42,6 +48,26 @@ export class SidebarComponent implements OnInit {
   clickProductsList() {
     this.isProductShow = true
     this.isProductsListActive = true
+    // false
+    this.isDashboardActive = false
+  }
+
+  clickAccountsNavItem() {
+    this.isAccountShow = !this.isAccountShow
+  }
+  clickAccountsList() {
+    this.isAccountShow = true
+    this.isAccountsListActive = true
+    // false
+    this.isDashboardActive = false
+  }
+
+  clickOrdersNavItem() {
+    this.isOrderShow = !this.isOrderShow
+  }
+  clickOrdersList() {
+    this.isOrderShow = true
+    this.isOrdersListActive = true
     // false
     this.isDashboardActive = false
   }
