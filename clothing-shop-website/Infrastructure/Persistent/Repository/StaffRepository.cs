@@ -32,6 +32,14 @@ namespace Infrastructure.Persistent.Repository
         //    return lStaff.AsQueryable();
         //}
 
+        public IQueryable<Account> GetAllAccountStaff()
+        {
+            var lAccount = _dbContext.Accounts.Where(a => a.IdTypeAccount != 4).ToList();
+
+            return lAccount.AsQueryable();
+        }
+
+
         public Staff GetStaffByID(int staffID)
         {
             return _dbContext.Staff.FirstOrDefault(p => p.IdAccount == staffID);

@@ -24,13 +24,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _categoriesService = categoriesService;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAllCategories()
-        //{
-        //    var lCategories = _unitOfWork.CategoriesRepository.Get();
-
-        //    return Ok(lCategories.Where(c => c.State != 0));
-        //}
 
         [HttpGet("GetAllCategories")]
         public async Task<IActionResult> GetAllCategories([FromQuery] FilterParamsCategories filterParams)

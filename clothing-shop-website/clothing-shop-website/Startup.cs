@@ -27,11 +27,11 @@ namespace clothing_shop_website
         {
             services.AddControllers();
 
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
-            b => b.MigrationsAssembly("clothing-shop-website")));
-
-            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
             //b => b.MigrationsAssembly("clothing-shop-website")));
+
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            b => b.MigrationsAssembly("clothing-shop-website")));
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
@@ -47,6 +47,7 @@ namespace clothing_shop_website
             services.AddSingleton(new PromotionsService());
             services.AddSingleton(new OrdersService());
             services.AddSingleton(new CategoriesService());
+            services.AddSingleton(new StaffService());
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {

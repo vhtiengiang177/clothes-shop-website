@@ -18,7 +18,8 @@ export class SidebarComponent implements OnInit {
   isStaffListActive: boolean = false
 
   isOrdersListActive: boolean = false
-  isOrderShow:boolean = false;
+
+  isPromotionsListActive: Boolean =false
   currentRouter: string
 
   constructor(private router: Router) {
@@ -44,6 +45,9 @@ export class SidebarComponent implements OnInit {
     this.isDashboardActive = true
     // false
     this.isProductShow = false
+    this.isOrdersListActive = false
+    this.isPromotionsListActive=false
+    this.isAccountShow = false
     //this.isProductsListActive = false
     
   }
@@ -57,9 +61,9 @@ export class SidebarComponent implements OnInit {
     this.isCustomerListActive = false
     this.isStaffListActive = false
     this.isOrdersListActive = false
+    this.isPromotionsListActive=false
 
     this.isAccountShow = false
-    this.isOrderShow = false
   }
 
   clickCategoriesList() {
@@ -71,9 +75,9 @@ export class SidebarComponent implements OnInit {
     this.isCustomerListActive = false
     this.isStaffListActive = false
     this.isOrdersListActive = false
+    this.isPromotionsListActive=false
 
     this.isAccountShow = false
-    this.isOrderShow = false
   }
 
   clickAccountsNavItem() {
@@ -89,9 +93,9 @@ export class SidebarComponent implements OnInit {
     this.isCategoriesListActive = false
     this.isOrdersListActive = false
     this.isStaffListActive = false
+    this.isPromotionsListActive=false
 
     this.isProductShow = false
-    this.isOrderShow = false
   }
 
   clickStaffList() {
@@ -103,9 +107,9 @@ export class SidebarComponent implements OnInit {
     this.isCategoriesListActive = false
     this.isOrdersListActive = false
     this.isCustomerListActive = false
+    this.isPromotionsListActive=false
 
     this.isProductShow = false
-    this.isOrderShow = false
   }
 
   // clickAccountsList() {
@@ -121,12 +125,9 @@ export class SidebarComponent implements OnInit {
   //   this.isOrderShow = false
   // }
 
-  clickOrdersNavItem() {
-    this.isOrderShow = !this.isOrderShow
-  }
+ 
 
   clickOrdersList() {
-    this.isOrderShow = true
     this.isOrdersListActive = true
     // false
     this.isDashboardActive = false
@@ -134,6 +135,21 @@ export class SidebarComponent implements OnInit {
     this.isCategoriesListActive = false
     this.isCustomerListActive = false
     this.isStaffListActive = false
+    this.isPromotionsListActive=false
+
+    this.isProductShow = false
+    this.isAccountShow = false
+  }
+
+  clickPromotionsList() {
+    this.isPromotionsListActive=true
+    // false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+    this.isOrdersListActive = false
 
     this.isProductShow = false
     this.isAccountShow = false

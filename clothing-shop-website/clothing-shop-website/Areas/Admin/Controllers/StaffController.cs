@@ -17,10 +17,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private StaffService _staffService;
-        public StaffController(DataDbContext dbContext, StaffService staffService)
+        private AccountService _accountService;
+
+
+        public StaffController(DataDbContext dbContext, StaffService staffService, AccountService accountService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _staffService = staffService;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -60,6 +64,48 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("GetAllAccountStaff")]
+        public IActionResult GetAllAccountStaff([FromQuery] FilterParamsAccount filterParams)
+        {
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
+
+                IQueryable<Account> lStaffItems;
+
+                //if (filterParams.IdTypeCustomers != null)
+                //{
+                //    if (filterParams.IdTypeCustomers.Count() != 0
+                //        || filterParams.IdTypeCustomers.Count() != 3)
+                //    {
+                //        lCustomerItems = _unitOfWork.CustomersRepository.GetlCustomersByTypeCustomerID(filterParams.IdTypeCustomers);
+                //    }
+                //    else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
+                //}
+                //else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
+
+                lStaffItems = _unitOfWork.StaffRepository.GetAllAccountStaff();
+
+                lStaffItems = _accountService.FilterAccount(filterParams, lStaffItems);
+
+                var lStaff = _accountService.SortListAccount(filterParams.Sort, lStaffItems);
+
+                var response = new ResponseJSON<Account>
+                {
+                    TotalData = lStaff.Count(),
+                    Data = lStaff.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
 
 
         [HttpGet("{id}")]

@@ -17,38 +17,43 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private CustomersService _customersService;
-        public CustomersController(DataDbContext dbContext, CustomersService customersService)
+        private AccountService _accountService;
+
+        public CustomersController(DataDbContext dbContext, CustomersService customersService, AccountService accountService )
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _customersService = customersService;
+            _accountService = accountService;
         }
 
-        [HttpGet]
-        public IActionResult GetAllCustomers([FromQuery] FilterParamsCustomer filterParams)
+        [HttpGet("GetAllAccountCustomers")]
+        public IActionResult GetAllAccountCustomers([FromQuery] FilterParamsAccount filterParams)
         {
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
                 int currentPageSize = filterParams.PageSize ?? 5;
 
-                IQueryable<Customer> lCustomerItems;
+                IQueryable<Account> lCustomerItems;
 
-                if (filterParams.IdTypeCustomers != null)
-                {
-                    if (filterParams.IdTypeCustomers.Count() != 0
-                        || filterParams.IdTypeCustomers.Count() != 3)
-                    {
-                        lCustomerItems = _unitOfWork.CustomersRepository.GetlCustomersByTypeCustomerID(filterParams.IdTypeCustomers);
-                    }
-                    else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllCustomers();
-                }
-                else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllCustomers();
+                //if (filterParams.IdTypeCustomers != null)
+                //{
+                //    if (filterParams.IdTypeCustomers.Count() != 0
+                //        || filterParams.IdTypeCustomers.Count() != 3)
+                //    {
+                //        lCustomerItems = _unitOfWork.CustomersRepository.GetlCustomersByTypeCustomerID(filterParams.IdTypeCustomers);
+                //    }
+                //    else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
+                //}
+                //else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
 
-                lCustomerItems = _customersService.FilterCustomer(filterParams, lCustomerItems);
+                lCustomerItems = _unitOfWork.CustomersRepository.GetAllAccountCustomers();
 
-                var lCustomer = _customersService.SortListCustomer(filterParams.Sort, lCustomerItems);
+                lCustomerItems = _accountService.FilterAccount(filterParams, lCustomerItems);
 
-                var response = new ResponseJSON<Customer>
+                var lCustomer = _accountService.SortListAccount(filterParams.Sort, lCustomerItems);
+
+                var response = new ResponseJSON<Account>
                 {
                     TotalData = lCustomer.Count(),
                     Data = lCustomer.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()

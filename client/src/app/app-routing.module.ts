@@ -15,6 +15,8 @@ import { NotFoundComponent } from './_shared/components/not-found/not-found.comp
 import { CategoriesListComponent } from './modules/admin/categories/categories-list/categories-list.component';
 import { StaffListComponent } from './modules/admin/staff/staff-list/staff-list.component';
 import { CustomersListComponent } from './modules/admin/customers/customers-list/customers-list.component';
+import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
+import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 
 
 const routes: Routes = [
@@ -41,6 +43,16 @@ const routes: Routes = [
   {
     path: 'admin/staff',
     component: StaffListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/promotions',
+    component: PromotionsListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders',
+    component: OrdersListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
