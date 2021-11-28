@@ -31,7 +31,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li [ngClass]="{ 'active': isProductsListActive }" class="nav-item nav-color">
+    <li [ngClass]="{ 'active': isProductShow }" class="nav-item nav-color">
         <a (click)="clickProductsNavItem()" class="nav-link collapsed" >
             <fa name="cubes"></fa>
             <span>Products</span>
@@ -45,14 +45,15 @@
                     [routerLink]="['/admin/products']">Products List</a>
                 <h6 class="collapse-header">Categories:</h6>
                 <a class="collapse-item"
-                    (click)="clickCategoriesList()" 
+                    (click)="clickCategoriesList()"
+                    [ngClass]="{ 'active': isCategoriesListActive }" 
                     [routerLink]="['/admin/categories']" 
                     href="">List Categories</a>
             </div>
         </div>
     </li>
 
-    <li [ngClass]="{ 'active': isAccountsListActive }" class="nav-item nav-color">
+    <li [ngClass]="{ 'active': isAccountShow }" class="nav-item nav-color">
         <a (click)="clickAccountsNavItem()" class="nav-link collapsed" >
             <fa name="cubes"></fa>
             <span>Accounts</span>
@@ -61,13 +62,14 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cutomers:</h6>
                 <a class="collapse-item" 
-                    (click)="clickProductsList()"  
-                    [ngClass]="{ 'active': isAccountsListActive }"
-                    [routerLink]="['/admin/products']"> List Customers</a>
+                    (click)="clickCustomersList()"  
+                    [ngClass]="{ 'active': isCustomerListActive }"
+                    [routerLink]="['/admin/customers']"> List Customers</a>
                 <h6 class="collapse-header">Staff:</h6>
                 <a class="collapse-item"
-                    (click)="clickCategoriesList()" 
-                    [routerLink]="['/admin/categories']" 
+                    (click)="clickStaffList()" 
+                    [ngClass]="{ 'active': isStaffListActive }"
+                    [routerLink]="['/admin/staff']" 
                     href="">List Staff</a>
             </div>
         </div>

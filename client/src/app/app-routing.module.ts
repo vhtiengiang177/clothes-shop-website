@@ -13,6 +13,8 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
 import { VerificationComponent } from './modules/authentication/verification/verification.component';
 import { NotFoundComponent } from './_shared/components/not-found/not-found.component';
+import { CustomersComponent } from './modules/admin/customers/customers.component';
+import { StaffComponent } from './modules/admin/staff/staff.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,16 @@ const routes: Routes = [
   {
     path: 'admin/categories',
     component: CategoriesComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/customers',
+    component: CustomersComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/staff',
+    component: StaffComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
