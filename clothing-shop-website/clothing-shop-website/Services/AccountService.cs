@@ -15,6 +15,12 @@ namespace clothing_shop_website.Services
         {
             switch (sort)
             {
+                case "state:desc":
+                    lAccount = lAccount.OrderByDescending(p => p.State).AsQueryable();
+                    break;
+                case "state:asc":
+                    lAccount = lAccount.OrderBy(p => p.State).AsQueryable();
+                    break;
                 case "email:desc":
                     lAccount = lAccount.OrderByDescending(p => p.Email).AsQueryable();
                     break;

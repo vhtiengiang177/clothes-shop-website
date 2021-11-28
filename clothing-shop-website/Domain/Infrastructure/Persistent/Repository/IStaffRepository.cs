@@ -14,5 +14,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Staff CreateStaff(Staff staff);
         void DeleteStaff(int accountId);
         IQueryable<Staff> GetlStaffByTypeStaffID(int[] idTypeStaff);
+        IQueryable<Account> GetAllAccountStaff();
     }
 }

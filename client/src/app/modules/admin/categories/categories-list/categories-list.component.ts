@@ -25,11 +25,13 @@ export class CategoriesListComponent implements OnInit {
 
   ngOnInit() {
   }
+
   onPaginate(pageEvent: PageEvent) {
     this.filter.pagesize = +pageEvent.pageSize;
     this.filter.pageindex = +pageEvent.pageIndex + 1;
     this.fetchData()
   }
+  
   fetchData() {
     this.categoriesStore.getAll(this.filter);
   }

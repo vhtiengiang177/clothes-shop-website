@@ -21,6 +21,12 @@ namespace Infrastructure.Persistent.Repository
             
             return lCustomer.AsQueryable();
         }
+        public IQueryable<Account> GetAllAccountCustomers()
+        {
+            var lAccount = _dbContext.Accounts.Where(a => a.IdTypeAccount == 4).ToList();
+          
+            return lAccount.AsQueryable();
+        }
 
         public IQueryable<Customer> GetAllCustomersByIDType(int TypeID)
         {

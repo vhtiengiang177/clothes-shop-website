@@ -1,1 +1,88 @@
-<p>staff-list works!</p>
+<div class="container">
+    <div class="row">
+      <!-- Search -->
+      <div class="searchFilter searchFilter-center">
+        <div class="input-group">
+            <input id="table_filter" 
+                [(ngModel)]="search" 
+                #searchInput 
+                type="text" 
+                class="form-control input-search"> &nbsp;
+            <div class="input-group-btn">
+                <button name="searchBtn" 
+                    type="button" 
+                    class="btn btn-secondary btn-search"
+                    (click)="searchEvent(searchInput.value)">
+                    <fa class="icon-size" name="search"></fa>
+                    <span class="label-icon">
+                        &nbsp; Search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+  
+      <div class="button-add">
+        <button 
+        mat-raised-button 
+        (click)="reloadAccoutStaff()"
+        class="btn btn-secondary">Reload</button>
+        &nbsp;
+        <button 
+        mat-raised-button 
+        (click)="addStaff()"
+        class="btn btn-primary btn-add">Add Staff</button>
+       
+      </div>
+          
+      <table id="producttable" class="table table-striped table-hover table-sm ">
+        <thead class="dt-header">
+          <tr>
+            <th> </th>
+            <th (click)="sortID()">ID
+              <fa *ngIf="filter.sort == null" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
+            </th>
+            <th (click)="sortEmail()">Email
+              <fa *ngIf="filter.sort == 'email:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'email:asc'" name="sort-up"></fa>
+            </th>
+            <th (click)="sortState()">State
+              <fa *ngIf="filter.sort == 'state:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'state:asc'" name="sort-up"></fa>
+            </th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-body" *ngIf="staffStore.totalData > 0">
+          <tr *ngFor="let accstaff of staffStore.accstaff$ | async; index as i">
+            <td>{{ i+1 }}</td>
+            <td>{{ accstaff.id }}</td>
+            <td><a>{{ accstaff.email }}</a></td>
+            <td>{{ accstaff.state }}</td>
+           
+            <td><fa class="edit-icon" name="edit"></fa></td>
+            <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="staffStore.totalData == 0">
+          <tr>
+            <td class="no-data" colspan="6">No data available in table</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="pb-0 pt-3 paging-custom">
+      <mat-paginator #paginator
+        [length]="staffStore.totalData"
+        [(pageSize)]="filter.pagesize"
+        [pageSizeOptions]="[5, 10, 15]"
+        (page)="onPaginate($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+</div>
+
