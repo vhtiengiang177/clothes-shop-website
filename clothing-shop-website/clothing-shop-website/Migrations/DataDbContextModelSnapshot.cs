@@ -625,11 +625,17 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdProduct")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

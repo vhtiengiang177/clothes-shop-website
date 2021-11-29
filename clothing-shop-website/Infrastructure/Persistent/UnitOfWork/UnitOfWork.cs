@@ -20,6 +20,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IRepository<Size> _sizesRepository;
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
+        private IRepository<Image> _imagesRepository;
        
         public UnitOfWork(DataDbContext dbContext)
         {
@@ -137,11 +138,22 @@ namespace Infrastructure.Persistent.UnitOfWork
                 return _colorsRepository;
             }
         }
+
         public IRepository<Size> SizesRepository {
             get {
                 if (_sizesRepository == null)
                     _sizesRepository = new GenericRepository<Size>(_dbContext);
                 return _sizesRepository;
+            }
+        }
+
+        public IRepository<Image> ImagesRepository
+        {
+            get
+            {
+                if (_imagesRepository == null)
+                    _imagesRepository = new GenericRepository<Image>(_dbContext);
+                return _imagesRepository;
             }
         }
 

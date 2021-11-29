@@ -57,6 +57,10 @@ export class ProductService extends DataService {
     return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddItemOfProduct", log_product)
   }
 
+  addImageProduct(id) {
+    // return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id, )
+  }
+
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {
     const cloneParams = { ...filterParams };
     let query = '?';

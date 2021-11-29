@@ -20,5 +20,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
         IQueryable<Product> GetTopProductBestSellers();
         IQueryable<Product> GetTopNewProducts();
+        IQueryable<Image> GetImagesByIdProduct(int productID);
     }
 }
