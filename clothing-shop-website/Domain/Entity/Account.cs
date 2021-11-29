@@ -8,7 +8,7 @@ namespace Domain.Entity
         public string Email { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public int State { get; set; } = 1; // 0: Delete, 1: Active
+        public int State { get; set; } = 1; // 0: Delete, 1: Active, 2: Block
         public int VerificationCode { get; set; } = 0; // 1: Activate, another: No Activate
         public int IdTypeAccount { get; set; }
         public TypeAccount TypeAccount { get; set; }

@@ -56,7 +56,9 @@
             <td>{{ i+1 }}</td>
             <td>{{ acccustomer.id }}</td>
             <td><a>{{ acccustomer.email }}</a></td>
-            <td>{{ acccustomer.state }}</td>
+            <td *ngIf="acccustomer.state == 1">Active</td>
+            
+            <td *ngIf="acccustomer.state == 2">Blocked</td>
            
             <td><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
