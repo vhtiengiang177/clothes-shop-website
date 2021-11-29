@@ -1,4 +1,5 @@
-﻿using clothing_shop_website.Model;
+﻿using clothing_shop_website.Interface;
+using clothing_shop_website.Model;
 using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
@@ -18,11 +20,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private ProductsService _productsService;
+        private IImageService _imageService;
 
-        public ProductsController(DataDbContext dbContext, ProductsService productsService)
+        public ProductsController(DataDbContext dbContext, ProductsService productsService, IImageService imageService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _productsService = productsService;
+            _imageService = imageService;
         }
 
         [HttpGet("GetAllProducts")]
@@ -86,6 +90,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var userId = User.Claims.Where(u => u.Type == "id");
                 var result = _unitOfWork.ProductsRepository.CreateProduct(product);
                 if (_unitOfWork.Save())
                 {
@@ -233,7 +238,40 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
+        }
 
+        [HttpPost("AddImageProduct/{id}")]
+        public async Task<IActionResult> AddImageProduct(int id, IFormFile file)
+        {
+            var product = _unitOfWork.ProductsRepository.GetProductByID(id);
+
+            if (product == null) return NotFound();
+
+            var result = await _imageService.AddImageAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var imageObj = new Image
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                IdProduct = product.Id,
+                State = 1
+            };
+
+            var lImages = _unitOfWork.ProductsRepository.GetImagesByIdProduct(id);
+
+            if (lImages.Count() == 0)
+            {
+                imageObj.IsMain = true;
+            }
+            else imageObj.IsMain = false;
+
+            var image = _unitOfWork.ImagesRepository.Create(imageObj);
+
+            if (_unitOfWork.Save())
+                return Ok();
+            return BadRequest("Something went wrong!");
         }
     }
 }

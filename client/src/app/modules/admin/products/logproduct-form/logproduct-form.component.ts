@@ -33,6 +33,7 @@ export class LogproductFormComponent implements OnInit {
     idColor: null,
     quantity: null
   }
+  isMatComplete = true
 
   constructor(public dialogRef: MatDialogRef<ProductFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductSizeColorForm,
@@ -40,6 +41,9 @@ export class LogproductFormComponent implements OnInit {
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
     private toastr: ToastrService) { 
+      if (data.typeform == 1)
+        this.isMatComplete = false
+
      this.sizeOptions = this.sizeInput.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.name)),

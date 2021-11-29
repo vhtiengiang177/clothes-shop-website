@@ -1,3 +1,5 @@
+using clothing_shop_website.Helper;
+using clothing_shop_website.Interface;
 using clothing_shop_website.Services;
 using Infrastructure.Persistent;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -63,6 +65,9 @@ namespace clothing_shop_website
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<IImageService, ImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

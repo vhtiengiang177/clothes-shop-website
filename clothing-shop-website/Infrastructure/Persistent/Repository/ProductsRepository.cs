@@ -95,5 +95,12 @@ namespace Infrastructure.Persistent.Repository
 
             return lProduct.AsQueryable();
         }
+
+        public IQueryable<Image> GetImagesByIdProduct(int productID)
+        {
+            var lImages = _dbContext.Images.Where(i => i.IdProduct == productID).ToList();
+
+            return lImages.AsQueryable();
+        }
     }
 }
