@@ -1,8 +1,5 @@
 <div class="container" *ngIf="isVisible">
     <div class="row detail-center">
-        <div class="col-md-4 img-right">
-            <img src="../../../../../assets/product.jpg">
-        </div>
         <div class="col-md-6">
             <h3>Product <strong>#{{ product.id }}</strong></h3>
             <div class="row">
@@ -47,6 +44,16 @@
                 <div *ngIf="product?.category" class="col-md-8">
                     {{ product?.category }}
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row image-list">
+        <div class="col-md-3 text-center" *ngFor="let image of listImages">
+            <!-- <img src="../../../../../assets/product.jpg"> -->
+            <img src="{{ image.url }}">
+            <div>
+                <button class="btn btn-sm btn-danger"><fa name="trash"></fa></button>
             </div>
         </div>
     </div>

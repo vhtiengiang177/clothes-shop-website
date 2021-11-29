@@ -16,14 +16,18 @@ export class DataService {
 
   get(params? : any) {
     if(params != undefined) {
-      return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + '?' + this.convertToQueryString(params))
+      return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + '?' + this.convertToQueryString(params), {
+        headers: this.authorizationHeader()
+      })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
         return throwError(new AppError(error))
       }))
     }
-    else return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI)
+    else return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI, {
+      headers: this.authorizationHeader()
+    })
     .pipe(catchError((error: Response) => {
       if(error.status == 400)
         return throwError(new BadRequestError(error))
@@ -32,11 +36,15 @@ export class DataService {
   }
 
   getById(routeName: string, id: number) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id)
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id, {
+      headers: this.authorizationHeader()
+    })
   }
 
   create(routeName: string, object: any) {
-    return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + routeName, object)
+    return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + routeName, object, {
+      headers: this.authorizationHeader()
+    })
     .pipe(catchError((error: Response) => {
       if(error.status == 400) {
         return throwError(new BadRequestError())
@@ -46,7 +54,9 @@ export class DataService {
   }
 
   update(routeName: string, id: number, object: any) {
-    return this.http.put<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id, object)
+    return this.http.put<any>(GlobalConstants.apiUrl + this.routeAPI + routeName + "/" + id, object, {
+      headers: this.authorizationHeader()
+    })
   }
 
   convertToQueryString(params) : string {

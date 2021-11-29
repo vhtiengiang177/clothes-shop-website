@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,7 +19,9 @@ export class ProductService extends DataService {
   }
 
   get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllProducts" + this.convertToQueryStringProduct(params))
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllProducts" + this.convertToQueryStringProduct(params), {
+      headers: this.authorizationHeader()
+    })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
@@ -28,11 +30,16 @@ export class ProductService extends DataService {
   }
 
   delete(productId) {
-    return this.http.put(GlobalConstants.apiUrl + "/products" + "/DeleteProduct/" + productId, productId)
+    return this.http.put(GlobalConstants.apiUrl + "/products" + "/DeleteProduct/" + productId, productId,
+    {
+      headers: this.authorizationHeader()
+    })
   }
 
   getTopBestSellers() {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopProductBestSellers")
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopProductBestSellers", {
+      headers: this.authorizationHeader()
+    })
     .pipe(catchError((error: Response) => {
       if(error.status == 400)
         return throwError(new BadRequestError(error))
@@ -41,7 +48,9 @@ export class ProductService extends DataService {
   }
 
   getTopNewProducts() {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopNewProducts")
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopNewProducts", {
+      headers: this.authorizationHeader()
+    })
     .pipe(catchError((error: Response) => {
       if(error.status == 400)
         return throwError(new BadRequestError(error))
@@ -50,15 +59,35 @@ export class ProductService extends DataService {
   }
 
   getAllItemOfProduct(id) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllItemOfProduct/" + id)
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllItemOfProduct/" + id, {
+      headers: this.authorizationHeader()
+    })
   }
 
   addItemOfProduct(log_product: LogProduct) {
-    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddItemOfProduct", log_product)
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddItemOfProduct", log_product, {
+      headers: this.authorizationHeader()
+    })
   }
 
-  addImageProduct(id) {
-    // return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id, )
+  addImageProduct(id, file) {
+    let headers = this.authorizationHeader()
+
+    headers = headers.set('Content-Disposition', 'mulipart/form-data');
+    console.log(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id);
+    
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id, file, {
+      headers: headers
+    }).subscribe(() => {}, error => {
+      console.log(error);
+      
+    })
+  }
+
+  getImagesByIdProduct(id) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetImagesByIdProduct/" + id, {
+      headers: this.authorizationHeader()
+    })
   }
 
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {

@@ -2,6 +2,13 @@
     text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.image-list {
+  margin-top: 10px;
+}
 .btn-add {
     background-color: #0093c9;
     color: #fff;
