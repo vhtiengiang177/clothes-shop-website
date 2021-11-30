@@ -39,6 +39,7 @@ import { ProductDetailComponent } from './modules/admin/products/product-detail/
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
+import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form
     ProductDetailComponent,
     FileSelectDirective,
     FooterComponent,
-    ConfirmFormComponent
+    ConfirmFormComponent,
+    ProductDetailPageComponent
   ],
   entryComponents: [
     ProductFormComponent,

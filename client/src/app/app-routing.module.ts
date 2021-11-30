@@ -18,6 +18,7 @@ import { CustomersListComponent } from './modules/admin/customers/customers-list
 import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
+import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 
 
 const routes: Routes = [
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductPageComponent
+  },
+  {
+    path: 'product-detail',
+    component: ProductDetailPageComponent
   },
   {
     path: 'login',
