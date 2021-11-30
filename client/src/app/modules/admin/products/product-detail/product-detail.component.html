@@ -1,4 +1,9 @@
 <div class="container" *ngIf="isVisible">
+    <div class="row">
+        <div class="col-12">
+            <button [routerLink]="['/admin/products']" class="btn btn-secondary">Back</button>
+        </div>
+    </div>
     <div class="row detail-center">
         <div class="col-md-6">
             <h3>Product <strong>#{{ product.id }}</strong></h3>
@@ -48,7 +53,7 @@
         </div>
     </div>
     
-    <div class="row image-list">
+    <div *ngIf="listImages.length > 0" class="row image-list">
         <div class="col-md-3 text-center" *ngFor="let image of listImages">
             <!-- <img src="../../../../../assets/product.jpg"> -->
             <img src="{{ image.url }}">

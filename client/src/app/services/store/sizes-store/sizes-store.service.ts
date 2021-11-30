@@ -32,10 +32,6 @@ export class SizesStoreService {
   }
 
   create(size) {
-    let result = new Subject<Size>();
-    this.sizeService.create("/CreateSize", size).subscribe(res => {
-      result.next(res)
-    });
-    return result.asObservable();
+    return this.sizeService.create("/CreateSize", size).toPromise()
   }
 }
