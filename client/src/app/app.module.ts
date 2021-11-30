@@ -75,7 +75,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     OrdersListComponent,
     ProductDetailComponent,
     FileSelectDirective,
-    FooterComponent
+    FooterComponent,
+    PromotionFormComponent
   ],
   entryComponents: [
     ProductFormComponent,

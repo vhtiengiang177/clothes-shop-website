@@ -1,8 +1,8 @@
-import { Category } from './../../model/category/category.model';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CategoryService } from '../../data/category/category.service';
+import { Category } from '../../model/category/category.model';
 import { FilterParamsCategories } from 'src/app/services/model/category/filter-params-categories.model';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
@@ -41,14 +41,6 @@ export class CategoriesStoreService {
   }
 
 
-  // async get(){
-  //   await this.categoryService.get()
-  //           .subscribe(res => this.categories = res,
-  //             () => {
-  //               this.toastr.error("An unexpected error occurred.", "List Categories")
-  //             });
-  // }
-
   async getAll(filterParams: FilterParamsCategories) {
     await this.categoryService.get(filterParams)
       .subscribe(res => {
@@ -86,5 +78,5 @@ export class CategoriesStoreService {
   getById(id) {
     return this.categoryService.getById("/GetCategoryByID", id)
   }
-
-}
+ 
+ }
