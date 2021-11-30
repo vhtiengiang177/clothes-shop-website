@@ -18,16 +18,16 @@ export class ProductService extends DataService {
     super('/products', http)
   }
 
-  // get(params) {
-  //   return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllProducts" + this.convertToQueryStringProduct(params), {
-  //     headers: this.authorizationHeader()
-  //   })
-  //     .pipe(catchError((error: Response) => {
-  //       if(error.status == 400)
-  //         return throwError(new BadRequestError(error))
-  //       return throwError(new AppError(error))
-  //     }))
-  // }
+  get(params) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllProducts" + this.convertToQueryStringProduct(params), {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
 
   delete(productId) {
     return this.http.put(GlobalConstants.apiUrl + "/products" + "/DeleteProduct/" + productId, productId,
@@ -66,6 +66,12 @@ export class ProductService extends DataService {
 
   addItemOfProduct(log_product: LogProduct) {
     return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddItemOfProduct", log_product, {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  deleteItemOfProduct(psc) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/DeleteItemOfProduct", psc, {
       headers: this.authorizationHeader()
     })
   }

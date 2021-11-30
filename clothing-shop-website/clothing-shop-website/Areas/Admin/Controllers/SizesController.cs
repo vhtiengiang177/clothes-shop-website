@@ -22,6 +22,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _unitOfWork = new UnitOfWork(dbContext);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAllSize()
         {
@@ -32,7 +33,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult GetlSizeByID(int id)
+        public IActionResult GetSizeByID(int id)
         {
             var size = _unitOfWork.SizesRepository.GetByID(id);
 

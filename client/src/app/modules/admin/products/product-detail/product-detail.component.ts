@@ -2,7 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { Image } from 'src/app/services/model/product/image.model';
+import { ProductSizeColor } from 'src/app/services/model/product/product-size-color.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
@@ -25,14 +28,15 @@ export class ProductDetailComponent implements OnInit {
   static readonly importForm = 1;
   static readonly deleteForm = 2;
 
-  constructor(private route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+    private route: ActivatedRoute,
     private router: Router,
     private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
-    public dialog: MatDialog) { 
+    private toastr: ToastrService) { 
       this.route.params.subscribe((param) => {
         this.id = param['id']
         this.productsStore.getById(param['id']).subscribe(res => {
@@ -108,4 +112,30 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  delete(stt,item: ProductSizeColor) {
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to delete this item",
+        id: stt
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        item.color = null
+        item.size = null
+        this.productsStore.deleteItemOfProduct(item).subscribe(() => {
+          this.toastr.success("Delete item successfully")
+          this.fetchItem()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found item at " + stt)
+          }
+        })
+      }
+    });
+  }
 }

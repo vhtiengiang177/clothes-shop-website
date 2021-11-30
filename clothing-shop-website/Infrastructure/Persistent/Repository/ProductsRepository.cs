@@ -29,7 +29,6 @@ namespace Infrastructure.Persistent.Repository
         }
         public Product CreateProduct(Product product)
         {
-            product.CreatedDate = System.DateTime.Now;
             var result = _dbContext.Products.Add(product);
 
             return result.Entity;
@@ -37,7 +36,6 @@ namespace Infrastructure.Persistent.Repository
 
         public void UpdateProduct(Product product)
         {
-            product.LastModified = System.DateTime.Now;
             _dbContext.Attach(product);
             _dbContext.Entry(product).State = EntityState.Modified;
         }
@@ -57,19 +55,9 @@ namespace Infrastructure.Persistent.Repository
             return lProductItems.AsQueryable();
         }
 
-        public bool CheckItemInList(Log_Product logproduct)
+        public Product_Size_Color GetItemActiveByIdPSC(int idProduct, int idSize, int idColor)
         {
-            bool check = false;
-            var count = _dbContext.Product_Size_Colors.Where(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0).ToList().Count;
-            if (count > 0)
-                check = true;
-            
-            return check;
-        }
-
-        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct)
-        {
-            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor && i.State > 0);
+            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == idProduct && i.IdSize == idSize && i.IdColor == idColor && i.State > 0);
         }
 
         public IQueryable<Product> GetProductsByCategoriesID(int[] idCategories)
@@ -101,6 +89,16 @@ namespace Infrastructure.Persistent.Repository
             var lImages = _dbContext.Images.Where(i => i.IdProduct == productID && i.State > 0).ToList();
 
             return lImages.AsQueryable();
+        }
+
+        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct)
+        {
+            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor);
+        }
+
+        public Product GetProductInactiveBySKU(string SKU)
+        {
+            return _dbContext.Products.FirstOrDefault(p => p.Sku == SKU && p.State == 0);
         }
     }
 }

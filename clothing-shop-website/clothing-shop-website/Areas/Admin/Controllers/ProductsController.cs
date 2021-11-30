@@ -32,7 +32,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts([FromQuery] FilterParamsProduct filterParams)
         {
             try
@@ -97,7 +97,32 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (userId == null) return BadRequest();
 
                 product.CreatedById = int.Parse(userId);
-                var result = _unitOfWork.ProductsRepository.CreateProduct(product);
+                product.CreatedDate = DateTime.Now;
+
+                var oldProduct = _unitOfWork.ProductsRepository.GetProductInactiveBySKU(product.Sku);
+
+                Product result = new Product();
+
+                if (oldProduct != null)
+                {
+                    oldProduct.Name = product.Name;
+                    oldProduct.TotalBuy = 0;
+                    oldProduct.UnitPrice = product.UnitPrice;
+                    oldProduct.State = 1;
+                    oldProduct.CreatedById = product.CreatedById;
+                    oldProduct.CreatedDate = product.CreatedDate;
+                    oldProduct.Description = product.Description;
+                    oldProduct.IdCategory = product.IdCategory;
+                    oldProduct.LastModified = null;
+                    oldProduct.ModifiedById = null;
+                    _unitOfWork.ProductsRepository.UpdateProduct(oldProduct);
+                    result = oldProduct;
+                }
+                else
+                {
+                    result = _unitOfWork.ProductsRepository.CreateProduct(product);
+                }
+                
                 if (_unitOfWork.Save())
                 {
                     return Ok(result);
@@ -139,16 +164,21 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("DeleteProduct/{id}", Name = "DeleteProduct")]
+        [HttpPut("DeleteProduct/{id}")]
         public IActionResult DeleteProduct(int id)
         {
             try
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
                 var product = _unitOfWork.ProductsRepository.GetProductByID(id);
 
                 if (product == null)
                     return NotFound();
 
+                product.ModifiedById = int.Parse(userId);
+                product.LastModified = DateTime.Now;
                 product.State = 0;
                 _unitOfWork.ProductsRepository.UpdateProduct(product);
                 _unitOfWork.Save();
@@ -161,8 +191,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-
         // Product-Size-Color
+        [AllowAnonymous]
         [HttpGet("GetAllItemOfProduct/{id}")]
         public async Task<IActionResult> GetAllItemOfProduct(int id)
         {
@@ -187,19 +217,25 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.LogProductsRepository.Create(logproduct);
 
                 Product_Size_Color item = new Product_Size_Color();
-                Product product = new Product();
 
-                if (_unitOfWork.ProductsRepository.CheckItemInList(logproduct))
+                item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
+
+                if (item != null)
                 {
-                    item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
-                    if (item != null)
+                    if (item.State == 1)
                     {
                         item.Stock += logproduct.Quantity;
-                        _unitOfWork.ProductSizeColorsRepository.Update(item);
                     }
+                    else if (item.State == 0)
+                    {
+                        item.State = 1;
+                        item.Stock = logproduct.Quantity;
+                    }
+                    _unitOfWork.ProductSizeColorsRepository.Update(item);
                 }
                 else
                 {
+                    item = new Product_Size_Color();
                     item.IdProduct = logproduct.IdProduct;
                     item.IdSize = logproduct.IdSize;
                     item.IdColor = logproduct.IdColor;
@@ -212,20 +248,31 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 {
                     return BadRequest();
                 }
-                // Dùng giá chung nên k còn xét ntn nữa
-                //product = _unitOfWork.ProductsRepository.GetProductByID(logproduct.IdProduct);
-                //if (product != null && product.UnitPrice != logproduct.ImportPrice)
-                //{
-                //    product.UnitPrice = logproduct.ImportPrice;
-                //    product.LastModified = logproduct.CreatedDate;
-                //    _unitOfWork.ProductsRepository.UpdateProduct(product);
-                //    _unitOfWork.Save();
-                //}
                 return Ok();
             }
             return BadRequest(ModelState);
         }
 
+        [HttpPut("DeleteItemOfProduct")]
+        public IActionResult DeleteItemOfProduct(Product_Size_Color psc)
+        {
+            var item = _unitOfWork.ProductsRepository.GetItemActiveByIdPSC(psc.IdProduct, psc.IdSize, psc.IdColor);
+            if (item != null)
+            {
+                item.Stock = 0;
+                item.State = 0;
+                _unitOfWork.ProductSizeColorsRepository.Update(item);
+
+                if (!_unitOfWork.Save())
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else return NotFound();
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetTopProductBestSellers")]
         public IActionResult GetTopProductBestSellers()
         {
@@ -241,6 +288,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("GetTopNewProducts")]
         public IActionResult GetTopNewProducts()
         {
@@ -290,6 +338,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest("Something went wrong!");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetImagesByIdProduct/{id}")]
         public IActionResult GetImagesByIdProduct(int id)
         {
