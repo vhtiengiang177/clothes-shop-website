@@ -96,7 +96,7 @@ namespace clothing_shop_website
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
 
                 endpoints.MapControllerRoute(
                 name: "AdminArea",

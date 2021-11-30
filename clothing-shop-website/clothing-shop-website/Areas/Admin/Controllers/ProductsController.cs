@@ -31,7 +31,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _imageService = imageService;
         }
 
-        [HttpGet("GetAllProducts")]
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> GetAllProducts([FromQuery] FilterParamsProduct filterParams)
         {
             try
@@ -71,7 +72,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetProductByID/{id}", Name = "GetProductByID")]
         public IActionResult GetProductByID(int id)
         {

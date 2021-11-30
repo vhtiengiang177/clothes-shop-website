@@ -29,3 +29,11 @@
     justify-content: end;
     padding: 4px;
   }
+
+  .edit-icon {
+    color: mediumpurple
+  }
+  
+  .delete-icon {
+    color:salmon
+  }

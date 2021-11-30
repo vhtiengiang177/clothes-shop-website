@@ -21,6 +21,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IRepository<Product_Size_Color> _productSizesRepository;
         private IRepository<Log_Product> _logProductsRepository;
         private IRepository<Image> _imagesRepository;
+        private IRepository<ShopInfo> _shopInfosRepository;
        
         public UnitOfWork(DataDbContext dbContext)
         {
@@ -154,6 +155,16 @@ namespace Infrastructure.Persistent.UnitOfWork
                 if (_imagesRepository == null)
                     _imagesRepository = new GenericRepository<Image>(_dbContext);
                 return _imagesRepository;
+            }
+        }
+
+        public IRepository<ShopInfo> ShopInfosRepository
+        {
+            get
+            {
+                if (_shopInfosRepository == null)
+                    _shopInfosRepository = new GenericRepository<ShopInfo>(_dbContext);
+                return _shopInfosRepository;
             }
         }
 

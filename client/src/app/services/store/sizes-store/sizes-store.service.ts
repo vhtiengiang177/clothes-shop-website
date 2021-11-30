@@ -22,7 +22,7 @@ export class SizesStoreService {
     return this._sizes.value;
   }
 
-  set sizes(val:Size[]) {
+  set sizes(val: Size[]) {
     this._sizes.next(val);
   }
 

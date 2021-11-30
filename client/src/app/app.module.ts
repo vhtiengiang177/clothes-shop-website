@@ -37,6 +37,7 @@ import { PromotionsListComponent } from './modules/admin/promotions/promotions-l
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
     PromotionsListComponent,
     OrdersListComponent,
     ProductDetailComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    FooterComponent
   ],
   entryComponents: [
     ProductFormComponent,
