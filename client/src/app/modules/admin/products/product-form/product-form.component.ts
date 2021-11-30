@@ -6,7 +6,6 @@ import { LogProduct } from 'src/app/services/model/product/log-product.model';
 import { ProductForm } from 'src/app/services/model/product/product-form.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
-import { LogproductFormComponent } from '../logproduct-form/logproduct-form.component';
 
 @Component({
   selector: 'app-product-form',
@@ -23,8 +22,6 @@ export class ProductFormComponent implements OnInit {
     private productsStore: ProductsStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
-      console.log(data);
-      
     }
 
   ngOnInit() {

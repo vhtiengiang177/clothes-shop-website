@@ -4,6 +4,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -29,7 +31,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _imageService = imageService;
         }
 
-        [HttpGet("GetAllProducts")]
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> GetAllProducts([FromQuery] FilterParamsProduct filterParams)
         {
             try
@@ -69,7 +72,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetProductByID/{id}", Name = "GetProductByID")]
         public IActionResult GetProductByID(int id)
         {
@@ -90,7 +93,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var userId = User.Claims.Where(u => u.Type == "id");
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                product.CreatedById = int.Parse(userId);
                 var result = _unitOfWork.ProductsRepository.CreateProduct(product);
                 if (_unitOfWork.Save())
                 {
@@ -111,6 +117,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 try
                 {
+                    var userId = User.FindFirst("id").Value;
+                    if (userId == null) return BadRequest();
+
+                    productObj.ModifiedById = int.Parse(userId);
+                    productObj.LastModified = DateTime.Now;
+
                     _unitOfWork.ProductsRepository.UpdateProduct(productObj);
                     if (!_unitOfWork.Save())
                     {
@@ -167,6 +179,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                logproduct.CreatedById = int.Parse(userId);
                 logproduct.CreatedDate = DateTime.Now;
                 _unitOfWork.LogProductsRepository.Create(logproduct);
 
@@ -181,7 +197,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                         item.Stock += logproduct.Quantity;
                         _unitOfWork.ProductSizeColorsRepository.Update(item);
                     }
-                    
                 }
                 else
                 {
@@ -243,6 +258,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpPost("AddImageProduct/{id}")]
         public async Task<IActionResult> AddImageProduct(int id, IFormFile file)
         {
+
             var product = _unitOfWork.ProductsRepository.GetProductByID(id);
 
             if (product == null) return NotFound();
@@ -270,8 +286,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             var image = _unitOfWork.ImagesRepository.Create(imageObj);
 
             if (_unitOfWork.Save())
-                return Ok();
+                return Ok(image.Url);
             return BadRequest("Something went wrong!");
+        }
+
+        [HttpGet("GetImagesByIdProduct/{id}")]
+        public IActionResult GetImagesByIdProduct(int id)
+        {
+            var lImages = _unitOfWork.ProductsRepository.GetImagesByIdProduct(id);
+
+            return Ok(lImages);
         }
     }
 }

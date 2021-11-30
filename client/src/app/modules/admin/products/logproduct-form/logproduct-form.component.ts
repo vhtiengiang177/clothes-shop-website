@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Color } from 'src/app/services/model/product/color.model';
 import { LogProduct } from 'src/app/services/model/product/log-product.model';
-import { ProductForm } from 'src/app/services/model/product/product-form.model';
 import { ProductSizeColorForm } from 'src/app/services/model/product/product-size-color-form.model';
 import { Size } from 'src/app/services/model/product/size.model';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
@@ -31,7 +30,7 @@ export class LogproductFormComponent implements OnInit {
     idProduct: this.data.product.id,
     idSize: null,
     idColor: null,
-    quantity: null
+    quantity: 0
   }
   isMatComplete = true
 
@@ -80,27 +79,27 @@ export class LogproductFormComponent implements OnInit {
     return this.colorsStore.colors.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
-  save() {
+  async save() {
     if(this.checkValidate()) {
       if(this.data.typeform == 0) {
         if(typeof this.sizeInput.value === 'string' || this.sizeInput instanceof String) {
           this.newSize = {
             name: this.sizeInput.value
           } 
-          this.sizesStore.create(this.newSize).subscribe(res => {
-            this.logProduct.idSize = res.id
-            this.sizesStore.get()
-          })
+          const resSize = await this.sizesStore.create(this.newSize)
+          this.logProduct.idSize = resSize.id
+          this.sizesStore.get()
         }
         else {
           this.logProduct.idSize = this.sizeInput.value.id
         } 
         if(typeof this.colorInput.value === 'string' || this.colorInput instanceof String) {
-          this.newColor.name = this.colorInput.value
-          this.colorsStore.create(this.newColor).subscribe(res => {
-            this.logProduct.idColor = res.id
-            this.colorsStore.get()
-          })
+          this.newColor = {
+            name: this.colorInput.value
+          }
+          const resColor = await this.colorsStore.create(this.newColor)
+          this.logProduct.idColor = resColor.id
+          this.colorsStore.get()
         }
         else {
           this.logProduct.idColor = this.colorInput.value.id
@@ -124,10 +123,19 @@ export class LogproductFormComponent implements OnInit {
   }
 
   checkValidate() : boolean {
-    if(!this.logProduct.quantity || this.sizeInput.value === null || this.colorInput.value == null) {
-      this.toastr.error("Please fill in all the required fields.")
-      return false
+    if (this.data.typeform == 0) {
+      if(this.sizeInput.value === null || this.colorInput.value == null) {
+        this.toastr.error("Please fill in all the required fields.")
+        return false
+      }  
     }
+    else if (this.data.typeform == 1) {
+      if(this.logProduct.quantity <= 0) {
+        this.toastr.error("Please enter quantity.")
+        return false
+      }
+    }
+    
     return true
   }
 

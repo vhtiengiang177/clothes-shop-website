@@ -55,7 +55,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                    new Claim("id", account.Id.ToString()),
+                    new Claim("id", user.Id.ToString()),
                     new Claim("firstNameUser", firstNameUser),
                     new Claim("idTypeAccount", user.IdTypeAccount.ToString())
                     };

@@ -98,7 +98,7 @@ namespace Infrastructure.Persistent.Repository
 
         public IQueryable<Image> GetImagesByIdProduct(int productID)
         {
-            var lImages = _dbContext.Images.Where(i => i.IdProduct == productID).ToList();
+            var lImages = _dbContext.Images.Where(i => i.IdProduct == productID && i.State > 0).ToList();
 
             return lImages.AsQueryable();
         }

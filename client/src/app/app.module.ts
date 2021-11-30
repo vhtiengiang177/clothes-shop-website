@@ -36,6 +36,8 @@ import { CategoriesFormComponent } from './modules/admin/categories/categories-f
 import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -72,7 +74,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     PromotionsListComponent,
     OrdersListComponent,
     ProductDetailComponent,
-    PromotionFormComponent
+    FileSelectDirective,
+    FooterComponent
   ],
   entryComponents: [
     ProductFormComponent,

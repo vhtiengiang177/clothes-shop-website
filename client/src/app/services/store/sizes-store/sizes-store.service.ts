@@ -22,7 +22,7 @@ export class SizesStoreService {
     return this._sizes.value;
   }
 
-  set sizes(val:Size[]) {
+  set sizes(val: Size[]) {
     this._sizes.next(val);
   }
 
@@ -32,10 +32,6 @@ export class SizesStoreService {
   }
 
   create(size) {
-    let result = new Subject<Size>();
-    this.sizeService.create("/CreateSize", size).subscribe(res => {
-      result.next(res)
-    });
-    return result.asObservable();
+    return this.sizeService.create("/CreateSize", size).toPromise()
   }
 }

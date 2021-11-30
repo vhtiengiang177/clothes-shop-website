@@ -5,6 +5,7 @@ import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { ProductService } from '../../data/product/product.service';
 import { FilterParamsProduct } from '../../model/product/filter-params-product.model';
+import { Image } from '../../model/product/image.model';
 import { LogProduct } from '../../model/product/log-product.model';
 import { Product } from '../../model/product/product.model';
 
@@ -111,5 +112,18 @@ export class ProductsStoreService {
 
   addItemOfProduct(log_product: LogProduct) {
     return this.productService.addItemOfProduct(log_product)
+  }
+
+  addImageProduct(id, file) {
+    return this.productService.addImageProduct(id, file)
+  }
+
+  getImagesByIdProduct(idProduct) {
+    let result = new Subject<Image[]>();
+    this.productService.getImagesByIdProduct(idProduct).subscribe(res => {
+      result.next(res)
+    })
+
+    return result.asObservable()
   }
 }

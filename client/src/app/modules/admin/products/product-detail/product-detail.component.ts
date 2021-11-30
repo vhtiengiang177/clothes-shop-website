@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Image } from 'src/app/services/model/product/image.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
@@ -19,6 +20,7 @@ export class ProductDetailComponent implements OnInit {
   isVisible = false
   id: number
   product: Product
+  listImages: Image[]
   static readonly addForm = 0;
   static readonly importForm = 1;
   static readonly deleteForm = 2;
@@ -38,6 +40,7 @@ export class ProductDetailComponent implements OnInit {
           this.product = res;
           this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name
           this.fetchItem()
+          this.getImages(this.product.id)
           this.productSizeColorsStore.productitems$.subscribe(res => {
             if (res) {
               this.getNameSizeColor()
@@ -59,6 +62,12 @@ export class ProductDetailComponent implements OnInit {
     this.productSizeColorsStore.productitems.forEach(item => {
       item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize).pop().name
       item.color = this.colorsStore.colors.filter(c => c.id == item.idColor).pop().name
+    })
+  }
+
+  getImages(id) {
+    this.productsStore.getImagesByIdProduct(id).subscribe(res => {
+      this.listImages = res
     })
   }
 

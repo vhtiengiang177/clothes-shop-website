@@ -2,6 +2,15 @@
     text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.image-list {
+  background-color: gainsboro;
+  margin-top: 10px;
+  padding: 5px;
+}
 .btn-add {
     background-color: #0093c9;
     color: #fff;
@@ -19,4 +28,12 @@
     display: flex;
     justify-content: flex-end;
     padding: 4px;
+  }
+
+  .edit-icon {
+    color: mediumpurple
+  }
+  
+  .delete-icon {
+    color:salmon
   }

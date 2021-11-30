@@ -32,10 +32,6 @@ export class ColorsStoreService {
   }
 
   create(color: Color) {
-    let result = new Subject<Color>();
-    this.colorService.create("/CreateColor", color).subscribe(res => {
-      result.next(res)
-    });
-    return result.asObservable();
+    return this.colorService.create("/CreateColor", color).toPromise()
   }
 }
