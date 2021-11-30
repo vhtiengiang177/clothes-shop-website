@@ -14,8 +14,10 @@
                         </div>
                         <div class="group-input">
                             <label for="pass">Password</label>
-                            <input ngModel name="password" [type]="passwordVisibility ? 'text' : 'password'" #password="ngModel" >
-                            <fa (click)="passwordVisibility = !passwordVisibility" [name]="passwordVisibility ? 'eye' : 'eye-slash'"></fa>
+                            <div class="pwd">
+                                <input ngModel name="password" [type]="passwordVisibility ? 'text' : 'password'" #password="ngModel" >
+                                <span class="p-viewer"><fa (click)="passwordVisibility = !passwordVisibility" [name]="passwordVisibility ? 'eye' : 'eye-slash'"></fa></span>
+                            </div>
                             <mat-error class="alert alert-danger" *ngIf="password?.touched && password?.invalid && password?.errors?.required">
                                 Password is required
                             </mat-error>

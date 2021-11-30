@@ -114,6 +114,10 @@ export class ProductsStoreService {
     return this.productService.addItemOfProduct(log_product)
   }
 
+  deleteItemOfProduct(psc) {
+    return this.productService.deleteItemOfProduct(psc)
+  }
+
   addImageProduct(id, file) {
     return this.productService.addImageProduct(id, file)
   }

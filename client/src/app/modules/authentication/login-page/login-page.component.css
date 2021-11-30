@@ -1,0 +1,10 @@
+.p-viewer {
+	z-index: 9999;
+	position: absolute;
+	top: 30%;
+	right: 10px;
+}
+
+.pwd{
+	position: relative;
+}

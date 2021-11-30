@@ -11,15 +11,16 @@ namespace Domain.Infrastructure.Persistent.Repository
     {
         Task<IQueryable<Product>> GetAllProducts();
         Product GetProductByID(int productID);
+        Product GetProductInactiveBySKU(string SKU);
         Task<IQueryable<Product_Size_Color>> GetListItemByIdProduct(int productID);
         Product CreateProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
         IQueryable<Product> GetProductsByCategoriesID(int[] idCategories);
-        bool CheckItemInList(Log_Product logproduct);
-        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
+        public Product_Size_Color GetItemActiveByIdPSC(int idProduct, int idSize, int idColor);
         IQueryable<Product> GetTopProductBestSellers();
         IQueryable<Product> GetTopNewProducts();
         IQueryable<Image> GetImagesByIdProduct(int productID);
+        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
     }
 }

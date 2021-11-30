@@ -38,22 +38,22 @@
                 <div *ngIf="product.unitPrice" class="col-md-8">
                     {{ product.unitPrice | currency: 'VND' }}
                 </div>
-                <div *ngIf="!product.unitPrice" class="col-md-8">
-                    N/A
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-4 title-item">
                     Categories:
                 </div>
                 <div *ngIf="product?.category" class="col-md-8">
-                    {{ product?.category }}
+                    {{ product.category }}
+                </div>
+                <div *ngIf="!product?.category" class="col-md-8">
+                    N/A
                 </div>
             </div>
         </div>
     </div>
     
-    <div *ngIf="listImages.length > 0" class="row image-list">
+    <div *ngIf="listImages?.length > 0" class="row image-list">
         <div class="col-md-3 text-center" *ngFor="let image of listImages">
             <!-- <img src="../../../../../assets/product.jpg"> -->
             <img src="{{ image.url }}">
@@ -87,7 +87,7 @@
                         <fa (click)="import(item)" class="edit-icon" name="download"></fa>
                     </td>
                     <td>
-                        <fa class="delete-icon" name="trash"></fa>
+                        <fa (click)="delete(i+1, item)" class="delete-icon" name="trash"></fa>
                     </td>
                 </tr>
             </tbody>

@@ -97,54 +97,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        //[HttpPost("IsVerificationAccount")]
-        //public async Task<IActionResult> IsVerificationAccount([FromBody] Account account)
-        //{
-        //    var user = await _unitOfWork.AccountsRepository.Login(account.Email, account.Password);
-        //    if (user != null)
-        //    {
-        //        string firstNameUser = "";
-
-        //        if (user.IdTypeAccount == 4 && user.State == 1) // Customer
-        //        {
-        //            var customer = _unitOfWork.CustomersRepository.GetCustomerByID(user.Id);
-        //            firstNameUser = customer.FirstName;
-        //        }
-        //        else if (user.IdTypeAccount != 4)
-        //        {
-        //            var staff = _unitOfWork.StaffRepository.GetStaffByID(user.Id);
-        //            firstNameUser = staff.FirstName;
-        //        }
-
-        //        if (user.VerificationCode != 1)
-        //        {
-        //            _accountService.SendVerificationCode(user, firstNameUser);
-
-        //            var response = new
-        //            {
-        //                isVerify = false,
-        //                id = user.Id
-        //            };
-
-        //            return Ok(response);
-        //        }
-        //        else
-        //        {
-        //            var response = new
-        //            {
-        //                isVerify = true,
-        //                id = user.Id
-        //            };
-
-        //            return Ok(response);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return BadRequest("Invalid credentials");
-        //    }
-        //}
-
         [HttpGet("VerifyAccount/{idAccount}")]
         public IActionResult VerifyAccount(int idAccount, [FromQuery] int VerificationCode)
         {

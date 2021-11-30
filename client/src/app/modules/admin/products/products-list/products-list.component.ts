@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
@@ -21,7 +22,6 @@ export class ProductsListComponent implements OnInit {
   };
   static readonly addForm = 0;
   static readonly editForm = 1;
-  static readonly deleteForm = 2;
 
 
   constructor(private productsStore: ProductsStoreService,
@@ -42,17 +42,33 @@ export class ProductsListComponent implements OnInit {
   }
 
   deleteProduct(productId) {
-    this.productsStore.delete(productId).subscribe(() => {
-      this.toastr.success("Delete product #" + productId + " successfully")
-      this.fetchData()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
-        this.toastr.error("Bad Request")
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to delete the product",
+        id: productId
       }
-      else if (error.status == 404) {
-        this.toastr.error("Not found product #" + productId)
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.productsStore.delete(productId).subscribe(() => {
+          this.toastr.success("Delete product #" + productId + " successfully")
+          let totalStore = this.productsStore.products.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found product #" + productId)
+          }
+        })
       }
-    })
+    });
   }
 
   addProduct() {

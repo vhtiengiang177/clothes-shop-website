@@ -22,6 +22,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _unitOfWork = new UnitOfWork(dbContext);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAllColors()
         {

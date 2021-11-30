@@ -48,14 +48,14 @@
                     (click)="clickCategoriesList()"
                     [ngClass]="{ 'active': isCategoriesListActive }" 
                     [routerLink]="['/admin/categories']" 
-                    href="">List Categories</a>
+                    href="">Categories List</a>
             </div>
         </div>
     </li>
 
     <li [ngClass]="{ 'active': isAccountShow }" class="nav-item nav-color">
         <a (click)="clickAccountsNavItem()" class="nav-link collapsed" >
-            <fa name="cubes"></fa>
+            <fa name="users"></fa>
             <span>Accounts</span>
         </a>
         <div [ngClass]="{ 'show': isAccountShow }" id="collapseThree" class="collapse">
@@ -64,13 +64,13 @@
                 <a class="collapse-item" 
                     (click)="clickCustomersList()"  
                     [ngClass]="{ 'active': isCustomerListActive }"
-                    [routerLink]="['/admin/customers']"> List Customers</a>
+                    [routerLink]="['/admin/customers']">Customers List</a>
                 <h6 class="collapse-header">Staff:</h6>
                 <a class="collapse-item"
                     (click)="clickStaffList()" 
                     [ngClass]="{ 'active': isStaffListActive }"
                     [routerLink]="['/admin/staff']" 
-                    href="">List Staff</a>
+                    href="">Staff List</a>
             </div>
         </div>
     </li>
@@ -80,7 +80,7 @@
     [routerLink]="['/admin/orders']" 
     class="nav-item nav-color">
     <a class="nav-link">
-        <fa name="cubes"></fa>
+        <fa name="tasks"></fa>
         <span>Orders</span></a>
     </li>
 
@@ -89,7 +89,7 @@
     [routerLink]="['/admin/promotions']" 
     class="nav-item nav-color">
     <a class="nav-link">
-        <fa name="cubes"></fa>
+        <fa name="gift"></fa>
         <span>Promotions</span></a>
     </li>
 </ul>
