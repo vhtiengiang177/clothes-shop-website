@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clothing_shop_website.Migrations
 {
-    public partial class Database : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -513,11 +513,11 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "CreatedById", "CreatedDate", "Description", "EndDate", "LastModified", "ModifiedById", "Name", "StartDate", "State", "Value" },
                 values: new object[,]
                 {
-                    { 1, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Dương Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Tết Dương Lịch", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.10000000000000001 },
-                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinh nhật khách hàng", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Sinh nhật khách hàng", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.14999999999999999 },
-                    { 3, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Quốc tế phụ nữ 08-03", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Quốc tế phụ nữ 08-03", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.14999999999999999 },
-                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Âm Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Tết Âm Lịch", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
-                    { 5, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Phụ Nữ Việt Nam 20-10", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Phụ Nữ Việt Nam 20-10", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 }
+                    { 1, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Dương Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TDL001", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.10000000000000001 },
+                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinh nhật khách hàng", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "BIRDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.14999999999999999 },
+                    { 3, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Quốc tế phụ nữ 08-03", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.14999999999999999 },
+                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Âm Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TET999", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
+                    { 5, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Phụ Nữ Việt Nam 20-10", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANVN", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 }
                 });
 
             migrationBuilder.InsertData(

@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { FilterParamsCategories } from 'src/app/services/model/category/filter-params-categories.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
+import { CategoriesFormComponent } from '../categories-form/categories-form.component';
 
 @Component({
   selector: 'app-categories-list',
@@ -104,5 +106,75 @@ export class CategoriesListComponent implements OnInit {
       }
       this.fetchData()
     }
+  }
+
+  addCategory() {
+    const dialogRef = this.dialog.open(CategoriesFormComponent, {
+      width: '500px',
+      data: { 
+        typeform: CategoriesListComponent.addForm, 
+        category: { }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        if(this.filter.sort == null && this.filter.pageindex == 1) {
+          this.categoriesStore.categories.splice(this.filter.pagesize - 1,1);
+          this.categoriesStore.categories.splice(0,0,res);
+          this.categoriesStore.totalData = this.categoriesStore.totalData + 1;
+        }
+        else {
+          this.filter = {
+            pageindex: 1,
+            pagesize: this.filter.pagesize,
+            sort: null
+          }
+          this.fetchData()
+        }
+        this.paginator.pageIndex = 0;
+      }
+    });
+  }
+
+  editCategory(idCategory) {
+    if(!this.categoriesStore.categories.find(p => p.id == idCategory)) {
+      this.toastr.error("Cannot find the category #" + idCategory)
+    }
+    else {
+      this.categoriesStore.getById(idCategory).subscribe(res => {
+        if(res) {
+          const dialogRef = this.dialog.open(CategoriesFormComponent, {
+            width: '500px',
+            data: { 
+              typeform: CategoriesListComponent.editForm, 
+              category: res
+            }
+          });
+          
+          dialogRef.afterClosed().subscribe(res => {
+            if(res) {
+              var index = this.categoriesStore.categories.findIndex(p => p.id == res.id)
+              this.categoriesStore.categories.splice(index, 1, res)
+            }
+          });
+        }
+      })
+    }
+  }
+
+  
+  deleteCategory(idCategory) {
+    this.categoriesStore.delete(idCategory).subscribe(() => {
+      this.toastr.success("Delete category #" + idCategory + " successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 400) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 404) {
+        this.toastr.error("Not found category #" + idCategory)
+      }
+    })
   }
 }

@@ -154,3 +154,6 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll

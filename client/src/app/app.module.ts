@@ -36,6 +36,11 @@ import { CategoriesFormComponent } from './modules/admin/categories/categories-f
 import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
+import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -66,12 +71,14 @@ import { ProductDetailComponent } from './modules/admin/products/product-detail/
     CategoriesFormComponent,
     PromotionsListComponent,
     OrdersListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    PromotionFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
     LogproductFormComponent,
-    CategoriesFormComponent
+    CategoriesFormComponent,
+    PromotionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +89,13 @@ import { ProductDetailComponent } from './modules/admin/products/product-detail/
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserModule, 
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule 
   ],
   providers: [
     AuthService

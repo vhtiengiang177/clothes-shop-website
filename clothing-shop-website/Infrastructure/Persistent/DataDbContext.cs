@@ -342,11 +342,11 @@ namespace Infrastructure.Persistent
 
 
             modelBuilder.Entity<Promotion>().HasData(
-               new Promotion() { Id = 1, Name = "Tết Dương Lịch", Description = "Tết Dương Lịch", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 2, Name = "Sinh nhật khách hàng", Description = "Sinh nhật khách hàng", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 3, Name = "Quốc tế phụ nữ 08-03", Description = "Quốc tế phụ nữ 08-03", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 4, Name = "Tết Âm Lịch", Description = "Tết Âm Lịch", Value = 0.2, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 5, Name = "Phụ Nữ Việt Nam 20-10", Description = "Phụ Nữ Việt Nam 20-10", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 3, CreatedDate = createdDate, CreatedById = 3 });
+               new Promotion() { Id = 1, Name = "TDL001", Description = "Tết Dương Lịch", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 2, Name = "BIRDAY", Description = "Sinh nhật khách hàng", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 3, Name = "WOMANDAY", Description = "Quốc tế phụ nữ 08-03", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 4, Name = "TET999", Description = "Tết Âm Lịch", Value = 0.2, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 5, Name = "WOMANVN", Description = "Phụ Nữ Việt Nam 20-10", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 3, CreatedDate = createdDate, CreatedById = 3 });
 
             modelBuilder.Entity<Cart>().HasData(
                new Cart() { IdCustomer = 7, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 20 },

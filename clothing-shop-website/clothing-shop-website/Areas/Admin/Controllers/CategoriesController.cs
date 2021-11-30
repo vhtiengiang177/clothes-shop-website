@@ -58,7 +58,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetCategoryByID/{id}" , Name = "GetCategoryByID")]
         public IActionResult GetCategoryByID(int id)
         {
             var category = _unitOfWork.CategoriesRepository.GetByID(id);
@@ -71,15 +71,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateCategory")]
         public IActionResult CreateCategory(Category category)
         {
             if (ModelState.IsValid) {
                 category.CreatedDate = DateTime.Now;
-                _unitOfWork.CategoriesRepository.Create(category);
+                var result = _unitOfWork.CategoriesRepository.Create(category);
 
                 if (_unitOfWork.Save()) {
-                    return Ok();
+                    return Ok(result);
                 }
                 else {
                     return BadRequest();

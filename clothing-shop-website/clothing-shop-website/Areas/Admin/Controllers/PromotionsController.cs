@@ -81,6 +81,20 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
+        [HttpGet("GetPromotionByID/{id}", Name = "GetPromotionByID")]
+        public IActionResult GetPromotionByID(int id)
+        {
+            var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(id);
+
+            if (promotion == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(promotion);
+            }
+        }
 
         [HttpGet("{Code}")]
         public IActionResult GetlPromotionByID(string Code)
@@ -98,17 +112,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreatePromotion")]
         public IActionResult CreatePromotion(Promotion promotion)
         {
             if (ModelState.IsValid)
             {
                 promotion.CreatedDate = DateTime.Now;
-                _unitOfWork.PromotionsRepository.CreatePromotion(promotion);
+                var result = _unitOfWork.PromotionsRepository.CreatePromotion(promotion);
 
                 if (_unitOfWork.Save())
                 {
-                    return Ok();
+                    return Ok(result);
                 }
                 else
                 {
@@ -118,28 +132,23 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("UpdatePromotion", Name = "UpdatePromotion")]
+        [HttpPut("UpdatePromotion/{id}", Name = "UpdatePromotion")]
         public IActionResult UpdatePromotion(Promotion promotion)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (promotion != null )
+                    promotion.LastModified = DateTime.Now;
+                    _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
+                    if (_unitOfWork.Save())
                     {
-                        promotion.LastModified = DateTime.Now;
-                  
-                        _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
-                        if (_unitOfWork.Save())
-                        {
-                            return Ok(promotion);
-                        }
-                        else
-                        {
-                            return BadRequest();
-                        }
+                        return Ok(promotion);
                     }
-                    else return NotFound();
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
                 catch
                 {

@@ -56,7 +56,9 @@ namespace clothing_shop_website.Services
         public IQueryable<Promotion> FilterPromotion(FilterParamsPromotion filterParams, IQueryable<Promotion> lPromotion)
         {
             if (filterParams.Content != null)
-                lPromotion = lPromotion.Where(p => p.Name.ToLower().Contains(filterParams.Content.ToLower()));
+                lPromotion = lPromotion.Where(p => p.Name.ToLower().Contains(filterParams.Content.ToLower())
+                 || p.Description.ToString().Contains(filterParams.Content)
+                || p.Value.ToString().Contains(filterParams.Content));
             return lPromotion.AsQueryable();
         }
     }

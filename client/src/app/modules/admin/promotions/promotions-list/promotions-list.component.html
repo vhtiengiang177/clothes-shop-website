@@ -1,1 +1,99 @@
-<p>promotions-list works!</p>
+<div class="container">
+    <div class="row">
+      <!-- Search -->
+      <div class="searchFilter searchFilter-center">
+        <div class="input-group">
+            <input id="table_filter" 
+                [(ngModel)]="search" 
+                #searchInput 
+                type="text" 
+                class="form-control input-search"> &nbsp;
+            <div class="input-group-btn">
+                <button name="searchBtn" 
+                    type="button" 
+                    class="btn btn-secondary btn-search"
+                    (click)="searchEvent(searchInput.value)">
+                    <fa class="icon-size" name="search"></fa>
+                    <span class="label-icon">
+                        &nbsp; Search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+  
+      <div class="button-add">
+        <button 
+        mat-raised-button 
+        (click)="reloadPromotion()"
+        class="btn btn-secondary">Reload</button>
+        &nbsp;
+        <button 
+        mat-raised-button 
+        (click)="addPromotion()"
+        class="btn btn-primary btn-add">Add Promotion</button>
+      </div>
+          
+      <table id="producttable" class="table table-striped table-hover table-sm ">
+        <thead class="dt-header">
+          <tr>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+            <th (click)="sortID()">ID
+              <fa *ngIf="filter.sort == null" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
+            </th>
+            <th (click)="sortName()">CODE
+              <fa *ngIf="filter.sort == 'name:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'name:asc'" name="sort-up"></fa>
+            </th>
+            <th >Description
+            </th>
+            <th (click)="sortValue()">Value
+                <fa *ngIf="filter.sort == 'value:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'value:asc'" name="sort-up"></fa>
+              </th>
+            <th (click)="sortStartDate()">Start Date
+              <fa *ngIf="filter.sort == 'startdate:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'startdate:asc'" name="sort-up"></fa>
+            </th>
+            <th (click)="sortEndDate()">End Date
+                <fa *ngIf="filter.sort == 'enddate:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'enddate:asc'" name="sort-up"></fa>
+            </th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-body" *ngIf="promotionsStore.totalData > 0">
+          <tr *ngFor="let promotion of promotionsStore.promotions$ | async; index as i">
+            <td>{{ i+1 }}</td>
+            <td>{{ promotion.id }}</td>
+            <td><a>{{ promotion.name }}</a></td>
+            <td><a>{{ promotion.description }}</a></td>
+            <td><a>{{ promotion.value }}</a></td>
+            <td>{{ promotion.startDate | date: 'longDate' }}</td>
+            <td>{{ promotion.endDate| date: 'longDate' }}</td>
+            <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit"></fa></td>
+            <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash"></fa></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="promotionsStore.totalData == 0">
+          <tr>
+            <td class="no-data" colspan="6">No data available in table</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="pb-0 pt-3 paging-custom">
+      <mat-paginator #paginator
+        [length]="promotionsStore.totalData"
+        [(pageSize)]="filter.pagesize"
+        [pageSizeOptions]="[5, 10, 15]"
+        (page)="onPaginate($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+</div>
+
