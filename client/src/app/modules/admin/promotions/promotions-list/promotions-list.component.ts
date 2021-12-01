@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsPromotions } from 'src/app/services/model/promotion/filter-params-promotions.model';
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
 import { PromotionFormComponent } from '../promotion-form/promotion-form.component';
@@ -178,18 +179,48 @@ export class PromotionsListComponent implements OnInit {
   }
 
   
+  // deletePromotion(idPromotion) {
+  //   this.promotionsStore.delete(idPromotion).subscribe(() => {
+  //     this.toastr.success("Delete promotion #" + idPromotion + " successfully")
+  //     this.fetchData()
+  //   }, (error: HttpErrorResponse) => {
+  //     if(error.status == 400) {
+  //       this.toastr.error("Bad Request")
+  //     }
+  //     else if (error.status == 404) {
+  //       this.toastr.error("Not found promotion #" + idPromotion)
+  //     }
+  //   })
+  // }
+
   deletePromotion(idPromotion) {
-    this.promotionsStore.delete(idPromotion).subscribe(() => {
-      this.toastr.success("Delete promotion #" + idPromotion + " successfully")
-      this.fetchData()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
-        this.toastr.error("Bad Request")
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to delete the promotion",
+        id: idPromotion
       }
-      else if (error.status == 404) {
-        this.toastr.error("Not found promotion #" + idPromotion)
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.promotionsStore.delete(idPromotion).subscribe(() => {
+          this.toastr.success("Delete promotion #" + idPromotion + " successfully")
+          let totalStore = this.promotionsStore.promotions.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found promotion #" + idPromotion)
+          }
+        })
       }
-    })
+    });
   }
 
 }

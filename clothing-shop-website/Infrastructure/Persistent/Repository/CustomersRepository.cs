@@ -23,7 +23,7 @@ namespace Infrastructure.Persistent.Repository
         }
         public IQueryable<Account> GetAllAccountCustomers()
         {
-            var lAccount = _dbContext.Accounts.Where(a => a.IdTypeAccount == 4 && a.State>0).ToList();
+            var lAccount = _dbContext.Accounts.Where(a => a.IdTypeAccount == 4 && a.State > 0).ToList();
           
             return lAccount.AsQueryable();
         }

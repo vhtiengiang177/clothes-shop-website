@@ -44,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
 
 @NgModule({
   declarations: [
@@ -77,13 +78,16 @@ import { MatNativeDateModule } from '@angular/material/core';
     ProductDetailComponent,
     FileSelectDirective,
     FooterComponent,
-    ConfirmFormComponent
+    ConfirmFormComponent,
+    PromotionFormComponent,
+    StaffFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
     LogproductFormComponent,
     CategoriesFormComponent,
-    ConfirmFormComponent
+    ConfirmFormComponent,
+    PromotionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -102,8 +106,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule 
   ],
+  exports: [
+    MatDatepickerModule,
+    MatNativeDateModule
+ ],
   providers: [
-    AuthService
+    AuthService,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [AppComponent]
 })

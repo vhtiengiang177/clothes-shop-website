@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-6">
             <mat-form-field >
-                <input [(ngModel)]="data.promotion.startDate" #startDate="ngModel"  matInput [matDatepicker]="startDate" placeholder="Start Date" required (dateChange)="checkStartDate()">
+                <input [(ngModel)]="data.promotion.startDate" #startDate="ngModel" matInput [matDatepicker]="startDate" placeholder="Start Date" required>
                 <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                 <mat-datepicker #startDate ></mat-datepicker>
                 <mat-error class="error-required"
@@ -37,7 +37,7 @@
         </div>
         <div class="col-6">
             <mat-form-field >
-                <input [(ngModel)]="data.promotion.endDate" #endDate="ngModel"  matInput [matDatepicker]="endDate" placeholder="End Date" required (dateChange)="checkEndDate()">
+                <input [(ngModel)]="data.promotion.endDate" #endDate="ngModel" matInput [matDatepicker]="endDate" placeholder="End Date" required>
                 <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
                 <mat-datepicker #endDate ></mat-datepicker>
                 <mat-error class="error-required"

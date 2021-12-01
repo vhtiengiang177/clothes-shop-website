@@ -175,6 +175,9 @@ namespace Infrastructure.Persistent
                 entity.HasMany<Order>(e => e.Orders)
                          .WithOne(order => order.Promotion)
                          .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(e => e.Name)
+                     .IsUnique();
             });
 
             modelBuilder.Entity<ShopInfo>(entity => {

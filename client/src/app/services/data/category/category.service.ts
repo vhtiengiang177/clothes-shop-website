@@ -35,6 +35,9 @@ export class CategoryService extends DataService {
     return query;
   }
   delete(categoryId) {
-    return this.http.put(GlobalConstants.apiUrl + "/categories" + "/DeleteCategory/" + categoryId, categoryId)
+    return this.http.put(GlobalConstants.apiUrl + "/categories" + "/DeleteCategory/" + categoryId, categoryId,
+    {
+      headers: this.authorizationHeader()
+    })
   }
 }

@@ -60,8 +60,9 @@
             
             <td *ngIf="acccustomer.state == 2">Blocked</td>
            
-            <td><fa class="edit-icon" name="edit"></fa></td>
-            <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
+            <td (click)="blockAccount(acccustomer.id)" *ngIf="acccustomer.state == 1"><fa class="edit-icon" name="lock"></fa></td>
+            <td (click)="unblockAccount(acccustomer.id)" *ngIf="acccustomer.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
+            <td (click)="deleteAccount(acccustomer.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>
         <tbody *ngIf="customersStore.totalData == 0">

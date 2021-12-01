@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MatSelect, MAT_DIALOG_DATA } from '@angular/ma
 import { ToastrService } from 'ngx-toastr';
 import { PromotionForm } from 'src/app/services/model/promotion/promotion-form.model';
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -32,13 +33,26 @@ export const MY_DATE_FORMATS = {
 
 export class PromotionFormComponent implements OnInit {
 
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
   constructor(public dialogRef: MatDialogRef<PromotionFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PromotionForm,
     private promotionsStore: PromotionsStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
       console.log(data);
-      
+
+      if(!this.data.promotion.startDate) {
+        this.data.promotion.startDate = new Date();
+      }
+  
+      if(!this.data.promotion.endDate) {
+        this.data.promotion.endDate = new Date();
+        this.data.promotion.endDate.setDate(this.data.promotion.endDate.getDate() + 1);
+      }
     }
 
   ngOnInit() {
@@ -74,6 +88,18 @@ export class PromotionFormComponent implements OnInit {
       return false
     }
     return true
+  }
+
+  checkStartDate() {
+    if(this.data.promotion.startDate >= this.data.promotion.endDate) {
+      this.data.promotion.startDate.setDate(this.data.promotion.endDate.getDate() - 1);
+    }
+  }
+
+  checkEndDate() {
+    if(this.data.promotion.startDate >= this.data.promotion.endDate) {
+      this.data.promotion.endDate.setDate(this.data.promotion.endDate.getDate() + 1);
+    }
   }
 
 }

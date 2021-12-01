@@ -1,3 +1,5 @@
+import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +19,8 @@ export class CustomersListComponent implements OnInit {
   };
 
   constructor(private customersStore: CustomersStoreService, public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private accountsStore: AccountsStoreService) { }
 
   ngOnInit() {
   }
@@ -78,5 +81,32 @@ export class CustomersListComponent implements OnInit {
     }
   }
 
+  unblockAccount(idAccount) {
+    this.accountsStore.unblock(idAccount).subscribe(() => {
+      this.toastr.success("Unblock customer #" + idAccount + " successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 400) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 404) {
+        this.toastr.error("Not found customer #" + idAccount)
+      }
+    })
+  }
+
+  blockAccount(idAccount) {
+    this.accountsStore.block(idAccount).subscribe(() => {
+      this.toastr.success("Block customer #" + idAccount + " successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 400) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 404) {
+        this.toastr.error("Not found customer #" + idAccount)
+      }
+    })
+  }
 
 }

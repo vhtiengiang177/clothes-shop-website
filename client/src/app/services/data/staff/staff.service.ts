@@ -18,7 +18,10 @@ export class StaffService extends DataService{
    }
 
    get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllAccountStaff" + this.convertToQueryStringAccounts(params))
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllAccountStaff" + this.convertToQueryStringAccounts(params),
+    {
+      headers: this.authorizationHeader()
+    })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))

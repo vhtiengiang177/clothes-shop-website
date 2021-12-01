@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsCategories } from 'src/app/services/model/category/filter-params-categories.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { CategoriesFormComponent } from '../categories-form/categories-form.component';
@@ -163,18 +164,35 @@ export class CategoriesListComponent implements OnInit {
     }
   }
 
-  
+
   deleteCategory(idCategory) {
-    this.categoriesStore.delete(idCategory).subscribe(() => {
-      this.toastr.success("Delete category #" + idCategory + " successfully")
-      this.fetchData()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
-        this.toastr.error("Bad Request")
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to delete the categoy",
+        id: idCategory,
+        remindtext: "Warning: When delete the category, system will delete all products of category"
       }
-      else if (error.status == 404) {
-        this.toastr.error("Not found category #" + idCategory)
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.categoriesStore.delete(idCategory).subscribe(() => {
+          this.toastr.success("Delete category #" + idCategory + " successfully")
+          let totalStore = this.categoriesStore.categories.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found category #" + idCategory)
+          }
+        })
       }
-    })
+    });
   }
 }

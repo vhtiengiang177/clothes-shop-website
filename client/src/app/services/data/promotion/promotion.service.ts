@@ -18,7 +18,10 @@ export class PromotionService extends DataService{
   }
 
   get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllPromotions" + this.convertToQueryStringPromotios(params))
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllPromotions" + this.convertToQueryStringPromotios(params),
+    {
+      headers: this.authorizationHeader()
+    })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
@@ -36,6 +39,9 @@ export class PromotionService extends DataService{
   }
 
   delete(promotionId) {
-    return this.http.put(GlobalConstants.apiUrl + "/promotions" + "/DeletePromotion/" + promotionId, promotionId)
+    return this.http.put(GlobalConstants.apiUrl + "/promotions" + "/DeletePromotion/" + promotionId, promotionId,
+    {
+      headers: this.authorizationHeader()
+    })
   }
 }

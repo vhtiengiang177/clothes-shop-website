@@ -3,6 +3,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -24,8 +26,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _categoriesService = categoriesService;
         }
 
-
-        [HttpGet("GetAllCategories")]
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> GetAllCategories([FromQuery] FilterParamsCategories filterParams)
         {
             try
@@ -58,6 +60,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("GetCategoryByID/{id}" , Name = "GetCategoryByID")]
         public IActionResult GetCategoryByID(int id)
         {
@@ -74,14 +77,22 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpPost("CreateCategory")]
         public IActionResult CreateCategory(Category category)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid) 
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                category.CreatedById = int.Parse(userId);
                 category.CreatedDate = DateTime.Now;
+
                 var result = _unitOfWork.CategoriesRepository.Create(category);
 
-                if (_unitOfWork.Save()) {
+                if (_unitOfWork.Save()) 
+                {
                     return Ok(result);
                 }
-                else {
+                else 
+                {
                     return BadRequest();
                 }
             }
@@ -92,17 +103,27 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         public IActionResult UpdateCategory(Category category)
         {
             if (ModelState.IsValid) {
-                try {
+                try 
+                {
+                    var userId = User.FindFirst("id").Value;
+                    if (userId == null) return BadRequest();
+
+                    category.ModifiedById = int.Parse(userId);
                     category.LastModified = DateTime.Now;
+
                     _unitOfWork.CategoriesRepository.Update(category);
-                    if (_unitOfWork.Save()) {
+
+                    if (_unitOfWork.Save()) 
+                    {
                         return Ok(category);
                     }
-                    else {
+                    else 
+                    {
                         return BadRequest();
                     }
                 }
-                catch {
+                catch 
+                {
                     return BadRequest();
                 }
             }
@@ -112,12 +133,18 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpPut("DeleteCategory/{id}", Name = "DeleteCategory")]
         public IActionResult DeleteCategory(int id)
         {
-            try {
+            try 
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
                 var category = _unitOfWork.CategoriesRepository.GetByID(id);
 
                 if (category == null)
                     return NotFound();
 
+                category.ModifiedById = int.Parse(userId);
+                category.LastModified = DateTime.Now;
                 category.State = 0;
                 _unitOfWork.CategoriesRepository.Update(category);
 
@@ -134,7 +161,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 return Ok();
             }
-            catch {
+            catch 
+            {
                 return BadRequest();
             }
         }
