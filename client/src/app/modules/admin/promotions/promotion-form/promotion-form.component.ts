@@ -92,13 +92,14 @@ export class PromotionFormComponent implements OnInit {
 
   checkStartDate() {
     if(this.data.promotion.startDate >= this.data.promotion.endDate) {
+      this.toastr.warning("Start date < End date")
       this.data.promotion.startDate.setDate(this.data.promotion.endDate.getDate() - 1);
     }
   }
 
   checkEndDate() {
     if(this.data.promotion.startDate >= this.data.promotion.endDate) {
-      this.data.promotion.endDate.setDate(this.data.promotion.endDate.getDate() + 1);
+      this.data.promotion.endDate.setDate(this.data.promotion.startDate.getDate() + 1);
     }
   }
 

@@ -5,6 +5,7 @@ import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -108,5 +109,37 @@ export class CustomersListComponent implements OnInit {
       }
     })
   }
+
+  deleteAccount(idAccount) {
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to delete the customer",
+        id: idAccount
+        
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.accountsStore.delete(idAccount).subscribe(() => {
+          this.toastr.success("Delete customer #" + idAccount + " successfully")
+          let totalStore = this.accountsStore.accounts.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found account #" + idAccount)
+          }
+        })
+      }
+    });
+  }
+
 
 }
