@@ -79,14 +79,18 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
     ProductDetailComponent,
     FileSelectDirective,
     FooterComponent,
-    ConfirmFormComponent
+    ConfirmFormComponent,
+    ProductDetailPageComponent,
+    StaffFormComponent,
+    PromotionFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
     LogproductFormComponent,
     CategoriesFormComponent,
     ConfirmFormComponent,
-    PromotionFormComponent
+    PromotionFormComponent,
+    StaffFormComponent
   ],
   imports: [
     BrowserModule,
@@ -99,15 +103,9 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule, 
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule 
+    BrowserAnimationsModule
   ],
   exports: [
-    MatDatepickerModule,
-    MatNativeDateModule
  ],
   providers: [
     AuthService,
