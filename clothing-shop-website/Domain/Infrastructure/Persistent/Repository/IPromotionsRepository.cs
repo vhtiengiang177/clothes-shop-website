@@ -15,5 +15,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Promotion CreatePromotion(Promotion promotion);
         void UpdatePromotion(Promotion promotion);
         Task<IQueryable<Promotion>> GetPromotionsEffective();
+        Promotion GetPromotionInactiveByCode(string Code);
     }
 }

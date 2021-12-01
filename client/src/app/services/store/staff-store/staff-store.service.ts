@@ -1,8 +1,9 @@
+
 import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { StaffService } from '../../data/staff/staff.service';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
@@ -52,4 +53,17 @@ export class StaffStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
+
+  // create(staffObj) {
+  //   let result = new Subject<Promotion>();
+  //   this.StaffService.create("/CreateAccount", staffObj).subscribe(res => {
+  //     result.next(res)
+  //     this.toastr.success("Added successfully", "Staff #" + res.id)
+  //   }, (error: AppError) => {
+  //     if (error instanceof BadRequestError)
+  //       return this.toastr.error("Add staff failed")
+  //     else this.toastr.error("An unexpected error occurred.", "Add Staff")
+  //   })
+  //   return result.asObservable()
+  // }
 }

@@ -35,14 +35,12 @@ namespace Infrastructure.Persistent.Repository
         }
         public Promotion CreatePromotion(Promotion promotion)
         {
-            promotion.CreatedDate = System.DateTime.Now;
             var result = _dbContext.Promotions.Add(promotion);
 
             return result.Entity;
         }
         public void UpdatePromotion(Promotion promotion)
         {
-            promotion.LastModified = System.DateTime.Now;
             _dbContext.Attach(promotion);
             _dbContext.Entry(promotion).State = EntityState.Modified;
         }
@@ -51,6 +49,11 @@ namespace Infrastructure.Persistent.Repository
         {
             var lPromotion = await _dbContext.Promotions.Where(p => p.StartDate <= DateTime.Today && p.EndDate >= DateTime.Today && p.State > 0).ToListAsync();
             return  lPromotion.AsQueryable();
+        }
+
+        public Promotion GetPromotionInactiveByCode(string Code)
+        {
+            return _dbContext.Promotions.FirstOrDefault(p => p.Name == Code && p.State == 0);
         }
 
     }

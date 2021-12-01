@@ -39,6 +39,12 @@ import { ProductDetailComponent } from './modules/admin/products/product-detail/
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
+import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 
 @NgModule({
@@ -73,14 +79,14 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
     ProductDetailComponent,
     FileSelectDirective,
     FooterComponent,
-    ConfirmFormComponent,
-    ProductDetailPageComponent
+    ConfirmFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
     LogproductFormComponent,
     CategoriesFormComponent,
-    ConfirmFormComponent
+    ConfirmFormComponent,
+    PromotionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -91,10 +97,22 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserModule, 
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule 
   ],
+  exports: [
+    MatDatepickerModule,
+    MatNativeDateModule
+ ],
   providers: [
-    AuthService
+    AuthService,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [AppComponent]
 })

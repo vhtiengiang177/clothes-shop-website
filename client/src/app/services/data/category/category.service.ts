@@ -17,14 +17,14 @@ export class CategoryService extends DataService {
     super('/categories', http)
   }
 
-  get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllCategories" + this.convertToQueryStringCategories(params))
-      .pipe(catchError((error: Response) => {
-        if(error.status == 400)
-          return throwError(new BadRequestError(error))
-        return throwError(new AppError(error))
-      }))
-  }
+  // get(params) {
+  //   return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllCategories" + this.convertToQueryStringCategories(params))
+  //     .pipe(catchError((error: Response) => {
+  //       if(error.status == 400)
+  //         return throwError(new BadRequestError(error))
+  //       return throwError(new AppError(error))
+  //     }))
+  // }
 
   convertToQueryStringCategories(filterParams: FilterParamsCategories): string {
     const cloneParams = { ...filterParams };
@@ -33,5 +33,11 @@ export class CategoryService extends DataService {
     query+= this.convertToQueryString(cloneParams)
 
     return query;
+  }
+  delete(categoryId) {
+    return this.http.put(GlobalConstants.apiUrl + "/categories" + "/DeleteCategory/" + categoryId, categoryId,
+    {
+      headers: this.authorizationHeader()
+    })
   }
 }

@@ -3,6 +3,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PromotionsController : ControllerBase
@@ -56,6 +58,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("GetPromotionsEffective")]
         public async Task<IActionResult> GetPromotionsEffective()
         {
@@ -81,7 +84,22 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
+        [HttpGet("GetPromotionByID/{id}", Name = "GetPromotionByID")]
+        public IActionResult GetPromotionByID(int id)
+        {
+            var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(id);
 
+            if (promotion == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(promotion);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpGet("{Code}")]
         public IActionResult GetlPromotionByID(string Code)
         {
@@ -98,17 +116,45 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreatePromotion")]
         public IActionResult CreatePromotion(Promotion promotion)
         {
             if (ModelState.IsValid)
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                promotion.CreatedById = int.Parse(userId);
                 promotion.CreatedDate = DateTime.Now;
-                _unitOfWork.PromotionsRepository.CreatePromotion(promotion);
+
+                var oldPromotion = _unitOfWork.PromotionsRepository.GetPromotionInactiveByCode(promotion.Name);
+
+                Promotion result = new Promotion();
+
+                if (oldPromotion != null)
+                {
+                    oldPromotion.Name = promotion.Name;
+                    oldPromotion.Description = promotion.Description;
+                    oldPromotion.Value = promotion.Value;
+                    oldPromotion.State = 1;
+                    oldPromotion.StartDate = promotion.StartDate;
+                    oldPromotion.EndDate = promotion.EndDate;
+                    oldPromotion.CreatedById = promotion.CreatedById;
+                    oldPromotion.CreatedDate = promotion.CreatedDate;
+                    oldPromotion.LastModified = null;
+                    oldPromotion.ModifiedById = null;
+
+                    _unitOfWork.PromotionsRepository.UpdatePromotion(oldPromotion);
+                    result = oldPromotion;
+                }
+                else
+                {
+                    result = _unitOfWork.PromotionsRepository.CreatePromotion(promotion);
+                }
 
                 if (_unitOfWork.Save())
                 {
-                    return Ok();
+                    return Ok(result);
                 }
                 else
                 {
@@ -118,28 +164,28 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("UpdatePromotion", Name = "UpdatePromotion")]
+        [HttpPut("UpdatePromotion/{id}", Name = "UpdatePromotion")]
         public IActionResult UpdatePromotion(Promotion promotion)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (promotion != null )
+                    var userId = User.FindFirst("id").Value;
+                    if (userId == null) return BadRequest();
+
+                    promotion.ModifiedById = int.Parse(userId);
+                    promotion.LastModified = DateTime.Now;
+
+                    _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
+                    if (_unitOfWork.Save())
                     {
-                        promotion.LastModified = DateTime.Now;
-                  
-                        _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
-                        if (_unitOfWork.Save())
-                        {
-                            return Ok(promotion);
-                        }
-                        else
-                        {
-                            return BadRequest();
-                        }
+                        return Ok(promotion);
                     }
-                    else return NotFound();
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
                 catch
                 {
@@ -154,11 +200,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             try
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
                 var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(id);
 
                 if (promotion == null)
                     return NotFound();
 
+                promotion.ModifiedById = int.Parse(userId);
+                promotion.LastModified = DateTime.Now;
                 promotion.State = 0;
                 _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
                 _unitOfWork.Save();

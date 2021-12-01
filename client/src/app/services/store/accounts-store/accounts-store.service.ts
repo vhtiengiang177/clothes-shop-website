@@ -49,4 +49,16 @@ export class AccountsStoreService {
         })
       return result.asObservable()
   }
+
+  delete(id) {
+    return this.accountService.delete(id)
+  }
+
+  block(id) {
+    return this.accountService.block(id)
+  }
+
+  unblock(id) {
+    return this.accountService.unblock(id)
+  }
 }

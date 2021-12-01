@@ -19,7 +19,10 @@ export class CustomerService extends DataService  {
    }
 
   get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllAccountCustomers" + this.convertToQueryStringAccounts(params))
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllAccountCustomers" + this.convertToQueryStringAccounts(params),
+    {
+      headers: this.authorizationHeader()
+    })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)
           return throwError(new BadRequestError(error))
@@ -34,5 +37,26 @@ export class CustomerService extends DataService  {
     query+= this.convertToQueryString(cloneParams)
 
     return query;
+  }
+
+  delete(accountId) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/DeleteAccount/" + accountId, accountId,
+    {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  block(accountId) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/BlockAccount/" + accountId, accountId,
+    {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  unblock(accountId) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/UnblockAccount/" + accountId, accountId,
+    {
+      headers: this.authorizationHeader()
+    })
   }
 }

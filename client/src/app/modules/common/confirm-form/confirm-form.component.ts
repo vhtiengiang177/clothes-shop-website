@@ -9,10 +9,12 @@ import { ConfirmData } from 'src/app/services/model/confirm/confirm.model';
 })
 export class ConfirmFormComponent implements OnInit {
   confirmtext: string = ""
+  remindtext: string =""
 
   constructor(public dialogRef: MatDialogRef<ConfirmFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmData) {
       this.confirmtext = data.text
+      this.remindtext = data.remindtext
      }
 
   ngOnInit() {

@@ -3,6 +3,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
@@ -64,8 +66,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public IActionResult GetlAccountByID(int id)
+        [HttpGet("GetAccountByID/{id}")]
+        public IActionResult GetAccountByID(int id)
         {
             var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
 
@@ -79,7 +81,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateAccount")]
         public IActionResult CreateAccount([FromBody] CreateAccountParams createAccountParams)
         {
             if (ModelState.IsValid)
@@ -144,6 +146,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
+    
         [HttpPost("CreateCustomerAccount")]
         public IActionResult CreateCustomerAccount([FromBody] CustomerAccount customerAccountParams)
         {
@@ -182,6 +185,51 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
             }
             else return BadRequest(ModelState);
+        }
+
+
+        [HttpPut("BlockAccount/{id}", Name = "BlockAccount")]
+        public IActionResult BlockAccount(int id)
+        {
+            try
+            {
+                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+
+                if (Account == null)
+                    return NotFound();
+
+                Account.State = 2;
+                _unitOfWork.AccountsRepository.UpdateAccount(Account);
+                _unitOfWork.Save();
+
+                return Ok(Account);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("UnblockAccount/{id}", Name = "UnblockAccount")]
+        public IActionResult UnBlockAccount(int id)
+        {
+            try
+            {
+                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+
+                if (Account == null)
+                    return NotFound();
+
+                Account.State = 1;
+                _unitOfWork.AccountsRepository.UpdateAccount(Account);
+                _unitOfWork.Save();
+
+                return Ok(Account);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

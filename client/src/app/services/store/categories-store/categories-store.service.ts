@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CategoryService } from '../../data/category/category.service';
 import { Category } from '../../model/category/category.model';
 import { FilterParamsCategories } from 'src/app/services/model/category/filter-params-categories.model';
@@ -28,7 +28,7 @@ export class CategoriesStoreService {
     return this._categories.value;
   }
 
-  set categories(val:Category[]) {
+  set categories(val: Category[]) {
     this._categories.next(val);
   }
 
@@ -40,14 +40,6 @@ export class CategoriesStoreService {
     this._totalData.next(val);
   }
 
-
-  // async get(){
-  //   await this.categoryService.get()
-  //           .subscribe(res => this.categories = res,
-  //             () => {
-  //               this.toastr.error("An unexpected error occurred.", "List Categories")
-  //             });
-  // }
 
   async getAll(filterParams: FilterParamsCategories) {
     await this.categoryService.get(filterParams)
@@ -61,4 +53,30 @@ export class CategoriesStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
-}
+
+  delete(id) {
+    return this.categoryService.delete(id)
+  }
+
+  create(categoryObj) {
+    let result = new Subject<Category>();
+    this.categoryService.create("/createcategory", categoryObj).subscribe(res => {
+      result.next(res)
+      this.toastr.success("Added successfully", "Category #" + res.id)
+    }, (error: AppError) => {
+      if (error instanceof BadRequestError)
+        return this.toastr.error("Add category failed")
+      else this.toastr.error("An unexpected error occurred.", "Add Category")
+    })
+    return result.asObservable()
+  }
+
+  update(categoryObj) {
+    return this.categoryService.update("/UpdateCategory", categoryObj.id, categoryObj)
+  }
+
+  getById(id) {
+    return this.categoryService.getById("/GetCategoryByID", id)
+  }
+ 
+ }

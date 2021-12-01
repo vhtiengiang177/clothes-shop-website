@@ -53,4 +53,10 @@ export class CustomersStoreService {
         });
   }
 
+  getById(id) {
+    return this.customerService.getById("/GetAccountByID", id)
+  }
+
+
+
 }

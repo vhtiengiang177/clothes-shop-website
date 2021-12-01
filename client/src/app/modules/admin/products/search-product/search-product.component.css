@@ -13,7 +13,7 @@
 
 .div-reset {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 2px;
   padding-right: 30px;
 }
@@ -29,7 +29,7 @@
 }
 
 .searchFilter-center{
-  display: flex;
+  display: flex-end;
   justify-content: center;
 }
 

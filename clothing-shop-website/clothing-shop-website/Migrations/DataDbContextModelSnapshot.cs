@@ -1498,7 +1498,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tết Dương Lịch",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tết Dương Lịch",
+                            Name = "TDL001",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
                             Value = 0.10000000000000001
@@ -1510,7 +1510,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sinh nhật khách hàng",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sinh nhật khách hàng",
+                            Name = "BIRDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
                             Value = 0.14999999999999999
@@ -1522,7 +1522,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Quốc tế phụ nữ 08-03",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Quốc tế phụ nữ 08-03",
+                            Name = "WOMANDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 2,
                             Value = 0.14999999999999999
@@ -1534,7 +1534,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tết Âm Lịch",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tết Âm Lịch",
+                            Name = "TET999",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 2,
                             Value = 0.20000000000000001
@@ -1546,7 +1546,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Phụ Nữ Việt Nam 20-10",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Phụ Nữ Việt Nam 20-10",
+                            Name = "WOMANVN",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 3,
                             Value = 0.10000000000000001
