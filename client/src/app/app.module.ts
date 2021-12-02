@@ -108,9 +108,7 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
   exports: [
  ],
   providers: [
-    AuthService,
-    MatDatepickerModule,
-    MatNativeDateModule
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
