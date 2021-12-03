@@ -28,6 +28,7 @@ import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 import { ClientAuthGuard } from './services/client-auth-guard/client-auth-guard.service';
+import { OrderPageComponent } from './modules/user/order-page/order-page.component';
 
 
 const routes: Routes = [
@@ -147,6 +148,11 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: CartPageComponent,
+    canActivate: [AuthGuard, ClientAuthGuard]
+  },
+  {
+    path: 'check-out',
+    component: OrderPageComponent,
     canActivate: [AuthGuard, ClientAuthGuard]
   },
   {

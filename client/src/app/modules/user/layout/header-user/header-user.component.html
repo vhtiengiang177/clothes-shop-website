@@ -12,12 +12,12 @@
             </div>
             <div class="col-lg-3 text-right col-md-3">
                 <ul class="nav-right">
-                    <li class="cart-icon">
+                    <li class="cart-icon" *ngIf="authService.isLoggedIn() && authService.getCurrentUser().idTypeAccount == 4">
                         <a href="/shopping-cart">
                             <fa name="shopping-cart"></fa>
-                            <!-- <span>3</span> -->
+                            <span>{{ cartStore.totalData }}</span>
                         </a>
-                        <div class="cart-hover">
+                        <!-- <div class="cart-hover">
                             <div class="select-items">
                                 <table>
                                     <tbody>
@@ -56,7 +56,7 @@
                                 <a href="#" class="primary-btn view-card">VIEW CARD</a>
                                 <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
                             </div>
-                        </div>
+                        </div> -->
                     </li>
                     <li *ngIf="authService.isLoggedIn()" (click)="clickUserInformation()" class="cart-icon">
                         <button class="btn">Hi, {{ authService.getCurrentUser().firstNameUser }}!</button>

@@ -53,6 +53,7 @@ import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/de
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 import { ProductAddCartFormComponent } from './modules/user/product-add-cart-form/product-add-cart-form.component';
+import { OrderPageComponent } from './modules/user/order-page/order-page.component';
 
 @NgModule({
   declarations: [
@@ -100,10 +101,11 @@ import { ProductAddCartFormComponent } from './modules/user/product-add-cart-for
     OrdersReturnListComponent,
     OrdersDetailComponent,
     DeliveryListComponent,
-    CartPageComponent
+    CartPageComponent,
     DeliveryListComponent,
     CartPageComponent,
-    ProductAddCartFormComponent
+    ProductAddCartFormComponent,
+    OrderPageComponent
   ],
   entryComponents: [
     ProductFormComponent,

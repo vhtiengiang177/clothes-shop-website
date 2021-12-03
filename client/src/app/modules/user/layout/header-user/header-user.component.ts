@@ -3,6 +3,7 @@ import { MatOption, MatSelect } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Category } from 'src/app/services/model/category/category.model';
+import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 
 @Component({
@@ -15,14 +16,17 @@ export class HeaderUserComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private authService : AuthService) { }
+    private authService : AuthService,
+    private cartStore: CartsStoreService) {
+     }
 
   ngOnInit() {
   }
 
   logout() {
     this.isUserInformation = false
-    this.authService.logout();
+    this.authService.logout()
+    this.fetchCart()
     if(this.route.snapshot['_routerState'].url != '/')    
       this.router.navigate(['/']);
   }
@@ -31,4 +35,7 @@ export class HeaderUserComponent implements OnInit {
     this.isUserInformation = !this.isUserInformation
   }
 
+  fetchCart() {
+    this.cartStore.get()
+  }
 }

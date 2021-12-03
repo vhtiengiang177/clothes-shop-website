@@ -6,6 +6,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Account } from 'src/app/services/model/account/account.model';
 import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
+import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 @Component({
   selector: 'app-verification',
@@ -20,7 +21,8 @@ export class VerificationComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router, 
     private authService: AuthService,
-    private toastr: ToastrService) { 
+    private toastr: ToastrService,
+    private cartStore: CartsStoreService) { 
 
       this.account = history.state.account
       if(this.account == null) {
@@ -38,6 +40,7 @@ export class VerificationComponent implements OnInit {
     if(this.code) {
       this.authService.verifyAccount(this.code, this.idAccount).subscribe(res => {
         if (res) {
+          this.fetchCart()
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/'])
         }
@@ -45,5 +48,9 @@ export class VerificationComponent implements OnInit {
         this.toastr.error(error.error)
       })
     }
+  }
+
+  fetchCart() {
+    this.cartStore.get()
   }
 }

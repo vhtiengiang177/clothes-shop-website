@@ -1,0 +1,93 @@
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a href=""><i class="fa fa-home"></i> Home</a>
+                    <a href="/products">Shop</a>
+                    <span>Check Out</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Shopping Cart Section Begin -->
+<section class="checkout-section spad">
+    <div class="container">
+        <form action="#" class="checkout-form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Biiling Details</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="fir">First Name<span>*</span></label>
+                            <input type="text" id="fir">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="last">Last Name<span></span></label>
+                            <input type="text" id="last">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="street">Address<span>*</span></label>
+                            <input type="text" id="street" class="street-first">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="town">Wards<span>*</span></label>
+                            <input type="text" id="town">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="town">District<span>*</span></label>
+                            <input type="text" id="town">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="town">Province<span>*</span></label>
+                            <input type="text" id="town">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="phone">Phone<span>*</span></label>
+                            <input type="text" id="phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="place-order">
+                        <h4>Your Order</h4>
+                        <div class="order-total">
+                            <ul class="order-table">
+                                <li>Product <span>Total</span></li>
+                                <li *ngFor="let item of cartsStore.carts$ | async" class="fw-normal">
+                                    {{ item.nameProduct }} x {{ item.quantity }} 
+                                    <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
+                                </li>
+                                <li class="total-price">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>
+                            </ul>
+                            <div>Coupon:</div>
+                            <input type="text" placeholder="Enter Your Coupon Code">
+                            <div class="payment-check">
+                                <div class="pc-item">
+                                    <label for="pc-check">
+                                        Note <strong class="required">*</strong>: Payment after delivery
+                                    </label>
+                                </div>
+                                <!-- <div class="pc-item">
+                                    <label for="pc-paypal">
+                                        Paypal
+                                        <input type="checkbox" id="pc-paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                            </div>
+                            <div class="order-btn">
+                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->

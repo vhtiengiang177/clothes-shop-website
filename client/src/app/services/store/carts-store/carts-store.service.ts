@@ -14,9 +14,10 @@ import { ProductsStoreService } from '../products-store/products-store.service';
 })
 export class CartsStoreService {
   private readonly _carts = new BehaviorSubject<Cart[]>([]);
-
   readonly carts$ = this._carts.asObservable();
-  toastr: any;
+
+  private readonly _totalData = new BehaviorSubject<number>(0);
+  readonly totalData$ = this._totalData.asObservable();
 
   constructor(private cartService: CartService, 
     private productsStore: ProductsStoreService,
@@ -34,10 +35,19 @@ export class CartsStoreService {
     this._carts.next(val);
   }
 
+  get totalData(): number {
+    return this._totalData.getValue();
+  }
+
+  set totalData(val: number) {
+    this._totalData.next(val);
+  }
+
   async get(){
     await this.cartService.getAllItemsInCart()
             .subscribe(res => {
               this.carts = res.data
+              this.totalData = res.totalData
               console.log(this.carts);
               
             });
@@ -55,11 +65,6 @@ export class CartsStoreService {
     let result = new Subject<Cart>();
     this.cartService.create("/AddItemToCart", cartObj).subscribe(res => {
       result.next(res)
-      this.toastr.success("Added successfully", "Product #" )
-    }, (error: AppError) => {
-      if (error instanceof BadRequestError)
-        return this.toastr.error("Add product failed")
-      else this.toastr.error("An unexpected error occurred.", "Add Product To Cart")
     })
     return result.asObservable()
   }

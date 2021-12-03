@@ -4181,7 +4181,7 @@ ol {
 }
 
 .center {
-    justify-content: center;
+    justify-content: right;
     padding-left: 100px;
     padding-right: 100px;
 }

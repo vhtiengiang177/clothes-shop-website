@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from 'src/app/services/model/cart/cart.model';
@@ -13,27 +12,27 @@ import { ProductsStoreService } from 'src/app/services/store/products-store/prod
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 
 @Component({
-  selector: 'app-cart-page',
-  templateUrl: './cart-page.component.html',
-  styleUrls: ['./cart-page.component.css']
+  selector: 'app-order-page',
+  templateUrl: './order-page.component.html',
+  styleUrls: ['./order-page.component.css']
 })
-export class CartPageComponent implements OnInit {
+export class OrderPageComponent implements OnInit {
   product: Product
   listColors: Color[] = []
   listSizes: Size[] = []
   totalPrice: number = 0
-  listCartSelected: Cart[] = []
-
+  
+  
   constructor(private cartsStore: CartsStoreService,
     private productsStore: ProductsStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
     private toastr: ToastrService) {
-    this.cartsStore.carts$.subscribe(res => {
-      this.getInfoCart()
-    })
-  }
+      this.cartsStore.carts$.subscribe(res => {
+        this.getInfoCart()
+      })
+     }
 
   ngOnInit() {
   }
@@ -87,41 +86,4 @@ export class CartPageComponent implements OnInit {
       this.listColors.push(color);
     }
   }
-
-  changeQuantity(input, item) {
-    if (item.quantity > item.stock) {
-      item.quantity = item.stock
-      this.toastr.warning("The selected quantity exceeds quantity available in stock")
-    }
-    else if (item.quantity < 1 || item.quantity == null) {
-      this.toastr.warning("The selected quantity must be one or more")
-      item.quantity = 1
-    }
-    this.cartsStore.updateQuantityItemInCart(item).subscribe(res => {
-       item.quantity = res.quantity
-    }, () => {
-      this.toastr.error("Something went wrong!")
-    })
-  }
-
-  countTotalPrice() {
-    this.totalPrice = 0
-    this.cartsStore.carts.forEach(item => {
-      this.totalPrice += item.unitPrice * item.quantity
-    })
-  }
-
-  removeItem(item, index) {
-    this.listCartSelected.push(item);
-    this.cartsStore.deleteItemsInCart(this.listCartSelected).subscribe(() => {
-      this.listCartSelected = []
-      this.cartsStore.carts.splice(index,1)
-      this.countTotalPrice()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 404)
-        this.toastr.error("Could not find this item")
-      else this.toastr.error("Something went wrong!")
-    })
-  }
-  
 }

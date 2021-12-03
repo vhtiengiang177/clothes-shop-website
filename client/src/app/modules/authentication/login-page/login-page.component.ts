@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { VerifyResponse } from 'src/app/services/model/account/verify-response.model';
+import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 @Component({
   selector: 'app-login-page',
@@ -18,7 +19,8 @@ export class LoginPageComponent implements OnInit {
   constructor(private authService: AuthService, 
     private router: Router,
     private route: ActivatedRoute, 
-    private toastr: ToastrService) { 
+    private toastr: ToastrService,
+    private cartStore: CartsStoreService) { 
       this.email = history.state.email;
     }
 
@@ -52,6 +54,7 @@ export class LoginPageComponent implements OnInit {
     if (form.valid) {
       this.authService.login(form.value).subscribe(res => {
         if (res.isVerify) {
+          this.fetchCart()
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/']);
         }
@@ -68,4 +71,7 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  fetchCart() {
+    this.cartStore.get()
+  }
 }
