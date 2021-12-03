@@ -27,4 +27,9 @@ export class ProductSizeColorsStoreService {
     this.productService.getAllItemOfProduct(id)
             .subscribe(res => this.productitems = res);
   }
+
+  getItemsOfProductForClientPage(id) {
+    this.productService.getItemsOfProductForClientPage(id)
+      .subscribe(res => this.productitems = res)
+  }
 }

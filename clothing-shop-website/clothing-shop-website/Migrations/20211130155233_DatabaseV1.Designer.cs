@@ -4,14 +4,16 @@ using Infrastructure.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211130155233_DatabaseV1")]
+    partial class DatabaseV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1498,7 +1500,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tết Dương Lịch",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TDL001",
+                            Name = "Tết Dương Lịch",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
                             Value = 0.10000000000000001
@@ -1510,7 +1512,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sinh nhật khách hàng",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BIRDAY",
+                            Name = "Sinh nhật khách hàng",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
                             Value = 0.14999999999999999
@@ -1522,7 +1524,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Quốc tế phụ nữ 08-03",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "WOMANDAY",
+                            Name = "Quốc tế phụ nữ 08-03",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 2,
                             Value = 0.14999999999999999
@@ -1534,7 +1536,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tết Âm Lịch",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TET999",
+                            Name = "Tết Âm Lịch",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 2,
                             Value = 0.20000000000000001
@@ -1546,7 +1548,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Phụ Nữ Việt Nam 20-10",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "WOMANVN",
+                            Name = "Phụ Nữ Việt Nam 20-10",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 3,
                             Value = 0.10000000000000001

@@ -409,7 +409,7 @@ ol {
 }
 
 .inner-header {
-	padding: 39px 0;
+	padding: 10px 39px;
 }
 
 .inner-header .logo a {
@@ -1589,7 +1589,7 @@ ol {
 -----------------------*/
 
 .product-shop {
-	padding-top: 80px;
+	padding-top: 40px;
 	padding-bottom: 80px;
 }
 
@@ -3937,10 +3937,6 @@ ol {
 /* Large Device: 480px */
 
 @media only screen and (max-width: 767px) {
-	.instagram-photo .insta-item {
-		width: 50%;
-		height: 300px;
-	}
 	.copyright-reserved .copyright-text {
 		float: none;
 		margin-bottom: 10px;
@@ -4121,10 +4117,6 @@ ol {
 		width: 270px;
 		padding: 20px;
 	}
-	.countdown-timer .cd-item {
-		margin-right: 5px;
-		padding: 10px 6px;
-	}
 	.product-show-option .select-option {
 		display: inline-block;
 	}
@@ -4185,4 +4177,10 @@ ol {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
+}
+
+.center {
+    justify-content: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }

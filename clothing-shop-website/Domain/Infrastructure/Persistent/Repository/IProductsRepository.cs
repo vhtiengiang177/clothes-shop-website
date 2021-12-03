@@ -17,10 +17,11 @@ namespace Domain.Infrastructure.Persistent.Repository
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
         IQueryable<Product> GetProductsByCategoriesID(int[] idCategories);
-        public Product_Size_Color GetItemActiveByIdPSC(int idProduct, int idSize, int idColor);
+        Product_Size_Color GetItemActiveByIdPSC(int idProduct, int idSize, int idColor);
         IQueryable<Product> GetTopProductBestSellers();
         IQueryable<Product> GetTopNewProducts();
         IQueryable<Image> GetImagesByIdProduct(int productID);
         public Product_Size_Color GetItemByIdPSC(Log_Product logproduct);
+        int CheckCountItemOfProduct(int productID);
     }
 }

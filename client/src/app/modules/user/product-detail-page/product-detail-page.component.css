@@ -1,0 +1,13 @@
+
+.product-tab {
+    width: 90%;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+
+.my-disable{
+    pointer-events: none;
+    opacity: 0.4;
+}

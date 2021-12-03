@@ -25,6 +25,7 @@ import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-deliv
 import { OrdersCompletedListComponent } from './modules/admin/orders/orders-completed-list/orders-completed-list.component';
 import { OrdersCancelledListComponent } from './modules/admin/orders/orders-cancelled-list/orders-cancelled-list.component';
 import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-list/orders-return-list.component';
+import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 
 
 const routes: Routes = [
@@ -142,6 +143,10 @@ const routes: Routes = [
     component: ProductPageComponent
   },
   {
+    path: 'product-detail/:id',
+    component: ProductDetailPageComponent
+  },
+  {
     path: 'login',
     component: LoginPageComponent,
     canActivate: [ActivatedLogin]
@@ -150,7 +155,8 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPageComponent,
     canActivate: [ActivatedLogin]
-  }, {
+  }, 
+  {
     path: 'no-access',
     component: NoAccessComponent
   },

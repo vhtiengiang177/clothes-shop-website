@@ -50,7 +50,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   fetchData() {
-    this.productsStore.getAll(this.filter);
+    this.productsStore.getProductsForClientPage(this.filter);
   }
 
   sort() {
@@ -119,5 +119,28 @@ export class ProductPageComponent implements OnInit {
         this.maxPrice = this.minPrice;
       }
     }
+  }
+
+  searchEvent(value) {
+    this.filter = {
+      pageindex: 1,
+      pagesize: this.filter.pagesize,
+      sort: this.filter.sort,
+      content: value,
+      idcategories: this.filter.idcategories
+    }
+    this.paginator.pageIndex = 0;
+
+    this.fetchData()
+  }
+
+  reloadProduct() {
+    this.filter = {
+      pageindex: 1,
+      pagesize: this.filter.pagesize,
+      sort: this.filter.sort
+    }
+    this.paginator.pageIndex = 0;
+    this.fetchData()
   }
 }

@@ -161,12 +161,16 @@ namespace Infrastructure.Persistent
                 entity.HasKey(e => new { e.IdProduct, e.IdSize, e.IdColor });
 
                 entity.HasOne<Product>(e => e.Product)
-                        .WithMany(product => product.Product_Sizes)
+                        .WithMany(product => product.Product_Sizes_Color)
                         .HasForeignKey(e => e.IdProduct);
 
                 entity.HasOne<Size>(e => e.Size)
-                        .WithMany(size => size.Product_Sizes)
+                        .WithMany(size => size.Product_Sizes_Color)
                         .HasForeignKey(e => e.IdSize);
+
+                entity.HasOne<Color>(e => e.Color)
+                      .WithMany(color => color.Product_Sizes_Color)
+                      .HasForeignKey(e => e.IdColor);
             });
 
             modelBuilder.Entity<Promotion>(entity => {

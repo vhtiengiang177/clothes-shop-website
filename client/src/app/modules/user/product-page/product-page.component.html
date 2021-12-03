@@ -1,5 +1,22 @@
 <section class="product-shop spad">
     <div class="container">
+        <div class="row inner-header center custome-search-client">
+            <div class="col-6">
+                <div class="advanced-search">
+                    <div class="input-group">
+                        <input [(ngModel)]="search" #searchInput type="text" placeholder="What do you need?">
+                        <button type="button" (click)="searchEvent(searchInput.value)">
+                            <fa name="search"></fa>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <button name="btn btn-secondary" type="button" class="btn btn-reset" (click)="reloadProduct()">
+                    <fa name="refresh"></fa>
+                </button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                 <div class="filter-widget">
@@ -22,7 +39,7 @@
                     </div>
                     <button class="btn filter-btn" (click)="filterPrice()">Filter</button>
                 </div>
-                <div class="filter-widget">
+                <!-- <div class="filter-widget">
                     <h4 class="fw-title">Size</h4>
                     <div class="fw-size-choose">
                         <div class="sc-item" *ngFor="let size of sizesStore.sizes$ | async">
@@ -30,10 +47,11 @@
                             <label for="s-size">{{ size.name }}</label>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
+                    
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <mat-form-field>
@@ -63,21 +81,22 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
                             <mat-chip-list #chipList aria-label="Fruit selection">
-                                <mat-chip *ngFor="let category of categoriesOptions" [selectable]="selectable" [removable]="removable"
-                                    (removed)="remove(category)">
+                                <mat-chip *ngFor="let category of categoriesOptions" [selectable]="selectable"
+                                    [removable]="removable" (removed)="remove(category)">
                                     {{ category.name }}
-                                    <button matChipRemove *ngIf="removable" style="border: none; background: transparent;">
+                                    <button matChipRemove *ngIf="removable"
+                                        style="border: none; background: transparent;">
                                         <fa name="times-circle"></fa>
                                     </button>
                                 </mat-chip>
-                            </mat-chip-list>    
+                            </mat-chip-list>
                         </div>
                     </div>
                 </div>
                 <div class="product-list">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6" *ngFor="let product of productsStore.products$ | async">
-                            <div class="product-item">
+                            <div [routerLink]="['/product-detail', product.id]" class="product-item">
                                 <div class="pi-pic">
                                     <img src="assets/product.jpg">
                                     <ul>

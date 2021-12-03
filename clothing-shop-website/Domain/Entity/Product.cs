@@ -21,6 +21,6 @@ namespace Domain.Entity
         public int? IdCategory { get; set; }
         public Category Category { get; set; }
         public virtual ICollection<Image> Images { get; set; }
-        public virtual ICollection<Product_Size_Color> Product_Sizes { get; set; }
+        public virtual ICollection<Product_Size_Color> Product_Sizes_Color { get; set; }
     }
 }

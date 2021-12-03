@@ -40,10 +40,6 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
 import { StaffAddFormComponent } from './modules/admin/staff/staff-add-form/staff-add-form.component';
 import { OrdersProcessListComponent } from './modules/admin/orders/orders-process-list/orders-process-list.component';
@@ -54,6 +50,8 @@ import { OrdersCancelledListComponent } from './modules/admin/orders/orders-canc
 import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-list/orders-return-list.component';
 import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orders-detail.component';
 import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/delivery-list.component';
+import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
+import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +86,8 @@ import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/de
     FileSelectDirective,
     FooterComponent,
     ConfirmFormComponent,
+    ProductDetailPageComponent,
+    StaffFormComponent,
     PromotionFormComponent,
     StaffFormComponent,
     StaffAddFormComponent,
@@ -99,13 +99,15 @@ import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/de
     OrdersReturnListComponent,
     OrdersDetailComponent,
     DeliveryListComponent
+    CartPageComponent
   ],
   entryComponents: [
     ProductFormComponent,
     LogproductFormComponent,
     CategoriesFormComponent,
     ConfirmFormComponent,
-    PromotionFormComponent
+    PromotionFormComponent,
+    StaffFormComponent
   ],
   imports: [
     BrowserModule,
@@ -118,20 +120,12 @@ import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/de
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule, 
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule 
+    BrowserAnimationsModule
   ],
   exports: [
-    MatDatepickerModule,
-    MatNativeDateModule
  ],
   providers: [
-    AuthService,
-    MatDatepickerModule,
-    MatNativeDateModule
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

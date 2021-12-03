@@ -73,6 +73,50 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetProductsForClientPage")]
+        public async Task<IActionResult> GetProductsForClientPage([FromQuery] FilterParamsProduct filterParams)
+        {
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
+
+                IQueryable<Product> lProductItems;
+
+                if (filterParams.IdCategories != null)
+                {
+                    if (filterParams.IdCategories.Count() != 0
+                        || filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
+                    {
+                        lProductItems = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(filterParams.IdCategories);
+                    }
+                    else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                }
+                else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+
+                // Check product is empty or not. Empty => Remove 
+                lProductItems = lProductItems.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0);
+
+                lProductItems = _productsService.FilterProduct(filterParams, lProductItems);
+
+                var lProduct = _productsService.SortListProducts(filterParams.Sort, lProductItems);
+
+                var response = new ResponseJSON<Product>
+                {
+                    TotalData = lProduct.Count(),
+                    Data = lProduct.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetProductByID/{id}", Name = "GetProductByID")]
         public IActionResult GetProductByID(int id)
         {
@@ -204,6 +248,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return Ok(lProductItems);
         }
 
+        [AllowAnonymous]
+        [HttpGet("GetItemsOfProductForClientPage/{id}")]
+        public async Task<IActionResult> GetItemsOfProductForClientPage(int id)
+        {
+            IQueryable<Product_Size_Color> lProductItems;
+
+            lProductItems = await _unitOfWork.ProductsRepository.GetListItemByIdProduct(id);
+
+            return Ok(lProductItems);
+        }
+
         [HttpPost("AddItemOfProduct")]
         public IActionResult AddItemOfProduct(Log_Product logproduct)
         {
@@ -279,7 +334,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             try
             {
                 var lProduct = _unitOfWork.ProductsRepository.GetTopProductBestSellers();
-                return Ok(lProduct);
+
+                // Check product is empty or not. Empty => Remove 
+                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(3);
+
+                if (lProduct.Count() >= 3)
+                {
+                    return Ok(lProduct);
+                }
+                else return NotFound();
             }
             catch
             {
@@ -295,7 +358,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             try
             {
                 var lProduct = _unitOfWork.ProductsRepository.GetTopNewProducts();
-                return Ok(lProduct);
+
+                // Check product is empty or not. Empty => Remove 
+                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(3);
+
+                if (lProduct.Count() >= 3)
+                {
+                    return Ok(lProduct);
+                }
+                else return NotFound();
             }
             catch
             {
@@ -346,5 +417,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
             return Ok(lImages);
         }
+
+        
     }
 }
