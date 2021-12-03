@@ -1,3 +1,4 @@
+import { Customer } from './../../model/customer/customer.model';
 import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { Injectable } from '@angular/core';
@@ -13,8 +14,10 @@ import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 export class CustomersStoreService {
 
   private readonly _acccustomer = new BehaviorSubject<Account[]>([]);
+  private readonly _customer = new BehaviorSubject<Customer[]>([]);
 
   readonly acccustomer$ = this._acccustomer.asObservable();
+  readonly customer$ = this._customer.asObservable();
   private readonly _totalData = new BehaviorSubject<number>(0);
 
   constructor(private customerService: CustomerService, private toastr: ToastrService) {
@@ -30,6 +33,14 @@ export class CustomersStoreService {
 
   set acccustomer(val: Account[]) {
     this._acccustomer.next(val);
+  }
+
+  get customer() : Customer[] {
+    return this._customer.value;
+  }
+
+  set customer(val: Customer[]) {
+    this._customer.next(val);
   }
 
   get totalData(): number {

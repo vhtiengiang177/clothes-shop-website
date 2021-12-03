@@ -138,7 +138,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.AccountsRepository.UpdateAccount(Account);
                 _unitOfWork.Save();
 
-                return Ok(Account);
+                int idStaff = Account.Id;
+                var lStaff = _unitOfWork.StaffRepository.GetStaffByID(idStaff);
+                if (lStaff !=null)
+                {
+                    _unitOfWork.StaffRepository.DeleteStaff(lStaff.IdAccount);
+
+                }
+
+                _unitOfWork.Save();
+
+                return Ok();
             }
             catch
             {

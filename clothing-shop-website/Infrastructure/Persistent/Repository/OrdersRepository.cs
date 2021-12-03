@@ -15,12 +15,20 @@ namespace Infrastructure.Persistent.Repository
         {
             _dbContext = dataDbContext;
         }
-        public async Task<IQueryable<Order>> GetAllOrders()
+        public async Task<IQueryable<Order>> GetAllOrdersByState(int state)
         {
-            var lOrder = await _dbContext.Orders.Where(p => p.State > 0).ToListAsync();
+            var lOrder = await _dbContext.Orders.Where(p => p.State == state).ToListAsync();
 
             return lOrder.AsQueryable();
         }
+
+        public async Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order)
+        {
+            var lOrder = await _dbContext.OrderDetails.Where(p => p.IdOrder == order).ToListAsync();
+
+            return lOrder.AsQueryable();
+        }
+
         public async Task<IQueryable<Order>> GetAllOrdersByCustomer(int customerID)
         {
             var lOrder = await _dbContext.Orders.Where(p => p.IdCustomer == customerID).ToListAsync();

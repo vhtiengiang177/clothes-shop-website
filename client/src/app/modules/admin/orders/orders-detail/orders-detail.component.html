@@ -1,0 +1,83 @@
+<div class="container" *ngIf="isVisible">
+    <div class="row">
+        <div class="col-12">
+            <button [routerLink]= "linkBack" class="btn btn-secondary">Back</button>
+        </div>
+    </div>
+    <div class="row detail-center">
+        <div class="col-md-6">
+            <h3>Order <strong>#{{ order.id }}</strong></h3>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Date Order:
+                </div>
+                <div *ngIf="order.dateOrder" class="col-md-8">
+                    {{ order.dateOrder | date: 'longDate' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Customer:
+                </div>5 
+                <div *ngIf="order.customer" class="col-md-8">
+                    {{ order.customer }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Total Amout:
+                </div>
+                <div *ngIf="order.totalAmount" class="col-md-8">
+                    {{ order.totalAmount | currency: 'VND'}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Total Quantity:
+                </div>
+                <div *ngIf="order.totalQuantity" class="col-md-8">
+                    {{ order.totalQuantity }} items
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div *ngIf="listImages?.length > 0" class="row image-list">
+        <div class="col-md-3 text-center" *ngFor="let image of listImages">
+            <!-- <img src="../../../../../assets/product.jpg"> -->
+            <!-- <img src="{{ image.url }}">
+            <div>
+                <button class="btn btn-sm btn-danger"><fa name="trash"></fa></button>
+            </div>
+        </div>
+    </div>
+    <div class="row button-add">
+        <button mat-button (click)="addItem()" class="btn btn-add">Add Item Product</button>
+    </div> --> 
+    <br/>
+    <div class="form-group custom-form">
+        <table id="producttable" class="table table-striped table-hover table-sm ">
+            <thead class="dt-header">
+                <tr>
+                    <th></th>
+                    <th>Name Product</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th> 
+                    <!-- <th colspan="2">Action</th> -->
+                 </tr> 
+            </thead>
+            <tbody class="table-body">
+                <tr *ngFor="let item of orderDetailStore.orderdetails$ | async; index as i">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ item?.product }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>{{ item.color }}</td>
+                    <td>{{ item.unitPrice }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

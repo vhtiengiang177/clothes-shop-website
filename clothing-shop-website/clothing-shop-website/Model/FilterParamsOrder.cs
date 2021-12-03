@@ -10,8 +10,7 @@ namespace clothing_shop_website.Model
         public int? PageIndex { get; set; }
         public int? PageSize { get; set; }
         public string Sort { get; set; }
-        public int IdOrder { get; set; }
-        public int[] lStates { get; set; }
+        public int IdState { get; set; }
         public string Content { get; set; }
     }
 }

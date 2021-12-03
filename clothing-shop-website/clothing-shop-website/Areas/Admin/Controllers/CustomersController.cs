@@ -38,17 +38,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 IQueryable<Account> lCustomerItems;
 
-                //if (filterParams.IdTypeCustomers != null)
-                //{
-                //    if (filterParams.IdTypeCustomers.Count() != 0
-                //        || filterParams.IdTypeCustomers.Count() != 3)
-                //    {
-                //        lCustomerItems = _unitOfWork.CustomersRepository.GetlCustomersByTypeCustomerID(filterParams.IdTypeCustomers);
-                //    }
-                //    else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
-                //}
-                //else lCustomerItems =  _unitOfWork.CustomersRepository.GetAllAccountCustomers();
-
                 lCustomerItems = _unitOfWork.CustomersRepository.GetAllAccountCustomers();
 
                 lCustomerItems = _accountService.FilterAccount(filterParams, lCustomerItems);

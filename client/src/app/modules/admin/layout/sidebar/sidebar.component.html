@@ -75,14 +75,60 @@
         </div>
     </li>
 
-    <li (click)="clickOrdersList()" 
+    <li [ngClass]="{ 'active': isOrderShow }" class="nav-item nav-color">
+        <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
+            <fa name="tasks"></fa>
+            <span>Orders</span>
+        </a>
+        <div [ngClass]="{ 'show': isOrderShow }" id="collapseThree" class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded">
+     
+                <a class="collapse-item" 
+                    (click)="clickOrdersProcessList()"  
+                    [ngClass]="{ 'active': isOrdersProcessActive }"
+                    [routerLink]="['/admin/orders-processing']">Processing</a>
+             
+                <a class="collapse-item"
+                    (click)="clickOrderApprovalList()" 
+                    [ngClass]="{ 'active': isOrderApprovalActive }"
+                    [routerLink]="['/admin/orders-approval']" 
+                    href="">Approval</a>
+
+                <a class="collapse-item"
+                    (click)="clickOrdersDeliveryList()" 
+                    [ngClass]="{ 'active': isOrdersDeliveryActive }"
+                    [routerLink]="['/admin/orders-delivery']" 
+                    href="">Delivery</a>   
+                
+                <a class="collapse-item"
+                    (click)="clickOrdersCompletedList()" 
+                    [ngClass]="{ 'active': isOrdersCompletedActive }"
+                    [routerLink]="['/admin/orders-completed']" 
+                    href="">Completed</a>
+                
+                <a class="collapse-item"
+                    (click)="clickOrdersCancelledList()" 
+                    [ngClass]="{ 'active': isOrdersCancelledActive }"
+                    [routerLink]="['/admin/orders-cancelled']" 
+                    href="">Cancelled</a>
+
+                <a class="collapse-item"
+                    (click)="clickOrdersReturnList()" 
+                    [ngClass]="{ 'active': isOrdersReturnActive }"
+                    [routerLink]="['/admin/orders-return']" 
+                    href="">Return Refund</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- <li (click)="clickOrdersList()" 
     [ngClass]="{ 'active': isOrdersListActive }" 
     [routerLink]="['/admin/orders']" 
     class="nav-item nav-color">
     <a class="nav-link">
         <fa name="tasks"></fa>
         <span>Orders</span></a>
-    </li>
+    </li> -->
 
     <li (click)="clickPromotionsList()" 
     [ngClass]="{ 'active': isPromotionsListActive }" 
