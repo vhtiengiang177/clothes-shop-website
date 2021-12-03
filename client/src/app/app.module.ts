@@ -52,6 +52,7 @@ import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orde
 import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/delivery-list.component';
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
+import { ProductAddCartFormComponent } from './modules/user/product-add-cart-form/product-add-cart-form.component';
 
 @NgModule({
   declarations: [
@@ -98,8 +99,9 @@ import { CartPageComponent } from './modules/user/cart-page/cart-page.component'
     OrdersCancelledListComponent,
     OrdersReturnListComponent,
     OrdersDetailComponent,
-    DeliveryListComponent
-    CartPageComponent
+    DeliveryListComponent,
+    CartPageComponent,
+    ProductAddCartFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -107,7 +109,8 @@ import { CartPageComponent } from './modules/user/cart-page/cart-page.component'
     CategoriesFormComponent,
     ConfirmFormComponent,
     PromotionFormComponent,
-    StaffFormComponent
+    StaffFormComponent,
+    ProductAddCartFormComponent
   ],
   imports: [
     BrowserModule,

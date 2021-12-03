@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material';
+import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/services/model/category/category.model';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
@@ -8,6 +8,7 @@ import { CategoriesStoreService } from 'src/app/services/store/categories-store/
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
 
 @Component({
   selector: 'app-product-page',
@@ -29,11 +30,14 @@ export class ProductPageComponent implements OnInit {
   sortSelected = 'name:asc' 
   minPrice: number;
   maxPrice: number;
+  
+  //static addForm: any;
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
+    public dialog: MatDialog,
     private toastr: ToastrService) {
       if(this.productsStore.products.length != 6) {
         this.fetchData()
@@ -142,5 +146,34 @@ export class ProductPageComponent implements OnInit {
     }
     this.paginator.pageIndex = 0;
     this.fetchData()
+  }
+
+  addToCart() {
+    const dialogRef = this.dialog.open(ProductAddCartFormComponent, {
+      width: '1000px',
+
+      data: { 
+        product : {}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        // if(this.filter.sort == null && this.filter.pageindex == 1) {
+        //   this.promotionsStore.promotions.splice(this.filter.pagesize - 1,1);
+        //   this.promotionsStore.promotions.splice(0,0,res);
+        //   this.promotionsStore.totalData = this.promotionsStore.totalData + 1;
+        // }
+        // else {
+        //   this.filter = {
+        //     pageindex: 1,
+        //     pagesize: this.filter.pagesize,
+        //     sort: null
+        //   }
+        //   this.fetchData()
+        // }
+        // this.paginator.pageIndex = 0;
+      }
+    });
   }
 }

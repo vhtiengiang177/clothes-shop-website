@@ -1,7 +1,7 @@
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from 'src/app/services/model/cart/cart.model';
@@ -15,13 +15,15 @@ import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-s
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-product-detail-page',
-  templateUrl: './product-detail-page.component.html',
-  styleUrls: ['./product-detail-page.component.css']
+  selector: 'app-product-add-cart-form',
+  templateUrl: './product-add-cart-form.component.html',
+  styleUrls: ['./product-add-cart-form.component.css']
 })
-export class ProductDetailPageComponent implements OnInit {
+export class ProductAddCartFormComponent implements OnInit {
+
   id: number
   product: Product
   isVisible: boolean = false
@@ -37,7 +39,7 @@ export class ProductDetailPageComponent implements OnInit {
   isEnabled = true
   cart: Cart = {}
 
-  constructor(private route: ActivatedRoute,
+  constructor(public dialogRef: MatDialogRef<ProductAddCartFormComponent>,private route: ActivatedRoute,
     private router: Router,
     private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
@@ -45,12 +47,12 @@ export class ProductDetailPageComponent implements OnInit {
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
     private cartsStoreService: CartsStoreService,
-    private toastr: ToastrService) {
-    this.route.params.subscribe((param) => {
-      this.id = param['id']
-      this.productsStore.getById(param['id']).subscribe(res => {
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: ProductSizeColor) {
+      this.id = data.idProduct
+      this.productsStore.getById(data.idProduct).subscribe(res => {
         this.product = res;
-        this.selectedSizeColor.idProduct = this.product.id
+        this.selectedSizeColor.idProduct = this.product.id;
         this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0
           ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name : ""
         this.fetchItem()
@@ -66,8 +68,14 @@ export class ProductDetailPageComponent implements OnInit {
           this.router.navigate(['/not-found'])
         }
       })
-    })
+    
   }
+
+  // constructor(public dialogRef: MatDialogRef<ConfirmFormComponent>,
+  //   @Inject(MAT_DIALOG_DATA) public data: ConfirmData) {
+  //     this.confirmtext = data.text
+  //     this.remindtext = data.remindtext
+  //    }
 
   ngOnInit() {
   }

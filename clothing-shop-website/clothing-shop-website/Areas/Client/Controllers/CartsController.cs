@@ -3,6 +3,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Client
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CartsController : ControllerBase
@@ -56,6 +58,11 @@ namespace clothing_shop_website.Areas.Client
         {
             if (ModelState.IsValid)
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                cart.IdCustomer = int.Parse(userId);
+
                 var item = _unitOfWork.CartsRepository.GetItemInCart(cart.IdCustomer, cart.IdProduct, cart.IdSize, cart.IdColor);
                 if (item != null)
                 {

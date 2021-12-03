@@ -72,7 +72,7 @@
                                 <input (change)="changeQuantity()" type="text" [value]="quantity">
                                 <span [ngClass]="{'my-disable': quantity === selectedSizeColor.stock }" (click)="incQuantity()" class="inc qtybtn">+</span>
                             </div>
-                            <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                           <button (click)="addToCart()"  class="primary-btn pd-cart">Add To Cart</button>
                         </div>
                     </div>
                 </div>

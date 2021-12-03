@@ -1,0 +1,242 @@
+
+.product-tab {
+    width: 90%;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+
+.my-disable{
+    pointer-events: none;
+    opacity: 0.4;
+}
+.product-details .pd-title {
+	position: relative;
+	margin-bottom: 6px;
+}
+
+.product-details .pd-title span {
+	display: block;
+	font-size: 12px;
+	color: #b2b2b2;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 700;
+	line-height: 23px;
+}
+
+.product-details .pd-title h3 {
+	color: #252525;
+	font-weight: 700;
+}
+
+.product-details .pd-title .heart-icon {
+	color: #252525;
+	font-size: 18px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.product-details .pd-rating {
+	margin-bottom: 10px;
+}
+
+.product-details .pd-rating i {
+	font-size: 12px;
+	display: inline-block;
+	color: #FAC451;
+	margin-right: -3px;
+}
+
+.product-details .pd-rating span {
+	font-size: 12px;
+	color: #999591;
+}
+
+.product-details .pd-desc {
+	margin-bottom: 24px;
+}
+
+.product-details .pd-desc p {
+	color: #636363;
+}
+
+.product-details .pd-desc h4 {
+	color: #e7ab3c;
+	font-weight: 700;
+}
+
+.product-details .pd-desc h4 span {
+	font-size: 18px;
+	font-weight: 400;
+	color: #b7b7b7;
+	text-decoration: line-through;
+	display: inline-block;
+	margin-left: 13px;
+}
+
+.product-details .pd-color {
+	margin-bottom: 25px;
+}
+
+.product-details .pd-color h6 {
+	color: #252525;
+	font-weight: 700;
+	float: left;
+	margin-right: 28px;
+}
+
+.product-details .pd-color .pd-color-choose {
+	display: inline-block;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label {
+	height: 20px;
+	width: 20px;
+	background: #252525;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-bottom: 0;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-yellow {
+	background: #EEEE21;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-violet {
+	background: #8230E3;
+}
+
+.product-details .pd-size-choose {
+	margin-bottom: 30px;
+}
+
+.product-details .pd-size-choose .sc-item {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.product-details .pd-size-choose .sc-item:last-child {
+	margin-right: 0;
+}
+
+.product-details .pd-size-choose .sc-item input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.product-details .pd-size-choose .sc-item label {
+	font-size: 16px;
+	color: #252525;
+	font-weight: 700;
+	height: 40px;
+	width: 47px;
+	border: 1px solid #ebebeb;
+	text-align: center;
+	line-height: 40px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.product-details .pd-size-choose .sc-item label.active {
+	background: #252525;
+	color: #ffffff;
+}
+
+.product-details .quantity {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin-bottom: 33px;
+}
+
+.product-details .quantity .pro-qty {
+	width: 123px;
+	height: 46px;
+	border: 2px solid #ebebeb;
+	padding: 0 15px;
+	float: left;
+	margin-right: 14px;
+}
+
+.product-details .quantity .pro-qty .qtybtn {
+	font-size: 24px;
+	color: #b2b2b2;
+	float: left;
+	line-height: 38px;
+	cursor: pointer;
+	width: 18px;
+}
+
+.product-details .quantity .pro-qty .qtybtn.dec {
+	font-size: 30px;
+}
+
+.product-details .quantity .pro-qty input {
+	text-align: center;
+	width: 52px;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
+	color: #4c4c4c;
+	line-height: 40px;
+	float: left;
+}
+
+.product-details .quantity .primary-btn.pd-cart {
+	padding: 14px 70px 10px;
+}
+
+.product-details .pd-tags {
+	margin-bottom: 27px;
+}
+
+.product-details .pd-tags li {
+	list-style: none;
+	font-size: 16px;
+	color: #636363;
+	line-height: 30px;
+}
+
+.product-details .pd-tags li span {
+	color: #252525;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.product-details .pd-share {
+	overflow: hidden;
+}
+
+.product-details .pd-share .p-code {
+	font-size: 16px;
+	color: #252525;
+	float: left;
+}
+
+.product-details .pd-share .pd-social {
+	float: right;
+}
+
+.product-details .pd-share .pd-social a {
+	display: inline-block;
+	color: #252525;
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+
+
+

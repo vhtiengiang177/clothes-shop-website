@@ -96,14 +96,14 @@
                 <div class="product-list">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6" *ngFor="let product of productsStore.products$ | async">
-                            <div [routerLink]="['/product-detail', product.id]" class="product-item">
+                            <div  class="product-item">
                                 <div class="pi-pic">
-                                    <img src="assets/product.jpg">
+                                    <img [routerLink]="['/product-detail', product.id]" src="assets/product.jpg">
                                     <ul>
-                                        <li class="quick-view"><a href="#">ADD TO CART</a></li>
+                                        <li (click)="addToCart(product.id)" class="quick-view"><a >ADD TO CART</a></li>
                                     </ul>
                                 </div>
-                                <div class="pi-text">
+                                <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                     <div class="catagory-name">Towel</div>
                                     <a href="#">
                                         <h5>{{ product.name }}</h5>
