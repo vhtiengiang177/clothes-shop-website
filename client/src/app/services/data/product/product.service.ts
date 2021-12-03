@@ -113,6 +113,12 @@ export class ProductService extends DataService {
     })
   }
 
+  getItemPSC(psc) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetItemPSC?" + this.convertToQueryString(psc), {
+      headers: this.authorizationHeader()
+    })
+  }
+
   convertToQueryStringProduct(filterParams: FilterParamsProduct): string {
     const cloneParams = { ...filterParams };
     let query = '?';

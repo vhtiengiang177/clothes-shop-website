@@ -7,6 +7,7 @@ import { ProductService } from '../../data/product/product.service';
 import { FilterParamsProduct } from '../../model/product/filter-params-product.model';
 import { Image } from '../../model/product/image.model';
 import { LogProduct } from '../../model/product/log-product.model';
+import { ProductSizeColor } from '../../model/product/product-size-color.model';
 import { Product } from '../../model/product/product.model';
 
 @Injectable({

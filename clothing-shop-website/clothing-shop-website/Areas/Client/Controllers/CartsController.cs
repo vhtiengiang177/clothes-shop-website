@@ -25,24 +25,24 @@ namespace clothing_shop_website.Areas.Client
         }
 
         [HttpGet("GetAllItemsInCart")]
-        public async Task<IActionResult> GetAllItemsInCart(int customerId)
+        public async Task<IActionResult> GetAllItemsInCart()
         {
             try
             {
                 IQueryable<Cart> lProductItems;
-                if ( customerId > 0 )
+
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                lProductItems = await _unitOfWork.CartsRepository.GetAllItemsInCart(int.Parse(userId));
+
+                var response = new ResponseJSON<Cart>
                 {
-                    lProductItems = await _unitOfWork.CartsRepository.GetAllItemsInCart(customerId);
+                    TotalData = lProductItems.Count(),
+                    Data = lProductItems.ToList()
+                };
 
-                    var response = new ResponseJSON<Cart>
-                    {
-                        TotalData = lProductItems.Count(),
-                        Data = lProductItems.ToList()
-                    };
-
-                    return Ok(response);
-                }
-                return BadRequest();
+                return Ok(response);
             }
             catch
             {

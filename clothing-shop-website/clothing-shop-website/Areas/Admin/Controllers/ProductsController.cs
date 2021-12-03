@@ -209,7 +209,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPut("DeleteProduct/{id}")]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             try
             {
@@ -224,6 +224,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 product.ModifiedById = int.Parse(userId);
                 product.LastModified = DateTime.Now;
                 product.State = 0;
+
+                var itemPSC = await _unitOfWork.ProductsRepository.GetListItemByIdProduct(product.Id);
+                foreach (var item in itemPSC)
+                {
+                    item.State = 0;
+                    _unitOfWork.ProductSizeColorsRepository.Update(item);
+                }
+
                 _unitOfWork.ProductsRepository.UpdateProduct(product);
                 _unitOfWork.Save();
 
@@ -273,7 +281,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 Product_Size_Color item = new Product_Size_Color();
 
-                item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct);
+                item = _unitOfWork.ProductsRepository.GetItemByIdPSC(logproduct.IdProduct, logproduct.IdSize, logproduct.IdColor);
 
                 if (item != null)
                 {
@@ -323,6 +331,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     return BadRequest();
                 }
                 return Ok();
+            }
+            else return NotFound();
+        }
+
+        [HttpGet("GetItemPSC")]
+        public IActionResult GetItemPSC([FromQuery] Product_Size_Color psc)
+        {
+            var item = _unitOfWork.ProductsRepository.GetItemByIdPSC(psc.IdProduct, psc.IdSize, psc.IdColor);
+            if (item != null)
+            {
+                return Ok(item);
             }
             else return NotFound();
         }

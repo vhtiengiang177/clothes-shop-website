@@ -101,6 +101,10 @@ namespace clothing_shop_website
                 endpoints.MapControllerRoute(
                 name: "AdminArea",
                 pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+                //endpoints.MapControllerRoute(
+                //name: "ClientArea",
+                //pattern: "{area:exists}/{controller}/{action}/{id?}");
             });
         }
     }

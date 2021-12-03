@@ -19,6 +19,7 @@ import { PromotionsListComponent } from './modules/admin/promotions/promotions-l
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
+import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 
 
 const routes: Routes = [
@@ -74,6 +75,11 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductPageComponent
+  },
+  {
+    path: 'shopping-cart',
+    component: CartPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'product-detail/:id',

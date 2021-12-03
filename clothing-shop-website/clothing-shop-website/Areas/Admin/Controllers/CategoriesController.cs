@@ -131,7 +131,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPut("DeleteCategory/{id}", Name = "DeleteCategory")]
-        public IActionResult DeleteCategory(int id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
             try 
             {
@@ -155,6 +155,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 {
                     item.State = 0;
                     _unitOfWork.ProductsRepository.UpdateProduct(item);
+
+                    var itemPSC = await _unitOfWork.ProductsRepository.GetListItemByIdProduct(item.Id);
+                    foreach (var psc in itemPSC)
+                    {
+                        psc.State = 0;
+                        _unitOfWork.ProductSizeColorsRepository.Update(psc);
+                    }
                 }
 
                 _unitOfWork.Save();

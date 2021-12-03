@@ -174,8 +174,6 @@ export class ProductDetailPageComponent implements OnInit {
       if (this.quantity > this.selectedSizeColor.stock) {
         this.toastr.warning("The selected quantity exceeds quantity available in stock")
       }
-      else if (this.quantity > 30)
-      this.toastr.warning("The maximum quantity is less than or equal to 30 products")
       else this.quantity += 1
     }
     else this.toastr.warning("Please select a color and a size of the product")
@@ -183,15 +181,11 @@ export class ProductDetailPageComponent implements OnInit {
 
   changeQuantity() {
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > this.selectedSizeColor.stock && this.quantity < 30) {
+      if (this.quantity > this.selectedSizeColor.stock) {
         this.quantity = this.selectedSizeColor.stock
         this.toastr.warning("The selected quantity exceeds quantity available in stock")
       }
-      else if (this.quantity > 30) {
-        this.quantity = 30
-        this.toastr.warning("The maximum quantity is less than or equal to 30 products")
-      }
-      else if (this.quantity < 1) {
+      else if (this.quantity < 1 || this.quantity == null) {
         this.toastr.warning("The selected quantity must be one or more")
         this.quantity = 1
       }

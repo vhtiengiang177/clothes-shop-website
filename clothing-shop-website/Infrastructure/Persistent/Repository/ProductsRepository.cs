@@ -91,9 +91,9 @@ namespace Infrastructure.Persistent.Repository
             return lImages.AsQueryable();
         }
 
-        public Product_Size_Color GetItemByIdPSC(Log_Product logproduct)
+        public Product_Size_Color GetItemByIdPSC(int idProduct, int idSize, int idColor)
         {
-            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == logproduct.IdProduct && i.IdSize == logproduct.IdSize && i.IdColor == logproduct.IdColor);
+            return _dbContext.Product_Size_Colors.FirstOrDefault(i => i.IdProduct == idProduct && i.IdSize == idSize && i.IdColor == idColor);
         }
 
         public Product GetProductInactiveBySKU(string SKU)

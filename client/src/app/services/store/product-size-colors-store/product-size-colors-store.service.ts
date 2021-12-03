@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductService } from '../../data/product/product.service';
 import { ProductSizeColor } from '../../model/product/product-size-color.model';
 
@@ -31,5 +31,14 @@ export class ProductSizeColorsStoreService {
   getItemsOfProductForClientPage(id) {
     this.productService.getItemsOfProductForClientPage(id)
       .subscribe(res => this.productitems = res)
+  }
+
+  getItemPSC(psc) {
+    let result = new Subject<ProductSizeColor>();
+    this.productService.getItemPSC(psc).subscribe(res => {
+      result.next(res)
+    })
+
+    return result.asObservable()
   }
 }
