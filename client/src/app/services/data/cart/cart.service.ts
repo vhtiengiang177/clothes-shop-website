@@ -18,4 +18,16 @@ export class CartService extends DataService {
        headers: this.authorizationHeader()
      })
    }
+
+   deleteItemsInCart(lItems: Cart[]) {
+     return this.http.post(GlobalConstants.apiUrl + this.routeAPI, lItems,{
+       headers: this.authorizationHeader()
+     })
+   }
+
+   updateQuantityItemInCart(item: Cart) {
+    return this.http.put<any>(GlobalConstants.apiUrl + this.routeAPI + "/UpdateQuantityItemInCart", item, {
+      headers: this.authorizationHeader()
+    })
+   }
 }

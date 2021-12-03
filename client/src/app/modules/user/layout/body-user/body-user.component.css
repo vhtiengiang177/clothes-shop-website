@@ -2533,7 +2533,7 @@ ol {
 	font-weight: 700;
 	border-bottom: 1px solid #ebebeb;
 	text-align: center;
-	padding: 18px 0 19px;
+	padding: 18px 20px 19px;
 	text-transform: uppercase;
 }
 
@@ -2547,7 +2547,8 @@ ol {
 }
 
 .cart-table table tr td.first-row {
-	padding-top: 30px;
+	padding-top: 20px;
+	padding-left: 20px;
 }
 
 .cart-table table tr td.cart-pic {

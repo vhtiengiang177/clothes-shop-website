@@ -23,7 +23,7 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th class="p-name">Product Name</th>
+                                <th class="p-name">Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
@@ -31,23 +31,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of listCart">
-                                <td></td>
+                            <tr *ngFor="let item of cartsStore.carts$ | async; index as i">
+                                <td>{{ i+1 }}</td>
                                 <td class="cart-title first-row">
-                                    <h5>{{ item.nameProduct }}</h5>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h5 class="name-item">{{ item.nameProduct }}</h5>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="div-color-size edit" role="button" tabindex="0">
+                                                <div>
+                                                    <span class="span-size">{{ item.nameSize }}</span>/<span class="span-size">{{ item.nameColor }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 stock">
+                                            Stock: {{ item.stock }}
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="p-price first-row">{{ item.unitPrice  | currency: 'VND'}}</td>
                                 <td class="qua-col first-row">
                                     <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span [ngClass]="{'my-disable': quantity == 1}" (click)="decQuantity(item)" class="dec qtybtn">-</span>
-                                            <input (input)="changeQuantity($event.target.value, item)" type="text" [value]="item.quantity">
-                                            <span [ngClass]="{'my-disable': quantity === item.stock }" (click)="incQuantity(item)" class="inc qtybtn">+</span>
-                                        </div>
+                                        <input class="input-quantity" (change)="changeQuantity($event.target.value, item)" type="number" [(ngModel)]="item.quantity" min="1" [max]="item.stock">
                                     </div>
                                 </td>
                                 <td class="total-price first-row">{{ item.unitPrice * item.quantity | currency: 'VND'}}</td>
-                                <td class="close-td first-row"><fa name="close"></fa></td>
+                                <td class="close-td first-row"><fa name="close" (click)="removeItem(item, i)"></fa></td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,8 +68,7 @@
                     <div class="col-lg-4 offset-lg-4">
                         <div class="proceed-checkout">
                             <ul>
-                                <li class="subtotal">Subtotal <span>$240.00</span></li>
-                                <li class="cart-total">Total <span>$240.00</span></li>
+                                <li class="cart-total">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>
                             </ul>
                             <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
                         </div>
