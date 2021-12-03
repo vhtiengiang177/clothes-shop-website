@@ -17,38 +17,62 @@
 <!-- Shopping Cart Section Begin -->
 <section class="checkout-section spad">
     <div class="container">
-        <form action="#" class="checkout-form">
+        <form [formGroup]="formAddress" (ngSubmit)="order(formAddress)" class="checkout-form">
             <div class="row">
                 <div class="col-lg-6">
                     <h4>Biiling Details</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="fir">First Name<span>*</span></label>
-                            <input type="text" id="fir">
+                            <input type="text" formControlName="firstName">
+                            <mat-error
+                                *ngIf="formAddress.get('firstName')?.touched && formAddress.get('firstName')?.errors?.required || formAddress.get('firstName').value?.trim() == ''">
+                                First name is required
+                            </mat-error>
                         </div>
                         <div class="col-lg-6">
                             <label for="last">Last Name<span></span></label>
-                            <input type="text" id="last">
+                            <input type="text" formControlName="lastName">
                         </div>
                         <div class="col-lg-12">
                             <label for="street">Address<span>*</span></label>
-                            <input type="text" id="street" class="street-first">
+                            <input type="text" formControlName="address" class="street-first">
+                            <mat-error
+                                *ngIf="formAddress.get('address')?.touched && formAddress.get('address')?.errors?.required || formAddress.get('address').value?.trim() == ''">
+                                Address is required
+                            </mat-error>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label for="town">Wards<span>*</span></label>
-                            <input type="text" id="town">
+                            <input type="text" formControlName="wards">
+                            <mat-error
+                                *ngIf="formAddress.get('wards')?.touched && formAddress.get('wards')?.errors?.required || formAddress.get('wards').value?.trim() == ''">
+                                Wards is required
+                            </mat-error>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label for="town">District<span>*</span></label>
-                            <input type="text" id="town">
+                            <input type="text" formControlName="district">
+                            <mat-error
+                                *ngIf="formAddress.get('district')?.touched && formAddress.get('district')?.errors?.required || formAddress.get('district').value?.trim() == ''">
+                                District is required
+                            </mat-error>
                         </div>
                         <div class="col-lg-12">
                             <label for="town">Province<span>*</span></label>
-                            <input type="text" id="town">
+                            <input type="text" formControlName="province">
+                            <mat-error
+                                *ngIf="formAddress.get('province')?.touched && formAddress.get('province')?.errors?.required || formAddress.get('province').value?.trim() == ''">
+                                Province is required
+                            </mat-error>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <label for="phone">Phone<span>*</span></label>
-                            <input type="text" id="phone">
+                            <input type="text" formControlName="phone">
+                            <mat-error
+                                *ngIf="formAddress.get('phone')?.touched && formAddress.get('phone')?.errors?.required || formAddress.get('phone').value?.trim() == ''">
+                                Phone is required
+                            </mat-error>
                         </div>
                     </div>
                 </div>
@@ -59,7 +83,7 @@
                             <ul class="order-table">
                                 <li>Product <span>Total</span></li>
                                 <li *ngFor="let item of cartsStore.carts$ | async" class="fw-normal">
-                                    {{ item.nameProduct }} x {{ item.quantity }} 
+                                    {{ item.nameProduct }} x {{ item.quantity }}
                                     <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
                                 </li>
                                 <li class="total-price">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>

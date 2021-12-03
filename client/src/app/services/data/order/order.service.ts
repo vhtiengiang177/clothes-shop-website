@@ -50,4 +50,8 @@ export class OrderService extends DataService{
       // headers: this.authorizationHeader()
     })
   }
+
+  createOrder(orderDetail, idAddress) {
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "?idAddress=" + idAddress, orderDetail)
+  }
 }

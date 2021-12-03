@@ -14,7 +14,7 @@
 </div>
 <!-- Breadcrumb Section Begin -->
 <!-- Shopping Cart Section Begin -->
-<section class="shopping-cart spad">
+<section *ngIf="cartsStore.carts.length > 0" class="shopping-cart spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -77,5 +77,8 @@
             </div>
         </div>
     </div>
+</section>
+<section *ngIf="cartsStore.carts.length == 0">
+    <img src="../../../../assets/empty-cart.png">
 </section>
 <!-- Shopping Cart Section End -->
