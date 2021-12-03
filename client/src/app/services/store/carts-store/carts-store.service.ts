@@ -39,4 +39,12 @@ export class CartsStoreService {
               
             });
   }
+
+  deleteItemsInCart(lItems) {
+    return this.cartService.deleteItemsInCart(lItems)
+  }
+
+  updateQuantityItemInCart(item) {
+    return this.cartService.updateQuantityItemInCart(item)
+  }
 }

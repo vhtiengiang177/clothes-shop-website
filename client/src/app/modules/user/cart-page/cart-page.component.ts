@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from 'src/app/services/model/cart/cart.model';
@@ -21,6 +22,8 @@ export class CartPageComponent implements OnInit {
   product: Product
   listColors: Color[] = []
   listSizes: Size[] = []
+  totalPrice: number = 0
+  listCartSelected: Cart[] = []
 
   constructor(private cartsStore: CartsStoreService,
     private productsStore: ProductsStoreService,
@@ -29,7 +32,7 @@ export class CartPageComponent implements OnInit {
     private colorsStore: ColorsStoreService,
     private toastr: ToastrService) {
     this.cartsStore.carts$.subscribe(res => {
-      this.listCart = res
+      //this.listCart = res
 
       this.getInfoCart()
     })
@@ -39,13 +42,32 @@ export class CartPageComponent implements OnInit {
   }
 
   getInfoCart() {
-    this.listCart.forEach(cart => {
+    // this.listCart.forEach(cart => {
+    //   this.productsStore.getById(cart.idProduct).subscribe(res => {
+    //     this.product = res
+    //     cart.state = this.product.state
+    //     cart.unitPrice = this.product.unitPrice
+    //     this.totalPrice += cart.quantity * cart.unitPrice
+    //     cart.nameProduct = this.product.name
+    //     var psc: ProductSizeColor = {
+    //       idProduct: cart.idProduct,
+    //       idColor: cart.idColor,
+    //       idSize: cart.idSize
+    //     }
+    //     this.productSizeColorsStore.getItemPSC(psc).subscribe(res => {
+    //       cart.stock = res.stock
+          
+    //       this.getNameSizeColor(cart)
+    //     })
+    //   })
+    // })
+    this.cartsStore.carts.forEach(cart => {
       this.productsStore.getById(cart.idProduct).subscribe(res => {
         this.product = res
         cart.state = this.product.state
         cart.unitPrice = this.product.unitPrice
+        this.totalPrice += cart.quantity * cart.unitPrice
         cart.nameProduct = this.product.name
-        cart.choose = true
         var psc: ProductSizeColor = {
           idProduct: cart.idProduct,
           idColor: cart.idColor,
@@ -53,11 +75,14 @@ export class CartPageComponent implements OnInit {
         }
         this.productSizeColorsStore.getItemPSC(psc).subscribe(res => {
           cart.stock = res.stock
-          
+          if (cart.quantity > cart.stock) {
+            cart.quantity = cart.stock
+            this.cartsStore.updateQuantityItemInCart(cart).subscribe(null)
+          }
           this.getNameSizeColor(cart)
+
         })
       })
-      
     })
     this.listColors.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
     this.listSizes.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
@@ -85,22 +110,7 @@ export class CartPageComponent implements OnInit {
     }
   }
 
-  decQuantity(item) {
-    if (item.quantity > 1)
-        item.quantity -= 1
-      else this.toastr.warning("The selected quantity must be one or more")
-  }
-
-  incQuantity(item) {
-    if (item.quantity > item.stock) {
-      this.toastr.warning("The selected quantity exceeds quantity available in stock")
-    }
-    else item.quantity += 1
-  }
-
   changeQuantity(input, item) {
-    console.log(input);
-    
     if (item.quantity > item.stock) {
       item.quantity = item.stock
       this.toastr.warning("The selected quantity exceeds quantity available in stock")
@@ -108,7 +118,31 @@ export class CartPageComponent implements OnInit {
     else if (item.quantity < 1 || item.quantity == null) {
       this.toastr.warning("The selected quantity must be one or more")
       item.quantity = 1
-      input = 5
     }
+    this.cartsStore.updateQuantityItemInCart(item).subscribe(res => {
+       item.quantity = res.quantity
+    }, () => {
+      this.toastr.error("Something went wrong!")
+    })
+  }
+
+  countTotalPrice() {
+    this.totalPrice = 0
+    this.cartsStore.carts.forEach(item => {
+      this.totalPrice += item.unitPrice * item.quantity
+    })
+  }
+
+  removeItem(item, index) {
+    this.listCartSelected.push(item);
+    this.cartsStore.deleteItemsInCart(this.listCartSelected).subscribe(() => {
+      this.listCartSelected = []
+      this.cartsStore.carts.splice(index,1)
+      this.countTotalPrice()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 404)
+        this.toastr.error("Could not find this item")
+      else this.toastr.error("Something went wrong!")
+    })
   }
 }

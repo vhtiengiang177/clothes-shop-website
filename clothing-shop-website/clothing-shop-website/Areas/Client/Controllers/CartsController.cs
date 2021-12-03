@@ -107,12 +107,12 @@ namespace clothing_shop_website.Areas.Client
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteItemInCart(Cart[] litems)
+        [HttpPost]
+        public IActionResult DeleteItemsInCart(Cart[] lItems)
         {
             try
             {
-                foreach (var item in litems)
+                foreach (var item in lItems)
                 {
                     var itemObj = _unitOfWork.CartsRepository.GetItemInCart(item.IdCustomer, item.IdProduct, item.IdSize, item.IdColor);
                     if (itemObj == null)

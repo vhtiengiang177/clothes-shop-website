@@ -98,7 +98,7 @@ import { CartPageComponent } from './modules/user/cart-page/cart-page.component'
     OrdersCancelledListComponent,
     OrdersReturnListComponent,
     OrdersDetailComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
     CartPageComponent
   ],
   entryComponents: [
