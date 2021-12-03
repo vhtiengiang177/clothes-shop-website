@@ -100,6 +100,8 @@ import { ProductAddCartFormComponent } from './modules/user/product-add-cart-for
     OrdersReturnListComponent,
     OrdersDetailComponent,
     DeliveryListComponent,
+    CartPageComponent
+    DeliveryListComponent,
     CartPageComponent,
     ProductAddCartFormComponent
   ],

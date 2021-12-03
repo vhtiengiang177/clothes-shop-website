@@ -43,6 +43,14 @@ export class CartsStoreService {
             });
   }
 
+  deleteItemsInCart(lItems) {
+    return this.cartService.deleteItemsInCart(lItems)
+  }
+
+  updateQuantityItemInCart(item) {
+    return this.cartService.updateQuantityItemInCart(item)
+  }
+
   add(cartObj) {
     let result = new Subject<Cart>();
     this.cartService.create("/AddItemToCart", cartObj).subscribe(res => {
