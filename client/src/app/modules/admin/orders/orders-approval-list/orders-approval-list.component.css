@@ -26,13 +26,14 @@
     color:salmon
   }
   .action {
-      color: rgb(16, 170, 42);
+      background-color: rgb(16, 170, 42);
       font-weight: bold; 
   }
 
   .cancel {
-    color: rgb(199, 32, 10);
+  
     font-weight: bold;
+    background-color: #fc130b;
   }
   
   .no-data {

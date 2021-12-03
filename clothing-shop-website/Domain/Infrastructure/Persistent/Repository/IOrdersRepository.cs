@@ -18,5 +18,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         void DeleteOrder(Order Order);
         Task<IQueryable<Order>> GetAllOrdersByCustomerAndState(int customerID, int state);
         Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order);
+
     }
 }

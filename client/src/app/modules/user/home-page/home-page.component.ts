@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
+import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +17,7 @@ export class HomePageComponent implements OnInit {
   productTopBestSellers: Product[] = []
   productTopNew: Product[] = []
 
-  constructor(private productsStore: ProductsStoreService,
+  constructor(private productsStore: ProductsStoreService, public dialog: MatDialog,
     private categoriesStore: CategoriesStoreService) { 
 
     this.productsStore.getTopBestSellers().subscribe(p => {
@@ -40,6 +42,21 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  addToCart(product) {
+    const dialogRef = this.dialog.open(ProductAddCartFormComponent, {
+      width: '1000px',
+      data: { 
+        product : product
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        
+      }
+    });
   }
 
 }

@@ -237,6 +237,23 @@
 	margin-left: 15px;
 }
 
+.cart-table table tr td.qua-col .quantity {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.product-details .quantity .primary-btn.pd-cart {
+	padding: 14px 30px 10px;
+}
+
+.product-details .quantity .primary-btn.pd-cart {
+	padding: 14px 20px 10px;
+}
+
 
 
 

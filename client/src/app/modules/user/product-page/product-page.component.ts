@@ -148,12 +148,11 @@ export class ProductPageComponent implements OnInit {
     this.fetchData()
   }
 
-  addToCart() {
+  addToCart(product) {
     const dialogRef = this.dialog.open(ProductAddCartFormComponent, {
       width: '1000px',
-
       data: { 
-        product : {}
+        product : product
       }
     });
 
