@@ -83,33 +83,70 @@ export class StaffListComponent implements OnInit {
     }
   }
 
-  unblockAccount(idAccount) {
-    this.accountsStore.unblock(idAccount).subscribe(() => {
-      this.toastr.success("Unblock customer #" + idAccount + " successfully")
-      this.fetchData()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
-        this.toastr.error("Bad Request")
+ 
+  
+  blockAccount(idAccount) {
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to block the employee",
+        id: idAccount,
+        
       }
-      else if (error.status == 404) {
-        this.toastr.error("Not found customer #" + idAccount)
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.accountsStore.block(idAccount).subscribe(() => {
+          this.toastr.success("Block employee #" + idAccount + " successfully")
+          let totalStore = this.accountsStore.accounts.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found employee #" + idAccount)
+          }
+        })
       }
-    })
+    });
   }
 
-  blockAccount(idAccount) {
-    this.accountsStore.block(idAccount).subscribe(() => {
-      this.toastr.success("Block customer #" + idAccount + " successfully")
-      this.fetchData()
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
-        this.toastr.error("Bad Request")
+  unblockAccount(idAccount) {
+    const dialogRef = this.dialog.open(ConfirmFormComponent, {
+      data: {
+        text: "Do you want to unblock the employee",
+        id: idAccount,
+        
       }
-      else if (error.status == 404) {
-        this.toastr.error("Not found customer #" + idAccount)
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.accountsStore.unblock(idAccount).subscribe(() => {
+          this.toastr.success("Unblock employee #" + idAccount + " successfully")
+          let totalStore = this.accountsStore.accounts.length;
+          if(totalStore == 1) {
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
+          }
+          this.fetchData()
+        }, (error: HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("Bad Request")
+          }
+          else if (error.status == 404) {
+            this.toastr.error("Not found employee #" + idAccount)
+          }
+        })
       }
-    })
+    });
   }
+
 
   deleteAccount(idAccount) {
     const dialogRef = this.dialog.open(ConfirmFormComponent, {

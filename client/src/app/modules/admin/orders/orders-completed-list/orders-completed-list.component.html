@@ -1,0 +1,91 @@
+
+<div class="container">
+    <div class="row">
+      <!-- Search -->
+      <div class="searchFilter searchFilter-center">
+        <div class="input-group">
+            <input id="table_filter" 
+                [(ngModel)]="search" 
+                #searchInput 
+                type="text" 
+                class="form-control input-search"> &nbsp;
+            <div class="input-group-btn">
+                <button name="searchBtn" 
+                    type="button" 
+                    class="btn btn-secondary btn-search"
+                    (click)="searchEvent(searchInput.value)">
+                    <fa class="icon-size" name="search"></fa>
+                    <span class="label-icon">
+                        &nbsp; Search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+  
+      <div class="button-add">
+        <button 
+        mat-raised-button 
+        (click)="reloadOrder()"
+        class="btn btn-secondary">Reload</button>
+        &nbsp;
+      </div>
+          
+      <table id="producttable" class="table table-striped table-hover table-sm ">
+        <thead class="dt-header">
+          <tr>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+            <th (click)="sortID()">ID
+              <fa *ngIf="filter.sort == null" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
+            </th>
+            <th (click)="sortDateOrders()">Date Order
+                <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+              </th>
+            <th (click)="sortTotalQuantity()">Total Quantity
+                <fa *ngIf="filter.sort == 'totalquantity:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'totalquantity:asc'" name="sort-up"></fa>
+              </th>
+            <th (click)="sortTotalAmount()">Total Amount
+                <fa *ngIf="filter.sort == 'totalamount:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'totalamount:asc'" name="sort-up"></fa>
+              </th>
+              <th >State   
+              </th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-body" *ngIf="ordersCompletedStore.totalData > 0">
+          <tr *ngFor="let order of ordersCompletedStore.orders$ | async; index as i">
+            <td>{{ i+1 }}</td>
+            <td><a [routerLink]="['/admin/orders-completed/', order.id]">{{ order.id }}</a></td>
+            <td><a>{{ order.dateOrder | date: 'longDate' }}</a></td>
+            <td><a>{{ order.totalQuantity }}</a></td>
+            <td>{{ order.totalAmount }}</td>
+            <td *ngIf="order.state == 4"> Completed</td>
+            <td ></td>
+            <!-- <td class ="cancel" (click)="editPromotion(promotion.id)">Cancel</td> --> 
+          </tr>
+        </tbody>
+        <tbody *ngIf="ordersCompletedStore.totalData == 0">
+          <tr>
+            <td class="no-data" colspan="6">No data available in table</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="pb-0 pt-3 paging-custom">
+      <mat-paginator #paginator
+        [length]="ordersCompletedStore.totalData"
+        [(pageSize)]="filter.pagesize"
+        [pageSizeOptions]="[5, 10, 15]"
+        (page)="onPaginate($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+</div>
+

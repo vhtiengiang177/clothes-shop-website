@@ -1,0 +1,21 @@
+mat-dialog-content {
+    text-align: center;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+
+.btn-add {
+    background-color: #0093c9;
+    color: #fff;
+    border: 1px solid #0093c9;
+    margin-left: 14px;
+    font-size: 13px;
+  }
+   .btn-add:hover {
+    background-color: #b3ebff;
+    color: #000;
+    border: 1px solid #b3ebff;
+  }

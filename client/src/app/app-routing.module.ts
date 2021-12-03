@@ -1,3 +1,4 @@
+import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orders-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -18,6 +19,12 @@ import { CustomersListComponent } from './modules/admin/customers/customers-list
 import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
+import { OrdersApprovalListComponent } from './modules/admin/orders/orders-approval-list/orders-approval-list.component';
+import { OrdersProcessListComponent } from './modules/admin/orders/orders-process-list/orders-process-list.component';
+import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-delivery-list/orders-delivery-list.component';
+import { OrdersCompletedListComponent } from './modules/admin/orders/orders-completed-list/orders-completed-list.component';
+import { OrdersCancelledListComponent } from './modules/admin/orders/orders-cancelled-list/orders-cancelled-list.component';
+import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-list/orders-return-list.component';
 
 
 const routes: Routes = [
@@ -57,8 +64,68 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
-    path: 'admin/orders',
-    component: OrdersListComponent,
+    path: 'admin/orders-processing',
+    component: OrdersProcessListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-approval',
+    component: OrdersApprovalListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-delivery',
+    component: OrdersDeliveryListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-completed',
+    component: OrdersCompletedListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-cancelled',
+    component: OrdersCancelledListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-return',
+    component: OrdersReturnListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-process/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-approval/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-delivery/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-completed/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-cancelled/:id',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-return/:id',
+    component: OrdersDetailComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {

@@ -179,19 +179,6 @@ export class PromotionsListComponent implements OnInit {
   }
 
   
-  // deletePromotion(idPromotion) {
-  //   this.promotionsStore.delete(idPromotion).subscribe(() => {
-  //     this.toastr.success("Delete promotion #" + idPromotion + " successfully")
-  //     this.fetchData()
-  //   }, (error: HttpErrorResponse) => {
-  //     if(error.status == 400) {
-  //       this.toastr.error("Bad Request")
-  //     }
-  //     else if (error.status == 404) {
-  //       this.toastr.error("Not found promotion #" + idPromotion)
-  //     }
-  //   })
-  // }
 
   deletePromotion(idPromotion) {
     const dialogRef = this.dialog.open(ConfirmFormComponent, {

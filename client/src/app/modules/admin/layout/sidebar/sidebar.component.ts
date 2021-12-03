@@ -20,6 +20,14 @@ export class SidebarComponent implements OnInit {
   isOrdersListActive: boolean = false
 
   isPromotionsListActive: Boolean =false
+
+  isOrderShow: Boolean = false;
+  isOrdersProcessActive: Boolean = false;
+  isOrderApprovalActive: Boolean = false;
+  isOrdersDeliveryActive: Boolean = false;
+  isOrdersCompletedActive: Boolean = false;
+  isOrdersCancelledActive: Boolean = false;
+  isOrdersReturnActive: Boolean = false;
   currentRouter: string
 
   constructor(private router: Router) {
@@ -112,20 +120,6 @@ export class SidebarComponent implements OnInit {
     this.isProductShow = false
   }
 
-  // clickAccountsList() {
-  //   this.isAccountShow = true
-  //   this.isAccountsListActive = true
-  //   // false
-  //   this.isDashboardActive = false
-  //   this.isProductsListActive = false    
-  //   this.isCategoriesListActive = false
-  //   this.isOrdersListActive = false
-
-  //   this.isProductShow = false
-  //   this.isOrderShow = false
-  // }
-
- 
 
   clickOrdersList() {
     this.isOrdersListActive = true
@@ -142,7 +136,7 @@ export class SidebarComponent implements OnInit {
   }
 
   clickPromotionsList() {
-    this.isPromotionsListActive=true
+    this.isPromotionsListActive = true
     // false
     this.isDashboardActive = false
     this.isProductsListActive = false    
@@ -154,4 +148,119 @@ export class SidebarComponent implements OnInit {
     this.isProductShow = false
     this.isAccountShow = false
   }
+
+  clickOrdersProcessList()
+  {
+    this.isOrderShow = true;
+    this.isOrdersProcessActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrderApprovalActive = false
+    this.isOrdersDeliveryActive = false    
+    this.isOrdersCompletedActive = false
+    this.isOrdersCancelledActive = false
+    this.isOrdersReturnActive = false
+  }
+
+  clickOrdersNavItem() {
+    this.isOrderShow = !this.isOrderShow
+  }
+
+  clickOrderApprovalList()
+  {
+    this.isOrderShow = true;
+    this.isOrderApprovalActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrdersProcessActive = false
+    this.isOrdersDeliveryActive = false    
+    this.isOrdersCompletedActive = false
+    this.isOrdersCancelledActive = false
+    this.isOrdersReturnActive = false
+  }
+
+  clickOrdersDeliveryList()
+  {
+    this.isOrderShow = true;
+    this.isOrdersDeliveryActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrdersProcessActive = false
+    this.isOrderApprovalActive = false    
+    this.isOrdersCompletedActive = false
+    this.isOrdersCancelledActive = false
+    this.isOrdersReturnActive = false
+  }
+
+  clickOrdersCompletedList()
+  {
+    this.isOrderShow = true;
+    this.isOrdersCompletedActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrdersProcessActive = false
+    this.isOrderApprovalActive = false    
+    this.isOrdersDeliveryActive = false
+    this.isOrdersCancelledActive = false
+    this.isOrdersReturnActive = false
+  }
+
+  clickOrdersCancelledList()
+  {
+    this.isOrderShow = true;
+    this.isOrdersCancelledActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrdersProcessActive = false
+    this.isOrderApprovalActive = false    
+    this.isOrdersDeliveryActive = false
+    this.isOrdersCompletedActive = false
+    this.isOrdersReturnActive = false
+  }
+
+  clickOrdersReturnList()
+  {
+    this.isOrderShow = true;
+    this.isOrdersReturnActive = true;
+    //false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+
+    this.isOrdersProcessActive = false
+    this.isOrderApprovalActive = false    
+    this.isOrdersDeliveryActive = false
+    this.isOrdersCancelledActive = false
+    this.isOrdersCompletedActive = false
+  }
+
+
+
 }

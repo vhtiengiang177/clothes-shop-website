@@ -9,7 +9,7 @@ namespace Domain.Infrastructure.Persistent.Repository
 {
     public interface IOrdersRepository
     {
-        Task<IQueryable<Order>> GetAllOrders();
+        Task<IQueryable<Order>> GetAllOrdersByState(int state);
         Task<IQueryable<Order>> GetAllOrdersByCustomer(int customerID);
         IQueryable<Order> GetOrdersByStates(int[] states);
         Order GetOrderByID(int orderID);
@@ -17,5 +17,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         void UpdateOrder(Order Order);
         void DeleteOrder(Order Order);
         Task<IQueryable<Order>> GetAllOrdersByCustomerAndState(int customerID, int state);
+        Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order);
     }
 }

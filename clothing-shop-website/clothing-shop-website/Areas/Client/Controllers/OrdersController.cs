@@ -3,6 +3,7 @@ using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Areas.Client
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
@@ -25,8 +27,9 @@ namespace clothing_shop_website.Areas.Client
             _ordersService = ordersService;
         }
 
-        [HttpGet("GetAllOrders")]
-        public async Task<IActionResult> GetAllOrders([FromQuery] FilterParamsOrder filterParams)
+        [AllowAnonymous]
+        [HttpGet("GetAllOrdersByState")]
+        public async Task<IActionResult> GetOrdersByStates([FromQuery] FilterParamsOrder filterParams)
         {
             try
             {
@@ -35,16 +38,7 @@ namespace clothing_shop_website.Areas.Client
 
                 IQueryable<Order> lOrderItems;
 
-                if (filterParams.lStates != null)
-                {
-                    if (filterParams.lStates.Count() != 0
-                        || filterParams.lStates.Count() != _unitOfWork.CategoriesRepository.Count())
-                    {
-                        lOrderItems = _unitOfWork.OrdersRepository.GetOrdersByStates(filterParams.lStates);
-                    }
-                    else lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrders();
-                }
-                else lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrders();
+                lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrdersByState(filterParams.IdState);
 
                 var lOrder = _ordersService.SortListOrder(filterParams.Sort, lOrderItems);
 
@@ -63,6 +57,23 @@ namespace clothing_shop_website.Areas.Client
 
         }
 
+        [AllowAnonymous]
+        [HttpGet("GetOrderByID/{id}", Name = "GetOrderByID")]
+        public IActionResult GetOrderByID(int id)
+        {
+            var order = _unitOfWork.OrdersRepository.GetOrderByID(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(order);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetAllOrdersByCustomer")]
         public async Task<IActionResult> GetAllOrdersByCustomer(int customerId)
         {
@@ -90,6 +101,7 @@ namespace clothing_shop_website.Areas.Client
 
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllOrdersByCustomerAndState")]
         public async Task<IActionResult> GetAllOrdersByCustomerAndState(int customerId,int state)
         {
@@ -115,6 +127,63 @@ namespace clothing_shop_website.Areas.Client
                 return BadRequest();
             }
 
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetAllOrderDetailByOrder/{id}")]
+        public async Task<IActionResult> GetAllOrderDetailByOrder(int id)
+        {
+            try
+            {
+                IQueryable<OrderDetail> lOrderItems;
+                
+                    lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrderDetailByOrder(id);
+
+                    var response = new ResponseJSON<OrderDetail>
+                    {
+                        TotalData = lOrderItems.Count(),
+                        Data = lOrderItems.ToList()
+                    };
+
+                    return Ok(response);
+               
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [AllowAnonymous]
+        [HttpPut("UpdateState/{id}/{state}", Name = "UpdateState")]
+        public IActionResult UpdateState(int id, int state)
+        {
+            try
+            {
+                var order = _unitOfWork.OrdersRepository.GetOrderByID(id);
+
+                if (order == null)
+                    return NotFound();
+
+                //var userId = User.FindFirst("id").Value;
+                //if (userId == null) return BadRequest();
+
+                //if (state == 3)
+                //    order.IdShipper = int.Parse(userId);
+                //else
+                //    order.IdStaff = int.Parse(userId);
+
+                order.State = state;
+                _unitOfWork.OrdersRepository.UpdateOrder(order);
+                _unitOfWork.Save();
+
+                return Ok(order);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

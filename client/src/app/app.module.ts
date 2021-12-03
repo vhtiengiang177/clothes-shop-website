@@ -45,6 +45,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
+import { StaffAddFormComponent } from './modules/admin/staff/staff-add-form/staff-add-form.component';
+import { OrdersProcessListComponent } from './modules/admin/orders/orders-process-list/orders-process-list.component';
+import { OrdersApprovalListComponent } from './modules/admin/orders/orders-approval-list/orders-approval-list.component';
+import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-delivery-list/orders-delivery-list.component';
+import { OrdersCompletedListComponent } from './modules/admin/orders/orders-completed-list/orders-completed-list.component';
+import { OrdersCancelledListComponent } from './modules/admin/orders/orders-cancelled-list/orders-cancelled-list.component';
+import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-list/orders-return-list.component';
+import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orders-detail.component';
+import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/delivery-list.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +89,16 @@ import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.
     FooterComponent,
     ConfirmFormComponent,
     PromotionFormComponent,
-    StaffFormComponent
+    StaffFormComponent,
+    StaffAddFormComponent,
+    OrdersProcessListComponent,
+    OrdersApprovalListComponent,
+    OrdersDeliveryListComponent,
+    OrdersCompletedListComponent,
+    OrdersCancelledListComponent,
+    OrdersReturnListComponent,
+    OrdersDetailComponent,
+    DeliveryListComponent
   ],
   entryComponents: [
     ProductFormComponent,
