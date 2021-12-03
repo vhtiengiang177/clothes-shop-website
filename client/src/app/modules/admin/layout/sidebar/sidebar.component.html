@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li (click)="clickDashboard()" 
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickDashboard()" 
         [ngClass]="{ 'active': isDashboardActive }" 
         [routerLink]="['admin']"
         class="nav-item nav-color">
@@ -23,15 +23,15 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <hr *ngIf="authService.getCurrentUser().idTypeAccount != 3" class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div *ngIf="authService.getCurrentUser().idTypeAccount != 3" class="sidebar-heading">
         Manage
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li [ngClass]="{ 'active': isProductShow }" class="nav-item nav-color">
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" [ngClass]="{ 'active': isProductShow }" class="nav-item nav-color">
         <a (click)="clickProductsNavItem()" class="nav-link collapsed" >
             <fa name="cubes"></fa>
             <span>Products</span>
@@ -53,7 +53,7 @@
         </div>
     </li>
 
-    <li [ngClass]="{ 'active': isAccountShow }" class="nav-item nav-color">
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" [ngClass]="{ 'active': isAccountShow }" class="nav-item nav-color">
         <a (click)="clickAccountsNavItem()" class="nav-link collapsed" >
             <fa name="users"></fa>
             <span>Accounts</span>
@@ -65,8 +65,8 @@
                     (click)="clickCustomersList()"  
                     [ngClass]="{ 'active': isCustomerListActive }"
                     [routerLink]="['/admin/customers']">Customers List</a>
-                <h6 class="collapse-header">Staff:</h6>
-                <a class="collapse-item"
+                <h6 *ngIf="authService.getCurrentUser().idTypeAccount == 1" class="collapse-header">Staff:</h6>
+                <a *ngIf="authService.getCurrentUser().idTypeAccount == 1" class="collapse-item"
                     (click)="clickStaffList()" 
                     [ngClass]="{ 'active': isStaffListActive }"
                     [routerLink]="['/admin/staff']" 
@@ -82,8 +82,7 @@
         </a>
         <div [ngClass]="{ 'show': isOrderShow }" id="collapseThree" class="collapse">
             <div class="bg-white py-2 collapse-inner rounded">
-     
-                <a class="collapse-item" 
+                <a *ngIf="authService.getCurrentUser().idTypeAccount != 3" class="collapse-item" 
                     (click)="clickOrdersProcessList()"  
                     [ngClass]="{ 'active': isOrdersProcessActive }"
                     [routerLink]="['/admin/orders-processing']">Processing</a>
@@ -106,7 +105,7 @@
                     [routerLink]="['/admin/orders-completed']" 
                     href="">Completed</a>
                 
-                <a class="collapse-item"
+                <a *ngIf="authService.getCurrentUser().idTypeAccount != 3" class="collapse-item"
                     (click)="clickOrdersCancelledList()" 
                     [ngClass]="{ 'active': isOrdersCancelledActive }"
                     [routerLink]="['/admin/orders-cancelled']" 
@@ -130,7 +129,7 @@
         <span>Orders</span></a>
     </li> -->
 
-    <li (click)="clickPromotionsList()" 
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickPromotionsList()" 
     [ngClass]="{ 'active': isPromotionsListActive }" 
     [routerLink]="['/admin/promotions']" 
     class="nav-item nav-color">
