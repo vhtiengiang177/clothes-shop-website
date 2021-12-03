@@ -72,12 +72,6 @@ export class ProductAddCartFormComponent implements OnInit {
     
   }
 
-  // constructor(public dialogRef: MatDialogRef<ConfirmFormComponent>,
-  //   @Inject(MAT_DIALOG_DATA) public data: ConfirmData) {
-  //     this.confirmtext = data.text
-  //     this.remindtext = data.remindtext
-  //    }
-
   ngOnInit() {
   }
 
