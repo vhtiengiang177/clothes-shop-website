@@ -65,8 +65,8 @@
             <td><a>{{ order.totalQuantity }}</a></td>
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 2"> Approval</td>
-            <td class ="action" (click)="deliveryOrder(order.id)">Delivery</td>
-            <td class ="cancel" (click)="cancelOrder(order.id)">Cancel</td>
+            <button  (click)="deliveryOrder(order.id)">Delivery </button> &nbsp; &nbsp; &nbsp;
+            <button mat-flat-button color="warn" (click)="cancelOrder(order.id)">Cancel</button>
           </tr>
         </tbody>
         <tbody *ngIf="ordersApprovalStore.totalData == 0">

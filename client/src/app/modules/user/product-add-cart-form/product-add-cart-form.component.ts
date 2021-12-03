@@ -16,6 +16,7 @@ import { ProductSizeColorsStoreService } from 'src/app/services/store/product-si
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ProductForm } from 'src/app/services/model/product/product-form.model';
 
 @Component({
   selector: 'app-product-add-cart-form',
@@ -48,9 +49,9 @@ export class ProductAddCartFormComponent implements OnInit {
     private colorsStore: ColorsStoreService,
     private cartsStoreService: CartsStoreService,
     private toastr: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: ProductSizeColor) {
-      this.id = data.idProduct
-      this.productsStore.getById(data.idProduct).subscribe(res => {
+    @Inject(MAT_DIALOG_DATA) public data: ProductForm) {
+      this.id = this.data.product.id
+      this.productsStore.getById(this.data.product.id).subscribe(res => {
         this.product = res;
         this.selectedSizeColor.idProduct = this.product.id;
         this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0

@@ -185,5 +185,52 @@ namespace clothing_shop_website.Areas.Client
                 return BadRequest();
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost("AddOrder")]
+        public IActionResult AddOrder(OrderDetail[] orderDetails,[FromQuery]int idAddress)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                var order = new Order();
+                order.IdCustomer = int.Parse(userId);
+                order.State = 1;
+                order.DateOrder = DateTime.Now;
+                order.FeeDelivery = 0;
+                order.IdAddress = idAddress;
+
+                var result = _unitOfWork.OrdersRepository.CreateOrder(order);
+                _unitOfWork.Save();
+
+                int totalQuantity = 0;
+                double totalProductPrice = 0;
+                double totalAmout = order.FeeDelivery;
+
+                foreach (var orderDetail in orderDetails)
+                {
+                    orderDetail.IdOrder = result.Id;
+                    _unitOfWork.OrderDetailRepository.Create(orderDetail);
+                    _unitOfWork.Save();
+                    totalQuantity += orderDetail.Quantity;
+                    totalProductPrice += orderDetail.UnitPrice;
+                    totalAmout += orderDetail.UnitPrice;
+                }
+
+                var orderUpdate = _unitOfWork.OrdersRepository.GetOrderByID(result.Id);
+                if (orderUpdate != null)
+                {
+                    orderUpdate.TotalQuantity = totalQuantity;
+                    orderUpdate.TotalProductPrice = totalProductPrice;
+                    orderUpdate.TotalAmount = totalAmout;
+                    _unitOfWork.OrdersRepository.UpdateOrder(orderUpdate);
+                }
+                return Ok(orderUpdate);
+            }
+
+            return BadRequest(ModelState);
+        }
     }
 }

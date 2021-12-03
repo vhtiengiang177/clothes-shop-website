@@ -59,7 +59,7 @@ namespace Infrastructure.Persistent.Repository
         }
         public Order CreateOrder(Order Order)
         {
-            Order.DateOrder = System.DateTime.Now;
+
             var result = _dbContext.Orders.Add(Order);
 
             return result.Entity;
@@ -77,5 +77,7 @@ namespace Infrastructure.Persistent.Repository
             }
             _dbContext.Remove(Order);
         }
+
+       
     }
 }
