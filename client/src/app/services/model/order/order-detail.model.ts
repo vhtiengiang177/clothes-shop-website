@@ -1,11 +1,10 @@
-import { Color } from './../product/color.model';
 export interface OrderDetail {
-    idOrder: number,
-    idProduct: number, 
-    idSize: number,
-    idColor: number,
-    unitPrice: number,
-    quantity:number,
+    idOrder?: number,
+    idProduct?: number, 
+    idSize?: number,
+    idColor?: number,
+    unitPrice?: number,
+    quantity?:number,
     product?: string,
     delivery?: string,
     color?: string,

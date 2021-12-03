@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { Product } from 'src/app/services/model/product/product.model';
+import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
@@ -18,8 +19,9 @@ export class HomePageComponent implements OnInit {
   productTopNew: Product[] = []
 
   constructor(private productsStore: ProductsStoreService, public dialog: MatDialog,
-    private categoriesStore: CategoriesStoreService) { 
-
+    private categoriesStore: CategoriesStoreService,
+    private cartStore: CartsStoreService) { 
+      this.cartStore.get()
     this.productsStore.getTopBestSellers().subscribe(p => {
       this.productTopBestSellers = p
       this.productTopBestSellers.forEach(pc => {

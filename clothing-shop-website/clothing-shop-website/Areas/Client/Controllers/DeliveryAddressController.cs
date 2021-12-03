@@ -67,15 +67,20 @@ namespace clothing_shop_website.Areas.Client
         }
 
         [HttpPost]
-        public IActionResult CreateDeliveryAddress(DeliveryAddress DeliveryAddress)
+        public IActionResult CreateDeliveryAddress(DeliveryAddress deliveryAddress)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.DeliveryAddressRepository.CreateDeliveryAddress(DeliveryAddress);
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                deliveryAddress.IdCustomer = int.Parse(userId);
+
+                var result = _unitOfWork.DeliveryAddressRepository.CreateDeliveryAddress(deliveryAddress);
 
                 if (_unitOfWork.Save())
                 {
-                    return Ok();
+                    return Ok(result);
                 }
                 else
                 {

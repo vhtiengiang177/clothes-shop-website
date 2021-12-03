@@ -210,6 +210,7 @@ export class ProductDetailPageComponent implements OnInit {
       this.cart.idProduct = this.product.id
       this.cart.quantity = this.quantity
       this.cartsStoreService.add(this.cart).subscribe(res => {
+        this.cartsStoreService.get()
         this.toastr.success("Success");
       }, (error:HttpErrorResponse) => {
         if(error.status == 400) {

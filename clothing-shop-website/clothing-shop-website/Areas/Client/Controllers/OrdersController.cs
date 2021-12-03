@@ -186,7 +186,6 @@ namespace clothing_shop_website.Areas.Client
             }
         }
 
-        [AllowAnonymous]
         [HttpPost("AddOrder")]
         public IActionResult AddOrder(OrderDetail[] orderDetails,[FromQuery]int idAddress)
         {
@@ -219,15 +218,22 @@ namespace clothing_shop_website.Areas.Client
                     totalAmout += orderDetail.UnitPrice;
                 }
 
-                var orderUpdate = _unitOfWork.OrdersRepository.GetOrderByID(result.Id);
-                if (orderUpdate != null)
-                {
-                    orderUpdate.TotalQuantity = totalQuantity;
-                    orderUpdate.TotalProductPrice = totalProductPrice;
-                    orderUpdate.TotalAmount = totalAmout;
-                    _unitOfWork.OrdersRepository.UpdateOrder(orderUpdate);
-                }
-                return Ok(orderUpdate);
+                result.TotalQuantity = totalQuantity;
+                result.TotalProductPrice = totalProductPrice;
+                result.TotalAmount = totalAmout;
+                _unitOfWork.OrdersRepository.UpdateOrder(result);
+                _unitOfWork.Save();
+
+                //var orderUpdate = _unitOfWork.OrdersRepository.GetOrderByID(result.Id);
+                //if (orderUpdate != null)
+                //{
+                //    orderUpdate.TotalQuantity = totalQuantity;
+                //    orderUpdate.TotalProductPrice = totalProductPrice;
+                //    orderUpdate.TotalAmount = totalAmout;
+                //    _unitOfWork.OrdersRepository.UpdateOrder(orderUpdate);
+                //}
+
+                return Ok();
             }
 
             return BadRequest(ModelState);
