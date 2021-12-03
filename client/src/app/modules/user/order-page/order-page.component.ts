@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OrderService } from 'src/app/services/data/order/order.service';
 import { Cart } from 'src/app/services/model/cart/cart.model';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
 import { OrderDetail } from 'src/app/services/model/order/order-detail.model';
@@ -11,6 +13,7 @@ import { Size } from 'src/app/services/model/product/size.model';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
 import { DeliveryStoreService } from 'src/app/services/store/delivery-store/delivery-store.service';
+import { OrdersStoreService } from 'src/app/services/store/orders-store/orders-store.service';
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
@@ -36,6 +39,8 @@ export class OrderPageComponent implements OnInit {
     private colorsStore: ColorsStoreService,
     private toastr: ToastrService,
     private deliveryStore: DeliveryStoreService, 
+    private orderStore: OrdersStoreService,
+    private router: Router,
     formBuilder: FormBuilder) {
       this.formAddress = formBuilder.group(
         {
@@ -124,6 +129,7 @@ export class OrderPageComponent implements OnInit {
       this.deliveryStore.create(this.deliveryAddress).subscribe(res => {
         this.deliveryAddress = res
         console.log(this.deliveryAddress);
+        this.listOrderDetail = []
         this.cartsStore.carts.forEach(item => {
           var orderDetail: OrderDetail = {
             idProduct: item.idProduct,
@@ -134,7 +140,19 @@ export class OrderPageComponent implements OnInit {
           }
           this.listOrderDetail.push(orderDetail)
         })
-        
+        this.orderStore.create(this.listOrderDetail, this.deliveryAddress.id).subscribe(res => {
+          this.toastr.success("Order successfully!")
+          this.cartsStore.deleteItemsInCart(this.cartsStore.carts).subscribe(() => {
+            this.cartsStore.get()
+            this.router.navigate(['shopping-cart'])
+          })
+          console.log(res);
+          
+        }, error => {
+          console.log(error);
+          
+          this.toastr.error("error")
+        })
       })
     }
   }

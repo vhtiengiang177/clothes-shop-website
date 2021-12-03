@@ -119,9 +119,12 @@ namespace clothing_shop_website.Areas.Client
         {
             try
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
                 foreach (var item in lItems)
                 {
-                    var itemObj = _unitOfWork.CartsRepository.GetItemInCart(item.IdCustomer, item.IdProduct, item.IdSize, item.IdColor);
+                    var itemObj = _unitOfWork.CartsRepository.GetItemInCart(int.Parse(userId), item.IdProduct, item.IdSize, item.IdColor);
                     if (itemObj == null)
                         return NotFound();
 
