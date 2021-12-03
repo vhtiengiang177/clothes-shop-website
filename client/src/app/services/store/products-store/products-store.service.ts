@@ -24,7 +24,7 @@ export class ProductsStoreService {
     private toastr: ToastrService) {
     if (this.products.length == 0) {
       let filter: FilterParamsProduct = {};
-      this.getAll(filter);
+      this.getProductsForClientPage(filter);
     }
   }
 
@@ -70,12 +70,7 @@ export class ProductsStoreService {
     this.productService.getTopBestSellers()
       .subscribe(res => {
         result.next(res)
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        })
+      })
       return result.asObservable()
   }
 
@@ -84,12 +79,7 @@ export class ProductsStoreService {
     this.productService.getTopNewProducts()
       .subscribe(res => {
         result.next(res)
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        })
+      })
       return result.asObservable()
   }
 
@@ -129,5 +119,18 @@ export class ProductsStoreService {
     })
 
     return result.asObservable()
+  }
+
+  async getProductsForClientPage(filterParams: FilterParamsProduct) {
+    await this.productService.getProductsForClientPage(filterParams)
+      .subscribe(res => {
+        this.products = res.data;
+        this.totalData = res.totalData;
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
   }
 }

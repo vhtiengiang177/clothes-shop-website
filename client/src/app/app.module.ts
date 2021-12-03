@@ -40,12 +40,9 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
+import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +79,8 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
     ConfirmFormComponent,
     ProductDetailPageComponent,
     StaffFormComponent,
-    PromotionFormComponent
+    PromotionFormComponent,
+    CartPageComponent
   ],
   entryComponents: [
     ProductFormComponent,

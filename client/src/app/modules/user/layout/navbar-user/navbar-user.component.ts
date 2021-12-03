@@ -18,7 +18,7 @@ export class NavbarUserComponent implements OnInit {
       this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
           this.currentRouter = event.url;
-          if (this.currentRouter == "/products")
+          if (this.currentRouter == "/products" || this.currentRouter.includes("/product-detail"))
             this.clickProductsPage()
           else if (this.currentRouter == "/contact")
             this.clickContactPage()

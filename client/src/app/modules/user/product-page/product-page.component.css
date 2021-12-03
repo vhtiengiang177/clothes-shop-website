@@ -1,0 +1,10 @@
+.custome-search-client {
+    padding-bottom: 30px;
+}
+
+.div-reset {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px;
+    padding-right: 30px;
+  }

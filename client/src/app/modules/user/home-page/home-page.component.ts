@@ -12,8 +12,8 @@ import { ProductsStoreService } from 'src/app/services/store/products-store/prod
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  productTopBestSellers: Product[]
-  productTopNew: Product[]
+  productTopBestSellers: Product[] = []
+  productTopNew: Product[] = []
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService) { 
@@ -35,7 +35,7 @@ export class HomePageComponent implements OnInit {
         if(categories.length == 1) {
           pc.category = categories[0].name
         }
-      });
+      })
     })
   }
 

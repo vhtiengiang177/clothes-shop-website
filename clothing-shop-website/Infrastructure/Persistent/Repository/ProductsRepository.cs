@@ -72,14 +72,14 @@ namespace Infrastructure.Persistent.Repository
 
         public IQueryable<Product> GetTopProductBestSellers()
         {
-            var lProduct =  _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.TotalBuy).Take(3).ToList();
+            var lProduct =  _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.TotalBuy).ToList();
 
             return lProduct.AsQueryable();
         }
 
         public IQueryable<Product> GetTopNewProducts()
         {
-            var lProduct = _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.CreatedDate).Take(3).ToList();
+            var lProduct = _dbContext.Products.Where(p => p.State > 0).OrderByDescending(i => i.CreatedDate).ToList();
 
             return lProduct.AsQueryable();
         }
@@ -99,6 +99,13 @@ namespace Infrastructure.Persistent.Repository
         public Product GetProductInactiveBySKU(string SKU)
         {
             return _dbContext.Products.FirstOrDefault(p => p.Sku == SKU && p.State == 0);
+        }
+
+        public int CheckCountItemOfProduct(int productID)
+        {
+            var countItems = _dbContext.Product_Size_Colors.Where(p => p.IdProduct == productID && p.State > 0).Count();
+
+            return countItems;
         }
     }
 }

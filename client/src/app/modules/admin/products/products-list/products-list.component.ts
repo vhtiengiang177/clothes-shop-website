@@ -26,7 +26,9 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private productsStore: ProductsStoreService,
     public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) {
+      this.fetchData()
+    }
 
   ngOnInit() {
   }

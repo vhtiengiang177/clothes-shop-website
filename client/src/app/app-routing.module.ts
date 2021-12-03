@@ -76,7 +76,7 @@ const routes: Routes = [
     component: ProductPageComponent
   },
   {
-    path: 'product-detail',
+    path: 'product-detail/:id',
     component: ProductDetailPageComponent
   },
   {
@@ -88,7 +88,8 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPageComponent,
     canActivate: [ActivatedLogin]
-  }, {
+  }, 
+  {
     path: 'no-access',
     component: NoAccessComponent
   },

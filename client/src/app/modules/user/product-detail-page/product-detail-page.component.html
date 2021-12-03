@@ -18,68 +18,61 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="product-pic-zoom">
-                        <img class="product-big-img" src="../../../../assets/product.jpg" alt="">
-                        <div class="zoom-icon">
-                            <i class="fa fa-search-plus"></i>
-                        </div>
+                        <ng-container *ngIf="listImages.length == 0; else second">
+                            <img class="product-big-img" src="../../../../assets/product.jpg" alt="">
+                        </ng-container>
+                        <ng-template>
+                            <img class="product-big-img" src="this.listImages[0].url">
+                        </ng-template>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="product-details">
                         <div class="pd-title">
-                            <h3>Pure Pineapple</h3>
+                            <h3>{{ product.name }}</h3>
                             <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                         </div>
                         <div class="pd-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum dolor
-                                sit amet, consectetur adipisicing elit, sed do mod tempor</p>
-                            <h4>$495.00</h4>
+                            <p>{{ product.description }}</p>
+                            <h4>{{ product.unitPrice | currency: 'VND'}}</h4>
                         </div>
                         <div class="pd-color">
                             <h6>Color:</h6>
                             <div class="pd-size-choose">
-                                <div class="sc-item">
-                                    <input type="radio" id="sm-size">
-                                    <label for="sm-size">s</label>
-                                </div>
+                                <mat-radio-group class="example-radio-group">
+                                    <mat-radio-button class="example-radio-button"
+                                        *ngFor="let item of listColors"
+                                        [value]="item.id"
+                                        (change)="colorChange($event)">
+                                        {{ item.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
                             </div>
                         </div>
                         <div class="pd-color">
                             <h6>Size:</h6>
                             <div class="pd-size-choose">
-                            
-                                <div class="sc-item">
-                                    <input type="radio" id="sm-size">
-                                    <label for="sm-size">s</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="md-size">
-                                    <label for="md-size">m</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="lg-size">
-                                    <label for="lg-size">l</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="xl-size">
-                                    <label for="xl-size">xs</label>
-                                </div>
+                                <mat-radio-group class="example-radio-group">
+                                    <mat-radio-button class="example-radio-button"
+                                        *ngFor="let item of listSizes"
+                                        [value]="item.id"
+                                        (change)="sizeChange($event)">
+                                        {{ item.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
                             </div>
                         </div>
-                        
-                        <div class="quantity">
+                        <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
+                            <h6>Stock:</h6> 
+                            <span>{{ selectedSizeColor.stock }}</span>
+                        </div>
+                        <div [ngClass]="{'my-disable': !isEnabled}" class="quantity">
                             <div class="pro-qty">
-                                <span class="dec qtybtn">-</span>
-                                <input type="text" value="1">
-                                <span class="inc qtybtn">+</span>
+                                <span (click)="decQuantity()" class="dec qtybtn">-</span>
+                                <input (change)="changeQuantity()" type="text" [value]="quantity">
+                                <span (click)="incQuantity()" class="inc qtybtn">+</span>
                             </div>
                             <a href="#" class="primary-btn pd-cart">Add To Cart</a>
-                        </div>
-                        <ul class="pd-tags">
-                            <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
-                        </ul>
-                        <div class="pd-share">
-                            <div class="p-code">Sku : 00012</div>
                         </div>
                     </div>
                 </div>
@@ -97,33 +90,21 @@
                         <div class="specification-table">
                             <table>
                                 <tr>
-                                    <td class="p-catagory">Price</td>
+                                    <td class="p-catagory">Total Buy</td>
                                     <td>
-                                        <div class="p-price">$495.00</div>
+                                        <div class="p-price">{{ product.totalBuy }}</div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="p-catagory">Availability</td>
+                                    <td class="p-catagory">Category</td>
                                     <td>
-                                        <div class="p-stock">22 in stock</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-catagory">Size</td>
-                                    <td>
-                                        <div class="p-size">Xxl</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-catagory">Color</td>
-                                    <td>
-                                        <div class="p-size">Xxl</div>
+                                        <div class="p-code">{{ product.category }}</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="p-catagory">Sku</td>
                                     <td>
-                                        <div class="p-code">00012</div>
+                                        <div class="p-code">{{ product.sku }}</div>
                                     </td>
                                 </tr>
                             </table>
