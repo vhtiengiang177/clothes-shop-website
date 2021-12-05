@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211129155211_InitialCreate")]
+    [Migration("20211205150252_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -838,7 +838,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("CustomerIdAccount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateCompleted")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOrder")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateReceive")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DeliveryAddressId")
@@ -890,7 +896,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 1,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 1,
                             IdCustomer = 7,
@@ -905,7 +913,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 2,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 2,
                             IdCustomer = 7,
@@ -920,7 +930,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 3,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 3,
                             IdCustomer = 8,
@@ -935,7 +947,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 4,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -950,7 +964,94 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 5,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FeeDelivery = 30000.0,
+                            IdAddress = 4,
+                            IdCustomer = 8,
+                            IdPromotion = 1,
+                            IdShipper = 5,
+                            IdStaff = 3,
+                            State = 5,
+                            TotalAmount = 17310000.0,
+                            TotalProductPrice = 19200000.0,
+                            TotalQuantity = 30
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FeeDelivery = 30000.0,
+                            IdAddress = 4,
+                            IdCustomer = 8,
+                            IdPromotion = 1,
+                            IdShipper = 5,
+                            IdStaff = 3,
+                            State = 1,
+                            TotalAmount = 17310000.0,
+                            TotalProductPrice = 19200000.0,
+                            TotalQuantity = 30
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FeeDelivery = 30000.0,
+                            IdAddress = 4,
+                            IdCustomer = 8,
+                            IdPromotion = 1,
+                            IdShipper = 5,
+                            IdStaff = 3,
+                            State = 1,
+                            TotalAmount = 17310000.0,
+                            TotalProductPrice = 19200000.0,
+                            TotalQuantity = 30
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FeeDelivery = 30000.0,
+                            IdAddress = 4,
+                            IdCustomer = 8,
+                            IdPromotion = 1,
+                            IdShipper = 5,
+                            IdStaff = 3,
+                            State = 2,
+                            TotalAmount = 17310000.0,
+                            TotalProductPrice = 19200000.0,
+                            TotalQuantity = 30
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FeeDelivery = 30000.0,
+                            IdAddress = 4,
+                            IdCustomer = 8,
+                            IdPromotion = 1,
+                            IdShipper = 5,
+                            IdStaff = 3,
+                            State = 6,
+                            TotalAmount = 17310000.0,
+                            TotalProductPrice = 19200000.0,
+                            TotalQuantity = 30
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 9,
@@ -980,9 +1081,6 @@ namespace clothing_shop_website.Migrations
 
                     b.Property<int?>("ColorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Material")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
@@ -1306,9 +1404,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdColor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ColorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("State")
                         .HasColumnType("int");
 
@@ -1317,7 +1412,7 @@ namespace clothing_shop_website.Migrations
 
                     b.HasKey("IdProduct", "IdSize", "IdColor");
 
-                    b.HasIndex("ColorId");
+                    b.HasIndex("IdColor");
 
                     b.HasIndex("IdSize");
 
@@ -1480,7 +1575,7 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -1492,6 +1587,10 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Promotions");
 
@@ -1983,17 +2082,19 @@ namespace clothing_shop_website.Migrations
             modelBuilder.Entity("Domain.Entity.Product_Size_Color", b =>
                 {
                     b.HasOne("Domain.Entity.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
+                        .WithMany("Product_Sizes_Color")
+                        .HasForeignKey("IdColor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entity.Product", "Product")
-                        .WithMany("Product_Sizes")
+                        .WithMany("Product_Sizes_Color")
                         .HasForeignKey("IdProduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entity.Size", "Size")
-                        .WithMany("Product_Sizes")
+                        .WithMany("Product_Sizes_Color")
                         .HasForeignKey("IdSize")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2028,6 +2129,11 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("Domain.Entity.Color", b =>
+                {
+                    b.Navigation("Product_Sizes_Color");
+                });
+
             modelBuilder.Entity("Domain.Entity.Customer", b =>
                 {
                     b.Navigation("Carts");
@@ -2046,7 +2152,7 @@ namespace clothing_shop_website.Migrations
                 {
                     b.Navigation("Images");
 
-                    b.Navigation("Product_Sizes");
+                    b.Navigation("Product_Sizes_Color");
                 });
 
             modelBuilder.Entity("Domain.Entity.Promotion", b =>
@@ -2056,7 +2162,7 @@ namespace clothing_shop_website.Migrations
 
             modelBuilder.Entity("Domain.Entity.Size", b =>
                 {
-                    b.Navigation("Product_Sizes");
+                    b.Navigation("Product_Sizes_Color");
                 });
 
             modelBuilder.Entity("Domain.Entity.Staff", b =>

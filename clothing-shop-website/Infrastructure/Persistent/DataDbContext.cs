@@ -220,6 +220,8 @@ namespace Infrastructure.Persistent
         public void SeedData(ModelBuilder modelBuilder)
         {
             DateTime createdDate = new DateTime(2021, 07, 10);
+            DateTime createdDateReceive = new DateTime(2021, 11, 10);
+            DateTime createdDateCompleted = new DateTime(2021, 12, 10);
             DateTime createdDateNew = new DateTime(2021, 11, 11);
             DateTime endDate = new DateTime(2022, 7, 15);
 
@@ -367,13 +369,16 @@ namespace Infrastructure.Persistent
                new Cart() { IdCustomer = 9, IdProduct = 9, IdSize = 1, IdColor = 1, Quantity = 20 });
 
             modelBuilder.Entity<Order>().HasData(
-               new Order() { Id = 1, DateOrder = createdDate, TotalQuantity = 20, TotalProductPrice = 12000000, TotalAmount = 10830000, State = 1, FeeDelivery = 30000, IdAddress = 1, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 2, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 2, FeeDelivery = 30000, IdAddress = 2, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 3, DateOrder = createdDate, TotalQuantity = 20, TotalProductPrice = 8100000, TotalAmount = 7320000, State = 3, FeeDelivery = 30000, IdAddress = 3, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 4, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 4, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 5, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 5, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 6, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 6, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 7, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 3, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 9, IdPromotion = 1, IdStaff = 3, IdShipper = 5 });
+               new Order() { Id = 1, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 20, TotalProductPrice = 12000000, TotalAmount = 10830000, State = 1, FeeDelivery = 30000, IdAddress = 1, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 2, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 2, FeeDelivery = 30000, IdAddress = 2, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 3, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 20, TotalProductPrice = 8100000, TotalAmount = 7320000, State = 3, FeeDelivery = 30000, IdAddress = 3, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 4, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 4, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 5, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 5, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 7, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 8, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 9, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 2, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 10, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 6, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 11, DateOrder = createdDate, DateReceive = createdDateReceive, DateCompleted = createdDateCompleted, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 3, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 9, IdPromotion = 1, IdStaff = 3, IdShipper = 5 });
 
             modelBuilder.Entity<OrderDetail>().HasData(
                new OrderDetail() { IdOrder = 1, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 10, UnitPrice = 320000 },

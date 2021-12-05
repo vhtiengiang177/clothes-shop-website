@@ -9,6 +9,8 @@ namespace Domain.Entity
     {
         public int Id { get; set; }
         public DateTime DateOrder { get; set; }
+        public DateTime DateReceive { get; set; }
+        public DateTime DateCompleted{ get; set; }
         public int TotalQuantity { get; set; }
         public double TotalProductPrice { get; set; }
         public double TotalAmount { get; set; }
