@@ -54,6 +54,9 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 import { ProductAddCartFormComponent } from './modules/user/product-add-cart-form/product-add-cart-form.component';
 import { OrderPageComponent } from './modules/user/order-page/order-page.component';
+import { MyAccountPageComponent } from './modules/user/my-account-page/my-account-page.component';
+import { UserInfoComponent } from './modules/user/my-account/user-info/user-info.component';
+import { SharedService } from './_shared/constant/share-service';
 
 @NgModule({
   declarations: [
@@ -105,7 +108,9 @@ import { OrderPageComponent } from './modules/user/order-page/order-page.compone
     DeliveryListComponent,
     CartPageComponent,
     ProductAddCartFormComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    MyAccountPageComponent,
+    UserInfoComponent
   ],
   entryComponents: [
     ProductFormComponent,

@@ -46,4 +46,20 @@ export class AccountService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getAccountInfo(accountId) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAccountInfo/" + accountId, {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  addImageAccount(file) {
+    let headers = this.authorizationHeader()
+    headers = headers.append('Content-Disposition', 'mulipart/form-data');
+
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageAccount", file, {
+      headers: headers,
+      responseType: "text"
+    })
+  }
 }

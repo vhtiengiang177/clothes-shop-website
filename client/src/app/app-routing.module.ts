@@ -29,6 +29,8 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 import { ClientAuthGuard } from './services/client-auth-guard/client-auth-guard.service';
 import { OrderPageComponent } from './modules/user/order-page/order-page.component';
+import { MyAccountPageComponent } from './modules/user/my-account-page/my-account-page.component';
+import { UserInfoComponent } from './modules/user/my-account/user-info/user-info.component';
 
 
 const routes: Routes = [
@@ -180,6 +182,18 @@ const routes: Routes = [
   {
     path: 'verification',
     component: VerificationComponent
+  },
+  {
+    path: 'my-account',
+    component: MyAccountPageComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: UserInfoComponent,
+        canActivate: [AuthGuard]
+      }
+    ]
   }
 ];
 

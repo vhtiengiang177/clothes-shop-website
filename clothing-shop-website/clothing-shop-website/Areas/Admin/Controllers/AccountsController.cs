@@ -1,4 +1,5 @@
-﻿using clothing_shop_website.Model;
+﻿using clothing_shop_website.Interface;
+using clothing_shop_website.Model;
 using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
@@ -20,10 +21,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private AccountService _accountsService;
-        public AccountsController(DataDbContext dbContext, AccountService accountsService)
+        private IImageService _imageService;
+        public AccountsController(DataDbContext dbContext, AccountService accountsService, IImageService imageService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _accountsService = accountsService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -240,6 +243,77 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
+        }
+        
+        [AllowAnonymous]
+        [HttpGet("GetAccountInfo/{id}")]
+        public IActionResult GetAccountInfo(int id)
+        {
+            var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+            if (account.IdTypeAccount == 4)
+            {
+                var customer = _unitOfWork.CustomersRepository.GetCustomerByID(id);
+                return Ok(customer);
+            }
+            else
+            {
+                var staff = _unitOfWork.StaffRepository.GetStaffByID(id);
+                return Ok(staff);
+            }
+        }
+
+        [HttpPost("AddImageAccount")]
+        public async Task<IActionResult> AddImageAccount(IFormFile file)
+        {
+            var userId = User.FindFirst("id").Value;
+            if (userId == null) return BadRequest();
+
+            var idTypeAccount = User.FindFirst("idTypeAccount").Value;
+
+            if (int.Parse(idTypeAccount) == 4)
+            {
+                var user = _unitOfWork.CustomersRepository.GetCustomerByID(int.Parse(userId));
+
+                var result = await _imageService.AddImageAsync(file);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+
+                if (string.IsNullOrEmpty(user.PublicId))
+                {
+                    var resultDelete = await _imageService.DeleteImageAsync(user.PublicId);
+                    if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
+                }
+
+                user.Image = result.SecureUrl.AbsoluteUri;
+                user.PublicId = result.PublicId;
+
+                _unitOfWork.CustomersRepository.UpdateCustomer(user);
+
+                if (_unitOfWork.Save())
+                    return Ok(user.Image);
+            }
+            else
+            {
+                var user = _unitOfWork.StaffRepository.GetStaffByID(int.Parse(userId));
+
+                var result = await _imageService.AddImageAsync(file);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+
+                if (!string.IsNullOrEmpty(user.PublicId))
+                {
+                    var resultDelete = await _imageService.DeleteImageAsync(user.PublicId);
+                    if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
+                }
+
+                user.Image = result.SecureUrl.AbsoluteUri;
+                user.PublicId = result.PublicId;
+
+                _unitOfWork.StaffRepository.UpdateStaff(user);
+
+                if (_unitOfWork.Save())
+                    return Ok(user.Image);
+            }
+
+            return BadRequest("Something went wrong!");
         }
     }
 }

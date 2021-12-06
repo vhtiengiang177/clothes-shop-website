@@ -1,0 +1,62 @@
+<h2 class="title">Profile</h2>
+<form *ngIf="typeaccount != 4" class="form-horizontal">
+    <fieldset class="fieldset">
+        <div class="form-group avatar">
+            <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                <img *ngIf="imageUrl == null" class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img *ngIf="imageUrl != null" class="img-rounded img-responsive" [src]="imageUrl" alt="">
+            </figure>
+            <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
+                <button type="submit" (click)="file.click()" class="btn btn-sm btn-add">Update Image</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" name="firstName" [(ngModel)]="staff.firstName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" name="lastName" [(ngModel)]="staff.lastName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date Of Birth</label>
+            <div class="col-md-10 col-sm-9 col-xs-12 dob">
+                <input class="form-control" [(ngModel)]="staff.dateOfBirth" #dateOfBirth="ngModel" matInput [matDatepicker]="dateOfBirth" [value]="staff.dateOfBirth" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                <mat-datepicker #dateOfBirth ></mat-datepicker>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Cart Identity</label>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" name="cardIdentity" [(ngModel)]="staff.cardIdentity">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone Number</label>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" name="phone" [(ngModel)]="staff.phone">
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="fieldset">
+        <h3 class="fieldset-title">Contact Info</h3>
+        <div class="form-group">
+            <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input type="email" class="form-control" [value]="email">
+            </div>
+        </div>
+    </fieldset>
+    <hr>
+    <div class="form-group">
+        <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+            <input class="btn btn-primary" type="submit" value="Update Profile">
+        </div>
+    </div>
+</form>

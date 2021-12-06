@@ -1,8 +1,9 @@
 export interface Customer {
-    id: number,
-    firstName: string,
-    lastName: string,
+    id?: number,
+    firstName?: string,
+    lastName?: string,
     verifyEmail?: number,
     point?: number,
-    idTypeCustomer?: number
+    idTypeCustomer?: number,
+    image?: string
 }

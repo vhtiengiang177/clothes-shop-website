@@ -97,7 +97,6 @@ export class ProductService extends DataService {
     let headers = this.authorizationHeader()
 
     headers = headers.set('Content-Disposition', 'mulipart/form-data');
-    console.log(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id);
     
     return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id, file, {
       headers: headers
