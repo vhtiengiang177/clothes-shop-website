@@ -206,7 +206,7 @@ namespace clothing_shop_website.Areas.Client
 
                 int totalQuantity = 0;
                 double totalProductPrice = 0;
-                double totalAmout = order.FeeDelivery;
+                double totalAmount = order.FeeDelivery;
 
                 foreach (var orderDetail in orderDetails)
                 {
@@ -215,23 +215,14 @@ namespace clothing_shop_website.Areas.Client
                     _unitOfWork.Save();
                     totalQuantity += orderDetail.Quantity;
                     totalProductPrice += orderDetail.UnitPrice;
-                    totalAmout += orderDetail.UnitPrice;
+                    totalAmount += orderDetail.UnitPrice;
                 }
 
                 result.TotalQuantity = totalQuantity;
                 result.TotalProductPrice = totalProductPrice;
-                result.TotalAmount = totalAmout;
+                result.TotalAmount = totalAmount;
                 _unitOfWork.OrdersRepository.UpdateOrder(result);
                 _unitOfWork.Save();
-
-                //var orderUpdate = _unitOfWork.OrdersRepository.GetOrderByID(result.Id);
-                //if (orderUpdate != null)
-                //{
-                //    orderUpdate.TotalQuantity = totalQuantity;
-                //    orderUpdate.TotalProductPrice = totalProductPrice;
-                //    orderUpdate.TotalAmount = totalAmout;
-                //    _unitOfWork.OrdersRepository.UpdateOrder(orderUpdate);
-                //}
 
                 return Ok();
             }

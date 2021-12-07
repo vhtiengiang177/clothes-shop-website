@@ -5,10 +5,10 @@
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
                             <ng-container *ngIf="listImages.length == 0; else second">
-                                <img class="product-big-img" src="../../../../assets/product.jpg" alt="">
+                                <img class="product-big-img image" src="../../../../assets/product.jpg" alt="">
                             </ng-container>
                             <ng-template>
-                                <img class="product-big-img" src="this.listImages[0].url">
+                                <img class="product-big-img image" src="this.listImages[0].url">
                             </ng-template>
                         </div>
                     </div>

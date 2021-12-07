@@ -1,20 +1,23 @@
-<h2 class="title">Profile</h2>
-<form *ngIf="typeaccount != 4" class="form-horizontal">
+<form #formStaff="ngForm" (ngSubmit)="updateStaffProfile(formStaff)" *ngIf="typeaccount != 4" class="form-horizontal">
     <fieldset class="fieldset">
+        <h3 class="fieldset-title">Profile</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                <img *ngIf="imageUrl == null" class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                <img *ngIf="imageUrl != null" class="img-rounded img-responsive" [src]="imageUrl" alt="">
+                <img *ngIf="imageUrl == null" class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                 <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
-                <button type="submit" (click)="file.click()" class="btn btn-sm btn-add">Update Image</button>
+                <button type="submit" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name <strong class="required">*</strong></label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="firstName" [(ngModel)]="staff.firstName">
+                <input type="text" class="form-control" name="firstName" #firstName="ngModel" matInput [(ngModel)]="staff.firstName" required>
+                <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
+                    First Name field is required
+                </mat-error>
             </div>
         </div>
         <div class="form-group">
@@ -26,37 +29,47 @@
         <div class="form-group">
             <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date Of Birth</label>
             <div class="col-md-10 col-sm-9 col-xs-12 dob">
-                <input class="form-control" [(ngModel)]="staff.dateOfBirth" #dateOfBirth="ngModel" matInput [matDatepicker]="dateOfBirth" [value]="staff.dateOfBirth" [ngModelOptions]="{standalone: true}">
+                <input class="form-control" [(ngModel)]="staff.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" matInput [matDatepicker]="dateOfBirth" [value]="staff.dateOfBirth">
                 <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
                 <mat-datepicker #dateOfBirth ></mat-datepicker>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Cart Identity</label>
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Card Identity <strong class="required">*</strong></label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="cardIdentity" [(ngModel)]="staff.cardIdentity">
+                <input type="text" class="form-control" name="cardIdentity" #cardIdentity="ngModel" matInput [(ngModel)]="staff.cardIdentity" required>
+                <mat-error *ngIf="cardIdentity?.touched && cardIdentity?.invalid && cardIdentity?.errors?.required">
+                    Card Identity field is required
+                </mat-error>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone Number</label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="phone" [(ngModel)]="staff.phone">
+                <input type="text" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="staff.phone" pattern="[0-9 ]{10}" matInput>
+                <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors">
+                    Please enter valid phone number
+                </mat-error>
             </div>
         </div>
     </fieldset>
     <fieldset class="fieldset">
         <h3 class="fieldset-title">Contact Info</h3>
         <div class="form-group">
-            <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email</label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="email" class="form-control" [value]="email">
+                <input type="email" class="form-control" title="Contact your administrator to change your email address" [value]="email" disabled>
+            </div>
+            <div class="col-md-8 col-sm-7 col-xs-9 control-info alert alert-info" role="alert">
+                <strong>Your account is managed.</strong> <br/>
+                Contact your administrator to change your email address
             </div>
         </div>
     </fieldset>
     <hr>
     <div class="form-group">
         <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-            <input class="btn btn-primary" type="submit" value="Update Profile">
+            <input class="primary-btn" type="submit" value="Update Profile">
         </div>
     </div>
 </form>

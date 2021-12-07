@@ -23,7 +23,7 @@ export class StaffStoreService {
   readonly staff$ = this._staff.asObservable();
   private readonly _totalData = new BehaviorSubject<number>(0);
 
-  constructor(private StaffService: StaffService, private toastr: ToastrService) {
+  constructor(private staffService: StaffService, private toastr: ToastrService) {
     if (this.accstaff.length == 0) {
       let filter: FilterParamsAccounts = {};
       this.getAll(filter);
@@ -55,7 +55,7 @@ export class StaffStoreService {
   }
 
   async getAll(filterParams: FilterParamsAccounts) {
-    await this.StaffService.get(filterParams)
+    await this.staffService.get(filterParams)
       .subscribe(res => {
         this.accstaff = res.data;
         this.totalData = res.totalData;
@@ -67,6 +67,22 @@ export class StaffStoreService {
         });
   }
 
+  // create(staffObj) {
+  //   let result = new Subject<Promotion>();
+  //   this.StaffService.create("/CreateAccount", staffObj).subscribe(res => {
+  //     result.next(res)
+  //     this.toastr.success("Added successfully", "Staff #" + res.id)
+  //   }, (error: AppError) => {
+  //     if (error instanceof BadRequestError)
+  //       return this.toastr.error("Add staff failed")
+  //     else this.toastr.error("An unexpected error occurred.", "Add Staff")
+  //   })
+  //   return result.asObservable()
+  // }
+
+  update(staffObj) {
+    return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
+  }
   create(accObj,staffObj) {
     let result = new Subject<Account>();
     this.StaffService.create("/createaccount", accObj).subscribe(res => {

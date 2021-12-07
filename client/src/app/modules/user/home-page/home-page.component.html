@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row category-menu">
             <div class="col-lg-2" *ngFor="let category of categoriesStore.categories$ | async">
-                <img src="assets/category.png" alt="">
+                <img class="image" src="assets/category.png" alt="">
                     <div class="inner-text">
                         <h6>{{ category.name }} </h6>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="product-item" *ngFor="let product of productTopBestSellers">
                         <div >
                             <div class="pi-pic">
-                                <img [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
+                                <img class="image" [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
                                 </ul>
@@ -73,7 +73,7 @@
                     <div class="product-item" *ngFor="let product of productTopNew">
                         <div >
                             <div class="pi-pic">
-                                <img [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
+                                <img class="image" [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
                                 </ul>

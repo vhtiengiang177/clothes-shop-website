@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
