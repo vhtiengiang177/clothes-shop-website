@@ -9,3 +9,7 @@
 .dob{
 	position: relative;
 }
+
+.control-info {
+	margin: 0.75rem;
+}

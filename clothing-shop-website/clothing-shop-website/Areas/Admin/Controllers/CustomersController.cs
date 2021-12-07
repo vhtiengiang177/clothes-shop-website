@@ -58,7 +58,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetlCustomerByID/{id}", Name = "GetlCustomerByID")]
         public IActionResult GetlCustomerByID(int id)
         {

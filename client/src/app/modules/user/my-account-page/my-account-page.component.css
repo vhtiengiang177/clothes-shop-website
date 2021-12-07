@@ -84,8 +84,8 @@
     }
     
     .view-account .side-bar .side-menu .nav>li.active a {
-    color: #40babd;
-    border-bottom: 2px solid #40babd;
+    color: #e7ab3c;
+    border-bottom: 2px solid #e7ab3c;
     background: none;
     border-right: none
     }
@@ -125,13 +125,14 @@
     padding-bottom: 15px;
     border-bottom: 1px solid #eaeaf1;
     margin-bottom: 30px;
-    color: #616670;
-    font-size: 16px
+    color: #e7ab3c;
+    font-size: 16px;
+    font-weight: bold;
     }
     
     .view-account .content-panel .avatar .figure img {
     float: right;
-    width: 64px
+    width: 100%
     }
     
     .view-account .content-panel .content-header-wrapper {
@@ -337,7 +338,7 @@
     }
     
     .drive-wrapper .drive-item-title a:hover {
-    color: #40babd
+    color: #e7ab3c
     }
     
     .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -414,7 +415,7 @@
     }
     
     .drive-list-view a:hover {
-    color: #40babd
+    color: #e7ab3c
     }
     
     .theme-2 .drive-list-view a:hover {
@@ -558,7 +559,7 @@
     }
     .view-account .side-bar .side-menu .nav>li.active a {
         background: #f9f9fb;
-        border-right: 4px solid #40babd;
+        border-right: 4px solid #e7ab3c;
         border-bottom: none
     }
     .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
@@ -587,4 +588,11 @@
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+.btn-small {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
 }

@@ -7,7 +7,11 @@
     margin: 5px;
 }
 
-.my-disable{
+.my-disable {
     pointer-events: none;
     opacity: 0.4;
+}
+
+.display-detail {
+    padding-left: 10%;
 }

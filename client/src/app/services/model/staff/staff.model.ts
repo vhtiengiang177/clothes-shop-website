@@ -1,5 +1,5 @@
 export interface Staff {
-    id?: number,
+    idAccount?: number,
     lastName?: string,
     firstName?: string,
     dateOfBirth?: Date,

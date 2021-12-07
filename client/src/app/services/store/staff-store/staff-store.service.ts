@@ -18,7 +18,7 @@ export class StaffStoreService {
   readonly accstaff$ = this._accstaff.asObservable();
   private readonly _totalData = new BehaviorSubject<number>(0);
 
-  constructor(private StaffService: StaffService, private toastr: ToastrService) {
+  constructor(private staffService: StaffService, private toastr: ToastrService) {
     if (this.accstaff.length == 0) {
       let filter: FilterParamsAccounts = {};
       this.getAll(filter);
@@ -42,7 +42,7 @@ export class StaffStoreService {
   }
 
   async getAll(filterParams: FilterParamsAccounts) {
-    await this.StaffService.get(filterParams)
+    await this.staffService.get(filterParams)
       .subscribe(res => {
         this.accstaff = res.data;
         this.totalData = res.totalData;
@@ -66,4 +66,8 @@ export class StaffStoreService {
   //   })
   //   return result.asObservable()
   // }
+
+  update(staffObj) {
+    return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
+  }
 }
