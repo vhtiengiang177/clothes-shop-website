@@ -4,7 +4,7 @@
             <div class="col-lg-2 col-md-2">
                 <div class="logo">
                     <a [routerLink]="['/']">
-                        <img src="assets/logo.png" alt="">
+                        <img class="logo" src="assets/logo.png" alt="">
                     </a>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <button class="btn">Hi, {{ authService.getCurrentUser().firstNameUser }}!</button>
                     </li>
                     <div *ngIf="isUserInformation" class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="/my-account">
                             <fa class="mr-2 text-gray-400" name="user" size="sm"></fa>
                             Profile
                         </a>

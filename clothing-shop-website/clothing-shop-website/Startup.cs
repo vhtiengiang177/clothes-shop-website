@@ -29,15 +29,15 @@ namespace clothing_shop_website
         {
             services.AddControllers();
 
-            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
-            //b => b.MigrationsAssembly("clothing-shop-website")));
-
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
             b => b.MigrationsAssembly("clothing-shop-website")));
+
+            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
+            //b => b.MigrationsAssembly("clothing-shop-website")));
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
-                    Title = "Web API",
+                    Title = "Mango Clothes API",
                     Version = "v1",
                     Description = "Description for the API."
                 });
@@ -65,7 +65,9 @@ namespace clothing_shop_website
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
-
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IImageService, ImageService>();
         }

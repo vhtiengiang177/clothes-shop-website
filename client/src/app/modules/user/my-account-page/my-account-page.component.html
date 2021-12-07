@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+                <div class="side-bar">
+                    <div class="user-info">
+                        <img *ngIf="imageUrl == null" class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <img *ngIf="imageUrl != null"  class="img-profile img-circle img-responsive center-block" [src]="imageUrl" alt="">
+                        <ul class="meta list list-unstyled">
+                            <li class="name"> {{ name }} </li>
+                            <li class="email"><a href="#">{{ email }}</a></li>
+                        </ul>
+                    </div>
+            		<nav class="side-menu">
+        				<ul class="nav">
+        					<li class="active"><a href="#"><span class="fa fa-user"></span> Profile</a></li>
+        					<li><a href="#"><span class="fa fa-cog"></span> Delivery Address</a></li>
+        					<li><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>
+        					<li><a href="#"><span class="fa fa-envelope"></span> Messages</a></li>
+        					<li><a href="user-drive.html"><span class="fa fa-th"></span> Drive</a></li>
+        				</ul>
+        			</nav>
+                </div>
+                <div class="content-panel">
+                    <router-outlet>
+                    </router-outlet>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

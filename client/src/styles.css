@@ -11,6 +11,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center;
 }
 
+.btn-add {
+    background-color: #0093c9 !important;
+    color: #fff !important;
+    border: 1px solid #0093c9;
+    margin-left: 14px;
+    font-size: 13px;
+  }
+   .btn-add:hover {
+    background-color: #b3ebff;
+    color: #000;
+    border: 1px solid #b3ebff;
+  }
+
+.upload{
+    font-weight:bold;
+    color:#28a745;
+    margin-left: 10px;
+    line-height: 36px;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

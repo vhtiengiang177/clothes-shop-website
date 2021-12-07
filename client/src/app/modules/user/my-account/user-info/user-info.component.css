@@ -1,0 +1,11 @@
+
+.p-viewer {
+	z-index: 9999;
+	position: absolute;
+    top: -1%;
+	right: 10px;
+}
+
+.dob{
+	position: relative;
+}
