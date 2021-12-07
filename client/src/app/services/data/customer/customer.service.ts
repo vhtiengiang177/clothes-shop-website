@@ -19,7 +19,7 @@ export class CustomerService extends DataService  {
    }
 
   get(params) {
-    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllAccountCustomers" + this.convertToQueryStringAccounts(params),
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllCustomers" + this.convertToQueryStringAccounts(params),
     {
       headers: this.authorizationHeader()
     })

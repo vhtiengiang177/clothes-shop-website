@@ -2,6 +2,8 @@
 export interface Order {
     idOrder: number,
     dateOrder: Date,
+    datePayment: Date,
+    dateShip: Date,
     totalQuantity: number,
     totalProductPrice: number,
     totalAmount: number,

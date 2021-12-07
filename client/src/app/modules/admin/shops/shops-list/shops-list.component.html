@@ -1,0 +1,55 @@
+
+    <div class="container">
+        <div class="row center">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-pic-zoom">
+                        <ng-container>
+                            <img class="product-big-img" src="../../../../assets/logo.png" alt="">
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- <div class="product-details">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="pd-title">
+                            <strong>Name: Mango Clothes</strong>
+                            <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                        </div>
+                        <div class="pd-desc">
+                           <strong>Phone: </strong> +84 12 345 6789
+                           <br>
+                            <strong>Email: </strong> mango.clothes2021@gmail.com
+                            <br>
+                            <strong>Address: </strong> {{ address }}
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Name</mat-label>
+                                <input [(ngModel)]="this.shopinfo.name" #name ="ngModel" matInput type="text" required>
+                                <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="number" required>
+                                <mat-error class="error-required"
+                                    *ngIf="value.touched && value.invalid && value.errors?.required">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -375,8 +375,8 @@ namespace clothing_shop_website.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateOrder = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateReceive = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateCompleted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DatePayment = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateShip = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalQuantity = table.Column<int>(type: "int", nullable: false),
                     TotalProductPrice = table.Column<double>(type: "float", nullable: false),
                     TotalAmount = table.Column<double>(type: "float", nullable: false),
@@ -681,19 +681,19 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "CustomerIdAccount", "DateCompleted", "DateOrder", "DateReceive", "DeliveryAddressId", "FeeDelivery", "IdAddress", "IdCustomer", "IdPromotion", "IdShipper", "IdStaff", "State", "TotalAmount", "TotalProductPrice", "TotalQuantity" },
+                columns: new[] { "Id", "CustomerIdAccount", "DateOrder", "DatePayment", "DateShip", "DeliveryAddressId", "FeeDelivery", "IdAddress", "IdCustomer", "IdPromotion", "IdShipper", "IdStaff", "State", "TotalAmount", "TotalProductPrice", "TotalQuantity" },
                 values: new object[,]
                 {
-                    { 11, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 9, 1, 5, 3, 3, 15420000.0, 17100000.0, 30 },
-                    { 10, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 6, 17310000.0, 19200000.0, 30 },
-                    { 9, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 2, 17310000.0, 19200000.0, 30 },
-                    { 8, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
-                    { 7, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
-                    { 5, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 5, 17310000.0, 19200000.0, 30 },
-                    { 4, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 4, 17310000.0, 19200000.0, 30 },
-                    { 3, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 3, 8, 1, 5, 3, 3, 7320000.0, 8100000.0, 20 },
-                    { 2, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 2, 7, 1, 5, 3, 2, 15420000.0, 17100000.0, 30 },
-                    { 1, null, new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 1, 7, 1, 5, 3, 1, 10830000.0, 12000000.0, 20 }
+                    { 11, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 9, 1, 5, 3, 3, 15420000.0, 17100000.0, 30 },
+                    { 10, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 6, 17310000.0, 19200000.0, 30 },
+                    { 9, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 2, 17310000.0, 19200000.0, 30 },
+                    { 8, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
+                    { 7, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
+                    { 5, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 5, 17310000.0, 19200000.0, 30 },
+                    { 4, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 4, 17310000.0, 19200000.0, 30 },
+                    { 3, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 3, 8, 1, 5, 3, 3, 7320000.0, 8100000.0, 20 },
+                    { 2, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 2, 7, 1, 5, 3, 2, 15420000.0, 17100000.0, 30 },
+                    { 1, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 1, 7, 1, 5, 3, 1, 10830000.0, 12000000.0, 20 }
                 });
 
             migrationBuilder.InsertData(

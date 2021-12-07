@@ -61,4 +61,8 @@ export class AccountsStoreService {
   unblock(id) {
     return this.accountService.unblock(id)
   }
+
+  getById(id){
+    return this.accountService.getById(id)
+  }
 }

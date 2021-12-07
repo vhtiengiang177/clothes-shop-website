@@ -1,4 +1,5 @@
 
+
 import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { Injectable } from '@angular/core';
@@ -7,6 +8,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { StaffService } from '../../data/staff/staff.service';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { Staff } from '../../model/staff/staff.model';
+import { Image } from 'src/app/services/model/product/image.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,10 @@ import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 export class StaffStoreService {
 
   private readonly _accstaff = new BehaviorSubject<Account[]>([]);
+  private readonly _staff = new BehaviorSubject<Staff[]>([]);
 
   readonly accstaff$ = this._accstaff.asObservable();
+  readonly staff$ = this._staff.asObservable();
   private readonly _totalData = new BehaviorSubject<number>(0);
 
   constructor(private StaffService: StaffService, private toastr: ToastrService) {
@@ -31,6 +36,14 @@ export class StaffStoreService {
 
   set accstaff(val: Account[]) {
     this._accstaff.next(val);
+  }
+
+  get staff() : Staff[] {
+    return this._staff.value;
+  }
+
+  set staff(val: Staff[]) {
+    this._staff.next(val);
   }
 
   get totalData(): number {
@@ -54,16 +67,25 @@ export class StaffStoreService {
         });
   }
 
-  // create(staffObj) {
-  //   let result = new Subject<Promotion>();
-  //   this.StaffService.create("/CreateAccount", staffObj).subscribe(res => {
-  //     result.next(res)
-  //     this.toastr.success("Added successfully", "Staff #" + res.id)
-  //   }, (error: AppError) => {
-  //     if (error instanceof BadRequestError)
-  //       return this.toastr.error("Add staff failed")
-  //     else this.toastr.error("An unexpected error occurred.", "Add Staff")
-  //   })
-  //   return result.asObservable()
-  // }
+  create(accObj,staffObj) {
+    let result = new Subject<Account>();
+    this.StaffService.create("/createaccount", accObj).subscribe(res => {
+      result.next(res)
+      this.toastr.success("Added successfully", "Staff #" + res.id)
+    }, (error: AppError) => {
+      if (error instanceof BadRequestError)
+        return this.toastr.error("Add staff failed")
+      else this.toastr.error("An unexpected error occurred.", "Add Staff")
+    })
+    return result.asObservable()
+  }
+
+  getById(id) {
+    return this.StaffService.getById("/GetStaffByID", id)
+  }
+  getAccById(id) {
+    return this.StaffService.getById("/GetStaffByID", id)
+  }
+
+
 }

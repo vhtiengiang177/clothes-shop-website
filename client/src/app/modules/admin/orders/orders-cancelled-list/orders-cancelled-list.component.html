@@ -65,7 +65,7 @@
             <td><a>{{ order.totalQuantity }}</a></td>
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 5"> Cancelled</td>
-            <td ></td>
+            <td [routerLink]="['/admin/orders-cancelled/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
           </tr>
         </tbody>
         <tbody *ngIf="ordersCancelledStore.totalData == 0">

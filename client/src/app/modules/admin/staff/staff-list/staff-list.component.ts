@@ -1,3 +1,5 @@
+import { Account } from 'src/app/services/model/account/account.model';
+import { Staff } from './../../../../services/model/staff/staff.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
@@ -6,6 +8,8 @@ import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confir
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { StaffAddFormComponent } from '../staff-add-form/staff-add-form.component';
+import { StaffDetailFormComponent } from '../staff-detail-form/staff-detail-form.component';
 
 @Component({
   selector: 'app-staff-list',
@@ -19,7 +23,7 @@ export class StaffListComponent implements OnInit {
     pagesize: 5,
     sort: null
   };
-
+ 
   constructor(private staffStore: StaffStoreService, public dialog: MatDialog,
     private toastr: ToastrService,
     private accountsStore: AccountsStoreService) { }
@@ -180,8 +184,54 @@ export class StaffListComponent implements OnInit {
     });
   }
 
+  AddAccoutStaff() {
+    const dialogRef = this.dialog.open(StaffAddFormComponent, {
+      width: '700px',
+      data: { 
+         account: { },
+         staff: { }
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        if(this.filter.sort == null && this.filter.pageindex == 1) {
+          this.staffStore.accstaff.splice(this.filter.pagesize - 1,1);
+          this.staffStore.accstaff.splice(0,0,res);
+          this.staffStore.totalData = this.staffStore.totalData + 1;
+        }
+        else {
+          this.filter = {
+            pageindex: 1,
+            pagesize: this.filter.pagesize,
+            sort: null
+          }
+          this.fetchData()
+        }
+        this.paginator.pageIndex = 0;
+      }
+    });
+  }
 
-
+  ViewDetailStaff(idStaff) {
+    if(!this.staffStore.accstaff.find(p => p.id == idStaff)) {
+      this.toastr.error("Cannot find the staff #" + idStaff)
+    }
+    else {
+      this.accountsStore.getById(idStaff).subscribe(res2 => {
+      this.staffStore.getById(idStaff).subscribe(res => {
+        if(res) {
+          const dialogRef = this.dialog.open(StaffDetailFormComponent, {
+            width: '500px',
+            data: { 
+              staff: res,
+              account: res2
+            }
+          });
+        }
+      })
+    })
+  }
+  }
 
 }

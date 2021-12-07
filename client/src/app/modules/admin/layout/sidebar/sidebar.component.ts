@@ -20,7 +20,8 @@ export class SidebarComponent implements OnInit {
 
   isOrdersListActive: boolean = false
 
-  isPromotionsListActive: Boolean =false
+  isPromotionsListActive: Boolean = false
+  isShopsActive: Boolean = false
 
   isOrderShow: Boolean = false;
   isOrdersProcessActive: Boolean = false;
@@ -58,6 +59,7 @@ export class SidebarComponent implements OnInit {
     this.isOrdersListActive = false
     this.isPromotionsListActive=false
     this.isAccountShow = false
+    this.isShopsActive = false
     //this.isProductsListActive = false
     
   }
@@ -261,6 +263,20 @@ export class SidebarComponent implements OnInit {
     this.isOrdersDeliveryActive = false
     this.isOrdersCancelledActive = false
     this.isOrdersCompletedActive = false
+  }
+
+  clickShops(){
+    this.isShopsActive = true
+     // false
+    this.isPromotionsListActive = false
+    this.isDashboardActive = false
+    this.isProductsListActive = false    
+    this.isCategoriesListActive = false
+    this.isCustomerListActive = false
+    this.isStaffListActive = false
+    this.isOrdersListActive = false
+    this.isProductShow = false
+    this.isAccountShow = false
   }
 
 

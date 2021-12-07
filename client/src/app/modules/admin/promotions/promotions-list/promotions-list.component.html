@@ -62,7 +62,7 @@
                 <fa *ngIf="filter.sort == 'enddate:desc'" name="sort-down"></fa>
                 <fa *ngIf="filter.sort == 'enddate:asc'" name="sort-up"></fa>
             </th>
-            <th colspan="2">Action</th>
+            <th colspan="3">Action</th>
           </tr>
         </thead>
         <tbody class="table-body" *ngIf="promotionsStore.totalData > 0">
@@ -74,6 +74,7 @@
             <td><a>{{ promotion.value }}</a></td>
             <td>{{ promotion.startDate | date: 'longDate' }}</td>
             <td>{{ promotion.endDate| date: 'longDate' }}</td>
+            <td ><fa  name="info-circle"></fa></td>
             <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>

@@ -65,7 +65,8 @@
             <td><a>{{ order.totalQuantity }}</a></td>
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 3"> Delivery</td>
-            <td type="button" class="btn btn-success" (click)="completeOrder(order.id)">Complete</td>&nbsp; &nbsp;
+            <td [routerLink]="['/admin/orders-delivery/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-success" (click)="completeOrder(order.id)">Complete</td>&nbsp;&nbsp;
             <td type="button" class="btn btn-warning" (click)="returnOrder(order.id)">Return Refund</td>
           </tr>
         </tbody>

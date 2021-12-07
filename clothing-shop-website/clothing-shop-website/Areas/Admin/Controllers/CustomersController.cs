@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -45,6 +45,37 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 var lCustomer = _accountService.SortListAccount(filterParams.Sort, lCustomerItems);
 
                 var response = new ResponseJSON<Account>
+                {
+                    TotalData = lCustomer.Count(),
+                    Data = lCustomer.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpGet("GetAllCustomers")]
+        public IActionResult GetAllCustomers([FromQuery] FilterParamsCustomer filterParams)
+        {
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
+
+                IQueryable<Customer> lCustomerItems;
+
+                lCustomerItems = _unitOfWork.CustomersRepository.GetAllCustomers();
+
+                lCustomerItems = _customersService.FilterCustomer(filterParams, lCustomerItems);
+
+                var lCustomer = _customersService.SortListCustomer(filterParams.Sort, lCustomerItems);
+
+                var response = new ResponseJSON<Customer>
                 {
                     TotalData = lCustomer.Count(),
                     Data = lCustomer.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()

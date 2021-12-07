@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { OrdersApprovalStoreService } from 'src/app/services/store/orders-approval-store/orders-approval-store.service';
 
@@ -23,6 +24,7 @@ export class OrdersApprovalListComponent implements OnInit {
   };
 
   constructor(private ordersApprovalStore: OrdersApprovalStoreService, public dialog: MatDialog,
+    private authService : AuthService,
     private toastr: ToastrService) { }
 
   ngOnInit() {

@@ -1,8 +1,11 @@
 export interface Staff {
-    id: number,
+    idAccount: number,
     lastName: string,
     firstName: string,
     dateOfBirth: Date,
     cardIdentity: string,
-    phone: string
+    phone: string,
+    image?: string
+    
+
 }

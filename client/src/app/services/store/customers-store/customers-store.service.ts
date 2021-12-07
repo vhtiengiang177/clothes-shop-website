@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CustomerService } from '../../data/customer/customer.service';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { FilterParamsCustomer } from '../../model/customer/filter-params-customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +52,10 @@ export class CustomersStoreService {
     this._totalData.next(val);
   }
 
-  async getAll(filterParams: FilterParamsAccounts) {
+  async getAll(filterParams: FilterParamsCustomer) {
     await this.customerService.get(filterParams)
       .subscribe(res => {
-        this.acccustomer = res.data;
+        this.customer = res.data;
         this.totalData = res.totalData;
       },
         (error: AppError) => {

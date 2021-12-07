@@ -109,9 +109,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
 
-
-        [HttpGet("{id}")]
-        public IActionResult GetlStaffByID(int id)
+        [AllowAnonymous]
+        [HttpGet("GetStaffByID/{id}")]
+        public IActionResult GetStaffByID(int id)
         {
             var staff = _unitOfWork.StaffRepository.GetStaffByID(id);
 
@@ -189,5 +189,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return BadRequest();
             }
         }
+
+       
     }
 }

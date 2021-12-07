@@ -3,5 +3,6 @@ export interface Account{
     email: string,
     password: string,
     verificationCode?: number,
-    state?: number
+    state?: number,
+    idTypeAccount: number
 }

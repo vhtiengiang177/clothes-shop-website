@@ -67,7 +67,8 @@
             <td>{{ order.feeDelivery }}</td> -->
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 1"> Processing</td>
-            <td type="button" class="btn btn-success" (click)="approvalOrder(order.id)">Approval</td>&nbsp; &nbsp;
+            <td [routerLink]="['/admin/orders-process/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-success" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
             <td type="button" class="btn btn-danger" (click)="cancelOrder(order.id)">Cancel</td>
           </tr>
         </tbody>

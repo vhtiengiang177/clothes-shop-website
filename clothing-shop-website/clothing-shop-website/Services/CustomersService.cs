@@ -25,11 +25,11 @@ namespace clothing_shop_website.Services
                 case "typecustomer:desc":
                     lCustomer = lCustomer.OrderByDescending(p => p.IdTypeCustomer).AsQueryable();
                     break;
-                case "lastname:desc":
-                    lCustomer = lCustomer.OrderByDescending(p => p.LastName).AsQueryable();
+                case "firstname:desc":
+                    lCustomer = lCustomer.OrderByDescending(p => p.FirstName).AsQueryable();
                     break;
-                case "lastname:asc":
-                    lCustomer = lCustomer.OrderBy(p => p.LastName).AsQueryable();
+                case "firstname:asc":
+                    lCustomer = lCustomer.OrderBy(p => p.FirstName).AsQueryable();
                     break;
                 case "id:asc":
                     lCustomer = lCustomer.OrderBy(p => p.IdAccount).AsQueryable();
@@ -44,7 +44,7 @@ namespace clothing_shop_website.Services
         public IQueryable<Customer> FilterCustomer(FilterParamsCustomer filterParams, IQueryable<Customer> lCustomerItems)
         {
             if (filterParams.Content != null)
-                lCustomerItems = lCustomerItems.Where(p => p.LastName.ToLower().Contains(filterParams.Content.ToLower())
+                lCustomerItems = lCustomerItems.Where(p => p.FirstName.ToLower().Contains(filterParams.Content.ToLower())
                 || p.Point.ToString().Contains(filterParams.Content));
 
             return lCustomerItems.AsQueryable();

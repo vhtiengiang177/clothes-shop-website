@@ -46,4 +46,11 @@ export class AccountService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getById(accountId){
+    return this.http.get(GlobalConstants.apiUrl + this.routeAPI + "/GetAccountByID/" + accountId,
+    {
+      headers: this.authorizationHeader()
+    })
+  }
 }

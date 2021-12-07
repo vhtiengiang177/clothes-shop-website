@@ -29,6 +29,7 @@ import { ProductDetailPageComponent } from './modules/user/product-detail-page/p
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
 import { ClientAuthGuard } from './services/client-auth-guard/client-auth-guard.service';
 import { OrderPageComponent } from './modules/user/order-page/order-page.component';
+import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 
 
 const routes: Routes = [
@@ -68,7 +69,12 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
-    path: 'admin/orders-processing',
+    path: 'admin/shops',
+    component: ShopsListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/orders-process',
     component: OrdersProcessListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },

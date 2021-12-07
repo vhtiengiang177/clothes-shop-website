@@ -85,7 +85,7 @@
                 <a *ngIf="authService.getCurrentUser().idTypeAccount != 3" class="collapse-item" 
                     (click)="clickOrdersProcessList()"  
                     [ngClass]="{ 'active': isOrdersProcessActive }"
-                    [routerLink]="['/admin/orders-processing']">Processing</a>
+                    [routerLink]="['/admin/orders-process']">Processing</a>
              
                 <a class="collapse-item"
                     (click)="clickOrderApprovalList()" 
@@ -136,6 +136,15 @@
     <a class="nav-link">
         <fa name="gift"></fa>
         <span>Promotions</span></a>
+    </li>
+
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickShops()" 
+    [ngClass]="{ 'active': isShopsActive }" 
+    [routerLink]="['/admin/shops']" 
+    class="nav-item nav-color">
+    <a class="nav-link">
+        <fa name="home"></fa>
+        <span>Shops Info</span></a>
     </li>
 </ul>
 <!-- End of Sidebar -->

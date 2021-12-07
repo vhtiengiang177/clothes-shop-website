@@ -836,13 +836,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("CustomerIdAccount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateReceive")
+                    b.Property<DateTime>("DatePayment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateShip")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DeliveryAddressId")
@@ -894,9 +894,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 1,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 1,
                             IdCustomer = 7,
@@ -911,9 +911,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 2,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 2,
                             IdCustomer = 7,
@@ -928,9 +928,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 3,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 3,
                             IdCustomer = 8,
@@ -945,9 +945,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 4,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -962,9 +962,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 5,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -979,9 +979,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 7,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -996,9 +996,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 8,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1013,9 +1013,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 9,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1030,9 +1030,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 10,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1047,9 +1047,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 11,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 9,
