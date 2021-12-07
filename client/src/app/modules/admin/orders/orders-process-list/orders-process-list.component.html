@@ -61,15 +61,15 @@
           <tr *ngFor="let order of ordersProcessStore.orders$ | async; index as i">
             <td>{{ i+1 }}</td>
             <td><a [routerLink]="['/admin/orders-process/', order.id]">{{ order.id }}</a></td>
-            <td><a>{{ order.dateOrder | date: 'longDate' }}</a></td>
+            <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.totalQuantity }}</a></td>
             <!-- <td><a>{{ order.totalProductPrice }}</a></td>
             <td>{{ order.feeDelivery }}</td> -->
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 1"> Processing</td>
-            <td [routerLink]="['/admin/orders-process/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-success" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-danger" (click)="cancelOrder(order.id)">Cancel</td>
+            <td [routerLink]="['/admin/orders-process/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-success button-action" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-danger button-action" (click)="cancelOrder(order.id)">Cancel</td>
           </tr>
         </tbody>
         <tbody *ngIf="ordersProcessStore.totalData == 0">

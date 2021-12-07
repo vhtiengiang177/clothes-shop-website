@@ -1,7 +1,7 @@
 <h2  mat-dialog-title>Add Staff</h2>
 <mat-dialog-content class="mat-typography">
     <div class="row detail-center">
-    <div class="col-lg-6">
+    <!-- <div class="col-lg-6">
         <div class="product-pic-zoom">
             <ng-container *ngIf="!data.staff.image; else second">
                 <img class="product-big-img" src="../../../../assets/product.jpg" alt="">
@@ -10,7 +10,7 @@
                 <img class="product-big-img" src="data.staff.image">
             </ng-template>
         </div>
-    </div>
+    </div> -->
     <div class="col-lg-6">   
     <div class="row">
         <h4><strong>  ID: </strong></h4>
@@ -58,7 +58,7 @@
          <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Phone </mat-label>
-                <input matInput type="text" required>
+                <input matInput type="text" >
                 <mat-error class="error-required"
                    >
                    Phone is <strong>required</strong>
@@ -76,12 +76,12 @@
         </div>
         <div class="col-6">
             <mat-form-field>
-                <mat-label>Type Staff</mat-label>
-                <select matNativeControl required>
-                  <option value="1">Admin</option>
-                  <option value="2">Employee</option>
-                  <option value="3">Shipper</option>
-                </select>
+                <mat-label>Role</mat-label>
+                <mat-select [ngModel]="typeStaff" #typeStaff="ngModel" name="typeStaff" required>
+                    <mat-option value="1">Admin</mat-option>
+                    <mat-option value="2">Employee</mat-option>
+                    <mat-option value="3">Shipper</mat-option>
+                </mat-select>
               </mat-form-field>
         </div>
     </div>

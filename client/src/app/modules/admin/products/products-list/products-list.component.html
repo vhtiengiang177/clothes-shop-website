@@ -50,7 +50,7 @@
             <td>{{ product.sku }}</td>
             <td><a [routerLink]="['/admin/products', product.id]">{{ product.name }}</a></td>
             <td>{{ product.totalBuy }}</td>
-            <td>{{ product.createdDate | date: 'longDate' }}</td>
+            <td>{{ product.createdDate |  date: 'dd/MM/yyyy' }}</td>
             <td (click)="editProduct(product.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>

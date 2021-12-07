@@ -74,7 +74,7 @@
             <td><a>{{ order.totalQuantity }}</a></td>
             <td>{{ order.totalAmount }}</td>
             <!-- <td *ngIf="order.state == 6"> Return Refund</td> -->
-            <td [routerLink]="['/admin/orders-return/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
+            <td [routerLink]="['/admin/orders-return/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
           </tr>
         </tbody>
         <tbody *ngIf="ordersReturnStore.totalData == 0">

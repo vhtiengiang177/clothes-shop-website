@@ -11284,3 +11284,8 @@
     background: transparent !important;
     display: unset !important;
   }
+
+  .button-action {
+    padding: 5px;
+    font-size: 11px;
+  }

@@ -113,7 +113,7 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
     ProductAddCartFormComponent,
     OrderPageComponent,
     MyAccountPageComponent,
-    UserInfoComponent
+    UserInfoComponent,
     OrderPageComponent,
     StaffDetailFormComponent,
     ShopsListComponent,

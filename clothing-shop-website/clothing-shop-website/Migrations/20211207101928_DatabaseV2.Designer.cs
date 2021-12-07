@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211205150252_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211207101928_DatabaseV2")]
+    partial class DatabaseV2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,25 +178,10 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdColor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SizeId")
-                        .HasColumnType("int");
-
                     b.HasKey("IdCustomer", "IdProduct", "IdSize", "IdColor");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SizeId");
 
                     b.ToTable("Carts");
 
@@ -358,7 +343,7 @@ namespace clothing_shop_website.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ColorCode")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -368,45 +353,36 @@ namespace clothing_shop_website.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorCode")
-                        .IsUnique()
-                        .HasFilter("[ColorCode] IS NOT NULL");
-
                     b.ToTable("Colors");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            ColorCode = "#FFFFFF",
                             Name = "White",
                             State = 1
                         },
                         new
                         {
                             Id = 2,
-                            ColorCode = "#000000",
                             Name = "Black",
                             State = 1
                         },
                         new
                         {
                             Id = 3,
-                            ColorCode = "#0000FF",
                             Name = "Blue",
                             State = 1
                         },
                         new
                         {
                             Id = 4,
-                            ColorCode = "#FF0000",
                             Name = "Red",
                             State = 1
                         },
                         new
                         {
                             Id = 5,
-                            ColorCode = "#808080",
                             Name = "Gray",
                             State = 0
                         });
@@ -423,11 +399,17 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdTypeCustomer")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Point")
                         .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdAccount");
 
@@ -684,7 +666,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -694,7 +676,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 2,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -704,7 +686,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 1,
                             IdSize = 3,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -714,7 +696,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 2,
                             IdProduct = 2,
                             IdSize = 2,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -724,7 +706,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 3,
                             IdProduct = 2,
                             IdSize = 2,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -734,7 +716,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 4,
                             IdProduct = 3,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -744,7 +726,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 2,
                             IdProduct = 4,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -754,7 +736,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 3,
                             IdProduct = 5,
                             IdSize = 2,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -764,7 +746,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 4,
                             IdProduct = 5,
                             IdSize = 2,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -774,7 +756,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 6,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -784,7 +766,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 7,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -794,7 +776,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 8,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -804,7 +786,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 9,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -814,7 +796,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 10,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         },
                         new
                         {
@@ -824,7 +806,7 @@ namespace clothing_shop_website.Migrations
                             IdColor = 1,
                             IdProduct = 11,
                             IdSize = 1,
-                            Quantity = 120
+                            Quantity = 100
                         });
                 });
 
@@ -838,13 +820,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("CustomerIdAccount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateReceive")
+                    b.Property<DateTime>("DatePayment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateShip")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DeliveryAddressId")
@@ -896,9 +878,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 1,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 1,
                             IdCustomer = 7,
@@ -913,9 +895,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 2,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 2,
                             IdCustomer = 7,
@@ -930,9 +912,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 3,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 3,
                             IdCustomer = 8,
@@ -947,9 +929,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 4,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -964,9 +946,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 5,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -981,9 +963,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 7,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -998,9 +980,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 8,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1015,9 +997,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 9,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1032,9 +1014,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 10,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 8,
@@ -1049,9 +1031,9 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 11,
-                            DateCompleted = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateReceive = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FeeDelivery = 30000.0,
                             IdAddress = 4,
                             IdCustomer = 9,
@@ -1361,7 +1343,7 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 5,
                             Name = "Mella Khaki Pant",
                             Sku = "123456781",
-                            State = 1,
+                            State = 0,
                             TotalBuy = 10,
                             UnitPrice = 800000.0
                         },
@@ -1374,7 +1356,7 @@ namespace clothing_shop_website.Migrations
                             IdCategory = 5,
                             Name = "Mochi Pants",
                             Sku = "123456780",
-                            State = 1,
+                            State = 0,
                             TotalBuy = 10,
                             UnitPrice = 900000.0
                         },
@@ -1528,7 +1510,7 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 9,
                             IdSize = 1,
                             IdColor = 1,
-                            State = 1,
+                            State = 0,
                             Stock = 100
                         },
                         new
@@ -1536,7 +1518,7 @@ namespace clothing_shop_website.Migrations
                             IdProduct = 10,
                             IdSize = 1,
                             IdColor = 1,
-                            State = 1,
+                            State = 0,
                             Stock = 100
                         },
                         new
@@ -1670,7 +1652,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Province")
@@ -1767,6 +1755,9 @@ namespace clothing_shop_website.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdAccount");
 
@@ -1944,31 +1935,13 @@ namespace clothing_shop_website.Migrations
 
             modelBuilder.Entity("Domain.Entity.Cart", b =>
                 {
-                    b.HasOne("Domain.Entity.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
-
                     b.HasOne("Domain.Entity.Customer", "Customer")
                         .WithMany("Carts")
                         .HasForeignKey("IdCustomer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entity.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("Domain.Entity.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Color");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Domain.Entity.Customer", b =>

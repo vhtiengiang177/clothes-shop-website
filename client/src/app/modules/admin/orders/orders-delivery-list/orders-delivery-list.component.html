@@ -61,13 +61,13 @@
           <tr *ngFor="let order of ordersDeliveryStore.orders$ | async; index as i">
             <td>{{ i+1 }}</td>
             <td><a [routerLink]="['/admin/orders-delivery/', order.id]">{{ order.id }}</a></td>
-            <td><a>{{ order.dateOrder | date: 'longDate' }}</a></td>
+            <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.totalQuantity }}</a></td>
             <td>{{ order.totalAmount }}</td>
             <td *ngIf="order.state == 3"> Delivery</td>
-            <td [routerLink]="['/admin/orders-delivery/', order.id]" type="button" class="btn btn-info">View Detail</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-success" (click)="completeOrder(order.id)">Complete</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-warning" (click)="returnOrder(order.id)">Return Refund</td>
+            <td [routerLink]="['/admin/orders-delivery/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-success button-action" (click)="completeOrder(order.id)">Complete</td>&nbsp;&nbsp;
+            <td type="button" class="btn btn-warning button-action" (click)="returnOrder(order.id)">Return Refund</td>
           </tr>
         </tbody>
         <tbody *ngIf="ordersDeliveryStore.totalData == 0">

@@ -24,10 +24,10 @@ export class StaffDetailFormComponent implements OnInit {
     private toastr: ToastrService) { 
       console.log(data);
 
-      if (data.staff.idAccount)
-      {
+      // if (data.staff.idAccount)
+      // {
        
-      }
+      // }
       
     }
 
