@@ -60,7 +60,7 @@ import { SharedService } from './_shared/constant/share-service';
 import { StaffDetailFormComponent } from './modules/admin/staff/staff-detail-form/staff-detail-form.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.component';
-
+import { PromotionDetailComponent } from './modules/admin/promotions/promotion-detail/promotion-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +117,8 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
     OrderPageComponent,
     StaffDetailFormComponent,
     ShopsListComponent,
-    ShopsFormComponent
+    ShopsFormComponent,
+    PromotionDetailComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -128,7 +129,8 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
     StaffFormComponent,
     ProductAddCartFormComponent,
     StaffAddFormComponent,
-    StaffDetailFormComponent
+    StaffDetailFormComponent,
+    PromotionDetailComponent
   ],
   imports: [
     BrowserModule,

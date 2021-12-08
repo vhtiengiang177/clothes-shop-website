@@ -41,19 +41,25 @@
               <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
             </th>
             <th (click)="sortDateOrders()">Date Order
-                <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-                <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
-              </th>
-            <th (click)="sortTotalQuantity()">Total Quantity
-                <fa *ngIf="filter.sort == 'totalquantity:desc'" name="sort-down"></fa>
-                <fa *ngIf="filter.sort == 'totalquantity:asc'" name="sort-up"></fa>
-              </th>
-            <th (click)="sortTotalAmount()">Total Amount
-                <fa *ngIf="filter.sort == 'totalamount:desc'" name="sort-down"></fa>
-                <fa *ngIf="filter.sort == 'totalamount:asc'" name="sort-up"></fa>
-              </th>
-              <th >State   
-              </th>
+              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+            </th>
+          <th (click)="sortDateOrders()">Date Payment
+              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+            </th>
+          <th (click)="sortDateOrders()">Date Ship
+              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+            </th>
+          <th (click)="sortTotalQuantity()">Shipper
+              <fa *ngIf="filter.sort == 'totalquantity:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'totalquantity:asc'" name="sort-up"></fa>
+            </th>
+          <th (click)="sortTotalAmount()">Customer
+              <fa *ngIf="filter.sort == 'totalamount:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'totalamount:asc'" name="sort-up"></fa>
+            </th>
             <th colspan="2">Action</th>
           </tr>
         </thead>
@@ -62,9 +68,10 @@
             <td>{{ i+1 }}</td>
             <td><a [routerLink]="['/admin/orders-delivery/', order.id]">{{ order.id }}</a></td>
             <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.totalQuantity }}</a></td>
-            <td>{{ order.totalAmount }}</td>
-            <td *ngIf="order.state == 3"> Delivery</td>
+            <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
+            <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
+            <td><a>{{ order.idShipper }}-{{ order.staff }}</a></td>
+            <td>{{ order.idCustomer }}-{{ order.customer }}</td>
             <td [routerLink]="['/admin/orders-delivery/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
             <td type="button" class="btn btn-success button-action" (click)="completeOrder(order.id)">Complete</td>&nbsp;&nbsp;
             <td type="button" class="btn btn-warning button-action" (click)="returnOrder(order.id)">Return Refund</td>

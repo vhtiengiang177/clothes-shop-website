@@ -1,0 +1,74 @@
+<h2  mat-dialog-title>Detail Promotion <strong># {{ data.promotion.id }}</strong></h2>
+<mat-dialog-content class="mat-typography">
+<div class="container" >
+            <div class="row">
+                <div class="col-4">
+                   CODE:
+                </div>
+                <div *ngIf="data.promotion.name" class="col-8">
+                    {{  data.promotion.name }} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Description:
+                </div>
+                <div *ngIf="data.promotion.description" class="col-8">
+                    {{ data.promotion.description}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Start Date:
+                </div>
+                <div *ngIf="data.promotion.startDate" class="col-8">
+                    {{ data.promotion.startDate |  date: 'dd/MM/yyyy'}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                   End Date:
+                </div>
+                <div *ngIf="data.promotion.endDate" class="col-8">
+                    {{ data.promotion.endDate |  date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Created Date:
+                </div>
+                <div *ngIf="data.promotion.createdDate" class="col-8">
+                    {{ data.promotion.createdDate  |  date: 'dd/MM/yyyy'}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Last Modified:
+                </div>
+                <div *ngIf="data.promotion.lastModified" class="col-8">
+                    {{ data.promotion.lastModified |  date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-4">
+                        Created By:
+                    </div>
+                    <!-- <div *ngIf="data.promotion.lastModified" class="col-6">
+                        {{ data.promotion.lastModified |  date: 'dd/MM/yyyy' }}
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Modified By:
+                    </div>
+                    <!-- <div *ngIf="data.promotion.lastModified" class="col-6">
+                        {{ data.promotion.lastModified |  date: 'dd/MM/yyyy' }}
+                    </div> -->
+                </div>
+      
+
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Exit</button> &nbsp;
+</mat-dialog-actions>

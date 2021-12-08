@@ -1,6 +1,6 @@
 import { Account } from 'src/app/services/model/account/account.model';
 export interface Customer {
-    id?: number,
+    idAccount?: number,
     firstName?: string,
     lastName?: string,
     verifyEmail?: number,

@@ -52,10 +52,10 @@ export class CustomersStoreService {
     this._totalData.next(val);
   }
 
-  async getAll(filterParams: FilterParamsCustomer) {
+  async getAll(filterParams: FilterParamsAccounts) {
     await this.customerService.get(filterParams)
       .subscribe(res => {
-        this.customer = res.data;
+        this.acccustomer = res.data;
         this.totalData = res.totalData;
       },
         (error: AppError) => {

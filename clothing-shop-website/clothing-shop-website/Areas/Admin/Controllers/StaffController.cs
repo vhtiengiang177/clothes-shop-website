@@ -30,36 +30,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllStaff([FromQuery] FilterParamsStaff filterParams)
+        public IActionResult GetAllStaff()
         {
-            try
-            {
-                int currentPageIndex = filterParams.PageIndex ?? 1;
-                int currentPageSize = filterParams.PageSize ?? 5;
-
+            try 
+            { 
                 IQueryable<Staff> lStaffItems;
 
-                if (filterParams.IdTypeStaff != null)
-                {
-                    if (filterParams.IdTypeStaff.Count() != 0
-                        || filterParams.IdTypeStaff.Count() != 3)
-                    {
-                        lStaffItems = _unitOfWork.StaffRepository.GetlStaffByTypeStaffID(filterParams.IdTypeStaff);
-                    }
-                    else lStaffItems = _unitOfWork.StaffRepository.GetAllStaff();
-                }
-                else lStaffItems = _unitOfWork.StaffRepository.GetAllStaff();
+                lStaffItems = _unitOfWork.StaffRepository.GetAllStaff();
 
-                lStaffItems = _staffService.FilterStaff(filterParams, lStaffItems);
-                var lStaff = _staffService.SortListStaff(filterParams.Sort, lStaffItems);
 
-                var response = new ResponseJSON<Staff>
-                {
-                    TotalData = lStaff.Count(),
-                    Data = lStaff.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
-                };
-
-                return Ok(response);
+                return Ok(lStaffItems);
             }
             catch
             {
