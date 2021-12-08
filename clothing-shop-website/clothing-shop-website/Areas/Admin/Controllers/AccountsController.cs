@@ -277,7 +277,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 var result = await _imageService.AddImageAsync(file);
                 if (result.Error != null) return BadRequest(result.Error.Message);
 
-                if (string.IsNullOrEmpty(user.PublicId))
+                if (!string.IsNullOrEmpty(user.PublicId))
                 {
                     var resultDelete = await _imageService.DeleteImageAsync(user.PublicId);
                     if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
