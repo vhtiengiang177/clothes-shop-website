@@ -13,11 +13,9 @@
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
-        					<li class="active"><a href="#"><span class="fa fa-user"></span> Profile</a></li>
-        					<li><a href="#"><span class="fa fa-cog"></span> Delivery Address</a></li>
-        					<li><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>
-        					<li><a href="#"><span class="fa fa-envelope"></span> Messages</a></li>
-        					<li><a href="user-drive.html"><span class="fa fa-th"></span> Drive</a></li>
+        					<li (click)="clickProfileItem()" [ngClass]="{ 'active': clickProduct }" ><a [routerLink]="['/my-account']"><span class="fa fa-user"></span> Profile</a></li>
+        					<li (click)="clickAddressItem()" [ngClass]="{ 'active': clickAddress }"><a [routerLink]="['/my-account/delivery-address']"><span class="fa fa-cog"></span> Delivery Address</a></li>
+        					<li (click)="clickChangePassItem()" [ngClass]="{ 'active': clickChangePass }"><a href="['/my-account/change-password']"><span class="fa fa-credit-card"></span> Change Password</a></li>
         				</ul>
         			</nav>
                 </div>

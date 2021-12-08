@@ -83,7 +83,8 @@ export class StaffStoreService {
   update(staffObj) {
     return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
   }
-  create(accObj,staffObj) {
+
+  create(accObj, staffObj) {
     let result = new Subject<Account>();
     this.staffService.create("/createaccount", accObj).subscribe(res => {
       result.next(res)

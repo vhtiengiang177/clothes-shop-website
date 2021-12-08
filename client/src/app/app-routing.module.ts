@@ -32,6 +32,8 @@ import { OrderPageComponent } from './modules/user/order-page/order-page.compone
 import { MyAccountPageComponent } from './modules/user/my-account-page/my-account-page.component';
 import { UserInfoComponent } from './modules/user/my-account/user-info/user-info.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
+import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
+import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -197,6 +199,16 @@ const routes: Routes = [
       {
         path: '',
         component: UserInfoComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'delivery-address',
+        component: DeliveryAddressComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
         canActivate: [AuthGuard]
       }
     ]

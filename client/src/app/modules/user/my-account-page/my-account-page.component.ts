@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/data/account/account.service';
 import { Customer } from 'src/app/services/model/customer/customer.model';
@@ -18,10 +19,21 @@ export class MyAccountPageComponent implements OnInit {
   typeaccount: number
   name: string
   imageUrl: string = null
+  clickProfile: boolean = false
+  clickAddress: boolean = false
+  clickChangePass: boolean = false
 
-  constructor(private authService: AuthService, 
+  constructor(private route: ActivatedRoute,
+    private authService: AuthService, 
     private accountService: AccountService,
     private sharedService: SharedService) { 
+    let path = route.snapshot.children[0].routeConfig.path
+    if (path == 'delivery-address') 
+      this.clickAddressItem()
+    else if (path == 'change-password')
+      this.clickChangePassItem()
+    else this.clickProfileItem()
+     
     this.typeaccount = authService.getCurrentUser().idTypeAccount
     accountService.getAccountInfo(authService.getCurrentUser().id).subscribe(res => {
       this.email = res.account.email
@@ -43,7 +55,27 @@ export class MyAccountPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
   
+  clickProfileItem() {
+    this.clickProfile = true
 
+    this.clickAddress = false
+    this.clickChangePass = false
+  }
+
+  clickAddressItem() {
+    this.clickAddress = true
+
+    this.clickProfile = false
+    this.clickChangePass = false
+  }
+
+  clickChangePassItem() {
+    this.clickChangePass = true
+
+    this.clickProfile = false
+    this.clickAddress = false
+  }
 }
