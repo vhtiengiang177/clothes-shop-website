@@ -83,9 +83,10 @@ export class StaffStoreService {
   update(staffObj) {
     return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
   }
-  create(accObj,staffObj) {
+
+  create(accObj, staffObj) {
     let result = new Subject<Account>();
-    this.StaffService.create("/createaccount", accObj).subscribe(res => {
+    this.staffService.create("/createaccount", accObj).subscribe(res => {
       result.next(res)
       this.toastr.success("Added successfully", "Staff #" + res.id)
     }, (error: AppError) => {
@@ -97,10 +98,10 @@ export class StaffStoreService {
   }
 
   getById(id) {
-    return this.StaffService.getById("/GetStaffByID", id)
+    return this.staffService.getById("/GetStaffByID", id)
   }
   getAccById(id) {
-    return this.StaffService.getById("/GetStaffByID", id)
+    return this.staffService.getById("/GetStaffByID", id)
   }
 
 
