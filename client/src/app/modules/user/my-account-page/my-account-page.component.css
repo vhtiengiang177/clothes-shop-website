@@ -582,6 +582,7 @@
 
 .img-circle {
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {

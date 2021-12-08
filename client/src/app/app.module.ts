@@ -36,7 +36,6 @@ import { CategoriesFormComponent } from './modules/admin/categories/categories-f
 import { PromotionsListComponent } from './modules/admin/promotions/promotions-list/promotions-list.component';
 import { OrdersListComponent } from './modules/admin/orders/orders-list/orders-list.component';
 import { ProductDetailComponent } from './modules/admin/products/product-detail/product-detail.component';
-import { FileSelectDirective } from 'ng2-file-upload';
 import { FooterComponent } from './modules/admin/layout/footer/footer.component';
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
@@ -60,6 +59,8 @@ import { SharedService } from './_shared/constant/share-service';
 import { StaffDetailFormComponent } from './modules/admin/staff/staff-detail-form/staff-detail-form.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.component';
+import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
+import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,6 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
     PromotionsListComponent,
     OrdersListComponent,
     ProductDetailComponent,
-    FileSelectDirective,
     FooterComponent,
     ConfirmFormComponent,
     ProductDetailPageComponent,
@@ -117,7 +117,9 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
     OrderPageComponent,
     StaffDetailFormComponent,
     ShopsListComponent,
-    ShopsFormComponent
+    ShopsFormComponent,
+    DeliveryAddressComponent,
+    ChangePasswordComponent
   ],
   entryComponents: [
     ProductFormComponent,

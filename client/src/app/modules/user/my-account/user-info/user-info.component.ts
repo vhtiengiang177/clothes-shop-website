@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/data/account/account.service';
 import { Customer } from 'src/app/services/model/customer/customer.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
+import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import { SharedService } from 'src/app/_shared/constant/share-service';
 
@@ -18,13 +18,14 @@ export class UserInfoComponent implements OnInit {
   customer: Customer = {}
   staff: Staff = {}
   typeaccount: number
-  uploader: FileUploader
   imageUrl: string = null
+  loading: boolean = false
 
   constructor(private authService: AuthService, 
     private accountService: AccountService,
     private sharedService: SharedService,
     private staffStore: StaffStoreService,
+    private customerStore: CustomersStoreService,
     private toastr: ToastrService) {
     this.typeaccount = authService.getCurrentUser().idTypeAccount
     accountService.getAccountInfo(authService.getCurrentUser().id).subscribe(res => {
@@ -49,13 +50,14 @@ export class UserInfoComponent implements OnInit {
   public uploadFile = (files) => {
     if (files.length === 0)
       return
-
+    this.loading = true
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     this.accountService.addImageAccount(formData).subscribe(res => {
       this.imageUrl = res
       this.sharedService.emitChange(this.imageUrl)
+      this.loading = false
     })
   }
 
@@ -63,18 +65,28 @@ export class UserInfoComponent implements OnInit {
     console.log(formStaff);
     if (formStaff.valid) {
       this.staff.firstName = formStaff.value.firstName
-      this.staff.lastName = formStaff.value.get.lastName
+      this.staff.lastName = formStaff.value.lastName
       this.staff.dateOfBirth = formStaff.value.dateOfBirth
       this.staff.cardIdentity = formStaff.value.cardIdentity
       this.staff.phone = formStaff.value.phone
       this.staff.idAccount = this.authService.getCurrentUser().id
       
       this.staffStore.update(this.staff).subscribe(res => {
-        this.staff = res
         this.toastr.success("Update profile successfully")
       })
     }
-    
+  }
+
+  updateCustomerProfile(formCustomer) {
+    if (formCustomer.valid) {
+      this.customer.firstName = formCustomer.value.firstName
+      this.customer.lastName = formCustomer.value.lastName
+      this.customer.idAccount = this.authService.getCurrentUser().id
+      
+      this.customerStore.update(this.customer).subscribe(res => {
+        this.toastr.success("Update profile successfully")
+      })
+    }
   }
 
 }

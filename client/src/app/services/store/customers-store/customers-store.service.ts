@@ -69,6 +69,8 @@ export class CustomersStoreService {
     return this.customerService.getById("/GetAccountByID", id)
   }
 
-
+  update(customerObj) {
+    return this.customerService.update("/UpdateCustomer", customerObj.id, customerObj)
+  }
 
 }
