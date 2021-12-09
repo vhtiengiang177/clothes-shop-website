@@ -8,11 +8,13 @@ export interface Order {
     totalProductPrice: number,
     totalAmount: number,
     feeDelivery: number
-    IdAddress: number,
-    IdCustomer: number,
+    idAddress: number,
+    idCustomer: number,
     state: number,
-    IdPromotion?: number,
-    IdStaff?: number,
-    IdShipper?: number
+    idPromotion?: number,
+    idStaff?: number,
+    idShipper?: number,
+    shipper?: string,
+    staff?: string,
     customer?: string
 }

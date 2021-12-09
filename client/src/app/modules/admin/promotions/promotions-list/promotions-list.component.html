@@ -48,8 +48,6 @@
               <fa *ngIf="filter.sort == 'name:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'name:asc'" name="sort-up"></fa>
             </th>
-            <th >Description
-            </th>
             <th (click)="sortValue()">Value
                 <fa *ngIf="filter.sort == 'value:desc'" name="sort-down"></fa>
                 <fa *ngIf="filter.sort == 'value:asc'" name="sort-up"></fa>
@@ -69,12 +67,11 @@
           <tr *ngFor="let promotion of promotionsStore.promotions$ | async; index as i">
             <td>{{ i+1 }}</td>
             <td>{{ promotion.id }}</td>
-            <td><a>{{ promotion.name }}</a></td>
-            <td><a>{{ promotion.description }}</a></td>
+            <td><a>{{ promotion.name }}</a></td>  
             <td><a>{{ promotion.value }}</a></td>
             <td>{{ promotion.startDate |  date: 'dd/MM/yyyy' }}</td>
             <td>{{ promotion.endDate|  date: 'dd/MM/yyyy' }}</td>
-            <td ><fa  name="info-circle"></fa></td>
+            <td (click)="ViewDetailPromotion(promotion.id)"><fa  name="info-circle"></fa></td>
             <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>

@@ -160,6 +160,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
     
+        [AllowAnonymous]
         [HttpPost("CreateCustomerAccount")]
         public IActionResult CreateCustomerAccount([FromBody] CustomerAccount customerAccountParams)
         {

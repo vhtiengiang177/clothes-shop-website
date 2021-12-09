@@ -1,58 +1,74 @@
-<h2 *ngIf="this.data.typeform === 0" mat-dialog-title>Add Promotion</h2>
-<h2 *ngIf="this.data.typeform === 1" mat-dialog-title>Edit Promotion <strong>#{{ data.promotion.id }}</strong></h2>
+<h2 *ngIf="this.data.typeform === 0" mat-dialog-title>Add Product</h2>
+<h2 *ngIf="this.data.typeform === 1" mat-dialog-title>Edit Product <strong>#{{ data.product.id }}</strong></h2>
 <mat-dialog-content class="mat-typography">
-    <div class="row">
-        <div class="col-6">
-            <mat-form-field appearance="fill">
-                <mat-label>CODE</mat-label>
-                <input [(ngModel)]="data.promotion.name" #name ="ngModel" matInput type="text" required>
-                <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
-                    CODE is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
+    <div class="col-lg-6">
+        <div class="form-group avatar">
+           <figure class="figure col-md-2 col-sm-3 col-xs-12">
+               <img *ngIf="imageUrl == null" class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+               <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
+           </figure>
+           <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+               <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
+               <button type="submit" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
+           </div>
+       </div>
+       </div>
+    <div class="col-lg-6">  
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>SKU</mat-label>
+                    <input [(ngModel)]="data.product.sku" #sku="ngModel" matInput type="text" required>
+                    <mat-error class="error-required" *ngIf="sku.touched && sku.invalid && sku.errors?.required">
+                        SKU is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input [(ngModel)]="data.product.name" #name="ngModel" matInput type="text" required>
+                    <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
+                        A product name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-        <div class="col-6">
-            <mat-form-field appearance="fill">
-                <mat-label>Value</mat-label>
-                <input [(ngModel)]="data.promotion.value" #value="ngModel" matInput type="number" required>
-                <mat-error class="error-required"
-                    *ngIf="value.touched && value.invalid && value.errors?.required">
-                    Value is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-6">
-            <mat-form-field >
-                <input [(ngModel)]="data.promotion.startDate" #startDate="ngModel" matInput [matDatepicker]="startDate" placeholder="Start Date" required>
-                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-                <mat-datepicker #startDate ></mat-datepicker>
-                <mat-error class="error-required"
-                    *ngIf="startDate.touched && startDate.invalid && startDate.errors?.required">
-                    Start Date is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Unit Price</mat-label>
+                    <input [(ngModel)]="data.product.unitPrice" #unitPrice="ngModel" matInput type="number" required>
+                    <mat-error class="error-required"
+                        *ngIf="unitPrice.touched && unitPrice.invalid && unitPrice.errors?.required">
+                        Product price is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select [(ngModel)]="data.product.idCategory" [compareWith]="compareCategory"
+                        #selectCategory="ngModel" name="category" required>
+                        <mat-option (click)="selectedCategory(category)"
+                            *ngFor="let category of categoriesStore.categories$ | async" [value]="category.id">
+                            {{ category.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="selectCategory.touched && selectCategory?.errors?.required">
+                        Please select at least one category
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
-        <div class="col-6">
-            <mat-form-field >
-                <input [(ngModel)]="data.promotion.endDate" #endDate="ngModel" matInput [matDatepicker]="endDate" placeholder="End Date" required>
-                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-                <mat-datepicker #endDate ></mat-datepicker>
-                <mat-error class="error-required"
-                    *ngIf="endDate.touched && endDate.invalid && endDate.errors?.required">
-                    End Date is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <mat-form-field appearance="fill">
-                <mat-label>Description</mat-label>
-                <textarea [(ngModel)]="data.promotion.description" matInput></textarea>            
-            </mat-form-field>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea [(ngModel)]="data.product.description" matInput></textarea>
+                </mat-form-field>
+            </div>
         </div>
     </div>
 </mat-dialog-content>

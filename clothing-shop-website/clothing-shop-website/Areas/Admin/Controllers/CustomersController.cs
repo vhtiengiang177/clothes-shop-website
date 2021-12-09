@@ -90,8 +90,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
 
-        [HttpGet("GetlCustomerByID/{id}", Name = "GetlCustomerByID")]
-        public IActionResult GetlCustomerByID(int id)
+        [HttpGet("GetCustomerByID/{id}", Name = "GetCustomerByID")]
+        public IActionResult GetCustomerByID(int id)
         {
             var Customer = _unitOfWork.CustomersRepository.GetCustomerByID(id);
 

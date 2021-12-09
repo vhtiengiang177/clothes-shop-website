@@ -67,6 +67,18 @@ export class StaffStoreService {
         });
   }
 
+  async getAllStaff() {
+    await this.staffService.getAllStaff()
+      .subscribe(res => {
+        this.staff = res
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+  }
+
   // create(staffObj) {
   //   let result = new Subject<Promotion>();
   //   this.StaffService.create("/CreateAccount", staffObj).subscribe(res => {
@@ -84,7 +96,7 @@ export class StaffStoreService {
     return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
   }
 
-  create(accObj, staffObj) {
+  create(accObj,staffObj) {
     let result = new Subject<Account>();
     this.staffService.create("/createaccount", accObj).subscribe(res => {
       result.next(res)
@@ -100,9 +112,5 @@ export class StaffStoreService {
   getById(id) {
     return this.staffService.getById("/GetStaffByID", id)
   }
-  getAccById(id) {
-    return this.staffService.getById("/GetStaffByID", id)
-  }
-
 
 }

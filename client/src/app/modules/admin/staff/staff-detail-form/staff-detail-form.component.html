@@ -1,16 +1,18 @@
-<h2  mat-dialog-title>Detail Staff <strong># {{ data.staff.idAccount }}</strong> <fa name="close" (click)="removeItem(item, i)"></fa></h2>
+<h2  mat-dialog-title>Detail Staff <strong># {{ data.staff.idAccount }}</strong></h2>
 <mat-dialog-content class="mat-typography">
 <div class="container" >
     <div class="row detail-center">
         <div class="col-lg-6">
-            <div class="product-pic-zoom">
-                <ng-container *ngIf="!data.staff.image; else second">
-                    <img class="product-big-img" src="../../../../assets/product.jpg" alt="">
-                </ng-container>
-                <ng-template>
-                    <img class="product-big-img" src="data.staff.image">
-                </ng-template>
+         <div class="form-group avatar">
+            <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                <img *ngIf="imageUrl == null" class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
+            </figure>
+            <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
+                <button type="submit" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
             </div>
+        </div>
         </div>
         <div class="col-lg-6">    
             <div class="row">
@@ -81,3 +83,6 @@
     </div>
 </div>
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Exit</button> &nbsp;
+</mat-dialog-actions>

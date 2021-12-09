@@ -59,6 +59,7 @@ import { SharedService } from './_shared/constant/share-service';
 import { StaffDetailFormComponent } from './modules/admin/staff/staff-detail-form/staff-detail-form.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.component';
+import { PromotionDetailComponent } from './modules/admin/promotions/promotion-detail/promotion-detail.component';
 import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 
@@ -120,6 +121,8 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     ShopsFormComponent,
     DeliveryAddressComponent,
     ChangePasswordComponent
+    ShopsFormComponent,
+    PromotionDetailComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -130,7 +133,8 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     StaffFormComponent,
     ProductAddCartFormComponent,
     StaffAddFormComponent,
-    StaffDetailFormComponent
+    StaffDetailFormComponent,
+    PromotionDetailComponent
   ],
   imports: [
     BrowserModule,
