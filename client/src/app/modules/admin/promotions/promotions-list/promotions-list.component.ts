@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsPromotions } from 'src/app/services/model/promotion/filter-params-promotions.model';
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
+import { PromotionDetailComponent } from '../promotion-detail/promotion-detail.component';
 import { PromotionFormComponent } from '../promotion-form/promotion-form.component';
 
 @Component({
@@ -209,5 +210,23 @@ export class PromotionsListComponent implements OnInit {
       }
     });
   }
+
+  ViewDetailPromotion(idPromotion) {
+    if(!this.promotionsStore.promotions.find(p => p.id == idPromotion)) {
+      this.toastr.error("Cannot find the promotion #" + idPromotion)
+    }
+    else {
+    this.promotionsStore.getById(idPromotion).subscribe(res => {
+        if(res) {
+          const dialogRef = this.dialog.open(PromotionDetailComponent, {
+            width: '500px',
+            data: { 
+              promotion: res
+            }
+          });
+        }
+      })
+  }
+}
 
 }

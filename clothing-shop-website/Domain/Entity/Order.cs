@@ -26,6 +26,7 @@ namespace Domain.Entity
         public Customer Customer { get; set; }
         public Promotion Promotion { get; set; }
         public Staff Staff { get; set; }
+
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
     }

@@ -55,10 +55,10 @@ import { ProductAddCartFormComponent } from './modules/user/product-add-cart-for
 import { OrderPageComponent } from './modules/user/order-page/order-page.component';
 import { MyAccountPageComponent } from './modules/user/my-account-page/my-account-page.component';
 import { UserInfoComponent } from './modules/user/my-account/user-info/user-info.component';
-import { SharedService } from './_shared/constant/share-service';
 import { StaffDetailFormComponent } from './modules/admin/staff/staff-detail-form/staff-detail-form.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.component';
+import { PromotionDetailComponent } from './modules/admin/promotions/promotion-detail/promotion-detail.component';
 import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 
@@ -119,7 +119,9 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     ShopsListComponent,
     ShopsFormComponent,
     DeliveryAddressComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ShopsFormComponent,
+    PromotionDetailComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -130,7 +132,8 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     StaffFormComponent,
     ProductAddCartFormComponent,
     StaffAddFormComponent,
-    StaffDetailFormComponent
+    StaffDetailFormComponent,
+    PromotionDetailComponent
   ],
   imports: [
     BrowserModule,

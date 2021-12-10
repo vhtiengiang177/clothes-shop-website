@@ -1,10 +1,14 @@
+import { filter } from 'rxjs/operators';
+import { Staff } from 'src/app/services/model/staff/staff.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
+import { MatDialog, MatPaginator, PageEvent, SELECT_ITEM_HEIGHT_EM } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { OrdersReturnStoreService } from 'src/app/services/store/orders-return-store/orders-return-store.service';
+import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { Order } from 'src/app/services/model/order/order.model';
 
 
 @Component({
@@ -22,8 +26,25 @@ export class OrdersReturnListComponent implements OnInit {
     sort: null
   };
 
+  staff: Staff = {}
+
   constructor(private ordersReturnStore: OrdersReturnStoreService, public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private staffStore:StaffStoreService,
+    private toastr: ToastrService) {
+
+      this.staffStore.staff$.subscribe(res => {
+        if(res.length == 0) {
+          this.staffStore.getAllStaff()
+        }
+        else {
+          this.ordersReturnStore.orders$.subscribe(res => {
+            if (res) {
+              this.getNameStaff()
+            }
+          })
+        }
+      })
+     }
 
   ngOnInit() {
   }
@@ -108,7 +129,12 @@ export class OrdersReturnListComponent implements OnInit {
       this.fetchData()
     }
   }
-  
 
-
+  getNameStaff() {
+    this.ordersReturnStore.orders.forEach((item:Order) => {
+        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
+        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
+        
+    }) 
+  }
 }
