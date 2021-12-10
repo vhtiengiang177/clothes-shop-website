@@ -7,7 +7,6 @@ import { PromotionsStoreService } from 'src/app/services/store/promotions-store/
 import { FormControl, FormGroup } from '@angular/forms';
 import { DeliveryStoreService } from 'src/app/services/store/delivery-store/delivery-store.service';
 import { DeliveryAddressForm } from 'src/app/services/model/delivery/delivery-address-form.model';
-import { loadavg } from 'os';
 
 @Component({
   selector: 'app-delivery-address-form',
