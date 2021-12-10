@@ -5,4 +5,5 @@ export interface ProductSizeColor {
     stock?: number,
     size?: string,
     color?: string
+    selectedQuantity?: number
 }

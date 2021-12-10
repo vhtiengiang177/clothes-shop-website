@@ -12,9 +12,12 @@ export class NavbarUserComponent implements OnInit {
   isHomeActive: boolean = true
   isProductsActive: boolean = false
   isContactActive: boolean = false
+  isOpenMenu: string = "none"
 
   constructor(private categoriesStore: CategoriesStoreService,
     private router: Router) { 
+
+
       this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
           this.currentRouter = event.url;
@@ -54,6 +57,12 @@ export class NavbarUserComponent implements OnInit {
     this.isContactActive = false
     this.isHomeActive = false
     this.isProductsActive = false
+  }
+
+  clickMenu() {
+    if (this.isOpenMenu == "none") 
+      this.isOpenMenu = "block"
+    else this.isOpenMenu = "none"
   }
 
 }

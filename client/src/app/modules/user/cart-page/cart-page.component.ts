@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from 'src/app/services/model/cart/cart.model';
 import { Color } from 'src/app/services/model/product/color.model';
@@ -11,6 +12,7 @@ import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-s
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
 
 @Component({
   selector: 'app-cart-page',
@@ -29,7 +31,8 @@ export class CartPageComponent implements OnInit {
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    public dialog: MatDialog) {
     this.cartsStore.carts$.subscribe(res => {
       this.getInfoCart()
     })
@@ -44,7 +47,6 @@ export class CartPageComponent implements OnInit {
         this.product = res
         cart.state = this.product.state
         cart.unitPrice = this.product.unitPrice
-        this.totalPrice += cart.quantity * cart.unitPrice
         cart.nameProduct = this.product.name
         var psc: ProductSizeColor = {
           idProduct: cart.idProduct,
@@ -55,10 +57,12 @@ export class CartPageComponent implements OnInit {
           cart.stock = res.stock
           if (cart.quantity > cart.stock) {
             cart.quantity = cart.stock
-            this.cartsStore.updateQuantityItemInCart(cart).subscribe(null)
+            this.cartsStore.updateQuantityItemInCart(cart).subscribe(res => {
+              this.countTotalPrice()
+            })
           }
           this.getNameSizeColor(cart)
-
+          this.countTotalPrice()
         })
       })
     })
@@ -99,6 +103,7 @@ export class CartPageComponent implements OnInit {
     }
     this.cartsStore.updateQuantityItemInCart(item).subscribe(res => {
        item.quantity = res.quantity
+       this.countTotalPrice()
     }, () => {
       this.toastr.error("Something went wrong!")
     })
@@ -116,11 +121,30 @@ export class CartPageComponent implements OnInit {
     this.cartsStore.deleteItemsInCart(this.listCartSelected).subscribe(() => {
       this.listCartSelected = []
       this.cartsStore.carts.splice(index,1)
+      this.cartsStore.get()
       this.countTotalPrice()
     }, (error: HttpErrorResponse) => {
       if(error.status == 404)
         this.toastr.error("Could not find this item")
       else this.toastr.error("Something went wrong!")
+    })
+  }
+
+  changeSizeColor(item) {
+    console.log(item);
+    const dialogRef = this.dialog.open(ProductAddCartFormComponent, {
+      width: '1000px',
+      data: { 
+        idProduct: item.idProduct,
+        idSize: item.idSize,
+        idColor: item.idColor,
+        selectedQuantity: item.quantity,
+        stock: item.stock
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      //this.cartsStore.get()
     })
   }
   

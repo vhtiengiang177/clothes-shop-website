@@ -28,8 +28,64 @@
                    [routerLink]="['/contact']">
                     <a>Contact</a>
                 </li>
+                <li>
+                    <a>About Us</a>
+                </li>
             </ul>
         </nav>
-        <div id="mobile-menu-wrap"></div>
+        <div id="mobile-menu-wrap">
+            <div class="slicknav_menu">
+                <a (click)="clickMenu()" href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_open">
+                    <span class="slicknav_menutxt">MENU</span>
+                    <span class="slicknav_icon">
+                        <span class="slicknav_icon-bar"></span>
+                        <span class="slicknav_icon-bar"></span>
+                        <span class="slicknav_icon-bar"></span>
+                    </span>
+                </a>
+                <nav [ngStyle]="{ 'display': isOpenMenu }" class="slicknav_nav ml-auto" role="menu">
+                    <ul>
+                        <li (click)="clickHomePage()" 
+                            [ngClass]="{ 'active': isHomeActive }" 
+                            [routerLink]="['']">
+                            <a role="menuitem">Home</a>
+                        </li>
+                        <li (click)="clickProductsPage()" 
+                            [ngClass]="{ 'active': isProductsActive }" 
+                            [routerLink]="['/products']">
+                            <a role="menuitem">Products</a>
+                        </li>
+                        <li (click)="clickContactPage()" 
+                            [ngClass]="{ 'active': isContactActive }"
+                            [routerLink]="['/contact']">
+                            <a  role="menuitem">Contact</a>
+                         </li>
+                         <li>
+                            <a>About Us</a>
+                        </li>
+                        <!-- <li class="slicknav_parent slicknav_open"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">Collection</a>
+                            <span class="slicknav_arrow">▼</span></a><ul class="dropdown" role="menu" aria-hidden="false" style="">
+                                <li><a href="#" role="menuitem" tabindex="0">Men's</a></li>
+                                <li><a href="#" role="menuitem" tabindex="0">Women's</a></li>
+                                <li><a href="#" role="menuitem" tabindex="0">Kid's</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./blog.html" role="menuitem">Blog</a></li>
+                        <li><a href="./contact.html" role="menuitem">Contact</a></li>
+                        <li class="slicknav_collapsed slicknav_parent"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">Pages</a>
+                            <span class="slicknav_arrow">►</span></a><ul class="dropdown slicknav_hidden" role="menu" aria-hidden="true" style="display: none;">
+                                <li><a href="./blog-details.html" role="menuitem" tabindex="-1">Blog Details</a></li>
+                                <li><a href="./shopping-cart.html" role="menuitem" tabindex="-1">Shopping Cart</a></li>
+                                <li><a href="./check-out.html" role="menuitem" tabindex="-1">Checkout</a></li>
+                                <li><a href="./faq.html" role="menuitem" tabindex="-1">Faq</a></li>
+                                <li><a href="./register.html" role="menuitem" tabindex="-1">Register</a></li>
+                                <li><a href="./login.html" role="menuitem" tabindex="-1">Login</a></li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+            
+        </div>
     </div>
 </div>

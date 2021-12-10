@@ -355,7 +355,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 var lProduct = _unitOfWork.ProductsRepository.GetTopProductBestSellers();
 
                 // Check product is empty or not. Empty => Remove 
-                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(3);
+                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(6);
 
                 if (lProduct.Count() >= 3)
                 {
@@ -379,7 +379,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 var lProduct = _unitOfWork.ProductsRepository.GetTopNewProducts();
 
                 // Check product is empty or not. Empty => Remove 
-                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(3);
+                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(6);
 
                 if (lProduct.Count() >= 3)
                 {

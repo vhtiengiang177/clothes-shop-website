@@ -1,21 +1,15 @@
-.set-bg {
-	background-repeat: no-repeat;
-	background-position: top center;
-	background-image: url("../../../../assets/landingpage1.png");
-}
-
 .set-poster1 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top center;
-	background-image: url("../../../../assets/poster3.gif");
+	background-image: url("../../../../assets/img/poster3.gif");
 }
 
 .set-poster2 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top center;
-	background-image: url("../../../../assets/poster2.gif");
+	background-image: url("../../../../assets/img/poster2.gif");
 }
 
 .hero-items {
@@ -51,4 +45,21 @@
 
 .category-menu {
     justify-content: center;
+}
+
+.image-category {
+	width: 100px;
+	height: 100px;
+	object-fit: scale-down;
+}
+
+carousel {
+	z-index: 999;
+}
+
+.set-deal {
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top center;
+	background-image: url("../../../../assets/img/time-bg.png");
 }

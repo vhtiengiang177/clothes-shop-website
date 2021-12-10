@@ -13,11 +13,24 @@ import { CategoriesStoreService } from 'src/app/services/store/categories-store/
 })
 export class HeaderUserComponent implements OnInit {
   isUserInformation: boolean = false
+  numOfCart: number = 0
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authService : AuthService,
     private cartStore: CartsStoreService) {
+      this.cartStore.carts$.subscribe(res => {
+        console.log("header");
+        console.log(res);
+        console.log(this.numOfCart);
+        
+        
+        
+        if (res && this.numOfCart != res.length) {
+          this.fetchCart()
+          this.numOfCart = res.length
+        }
+      })
      }
 
   ngOnInit() {
@@ -26,7 +39,7 @@ export class HeaderUserComponent implements OnInit {
   logout() {
     this.isUserInformation = false
     this.authService.logout()
-    this.fetchCart()
+    //this.fetchCart()
     if(this.route.snapshot['_routerState'].url != '/')    
       this.router.navigate(['/']);
   }

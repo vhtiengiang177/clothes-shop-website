@@ -3420,6 +3420,7 @@ ol {
 		background: transparent;
 	}
 	.nav-item .nav-menu {
+		justify-content: center;
 		display: none;
 	}
 	.slicknav_menu {

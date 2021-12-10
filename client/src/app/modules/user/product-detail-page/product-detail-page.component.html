@@ -68,11 +68,11 @@
                         </div>
                         <div [ngClass]="{'my-disable': !isEnabled}" class="quantity">
                             <div class="pro-qty">
-                                <span [ngClass]="{'my-disable': quantity == 1}" (click)="decQuantity()" class="dec qtybtn">-</span>
-                                <input (change)="changeQuantity()" type="text" [value]="quantity">
-                                <span [ngClass]="{'my-disable': quantity === selectedSizeColor.stock }" (click)="incQuantity()" class="inc qtybtn">+</span>
+                                <div class="quantity">
+                                    <input class="input-quantity" (change)="changeQuantity()" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
+                                </div>
                             </div>
-                           <button (click)="addToCart()"  class="primary-btn pd-cart">Add To Cart</button>
+                           <button (click)="addToCart()" class="primary-btn pd-cart">Add To Cart</button>
                         </div>
                     </div>
                 </div>

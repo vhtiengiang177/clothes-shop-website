@@ -61,6 +61,7 @@ import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.
 import { PromotionDetailComponent } from './modules/admin/promotions/promotion-detail/promotion-detail.component';
 import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,7 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule, 
-    BrowserAnimationsModule
+    IvyCarouselModule
   ],
   exports: [
  ],

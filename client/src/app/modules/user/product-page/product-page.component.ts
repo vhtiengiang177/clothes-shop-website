@@ -3,6 +3,7 @@ import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/services/model/category/category.model';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
+import { ProductSizeColor } from 'src/app/services/model/product/product-size-color.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
@@ -30,8 +31,6 @@ export class ProductPageComponent implements OnInit {
   sortSelected = 'name:asc' 
   minPrice: number;
   maxPrice: number;
-  
-  //static addForm: any;
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
@@ -91,7 +90,7 @@ export class ProductPageComponent implements OnInit {
       this.toastr.warning("Minimum price should not be greater than maximum")
     }
     else {
-      if (this.minPrice >= 0 && this.maxPrice <= 1000000) {
+      if (this.minPrice >= 0) {
         this.filter.minprice = this.minPrice
         this.filter.maxprice = this.maxPrice
         this.filter.pageindex = 1
@@ -139,6 +138,9 @@ export class ProductPageComponent implements OnInit {
   }
 
   reloadProduct() {
+    this.minPrice = null
+    this.maxPrice = null
+    this.categoriesOptions = []
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
@@ -149,29 +151,14 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart(product) {
-    const dialogRef = this.dialog.open(ProductAddCartFormComponent, {
+    console.log(product.id);
+    
+    this.dialog.open(ProductAddCartFormComponent, {
       width: '1000px',
       data: { 
-        product : product
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if(res) {
-        // if(this.filter.sort == null && this.filter.pageindex == 1) {
-        //   this.promotionsStore.promotions.splice(this.filter.pagesize - 1,1);
-        //   this.promotionsStore.promotions.splice(0,0,res);
-        //   this.promotionsStore.totalData = this.promotionsStore.totalData + 1;
-        // }
-        // else {
-        //   this.filter = {
-        //     pageindex: 1,
-        //     pagesize: this.filter.pagesize,
-        //     sort: null
-        //   }
-        //   this.fetchData()
-        // }
-        // this.paginator.pageIndex = 0;
+        idProduct: product.id,
+        idColor: null,
+        idSize: null
       }
     });
   }

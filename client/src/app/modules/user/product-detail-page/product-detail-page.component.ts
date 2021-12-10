@@ -164,26 +164,6 @@ export class ProductDetailPageComponent implements OnInit {
     }
   }
 
-  decQuantity() {
-    if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > 1)
-        this.quantity -= 1
-      else this.toastr.warning("The selected quantity must be one or more")
-    }
-    else this.toastr.warning("Please select a color and a size of the product")
-    //this.quantity -= 1
-  }
-
-  incQuantity() {
-    if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > this.selectedSizeColor.stock) {
-        this.toastr.warning("The selected quantity exceeds quantity available in stock")
-      }
-      else this.quantity += 1
-    }
-    else this.toastr.warning("Please select a color and a size of the product")
-  }
-
   changeQuantity() {
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
       if (this.quantity > this.selectedSizeColor.stock) {
@@ -202,8 +182,6 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   addToCart(){
-    console.log(this.selectedSizeColor);
-    
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
       this.cart.idColor = this.selectedSizeColor.idColor
       this.cart.idSize =  this.selectedSizeColor.idSize

@@ -2,3 +2,28 @@
     justify-content: center;
     display: flex;
 }
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .mobile-menu-wrap {
+        display: inline-block;
+        justify-content: end;
+    }
+
+    .nav-center {
+        justify-content: end;
+        display: block;
+    }
+    
+    .slicknav_nav {
+        display: block;
+        text-align-last: right;
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile-menu-wrap {
+        display: none;
+    }
+  }

@@ -39,7 +39,7 @@
                                             <h5 class="name-item">{{ item.nameProduct }}</h5>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="div-color-size edit" role="button" tabindex="0">
+                                            <div (click)="changeSizeColor(item)" class="div-color-size edit" role="button" tabindex="0">
                                                 <div>
                                                     <span class="span-size">{{ item.nameSize }}</span>/<span class="span-size">{{ item.nameColor }}</span>
                                                 </div>

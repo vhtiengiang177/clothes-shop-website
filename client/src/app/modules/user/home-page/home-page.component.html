@@ -1,5 +1,5 @@
 <section class="hero-section">
-    <div class="hero-items owl-carousel">
+    <!-- <div class="hero-items owl-carousel">
         <div class="single-hero-items set-bg">
             <div class="container">
                 <div class="row">
@@ -9,17 +9,26 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <carousel 
+        cellsToShow="1"
+        loop="true"
+        autoplay="true"
+        autoplayInterval="4000"
+        height="500"
+        cellWidth="90%"
+        [images]="images">
+    </carousel>
 </section>
 
 <div class="banner-section spad">
     <div class="container-fluid">
         <div class="row category-menu">
             <div class="col-lg-2" *ngFor="let category of categoriesStore.categories$ | async">
-                <img class="image" src="assets/category.png" alt="">
-                    <div class="inner-text">
-                        <h6>{{ category.name }} </h6>
-                    </div>
+                <img class="image image-category" src="assets/category.png" alt="">
+                <div class="inner-text">
+                    <h6>{{ category.name }} </h6>
+                </div>
             </div>
         </div>
     </div>
@@ -37,25 +46,35 @@
                     BEST SELLER
                 </div>
                 <div class="product-slider owl-carousel1">
-                    <div class="product-item" *ngFor="let product of productTopBestSellers">
-                        <div >
-                            <div class="pi-pic">
-                                <img class="image" [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
-                                <ul>
-                                    <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
-                                </ul>
-                            </div>
-                            <div [routerLink]="['/product-detail', product.id]" class="pi-text">
-                                <div class="catagory-name">{{ product.category }}</div>
-                                <a >
-                                    <h5>{{ product.name }}</h5>
-                                </a>
-                                <div class="product-price">
-                                    {{ product.unitPrice | currency: 'VND' }}
+                    <carousel 
+                        [cellsToShow]="3"
+                        [cellsToScroll]="1"
+                        [overflowCellsLimit]="4"
+                        autoplay="true"
+                        autoplayInterval="5000"
+                        height="500"
+                        width="700">
+                        <div class="carousel-cell product-item" *ngFor="let product of productTopBestSellers">
+                            <div>
+                                <div class="pi-pic">
+                                    <img class="image" [routerLink]="['/product-detail', product.id]"
+                                        src="assets/product.jpg" alt="">
+                                    <ul>
+                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
+                                    </ul>
+                                </div>
+                                <div [routerLink]="['/product-detail', product.id]" class="pi-text">
+                                    <div class="catagory-name">{{ product.category }}</div>
+                                    <a>
+                                        <h5>{{ product.name }}</h5>
+                                    </a>
+                                    <div class="product-price">
+                                        {{ product.unitPrice | currency: 'VND' }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </carousel>
                 </div>
             </div>
         </div>
@@ -70,15 +89,24 @@
                     NEW PRODUCT
                 </div>
                 <div class="product-slider owl-carousel1">
-                    <div class="product-item" *ngFor="let product of productTopNew">
-                        <div >
+                    <carousel 
+                    [cellsToShow]="3"
+                    [cellsToScroll]="1"
+                    [overflowCellsLimit]="4"
+                    autoplay="true"
+                    autoplayInterval="5000"
+                    height="500"
+                    width="700">
+                    <div class="carousel-cell product-item" *ngFor="let product of productTopNew">
+                        <div>
                             <div class="pi-pic">
-                                <img class="image" [routerLink]="['/product-detail', product.id]" src="assets/product.jpg" alt="">
+                                <img class="image" [routerLink]="['/product-detail', product.id]"
+                                    src="assets/product.jpg" alt="">
                                 <ul>
-                                    <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
+                                    <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
                                 </ul>
                             </div>
-                            <div  [routerLink]="['/product-detail', product.id]" class="pi-text">
+                            <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                 <div class="catagory-name">{{ product.category }}</div>
                                 <a>
                                     <h5>{{ product.name }}</h5>
@@ -89,11 +117,39 @@
                             </div>
                         </div>
                     </div>
+                </carousel>
                 </div>
             </div>
             <div class="col-lg-3  offset-lg-1">
                 <div class="product-large set-poster2"></div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="deal-of-week set-deal spad">
+    <div class="container">
+        <div class="col-lg-7 text-center">
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div class="countdown-timer" id="countdown">
+                <div class="cd-item">
+                    <span>{{ days }}</span>
+                    <p>Days</p>
+                </div>
+                <div class="cd-item">
+                    <span>{{ hours }}</span>
+                    <p>Hrs</p>
+                </div>
+                <div class="cd-item">
+                    <span>{{ minutes }}</span>
+                    <p>Mins</p>
+                </div>
+                <div class="cd-item">
+                    <span>{{ seconds }}</span>
+                    <p>Secs</p>
+                </div>
+            </div>
+            <a [routerLink]="['/products']" class="primary-btn">Shop Now</a>
         </div>
     </div>
 </section>

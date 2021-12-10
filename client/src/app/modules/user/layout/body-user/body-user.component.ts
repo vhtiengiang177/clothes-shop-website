@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import $ from "jquery";
 
 @Component({
   selector: 'app-body-user',
@@ -8,7 +9,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class BodyUserComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    $(document).ready(function () {
+      $(window).on('load', function () {
+        $(".loader").fadeOut();
+        $("#preloder").delay(200).fadeOut("slow");
+      }); 
+    })
+  }
 
   ngOnInit() {
   }

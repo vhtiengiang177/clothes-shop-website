@@ -1,5 +1,4 @@
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,11 +33,17 @@ export class ProductAddCartFormComponent implements OnInit {
     idSize: null,
     stock: null
   }
+  oldSelected: Cart = {
+    idColor: null,
+    idSize: null,
+    stock: null
+  }
   listColors: Color[] = []
   listSizes: Size[] = []
   quantity: number = 1
   isEnabled = true
   cart: Cart = {}
+  isOpenByCart: boolean = false
 
   constructor(public dialogRef: MatDialogRef<ProductAddCartFormComponent>,private route: ActivatedRoute,
     private router: Router,
@@ -49,13 +54,12 @@ export class ProductAddCartFormComponent implements OnInit {
     private colorsStore: ColorsStoreService,
     private cartsStoreService: CartsStoreService,
     private toastr: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: ProductForm) {
-      this.id = this.data.product.id
-      this.productsStore.getById(this.data.product.id).subscribe(res => {
+    @Inject(MAT_DIALOG_DATA) public data: ProductSizeColor) {
+      this.id = this.data.idProduct
+      this.productsStore.getById(this.id).subscribe(res => {
         this.product = res;
-        this.selectedSizeColor.idProduct = this.product.id;
-        this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0
-          ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name : ""
+        this.selectedSizeColor.idProduct = this.product.id
+        this.oldSelected.idProduct = this.product.id
         this.fetchItem()
         this.getImages(this.product.id)
         this.productSizeColorsStore.productitems$.subscribe(res => {
@@ -65,11 +69,22 @@ export class ProductAddCartFormComponent implements OnInit {
         })
         this.isVisible = true
       }, (error: HttpErrorResponse) => {
-        if (error.status == 404) {
-          this.router.navigate(['/not-found'])
-        }
+        this.dialogRef.close()
       })
-    
+      if (data.idColor != null && data.idSize != null) {
+        this.selectedSizeColor.idColor = this.data.idColor
+        this.selectedSizeColor.idSize = this.data.idSize
+        this.selectedSizeColor.stock = this.data.stock
+        this.oldSelected.idColor = this.data.idColor
+        this.oldSelected.idSize = this.data.idSize
+        this.isOpenByCart = true
+        this.colorChange(this.selectedSizeColor.idColor)
+        this.sizeChange(this.selectedSizeColor.idSize)
+      }
+      if (data.selectedQuantity != null) {
+        this.quantity = data.selectedQuantity
+        this.oldSelected.quantity = data.selectedQuantity
+      }
   }
 
   ngOnInit() {
@@ -126,10 +141,10 @@ export class ProductAddCartFormComponent implements OnInit {
     });
 
     this.listSizes.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
-
-    this.selectedSizeColor.idColor = $event.value
-
-    this.checkStock()
+    if ($event.value != undefined) {
+      this.selectedSizeColor.idColor = $event.value
+      this.checkStock()
+    }
   }
 
   sizeChange($event) {
@@ -147,10 +162,10 @@ export class ProductAddCartFormComponent implements OnInit {
     });
 
     this.listColors.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
-
-    this.selectedSizeColor.idSize = $event.value
-
-    this.checkStock()
+    if ($event.value != undefined) {
+      this.selectedSizeColor.idSize = $event.value
+      this.checkStock()
+    }
   }
 
   checkStock() {
@@ -165,26 +180,6 @@ export class ProductAddCartFormComponent implements OnInit {
         }
         else this.isEnabled = false
     }
-  }
-
-  decQuantity() {
-    if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > 1)
-        this.quantity -= 1
-      else this.toastr.warning("The selected quantity must be one or more")
-    }
-    else this.toastr.warning("Please select a color and a size of the product")
-    //this.quantity -= 1
-  }
-
-  incQuantity() {
-    if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > this.selectedSizeColor.stock) {
-        this.toastr.warning("The selected quantity exceeds quantity available in stock")
-      }
-      else this.quantity += 1
-    }
-    else this.toastr.warning("Please select a color and a size of the product")
   }
 
   changeQuantity() {
@@ -205,24 +200,52 @@ export class ProductAddCartFormComponent implements OnInit {
   }
 
   addToCart(){
-    console.log(this.selectedSizeColor);
-    
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
       this.cart.idColor = this.selectedSizeColor.idColor
       this.cart.idSize =  this.selectedSizeColor.idSize
       this.cart.idProduct = this.product.id
       this.cart.quantity = this.quantity
-      this.cartsStoreService.add(this.cart).subscribe(res => {
-        this.toastr.success("Success");
-      }, (error:HttpErrorResponse) => {
-        if(error.status == 400) {
-          this.toastr.error("It looks like something went wrong")
+      if (!this.isOpenByCart) {
+        this.cartsStoreService.add(this.cart).subscribe(res => {
+          this.cartsStoreService.get()
+          this.toastr.success("Success");
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
+          }
+        })
+      }
+      else {
+        if (this.oldSelected.idColor != this.cart.idColor || this.oldSelected.idSize != this.cart.idSize) {
+          var listCart: Cart[] = []
+          this.oldSelected.idCustomer = 0
+          listCart.push(this.oldSelected)
+          this.cartsStoreService.deleteItemsInCart(listCart).subscribe(() => {
+            this.cartsStoreService.add(this.cart).subscribe(res => {
+              this.toastr.success("Update successfully");
+              this.dialogRef.close()
+            }, (error:HttpErrorResponse) => {
+              if(error.status == 400) {
+                this.toastr.error("It looks like something went wrong")
+              }
+            })
+          })
+        } 
+        else {
+          this.cartsStoreService.add(this.cart).subscribe(res => {
+            this.toastr.success("Update successfully");
+            this.dialogRef.close()
+          }, (error:HttpErrorResponse) => {
+            if(error.status == 400) {
+              this.toastr.error("It looks like something went wrong")
+            }
+          })
         }
-      })
+      }
+
     }
     else {
       this.toastr.warning("Please select a color and a size of the product")
     } 
   }
-
 }
