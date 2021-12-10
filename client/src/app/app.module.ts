@@ -55,7 +55,6 @@ import { ProductAddCartFormComponent } from './modules/user/product-add-cart-for
 import { OrderPageComponent } from './modules/user/order-page/order-page.component';
 import { MyAccountPageComponent } from './modules/user/my-account-page/my-account-page.component';
 import { UserInfoComponent } from './modules/user/my-account/user-info/user-info.component';
-import { SharedService } from './_shared/constant/share-service';
 import { StaffDetailFormComponent } from './modules/admin/staff/staff-detail-form/staff-detail-form.component';
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { ShopsFormComponent } from './modules/admin/shops/shops-form/shops-form.component';
