@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ShopInfo } from 'src/app/services/model/shop-info/shop-info.model';
 import { ShopInfosStoreService } from 'src/app/services/store/shop-infos-store/shop-infos-store.service';
 
@@ -12,7 +13,8 @@ export class ShopsListComponent implements OnInit {
   shopinfo: ShopInfo
   address: string = ""
 
-  constructor(private shopInfosStore: ShopInfosStoreService) {
+  constructor(private shopInfosStore: ShopInfosStoreService,
+    private toastr: ToastrService) {
     this.getShopInfos()
    }
 
@@ -31,5 +33,24 @@ export class ShopsListComponent implements OnInit {
         
       }
     })
+  }
+
+  UpdateShopInfo(formShopInfo) {
+    console.log(formShopInfo);
+    if (formShopInfo.valid) {
+      this.shopinfo.name = formShopInfo.value.name
+      this.shopinfo.datecreate = formShopInfo.value.dateCreate
+      this.shopinfo.email = formShopInfo.value.email
+      this.shopinfo.phone = formShopInfo.value.phone
+      this.shopinfo.wards = formShopInfo.value.wards
+      this.shopinfo.wards = formShopInfo.value.wards
+      this.shopinfo.district = formShopInfo.value.district
+      this.shopinfo.address = formShopInfo.value.address
+      this.shopinfo.province = formShopInfo.value.province
+      
+      this.shopInfosStore.update(this.shopinfo).subscribe(res => {
+        this.toastr.success("Update shop's information successfully")
+      })
+    }
   }
 }

@@ -1,1 +1,60 @@
-<p>delivery-address works!</p>
+
+<section *ngIf="listDeliverySelected.length > 0" class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="button-add">
+                    <button  type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery</button>
+                </div>
+                <br>
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="p-name">Delivery</th>
+                                <th></th>
+                                <th></th>
+                                <!-- <th><fa name="close"></fa></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of deliveryStore.deliveryaddress$  | async; index as i">
+                                <td>{{ i+1 }}</td>
+                                <td class="cart-title first-row">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <h5 class="name-item">{{ item.lastName }} {{ item.firstName }}</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 stock">
+                                            Phone: {{ item.phone }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 stock">
+                                            Address: {{ item.address }}, {{ item.wards }}, {{ item.district }}, {{ item.province }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="close-td first-row"><fa name="pencil-square-o" (click)="editDeliveryAddress(item.id)"></fa></td>
+                                <td class="close-td first-row"><fa name="trash" (click)="deleteDeliveryAddress(item.id)"></fa></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section class="center" *ngIf="listDeliverySelected.length == 0">
+    <div class="button-add">
+        <button  type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery</button>
+    </div>
+    <img src="../../../../assets/empty-cart.png">
+</section>
+

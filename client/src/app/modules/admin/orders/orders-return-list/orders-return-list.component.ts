@@ -44,6 +44,8 @@ export class OrdersReturnListComponent implements OnInit {
           })
         }
       })
+
+      this.fetchData()
      }
 
   ngOnInit() {
@@ -95,6 +97,30 @@ export class OrdersReturnListComponent implements OnInit {
     }
   }
 
+  sortIdShipper() {
+    if(this.ordersReturnStore.totalData !== 0) {
+      if(this.filter.sort != 'idshipper:asc') {
+        this.filter.sort = 'idshipper:asc';
+      }
+      else {
+        this.filter.sort = null;
+      }
+      this.fetchData()
+    }
+  }
+
+  sortIdEmployee() {
+    if(this.ordersReturnStore.totalData !== 0) {
+      if(this.filter.sort != 'idemployee:asc') {
+        this.filter.sort = 'idemployee:asc';
+      }
+      else {
+        this.filter.sort = null;
+      }
+      this.fetchData()
+    }
+  }
+
   sortDateOrders() {
     if(this.ordersReturnStore.totalData !== 0) {
       if(this.filter.sort != 'dateorder:asc') {
@@ -106,25 +132,25 @@ export class OrdersReturnListComponent implements OnInit {
       this.fetchData()
     }
   }
-  sortTotalQuantity() {
+  sortDatePayment() {
     if(this.ordersReturnStore.totalData !== 0) {
-      if(this.filter.sort != 'totalquantity:asc') {
-        this.filter.sort = 'totalquantity:asc';
+      if(this.filter.sort != 'datepayment:asc') {
+        this.filter.sort = 'datepayment:asc';
       }
       else {
-        this.filter.sort = 'totalquantity:desc';
+        this.filter.sort = 'datepayment:desc';
       }
       this.fetchData()
     }
   }
 
-  sortTotalAmount() {
+  sortDateShip() {
     if(this.ordersReturnStore.totalData !== 0) {
-      if(this.filter.sort != 'totalamount:asc') {
-        this.filter.sort = 'totalamount:asc';
+      if(this.filter.sort != 'dateship:asc') {
+        this.filter.sort = 'dateship:asc';
       }
       else {
-        this.filter.sort = 'totalamount:desc';
+        this.filter.sort = 'dateship:desc';
       }
       this.fetchData()
     }

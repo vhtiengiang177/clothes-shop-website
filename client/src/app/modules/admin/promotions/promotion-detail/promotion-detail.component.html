@@ -53,17 +53,17 @@
                     <div class="col-4">
                         Created By:
                     </div>
-                    <!-- <div *ngIf="data.promotion.lastModified" class="col-6">
-                        {{ data.promotion.lastModified |  date: 'dd/MM/yyyy' }}
-                    </div> -->
+                    <div *ngIf="data.promotion.staffCreate" class="col-6">
+                        {{ data.promotion.createdById  }} - {{ data.promotion.staffCreate }}
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         Modified By:
                     </div>
-                    <!-- <div *ngIf="data.promotion.lastModified" class="col-6">
-                        {{ data.promotion.lastModified |  date: 'dd/MM/yyyy' }}
-                    </div> -->
+                    <div *ngIf="data.promotion.staffModify" class="col-6">
+                        {{ data.promotion.modifiedById  }} - {{ data.promotion.staffModify  }}
+                    </div>
                 </div>
       
 

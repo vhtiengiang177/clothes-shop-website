@@ -12,15 +12,63 @@
                     Date Order:
                 </div>
                 <div *ngIf="order.dateOrder" class="col-md-8">
-                    {{ order.dateOrder | date: 'longDate' }}
+                    {{ order.dateOrder | date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Date Payment:
+                </div>
+                <div *ngIf="order.datePayment" class="col-md-8">
+                    {{ order.datePayment | date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Date Ship:
+                </div>
+                <div *ngIf="order.dateShip" class="col-md-8">
+                    {{ order.dateShip | date: 'dd/MM/yyyy' }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 title-item">
                     Customer:
-                </div>5 
-                <div *ngIf="order.customer" class="col-md-8">
-                    {{ order.customer }}
+                </div>
+                <div *ngIf="customer" class="col-md-8">
+                    {{ customer }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Address:
+                </div>
+                <div *ngIf="address" class="col-md-8">
+                    {{ address }} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Fee Delivery:
+                </div>
+                <div *ngIf="order.feeDelivery" class="col-md-8">
+                    {{ order.feeDelivery | currency: 'VND'}} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Total Quantity:
+                </div>
+                <div *ngIf="order.totalQuantity" class="col-md-8">
+                    {{ order.totalQuantity }} items
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Promotion:
+                </div>
+                <div *ngIf="promotion" class="col-md-8">
+                    {{ promotion }} 
                 </div>
             </div>
             <div class="row">
@@ -33,10 +81,18 @@
             </div>
             <div class="row">
                 <div class="col-md-4 title-item">
-                    Total Quantity:
+                    Shipper:
                 </div>
-                <div *ngIf="order.totalQuantity" class="col-md-8">
-                    {{ order.totalQuantity }} items
+                <div *ngIf="shipper" class="col-md-8">
+                    {{ shipper }} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 title-item">
+                    Emloyee:
+                </div>
+                <div *ngIf="employee" class="col-md-8">
+                    {{ employee }} 
                 </div>
             </div>
         </div>

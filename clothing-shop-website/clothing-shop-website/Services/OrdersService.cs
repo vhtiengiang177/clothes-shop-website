@@ -19,17 +19,29 @@ namespace clothing_shop_website.Services
                 case "dateorder:desc":
                     lOrder = lOrder.OrderByDescending(p => p.DateOrder).AsQueryable();
                     break;
-                case "totalquantity:asc":
-                    lOrder = lOrder.OrderBy(p => p.TotalQuantity).AsQueryable();
+                case "datepayment:asc":
+                    lOrder = lOrder.OrderBy(p => p.DatePayment).AsQueryable();
                     break;
-                case "totalquantity:desc":
-                    lOrder = lOrder.OrderByDescending(p => p.TotalQuantity).AsQueryable();
+                case "datepayment:desc":
+                    lOrder = lOrder.OrderByDescending(p => p.DatePayment).AsQueryable();
                     break;
-                case "totalamount:asc":
-                    lOrder = lOrder.OrderBy(p => p.TotalAmount).AsQueryable();
+                case "dateship:asc":
+                    lOrder = lOrder.OrderBy(p => p.DateShip).AsQueryable();
                     break;
-                case "totalamount:desc":
-                    lOrder = lOrder.OrderByDescending(p => p.TotalAmount).AsQueryable();
+                case "dateship:desc":
+                    lOrder = lOrder.OrderByDescending(p => p.DateShip).AsQueryable();
+                    break;
+                case "idshipper:asc":
+                    lOrder = lOrder.OrderBy(p => p.IdShipper).AsQueryable();
+                    break;
+                case "idshipper:desc":
+                    lOrder = lOrder.OrderByDescending(p => p.IdShipper).AsQueryable();
+                    break;
+                case "idemployee:asc":
+                    lOrder = lOrder.OrderBy(p => p.IdStaff).AsQueryable();
+                    break;
+                case "idemployee:desc":
+                    lOrder = lOrder.OrderByDescending(p => p.IdStaff).AsQueryable();
                     break;
                 case "id:asc":
                     lOrder = lOrder.OrderBy(p => p.Id).AsQueryable();
@@ -41,10 +53,11 @@ namespace clothing_shop_website.Services
 
             return lOrder;
         }
+
         //public IQueryable<Order> FilterOrder(FilterParamsOrder filterParams, IQueryable<Order> lOrder)
         //{
         //    if (filterParams.Content != null)
-        //        lOrder = lOrder.Where(p => p.Name.ToLower().Contains(filterParams.Content.ToLower()));
+        //        lOrder = lOrder.Where(p => p..ToLower().Contains(filterParams.Content.ToLower()));
         //    return lOrder.AsQueryable();
         //}
     }

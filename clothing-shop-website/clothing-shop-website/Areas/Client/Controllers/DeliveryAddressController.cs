@@ -23,6 +23,26 @@ namespace clothing_shop_website.Areas.Client
             _unitOfWork = new UnitOfWork(dbContext);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllDeliveryAddress()
+        {
+            try
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                int idCustomer = int.Parse(userId);
+                IQueryable<DeliveryAddress> lDeliveryAddress;
+
+                lDeliveryAddress = await _unitOfWork.DeliveryAddressRepository.GetAllDeliveryAddresssByCustomer(idCustomer);
+
+                return Ok(lDeliveryAddress);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpGet("GetAllDeliveryAddresssByCustomer")]
         public async Task<IActionResult> GetAllDeliveryAddresssByCustomer(int customerId)
@@ -51,7 +71,7 @@ namespace clothing_shop_website.Areas.Client
 
         }
 
-        [HttpGet("GetlDeliveryAddressByID/{id}")]
+        [HttpGet("GetDeliveryAddressByID/{id}")]
         public IActionResult GetDeliveryAddressByID(int id)
         {
             var DeliveryAddress = _unitOfWork.DeliveryAddressRepository.GetDeliveryAddressByID(id);
@@ -66,7 +86,7 @@ namespace clothing_shop_website.Areas.Client
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateDeliveryAddress")]
         public IActionResult CreateDeliveryAddress(DeliveryAddress deliveryAddress)
         {
             if (ModelState.IsValid)
@@ -90,7 +110,7 @@ namespace clothing_shop_website.Areas.Client
             return BadRequest(ModelState);
         }
 
-        [HttpPut("UpdateDeliveryAddress", Name = "UpdateDeliveryAddress")]
+        [HttpPut("UpdateDeliveryAddress/{id}", Name = "UpdateDeliveryAddress")]
         public IActionResult UpdateDeliveryAddress(DeliveryAddress DeliveryAddress)
         {
             if (ModelState.IsValid)

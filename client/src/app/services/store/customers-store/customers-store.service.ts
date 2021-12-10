@@ -69,8 +69,24 @@ export class CustomersStoreService {
     return this.customerService.getById("/GetAccountByID", id)
   }
 
+  getCustomerById(id) {
+    return this.customerService.getById("/GetCustomerByID", id)
+  }
+
   update(customerObj) {
     return this.customerService.update("/UpdateCustomer", customerObj.id, customerObj)
   }
+
+  async getAllCustomer() {
+    await this.customerService.getAllCustomer()
+      .subscribe(res => {
+        this.customer = res
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+      }
 
 }

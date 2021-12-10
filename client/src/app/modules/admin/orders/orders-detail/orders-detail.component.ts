@@ -21,6 +21,7 @@ import { CustomersStoreService } from 'src/app/services/store/customers-store/cu
 import { OrderDetailStoreService } from 'src/app/services/store/order-detail-store/order-detail-store.service';
 import { OrdersProcessingStoreService } from 'src/app/services/store/orders-processing-store/orders-processing-store.service';
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
+import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 
 
 @Component({
@@ -33,6 +34,11 @@ export class OrdersDetailComponent implements OnInit {
   isVisible = false
   id: number
   order: Order
+  address: string = ""
+  promotion: string = ""
+  customer: string =""
+  shipper: string =""
+  employee: string =""
   linkBack: string
   listImages: Image[]
   static readonly addForm = 0;
@@ -51,6 +57,7 @@ export class OrdersDetailComponent implements OnInit {
     private customerStore: CustomersStoreService,
     private colorsStore: ColorsStoreService,
     private sizesStore: SizesStoreService,
+    private staffStore: StaffStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private toastr: ToastrService) { 
       this.route.params.subscribe((param) => {
@@ -85,6 +92,46 @@ export class OrdersDetailComponent implements OnInit {
               this.getNameEntity()
             }
           })
+
+          this.customerStore.customer$.subscribe(res => {
+            if(res) {
+              this.customerStore.getCustomerById(this.order.idCustomer).subscribe(customer => {
+                if (customer) {
+                  this.customer =  customer.idAccount + " - " + customer.firstName + " "+ customer.lastName
+                }
+              })
+            }
+          })
+
+          this.deliveryStore.deliveryaddress$.subscribe(res => {
+            if(res) {
+              this.deliveryStore.getById(this.order.idAddress).subscribe(address => {
+                if (address) {
+                  this.address =  address.address + ", " + address.wards + ", " + address.district + ", " + address.province + "."
+                }
+              })
+            }
+          })
+
+          this.promotionsStore.promotions$.subscribe(res => {
+            if(res) {
+              this.promotionsStore.getById(this.order.idPromotion).subscribe(promotion => {
+                if (promotion) {
+                  this.promotion = promotion.name + " - " + (promotion.value * 100) + " % "
+                }
+              })
+            }
+          })
+
+          this.staffStore.staff$.subscribe(res => {
+            if(res.length == 0) {
+              this.staffStore.getAllStaff()
+            }
+            else {
+              this.getNameStaff(this.order.idShipper,this.order.idStaff)
+            }
+          })
+
 
         }, (error: HttpErrorResponse) => {
           if(error.status == 404) {
@@ -124,6 +171,14 @@ export class OrdersDetailComponent implements OnInit {
     this.productsStore.products.forEach(item => {
       item.name = this.productsStore.products.filter(s=>s.id==item.id).pop.name;
     })
+  }
+
+  getNameStaff(idShipper,idEmployee) {
+    var shipper = this.staffStore.staff.filter(x => x.idAccount ==  idShipper)[0]
+    this.shipper = shipper.idAccount + " - " + shipper.firstName + " " + shipper.lastName
+
+    var employee = this.staffStore.staff.filter(x => x.idAccount ==  idEmployee)[0]
+    this.employee = employee.idAccount + " - " + employee.firstName + " " + employee.lastName
   }
 
 }

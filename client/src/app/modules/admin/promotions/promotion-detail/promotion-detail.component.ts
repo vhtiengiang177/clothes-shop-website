@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { StaffForm } from 'src/app/services/model/staff/staff-form.model';
 import { Image } from 'src/app/services/model/product/image.model';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { Order } from 'src/app/services/model/order/order.model';
 
 @Component({
   selector: 'app-promotion-detail',
@@ -21,12 +22,26 @@ export class PromotionDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: PromotionForm,
     private promotionsStore: PromotionsStoreService,
     public dialog: MatDialog,
-    private toastr: ToastrService) { 
-      console.log(data);
-      
-    }
+    private staffStore:StaffStoreService,
+    private toastr: ToastrService) {
+
+      this.staffStore.staff$.subscribe(res => {
+        if(res.length == 0) {
+          this.staffStore.getAllStaff()
+        }
+        else {
+          this.getNameStaff()
+        }
+      })
+
+     }
 
   ngOnInit() {
+  }
+
+  getNameStaff() {
+    this.data.promotion.staffCreate = this.staffStore.staff.filter(x => x.idAccount ==  this.data.promotion.createdById)[0].firstName
+    this.data.promotion.staffModify = this.staffStore.staff.filter(x => x.idAccount ==  this.data.promotion.modifiedById)[0].firstName
   }
 
 }

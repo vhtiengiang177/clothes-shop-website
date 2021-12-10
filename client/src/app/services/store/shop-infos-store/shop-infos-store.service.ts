@@ -29,4 +29,8 @@ export class ShopInfosStoreService {
     await this.shopInfoService.get()
             .subscribe(res => this.shopinfos = res);
   }
+
+  update(shopObj) {
+    return this.shopInfoService.update("/UpdateShopInfo", shopObj.id, shopObj)
+  }
 }

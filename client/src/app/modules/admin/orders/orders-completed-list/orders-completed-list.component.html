@@ -45,22 +45,23 @@
               <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
             </th>
-          <th (click)="sortDateOrders()">Date Payment
-              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+            <th (click)="sortDatePayment()">Date Payment
+              <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
             </th>
-          <th (click)="sortDateOrders()">Date Ship
-              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+          <th (click)="sortDateShip()">Date Ship
+              <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
             </th>
-          <th (click)="sortTotalQuantity()">Shipper
-              <fa *ngIf="filter.sort == 'totalquantity:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'totalquantity:asc'" name="sort-up"></fa>
+          <th (click)="sortIdShipper()">Shipper
+              <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
             </th>
-          <th (click)="sortTotalAmount()">Customer
-              <fa *ngIf="filter.sort == 'totalamount:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'totalamount:asc'" name="sort-up"></fa>
+          <th (click)="sortIdEmployee()">Employee
+              <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
             </th>
+            
             <th colspan="2">Action</th>
           </tr>
         </thead>
@@ -71,9 +72,8 @@
             <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.idShipper }}-{{ order.staff }}</a></td>
-            <td>{{ order.idCustomer }}-{{ order.customer }}</td>
-           
+            <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
+            <td>{{ order.idStaff }}-{{ order.staff }}</td>
             <td [routerLink]="['/admin/orders-completed/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
           </tr>
         </tbody>

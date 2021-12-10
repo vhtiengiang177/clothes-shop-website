@@ -28,6 +28,25 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _accountService = accountService;
         }
 
+        [HttpGet]
+        public IActionResult GetAllCustomer()
+        {
+            try
+            {
+                IQueryable<Customer> lCustomerItems;
+
+                lCustomerItems = _unitOfWork.CustomersRepository.GetAllCustomers();
+
+
+                return Ok(lCustomerItems);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
         [HttpGet("GetAllAccountCustomers")]
         public IActionResult GetAllAccountCustomers([FromQuery] FilterParamsAccount filterParams)
         {

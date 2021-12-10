@@ -38,5 +38,30 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
 
         }
+
+        [HttpPut("UpdateShopInfo/{id}", Name = "UpdateShopInfo")]
+        public IActionResult UpdateShopInfo(ShopInfo shopInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _unitOfWork.ShopInfosRepository.Update(shopInfo);
+                    if (_unitOfWork.Save())
+                    {
+                        return Ok(shopInfo);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest(ModelState);
+        }
     }
 }
