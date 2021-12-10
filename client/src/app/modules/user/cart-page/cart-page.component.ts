@@ -144,7 +144,7 @@ export class CartPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      //this.cartsStore.get()
+      this.cartsStore.get()
     })
   }
   

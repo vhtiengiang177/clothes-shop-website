@@ -28,7 +28,7 @@ export class DeliveryStoreService {
   }
 
   create(deliveryAddress) {
-    return this.deliveryAddressService.create("", deliveryAddress)
+    return this.deliveryAddressService.create("/createdeliveryaddress", deliveryAddress)
   }
 
   async getAllDeliveryAddress() {
@@ -47,11 +47,10 @@ export class DeliveryStoreService {
     let result = new Subject<DeliveryAddress>();
     this.deliveryAddressService.create("/createdeliveryaddress", deliveryaddressObj).subscribe(res => {
       result.next(res)
-      this.toastr.success("Added successfully", "Delivery Address #" + res.id)
+      this.toastr.success("Added successfully")
     }, (error: AppError) => {
       if (error instanceof BadRequestError)
         return this.toastr.error("Add delivery address failed")
-      else this.toastr.error("An unexpected error occurred.", "Add Promotion")
     })
     return result.asObservable()
   }

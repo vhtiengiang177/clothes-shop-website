@@ -83,7 +83,7 @@
                             <ul class="order-table">
                                 <li>Product <span>Total</span></li>
                                 <li *ngFor="let item of cartsStore.carts$ | async" class="fw-normal">
-                                    {{ item.nameProduct }} x {{ item.quantity }}
+                                    {{ item.nameProduct }} x {{ item.quantity }} ({{ item.nameSize }}/{{ item.nameColor }})
                                     <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
                                 </li>
                                 <li class="total-price">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>

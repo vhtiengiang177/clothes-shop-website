@@ -33,54 +33,6 @@
         </div>
     </div>
 </div>
-
-<!-- Women Banner Section Begin -->
-<section class="women-banner spad" *ngIf="productTopBestSellers.length > 0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="product-large set-poster1"></div>
-            </div>
-            <div class="col-lg-8 offset-lg-1">
-                <div class="filter-control">
-                    BEST SELLER
-                </div>
-                <div class="product-slider owl-carousel1">
-                    <carousel 
-                        [cellsToShow]="3"
-                        [cellsToScroll]="1"
-                        [overflowCellsLimit]="4"
-                        autoplay="true"
-                        autoplayInterval="5000"
-                        height="500"
-                        width="700">
-                        <div class="carousel-cell product-item" *ngFor="let product of productTopBestSellers">
-                            <div>
-                                <div class="pi-pic">
-                                    <img class="image" [routerLink]="['/product-detail', product.id]"
-                                        src="assets/product.jpg" alt="">
-                                    <ul>
-                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                    </ul>
-                                </div>
-                                <div [routerLink]="['/product-detail', product.id]" class="pi-text">
-                                    <div class="catagory-name">{{ product.category }}</div>
-                                    <a>
-                                        <h5>{{ product.name }}</h5>
-                                    </a>
-                                    <div class="product-price">
-                                        {{ product.unitPrice | currency: 'VND' }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </carousel>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Women Banner Section End -->
 <section class="women-banner spad" *ngIf="productTopNew.length > 0">
     <div class="container-fluid">
         <div class="row">
@@ -150,6 +102,52 @@
                 </div>
             </div>
             <a [routerLink]="['/products']" class="primary-btn">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="women-banner spad" *ngIf="productTopBestSellers.length > 0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="product-large set-poster1"></div>
+            </div>
+            <div class="col-lg-8 offset-lg-1">
+                <div class="filter-control">
+                    BEST SELLER
+                </div>
+                <div class="product-slider owl-carousel1">
+                    <carousel 
+                        [cellsToShow]="3"
+                        [cellsToScroll]="1"
+                        [overflowCellsLimit]="4"
+                        autoplay="true"
+                        autoplayInterval="5000"
+                        height="500"
+                        width="700">
+                        <div class="carousel-cell product-item" *ngFor="let product of productTopBestSellers">
+                            <div>
+                                <div class="pi-pic">
+                                    <img class="image" [routerLink]="['/product-detail', product.id]"
+                                        src="assets/product.jpg" alt="">
+                                    <ul>
+                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
+                                    </ul>
+                                </div>
+                                <div [routerLink]="['/product-detail', product.id]" class="pi-text">
+                                    <div class="catagory-name">{{ product.category }}</div>
+                                    <a>
+                                        <h5>{{ product.name }}</h5>
+                                    </a>
+                                    <div class="product-price">
+                                        {{ product.unitPrice | currency: 'VND' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </carousel>
+                </div>
+            </div>
         </div>
     </div>
 </section>

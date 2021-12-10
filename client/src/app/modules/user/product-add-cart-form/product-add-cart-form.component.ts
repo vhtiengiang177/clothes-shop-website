@@ -15,7 +15,6 @@ import { ProductSizeColorsStoreService } from 'src/app/services/store/product-si
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ProductForm } from 'src/app/services/model/product/product-form.model';
 
 @Component({
   selector: 'app-product-add-cart-form',

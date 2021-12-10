@@ -1,3 +1,7 @@
 .content-center {
     justify-content: center;
 }
+
+.verify-form {
+    padding: 10px;
+}

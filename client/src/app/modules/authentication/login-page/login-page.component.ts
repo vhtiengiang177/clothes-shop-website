@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { VerifyResponse } from 'src/app/services/model/account/verify-response.model';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 @Component({

@@ -1,6 +1,4 @@
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { ShopInfo } from 'src/app/services/model/shop-info/shop-info.model';
 import { ShopInfosStoreService } from 'src/app/services/store/shop-infos-store/shop-infos-store.service';
 
@@ -20,7 +18,7 @@ export class FooterUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  async getShopInfos() {
+  getShopInfos() {
     const shop = this.shopInfosStore.shopinfos$ 
     shop.subscribe(res => {
       if(res.length != 0) {

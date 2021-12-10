@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OrderService } from 'src/app/services/data/order/order.service';
 import { Cart } from 'src/app/services/model/cart/cart.model';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
 import { OrderDetail } from 'src/app/services/model/order/order-detail.model';

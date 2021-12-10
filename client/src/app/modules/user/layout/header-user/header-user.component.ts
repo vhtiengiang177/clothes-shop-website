@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatOption, MatSelect } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Category } from 'src/app/services/model/category/category.model';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
-import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 
 @Component({
   selector: 'app-header-user',
@@ -20,12 +17,6 @@ export class HeaderUserComponent implements OnInit {
     private authService : AuthService,
     private cartStore: CartsStoreService) {
       this.cartStore.carts$.subscribe(res => {
-        console.log("header");
-        console.log(res);
-        console.log(this.numOfCart);
-        
-        
-        
         if (res && this.numOfCart != res.length) {
           this.fetchCart()
           this.numOfCart = res.length

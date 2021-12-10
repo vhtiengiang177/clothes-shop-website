@@ -1,5 +1,4 @@
 import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @Component({
