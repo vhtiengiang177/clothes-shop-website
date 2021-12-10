@@ -8,7 +8,6 @@ import { CartsStoreService } from 'src/app/services/store/carts-store/carts-stor
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
-import * as $ from 'jquery';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -23,10 +22,6 @@ export class HomePageComponent implements OnInit {
   constructor(private productsStore: ProductsStoreService, public dialog: MatDialog,
     private categoriesStore: CategoriesStoreService,
     private cartStore: CartsStoreService) { 
-      $('.set-bg').each(function () {
-        var bg = $(this).data('setbg');
-        $(this).css('background-image', 'url(' + bg + ')');
-    });
       this.cartStore.get()
     this.productsStore.getTopBestSellers().subscribe(p => {
       this.productTopBestSellers = p
