@@ -120,7 +120,7 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
     ShopsListComponent,
     ShopsFormComponent,
     DeliveryAddressComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
     ShopsFormComponent,
     PromotionDetailComponent
   ],
