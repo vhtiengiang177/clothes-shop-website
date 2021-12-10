@@ -59,4 +59,16 @@ export class CustomerService extends DataService  {
       headers: this.authorizationHeader()
     })
   }
+
+  getAllCustomer() {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI,
+    {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
 }

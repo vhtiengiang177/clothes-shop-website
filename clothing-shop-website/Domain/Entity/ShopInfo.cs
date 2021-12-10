@@ -15,5 +15,6 @@ namespace Domain.Entity
         public string Province { get; set; }
         public string District { get; set; }
         public string Wards { get; set; }
+        public DateTime DateCreate { get; set; }
     }
 }

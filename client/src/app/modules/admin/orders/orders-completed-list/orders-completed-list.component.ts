@@ -4,7 +4,10 @@ import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
+import { Order } from 'src/app/services/model/order/order.model';
+import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersCompletedStoreService } from 'src/app/services/store/orders-completed-store/orders-completed-store.service';
+import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 
 
 @Component({
@@ -22,8 +25,27 @@ export class OrdersCompletedListComponent implements OnInit {
     sort: null
   };
 
+  staff: Staff = {}
+
   constructor(private ordersCompletedStore: OrdersCompletedStoreService, public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private staffStore: StaffStoreService,
+    private toastr: ToastrService) { 
+      this.staffStore.staff$.subscribe(res => {
+        if(res.length == 0) {
+          this.staffStore.getAllStaff()
+        }
+        else {
+          this.ordersCompletedStore.orders$.subscribe(res => {
+            if (res) {
+              this.getNameStaff()
+            }
+          })
+        }
+      })
+
+      this.fetchData()
+    }
+
 
   ngOnInit() {
   }
@@ -85,28 +107,61 @@ export class OrdersCompletedListComponent implements OnInit {
       this.fetchData()
     }
   }
-  sortTotalQuantity() {
+
+  sortIdShipper() {
     if(this.ordersCompletedStore.totalData !== 0) {
-      if(this.filter.sort != 'totalquantity:asc') {
-        this.filter.sort = 'totalquantity:asc';
+      if(this.filter.sort != 'idshipper:asc') {
+        this.filter.sort = 'idshipper:asc';
       }
       else {
-        this.filter.sort = 'totalquantity:desc';
+        this.filter.sort = null;
       }
       this.fetchData()
     }
   }
 
-  sortTotalAmount() {
+  sortIdEmployee() {
     if(this.ordersCompletedStore.totalData !== 0) {
-      if(this.filter.sort != 'totalamount:asc') {
-        this.filter.sort = 'totalamount:asc';
+      if(this.filter.sort != 'idemployee:asc') {
+        this.filter.sort = 'idemployee:asc';
       }
       else {
-        this.filter.sort = 'totalamount:desc';
+        this.filter.sort = null;
       }
       this.fetchData()
     }
+  }
+
+  sortDatePayment() {
+    if(this.ordersCompletedStore.totalData !== 0) {
+      if(this.filter.sort != 'datepayment:asc') {
+        this.filter.sort = 'datepayment:asc';
+      }
+      else {
+        this.filter.sort = 'datepayment:desc';
+      }
+      this.fetchData()
+    }
+  }
+
+  sortDateShip() {
+    if(this.ordersCompletedStore.totalData !== 0) {
+      if(this.filter.sort != 'dateship:asc') {
+        this.filter.sort = 'dateship:asc';
+      }
+      else {
+        this.filter.sort = 'dateship:desc';
+      }
+      this.fetchData()
+    }
+  }
+
+  getNameStaff() {
+    this.ordersCompletedStore.orders.forEach((item:Order) => {
+        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
+        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
+        
+    }) 
   }
 
 }

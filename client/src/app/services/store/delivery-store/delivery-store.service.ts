@@ -1,6 +1,10 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { AppError } from 'src/app/_shared/errors/app-error';
+import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
 import { DeliveryAddressService } from '../../data/delivery-address/delivery-address.service';
 import { DeliveryAddress } from '../../model/customer/delivery-address.model';
 
@@ -12,7 +16,7 @@ export class DeliveryStoreService {
 
   readonly deliveryaddress$ = this._deliveryaddress.asObservable();
 
-  constructor(private deliveryAddressService: DeliveryAddressService) {
+  constructor(private deliveryAddressService: DeliveryAddressService,private toastr: ToastrService) {
    }
 
   get deliveryaddress() : DeliveryAddress[] {
@@ -26,4 +30,42 @@ export class DeliveryStoreService {
   create(deliveryAddress) {
     return this.deliveryAddressService.create("", deliveryAddress)
   }
+
+  async getAllDeliveryAddress() {
+    await this.deliveryAddressService.getAllDeliveryAddress()
+      .subscribe(res => {
+        this.deliveryaddress = res
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+  }
+
+  createDelivery(deliveryaddressObj) {
+    let result = new Subject<DeliveryAddress>();
+    this.deliveryAddressService.create("/createdeliveryaddress", deliveryaddressObj).subscribe(res => {
+      result.next(res)
+      this.toastr.success("Added successfully", "Delivery Address #" + res.id)
+    }, (error: AppError) => {
+      if (error instanceof BadRequestError)
+        return this.toastr.error("Add delivery address failed")
+      else this.toastr.error("An unexpected error occurred.", "Add Promotion")
+    })
+    return result.asObservable()
+  }
+
+  update(deliveryaddressObj) {
+    return this.deliveryAddressService.update("/UpdateDeliveryAddress", deliveryaddressObj.id, deliveryaddressObj)
+  }
+
+  getById(id) {
+    return this.deliveryAddressService.getById("/GetDeliveryAddressByID", id)
+  }
+
+  delete(id) {
+    return this.deliveryAddressService.delete(id)
+  }
+  
 }

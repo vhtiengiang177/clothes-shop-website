@@ -155,7 +155,6 @@ namespace clothing_shop_website.Areas.Client
 
         }
 
-        [AllowAnonymous]
         [HttpPut("UpdateState/{id}/{state}", Name = "UpdateState")]
         public IActionResult UpdateState(int id, int state)
         {
@@ -166,13 +165,14 @@ namespace clothing_shop_website.Areas.Client
                 if (order == null)
                     return NotFound();
 
-                //var userId = User.FindFirst("id").Value;
-                //if (userId == null) return BadRequest();
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
 
-                //if (state == 3)
-                //    order.IdShipper = int.Parse(userId);
-                //else
-                //    order.IdStaff = int.Parse(userId);
+
+                if (state == 3 || state == 4)
+                    order.IdShipper = int.Parse(userId);
+                else
+                    order.IdStaff = int.Parse(userId);
 
                 order.State = state;
                 _unitOfWork.OrdersRepository.UpdateOrder(order);

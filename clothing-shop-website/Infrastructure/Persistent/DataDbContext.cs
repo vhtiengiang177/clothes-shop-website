@@ -222,7 +222,7 @@ namespace Infrastructure.Persistent
             DateTime endDate = new DateTime(2022, 7, 15);
 
             modelBuilder.Entity<ShopInfo>().HasData(
-                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "Số 1 Võ văn Ngân", Wards = "Bình Thọ", District = "TP.Thủ Đức", Province = "TP.HCM" });
+                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "1 Vo Van Ngan Street", Wards = "Binh Tho", District = "Thu Duc City", Province = "HCM City", Phone = "+84 12 345 6789", Email= "mango.clothes2021@gmail.com", DateCreate = createdDate });
 
             modelBuilder.Entity<TypeAccount>().HasData(
                 new TypeAccount() { Id = 1, Name = "Admin", State = 1 },
@@ -245,14 +245,14 @@ namespace Infrastructure.Persistent
                 new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
 
             modelBuilder.Entity<Staff>().HasData(
-                new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Võ Hồng Tiên", CardIdentity = "123456786", Phone = "0328807778" },
-                new Staff() { IdAccount = 2, FirstName = "Thảo", LastName = "Nguyễn Thị", CardIdentity = "123456787", Phone = "0328807776" },
-                new Staff() { IdAccount = 3, FirstName = "Bảo", LastName = "Lê Nguyễn Gia", CardIdentity = "123456789", Phone = "0328807774" },
-                new Staff() { IdAccount = 4, FirstName = "Yến", LastName = "Lê Thị Ngọc", CardIdentity = "123456788", Phone = "0328807775" },
-                new Staff() { IdAccount = 5, FirstName = "Tiên", LastName = "Trần Thủy", CardIdentity = "123456785", Phone = "0328807773" },
-                new Staff() { IdAccount = 6, FirstName = "Nam", LastName = "Phạm Hoài", CardIdentity = "123456784", Phone = "0328807772" },
-                new Staff() { IdAccount = 10, FirstName = "Quân", LastName = "Gian Thiệu", CardIdentity = "123456783", Phone = "0328807771" },
-                new Staff() { IdAccount = 11, FirstName = "Thư", LastName = "Nguyễn Thị Minh", CardIdentity = "123456782", Phone = "0328807770" });
+                new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Vo Hong Tien", CardIdentity = "123456786", Phone = "0328807778" },
+                new Staff() { IdAccount = 2, FirstName = "Thao", LastName = "Nguyen Thi", CardIdentity = "123456787", Phone = "0328807776" },
+                new Staff() { IdAccount = 3, FirstName = "Bao", LastName = "Le Nguyen Gia", CardIdentity = "123456789", Phone = "0328807774" },
+                new Staff() { IdAccount = 4, FirstName = "Yen", LastName = "Le Thi Ngoc", CardIdentity = "123456788", Phone = "0328807775" },
+                new Staff() { IdAccount = 5, FirstName = "Tien", LastName = "Tran Thuy", CardIdentity = "123456785", Phone = "0328807773" },
+                new Staff() { IdAccount = 6, FirstName = "Nam", LastName = "Pham Hoai", CardIdentity = "123456784", Phone = "0328807772" },
+                new Staff() { IdAccount = 10, FirstName = "Quan", LastName = "Gian Thieu", CardIdentity = "123456783", Phone = "0328807771" },
+                new Staff() { IdAccount = 11, FirstName = "Thu", LastName = "Nguyen Thi Minh", CardIdentity = "123456782", Phone = "0328807770" });
 
             modelBuilder.Entity<TypeCustomer>().HasData(
                 new TypeCustomer() { Id = 1, Name = "Gold", State = 1 },
@@ -260,20 +260,20 @@ namespace Infrastructure.Persistent
                 new TypeCustomer() { Id = 3, Name = "Bronze", State = 1 });
 
             modelBuilder.Entity<Customer>().HasData(
-               new Customer() { IdAccount = 7, FirstName = "Tuấn", LastName = "Võ Anh", IdTypeCustomer = 3, Point = 100 },
-               new Customer() { IdAccount = 8, FirstName = "Như", LastName = "Huỳnh", IdTypeCustomer = 2, Point = 200 },
-               new Customer() { IdAccount = 9, FirstName = "Ân", LastName = "Trần Văn", IdTypeCustomer = 1, Point = 300 },
-               new Customer() { IdAccount = 12, FirstName = "Hiệp", LastName = "Nguyễn Đức", IdTypeCustomer = 1, Point = 300 });
+               new Customer() { IdAccount = 7, FirstName = "Tuan", LastName = "Vo Anh", IdTypeCustomer = 3, Point = 100 },
+               new Customer() { IdAccount = 8, FirstName = "Nhu", LastName = "Huynh", IdTypeCustomer = 2, Point = 200 },
+               new Customer() { IdAccount = 9, FirstName = "An", LastName = "Tran Van", IdTypeCustomer = 1, Point = 300 },
+               new Customer() { IdAccount = 12, FirstName = "Hiep", LastName = "Nguyen Duc", IdTypeCustomer = 1, Point = 300 });
 
             modelBuilder.Entity<DeliveryAddress>().HasData(
-              new DeliveryAddress() { Id = 1, FirstName = "Tuấn", LastName = "Võ Anh", Phone = "0324407774", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 2, FirstName = "Tú", LastName = "Võ Anh", Phone = "0324407773", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 3, FirstName = "Như", LastName = "Huỳnh", Phone = "0324407772", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 4, FirstName = "Bảo", LastName = "Lê Nguyễn Gia", Phone = "0324407771", Address = "46/64", Wards = "Phường 1", District = "Quận 1", Province = "Đồng Nai", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 5, FirstName = "Ân", LastName = "Trần Văn", Phone = "0324407775", Address = "50/1 Đặng Văn Bi", Wards = "Trường Thọ", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 6, FirstName = "Anh", LastName = "Trần Thi Mai", Phone = "0324407776", Address = "KTX Khu B", Wards = "Linh Trung", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 7, FirstName = "Hiệp", LastName = "Nguyễn Đức", Phone = "0324407777", Address = "KTX D2", Wards = "Tăng Nhơn Phú", District = "TP.Thủ Đức", Province = "TP.HCM", IdCustomer = 12, State = 1 },
-              new DeliveryAddress() { Id = 8, FirstName = "Hiệp", LastName = "Nguyễn Đức", Phone = "0324407777", Address = "56/16", Wards = "Phước Hưng", District = "Long Điền", Province = "Bà Rịa-Vũng Tàu", IdCustomer = 12, State = 1 });
+              new DeliveryAddress() { Id = 1, FirstName = "Tuan", LastName = "Vo Anh", Phone = "0324407774", Address = "50/1 Dang Van Bi Street", Wards = "Truong Tho", District = "Thu Duc City", Province = "HCM City", IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 2, FirstName = "Tu", LastName = "Vo Anh", Phone = "0324407773", Address = "KTX Khu B", Wards = "Linh Trung", District = "Thu Duc City", Province = "HCM City", IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 3, FirstName = "Nhu", LastName = "Huynh", Phone = "0324407772", Address = "KTX D2", Wards = "Tang Nhon Phu", District = "Thu Duc City", Province = "HCM City", IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 4, FirstName = "Bao", LastName = "Le Nguyen Gia Bao", Phone = "0324407771", Address = "46/64", Wards = " 1", District = "1", Province = "Dong Nai", IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 5, FirstName = "An", LastName = "Tran Van", Phone = "0324407775", Address = "50/1 Dang Van Bi Street", Wards = "Truong Tho", District = "Thu Duc City", Province = "HCM City", IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 6, FirstName = "Anh", LastName = "Tran Thi Mai", Phone = "0324407776", Address = "KTX Khu B", Wards = "Linh Trung", District = "Thu Duc City", Province = "HCM City", IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 7, FirstName = "Huyen", LastName = "Nguyen Thi", Phone = "0324407777", Address = "KTX D2", Wards = "Tang Nhon Phu", District = "Thu Duc City", Province = "HCM City", IdCustomer = 12, State = 1 },
+              new DeliveryAddress() { Id = 8, FirstName = "Hiep", LastName = "Nguyen Duc", Phone = "0324407777", Address = "56/16", Wards = "Phuoc Hung", District = "Long Dien", Province = "Ba Ria- Vung Tau", IdCustomer = 12, State = 1 });
 
             modelBuilder.Entity<Category>().HasData(
                 new Category() { Id = 1, Name = "Dress", CreatedById = 1, CreatedDate = createdDate, State = 1 },
@@ -347,11 +347,11 @@ namespace Infrastructure.Persistent
 
 
             modelBuilder.Entity<Promotion>().HasData(
-               new Promotion() { Id = 1, Name = "TDL001", Description = "Tết Dương Lịch", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 2, Name = "BIRDAY", Description = "Sinh nhật khách hàng", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 3, Name = "WOMANDAY", Description = "Quốc tế phụ nữ 08-03", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 4, Name = "TET999", Description = "Tết Âm Lịch", Value = 0.2, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 5, Name = "WOMANVN", Description = "Phụ Nữ Việt Nam 20-10", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 3, CreatedDate = createdDate, CreatedById = 3 });
+               new Promotion() { Id = 1, Name = "TDL001", Description = "Tet Duong Lich", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 2, Name = "BIRDAY", Description = "Happy BirthDay Customer", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 3, Name = "WOMANDAY", Description = "Women's Day 8-3", Value = 0.15, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 4, Name = "TET999", Description = "Tet Am Lich", Value = 0.2, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 5, Name = "WOMANVN", Description = "Women Viet Nam 20-10", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 3, CreatedDate = createdDate, CreatedById = 3 });
 
             modelBuilder.Entity<Cart>().HasData(
                new Cart() { IdCustomer = 7, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 20 },

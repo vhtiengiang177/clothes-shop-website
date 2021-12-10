@@ -1,50 +1,108 @@
-<!-- 
-    <div class="container">
-        <div class="row center">
+<div class="container">
+    <form #formShopInfo="ngForm" (ngSubmit)="UpdateShopInfo(formShopInfo)" >
+        <fieldset class="fieldset">
+            <h3 class="fieldset-title">Shop's Information</h3>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="product-pic-zoom">
-                        <ng-container>
-                            <img class="product-big-img" src="../../../../assets/logo.png" alt="">
-                        </ng-container>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Name <strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="name" #name="ngModel" matInput [(ngModel)]="shopinfo.name" class="form-control" required>
+                            <mat-error *ngIf="name?.touched && name?.invalid && name?.errors?.required">
+                                Name field is required
+                            </mat-error>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                        <div class="product-details">
-                        <div class="pd-title">
-                            <strong>Name: Mango Clothes</strong>
-                            <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
-                        </div>
-                        <div class="pd-desc">
-                           <strong>Phone: </strong> +84 12 345 6789
-                           <br>
-                            <strong>Email: </strong> mango.clothes2021@gmail.com
-                            <br>
-                            <strong>Address: </strong> {{ address }}
-                        </div>
-                    </div> -->
-                    <!-- <div class="row">
-                        <div class="col-6">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Name</mat-label>
-                                <input [(ngModel)]="this.shopinfo.name" #name ="ngModel" matInput type="text" required>
-                                <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
-                                    Name is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-6">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Email</mat-label>
-                                <input matInput type="number" required>
-                                <mat-error class="error-required"
-                                    *ngIf="value.touched && value.invalid && value.errors?.required">
-                                    Email is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email <strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="email" #email="ngModel" matInput [(ngModel)]="shopinfo.email" class="form-control" required>
+                            <mat-error *ngIf="email?.touched && email?.invalid && email?.errors?.required">
+                                Email field is required
+                            </mat-error>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Establishment<strong class="required">*</strong></label>
+                            <div class="col-md-10 col-sm-9 col-xs-12 dob">
+                                <input class="form-control" [(ngModel)]="shopinfo.dateCreate" name="dateCreate" #datecreate="ngModel" matInput [matDatepicker]="dateCreate" [value]="shopinfo.dateCreate">
+                                <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateCreate"></mat-datepicker-toggle>
+                                <mat-datepicker #dateCreate ></mat-datepicker>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone<strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="phone" #phone="ngModel" matInput [(ngModel)]="shopinfo.phone" class="form-control" required>
+                            <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors?.required" >
+                                Phone field is required
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Address<strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="address" #address="ngModel" matInput [(ngModel)]="shopinfo.address" class="form-control" required>
+                            <mat-error *ngIf="address?.touched && address?.invalid && address?.errors?.required" >
+                                Address field is required
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">District<strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="district" #district="ngModel" matInput [(ngModel)]="shopinfo.district" class="form-control" required>
+                            <mat-error *ngIf="district?.touched && district?.invalid && district?.errors?.required" >
+                                District field is required
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Wards<strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="wards" #wards="ngModel" matInput [(ngModel)]="shopinfo.wards" class="form-control" required>
+                            <mat-error *ngIf="wards?.touched && wards?.invalid && wards?.errors?.required">
+                                Wards field is required
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Province<strong class="required">*</strong></label>
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <input type="text" name="province" #province="ngModel" matInput [(ngModel)]="shopinfo.province" class="form-control" required>
+                            <mat-error *ngIf="province?.touched && province?.invalid && province?.errors?.required">
+                                Province field is required
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+        </fieldset>
+        <hr>
+        <div class="form-group">
+            <div >
+                <input class="btn btn-primary" type="submit" value="Update Information">
+            </div>
         </div>
-    </div> --> 
+    </form>
+</div>

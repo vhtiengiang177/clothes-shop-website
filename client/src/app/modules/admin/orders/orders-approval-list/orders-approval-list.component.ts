@@ -5,7 +5,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
+import { Order } from 'src/app/services/model/order/order.model';
+import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersApprovalStoreService } from 'src/app/services/store/orders-approval-store/orders-approval-store.service';
+import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 
 
 @Component({
@@ -23,9 +26,28 @@ export class OrdersApprovalListComponent implements OnInit {
     sort: null
   };
 
+  staff: Staff = {}
+
   constructor(private ordersApprovalStore: OrdersApprovalStoreService, public dialog: MatDialog,
     private authService : AuthService,
-    private toastr: ToastrService) { }
+    private staffStore: StaffStoreService,
+    private toastr: ToastrService) { 
+      this.staffStore.staff$.subscribe(res => {
+        if(res.length == 0) {
+          this.staffStore.getAllStaff()
+        }
+        else {
+          this.ordersApprovalStore.orders$.subscribe(res => {
+            if (res) {
+              this.getNameStaff()
+            }
+          })
+        }
+      })
+
+      this.fetchData()
+    }
+
 
   ngOnInit() {
   }
@@ -87,30 +109,63 @@ export class OrdersApprovalListComponent implements OnInit {
       this.fetchData()
     }
   }
-  sortTotalQuantity() {
+
+  sortIdShipper() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter.sort != 'totalquantity:asc') {
-        this.filter.sort = 'totalquantity:asc';
+      if(this.filter.sort != 'idshipper:asc') {
+        this.filter.sort = 'idshipper:asc';
       }
       else {
-        this.filter.sort = 'totalquantity:desc';
+        this.filter.sort = null;
       }
       this.fetchData()
     }
   }
 
-  sortTotalAmount() {
+  sortIdEmployee() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter.sort != 'totalamount:asc') {
-        this.filter.sort = 'totalamount:asc';
+      if(this.filter.sort != 'idemployee:asc') {
+        this.filter.sort = 'idemployee:asc';
       }
       else {
-        this.filter.sort = 'totalamount:desc';
+        this.filter.sort = null;
       }
       this.fetchData()
     }
   }
 
+  sortDatePayment() {
+    if(this.ordersApprovalStore.totalData !== 0) {
+      if(this.filter.sort != 'datepayment:asc') {
+        this.filter.sort = 'datepayment:asc';
+      }
+      else {
+        this.filter.sort = 'datepayment:desc';
+      }
+      this.fetchData()
+    }
+  }
+
+  sortDateShip() {
+    if(this.ordersApprovalStore.totalData !== 0) {
+      if(this.filter.sort != 'dateship:asc') {
+        this.filter.sort = 'dateship:asc';
+      }
+      else {
+        this.filter.sort = 'dateship:desc';
+      }
+      this.fetchData()
+    }
+  }
+
+  getNameStaff() {
+    this.ordersApprovalStore.orders.forEach((item:Order) => {
+        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
+        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
+        
+    }) 
+  }
+  
   cancelOrder(idOrder) {
     const dialogRef = this.dialog.open(ConfirmFormComponent, {
       data: {

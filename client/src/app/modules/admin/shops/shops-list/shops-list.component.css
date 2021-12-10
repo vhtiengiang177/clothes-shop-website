@@ -1,0 +1,31 @@
+
+.p-viewer {
+	z-index: 9999;
+	position: absolute;
+    top: -1%;
+	right: 10px;
+}
+
+.dob{
+	position: relative;
+}
+
+.control-info {
+	margin: 0.75rem;
+	width: 90% !important;
+}
+
+.loading {
+	width: 10px;
+	object-fit: scale-down;
+}
+
+.figure{
+	display: flex;
+}
+
+.button-update {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+  }

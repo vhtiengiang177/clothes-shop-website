@@ -9,5 +9,7 @@ export interface Promotion {
     createdDate: Date,
     lastModified: Date,
     createdById: number,
-    modifiedById: number
+    modifiedById: number,
+    staffCreate: string,
+    staffModify: string
 }
