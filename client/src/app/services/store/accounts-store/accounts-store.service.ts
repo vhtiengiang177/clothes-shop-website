@@ -65,4 +65,8 @@ export class AccountsStoreService {
   getById(id){
     return this.accountService.getById(id)
   }
+
+  changePassword(params) {
+    return this.accountService.changePassword(params)
+  }
 }

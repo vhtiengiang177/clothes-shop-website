@@ -69,4 +69,10 @@ export class AccountService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  changePassword(params) {
+    return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + "/ChangePassword", params, {
+      headers: this.authorizationHeader()
+    })
+  }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -315,6 +314,29 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
 
             return BadRequest("Something went wrong!");
+        }
+
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword([FromBody] ParamsPassword paramsPassword)
+        {
+            var userId = User.FindFirst("id").Value;
+            if (userId == null) return BadRequest("Something went wrong!");
+
+            var account = _unitOfWork.AccountsRepository.GetAccountByID(int.Parse(userId));
+
+            if (account.Password != paramsPassword.OldPassword)
+                return BadRequest("Incorrect Old Password");
+            try
+            {
+                account.Password = paramsPassword.NewPassword;
+                _unitOfWork.AccountsRepository.UpdateAccount(account);
+                _unitOfWork.Save();
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Something went wrong!");
+            }
         }
     }
 }

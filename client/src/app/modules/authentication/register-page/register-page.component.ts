@@ -16,7 +16,9 @@ import { passwordValidator } from 'src/app/_shared/validator/password.validator'
 export class RegisterPageComponent implements OnInit {
   form: FormGroup;
   isMatchPassword: boolean
-
+  passwordVisibility: boolean = false
+  confirmPasswordVisibility: boolean = false
+  
   constructor(private authService: AuthService, 
     private router: Router,
     private route: ActivatedRoute, 
