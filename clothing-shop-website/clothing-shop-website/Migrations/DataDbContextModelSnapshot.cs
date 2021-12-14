@@ -460,8 +460,8 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("District")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -475,13 +475,13 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Province")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
-                    b.Property<string>("Wards")
+                    b.Property<string>("WardCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -495,105 +495,105 @@ namespace clothing_shop_website.Migrations
                         {
                             Id = 1,
                             Address = "50/1 Dang Van Bi Street",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "Tuan",
                             IdCustomer = 7,
                             LastName = "Vo Anh",
                             Phone = "0324407774",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Truong Tho"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 2,
                             Address = "KTX Khu B",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "Tu",
                             IdCustomer = 7,
                             LastName = "Vo Anh",
                             Phone = "0324407773",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Linh Trung"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 3,
                             Address = "KTX D2",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "Nhu",
                             IdCustomer = 8,
                             LastName = "Huynh",
                             Phone = "0324407772",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Tang Nhon Phu"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 4,
                             Address = "46/64",
-                            District = "1",
+                            DistrictId = 3695,
                             FirstName = "Bao",
                             IdCustomer = 8,
-                            LastName = "Le Nguyen Gia Bao",
+                            LastName = "Le Nguyen Gia",
                             Phone = "0324407771",
-                            Province = "Dong Nai",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Phường 1"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 5,
                             Address = "50/1 Dang Van Bi Street",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "An",
                             IdCustomer = 9,
                             LastName = "Tran Van",
                             Phone = "0324407775",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Truong Tho"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 6,
                             Address = "KTX Khu B",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "Anh",
                             IdCustomer = 9,
                             LastName = "Tran Thi Mai",
                             Phone = "0324407776",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Linh Trung"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 7,
                             Address = "KTX D2",
-                            District = "Thu Duc City",
+                            DistrictId = 3695,
                             FirstName = "Huyen",
                             IdCustomer = 12,
                             LastName = "Nguyen Thi",
                             Phone = "0324407777",
-                            Province = "HCM City",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Tang Nhon Phu"
+                            WardCode = "90767"
                         },
                         new
                         {
                             Id = 8,
                             Address = "56/16",
-                            District = "Long Dien",
+                            DistrictId = 3695,
                             FirstName = "Hiep",
                             IdCustomer = 12,
                             LastName = "Nguyen Duc",
                             Phone = "0324407777",
-                            Province = "Ba Ria- Vung Tau",
+                            ProvinceId = 202,
                             State = 1,
-                            Wards = "Phuoc Hung"
+                            WardCode = "90767"
                         });
                 });
 
@@ -1580,7 +1580,7 @@ namespace clothing_shop_website.Migrations
                             Id = 1,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tết Dương Lịch",
+                            Description = "Tet Duong Lich",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "TDL001",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1592,7 +1592,7 @@ namespace clothing_shop_website.Migrations
                             Id = 2,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Sinh nhật khách hàng",
+                            Description = "Happy BirthDay Customer",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "BIRDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1604,7 +1604,7 @@ namespace clothing_shop_website.Migrations
                             Id = 3,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Quốc tế phụ nữ 08-03",
+                            Description = "Women's Day 8-3",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "WOMANDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1616,7 +1616,7 @@ namespace clothing_shop_website.Migrations
                             Id = 4,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tết Âm Lịch",
+                            Description = "Tet Am Lich",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "TET999",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1628,7 +1628,7 @@ namespace clothing_shop_website.Migrations
                             Id = 5,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Phụ Nữ Việt Nam 20-10",
+                            Description = "Women Viet Nam 20-10",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "WOMANVN",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),

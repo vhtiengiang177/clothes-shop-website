@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
+import { AddressApiService } from 'src/app/services/data/address-api/address-api.service';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
-import { Delivery } from 'src/app/services/model/delivery/delivery.model';
 import { DeliveryStoreService } from 'src/app/services/store/delivery-store/delivery-store.service';
 import { DeliveryAddressFormComponent } from '../delivery-address-form/delivery-address-form.component';
 
@@ -17,23 +17,13 @@ export class DeliveryAddressComponent implements OnInit {
 
   static readonly addForm = 0;
   static readonly editForm = 1;
-  static readonly deleteForm = 2;
-
   listDeliverySelected: DeliveryAddress[] = []
-  constructor(private deliveryStore: DeliveryStoreService,public dialog: MatDialog,
-    private toastr: ToastrService) {
-    this.deliveryStore.deliveryaddress$.subscribe(res => {
-      if(res.length == 0) {
-        this.deliveryStore.getAllDeliveryAddress()
-      }
-      else {
-        this.deliveryStore.deliveryaddress$.subscribe(res => {
-          if (res) {
-            this.listDeliverySelected=res;
-          }
-        })
-      }
-    })
+
+  constructor(private deliveryStore: DeliveryStoreService,
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private addressAPI: AddressApiService) {
+      this.fetchData()
   }
 
   ngOnInit() {
@@ -41,8 +31,8 @@ export class DeliveryAddressComponent implements OnInit {
 
   fetchData() {
     this.deliveryStore.getAllDeliveryAddress()
+    
   }
-
 
   addDeliveryAddress() {
     const dialogRef = this.dialog.open(DeliveryAddressFormComponent, {
@@ -58,22 +48,6 @@ export class DeliveryAddressComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
         this.fetchData()
-      //   if(this.filter.sort == null && this.filter.pageindex == 1) {
-      //     this.promotionsStore.promotions.splice(this.filter.pagesize - 1,1);
-      //     this.promotionsStore.promotions.splice(0,0,res);
-      //     this.promotionsStore.totalData = this.promotionsStore.totalData + 1;
-      //   }
-      //   else {
-      //     this.filter = {
-      //       pageindex: 1,
-      //       pagesize: this.filter.pagesize,
-      //       sort: null
-      //     }
-      //     this.fetchData()
-      //   }
-      //   this.paginator.pageIndex = 0;
-      // }
-    // });
      }
    });
   }

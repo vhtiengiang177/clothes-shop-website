@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clothing_shop_website.Migrations
 {
-    public partial class DatabaseV2 : Migration
+    public partial class Database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,7 +93,8 @@ namespace clothing_shop_website.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Wards = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Wards = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -335,9 +336,9 @@ namespace clothing_shop_website.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    District = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Wards = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: false),
+                    DistrictId = table.Column<int>(type: "int", nullable: false),
+                    WardCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCustomer = table.Column<int>(type: "int", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false)
                 },
@@ -497,17 +498,17 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "CreatedById", "CreatedDate", "Description", "EndDate", "LastModified", "ModifiedById", "Name", "StartDate", "State", "Value" },
                 values: new object[,]
                 {
-                    { 1, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Dương Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TDL001", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.10000000000000001 },
-                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinh nhật khách hàng", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "BIRDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.14999999999999999 },
-                    { 3, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Quốc tế phụ nữ 08-03", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.14999999999999999 },
-                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tết Âm Lịch", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TET999", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
-                    { 5, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Phụ Nữ Việt Nam 20-10", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANVN", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 }
+                    { 1, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tet Duong Lich", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TDL001", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.10000000000000001 },
+                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Happy BirthDay Customer", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "BIRDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.14999999999999999 },
+                    { 3, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women's Day 8-3", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.14999999999999999 },
+                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tet Am Lich", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TET999", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
+                    { 5, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women Viet Nam 20-10", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANVN", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 }
                 });
 
             migrationBuilder.InsertData(
                 table: "ShopInfos",
-                columns: new[] { "Id", "Address", "District", "Email", "Name", "Phone", "Province", "Wards" },
-                values: new object[] { 1, "Số 1 Võ văn Ngân", "TP.Thủ Đức", null, "Mango Clothes", null, "TP.HCM", "Bình Thọ" });
+                columns: new[] { "Id", "Address", "DateCreate", "District", "Email", "Name", "Phone", "Province", "Wards" },
+                values: new object[] { 1, "1 Vo Van Ngan Street", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Thu Duc City", "mango.clothes2021@gmail.com", "Mango Clothes", "+84 12 345 6789", "HCM City", "Binh Tho" });
 
             migrationBuilder.InsertData(
                 table: "Sizes",
@@ -588,10 +589,10 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "IdAccount", "FirstName", "IdTypeCustomer", "Image", "LastName", "Point", "PublicId" },
                 values: new object[,]
                 {
-                    { 12, "Hiệp", 1, null, "Nguyễn Đức", 300, null },
-                    { 8, "Như", 2, null, "Huỳnh", 200, null },
-                    { 7, "Tuấn", 3, null, "Võ Anh", 100, null },
-                    { 9, "Ân", 1, null, "Trần Văn", 300, null }
+                    { 12, "Hiep", 1, null, "Nguyen Duc", 300, null },
+                    { 8, "Nhu", 2, null, "Huynh", 200, null },
+                    { 7, "Tuan", 3, null, "Vo Anh", 100, null },
+                    { 9, "An", 1, null, "Tran Van", 300, null }
                 });
 
             migrationBuilder.InsertData(
@@ -622,14 +623,14 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "IdAccount", "CardIdentity", "DateOfBirth", "FirstName", "Image", "LastName", "Phone", "PublicId" },
                 values: new object[,]
                 {
-                    { 1, "123456786", null, "Giang", null, "Võ Hồng Tiên", "0328807778", null },
-                    { 2, "123456787", null, "Thảo", null, "Nguyễn Thị", "0328807776", null },
-                    { 4, "123456788", null, "Yến", null, "Lê Thị Ngọc", "0328807775", null },
-                    { 10, "123456783", null, "Quân", null, "Gian Thiệu", "0328807771", null },
-                    { 11, "123456782", null, "Thư", null, "Nguyễn Thị Minh", "0328807770", null },
-                    { 5, "123456785", null, "Tiên", null, "Trần Thủy", "0328807773", null },
-                    { 6, "123456784", null, "Nam", null, "Phạm Hoài", "0328807772", null },
-                    { 3, "123456789", null, "Bảo", null, "Lê Nguyễn Gia", "0328807774", null }
+                    { 1, "123456786", null, "Giang", null, "Vo Hong Tien", "0328807778", null },
+                    { 2, "123456787", null, "Thao", null, "Nguyen Thi", "0328807776", null },
+                    { 4, "123456788", null, "Yen", null, "Le Thi Ngoc", "0328807775", null },
+                    { 10, "123456783", null, "Quan", null, "Gian Thieu", "0328807771", null },
+                    { 11, "123456782", null, "Thu", null, "Nguyen Thi Minh", "0328807770", null },
+                    { 5, "123456785", null, "Tien", null, "Tran Thuy", "0328807773", null },
+                    { 6, "123456784", null, "Nam", null, "Pham Hoai", "0328807772", null },
+                    { 3, "123456789", null, "Bao", null, "Le Nguyen Gia", "0328807774", null }
                 });
 
             migrationBuilder.InsertData(
@@ -650,17 +651,17 @@ namespace clothing_shop_website.Migrations
 
             migrationBuilder.InsertData(
                 table: "DeliveryAddresses",
-                columns: new[] { "Id", "Address", "District", "FirstName", "IdCustomer", "LastName", "Phone", "Province", "State", "Wards" },
+                columns: new[] { "Id", "Address", "DistrictId", "FirstName", "IdCustomer", "LastName", "Phone", "ProvinceId", "State", "WardCode" },
                 values: new object[,]
                 {
-                    { 1, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Tuấn", 7, "Võ Anh", "0324407774", "TP.HCM", 1, "Trường Thọ" },
-                    { 6, "KTX Khu B", "TP.Thủ Đức", "Anh", 9, "Trần Thi Mai", "0324407776", "TP.HCM", 1, "Linh Trung" },
-                    { 5, "50/1 Đặng Văn Bi", "TP.Thủ Đức", "Ân", 9, "Trần Văn", "0324407775", "TP.HCM", 1, "Trường Thọ" },
-                    { 4, "46/64", "Quận 1", "Bảo", 8, "Lê Nguyễn Gia", "0324407771", "Đồng Nai", 1, "Phường 1" },
-                    { 3, "KTX D2", "TP.Thủ Đức", "Như", 8, "Huỳnh", "0324407772", "TP.HCM", 1, "Tăng Nhơn Phú" },
-                    { 8, "56/16", "Long Điền", "Hiệp", 12, "Nguyễn Đức", "0324407777", "Bà Rịa-Vũng Tàu", 1, "Phước Hưng" },
-                    { 7, "KTX D2", "TP.Thủ Đức", "Hiệp", 12, "Nguyễn Đức", "0324407777", "TP.HCM", 1, "Tăng Nhơn Phú" },
-                    { 2, "KTX Khu B", "TP.Thủ Đức", "Tú", 7, "Võ Anh", "0324407773", "TP.HCM", 1, "Linh Trung" }
+                    { 1, "50/1 Dang Van Bi Street", 3695, "Tuan", 7, "Vo Anh", "0324407774", 202, 1, "90767" },
+                    { 6, "KTX Khu B", 3695, "Anh", 9, "Tran Thi Mai", "0324407776", 202, 1, "90767" },
+                    { 5, "50/1 Dang Van Bi Street", 3695, "An", 9, "Tran Van", "0324407775", 202, 1, "90767" },
+                    { 4, "46/64", 3695, "Bao", 8, "Le Nguyen Gia", "0324407771", 202, 1, "90767" },
+                    { 3, "KTX D2", 3695, "Nhu", 8, "Huynh", "0324407772", 202, 1, "90767" },
+                    { 8, "56/16", 3695, "Hiep", 12, "Nguyen Duc", "0324407777", 202, 1, "90767" },
+                    { 7, "KTX D2", 3695, "Huyen", 12, "Nguyen Thi", "0324407777", 202, 1, "90767" },
+                    { 2, "KTX Khu B", 3695, "Tu", 7, "Vo Anh", "0324407773", 202, 1, "90767" }
                 });
 
             migrationBuilder.InsertData(

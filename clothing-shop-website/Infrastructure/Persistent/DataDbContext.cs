@@ -266,14 +266,14 @@ namespace Infrastructure.Persistent
                new Customer() { IdAccount = 12, FirstName = "Hiep", LastName = "Nguyen Duc", IdTypeCustomer = 1, Point = 300 });
 
             modelBuilder.Entity<DeliveryAddress>().HasData(
-              new DeliveryAddress() { Id = 1, FirstName = "Tuan", LastName = "Vo Anh", Phone = "0324407774", Address = "50/1 Dang Van Bi Street", Wards = "Truong Tho", District = "Thu Duc City", Province = "HCM City", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 2, FirstName = "Tu", LastName = "Vo Anh", Phone = "0324407773", Address = "KTX Khu B", Wards = "Linh Trung", District = "Thu Duc City", Province = "HCM City", IdCustomer = 7, State = 1 },
-              new DeliveryAddress() { Id = 3, FirstName = "Nhu", LastName = "Huynh", Phone = "0324407772", Address = "KTX D2", Wards = "Tang Nhon Phu", District = "Thu Duc City", Province = "HCM City", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 4, FirstName = "Bao", LastName = "Le Nguyen Gia Bao", Phone = "0324407771", Address = "46/64", Wards = " 1", District = "1", Province = "Dong Nai", IdCustomer = 8, State = 1 },
-              new DeliveryAddress() { Id = 5, FirstName = "An", LastName = "Tran Van", Phone = "0324407775", Address = "50/1 Dang Van Bi Street", Wards = "Truong Tho", District = "Thu Duc City", Province = "HCM City", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 6, FirstName = "Anh", LastName = "Tran Thi Mai", Phone = "0324407776", Address = "KTX Khu B", Wards = "Linh Trung", District = "Thu Duc City", Province = "HCM City", IdCustomer = 9, State = 1 },
-              new DeliveryAddress() { Id = 7, FirstName = "Huyen", LastName = "Nguyen Thi", Phone = "0324407777", Address = "KTX D2", Wards = "Tang Nhon Phu", District = "Thu Duc City", Province = "HCM City", IdCustomer = 12, State = 1 },
-              new DeliveryAddress() { Id = 8, FirstName = "Hiep", LastName = "Nguyen Duc", Phone = "0324407777", Address = "56/16", Wards = "Phuoc Hung", District = "Long Dien", Province = "Ba Ria- Vung Tau", IdCustomer = 12, State = 1 });
+              new DeliveryAddress() { Id = 1, FirstName = "Tuan", LastName = "Vo Anh", Phone = "0324407774", Address = "50/1 Dang Van Bi Street", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 2, FirstName = "Tu", LastName = "Vo Anh", Phone = "0324407773", Address = "KTX Khu B", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 7, State = 1 },
+              new DeliveryAddress() { Id = 3, FirstName = "Nhu", LastName = "Huynh", Phone = "0324407772", Address = "KTX D2", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 4, FirstName = "Bao", LastName = "Le Nguyen Gia", Phone = "0324407771", Address = "46/64", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 8, State = 1 },
+              new DeliveryAddress() { Id = 5, FirstName = "An", LastName = "Tran Van", Phone = "0324407775", Address = "50/1 Dang Van Bi Street", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 6, FirstName = "Anh", LastName = "Tran Thi Mai", Phone = "0324407776", Address = "KTX Khu B", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 9, State = 1 },
+              new DeliveryAddress() { Id = 7, FirstName = "Huyen", LastName = "Nguyen Thi", Phone = "0324407777", Address = "KTX D2", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 12, State = 1 },
+              new DeliveryAddress() { Id = 8, FirstName = "Hiep", LastName = "Nguyen Duc", Phone = "0324407777", Address = "56/16", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 12, State = 1 });
 
             modelBuilder.Entity<Category>().HasData(
                 new Category() { Id = 1, Name = "Dress", CreatedById = 1, CreatedDate = createdDate, State = 1 },

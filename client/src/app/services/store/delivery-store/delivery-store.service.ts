@@ -35,12 +35,7 @@ export class DeliveryStoreService {
     await this.deliveryAddressService.getAllDeliveryAddress()
       .subscribe(res => {
         this.deliveryaddress = res
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        });
+      });
   }
 
   createDelivery(deliveryaddressObj) {

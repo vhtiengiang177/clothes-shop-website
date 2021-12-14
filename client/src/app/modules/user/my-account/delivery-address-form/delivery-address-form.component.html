@@ -8,7 +8,7 @@
                 <input [(ngModel)]="data.deliveryaddress.firstName" #firstName="ngModel" matInput type="text" required>
                 <mat-error class="error-required"
                     *ngIf="firstName.touched && firstName.invalid && firstName.errors?.required">
-                    First Name is <strong>required</strong>
+                    First name field is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
         </div>
@@ -25,30 +25,7 @@
                 <mat-label>Address:</mat-label>
                 <input [(ngModel)]="data.deliveryaddress.address" #address ="ngModel" matInput type="text" required>
                 <mat-error class="error-required" *ngIf="address.touched && address.invalid && address.errors?.required">
-                    Address is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-   
-    <div class="row">
-        <div class="col-6">
-            <mat-form-field appearance="fill">
-                <mat-label>Wards</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.wards" #wards="ngModel" matInput type="text" required>
-                <mat-error class="error-required"
-                    *ngIf="wards.touched && wards.invalid && wards.errors?.required">
-                    Wards is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-6">
-            <mat-form-field appearance="fill">
-                <mat-label>District</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.district" #district="ngModel" matInput type="text" required>
-                <mat-error class="error-required"
-                    *ngIf="district.touched && district.invalid && district.errors?.required">
-                    District is <strong>required</strong>
+                    Address field is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
         </div>
@@ -56,10 +33,48 @@
     <div class="row">
         <div class="col-12">
             <mat-form-field appearance="fill">
-                <mat-label>Province:</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.province" #province ="ngModel" matInput type="text" required>
-                <mat-error class="error-required" *ngIf="province.touched && province.invalid && province.errors?.required">
-                    Province is <strong>required</strong>
+                <mat-label>Province</mat-label>
+                <mat-select [(ngModel)]="data.deliveryaddress.provinceId" [compareWith]="compareSelected" 
+                     name="provinces" #provinces="ngModel" required>
+                    <mat-option *ngIf="dataProvinces.value.length == 0" disabled>No data available</mat-option>
+                    <mat-option (click)="selectedProvices(province)"
+                        *ngFor="let province of dataProvinces | async" [value]="province.ProvinceID">
+                        {{ province.ProvinceName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="provinces.touched && provinces?.errors?.required">
+                    Please select a province
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Wards</mat-label>
+                <mat-select [(ngModel)]="data.deliveryaddress.wardCode" [compareWith]="compareSelected" 
+                     name="wards" #wards="ngModel" required>
+                    <mat-option *ngIf="dataWards.value.length == 0" disabled>No data available</mat-option>
+                    <mat-option (click)="selectedWards(ward)"
+                        *ngFor="let ward of dataWards | async" [value]="ward.WardCode">
+                        {{ ward.WardName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="wards.touched && wards?.errors?.required">
+                    Please select a ward
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>District</mat-label>
+                <mat-select [(ngModel)]="data.deliveryaddress.districtId" [compareWith]="compareSelected" 
+                    name="districts" #districts="ngModel" required>
+                    <mat-option *ngIf="dataDistricts.value.length == 0" disabled>No data available</mat-option>
+                    <mat-option (click)="selectedDistricts(district)"
+                        *ngFor="let district of dataDistricts | async" [value]="district.DistrictID">
+                        {{ district.DistrictName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="districts.touched && districts?.errors?.required">
+                    Please select a district
                 </mat-error>
             </mat-form-field>
         </div>
@@ -70,7 +85,7 @@
                 <mat-label>Phone:</mat-label>
                 <input [(ngModel)]="data.deliveryaddress.phone" #phone ="ngModel" matInput type="text" required>
                 <mat-error class="error-required" *ngIf="phone.touched && phone.invalid && phone.errors?.required">
-                    Phone is <strong>required</strong>
+                    Phone field is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
         </div>
