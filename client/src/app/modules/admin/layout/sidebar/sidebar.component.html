@@ -75,7 +75,23 @@
         </div>
     </li>
 
-    <li [ngClass]="{ 'active': isOrderShow }" class="nav-item nav-color">
+    <li [ngClass]="{ 'active': isOrdersListActive }" class="nav-item nav-color">
+        <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
+            <fa name="cubes"></fa>
+            <span>Orders</span>
+        </a>
+        <div [ngClass]="{ 'show': isOrderShow }" id="collapseFour" class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Orders:</h6>
+                <a class="collapse-item" 
+                    (click)="clickOrdersList()"  
+                    [ngClass]="{ 'active': isOrdersListActive }"
+                    [routerLink]="['/admin/orders']"> List Orders</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- <li [ngClass]="{ 'active': isOrderShow }" class="nav-item nav-color">
         <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
             <fa name="tasks"></fa>
             <span>Orders</span>
@@ -118,7 +134,7 @@
                     href="">Return Refund</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- <li (click)="clickOrdersList()" 
     [ngClass]="{ 'active': isOrdersListActive }" 

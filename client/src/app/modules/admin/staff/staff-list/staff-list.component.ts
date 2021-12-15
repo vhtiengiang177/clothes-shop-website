@@ -1,5 +1,5 @@
-import { Account } from 'src/app/services/model/account/account.model';
-import { Staff } from './../../../../services/model/staff/staff.model';
+import { Account } from './../../../../services/model/account/account.model';
+import { Staff } from 'src/app/services/model/staff/staff.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
@@ -10,6 +10,7 @@ import { AccountsStoreService } from 'src/app/services/store/accounts-store/acco
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import { StaffAddFormComponent } from '../staff-add-form/staff-add-form.component';
 import { StaffDetailFormComponent } from '../staff-detail-form/staff-detail-form.component';
+import { StaffFormComponent } from '../staff-form/staff-form.component';
 
 @Component({
   selector: 'app-staff-list',
@@ -23,6 +24,9 @@ export class StaffListComponent implements OnInit {
     pagesize: 5,
     sort: null
   };
+  
+  getStaff: Staff = {}
+  account: Account ={}
  
   constructor(private staffStore: StaffStoreService, public dialog: MatDialog,
     private toastr: ToastrService,
@@ -185,8 +189,8 @@ export class StaffListComponent implements OnInit {
   }
 
   AddAccoutStaff() {
-    const dialogRef = this.dialog.open(StaffAddFormComponent, {
-      width: '700px',
+    const dialogRef = this.dialog.open(StaffFormComponent, {
+      width: '800px',
       data: { 
          account: { },
          staff: { }
@@ -222,7 +226,7 @@ export class StaffListComponent implements OnInit {
       this.staffStore.getById(idStaff).subscribe(res => {
         if(res) {
           const dialogRef = this.dialog.open(StaffDetailFormComponent, {
-            width: '500px',
+            width: '800px',
             data: { 
               staff: res,
               account: res2
@@ -230,6 +234,41 @@ export class StaffListComponent implements OnInit {
           });
         }
       })
+    })
+  }
+}
+
+editStaff(idStaff) {
+  if(!this.staffStore.accstaff.find(p => p.id == idStaff)) {
+    this.toastr.error("Cannot find the staff #" + idStaff)
+  }
+  else {
+    
+    this.staffStore.getById(idStaff).subscribe(res => {
+      if(res) {
+        this.getStaff= res;
+        this.accountsStore.getById(idStaff).subscribe(acc =>{
+          if (res){
+            this.account = acc;
+            this.getStaff.email = this.account.email;
+            this.getStaff.typeStaff = this.account.idTypeAccount;
+          }
+        })
+        const dialogRef = this.dialog.open(StaffFormComponent, {
+          width: '800px',
+          data: { 
+            typeform: 1, 
+            staff: this.getStaff
+          }
+        });
+        
+        dialogRef.afterClosed().subscribe(res => {
+          if(res) {
+            var index = this.accountsStore.accounts.findIndex(p => p.id == res.id)
+            this.accountsStore.accounts.splice(index, 1, res)
+          }
+        });
+      }
     })
   }
 }

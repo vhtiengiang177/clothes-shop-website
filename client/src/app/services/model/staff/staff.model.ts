@@ -5,5 +5,7 @@ export interface Staff {
     dateOfBirth?: Date,
     cardIdentity?: string,
     phone?: string,
-    image?: string
+    image?: string,
+    email?: string,
+    typeStaff?:number
 }

@@ -1,5 +1,6 @@
 
 
+
 import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { Injectable } from '@angular/core';
@@ -79,26 +80,9 @@ export class StaffStoreService {
         });
   }
 
-  // create(staffObj) {
-  //   let result = new Subject<Promotion>();
-  //   this.StaffService.create("/CreateAccount", staffObj).subscribe(res => {
-  //     result.next(res)
-  //     this.toastr.success("Added successfully", "Staff #" + res.id)
-  //   }, (error: AppError) => {
-  //     if (error instanceof BadRequestError)
-  //       return this.toastr.error("Add staff failed")
-  //     else this.toastr.error("An unexpected error occurred.", "Add Staff")
-  //   })
-  //   return result.asObservable()
-  // }
-
-  update(staffObj) {
-    return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
-  }
-
-  create(accObj,staffObj) {
-    let result = new Subject<Account>();
-    this.staffService.create("/createaccount", accObj).subscribe(res => {
+  create(staffObj) {
+    let result = new Subject<Staff>();
+    this.staffService.create("/CreateAccount", staffObj).subscribe(res => {
       result.next(res)
       this.toastr.success("Added successfully", "Staff #" + res.id)
     }, (error: AppError) => {
@@ -108,6 +92,23 @@ export class StaffStoreService {
     })
     return result.asObservable()
   }
+
+  update(staffObj) {
+    return this.staffService.update("/UpdateStaff", staffObj.id, staffObj)
+  }
+
+  // create(accObj,staffObj) {
+  //   let result = new Subject<Account>();
+  //   this.staffService.create("/createaccount", accObj).subscribe(res => {
+  //     result.next(res)
+  //     this.toastr.success("Added successfully", "Staff #" + res.id)
+  //   }, (error: AppError) => {
+  //     if (error instanceof BadRequestError)
+  //       return this.toastr.error("Add staff failed")
+  //     else this.toastr.error("An unexpected error occurred.", "Add Staff")
+  //   })
+  //   return result.asObservable()
+  // }
 
   getById(id) {
     return this.staffService.getById("/GetStaffByID", id)

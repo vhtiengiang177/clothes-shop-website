@@ -41,13 +41,13 @@ export class OrderService extends DataService{
   updateState(idState,newState) {
     return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/UpdateState/" + idState + "/"+ newState, idState,
     {
-      // headers: this.authorizationHeader()
+      headers: this.authorizationHeader()
     })
   }
 
   GetAllOrderDetailByOrder(id) {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrderDetailByOrder/" + id, {
-      // headers: this.authorizationHeader()
+      headers: this.authorizationHeader()
     })
   }
 

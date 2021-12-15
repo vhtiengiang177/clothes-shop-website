@@ -8,6 +8,7 @@ import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersProcessingStoreService } from 'src/app/services/store/orders-processing-store/orders-processing-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-orders-process-list',
