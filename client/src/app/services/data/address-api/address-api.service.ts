@@ -9,7 +9,7 @@ export class AddressApiService {
 
   constructor(private http: HttpClient) { }
 
-  getProvice() {
+  getProvince() {
     return this.http.get<any>(GlobalConstants.apiAddressUrl + "/province", {
       headers: this.getHeader()
     })

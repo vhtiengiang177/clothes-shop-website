@@ -9,13 +9,15 @@
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                 <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
-                <button type="button" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
+                <button matTooltip="Allowed file extensions: .jpg, .png" type="button" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
+                <span class="required">&nbsp; &nbsp;{{ messageErrorImage }}</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name <strong class="required">*</strong></label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="firstName" #firstName="ngModel" matInput [(ngModel)]="staff.firstName" required>
+                <input type="text" class="form-control" name="firstName" #firstName="ngModel" matInput [(ngModel)]="staff.firstName" maxlength="10" required
+                    matTooltip="Firstname must be maximum 10 character">
                 <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
                     First Name field is required
                 </mat-error>
@@ -24,7 +26,8 @@
         <div class="form-group">
             <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
             <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="lastName" [(ngModel)]="staff.lastName">
+                <input type="text" class="form-control" name="lastName" [(ngModel)]="staff.lastName" maxlength="30"
+                    matTooltip="Lastname must be maximum 30 character">
             </div>
         </div>
         <div class="form-group">

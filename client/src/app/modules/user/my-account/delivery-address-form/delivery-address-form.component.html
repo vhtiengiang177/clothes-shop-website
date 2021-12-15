@@ -5,7 +5,8 @@
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>First Name</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.firstName" #firstName="ngModel" matInput type="text" required>
+                <input [(ngModel)]="data.deliveryaddress.firstName" #firstName="ngModel" matInput type="text" maxlength="10" required
+                    matTooltip="Firstname must be maximum 10 character">
                 <mat-error class="error-required"
                     *ngIf="firstName.touched && firstName.invalid && firstName.errors?.required">
                     First name field is <strong>required</strong>
@@ -15,15 +16,17 @@
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Last Name</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.lastName" #lastName ="ngModel" matInput type="text">
+                <input [(ngModel)]="data.deliveryaddress.lastName" #lastName ="ngModel" matInput maxlength="30" type="text"
+                    matTooltip="Lastname must be maximum 30 character">
             </mat-form-field>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <mat-form-field appearance="fill">
-                <mat-label>Address:</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.address" #address ="ngModel" matInput type="text" required>
+                <mat-label>Street Address</mat-label>
+                <input [(ngModel)]="data.deliveryaddress.address" #address ="ngModel" matInput type="text" maxlength="40" required
+                    matTooltip="Apartment, house number, street name,...">
                 <mat-error class="error-required" *ngIf="address.touched && address.invalid && address.errors?.required">
                     Address field is <strong>required</strong>
                 </mat-error>
@@ -50,21 +53,6 @@
     <div class="row">
         <div class="col-6">
             <mat-form-field appearance="fill">
-                <mat-label>Wards</mat-label>
-                <mat-select [(ngModel)]="data.deliveryaddress.wardCode" [compareWith]="compareSelected" 
-                     name="wards" #wards="ngModel" required>
-                    <mat-option *ngIf="dataWards.value.length == 0" disabled>No data available</mat-option>
-                    <mat-option (click)="selectedWards(ward)"
-                        *ngFor="let ward of dataWards | async" [value]="ward.WardCode">
-                        {{ ward.WardName }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="wards.touched && wards?.errors?.required">
-                    Please select a ward
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-6">
-            <mat-form-field appearance="fill">
                 <mat-label>District</mat-label>
                 <mat-select [(ngModel)]="data.deliveryaddress.districtId" [compareWith]="compareSelected" 
                     name="districts" #districts="ngModel" required>
@@ -78,14 +66,32 @@
                 </mat-error>
             </mat-form-field>
         </div>
+        <div class="col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Wards</mat-label>
+                <mat-select [(ngModel)]="data.deliveryaddress.wardCode" [compareWith]="compareSelected" 
+                     name="wards" #wards="ngModel" required>
+                    <mat-option *ngIf="dataWards.value.length == 0" disabled>No data available</mat-option>
+                    <mat-option (click)="selectedWards(ward)"
+                        *ngFor="let ward of dataWards | async" [value]="ward.WardCode">
+                        {{ ward.WardName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="wards.touched && wards?.errors?.required">
+                    Please select a ward
+                </mat-error>
+            </mat-form-field>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
             <mat-form-field appearance="fill">
                 <mat-label>Phone:</mat-label>
-                <input [(ngModel)]="data.deliveryaddress.phone" #phone ="ngModel" matInput type="text" required>
-                <mat-error class="error-required" *ngIf="phone.touched && phone.invalid && phone.errors?.required">
+                <input [(ngModel)]="data.deliveryaddress.phone" #phone="ngModel" matInput pattern="[0-9 ]{10}" type="text" required>
+                <mat-error *ngIf="phone.touched && phone.invalid && phone.errors?.required">
                     Phone field is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors">
+                    Please enter valid phone number
                 </mat-error>
             </mat-form-field>
         </div>

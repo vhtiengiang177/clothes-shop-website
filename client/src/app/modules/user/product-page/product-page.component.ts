@@ -97,6 +97,7 @@ export class ProductPageComponent implements OnInit {
         this.paginator.pageIndex = 0;
         this.fetchData()
       }
+      else this.toastr.warning("Minimum price should be at least 0 VND")
     }
   }
 

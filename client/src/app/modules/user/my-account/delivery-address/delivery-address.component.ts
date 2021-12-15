@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { AddressApiService } from 'src/app/services/data/address-api/address-api.service';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
@@ -17,13 +18,11 @@ export class DeliveryAddressComponent implements OnInit {
 
   static readonly addForm = 0;
   static readonly editForm = 1;
-  listDeliverySelected: DeliveryAddress[] = []
 
   constructor(private deliveryStore: DeliveryStoreService,
     public dialog: MatDialog,
-    private toastr: ToastrService,
-    private addressAPI: AddressApiService) {
-      this.fetchData()
+    private toastr: ToastrService) {
+    this.fetchData()
   }
 
   ngOnInit() {

@@ -26,7 +26,7 @@ export class DeliveryAddressFormComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrService,
     private addressAPI: AddressApiService) {
-      this.addressAPI.getProvice().subscribe(res => {
+      this.addressAPI.getProvince().subscribe(res => {
         if (res){
           this.dataProvinces.next(res.data)
         }
@@ -85,13 +85,17 @@ export class DeliveryAddressFormComponent implements OnInit {
 
   selectedProvices(selected) {
     this.data.deliveryaddress.provinceId = selected.ProvinceID
-    this.addressAPI.getDistrict(selected.ProvinceID).subscribe(res => {
-      this.dataDistricts.next(res.data)
-    })
+      this.data.deliveryaddress.districtId = null
+      this.addressAPI.getDistrict(selected.ProvinceID).subscribe(res => {
+        this.dataDistricts.next(res.data)
+      })
+      this.dataWards.next([])
+      this.data.deliveryaddress.wardCode = null
   }
 
   selectedDistricts(selected) {
     this.data.deliveryaddress.districtId = selected.DistrictID
+    this.data.deliveryaddress.wardCode = null
     this.addressAPI.getWard(selected.DistrictID).subscribe(res => {
       this.dataWards.next(res.data)
     })
