@@ -16,6 +16,8 @@ export class SearchProductComponent implements OnInit {
   isAdvance: boolean = false
   isAllCategories : boolean = false;
   categories: Category[] = [];
+  minPrice: number
+  maxPrice: number
 
   
   constructor(private categoriesStore: CategoriesStoreService) { }
@@ -34,6 +36,8 @@ export class SearchProductComponent implements OnInit {
       
       filterParams = {
         idcategories: idCategories,
+        minprice: this.minPrice,
+        maxprice: this.maxPrice,
         content: searchInput
       }
       this.searchEvent.emit(filterParams);
@@ -75,6 +79,32 @@ export class SearchProductComponent implements OnInit {
   }
 
   reset() {
-    this.categories = [];
+    this.categories = []
+    this.minPrice = null
+    this.maxPrice = null
+  }
+
+  checkMinPrice() {
+    if(this.minPrice < 0 || this.maxPrice == null) 
+    {
+      this.minPrice = null;
+    }
+    if(this.maxPrice) {
+      if(this.minPrice > this.maxPrice) {
+        this.minPrice = this.maxPrice;
+      }
+    }
+  }
+  
+  checkMaxPrice() {
+    if(this.maxPrice < 0 || this.maxPrice == null) 
+    {
+      this.maxPrice = null;
+    }
+    if(this.minPrice) {
+      if(this.maxPrice < this.minPrice) {
+        this.maxPrice = this.minPrice;
+      }
+    }
   }
 }

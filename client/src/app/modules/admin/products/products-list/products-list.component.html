@@ -37,9 +37,9 @@
               <fa *ngIf="filter.sort == 'totalbuy:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'totalbuy:asc'" name="sort-up"></fa>
             </th>
-            <th (click)="sortCreatedDate()">Created Date
-              <fa *ngIf="filter.sort == 'modifydate:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'modifydate:asc'" name="sort-up"></fa>
+            <th (click)="sortPrice()">Price
+              <fa *ngIf="filter.sort == 'price:desc'" name="sort-down"></fa>
+              <fa *ngIf="filter.sort == 'price:asc'" name="sort-up"></fa>
             </th>
             <th colspan="2">Action</th>
           </tr>
@@ -50,7 +50,8 @@
             <td>{{ product.sku }}</td>
             <td><a [routerLink]="['/admin/products', product.id]">{{ product.name }}</a></td>
             <td>{{ product.totalBuy }}</td>
-            <td>{{ product.createdDate |  date: 'dd/MM/yyyy' }}</td>
+            <!-- <td>{{ product.createdDate |  date: 'dd/MM/yyyy' }}</td> -->
+            <td>{{ product.unitPrice |  currency: 'VND' }}</td>
             <td (click)="editProduct(product.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deleteProduct(product.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>

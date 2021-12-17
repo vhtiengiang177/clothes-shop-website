@@ -13,11 +13,11 @@ namespace clothing_shop_website.Services
         {
             switch (sort)
             {
-                case "createddate:asc":
-                    lProduct = lProduct.OrderBy(p => p.CreatedDate).AsQueryable();
+                case "price:asc":
+                    lProduct = lProduct.OrderBy(p => p.UnitPrice).AsQueryable();
                     break;
-                case "createddate:desc":
-                    lProduct = lProduct.OrderByDescending(p => p.CreatedDate).AsQueryable();
+                case "price:desc":
+                    lProduct = lProduct.OrderByDescending(p => p.UnitPrice).AsQueryable();
                     break;
                 case "totalbuy:asc":
                     lProduct = lProduct.OrderBy(p => p.TotalBuy).AsQueryable();

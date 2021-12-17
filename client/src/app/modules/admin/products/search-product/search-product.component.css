@@ -1,4 +1,4 @@
-.row {
+.inline {
   display: inline !important;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .searchFilter-center{
-  display: flex-end;
+  display: flex;
   justify-content: center;
 }
 

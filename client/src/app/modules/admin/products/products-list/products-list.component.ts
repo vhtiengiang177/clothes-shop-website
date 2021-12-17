@@ -122,6 +122,7 @@ export class ProductsListComponent implements OnInit {
           
           dialogRef.afterClosed().subscribe(res => {
             if(res) {
+              this.toastr.success("Update successfully!")
               var index = this.productsStore.products.findIndex(p => p.id == res.id)
               this.productsStore.products.splice(index, 1, res)
             }
@@ -145,6 +146,8 @@ export class ProductsListComponent implements OnInit {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
+      minprice: $event.minprice,
+      maxprice: $event.maxprice,
       sort: this.filter.sort,
       content: $event.content,
       idcategories: $event.idcategories
@@ -202,13 +205,13 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  sortCreatedDate() {
+  sortPrice() {
     if(this.productsStore.totalData !== 0) {
-      if(this.filter.sort != 'createddate:asc') {
-        this.filter.sort = 'createddate:asc';
+      if(this.filter.sort != 'price:asc') {
+        this.filter.sort = 'price:asc';
       }
       else {
-        this.filter.sort = 'createddate:desc';
+        this.filter.sort = 'price:desc';
       }
       this.fetchData()
     }

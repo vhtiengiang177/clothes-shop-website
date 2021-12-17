@@ -68,7 +68,8 @@ export class ProductAddCartFormComponent implements OnInit {
         })
         this.isVisible = true
       }, (error: HttpErrorResponse) => {
-        this.dialogRef.close()
+        this.toastr.error("Something went wrong!")
+        this.dialogRef.close(false)
       })
       if (data.idColor != null && data.idSize != null) {
         this.selectedSizeColor.idColor = this.data.idColor
@@ -233,7 +234,7 @@ export class ProductAddCartFormComponent implements OnInit {
         else {
           this.cartsStoreService.add(this.cart).subscribe(res => {
             this.toastr.success("Update successfully");
-            this.dialogRef.close()
+            this.dialogRef.close(true)
           }, (error:HttpErrorResponse) => {
             if(error.status == 400) {
               this.toastr.error("It looks like something went wrong")

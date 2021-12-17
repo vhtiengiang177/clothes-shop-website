@@ -35,9 +35,9 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  // isVerificationAccount(account) {
-  //   return this.http.post<any>(GlobalConstants.apiUrl + '/authentication/IsVerificationAccount', account)
-  // }
+  resendVerificationCode(idAccount) {
+    return this.http.get(GlobalConstants.apiUrl + "/authentication/ResendVerificationCode/" + idAccount, { responseType: 'text' })
+  }
 
   verifyAccount(verificationCode, idAccount) {
     return this.http.get(GlobalConstants.apiUrl + "/authentication/VerifyAccount/" + idAccount + "?verificationcode=" + verificationCode, { responseType: 'text'})

@@ -1,8 +1,8 @@
 export interface Account{
-    id: number,
-    email: string,
-    password: string,
+    id?: number,
+    email?: string,
+    password?: string,
     verificationCode?: number,
     state?: number,
-    idTypeAccount: number
+    idTypeAccount?: number
 }

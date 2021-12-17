@@ -102,12 +102,27 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPatch("UpdateAccount/{id}", Name = "UpdateAccount")]
-        public IActionResult UpdateAccount(Account account)
+        public IActionResult UpdateAccount(Account newAccount)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var account = _unitOfWork.AccountsRepository.GetAccountByID(newAccount.Id);
+                    if (account.Email != newAccount.Email)
+                    {
+                        if (_unitOfWork.AccountsRepository.IsExistEmail(newAccount.Email))
+                        {
+                            return BadRequest("Email already exist!");
+                        }
+                        else
+                        {
+                            Random generator = new Random();
+                            int verificationCode = generator.Next(100000, 1000000);
+                            account.Email = newAccount.Email;
+                            account.VerificationCode = verificationCode;
+                        }
+                    }
                     _unitOfWork.AccountsRepository.UpdateAccount(account);
                     if (_unitOfWork.Save())
                     {
@@ -115,15 +130,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     }
                     else
                     {
-                        return BadRequest();
+                        return BadRequest("Something went wrong!");
                     }
                 }
                 catch
                 {
-                    return BadRequest();
+                    return BadRequest("Something went wrong!");
                 }
             }
-            return BadRequest(ModelState);
+            return BadRequest("Something went wrong!");
         }
 
         [HttpPut("DeleteAccount/{id}", Name = "DeleteAccount")]

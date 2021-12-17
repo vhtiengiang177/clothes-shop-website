@@ -6,20 +6,21 @@
                     <h2>Register</h2>
                     <form [formGroup]="form" (ngSubmit)="register(form)">
                         <div class="row">
-                            <div class="col-6">
-                                <div class="group-input">
-                                    <label for="username">Last Name</label>
-                                    <input type="text" formControlName="lastName">
-                                </div>
-                            </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="group-input">
                                     <label for="username">First Name <strong class="required">*</strong></label>
-                                    <input type="text" formControlName="firstName">
+                                    <input type="text" formControlName="firstName" maxlength="10" matTooltip="Firstname must be maximum 10 character">
                                     <mat-error
                                         *ngIf="form.get('firstName')?.touched && form.get('firstName')?.errors?.required || form.get('firstName').value?.trim() == ''">
                                         First name is required
                                     </mat-error>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="group-input">
+                                    <label for="username">Last Name</label>
+                                    <input type="text" formControlName="lastName" maxlength="30"
+                                        matTooltip="Lastname must be maximum 30 character">
                                 </div>
                             </div>
                         </div>
@@ -44,8 +45,8 @@
                         <div class="group-input">
                             <label for="con-pass">Confirm Password <strong class="required">*</strong></label>
                             <div class="pwd">
-                                <input #confirmPassword [type]="confirmPasswordVisibility ? 'text' : 'password'" class="form-control" formControlName="confirmPassword"
-                                (input)="matchPassword(newPassword.value, $event.target.value)">
+                                <input #confirmPassword [type]="confirmPasswordVisibility ? 'text' : 'password'" formControlName="confirmPassword"
+                                (input)="matchPassword(password.value, $event.target.value)">
                                 <span class="p-viewer"><fa (click)="confirmPasswordVisibility = !confirmPassworddVisibility" [name]="confirmPasswordVisibility ? 'eye' : 'eye-slash'"></fa></span>
                             </div>
                             <mat-error *ngIf="form.get('confirmPassword')?.touched 

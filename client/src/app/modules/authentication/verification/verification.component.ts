@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -16,6 +17,9 @@ export class VerificationComponent implements OnInit {
   idAccount: number
   account: Account
   code: number
+  countResendCodeRequest: number = 0
+  messageError: string = ""
+  today = formatDate(new Date(), 'dd/MM/yyyy', 'en')
 
   constructor(private route: ActivatedRoute,
     private router: Router, 
@@ -30,6 +34,14 @@ export class VerificationComponent implements OnInit {
       
       this.idAccount = history.state.idAccount
       this.account.id = this.idAccount
+
+      let check = localStorage.getItem(this.account.email)
+      if (check && check != this.today) {
+        localStorage.removeItem(this.account.email)
+      }
+      else if (check && check == this.today) {
+        this.messageError = "You've exceeded the number of verification attempts allowed within 24 hours"
+      }
   }
 
   ngOnInit() {
@@ -51,5 +63,27 @@ export class VerificationComponent implements OnInit {
 
   fetchCart() {
     this.cartStore.get()
+  }
+
+  clickResendCode() {
+    let currentUser = this.authService.getCurrentUser()
+    if (currentUser.id != null) {
+      this.router.navigate(['']);
+    }
+    let check = localStorage.getItem(this.account.email)
+    this.countResendCodeRequest += 1
+    if (!check || check != this.today) {
+      if (!check && this.countResendCodeRequest > 3) {
+        localStorage.setItem(this.account.email, this.today)
+        this.messageError = "You've exceeded the number of verification attempts allowed within 1 day"
+        return
+      }
+      else {
+        this.authService.resendVerificationCode(this.account.id).subscribe(res => {
+          this.toastr.success(res)
+        })
+      }
+    }
+    else this.messageError = "You've exceeded the number of verification attempts allowed within 1 day"
   }
 }
