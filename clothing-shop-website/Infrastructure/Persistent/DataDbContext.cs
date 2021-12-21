@@ -238,8 +238,8 @@ namespace Infrastructure.Persistent
                 new Account() { Id = 5, Email = "Shipper@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1, VerificationCode = 1 },
                 new Account() { Id = 6, Email = "Shipper2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 3, State = 1, VerificationCode = 1 },
                 new Account() { Id = 7, Email = "Customer@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
-                new Account() { Id = 8, Email = "Custome2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
-                new Account() { Id = 9, Email = "Custome3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
+                new Account() { Id = 8, Email = "Customer2@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
+                new Account() { Id = 9, Email = "Customer3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
                 new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
                 new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
                 new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });

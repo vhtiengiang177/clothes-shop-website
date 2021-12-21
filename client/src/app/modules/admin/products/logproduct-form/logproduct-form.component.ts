@@ -123,20 +123,21 @@ export class LogproductFormComponent implements OnInit {
   }
 
   checkValidate() : boolean {
+    var isValidate: boolean = true
     if (this.data.typeform == 0) {
       if(this.sizeInput.value === null || this.colorInput.value == null) {
         this.toastr.error("Please fill in all the required fields.")
-        return false
+        isValidate = false
       }  
     }
     else if (this.data.typeform == 1) {
       if(this.logProduct.quantity <= 0) {
         this.toastr.error("Please enter quantity.")
-        return false
+        isValidate = false
       }
     }
     
-    return true
+    return isValidate
   }
 
   quantityValidate() {

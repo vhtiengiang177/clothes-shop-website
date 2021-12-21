@@ -147,5 +147,17 @@ export class CartPageComponent implements OnInit {
       this.cartsStore.get()
     })
   }
+
+  removeAllItems() {
+    this.cartsStore.deleteItemsInCart(this.cartsStore.carts).subscribe(() => {
+      this.listCartSelected = []
+      this.cartsStore.get()
+      this.countTotalPrice()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 404)
+        this.toastr.error("Could not find this item")
+      else this.toastr.error("Something went wrong!")
+    })
+  }
   
 }
