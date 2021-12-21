@@ -36,6 +36,7 @@ export class ProductDetailPageComponent implements OnInit {
   quantity: number = 1
   isEnabled = true
   cart: Cart = {}
+  outOfStock = false
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -78,8 +79,8 @@ export class ProductDetailPageComponent implements OnInit {
 
   getNameSizeColor() {
     this.productSizeColorsStore.productitems.forEach(item => {
-      item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize).pop().name
-      item.color = this.colorsStore.colors.filter(c => c.id == item.idColor).pop().name
+      item.size = this.sizesStore.sizes.find(s => s.id == item.idSize).name
+      item.color = this.colorsStore.colors.find(c => c.id == item.idColor).name
       var size: Size = {
         id: item.idSize,
         name: item.size
@@ -109,20 +110,20 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   colorChange($event) {
-    var productItems = this.productSizeColorsStore.productitems.filter(item => item.idColor === $event.value)
-    this.listSizes = []
-    productItems.forEach(item => {
-      if (!this.listSizes.some((size) => size.id == item.idSize)) {
-        var size: Size = {
-          id: item.idSize,
-          name: item.size
-        }
+    //var productItems = this.productSizeColorsStore.productitems.filter(item => item.idColor === $event.value)
+    // this.listSizes = []
+    // productItems.forEach(item => {
+    //   if (!this.listSizes.some((size) => size.id == item.idSize)) {
+    //     var size: Size = {
+    //       id: item.idSize,
+    //       name: item.size
+    //     }
 
-        this.listSizes.push(size);
-      }
-    });
+    //     this.listSizes.push(size);
+    //   }
+    // });
 
-    this.listSizes.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
+    // this.listSizes.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
 
     this.selectedSizeColor.idColor = $event.value
 
@@ -130,20 +131,20 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   sizeChange($event) {
-    var productItems = this.productSizeColorsStore.productitems.filter(item => item.idSize === $event.value)
-    this.listColors = []
-    productItems.forEach(item => {
-      if (!this.listColors.some((color) => color.id == item.idColor)) {
-        var color: Color = {
-          id: item.idColor,
-          name: item.color
-        }
+    //var productItems = this.productSizeColorsStore.productitems.filter(item => item.idSize === $event.value)
+    // this.listColors = []
+    // productItems.forEach(item => {
+    //   if (!this.listColors.some((color) => color.id == item.idColor)) {
+    //     var color: Color = {
+    //       id: item.idColor,
+    //       name: item.color
+    //     }
 
-        this.listColors.push(color);
-      }
-    });
+    //     this.listColors.push(color);
+    //   }
+    // });
 
-    this.listColors.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
+    // this.listColors.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
 
     this.selectedSizeColor.idSize = $event.value
 
@@ -151,54 +152,67 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   checkStock() {
-    console.log(this.productSizeColorsStore.productitems);
-
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      this.selectedSizeColor.stock = this.productSizeColorsStore.productitems.filter(item => item.idColor == this.selectedSizeColor.idColor
-        && item.idSize == this.selectedSizeColor.idSize).pop().stock
+      this.fetchItem()
+      this.selectedSizeColor.stock = this.productSizeColorsStore.productitems.find(item => item.idColor == this.selectedSizeColor.idColor
+        && item.idSize == this.selectedSizeColor.idSize) ? this.productSizeColorsStore.productitems.find(item => item.idColor == this.selectedSizeColor.idColor
+          && item.idSize == this.selectedSizeColor.idSize).stock : 0
+       
+      if(this.selectedSizeColor.stock > 0) {
+        this.isEnabled = true
+      }
+      else {
+        this.isEnabled = false
+        this.selectedSizeColor.stock = null
+      } 
 
-        if(this.selectedSizeColor.stock > 0) {
-          this.isEnabled = true
-        }
-        else this.isEnabled = false
+      this.outOfStock = !this.isEnabled
     }
   }
 
   changeQuantity() {
-    if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      if (this.quantity > this.selectedSizeColor.stock) {
-        this.quantity = this.selectedSizeColor.stock
-        this.toastr.warning("The selected quantity exceeds quantity available in stock")
-      }
-      else if (this.quantity < 1 || this.quantity == null) {
-        this.toastr.warning("The selected quantity must be one or more")
-        this.quantity = 1
-      }
-    }
-    else {
-      this.toastr.warning("Please select a color and a size of the product")
-      this.quantity = 1
-    } 
+    // if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
+    //   if (this.quantity > this.selectedSizeColor.stock) {
+    //     this.quantity = this.selectedSizeColor.stock
+    //     this.toastr.warning("The selected quantity exceeds quantity available in stock")
+    //   }
+    //   else if (this.quantity < 1 || this.quantity == null) {
+    //     this.toastr.warning("The selected quantity must be one or more")
+    //     this.quantity = 1
+    //   }
+    // }
+    // else {
+    //   this.toastr.warning("Please select a color and a size of the product")
+    //   this.quantity = 1
+    // } 
   }
 
   addToCart(){
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
-      this.cart.idColor = this.selectedSizeColor.idColor
-      this.cart.idSize =  this.selectedSizeColor.idSize
-      this.cart.idProduct = this.product.id
-      this.cart.quantity = this.quantity
-      this.cartsStoreService.add(this.cart).subscribe(res => {
-        this.cartsStoreService.get()
-        this.toastr.success("Success");
-      }, (error:HttpErrorResponse) => {
-        if(error.status == 400) {
-          this.toastr.error("It looks like something went wrong")
-        }
-      })
+      if (this.quantity < 1 || this.quantity == null) {
+        this.toastr.warning("The selected quantity must be one or more")
+      }
+      else if (this.selectedSizeColor.stock >= this.quantity) {
+        this.cart.idColor = this.selectedSizeColor.idColor
+        this.cart.idSize =  this.selectedSizeColor.idSize
+        this.cart.idProduct = this.product.id
+        this.cart.quantity = this.quantity
+        this.cartsStoreService.add(this.cart).subscribe(res => {
+          this.cartsStoreService.get()
+          this.toastr.success("Success");
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
+          }
+        })
+      }
+      else if (this.selectedSizeColor.stock == null || this.selectedSizeColor.stock < this.quantity) {
+        this.toastr.warning("The selected quantity exceeds quantity available in stock")
+      }
+      else {
+        this.toastr.warning("Please select a color and a size of the product")
+      } 
     }
-    else {
-      this.toastr.warning("Please select a color and a size of the product")
-    } 
   }
 
 }

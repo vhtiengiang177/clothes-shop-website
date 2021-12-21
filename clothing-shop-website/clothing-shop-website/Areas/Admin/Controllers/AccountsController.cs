@@ -180,37 +180,33 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                if (_unitOfWork.AccountsRepository.IsExistEmail(customerAccountParams.Email))
                 {
-                    if(_unitOfWork.AccountsRepository.IsExistEmail(customerAccountParams.Email))
-                    {
-                        return BadRequest("Email already exist!");
-                    }
-                    else
-                    {
-                        Random generator = new Random();
-                        int verificationCode = generator.Next(100000, 1000000);
-
-                        Account account = new Account();
-                        account.Email = customerAccountParams.Email;
-                        account.Password = customerAccountParams.Password;
-                        account.IdTypeAccount = 4;
-                        account.VerificationCode = verificationCode;
-
-                        Customer customer = new Customer();
-                        customer.LastName = customerAccountParams.LastName;
-                        customer.FirstName = customerAccountParams.FirstName;
-
-
-                        _unitOfWork.AccountsRepository.CreateAccount(account, customer, null);
-                        _unitOfWork.Save();
-                    }
-                    return Ok();
+                    return BadRequest("Email already exist!");
                 }
-                catch
+                else
                 {
-                    return BadRequest(ModelState);
+                    Random generator = new Random();
+                    int verificationCode = generator.Next(100000, 1000000);
+
+                    Account account = new Account();
+                    account.Email = customerAccountParams.Email;
+                    account.Password = customerAccountParams.Password;
+                    account.IdTypeAccount = 4;
+                    account.VerificationCode = verificationCode;
+
+                    Customer customer = new Customer();
+                    customer.LastName = customerAccountParams.LastName;
+                    customer.FirstName = customerAccountParams.FirstName;
+
+
+                    _unitOfWork.AccountsRepository.CreateAccount(account, customer, null);
+                    if (_unitOfWork.Save() == false)
+                    {
+                        return BadRequest("Failed.");
+                    }
                 }
+                return Ok();
             }
             else return BadRequest(ModelState);
         }
@@ -221,16 +217,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             try
             {
-                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+                var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
 
-                if (Account == null)
+                if (account == null)
                     return NotFound();
 
-                Account.State = 2;
-                _unitOfWork.AccountsRepository.UpdateAccount(Account);
+                account.State = 2;
+                _unitOfWork.AccountsRepository.UpdateAccount(account);
                 _unitOfWork.Save();
 
-                return Ok(Account);
+                return Ok(account);
             }
             catch
             {
@@ -243,16 +239,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             try
             {
-                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+                var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
 
-                if (Account == null)
+                if (account == null)
                     return NotFound();
 
-                Account.State = 1;
-                _unitOfWork.AccountsRepository.UpdateAccount(Account);
+                account.State = 1;
+                _unitOfWork.AccountsRepository.UpdateAccount(account);
                 _unitOfWork.Save();
 
-                return Ok(Account);
+                return Ok(account);
             }
             catch
             {
@@ -341,17 +337,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
             if (account.Password != paramsPassword.OldPassword)
                 return BadRequest("Incorrect Old Password");
-            try
-            {
-                account.Password = paramsPassword.NewPassword;
-                _unitOfWork.AccountsRepository.UpdateAccount(account);
-                _unitOfWork.Save();
-                return Ok();
-            }
-            catch
-            {
-                return BadRequest("Something went wrong!");
-            }
+            account.Password = paramsPassword.NewPassword;
+
+            _unitOfWork.AccountsRepository.UpdateAccount(account);
+            _unitOfWork.Save();
+            return Ok();
+            // TEST ONLY
+            // if (_unitOfWork.Save())
+            //     return Ok();
+            // else return BadRequest("Something went wrong!");
         }
     }
 }
