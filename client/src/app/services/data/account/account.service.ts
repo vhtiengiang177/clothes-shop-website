@@ -18,12 +18,9 @@ export class AccountService extends DataService{
   }
 
   updateAccount(account) {
-    return this.http.patch<Account>(GlobalConstants.apiUrl + '/accounts/updateaccount/' + account.id, account)
-    .pipe(catchError((error: Response) => {
-      if(error.status == 400)
-        return throwError(new BadRequestError(error))
-      return throwError(new AppError(error))
-    }))
+    return this.http.patch<Account>(GlobalConstants.apiUrl + '/accounts/updateaccount/' + account.id, account, {
+      headers: this.authorizationHeader()
+    })
   }
 
   delete(accountId) {

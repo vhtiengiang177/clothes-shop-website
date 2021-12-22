@@ -145,5 +145,41 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
             return BadRequest("Not Found"); // Fix sang return NotFound
         }
+
+        [HttpGet("ResendVerificationCode/{idAccount}")]
+        public IActionResult ResendVerificationCode(int idAccount)
+        {
+            var user = _unitOfWork.AccountsRepository.GetAccountByID(idAccount);
+            string firstNameUser = "";
+            if (user != null)
+            {
+                if (user.VerificationCode == 1)
+                    return Ok("You're verified!");
+                else
+                {
+                    if (user.IdTypeAccount == 4 && user.State == 1) // Customer
+                    {
+                        var customer = _unitOfWork.CustomersRepository.GetCustomerByID(user.Id);
+                        firstNameUser = customer.FirstName;
+                    }
+                    else if (user.IdTypeAccount != 4)
+                    {
+                        var staff = _unitOfWork.StaffRepository.GetStaffByID(user.Id);
+                        firstNameUser = staff.FirstName;
+                    }
+
+                    Random generator = new Random();
+                    int verificationCode = generator.Next(100000, 1000000);
+                    user.VerificationCode = verificationCode;
+                    _unitOfWork.AccountsRepository.UpdateAccount(user);
+                    _unitOfWork.Save();
+
+                    _accountService.SendVerificationCode(user, firstNameUser);
+
+                    return Ok("Resend successfully. Check your email account!");
+                }
+            }
+            return BadRequest("Not Found"); // Fix sang return NotFound
+        }
     }
 }

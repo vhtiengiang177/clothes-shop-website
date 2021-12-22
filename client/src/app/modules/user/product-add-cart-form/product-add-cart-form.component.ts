@@ -69,7 +69,8 @@ export class ProductAddCartFormComponent implements OnInit {
         })
         this.isVisible = true
       }, (error: HttpErrorResponse) => {
-        this.dialogRef.close()
+        this.toastr.error("Something went wrong!")
+        this.dialogRef.close(false)
       })
       if (data.idColor != null && data.idSize != null) {
         this.selectedSizeColor.idColor = this.data.idColor

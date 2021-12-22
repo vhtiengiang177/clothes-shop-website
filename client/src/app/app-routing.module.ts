@@ -34,6 +34,7 @@ import { UserInfoComponent } from './modules/user/my-account/user-info/user-info
 import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.component';
 import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
+import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
 
 
 const routes: Routes = [
@@ -169,6 +170,9 @@ const routes: Routes = [
     path: 'check-out',
     component: OrderPageComponent,
     canActivate: [AuthGuard, ClientAuthGuard]
+  }, {
+    path: 'promotions',
+    component: PromotionPageComponent
   },
   {
     path: 'product-detail/:id',

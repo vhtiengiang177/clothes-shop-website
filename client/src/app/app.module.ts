@@ -63,6 +63,7 @@ import { DeliveryAddressComponent } from './modules/user/my-account/delivery-add
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
+import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
@@ -129,6 +130,8 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     ShopsFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
+    PromotionPageComponent
+    DeliveryAddressFormComponent,
     OrdersDetailFormComponent,
     OrdersPickupListComponent
    
@@ -155,7 +158,7 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     BrowserAnimationsModule,
     BrowserModule, 
     IvyCarouselModule,

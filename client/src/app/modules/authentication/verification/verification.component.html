@@ -11,8 +11,9 @@
             </mat-error>
             &nbsp; &nbsp; &nbsp;
             <button (click)="clickVerify()" class="primary-btn">Verify</button>
+            <div class="required">{{ messageError }}</div>
             <p>
-                <a>Click here</a> if you did not receive an email.
+                <a class="required" (click)="clickResendCode()"><strong>Click here</strong></a> if you did not receive an email.
             </p>
             
         </div>

@@ -1,10 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
-import { AddressApiService } from 'src/app/services/data/address-api/address-api.service';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
 import { DeliveryStoreService } from 'src/app/services/store/delivery-store/delivery-store.service';
 import { DeliveryAddressFormComponent } from '../delivery-address-form/delivery-address-form.component';
@@ -15,7 +13,8 @@ import { DeliveryAddressFormComponent } from '../delivery-address-form/delivery-
   styleUrls: ['./delivery-address.component.css']
 })
 export class DeliveryAddressComponent implements OnInit {
-
+  @Output("selected-delivery") selectedDelivery = new EventEmitter<DeliveryAddress>()
+  selected: number = 0
   static readonly addForm = 0;
   static readonly editForm = 1;
 
@@ -30,25 +29,34 @@ export class DeliveryAddressComponent implements OnInit {
 
   fetchData() {
     this.deliveryStore.getAllDeliveryAddress()
-    
+    this.deliveryStore.deliveryaddress$.subscribe(res => {
+      if (res) {
+        if (res.length > 0) {
+          this.selectedDelivery.emit(res[0])
+        }
+        else this.selectedDelivery.emit({})
+      }
+    })
   }
 
   addDeliveryAddress() {
-    const dialogRef = this.dialog.open(DeliveryAddressFormComponent, {
-      width: '700px',
-      data: { 
-        typeform: 0, 
-        deliveryaddress : { }
-      }
-     
-      
-    });
-    console.log();
-    dialogRef.afterClosed().subscribe(res => {
-      if(res) {
-        this.fetchData()
-     }
-   });
+    if (this.deliveryStore.deliveryaddress.length < 5) {
+      const dialogRef = this.dialog.open(DeliveryAddressFormComponent, {
+        width: '700px',
+        data: { 
+          typeform: 0, 
+          deliveryaddress : { }
+        }
+       
+        
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        if(res) {
+          this.fetchData()
+       }
+     });
+    }
+    else this.toastr.warning("You cannot create new delivery addresses", "Limited address")
   }
 
   editDeliveryAddress(idDeliveryAddress) {
@@ -103,10 +111,11 @@ export class DeliveryAddressComponent implements OnInit {
     });
   }
 
-
-  
-
-  
-
+  selectedDeliveryAddress(idDeliveryAddress) {
+    var item = this.deliveryStore.deliveryaddress.find(item => item.id === idDeliveryAddress)
+    
+    this.selected = idDeliveryAddress
+    this.selectedDelivery.emit(item)
+  }
 }
 

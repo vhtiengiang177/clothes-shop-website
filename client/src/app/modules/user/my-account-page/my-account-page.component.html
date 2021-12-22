@@ -4,7 +4,7 @@
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
-                        <img *ngIf="imageUrl == null" class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <img *ngIf="imageUrl == null" class="img-profile img-circle img-responsive center-block" src="assets/img/profile-default.png" alt="">
                         <img *ngIf="imageUrl != null"  class="img-profile img-circle img-responsive center-block" [src]="imageUrl" alt="">
                         <ul class="meta list list-unstyled">
                             <li class="name"> {{ name }} </li>
@@ -13,7 +13,7 @@
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
-        					<li (click)="clickProfileItem()" [ngClass]="{ 'active': clickProduct }" ><a [routerLink]="['/my-account']"><span class="fa fa-user"></span> Profile</a></li>
+        					<li class="active" (click)="clickProfileItem()" [ngClass]="{ 'active': clickProfile }" ><a [routerLink]="['/my-account']"><span class="fa fa-user"></span> Profile</a></li>
         					<li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickAddressItem()" [ngClass]="{ 'active': clickAddress }"><a [routerLink]="['/my-account/delivery-address']"><span class="fa fa-cog"></span> Delivery Address</a></li>
         					<li (click)="clickChangePassItem()" [ngClass]="{ 'active': clickChangePass }"><a [routerLink] ="['/my-account/change-password']"><span class="fa fa-credit-card"></span> Change Password</a></li>
         				</ul>

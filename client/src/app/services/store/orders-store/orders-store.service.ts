@@ -22,7 +22,7 @@ export class OrdersStoreService {
     this._orders.next(val);
   }
 
-  create(orderDetail, idAddress) {
-    return this.orderService.createOrder(orderDetail, idAddress)
+  create(orderDetail, idAddress, idPromotion) {
+    return this.orderService.createOrder(orderDetail, idAddress, idPromotion)
   }
 }

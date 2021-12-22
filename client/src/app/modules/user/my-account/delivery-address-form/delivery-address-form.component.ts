@@ -67,6 +67,9 @@ export class DeliveryAddressFormComponent implements OnInit {
       this.toastr.error("Please fill in all the required fields.")
       return false
     }
+    else if (!this.data.deliveryaddress.phone.match("[0-9 ]{10}")) {
+      return false
+    }
     return true
   }
 

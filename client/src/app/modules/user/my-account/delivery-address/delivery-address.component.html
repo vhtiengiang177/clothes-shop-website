@@ -1,54 +1,42 @@
 
-<section class="shopping-cart spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="button-add">
-                    <button  type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery</button>
-                </div>
-                <br>
-                <div *ngIf="deliveryStore.deliveryaddress.length > 0" class="cart-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="p-name">Delivery</th>
-                                <th></th>
-                                <th></th>
-                                <!-- <th><fa name="close"></fa></th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of deliveryStore.deliveryaddress$  | async; index as i">
-                                <td>{{ i+1 }}</td>
-                                <td class="cart-title first-row">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <h5 class="name-item">{{ item.lastName }} {{ item.firstName }}</h5>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-8 stock">
-                                            Phone: {{ item.phone }}
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-8 stock">
-                                            Address: {{ item.address }}, {{ item.ward }}, {{ item.district }}, {{ item.province }}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="close-td first-row"><fa name="pencil-square-o" (click)="editDeliveryAddress(item.id)"></fa></td>
-                                <td class="close-td first-row"><fa name="trash" (click)="deleteDeliveryAddress(item.id)"></fa></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <img *ngIf="deliveryStore.deliveryaddress.length == 0" class="center" src="../../../../assets/delivery-address-empty.png">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="button-add">
+                <button matTooltip="Maximum 5 delivery addresses" type="button" class="btn primary-btn" (click)="addDeliveryAddress()">Add Delivery</button>
             </div>
+            <br>
+            <div *ngIf="deliveryStore.deliveryaddress.length > 0" class="order-table">
+                <table>
+                    <tbody>
+                        <tr class="tr-delivery" *ngFor="let item of deliveryStore.deliveryaddress$  | async; index as i">
+                            <td class="center-table"><mat-radio-button (change)="selectedDeliveryAddress(item.id)" [value]="item.id" [checked]="i === 0"></mat-radio-button></td>
+                            <td class="cart-title first-row">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h5 class="name-item">{{ item.lastName }} {{ item.firstName }}</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 stock">
+                                        Phone: {{ item.phone }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 stock">
+                                        Address: {{ item.address }}, {{ item.ward }}, {{ item.district }}, {{ item.province }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="close-td first-row"><fa name="pencil-square-o" (click)="editDeliveryAddress(item.id)"></fa></td>
+                            <td class="close-td first-row"><fa name="trash" (click)="deleteDeliveryAddress(item.id)"></fa></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <img *ngIf="deliveryStore.deliveryaddress.length == 0" class="center" src="../../../../assets/delivery-address-empty.png">
         </div>
     </div>
-</section>
-
+</div>

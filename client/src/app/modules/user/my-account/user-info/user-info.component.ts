@@ -1,7 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/data/account/account.service';
+import { Account } from 'src/app/services/model/account/account.model';
 import { Customer } from 'src/app/services/model/customer/customer.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
@@ -14,23 +19,29 @@ import { SharedService } from 'src/app/_shared/constant/share-service';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-  email: string
+  account: Account = {}
+  oldEmail: string
   customer: Customer = {}
   staff: Staff = {}
   typeaccount: number
   imageUrl: string = null
+  oldImageUrl: string
   loading: boolean = false
   messageErrorImage: string = ""
+  fileToUploadUpdate: File
 
   constructor(private authService: AuthService, 
     private accountService: AccountService,
     private sharedService: SharedService,
     private staffStore: StaffStoreService,
     private customerStore: CustomersStoreService,
-    private toastr: ToastrService) {
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private router: Router) {
     this.typeaccount = authService.getCurrentUser().idTypeAccount
     accountService.getAccountInfo(authService.getCurrentUser().id).subscribe(res => {
-      this.email = res.account.email
+      this.account = res.account
+      this.oldEmail = this.account.email
       if (this.typeaccount == 4) {
         this.customer = res
         this.imageUrl = this.customer.image
@@ -40,6 +51,7 @@ export class UserInfoComponent implements OnInit {
         if(this.staff.image != null) {
           this.imageUrl = this.staff.image
         }
+        this.oldImageUrl = this.imageUrl
       }
       this.sharedService.emitChange(this.imageUrl)
     })
@@ -52,20 +64,30 @@ export class UserInfoComponent implements OnInit {
     if (files.length === 0)
       return
     let fileToUpload = <File>files[0];
-    console.log(fileToUpload.type);
     if (fileToUpload.type != "image/jpeg" && fileToUpload.type != "image/png") {
       this.messageErrorImage = "Invalid image file format"
       return
     }
     this.messageErrorImage = ""
-    this.loading = true
+    this.readFile(fileToUpload)
+    this.fileToUploadUpdate = fileToUpload
+  }
+
+  readFile(fileToUpload) {
+    var reader  = new FileReader()
+    reader.onload = (event: Event) => {
+      this.imageUrl = reader.result.toString()
+    }
+    reader.readAsDataURL(fileToUpload);
+  }
+
+  updateImage() {
+    console.log(this.fileToUploadUpdate);
+    
     const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-    this.accountService.addImageAccount(formData).subscribe(res => {
-      this.imageUrl = res
-      this.sharedService.emitChange(this.imageUrl)
-      this.loading = false
-    })
+    formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
+    this.accountService.addImageAccount(formData).toPromise()
+    this.sharedService.emitChange(this.imageUrl)
   }
 
   updateStaffProfile(formStaff) {
@@ -83,19 +105,52 @@ export class UserInfoComponent implements OnInit {
       }, error => {
         this.toastr.error("Something went wrong")
       })
+
+      if (this.oldImageUrl != this.imageUrl)
+        this.updateImage()
     }
   }
 
   updateCustomerProfile(formCustomer) {
     if (formCustomer.valid) {
+
       this.customer.firstName = formCustomer.value.firstName
       this.customer.lastName = formCustomer.value.lastName
       this.customer.idAccount = this.authService.getCurrentUser().id
       
       this.customerStore.update(this.customer).subscribe(res => {
-        this.toastr.success("Update profile successfully")
+        if (this.oldEmail != this.account.email) {
+          console.log(this.account);
+          
+          this.accountService.updateAccount(this.account).subscribe(() => {
+            const dialogRef = this.dialog.open(ConfirmFormComponent, {
+              data: {
+                text: "Verify it's you. Sign out",
+                remindtext: "You were signed out of your account. Sign in again to continue.",
+                buttonOk: true
+              }
+            })
+
+            dialogRef.afterClosed().subscribe(res => {
+              if (res) {
+                this.authService.logout()
+                this.router.navigate(['/login'])
+              }
+            })
+          }, (error: HttpErrorResponse) => {
+            this.toastr.error(error.error)
+          })
+        }
+        else this.toastr.success("Update profile successfully")
       })
+
+      
+      if (this.imageUrl != this.oldImageUrl) 
+        this.updateImage()
     }
   }
 
+  deleteImage() {
+    this.imageUrl = this.oldImageUrl
+  }
 }

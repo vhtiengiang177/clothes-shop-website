@@ -33,8 +33,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 stock">
-                                            Stock: {{ item.stock }}
+                                            <span *ngIf="item.stock !== 0">Stock: {{ item.stock }} </span>
+                                            <h5 class="badge-out" *ngIf="item.stock === 0"><span class="badge badge-warning">Out of stock</span></h5>
                                         </div>
+
                                     </div>
                                 </td>
                                 <td class="p-price first-row">{{ item.unitPrice  | currency: 'VND'}}</td>
@@ -55,7 +57,7 @@
                             <ul>
                                 <li class="cart-total">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>
                             </ul>
-                            <a href="/check-out" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                            <a (click)="order()" class="proceed-btn">PROCEED TO CHECK OUT</a>
                         </div>
                     </div>
                 </div>

@@ -2729,13 +2729,22 @@ ol {
 	font-size: 14px;
 	font-weight: 700;
 	color: #ffffff;
-	background: #252525;
+	background: #E7AB3C;
 	text-transform: uppercase;
 	padding: 15px 25px 14px 25px;
 	display: block;
 	text-align: center;
 }
 
+.tr-delivery {
+    border-bottom: 1px #e0e0e0 solid;
+}
+
+.order-table table tr td.first-row {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
 /*---------------------
   Check Out
 -----------------------*/

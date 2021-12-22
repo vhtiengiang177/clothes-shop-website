@@ -3,70 +3,87 @@
         <h3 class="fieldset-title">Profile</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                <img *ngIf="imageUrl == null" class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img *ngIf="imageUrl == null" class="img-responsive" src="assets/img/profile-default.png" alt="">
                 <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
-                <img *ngIf="loading" class="loading" src="assets/loading.gif">
+                <!-- <img *ngIf="loading" class="loading" src="assets/loading.gif"> -->
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                 <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
-                <button matTooltip="Allowed file extensions: .jpg, .png" type="button" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
+                <button matTooltip="Allowed file extensions: .jpg, .png" matTooltipPosition="below" type="button" (click)="file.click()" class="btn-small primary-btn">Choose Image</button>
                 <span class="required">&nbsp; &nbsp;{{ messageErrorImage }}</span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name <strong class="required">*</strong></label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="firstName" #firstName="ngModel" matInput [(ngModel)]="staff.firstName" maxlength="10" required
-                    matTooltip="Firstname must be maximum 10 character">
-                <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
-                    First Name field is required
-                </mat-error>
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">First Name <strong class="required">*</strong></label>
+                    <div>
+                        <input class="form-control" type="text" name="firstName" #firstName="ngModel" matInput [(ngModel)]="staff.firstName" maxlength="10" required
+                            matTooltip="Firstname must be maximum 10 character">
+                        <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
+                            First Name field is required
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Last Name</label>
+                    <div>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="staff.lastName" maxlength="30"
+                            matTooltip="Lastname must be maximum 30 character">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="lastName" [(ngModel)]="staff.lastName" maxlength="30"
-                    matTooltip="Lastname must be maximum 30 character">
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Date Of Birth</label>
+                    <div class="dob">
+                        <input class="form-control" [(ngModel)]="staff.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" matInput [matDatepicker]="dateOfBirth" [value]="staff.dateOfBirth">
+                        <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                        <mat-datepicker #dateOfBirth ></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Card Identity <strong class="required">*</strong></label>
+                    <div>
+                        <input type="text" class="form-control" name="cardIdentity" #cardIdentity="ngModel" matInput [(ngModel)]="staff.cardIdentity" required>
+                        <mat-error *ngIf="cardIdentity?.touched && cardIdentity?.invalid && cardIdentity?.errors?.required">
+                            Card Identity field is required
+                        </mat-error>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date Of Birth</label>
-            <div class="col-md-10 col-sm-9 col-xs-12 dob">
-                <input class="form-control" [(ngModel)]="staff.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" matInput [matDatepicker]="dateOfBirth" [value]="staff.dateOfBirth">
-                <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
-                <mat-datepicker #dateOfBirth ></mat-datepicker>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="control-label">Phone Number</label>
+                    <div>
+                        <input type="text" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="staff.phone" pattern="[0-9 ]{10}" matInput>
+                        <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors">
+                            Please enter valid phone number
+                        </mat-error>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Card Identity <strong class="required">*</strong></label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="cardIdentity" #cardIdentity="ngModel" matInput [(ngModel)]="staff.cardIdentity" required>
-                <mat-error *ngIf="cardIdentity?.touched && cardIdentity?.invalid && cardIdentity?.errors?.required">
-                    Card Identity field is required
-                </mat-error>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone Number</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="staff.phone" pattern="[0-9 ]{10}" matInput>
-                <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors">
-                    Please enter valid phone number
-                </mat-error>
-            </div>
-        </div>
-    </fieldset>
-    <fieldset class="fieldset">
-        <h3 class="fieldset-title">Contact Info</h3>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="email" class="form-control" title="Contact your administrator to change your email address" [value]="email" disabled>
-            </div>
-            <div class="col-md-8 col-sm-5 col-xs-5 control-info alert alert-info" role="alert">
-                <strong>Your account is managed.</strong> <br/>
-                Contact your administrator to change your email address
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="ccontrol-label">Email</label>
+                    <div>
+                        <input type="email" class="form-control" title="Contact your administrator to change your email address" [value]="account.email" disabled>
+                    </div>
+                    <div class="control-info alert alert-info" role="alert">
+                        <strong>Your account is managed.</strong> <br/>
+                        Contact your administrator to change your email address
+                    </div>
+                </div>
             </div>
         </div>
     </fieldset>
@@ -83,37 +100,47 @@
         <h3 class="fieldset-title">Profile</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                <img *ngIf="imageUrl == null" class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img *ngIf="imageUrl == null" class="img-responsive" src="assets/img/profile-default.png" alt="">
                 <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
-                <img *ngIf="loading" class="loading" src="assets/loading.gif">
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                 <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
-                <button type="button" (click)="file.click()" class="btn-small primary-btn">Update Image</button>
+                <button matTooltip="Allowed file extensions: .jpg, .png" matTooltipPosition="below" type="button" (click)="file.click()" class="btn-small primary-btn">Choose Image</button>
+                &nbsp; &nbsp;<fa class="required" name="trash" (click)="deleteImage()"></fa>
+                <span class="required">&nbsp; &nbsp;{{ messageErrorImage }}</span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name <strong class="required">*</strong></label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="firstName" #firstName="ngModel" matInput [(ngModel)]="customer.firstName" required>
-                <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
-                    First Name field is required
-                </mat-error>
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">First Name <strong class="required">*</strong></label>
+                    <div>
+                        <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]="customer.firstName" maxlength="10" required
+                        matTooltip="Firstname must be maximum 10 character">
+                        <mat-error *ngIf="firstName?.touched && firstName?.invalid && firstName?.errors?.required">
+                            First Name field is required
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">Last Name</label>
+                    <div>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="customer.lastName" maxlength="30"
+                        matTooltip="Lastname must be maximum 30 character">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" name="lastName" [(ngModel)]="customer.lastName">
-            </div>
-        </div>
-    </fieldset>
-    <fieldset class="fieldset">
-        <h3 class="fieldset-title">Contact Info</h3>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="email" class="form-control" title="Contact your administrator to change your email address" [value]="email" disabled>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <div>
+                        <input type="email" class="form-control" title="Contact your administrator to change your email address" name="email" [(ngModel)]="account.email">
+                    </div>
+                </div>
             </div>
         </div>
     </fieldset>

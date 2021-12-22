@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from 'src/app/services/model/cart/cart.model';
 import { Color } from 'src/app/services/model/product/color.model';
@@ -32,7 +33,8 @@ export class CartPageComponent implements OnInit {
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
     private toastr: ToastrService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private router: Router) {
     this.cartsStore.carts$.subscribe(res => {
       this.getInfoCart()
     })
@@ -55,12 +57,12 @@ export class CartPageComponent implements OnInit {
         }
         this.productSizeColorsStore.getItemPSC(psc).subscribe(res => {
           cart.stock = res.stock
-          if (cart.quantity > cart.stock) {
-            cart.quantity = cart.stock
-            this.cartsStore.updateQuantityItemInCart(cart).subscribe(res => {
-              this.countTotalPrice()
-            })
-          }
+          // if (cart.quantity > cart.stock) {
+          //   cart.quantity = cart.stock
+          //   this.cartsStore.updateQuantityItemInCart(cart).subscribe(res => {
+          //     this.countTotalPrice()
+          //   })
+          // }
           this.getNameSizeColor(cart)
           this.countTotalPrice()
         })
@@ -143,8 +145,9 @@ export class CartPageComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.cartsStore.get()
+    dialogRef.afterClosed().subscribe((res) => {
+      if(res) 
+        this.cartsStore.get()
     })
   }
 
@@ -160,4 +163,36 @@ export class CartPageComponent implements OnInit {
     })
   }
   
+  order() {
+    var countProduct = 0
+    this.cartsStore.carts.forEach(cart => {
+      console.log(cart);
+      
+      this.productsStore.getById(cart.idProduct).subscribe(res => {
+        var product = res
+        console.log(product);
+        
+        var psc: ProductSizeColor = {
+          idProduct: cart.idProduct,
+          idColor: cart.idColor,
+          idSize: cart.idSize
+        }
+        this.productSizeColorsStore.getItemPSC(psc).subscribe(res => {
+          console.log(res);
+          if (cart.quantity > res.stock) {
+            this.toastr.warning("Quantity of product " + product.name + " exceeds quantity available in stock")
+          }
+          else countProduct += 1
+          if (countProduct == this.cartsStore.carts.length) this.router.navigate(['/check-out'])
+        })
+      })
+
+    })
+  }
+
+  checkOrder() {
+    console.log("checkOrder");
+    
+
+  }
 }
