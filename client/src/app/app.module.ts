@@ -130,7 +130,7 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     ShopsFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
-    PromotionPageComponent
+    PromotionPageComponent,
     DeliveryAddressFormComponent,
     OrdersDetailFormComponent,
     OrdersPickupListComponent
