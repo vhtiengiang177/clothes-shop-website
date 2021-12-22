@@ -1,4 +1,5 @@
-﻿using clothing_shop_website.Services;
+﻿using clothing_shop_website.Model;
+using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;

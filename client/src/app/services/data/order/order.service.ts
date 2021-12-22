@@ -20,7 +20,7 @@ export class OrderService extends DataService{
   get(params) {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrdersByState" + this.convertToQueryStringOrders(params),
     {
-      // headers: this.authorizationHeader()
+      headers: this.authorizationHeader()
     })
       .pipe(catchError((error: Response) => {
         if(error.status == 400)

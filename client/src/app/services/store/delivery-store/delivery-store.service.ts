@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { AddressApiService } from '../../data/address-api/address-api.service';
 import { DeliveryAddressService } from '../../data/delivery-address/delivery-address.service';
 import { DeliveryAddress } from '../../model/customer/delivery-address.model';
 
@@ -16,7 +17,9 @@ export class DeliveryStoreService {
 
   readonly deliveryaddress$ = this._deliveryaddress.asObservable();
 
-  constructor(private deliveryAddressService: DeliveryAddressService,private toastr: ToastrService) {
+  constructor(private deliveryAddressService: DeliveryAddressService, 
+    private toastr: ToastrService,
+    private addressAPI: AddressApiService) {
    }
 
   get deliveryaddress() : DeliveryAddress[] {
@@ -35,12 +38,20 @@ export class DeliveryStoreService {
     await this.deliveryAddressService.getAllDeliveryAddress()
       .subscribe(res => {
         this.deliveryaddress = res
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        });
+        this.deliveryaddress.forEach(item => {
+          this.addressAPI.getProvince().subscribe(res => {
+            item.province = res.data.find(obj => obj.ProvinceID === item.provinceId).ProvinceName
+          })
+          this.addressAPI.getDistrict(item.provinceId).subscribe(res => {
+            item.district = res.data.find(obj => obj.DistrictID === item.districtId).DistrictName
+          })
+          this.addressAPI.getWard(item.districtId).subscribe(res => {
+            item.ward = res.data.find(obj => obj.WardCode === item.wardCode).WardName
+          })
+        })
+        console.log(this.deliveryaddress);
+        
+      });
   }
 
   createDelivery(deliveryaddressObj) {

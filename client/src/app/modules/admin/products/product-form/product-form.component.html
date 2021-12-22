@@ -5,7 +5,8 @@
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>SKU</mat-label>
-                <input [(ngModel)]="data.product.sku" #sku="ngModel" matInput type="text" required>
+                <input [(ngModel)]="data.product.sku" #sku="ngModel" matInput type="text" required
+                    matTooltip="SKU is unique">
                 <mat-error class="error-required" *ngIf="sku.touched && sku.invalid && sku.errors?.required">
                     SKU is <strong>required</strong>
                 </mat-error>
@@ -14,7 +15,8 @@
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
-                <input [(ngModel)]="data.product.name" #name="ngModel" matInput type="text" required>
+                <input [(ngModel)]="data.product.name" #name="ngModel" matInput maxlength="30" type="text" required
+                    matTooltip="A product name must be maximum 30 character">
                 <mat-error class="error-required" *ngIf="name.touched && name.invalid && name.errors?.required">
                     A product name is <strong>required</strong>
                 </mat-error>
@@ -26,7 +28,7 @@
         <div class="col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Unit Price</mat-label>
-                <input [(ngModel)]="data.product.unitPrice" #unitPrice="ngModel" matInput type="number" required>
+                <input [(ngModel)]="data.product.unitPrice" #unitPrice="ngModel" matInput type="number" min="1000" required>
                 <mat-error class="error-required"
                     *ngIf="unitPrice.touched && unitPrice.invalid && unitPrice.errors?.required">
                     Product price is <strong>required</strong>

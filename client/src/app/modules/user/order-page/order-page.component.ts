@@ -46,7 +46,7 @@ export class OrderPageComponent implements OnInit {
           lastName: [undefined],
           firstName: [undefined, [Validators.required]],
           address: [undefined, [Validators.required]],
-          wards: [undefined, [Validators.required]],
+          ward: [undefined, [Validators.required]],
           district: [undefined, [Validators.required]],
           province: [undefined, [Validators.required]],
           phone: [undefined, [Validators.required]]
@@ -121,9 +121,9 @@ export class OrderPageComponent implements OnInit {
         lastName: this.formAddress.get('lastName').value,
         phone: this.formAddress.get('phone').value.trim(),
         address: this.formAddress.get('address').value.trim(),
-        province: this.formAddress.get('firstName').value.trim(),
-        district: this.formAddress.get('firstName').value.trim(),
-        wards: this.formAddress.get('firstName').value.trim()
+        province: this.formAddress.get('province').value.trim(),
+        district: this.formAddress.get('district').value.trim(),
+        ward: this.formAddress.get('ward').value.trim()
       }
       this.deliveryStore.create(this.deliveryAddress).subscribe(res => {
         this.deliveryAddress = res
@@ -161,7 +161,7 @@ export class OrderPageComponent implements OnInit {
     
     if(this.formAddress.get('firstName').value.trim() == "" 
     || this.formAddress.get('address').value.trim() == ""
-    || this.formAddress.get('wards').value.trim() == ""
+    || this.formAddress.get('ward').value.trim() == ""
     || this.formAddress.get('district').value.trim() == ""
     || this.formAddress.get('province').value.trim() == ""
     || this.formAddress.get('phone').value.trim() == "") {

@@ -57,6 +57,10 @@ export class ProductFormComponent implements OnInit {
       this.toastr.error("Please fill in all the required fields.")
       return false
     }
+    else if (this.data.product.unitPrice < 1000) {
+      this.toastr.warning("Product price should be at least 1000 VND")
+      return false
+    }
     return true
   }
 

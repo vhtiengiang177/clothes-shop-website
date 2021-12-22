@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
@@ -26,7 +27,8 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private productsStore: ProductsStoreService,
     public dialog: MatDialog,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private router: Router) {
       this.fetchData()
     }
 
@@ -84,20 +86,21 @@ export class ProductsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        if(this.filter.sort == null && this.filter.pageindex == 1) {
-          this.productsStore.products.splice(this.filter.pagesize - 1,1);
-          this.productsStore.products.splice(0,0,res);
-          this.productsStore.totalData = this.productsStore.totalData + 1;
-        }
-        else {
-          this.filter = {
-            pageindex: 1,
-            pagesize: this.filter.pagesize,
-            sort: null
-          }
-          this.fetchData()
-        }
-        this.paginator.pageIndex = 0;
+        // if(this.filter.sort == null && this.filter.pageindex == 1) {
+        //   this.productsStore.products.splice(this.filter.pagesize - 1,1);
+        //   this.productsStore.products.splice(0,0,res);
+        //   this.productsStore.totalData = this.productsStore.totalData + 1;
+        // }
+        // else {
+        //   this.filter = {
+        //     pageindex: 1,
+        //     pagesize: this.filter.pagesize,
+        //     sort: null
+        //   }
+        //   this.fetchData()
+        // }
+        // this.paginator.pageIndex = 0;
+        this.router.navigate(['admin/products/' + res.id])
       }
     });
   }

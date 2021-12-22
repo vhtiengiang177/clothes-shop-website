@@ -30,7 +30,7 @@ namespace clothing_shop_website.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(1000).Width(1000).Crop("mfit")
+                    Transformation = new Transformation().Height(800).Width(800).Crop("mfit")
                 };
 
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);

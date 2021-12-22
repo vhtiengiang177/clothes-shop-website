@@ -12,9 +12,9 @@ namespace Domain.Entity
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public string Province { get; set; }
-        public string District { get; set; }
-        public string Wards { get; set; }
+        public int ProvinceId { get; set; }
+        public int DistrictId { get; set; }
+        public string WardCode { get; set; }
         public int IdCustomer { get; set; }
         public int State { get; set; } = 1;
         public Customer Customer { get; set; }

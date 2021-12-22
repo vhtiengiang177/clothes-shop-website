@@ -45,12 +45,6 @@ export class DataService {
     return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + routeName, object, {
       headers: this.authorizationHeader()
     })
-    .pipe(catchError((error: Response) => {
-      if(error.status == 400) {
-        return throwError(new BadRequestError())
-      }
-      return throwError(new AppError(error))
-    }))
   }
 
   update(routeName: string, id: number, object: any) {

@@ -32,7 +32,10 @@
                         </div>
                         <div class="group-input">
                             <label for="pass">Password <strong class="required">*</strong></label>
-                            <input #password type="password" formControlName="password">
+                            <div class="pwd">
+                                <input #password [type]="passwordVisibility ? 'text' : 'password'" formControlName="password" (input)="matchPassword($event.target.value, confirmPassword.value)">
+                                <span class="p-viewer"><fa (click)="passwordVisibility = !passwordVisibility" [name]="passwordVisibility ? 'eye' : 'eye-slash'"></fa></span>
+                            </div>
                             <mat-error
                                 *ngIf="form.get('password')?.touched && form.get('password').errors?.invalidPassword">
                                 {{ form.get('password').errors?.invalidPassword.message }}
@@ -40,16 +43,17 @@
                         </div>
                         <div class="group-input">
                             <label for="con-pass">Confirm Password <strong class="required">*</strong></label>
-                            <input #confirmPassword type="password" formControlName="confirmPassword"
-                                (change)="matchPassword(password.value, confirmPassword.value)">
+                            <div class="pwd">
+                                <input #confirmPassword [type]="confirmPasswordVisibility ? 'text' : 'password'" class="form-control" formControlName="confirmPassword"
+                                (input)="matchPassword(newPassword.value, $event.target.value)">
+                                <span class="p-viewer"><fa (click)="confirmPasswordVisibility = !confirmPassworddVisibility" [name]="confirmPasswordVisibility ? 'eye' : 'eye-slash'"></fa></span>
+                            </div>
                             <mat-error *ngIf="form.get('confirmPassword')?.touched 
                                 && form.get('confirmPassword')?.invalid
                                 && form.get('confirmPassword').errors?.required">
                                 Confirm password is required
                             </mat-error>
-                            <mat-error *ngIf="form.get('confirmPassword')?.touched 
-                                && !form.get('confirmPassword').errors?.required
-                                && !isMatchPassword">
+                            <mat-error *ngIf="!form.get('confirmPassword').errors?.required && !isMatchPassword">
                                 Password and Confirm password must be matched
                             </mat-error>
                         </div>

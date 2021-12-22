@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
@@ -21,7 +23,8 @@ export class CartsStoreService {
 
   constructor(private cartService: CartService, 
     private productsStore: ProductsStoreService,
-    private productSizeColorsStore: ProductSizeColorsStoreService) {
+    private productSizeColorsStore: ProductSizeColorsStoreService,
+    private toastr: ToastrService) {
     if (this.carts.length == 0) {
       this.get()
     }
@@ -65,6 +68,9 @@ export class CartsStoreService {
     let result = new Subject<Cart>();
     this.cartService.create("/AddItemToCart", cartObj).subscribe(res => {
       result.next(res)
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 400)
+        this.toastr.error(error.error)
     })
     return result.asObservable()
   }

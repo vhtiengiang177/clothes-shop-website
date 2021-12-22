@@ -20,6 +20,7 @@ export class UserInfoComponent implements OnInit {
   typeaccount: number
   imageUrl: string = null
   loading: boolean = false
+  messageErrorImage: string = ""
 
   constructor(private authService: AuthService, 
     private accountService: AccountService,
@@ -50,8 +51,14 @@ export class UserInfoComponent implements OnInit {
   public uploadFile = (files) => {
     if (files.length === 0)
       return
-    this.loading = true
     let fileToUpload = <File>files[0];
+    console.log(fileToUpload.type);
+    if (fileToUpload.type != "image/jpeg" && fileToUpload.type != "image/png") {
+      this.messageErrorImage = "Invalid image file format"
+      return
+    }
+    this.messageErrorImage = ""
+    this.loading = true
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     this.accountService.addImageAccount(formData).subscribe(res => {
@@ -73,6 +80,8 @@ export class UserInfoComponent implements OnInit {
       
       this.staffStore.update(this.staff).subscribe(res => {
         this.toastr.success("Update profile successfully")
+      }, error => {
+        this.toastr.error("Something went wrong")
       })
     }
   }

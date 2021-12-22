@@ -44,9 +44,9 @@
                         </div>
                         <div class="col-lg-6">
                             <label for="town">Wards<span>*</span></label>
-                            <input type="text" formControlName="wards">
+                            <input type="text" formControlName="ward">
                             <mat-error
-                                *ngIf="formAddress.get('wards')?.touched && formAddress.get('wards')?.errors?.required || formAddress.get('wards').value?.trim() == ''">
+                                *ngIf="formAddress.get('ward')?.touched && formAddress.get('ward')?.errors?.required || formAddress.get('ward').value?.trim() == ''">
                                 Wards is required
                             </mat-error>
                         </div>

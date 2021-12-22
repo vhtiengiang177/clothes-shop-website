@@ -1,5 +1,5 @@
 
-<section *ngIf="listDeliverySelected.length > 0" class="shopping-cart spad">
+<section class="shopping-cart spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -7,7 +7,7 @@
                     <button  type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery</button>
                 </div>
                 <br>
-                <div class="cart-table">
+                <div *ngIf="deliveryStore.deliveryaddress.length > 0" class="cart-table">
                     <table>
                         <thead>
                             <tr>
@@ -36,7 +36,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-8 stock">
-                                            Address: {{ item.address }}, {{ item.wards }}, {{ item.district }}, {{ item.province }}
+                                            Address: {{ item.address }}, {{ item.ward }}, {{ item.district }}, {{ item.province }}
                                         </div>
                                     </div>
                                 </td>
@@ -46,15 +46,9 @@
                         </tbody>
                     </table>
                 </div>
-                
+                <img *ngIf="deliveryStore.deliveryaddress.length == 0" class="center" src="../../../../assets/delivery-address-empty.png">
             </div>
         </div>
     </div>
-</section>
-<section class="center" *ngIf="listDeliverySelected.length == 0">
-    <div class="button-add">
-        <button  type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery</button>
-    </div>
-    <img src="../../../../assets/empty-cart.png">
 </section>
 
