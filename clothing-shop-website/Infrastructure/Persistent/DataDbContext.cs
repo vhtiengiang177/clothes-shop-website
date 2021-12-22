@@ -68,7 +68,7 @@ namespace Infrastructure.Persistent
 
             modelBuilder.Entity<Category>(entity => {
                 entity.HasKey(e => e.Id);
-              
+
                 entity.HasMany<Product>(e => e.Products)
                       .WithOne(product => product.Category)
                       .OnDelete(DeleteBehavior.Cascade);
@@ -109,7 +109,7 @@ namespace Infrastructure.Persistent
             });
 
             modelBuilder.Entity<Log_Product>(entity => {
-                entity.HasKey(e => new { e.Id});
+                entity.HasKey(e => new { e.Id });
             });
 
             modelBuilder.Entity<Order>(entity => {
@@ -222,7 +222,7 @@ namespace Infrastructure.Persistent
             DateTime endDate = new DateTime(2022, 7, 15);
 
             modelBuilder.Entity<ShopInfo>().HasData(
-                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "1 Vo Van Ngan Street", Wards = "Binh Tho", District = "Thu Duc City", Province = "HCM City", Phone = "+84 12 345 6789", Email= "mango.clothes2021@gmail.com", DateCreate = createdDate });
+                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "1 Vo Van Ngan Street", Wards = "Binh Tho", District = "Thu Duc City", Province = "HCM City", Phone = "+84 12 345 6789", Email = "mango.clothes2021@gmail.com", DateCreate = createdDate });
 
             modelBuilder.Entity<TypeAccount>().HasData(
                 new TypeAccount() { Id = 1, Name = "Admin", State = 1 },
@@ -242,7 +242,7 @@ namespace Infrastructure.Persistent
                 new Account() { Id = 9, Email = "Customer3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
                 new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
                 new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
-                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
+                new Account() { Id = 12, Email = "Customer4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
 
             modelBuilder.Entity<Staff>().HasData(
                 new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Vo Hong Tien", CardIdentity = "123456786", Phone = "0328807778" },
@@ -311,22 +311,22 @@ namespace Infrastructure.Persistent
 
 
             modelBuilder.Entity<Product_Size_Color>().HasData(
-               new Product_Size_Color() { IdProduct = 1, IdSize = 1 ,IdColor = 1,  Stock = 100,State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1,  Stock = 100, State = 0 },
-               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1,  Stock = 100, State = 0 },
-               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 });
+               new Product_Size_Color() { IdProduct = 1, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1, Stock = 100, State = 0 },
+               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1, Stock = 100, State = 0 },
+               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1, Stock = 100, State = 1 });
 
             modelBuilder.Entity<Log_Product>().HasData(
               new Log_Product() { Id = 1, IdProduct = 1, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, Quantity = 100 },
@@ -365,16 +365,16 @@ namespace Infrastructure.Persistent
                new Cart() { IdCustomer = 9, IdProduct = 9, IdSize = 1, IdColor = 1, Quantity = 20 });
 
             modelBuilder.Entity<Order>().HasData(
-               new Order() { Id = 1, DateOrder = createdDate, TotalQuantity = 20, TotalProductPrice = 12000000, TotalAmount = 10830000, State = 1, FeeDelivery = 30000, IdAddress = 1, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 2, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 2, FeeDelivery = 30000, IdAddress = 2, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 3, DateOrder = createdDate, TotalQuantity = 20, TotalProductPrice = 8100000, TotalAmount = 7320000, State = 3, FeeDelivery = 30000, IdAddress = 3, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 1, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 20, TotalProductPrice = 12000000, TotalAmount = 10830000, State = 1, FeeDelivery = 30000, IdAddress = 1, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 2, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 2, FeeDelivery = 30000, IdAddress = 2, IdCustomer = 7, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 3, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 20, TotalProductPrice = 8100000, TotalAmount = 7320000, State = 3, FeeDelivery = 30000, IdAddress = 3, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
                new Order() { Id = 4, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 4, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
                new Order() { Id = 5, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 5, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 7, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 8, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 9, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 2, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 7, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 8, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 1, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
+               new Order() { Id = 9, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 2, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
                new Order() { Id = 10, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 19200000, TotalAmount = 17310000, State = 6, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 8, IdPromotion = 1, IdStaff = 3, IdShipper = 5 },
-               new Order() { Id = 11, DateOrder = createdDate, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 3, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 9, IdPromotion = 1, IdStaff = 3, IdShipper = 5 });
+               new Order() { Id = 11, DateOrder = createdDate, DatePayment = createdDatePayment, DateShip = createdDateShip, TotalQuantity = 30, TotalProductPrice = 17100000, TotalAmount = 15420000, State = 3, FeeDelivery = 30000, IdAddress = 4, IdCustomer = 9, IdPromotion = 1, IdStaff = 3, IdShipper = 5 });
 
             modelBuilder.Entity<OrderDetail>().HasData(
                new OrderDetail() { IdOrder = 1, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 10, UnitPrice = 320000 },
