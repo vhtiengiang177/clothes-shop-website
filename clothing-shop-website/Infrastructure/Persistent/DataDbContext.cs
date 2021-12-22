@@ -242,7 +242,7 @@ namespace Infrastructure.Persistent
                 new Account() { Id = 9, Email = "Customer3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 1, VerificationCode = 1 },
                 new Account() { Id = 10, Email = "Staff3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
                 new Account() { Id = 11, Email = "Shipper3@gmail.com", Password = "123456789Abc!", IdTypeAccount = 2, State = 0, VerificationCode = 1 },
-                new Account() { Id = 12, Email = "Custome4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
+                new Account() { Id = 12, Email = "Customer4@gmail.com", Password = "123456789Abc!", IdTypeAccount = 4, State = 0, VerificationCode = 1 });
 
             modelBuilder.Entity<Staff>().HasData(
                 new Staff() { IdAccount = 1, FirstName = "Giang", LastName = "Vo Hong Tien", CardIdentity = "123456786", Phone = "0328807778" },

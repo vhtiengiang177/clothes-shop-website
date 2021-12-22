@@ -64,6 +64,7 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
 import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
+import { ImagesProductFormComponent } from './modules/admin/products/images-product-form/images-product-form.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { PromotionPageComponent } from './modules/user/promotion-page/promotion-
     ShopsFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
-    PromotionPageComponent
+    PromotionPageComponent,
+    ImagesProductFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -140,7 +142,8 @@ import { PromotionPageComponent } from './modules/user/promotion-page/promotion-
     StaffAddFormComponent,
     StaffDetailFormComponent,
     PromotionDetailComponent,
-    DeliveryAddressFormComponent
+    DeliveryAddressFormComponent,
+    ImagesProductFormComponent
   ],
   imports: [
     BrowserModule,

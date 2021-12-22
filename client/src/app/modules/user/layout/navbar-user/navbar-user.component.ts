@@ -17,8 +17,6 @@ export class NavbarUserComponent implements OnInit {
 
   constructor(private categoriesStore: CategoriesStoreService,
     private router: Router) { 
-
-
       this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
           this.currentRouter = event.url;
