@@ -38,6 +38,7 @@ export class DeliveryStoreService {
     await this.deliveryAddressService.getAllDeliveryAddress()
       .subscribe(res => {
         this.deliveryaddress = res
+        
         this.deliveryaddress.forEach(item => {
           this.addressAPI.getProvince().subscribe(res => {
             item.province = res.data.find(obj => obj.ProvinceID === item.provinceId).ProvinceName
@@ -50,7 +51,6 @@ export class DeliveryStoreService {
           })
         })
         console.log(this.deliveryaddress);
-        
       });
   }
 

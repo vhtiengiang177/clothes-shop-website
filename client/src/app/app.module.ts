@@ -63,6 +63,7 @@ import { DeliveryAddressComponent } from './modules/user/my-account/delivery-add
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
+import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery
     ChangePasswordComponent,
     ShopsFormComponent,
     PromotionDetailComponent,
-    DeliveryAddressFormComponent
+    DeliveryAddressFormComponent,
+    PromotionPageComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -148,7 +150,7 @@ import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     BrowserAnimationsModule,
     BrowserModule, 
     IvyCarouselModule

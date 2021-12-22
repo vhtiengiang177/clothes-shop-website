@@ -23,6 +23,11 @@
                     [routerLink]="['/products']">
                     <a>Products</a>
                 </li>
+                <li (click)="clickPromotionPage()" 
+                    [ngClass]="{ 'active': isPromotionActive }"
+                    [routerLink]="['/promotions']">
+                    <a>Hot Deal</a>
+                </li>
                 <li (click)="clickContactPage()" 
                    [ngClass]="{ 'active': isContactActive }"
                    [routerLink]="['/contact']">
@@ -55,12 +60,17 @@
                             [routerLink]="['/products']">
                             <a role="menuitem">Products</a>
                         </li>
+                        <li (click)="clickPromotionPage()" 
+                            [ngClass]="{ 'active': isPromotionActive }"
+                            [routerLink]="['/promotions']">
+                            <a role="menuitem">Hot Deal</a>
+                        </li>
                         <li (click)="clickContactPage()" 
                             [ngClass]="{ 'active': isContactActive }"
                             [routerLink]="['/contact']">
-                            <a  role="menuitem">Contact</a>
-                         </li>
-                         <li>
+                            <a role="menuitem">Contact</a>
+                        </li>
+                        <li>
                             <a>About Us</a>
                         </li>
                         <!-- <li class="slicknav_parent slicknav_open"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">Collection</a>

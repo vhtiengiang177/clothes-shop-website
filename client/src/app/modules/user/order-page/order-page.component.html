@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
                     <a href=""><i class="fa fa-home"></i> Home</a>
-                    <a href="/products">Shop</a>
+                    <a href="/shopping-cart">Shopping Cart</a>
                     <span>Check Out</span>
                 </div>
             </div>
@@ -17,64 +17,14 @@
 <!-- Shopping Cart Section Begin -->
 <section class="checkout-section spad">
     <div class="container">
-        <form [formGroup]="formAddress" (ngSubmit)="order(formAddress)" class="checkout-form">
+        <form class="checkout-form">
             <div class="row">
                 <div class="col-lg-6">
-                    <h4>Biiling Details</h4>
+                    <h4>Delivery Address</h4>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <label for="fir">First Name<span>*</span></label>
-                            <input type="text" formControlName="firstName">
-                            <mat-error
-                                *ngIf="formAddress.get('firstName')?.touched && formAddress.get('firstName')?.errors?.required || formAddress.get('firstName').value?.trim() == ''">
-                                First name is required
-                            </mat-error>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="last">Last Name<span></span></label>
-                            <input type="text" formControlName="lastName">
-                        </div>
-                        <div class="col-lg-12">
-                            <label for="street">Address<span>*</span></label>
-                            <input type="text" formControlName="address" class="street-first">
-                            <mat-error
-                                *ngIf="formAddress.get('address')?.touched && formAddress.get('address')?.errors?.required || formAddress.get('address').value?.trim() == ''">
-                                Address is required
-                            </mat-error>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="town">Wards<span>*</span></label>
-                            <input type="text" formControlName="ward">
-                            <mat-error
-                                *ngIf="formAddress.get('ward')?.touched && formAddress.get('ward')?.errors?.required || formAddress.get('ward').value?.trim() == ''">
-                                Wards is required
-                            </mat-error>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="town">District<span>*</span></label>
-                            <input type="text" formControlName="district">
-                            <mat-error
-                                *ngIf="formAddress.get('district')?.touched && formAddress.get('district')?.errors?.required || formAddress.get('district').value?.trim() == ''">
-                                District is required
-                            </mat-error>
-                        </div>
-                        <div class="col-lg-12">
-                            <label for="town">Province<span>*</span></label>
-                            <input type="text" formControlName="province">
-                            <mat-error
-                                *ngIf="formAddress.get('province')?.touched && formAddress.get('province')?.errors?.required || formAddress.get('province').value?.trim() == ''">
-                                Province is required
-                            </mat-error>
-                        </div>
-                        <div class="col-lg-12">
-                            <label for="phone">Phone<span>*</span></label>
-                            <input type="text" formControlName="phone">
-                            <mat-error
-                                *ngIf="formAddress.get('phone')?.touched && formAddress.get('phone')?.errors?.required || formAddress.get('phone').value?.trim() == ''">
-                                Phone is required
-                            </mat-error>
-                        </div>
+                        <app-delivery-address (selected-delivery)="selectedDeliveryAddress($event)"></app-delivery-address>
                     </div>
+                    <div class="row"></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="place-order">
@@ -86,10 +36,19 @@
                                     {{ item.nameProduct }} x {{ item.quantity }} ({{ item.nameSize }}/{{ item.nameColor }})
                                     <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
                                 </li>
-                                <li class="total-price">Total <span>{{ totalPrice | currency: 'VND'}}</span></li>
+                                <li class="total-price">SUBTOTAL<span>{{ subTotalPrice | currency: 'VND'}}</span></li>
+                                <li class="total-price">DISCOUNT<span>{{ discount | currency: 'VND'}}</span></li>
+                                <li class="total-price">TOTAL<span>{{ totalPrice | currency: 'VND'}}</span></li>
                             </ul>
-                            <div>Coupon:</div>
-                            <input type="text" placeholder="Enter Your Coupon Code">
+                            <div>Promotion:</div>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="promotion" name="promotions">
+                                    <mat-option (click)="selectedPromotion()" [value]="null">None</mat-option>
+                                    <mat-option (click)="selectedPromotion()"
+                                        *ngFor="let promotion of listPromotion" [value]="promotion">
+                                        {{promotion.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
                             <div class="payment-check">
                                 <div class="pc-item">
                                     <label for="pc-check">
@@ -105,7 +64,7 @@
                                 </div> -->
                             </div>
                             <div class="order-btn">
-                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                                <button type="submit" (click)="order()" class="site-btn place-btn">Place Order</button>
                             </div>
                         </div>
                     </div>

@@ -187,7 +187,7 @@ namespace clothing_shop_website.Areas.Client
         }
 
         [HttpPost("AddOrder")]
-        public IActionResult AddOrder(OrderDetail[] orderDetails,[FromQuery]int idAddress)
+        public IActionResult AddOrder(OrderDetail[] orderDetails, [FromQuery] int idAddress, [FromQuery] int? idPromotion)
         {
             if (ModelState.IsValid)
             {
@@ -208,6 +208,8 @@ namespace clothing_shop_website.Areas.Client
                 double totalProductPrice = 0;
                 double totalAmount = order.FeeDelivery;
 
+                var lProductOutOfStock = new List<Product>();
+
                 foreach (var orderDetail in orderDetails)
                 {
                     orderDetail.IdOrder = result.Id;
@@ -216,11 +218,31 @@ namespace clothing_shop_website.Areas.Client
                     totalQuantity += orderDetail.Quantity;
                     totalProductPrice += orderDetail.UnitPrice;
                     totalAmount += orderDetail.UnitPrice;
+                    var productItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(orderDetail.IdProduct, orderDetail.IdSize, orderDetail.IdColor);
+                    productItem.Stock -= orderDetail.Quantity;
+                    if (productItem.Stock < 0)
+                    {
+                        var product = _unitOfWork.ProductsRepository.GetProductByID(productItem.IdProduct);
+                        lProductOutOfStock.Add(product);
+
+                    } 
+                    else _unitOfWork.ProductSizeColorsRepository.Update(productItem);
                 }
 
+                if (lProductOutOfStock.Count > 0)
+                {
+                    return BadRequest(lProductOutOfStock);
+                }
+
+                if (idPromotion.HasValue)
+                {
+                    var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(idPromotion.Value);
+                    totalAmount = totalAmount - totalAmount * promotion.Value;
+                }
                 result.TotalQuantity = totalQuantity;
                 result.TotalProductPrice = totalProductPrice;
-                result.TotalAmount = totalAmount;
+                result.TotalAmount = totalAmount - order.FeeDelivery;
+                result.IdPromotion = idPromotion;
                 _unitOfWork.OrdersRepository.UpdateOrder(result);
                 _unitOfWork.Save();
 

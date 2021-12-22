@@ -3,4 +3,5 @@ export interface ConfirmData {
     id?: number
     remindtext?: string
     buttonOk?: boolean
+    innerHtml?: string
 }
