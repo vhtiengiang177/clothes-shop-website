@@ -46,14 +46,15 @@
                                     </mat-radio-group>
                                 </div>
                             </div>
+                            <h4 class="badge-out" *ngIf="outOfStock"><span class="badge badge-warning">Out of stock</span></h4>
                             <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
                                 <span class="font-color">Stock:</span>
                                 <span>{{ selectedSizeColor.stock }}</span>
                             </div>
-                            <div [ngClass]="{'my-disable': !isEnabled}" class="quantity">
+                            <div class="quantity">
                                 <div class="pro-qty">
                                     <div class="quantity">
-                                        <input class="input-quantity" (change)="changeQuantity()" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
+                                        <input class="input-quantity" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
                                     </div>
                                 </div>
                                <button *ngIf="!isOpenByCart" (click)="addToCart()"  class="primary-btn pd-cart">Add To Cart</button>
@@ -61,111 +62,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="product-tab">
-                    <div class="tab-item">
-                        <ul class="nav" role="tablist">
-                            <li>
-                                <a class="active" role="tab">SPECIFICATIONS</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-item-content">
-                        <div class="tab-content">
-                            <div class="specification-table">
-                                <table>
-                                    <tr>
-                                        <td class="p-catagory">Total Buy</td>
-                                        <td>
-                                            <div class="p-price">{{ product.totalBuy }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Category</td>
-                                        <td>
-                                            <div class="p-code">{{ product.category }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Sku</td>
-                                        <td>
-                                            <div class="p-code">{{ product.sku }}</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="product-tab">
-                    <div class="tab-item">
-                        <ul class="nav" role="tablist">
-                            <li>
-                                <a class="active" role="tab">SPECIFICATIONS</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-item-content">
-                        <div class="tab-content">
-                            <div class="specification-table">
-                                <table>
-                                    <tr>
-                                        <td class="p-catagory">Total Buy</td>
-                                        <td>
-                                            <div class="p-price">{{ product.totalBuy }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Category</td>
-                                        <td>
-                                            <div class="p-code">{{ product.category }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Sku</td>
-                                        <td>
-                                            <div class="p-code">{{ product.sku }}</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="product-tab">
-                    <div class="tab-item">
-                        <ul class="nav" role="tablist">
-                            <li>
-                                <a class="active" role="tab">SPECIFICATIONS</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-item-content">
-                        <div class="tab-content">
-                            <div class="specification-table">
-                                <table>
-                                    <tr>
-                                        <td class="p-catagory">Total Buy</td>
-                                        <td>
-                                            <div class="p-price">{{ product.totalBuy }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Category</td>
-                                        <td>
-                                            <div class="p-code">{{ product.category }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-catagory">Sku</td>
-                                        <td>
-                                            <div class="p-code">{{ product.sku }}</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
 </mat-dialog-content>

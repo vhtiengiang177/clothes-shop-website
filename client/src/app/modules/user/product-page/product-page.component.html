@@ -39,15 +39,6 @@
                     </div>
                     <button class="btn filter-btn" (click)="filterPrice()">Filter</button>
                 </div>
-                <!-- <div class="filter-widget">
-                    <h4 class="fw-title">Size</h4>
-                    <div class="fw-size-choose">
-                        <div class="sc-item" *ngFor="let size of sizesStore.sizes$ | async">
-                            <input type="radio" id="s-size">
-                            <label for="s-size">{{ size.name }}</label>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
@@ -111,6 +102,9 @@
                                     <div class="product-price">{{ product.unitPrice | currency: 'VND' }}</div>
                                 </div>
                             </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <img *ngIf="productsStore.products.length == 0" class="image" src="assets/img/common/no-products-found.gif">
                         </div>
                     </div>
                 </div>

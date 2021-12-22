@@ -45,7 +45,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (filterParams.IdCategories != null)
                 {
                     if (filterParams.IdCategories.Count() != 0
-                        || filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
+                        && filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
                     {
                         lProductItems = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(filterParams.IdCategories);
                     }
