@@ -142,6 +142,7 @@ export class ProductDetailComponent implements OnInit {
 
   openImagesForm() {
     const dialogRef = this.dialog.open(ImagesProductFormComponent, {
+      width: "700px",
       data: this.id 
     });
 

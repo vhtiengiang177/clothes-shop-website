@@ -99,10 +99,8 @@ export class ProductService extends DataService {
     headers = headers.set('Content-Disposition', 'mulipart/form-data');
     
     return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageProduct/" + id, file, {
-      headers: headers
-    }).subscribe(() => {}, error => {
-      console.log(error);
-      
+      headers: headers,
+      responseType: "text"
     })
   }
 
