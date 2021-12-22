@@ -40,17 +40,21 @@
               <fa *ngIf="filter.sort == null" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
             </th>
-            <th (click)="sortDateOrders()">Date Order
+            <th (click)="sortDateOrders()">Order
                 <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
                 <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
               </th>
-            <th (click)="sortDatePayment()">Date Payment
+              <th (click)="sortDateShip()">Ship
+                <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
+                <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
+              </th>
+            <th (click)="sortDatePayment()">Payment
                 <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
                 <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
               </th>
-            <th (click)="sortDateShip()">Date Ship
-                <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
-                <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
+           
+            <th >Cancel/Return
+                
               </th>
             <th (click)="sortIdShipper()">Shipper
                 <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
@@ -67,14 +71,14 @@
         <tbody class="table-body" *ngIf="ordersReturnStore.totalData > 0">
           <tr *ngFor="let order of ordersReturnStore.orders$ | async; index as i">
             <td>{{ i+1 }}</td>
-            <td><a [routerLink]="['/admin/orders-return/', order.id]">{{ order.id }}</a></td>
+            <td><a (click)="viewDetailOrder(order.id)">{{ order.id }}</a></td>
             <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
+            <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
+            <td><a>{{ order.dateCancel |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
             <td>{{ order.idStaff }}-{{ order.staff }}</td>
-            <!-- <td *ngIf="order.state == 6"> Return Refund</td> -->
-            <td [routerLink]="['/admin/orders-return/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
+            <td (click)="viewDetailOrder(order.id)" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
           </tr>
         </tbody>
         <tbody *ngIf="ordersReturnStore.totalData == 0">

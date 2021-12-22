@@ -38,26 +38,26 @@ export class StaffAddFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  save() {
-    if (this.checkValidate()) {
-        this.staffStore.create(this.data.account,this.data.staff).subscribe(res => {
-          this.dialogRef.close(res);
-        }, (error:HttpErrorResponse) => {
-          if(error.status == 400) {
-            this.toastr.error("It looks like something went wrong")
-          }
-        }) 
-    }
-    else this.toastr.warning("It looks like something went wrong")
-  }
+  // save() {
+  //   if (this.checkValidate()) {
+  //       this.staffStore.create(this.data.account,this.data.staff).subscribe(res => {
+  //         this.dialogRef.close(res);
+  //       }, (error:HttpErrorResponse) => {
+  //         if(error.status == 400) {
+  //           this.toastr.error("It looks like something went wrong")
+  //         }
+  //       }) 
+  //   }
+  //   else this.toastr.warning("It looks like something went wrong")
+  // }
 
-  checkValidate() {
-    if(!this.data.staff.firstName || !this.data.staff.cardIdentity || !this.data.staff.phone || !this.data.account.email) {
-      this.toastr.error("Please fill in all the required fields.")
-      return false
-    }
-    return true
-  }
+  // checkValidate() {
+  //   if(!this.data.staff.firstName || !this.data.staff.cardIdentity || !this.data.staff.phone || !this.data.account.email) {
+  //     this.toastr.error("Please fill in all the required fields.")
+  //     return false
+  //   }
+  //   return true
+  // }
 
 }  
 

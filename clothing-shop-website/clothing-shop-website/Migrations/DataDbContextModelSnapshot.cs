@@ -118,7 +118,7 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 8,
-                            Email = "Custome2@gmail.com",
+                            Email = "Customer2@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 1,
@@ -127,7 +127,7 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 9,
-                            Email = "Custome3@gmail.com",
+                            Email = "Customer3@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 1,
@@ -154,7 +154,7 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 12,
-                            Email = "Custome4@gmail.com",
+                            Email = "Customer4@gmail.com",
                             IdTypeAccount = 4,
                             Password = "123456789Abc!",
                             State = 0,
@@ -818,13 +818,16 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("CustomerIdAccount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DateCancel")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DatePayment")
+                    b.Property<DateTime?>("DatePayment")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateShip")
+                    b.Property<DateTime?>("DateShip")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DeliveryAddressId")

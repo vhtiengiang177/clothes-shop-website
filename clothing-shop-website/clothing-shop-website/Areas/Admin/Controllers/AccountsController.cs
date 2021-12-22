@@ -224,9 +224,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 account.State = 2;
                 _unitOfWork.AccountsRepository.UpdateAccount(account);
-                _unitOfWork.Save();
 
-                return Ok(account);
+                var checkSave = _unitOfWork.Save();
+               if (!checkSave)
+                {
+                    return BadRequest();
+                }
+
+                return Ok();
             }
             catch
             {

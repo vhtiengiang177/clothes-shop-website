@@ -65,6 +65,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
 import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
 import { ImagesProductFormComponent } from './modules/admin/products/images-product-form/images-product-form.component';
+import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
+import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
 
 
 @NgModule({
@@ -129,7 +131,10 @@ import { ImagesProductFormComponent } from './modules/admin/products/images-prod
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
     PromotionPageComponent,
-    ImagesProductFormComponent
+    ImagesProductFormComponent,
+    OrdersDetailFormComponent,
+    OrdersPickupListComponent
+   
   ],
   entryComponents: [
     ProductFormComponent,
@@ -143,7 +148,8 @@ import { ImagesProductFormComponent } from './modules/admin/products/images-prod
     StaffDetailFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
-    ImagesProductFormComponent
+    ImagesProductFormComponent,
+    OrdersDetailFormComponent
   ],
   imports: [
     BrowserModule,

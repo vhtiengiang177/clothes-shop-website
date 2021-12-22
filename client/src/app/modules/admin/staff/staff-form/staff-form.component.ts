@@ -25,24 +25,33 @@ export class StaffFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  // save() {
-  //   if (this.checkValidate()) {
-  //     if (this.data.typeform === 0) {
-  //       this.staffStore.create(this.data.staff).subscribe(res => {
-  //         this.dialogRef.close(res);
-  //       }, (error:HttpErrorResponse) => {
-  //         if(error.status == 400) {
-  //           this.toastr.error("It looks like something went wrong")
-  //         }
-  //       })
-  //     }
-  //     else this.toastr.warning("It looks like something went wrong")
-  //   }
-  // }
+  save() {
+    if (this.checkValidate()) {
+      if (this.data.typeform === 0) {
+        this.staffStore.create(this.data.staff).subscribe(res => {
+          this.dialogRef.close(res);
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
+          }
+        })
+      }
+      else if (this.data.typeform === 1) {
+        this.staffStore.update(this.data.staff).subscribe(res => {
+          this.dialogRef.close(res)
+        }, (error:HttpErrorResponse) => {
+          if(error.status == 400) {
+            this.toastr.error("It looks like something went wrong")
+          }
+        })
+      }
+      else this.toastr.warning("It looks like something went wrong")
+    }
+  }
 
   checkValidate() {
-    if(!this.data.staff.lastName || !this.data.staff.firstName || !this.data.staff.cardIdentity || !this.data.staff.phone
-      || !this.data.staff.dateOfBirth || !this.data.staff || !this.data.account.email || !this.data.account.password) {
+    if(  !this.data.staff.firstName || !this.data.staff.cardIdentity || !this.data.staff.phone
+       || !this.data.staff.email) {
       this.toastr.error("Please fill in all the required fields.")
       return false
     }

@@ -53,7 +53,7 @@
               <fa *ngIf="filter.sort == 'state:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'state:asc'" name="sort-up"></fa>
             </th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
           </tr>
         </thead>
         <tbody class="table-body" *ngIf="staffStore.totalData > 0">
@@ -67,6 +67,7 @@
             <td (click)="ViewDetailStaff(accstaff.id)"><fa  name="info-circle"></fa></td>
             <td (click)="blockAccount(accstaff.id)" *ngIf="accstaff.state == 1"><fa class="edit-icon" name="lock"></fa></td>
             <td (click)="unblockAccount(accstaff.id)" *ngIf="accstaff.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
+            <td (click)="editStaff(accstaff.id)"><fa class="edit-icon" name="edit"></fa></td>
             <td (click)="deleteAccount(accstaff.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>

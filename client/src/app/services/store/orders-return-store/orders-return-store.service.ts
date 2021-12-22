@@ -21,7 +21,7 @@ export class OrdersReturnStoreService {
   constructor(private orderService: OrderService, private toastr: ToastrService) {
     if (this.orders.length == 0) {
       let filter: FilterParamsOrders = {
-        idState: 6
+        idState: 7
       };
       this.getAll(filter);
     }

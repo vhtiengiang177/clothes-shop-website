@@ -68,7 +68,7 @@ namespace Infrastructure.Persistent
 
             modelBuilder.Entity<Category>(entity => {
                 entity.HasKey(e => e.Id);
-              
+
                 entity.HasMany<Product>(e => e.Products)
                       .WithOne(product => product.Category)
                       .OnDelete(DeleteBehavior.Cascade);
@@ -109,7 +109,7 @@ namespace Infrastructure.Persistent
             });
 
             modelBuilder.Entity<Log_Product>(entity => {
-                entity.HasKey(e => new { e.Id});
+                entity.HasKey(e => new { e.Id });
             });
 
             modelBuilder.Entity<Order>(entity => {
@@ -222,7 +222,7 @@ namespace Infrastructure.Persistent
             DateTime endDate = new DateTime(2022, 7, 15);
 
             modelBuilder.Entity<ShopInfo>().HasData(
-                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "1 Vo Van Ngan Street", Wards = "Binh Tho", District = "Thu Duc City", Province = "HCM City", Phone = "+84 12 345 6789", Email= "mango.clothes2021@gmail.com", DateCreate = createdDate });
+                new ShopInfo() { Id = 1, Name = "Mango Clothes", Address = "1 Vo Van Ngan Street", Wards = "Binh Tho", District = "Thu Duc City", Province = "HCM City", Phone = "+84 12 345 6789", Email = "mango.clothes2021@gmail.com", DateCreate = createdDate });
 
             modelBuilder.Entity<TypeAccount>().HasData(
                 new TypeAccount() { Id = 1, Name = "Admin", State = 1 },
@@ -311,22 +311,22 @@ namespace Infrastructure.Persistent
 
 
             modelBuilder.Entity<Product_Size_Color>().HasData(
-               new Product_Size_Color() { IdProduct = 1, IdSize = 1 ,IdColor = 1,  Stock = 100,State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 },
-               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1,  Stock = 100, State = 0 },
-               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1,  Stock = 100, State = 0 },
-               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1,  Stock = 100, State = 1 });
+               new Product_Size_Color() { IdProduct = 1, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 2, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 1, IdSize = 3, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 2, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 2, IdSize = 2, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 3, IdSize = 1, IdColor = 4, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 2, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 4, IdSize = 1, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 3, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 5, IdSize = 2, IdColor = 4, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 6, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 7, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 8, IdSize = 1, IdColor = 1, Stock = 100, State = 1 },
+               new Product_Size_Color() { IdProduct = 9, IdSize = 1, IdColor = 1, Stock = 100, State = 0 },
+               new Product_Size_Color() { IdProduct = 10, IdSize = 1, IdColor = 1, Stock = 100, State = 0 },
+               new Product_Size_Color() { IdProduct = 11, IdSize = 1, IdColor = 1, Stock = 100, State = 1 });
 
             modelBuilder.Entity<Log_Product>().HasData(
               new Log_Product() { Id = 1, IdProduct = 1, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, Quantity = 100 },

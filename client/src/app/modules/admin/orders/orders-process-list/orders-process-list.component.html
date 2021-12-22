@@ -22,70 +22,74 @@
         </div>
     </div>
     </div>
-    <div class="row">
-  
-      <div class="button-add">
-        <button 
-        mat-raised-button 
-        (click)="reloadOrder()"
-        class="btn btn-secondary">Reload</button>
-        &nbsp;
-      </div>
-          
-      <table id="producttable" class="table table-striped table-hover table-sm ">
-        <thead class="dt-header">
-          <tr>
-            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
-            <th (click)="sortID()">ID
-              <fa *ngIf="filter.sort == null" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
-            </th>
-            <th (click)="sortDateOrders()">Date Order
-              <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
-            </th>
-            <th (click)="sortDatePayment()">Date Payment
-              <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
-            </th>
-          <th (click)="sortDateShip()">Date Ship
-              <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
-            </th>
-          <th (click)="sortIdShipper()">Shipper
-              <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
-            </th>
-          <th (click)="sortIdEmployee()">Employee
-              <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
-            </th>
-            
-            <th colspan="2">Action</th>
-          </tr>
-        </thead>
-        <tbody class="table-body" *ngIf="ordersProcessStore.totalData > 0">
-          <tr *ngFor="let order of ordersProcessStore.orders$ | async; index as i">
-            <td>{{ i+1 }}</td>
-            <td><a [routerLink]="['/admin/orders-process/', order.id]">{{ order.id }}</a></td>
-            <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
-            <td>{{ order.idStaff }}-{{ order.staff }}</td>
-            <td [routerLink]="['/admin/orders-process/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-success button-action" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
-            <td type="button" class="btn btn-danger button-action" (click)="cancelOrder(order.id)">Cancel</td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="ordersProcessStore.totalData == 0">
-          <tr>
-            <td class="no-data" colspan="6">No data available in table</td>
-          </tr>
-        </tbody>
-      </table>
+          <div class="row">
+              <div class="button-add">
+                <button 
+                mat-raised-button 
+                (click)="reloadOrder()"
+                class="btn btn-secondary">Reload</button>
+                &nbsp;
+              </div>     
+              <table id="producttable" class="table table-striped table-hover table-sm ">
+                <thead class="dt-header">
+                  <tr>
+                    <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+                    <th (click)="sortID()">ID
+                      <fa *ngIf="filter.sort == null" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
+                    </th>
+                    <th (click)="sortDateOrders()">Order
+                      <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
+                    </th>
+                    <th (click)="sortDateShip()">Ship
+                      <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
+                    </th>
+                    <th (click)="sortDatePayment()">Payment
+                      <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
+                    </th>
+                 
+                  <th>Cancel/Return</th>
+                  <th (click)="sortIdShipper()">Shipper
+                      <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
+                    </th>
+                  <th (click)="sortIdEmployee()">Employee
+                      <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
+                      <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
+                    </th>
+                    
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="table-body" *ngIf="ordersProcessStore.totalData > 0">
+                  <tr *ngFor="let order of ordersProcessStore.orders$ | async; index as i">
+                    <td>{{ i+1 }}</td>
+                    <td><a (click)="viewDetailOrder(order.id)">{{ order.id }}</a></td>
+                    <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
+                    <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
+                    <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
+                   
+                    <td><a>{{ order.dateCancel |  date: 'dd/MM/yyyy' }}</a></td>
+                    <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
+                    <td>{{ order.idStaff }}-{{ order.staff }}</td>
+                    <td (click)="viewDetailOrder(order.id)" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
+                    <td type="button" class="btn btn-success button-action" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
+                    <td type="button" class="btn btn-danger button-action" (click)="cancelOrder(order.id)">Cancel</td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="ordersProcessStore.totalData == 0">
+                  <tr>
+                    <td class="no-data" colspan="6">No data available in table</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        
       
-    </div>
+    
     <div class="pb-0 pt-3 paging-custom">
       <mat-paginator #paginator
         [length]="ordersProcessStore.totalData"

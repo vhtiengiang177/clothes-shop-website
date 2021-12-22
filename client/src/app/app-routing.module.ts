@@ -79,6 +79,11 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
+    path: 'admin/orders',
+    component: OrdersListComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
     path: 'admin/orders-process',
     component: OrdersProcessListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]

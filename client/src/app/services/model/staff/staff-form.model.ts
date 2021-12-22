@@ -3,6 +3,6 @@ import { Staff } from "./staff.model";
 
 
 export interface StaffForm {
-    staff: Staff,
-    account: Account
+    typeform: number;
+    staff: Staff
 }

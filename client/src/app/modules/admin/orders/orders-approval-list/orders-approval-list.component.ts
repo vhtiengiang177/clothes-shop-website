@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ViewChild,Output } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -9,6 +9,7 @@ import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersApprovalStoreService } from 'src/app/services/store/orders-approval-store/orders-approval-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 
 @Component({
@@ -17,7 +18,11 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./orders-approval-list.component.css']
 })
 export class OrdersApprovalListComponent implements OnInit {
-
+  @Output('pickup-event') pickupEvent = new EventEmitter();
+  @Output('cancel-event') cancelEvent = new EventEmitter();
+  @Input() set processListEvent(value: boolean) {
+    this.fetchData()
+  }
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
@@ -62,7 +67,7 @@ export class OrdersApprovalListComponent implements OnInit {
     this.ordersApprovalStore.getAll(this.filter);
   }
 
-  reloadOrder() {
+  reloadOrderApproval() {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
@@ -86,7 +91,7 @@ export class OrdersApprovalListComponent implements OnInit {
     this.fetchData()
   }
 
-  sortID() {
+  sortIDApproval() {
     if(this.ordersApprovalStore.totalData !== 0) {
       if(this.filter.sort != 'id:asc') {
         this.filter.sort = 'id:asc';
@@ -98,7 +103,7 @@ export class OrdersApprovalListComponent implements OnInit {
     }
   }
 
-  sortDateOrders() {
+  sortDateOrdersApproval() {
     if(this.ordersApprovalStore.totalData !== 0) {
       if(this.filter.sort != 'dateorder:asc') {
         this.filter.sort = 'dateorder:asc';
@@ -176,7 +181,7 @@ export class OrdersApprovalListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        this.ordersApprovalStore.updateState(idOrder,5).subscribe(() => {
+        this.ordersApprovalStore.updateState(idOrder,6).subscribe(() => {
           this.toastr.success("Cancel order #" + idOrder + " successfully")
           let totalStore = this.ordersApprovalStore.orders.length;
           if(totalStore == 1) {
@@ -184,6 +189,7 @@ export class OrdersApprovalListComponent implements OnInit {
             this.paginator.pageIndex = this.filter.pageindex - 1;
           }
           this.fetchData()
+          this.cancelEvent.emit();
         }, (error: HttpErrorResponse) => {
           if(error.status == 400) {
             this.toastr.error("Bad Request")
@@ -196,24 +202,38 @@ export class OrdersApprovalListComponent implements OnInit {
     });
   }
 
-  deliveryOrder(idOrder) {
+  pickUpOrder(idOrder) {
     this.ordersApprovalStore.updateState(idOrder,3).subscribe(() => {
-      this.toastr.success("Delivery order #" + idOrder + " successfully")
+      this.toastr.success("Pick up order #" + idOrder + " successfully")
       let totalStore = this.ordersApprovalStore.orders.length;
       if(totalStore == 1) {
         this.filter.pageindex = this.filter.pageindex - 1;
         this.paginator.pageIndex = this.filter.pageindex - 1;
       }
       this.fetchData()
+      this.pickupEvent.emit();
     }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
+      if(error.status == 500) {
         this.toastr.error("Bad Request")
       }
-      else if (error.status == 404) {
+      else if (error.status == 505) {
         this.toastr.error("Not found order #" + idOrder)
       }
     })
   }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+      width: '900px',
+      data: { 
+       idOrder:idOrder
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(res => {
+    
+    });
+    }
 
 
 }

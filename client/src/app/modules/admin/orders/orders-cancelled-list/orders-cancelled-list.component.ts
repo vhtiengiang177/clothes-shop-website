@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -8,6 +8,7 @@ import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersCancelledStoreService } from 'src/app/services/store/orders-cancelled-store/orders-cancelled-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 
 @Component({
@@ -16,12 +17,14 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./orders-cancelled-list.component.css']
 })
 export class OrdersCancelledListComponent implements OnInit {
-  
+  @Input() set cancelledListEvent(value: boolean) {
+    this.fetchData()
+  }
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
     pagesize: 5,
-    idState: 5,
+    idState: 6,
     sort: null
   };
 
@@ -63,7 +66,7 @@ export class OrdersCancelledListComponent implements OnInit {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
-      idState: 5,
+      idState: 6,
       sort: this.filter.sort
     }
     this.paginator.pageIndex = 0;
@@ -75,7 +78,7 @@ export class OrdersCancelledListComponent implements OnInit {
       pageindex: 1,
       pagesize: this.filter.pagesize,
       sort: this.filter.sort,
-      idState: 5,
+      idState: 6,
       content: content
     }
     this.paginator.pageIndex = 0;
@@ -162,5 +165,18 @@ export class OrdersCancelledListComponent implements OnInit {
         
     }) 
   }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+      width: '900px',
+      data: { 
+       idOrder:idOrder
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(res => {
+    
+    });
+    }
 
 }

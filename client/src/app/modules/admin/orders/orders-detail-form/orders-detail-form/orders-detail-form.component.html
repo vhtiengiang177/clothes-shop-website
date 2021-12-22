@@ -1,0 +1,126 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container" *ngIf="isVisible">
+        <div class="row detail-center">
+            <div class="col-md-6">
+                <h3>Order <strong>#{{ order.id }}</strong></h3>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Date Order:
+                    </div>
+                    <div *ngIf="order.dateOrder" class="col-md-8">
+                        {{ order.dateOrder | date: 'dd/MM/yyyy' }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Date Payment:
+                    </div>
+                    <div *ngIf="order.datePayment" class="col-md-8">
+                        {{ order.datePayment | date: 'dd/MM/yyyy' }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Date Ship:
+                    </div>
+                    <div *ngIf="order.dateShip" class="col-md-8">
+                        {{ order.dateShip | date: 'dd/MM/yyyy' }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Customer:
+                    </div>
+                    <div *ngIf="customer" class="col-md-8">
+                        {{ customer }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Address:
+                    </div>
+                    <div *ngIf="address" class="col-md-8">
+                        {{ address }} 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Fee Delivery:
+                    </div>
+                    <div *ngIf="order.feeDelivery" class="col-md-8">
+                        {{ order.feeDelivery | currency: 'VND'}} 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Total Quantity:
+                    </div>
+                    <div *ngIf="order.totalQuantity" class="col-md-8">
+                        {{ order.totalQuantity }} items
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Promotion:
+                    </div>
+                    <div *ngIf="promotion" class="col-md-8">
+                        {{ promotion }} 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Total Amout:
+                    </div>
+                    <div *ngIf="order.totalAmount" class="col-md-8">
+                        {{ order.totalAmount | currency: 'VND'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Shipper:
+                    </div>
+                    <div *ngIf="shipper" class="col-md-8">
+                        {{ shipper }} 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 title-item">
+                        Emloyee:
+                    </div>
+                    <div *ngIf="employee" class="col-md-8">
+                        {{ employee }} 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br/>
+        <div class="form-group custom-form">
+            <table id="producttable" class="table table-striped table-hover table-sm ">
+                <thead class="dt-header">
+                    <tr>
+                        <th></th>
+                        <th>Name Product</th>
+                        <th>Size</th>
+                        <th>Color</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th> 
+                    </tr> 
+                </thead>
+                <tbody class="table-body">
+                    <tr *ngFor="let item of orderDetailStore.orderdetails$ | async; index as i">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ item?.product }}</td>
+                        <td>{{ item.size }}</td>
+                        <td>{{ item.color }}</td>
+                        <td>{{ item.unitPrice }}</td>
+                        <td>{{ item.quantity }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Exit</button> &nbsp;
+</mat-dialog-actions>

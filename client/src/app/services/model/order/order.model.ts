@@ -4,6 +4,7 @@ export interface Order {
     dateOrder: Date,
     datePayment: Date,
     dateShip: Date,
+    dateCancel: Date,
     totalQuantity: number,
     totalProductPrice: number,
     totalAmount: number,
@@ -16,5 +17,7 @@ export interface Order {
     idShipper?: number,
     shipper?: string,
     staff?: string,
-    customer?: string
+    customer?: string,
+    promotion?: string,
+    delivery?: string
 }
