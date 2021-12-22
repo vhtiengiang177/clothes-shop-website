@@ -1,14 +1,24 @@
-import { filter } from 'rxjs/operators';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent, SELECT_ITEM_HEIGHT_EM } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
-import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { OrdersReturnStoreService } from 'src/app/services/store/orders-return-store/orders-return-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import { Order } from 'src/app/services/model/order/order.model';
+import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
+import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
+import { OrdersProcessingStoreService } from 'src/app/services/store/orders-processing-store/orders-processing-store.service';
+import { OrderService } from 'src/app/services/data/order/order.service';
+import { DeliveryStoreService } from 'src/app/services/store/delivery-store/delivery-store.service';
+import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
+import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { OrderDetailStoreService } from 'src/app/services/store/order-detail-store/order-detail-store.service';
+import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
+import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
+import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 
 @Component({
@@ -17,12 +27,14 @@ import { Order } from 'src/app/services/model/order/order.model';
   styleUrls: ['./orders-return-list.component.css']
 })
 export class OrdersReturnListComponent implements OnInit {
-
+  @Input() set returnListEvent(value: boolean) {
+    this.fetchData()
+  }
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
     pagesize: 5,
-    idState: 6,
+    idState: 7,
     sort: null
   };
 
@@ -30,6 +42,16 @@ export class OrdersReturnListComponent implements OnInit {
 
   constructor(private ordersReturnStore: OrdersReturnStoreService, public dialog: MatDialog,
     private staffStore:StaffStoreService,
+    private orderDetailStore: OrderDetailStoreService,
+    private productsStore: ProductsStoreService,
+    private customerStore: CustomersStoreService,
+    private colorsStore: ColorsStoreService,
+    private sizesStore: SizesStoreService,
+    private productSizeColorsStore: ProductSizeColorsStoreService,
+    private promotionsStore: PromotionsStoreService,
+    private deliveryStore: DeliveryStoreService,
+    private orderService: OrderService,
+    private orderStore: OrdersProcessingStoreService,
     private toastr: ToastrService) {
 
       this.staffStore.staff$.subscribe(res => {
@@ -65,7 +87,7 @@ export class OrdersReturnListComponent implements OnInit {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
-      idState: 6,
+      idState: 7,
       sort: this.filter.sort
     }
     this.paginator.pageIndex = 0;
@@ -77,7 +99,7 @@ export class OrdersReturnListComponent implements OnInit {
       pageindex: 1,
       pagesize: this.filter.pagesize,
       sort: this.filter.sort,
-      idState: 6,
+      idState: 7,
       content: content
     }
     this.paginator.pageIndex = 0;
@@ -163,4 +185,20 @@ export class OrdersReturnListComponent implements OnInit {
         
     }) 
   }
+
+
+viewDetailOrder(idOrder) {
+  const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+    width: '900px',
+    data: { 
+     idOrder:idOrder
+    }
+  });
+  
+  dialogRef.afterClosed().subscribe(res => {
+  
+  });
+  }
+ 
+  
 }

@@ -206,16 +206,21 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             try
             {
-                var Account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+                var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
 
-                if (Account == null)
+                if (account == null)
                     return NotFound();
 
-                Account.State = 2;
-                _unitOfWork.AccountsRepository.UpdateAccount(Account);
-                _unitOfWork.Save();
+                account.State = 2;
+                _unitOfWork.AccountsRepository.UpdateAccount(account);
 
-                return Ok(Account);
+                var checkSave = _unitOfWork.Save();
+               if (!checkSave)
+                {
+                    return BadRequest();
+                }
+
+                return Ok();
             }
             catch
             {

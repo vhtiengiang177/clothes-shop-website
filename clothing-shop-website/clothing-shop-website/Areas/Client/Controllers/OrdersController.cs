@@ -74,6 +74,22 @@ namespace clothing_shop_website.Areas.Client
         }
 
         [AllowAnonymous]
+        [HttpGet("GetAllOrders", Name = "GetAllOrders")]
+        public IActionResult GetAllOrders()
+        {
+            var lorders = _unitOfWork.OrdersRepository.GetAllOrders();
+
+            if (lorders == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(lorders);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetAllOrdersByCustomer")]
         public async Task<IActionResult> GetAllOrdersByCustomer(int customerId)
         {
@@ -169,10 +185,23 @@ namespace clothing_shop_website.Areas.Client
                 if (userId == null) return BadRequest();
 
 
-                if (state == 3 || state == 4)
+                if (state == 3 || state == 4 || state == 5)
                     order.IdShipper = int.Parse(userId);
                 else
                     order.IdStaff = int.Parse(userId);
+
+                if (state == 4)
+                {
+                    order.DateShip = DateTime.Now;
+                }
+                if (state == 5)
+                {
+                    order.DatePayment = DateTime.Now;
+                }
+                if (state == 6 || state == 7)
+                {
+                    order.DateCancel = DateTime.Now;
+                }
 
                 order.State = state;
                 _unitOfWork.OrdersRepository.UpdateOrder(order);

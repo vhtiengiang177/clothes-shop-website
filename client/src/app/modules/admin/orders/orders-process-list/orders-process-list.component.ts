@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter,Output } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -9,6 +9,7 @@ import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersProcessingStoreService } from 'src/app/services/store/orders-processing-store/orders-processing-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import {MatTabsModule} from '@angular/material/tabs';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 @Component({
   selector: 'app-orders-process-list',
@@ -16,6 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
   styleUrls: ['./orders-process-list.component.css']
 })
 export class OrdersProcessListComponent implements OnInit {
+  @Output('approval-event') approvalEvent = new EventEmitter();
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
@@ -171,6 +173,7 @@ export class OrdersProcessListComponent implements OnInit {
         this.paginator.pageIndex = this.filter.pageindex - 1;
       }
       this.fetchData()
+      this.approvalEvent.emit();
     }, (error: HttpErrorResponse) => {
       if(error.status == 400) {
         this.toastr.error("Bad Request")
@@ -209,9 +212,19 @@ export class OrdersProcessListComponent implements OnInit {
         })
       }
     });
-
-
-  
   }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+      width: '900px',
+      data: { 
+       idOrder:idOrder
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(res => {
+    
+    });
+    }
 
 }

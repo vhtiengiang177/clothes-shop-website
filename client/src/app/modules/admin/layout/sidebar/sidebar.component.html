@@ -75,7 +75,7 @@
         </div>
     </li>
 
-    <li [ngClass]="{ 'active': isOrdersListActive }" class="nav-item nav-color">
+    <!-- <li [ngClass]="{ 'active': isOrdersListActive }" class="nav-item nav-color">
         <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
             <fa name="cubes"></fa>
             <span>Orders</span>
@@ -89,7 +89,7 @@
                     [routerLink]="['/admin/orders']"> List Orders</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- <li [ngClass]="{ 'active': isOrderShow }" class="nav-item nav-color">
         <a (click)="clickOrdersNavItem()" class="nav-link collapsed" >
@@ -136,14 +136,14 @@
         </div>
     </li> -->
 
-    <!-- <li (click)="clickOrdersList()" 
+    <li (click)="clickOrdersList()" 
     [ngClass]="{ 'active': isOrdersListActive }" 
     [routerLink]="['/admin/orders']" 
     class="nav-item nav-color">
     <a class="nav-link">
         <fa name="tasks"></fa>
         <span>Orders</span></a>
-    </li> -->
+    </li>
 
     <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickPromotionsList()" 
     [ngClass]="{ 'active': isPromotionsListActive }" 

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input,Output,EventEmitter } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -8,6 +8,7 @@ import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-Delivery-store/orders-Delivery-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 @Component({
   selector: 'app-orders-delivery-list',
@@ -15,12 +16,16 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./orders-delivery-list.component.css']
 })
 export class OrdersDeliveryListComponent implements OnInit {
-
+  @Output('completed-event') completedEvent = new EventEmitter();
+  @Output('return-event') returnEvent = new EventEmitter();
+  @Input() set pickupListEvent(value: boolean) {
+    this.fetchData()
+  }
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
     pagesize: 5,
-    idState: 3,
+    idState: 4,
     sort: null
   };
 
@@ -62,7 +67,7 @@ export class OrdersDeliveryListComponent implements OnInit {
     this.filter = {
       pageindex: 1,
       pagesize: this.filter.pagesize,
-      idState: 2,
+      idState: 4,
       sort: this.filter.sort
     }
     this.paginator.pageIndex = 0;
@@ -74,7 +79,7 @@ export class OrdersDeliveryListComponent implements OnInit {
       pageindex: 1,
       pagesize: this.filter.pagesize,
       sort: this.filter.sort,
-      idState: 2,
+      idState: 4,
       content: content
     }
     this.paginator.pageIndex = 0;
@@ -172,7 +177,7 @@ export class OrdersDeliveryListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        this.ordersDeliveryStore.updateState(idOrder,6).subscribe(() => {
+        this.ordersDeliveryStore.updateState(idOrder,7).subscribe(() => {
           this.toastr.success("Return order #" + idOrder + " successfully")
           let totalStore = this.ordersDeliveryStore.orders.length;
           if(totalStore == 1) {
@@ -180,6 +185,7 @@ export class OrdersDeliveryListComponent implements OnInit {
             this.paginator.pageIndex = this.filter.pageindex - 1;
           }
           this.fetchData()
+          this.returnEvent.emit();
         }, (error: HttpErrorResponse) => {
           if(error.status == 400) {
             this.toastr.error("Bad Request")
@@ -193,7 +199,7 @@ export class OrdersDeliveryListComponent implements OnInit {
   }
 
   completeOrder(idOrder) {
-    this.ordersDeliveryStore.updateState(idOrder,4).subscribe(() => {
+    this.ordersDeliveryStore.updateState(idOrder,5).subscribe(() => {
       this.toastr.success("Completed order #" + idOrder + " successfully")
       let totalStore = this.ordersDeliveryStore.orders.length;
       if(totalStore == 1) {
@@ -201,6 +207,7 @@ export class OrdersDeliveryListComponent implements OnInit {
         this.paginator.pageIndex = this.filter.pageindex - 1;
       }
       this.fetchData()
+      this.completedEvent.emit();
     }, (error: HttpErrorResponse) => {
       if(error.status == 400) {
         this.toastr.error("Bad Request")
@@ -209,6 +216,20 @@ export class OrdersDeliveryListComponent implements OnInit {
         this.toastr.error("Not found order #" + idOrder)
       }
     })
+  }
+
+  
+viewDetailOrder(idOrder) {
+  const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+    width: '900px',
+    data: { 
+     idOrder:idOrder
+    }
+  });
+  
+  dialogRef.afterClosed().subscribe(res => {
+  
+  });
   }
 
 }

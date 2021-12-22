@@ -1,182 +1,33 @@
 <div class="container">
     <div class="row">
-      <!-- Search -->
-      <div class="searchFilter searchFilter-center">
-        <div class="input-group">
-            <input id="table_filter" 
-                [(ngModel)]="search" 
-                #searchInput 
-                type="text" 
-                class="form-control input-search"> &nbsp;
-            <div class="input-group-btn">
-                <button name="searchBtn" 
-                    type="button" 
-                    class="btn btn-secondary btn-search"
-                    (click)="searchEvent(searchInput.value)">
-                    <fa class="icon-size" name="search"></fa>
-                    <span class="label-icon">
-                        &nbsp; Search
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
+      <!-- Search -->    
     </div>
     <br>
     <div class="row">
       <mat-tab-group animationDuration="0ms">
         <mat-tab label="Processing">
-          <div class="row">
-              <div class="button-add">
-                <button 
-                mat-raised-button 
-                (click)="reloadOrderProcess()"
-                class="btn btn-secondary">Reload</button>
-                &nbsp;
-              </div>     
-              <table id="producttable" class="table table-striped table-hover table-sm ">
-                <thead class="dt-header">
-                  <tr>
-                    <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
-                    <th (click)="sortIDProcess()">ID
-                      <fa *ngIf="filter.sort == null" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
-                    </th>
-                    <th (click)="sortDateOrdersProcess()">Date Order
-                      <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
-                    </th>
-                    <th (click)="sortDatePaymentProcess()">Date Payment
-                      <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
-                    </th>
-                  <th (click)="sortDateShipProcess()">Date Ship
-                      <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
-                    </th>
-                  <th (click)="sortIdShipperProcess()">Shipper
-                      <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
-                    </th>
-                  <th (click)="sortIdEmployeeProcess()">Employee
-                      <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
-                      <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
-                    </th>
-                    
-                    <th colspan="2">Action</th>
-                  </tr>
-                </thead>
-                <tbody class="table-body" *ngIf="ordersProcessStore.totalData > 0">
-                  <tr *ngFor="let order of ordersProcessStore.orders$ | async; index as i">
-                    <td>{{ i+1 }}</td>
-                    <td><a [routerLink]="['/admin/orders-process/', order.id]">{{ order.id }}</a></td>
-                    <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
-                    <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
-                    <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
-                    <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
-                    <td>{{ order.idStaff }}-{{ order.staff }}</td>
-                    <td [routerLink]="['/admin/orders-process/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
-                    <td type="button" class="btn btn-success button-action" (click)="approvalOrder(order.id)">Approval</td>&nbsp;&nbsp;
-                    <td type="button" class="btn btn-danger button-action" (click)="cancelOrder(order.id)">Cancel</td>
-                  </tr>
-                </tbody>
-                <tbody *ngIf="ordersProcessStore.totalData == 0">
-                  <tr>
-                    <td class="no-data" colspan="6">No data available in table</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="pb-0 pt-3 paging-custom">
-                <mat-paginator #paginator
-                  [length]="ordersProcessStore.totalData"
-                  [(pageSize)]="filter.pagesize"
-                  [pageSizeOptions]="[5, 10, 15]"
-                  (page)="onPaginateProcess($event)"
-                  showFirstLastButtons>
-                </mat-paginator>
-              </div>
-          </div>
+          <app-orders-process-list (approval-event)=approvalEvent() (cancel-event)="cancelledEvent()">     
+          </app-orders-process-list>
         </mat-tab>
         <mat-tab label="Approval">
-          <div class="row">
-            <div class="button-add">
-              <button 
-              mat-raised-button 
-              (click)="reloadOrderApproval()"
-              class="btn btn-secondary">Reload</button>
-              &nbsp;
-            </div>    
-            <table id="producttable" class="table table-striped table-hover table-sm ">
-              <thead class="dt-header">
-                <tr>
-                  <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
-                  <th (click)="sortIDApproval()">ID
-                    <fa *ngIf="filter.sort == null" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
-                  </th>
-                  <th (click)="sortDateOrdersApproval()">Date Order
-                    <fa *ngIf="filter.sort == 'dateorder:desc'" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'dateorder:asc'" name="sort-up"></fa>
-                  </th>
-                  <th (click)="sortDatePaymentApproval()">Date Payment
-                    <fa *ngIf="filter.sort == 'datepayment:desc'" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
-                  </th>
-                <th (click)="sortDateShipApproval()">Date Ship
-                    <fa *ngIf="filter.sort == 'dateship:desc'" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'dateship:asc'" name="sort-up"></fa>
-                  </th>
-                <th (click)="sortIdShipperApproval()">Shipper
-                    <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
-                  </th>
-                <th (click)="sortIdEmployeeApproval()">Employee
-                    <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
-                    <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
-                  </th>
-                  
-                  <th colspan="2">Action</th>
-                </tr>
-              </thead>
-              <tbody class="table-body" *ngIf="ordersApprovalStore.totalData > 0">
-                <tr *ngFor="let order of ordersApprovalStore.orders$ | async; index as i">
-                  <td>{{ i+1 }}</td>
-                  <td><a [routerLink]="['/admin/orders-approval/', order.id]">{{ order.id }}</a></td>
-                  <td><a>{{ order.dateOrder |  date: 'dd/MM/yyyy' }}</a></td>
-                  <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
-                  <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
-                  <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
-                  <td>{{ order.idStaff }}-{{ order.staff }}</td>
-                  <td  [routerLink]="['/admin/orders-approval/', order.id]" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
-                  <button  type="button" class="btn btn-success button-action" (click)="deliveryOrder(order.id)">Delivery </button>&nbsp;&nbsp;
-                  <button type="button" class="btn btn-danger button-action" (click)="cancelOrder(order.id)">Cancel</button>
-                </tr>
-              </tbody>
-              <tbody *ngIf="ordersApprovalStore.totalData == 0">
-                <tr>
-                  <td class="no-data" colspan="6">No data available in table</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="pb-0 pt-3 paging-custom">
-              <mat-paginator #paginator
-                [length]="ordersApprovalStore.totalData"
-                [(pageSize)]="filter.pagesize"
-                [pageSizeOptions]="[5, 10, 15]"
-                (page)="onPaginateApproval($event)"
-                showFirstLastButtons>
-              </mat-paginator>
-            </div>
-          </div>
-
+          <app-orders-approval-list [processListEvent]="isApprovalEvent" (pickup-event)=pickupEvent() (cancel-event)="cancelledEvent()"></app-orders-approval-list>
         </mat-tab>
-        <mat-tab label="Delivery">Content 3</mat-tab>
-        <mat-tab label="Completed">Content 1</mat-tab>
-        <mat-tab label="Cancelled">Content 2</mat-tab>
-        <mat-tab label="Return Refun">Content 3</mat-tab>
+        <mat-tab label="Pick Up">
+          <app-orders-pickup-list [approvalListEvent]="isPickupEvent" (delivery-event)=deliveryEvent() ></app-orders-pickup-list>
+        </mat-tab>
+        <mat-tab label="Delivery">
+          <app-orders-delivery-list  [pickupListEvent]="isDeliveryEvent" (completed-event)=completedEvent()  (return-event)=returnEvent()></app-orders-delivery-list> 
+        </mat-tab>
+        <mat-tab label="Completed">
+          <app-orders-completed-list  [deliveryListEvent]="isCompletedEvent" ></app-orders-completed-list>   
+        </mat-tab>
+        <mat-tab label="Cancelled">
+          <app-orders-cancelled-list [cancelledListEvent]="isCancelledEvent"></app-orders-cancelled-list>
+        </mat-tab>
+        <mat-tab label="Return Refund">
+            <app-orders-return-list  [returnListEvent]="isReturnEvent" ></app-orders-return-list>
+        </mat-tab>
       </mat-tab-group>
-     
-      
     </div>
 </div>
 

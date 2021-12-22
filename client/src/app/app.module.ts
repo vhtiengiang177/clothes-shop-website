@@ -64,6 +64,8 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
+import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
 
 
 @NgModule({
@@ -126,7 +128,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     ChangePasswordComponent,
     ShopsFormComponent,
     PromotionDetailComponent,
-    DeliveryAddressFormComponent
+    DeliveryAddressFormComponent,
+    OrdersDetailFormComponent,
+    OrdersPickupListComponent
    
   ],
   entryComponents: [
@@ -140,7 +144,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     StaffAddFormComponent,
     StaffDetailFormComponent,
     PromotionDetailComponent,
-    DeliveryAddressFormComponent
+    DeliveryAddressFormComponent,
+    OrdersDetailFormComponent
   ],
   imports: [
     BrowserModule,

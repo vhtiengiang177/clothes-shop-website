@@ -20,7 +20,7 @@ export class OrdersDeliveryStoreService {
   constructor(private orderService: OrderService, private toastr: ToastrService) {
     if (this.orders.length == 0) {
       let filter: FilterParamsOrders = {
-        idState: 3
+        idState: 4
       };
       this.getAll(filter);
     }

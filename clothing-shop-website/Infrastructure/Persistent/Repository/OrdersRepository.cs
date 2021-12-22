@@ -22,6 +22,13 @@ namespace Infrastructure.Persistent.Repository
             return lOrder.AsQueryable();
         }
 
+        public async Task<IQueryable<Order>> GetAllOrders()
+        {
+            var lOrder = await _dbContext.Orders.ToListAsync();
+
+            return lOrder.AsQueryable();
+        }
+
         public async Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order)
         {
             var lOrder = await _dbContext.OrderDetails.Where(p => p.IdOrder == order).ToListAsync();

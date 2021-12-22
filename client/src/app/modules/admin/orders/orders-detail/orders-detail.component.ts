@@ -49,7 +49,6 @@ export class OrdersDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productsStore: ProductsStoreService,
-    private customersStore: CustomersStoreService,
     private promotionsStore: PromotionsStoreService,
     private deliveryStore: DeliveryStoreService,
     private orderDetailStore: OrderDetailStoreService,

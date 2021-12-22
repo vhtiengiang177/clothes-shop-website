@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ViewChild,Output } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -9,6 +9,7 @@ import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
 import { OrdersApprovalStoreService } from 'src/app/services/store/orders-approval-store/orders-approval-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 
 
 @Component({
@@ -17,9 +18,13 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./orders-approval-list.component.css']
 })
 export class OrdersApprovalListComponent implements OnInit {
-
+  @Output('pickup-event') pickupEvent = new EventEmitter();
+  @Output('cancel-event') cancelEvent = new EventEmitter();
+  @Input() set processListEvent(value: boolean) {
+    this.fetchData()
+  }
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
-  filter2: FilterParamsOrders = {
+  filter: FilterParamsOrders = {
     pageindex: 1,
     pagesize: 5,
     idState: 2,
@@ -32,133 +37,133 @@ export class OrdersApprovalListComponent implements OnInit {
     private authService : AuthService,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
-      // this.staffStore.staff$.subscribe(res => {
-      //   if(res.length == 0) {
-      //     this.staffStore.getAllStaff()
-      //   }
-      //   else {
-      //     this.ordersApprovalStore.orders$.subscribe(res => {
-      //       if (res) {
-      //         this.getNameStaff()
-      //       }
-      //     })
-      //   }
-      // })
+      this.staffStore.staff$.subscribe(res => {
+        if(res.length == 0) {
+          this.staffStore.getAllStaff()
+        }
+        else {
+          this.ordersApprovalStore.orders$.subscribe(res => {
+            if (res) {
+              this.getNameStaff()
+            }
+          })
+        }
+      })
 
-      // this.fetchData()
+      this.fetchData()
     }
 
 
   ngOnInit() {
   }
 
-  onPaginateApproval(pageEvent: PageEvent) {
-    this.filter2.pagesize = +pageEvent.pageSize;
-    this.filter2.pageindex = +pageEvent.pageIndex + 1;
-    this.fetchDataApproval()
+  onPaginate(pageEvent: PageEvent) {
+    this.filter.pagesize = +pageEvent.pageSize;
+    this.filter.pageindex = +pageEvent.pageIndex + 1;
+    this.fetchData()
   }
   
-  fetchDataApproval() {
-    this.ordersApprovalStore.getAll(this.filter2);
+  fetchData() {
+    this.ordersApprovalStore.getAll(this.filter);
   }
 
   reloadOrderApproval() {
-    this.filter2 = {
+    this.filter = {
       pageindex: 1,
-      pagesize: this.filter2.pagesize,
+      pagesize: this.filter.pagesize,
       idState: 2,
-      sort: this.filter2.sort
+      sort: this.filter.sort
     }
     this.paginator.pageIndex = 0;
-    this.fetchDataApproval()
+    this.fetchData()
   }
 
-  searchEventApproval(content) {
-    this.filter2 = {
+  searchEvent(content) {
+    this.filter = {
       pageindex: 1,
-      pagesize: this.filter2.pagesize,
-      sort: this.filter2.sort,
+      pagesize: this.filter.pagesize,
+      sort: this.filter.sort,
       idState: 2,
       content: content
     }
     this.paginator.pageIndex = 0;
 
-    this.fetchDataApproval()
+    this.fetchData()
   }
 
   sortIDApproval() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'id:asc') {
-        this.filter2.sort = 'id:asc';
+      if(this.filter.sort != 'id:asc') {
+        this.filter.sort = 'id:asc';
       }
       else {
-        this.filter2.sort = null;
+        this.filter.sort = null;
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
   sortDateOrdersApproval() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'dateorder:asc') {
-        this.filter2.sort = 'dateorder:asc';
+      if(this.filter.sort != 'dateorder:asc') {
+        this.filter.sort = 'dateorder:asc';
       }
       else {
-        this.filter2.sort = 'dateorder:desc';
+        this.filter.sort = 'dateorder:desc';
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
-  sortIdShipperApproval() {
+  sortIdShipper() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'idshipper:asc') {
-        this.filter2.sort = 'idshipper:asc';
+      if(this.filter.sort != 'idshipper:asc') {
+        this.filter.sort = 'idshipper:asc';
       }
       else {
-        this.filter2.sort = null;
+        this.filter.sort = null;
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
-  sortIdEmployeeApproval() {
+  sortIdEmployee() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'idemployee:asc') {
-        this.filter2.sort = 'idemployee:asc';
+      if(this.filter.sort != 'idemployee:asc') {
+        this.filter.sort = 'idemployee:asc';
       }
       else {
-        this.filter2.sort = null;
+        this.filter.sort = null;
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
-  sortDatePaymentApproval() {
+  sortDatePayment() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'datepayment:asc') {
-        this.filter2.sort = 'datepayment:asc';
+      if(this.filter.sort != 'datepayment:asc') {
+        this.filter.sort = 'datepayment:asc';
       }
       else {
-        this.filter2.sort = 'datepayment:desc';
+        this.filter.sort = 'datepayment:desc';
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
-  sortDateShipApproval() {
+  sortDateShip() {
     if(this.ordersApprovalStore.totalData !== 0) {
-      if(this.filter2.sort != 'dateship:asc') {
-        this.filter2.sort = 'dateship:asc';
+      if(this.filter.sort != 'dateship:asc') {
+        this.filter.sort = 'dateship:asc';
       }
       else {
-        this.filter2.sort = 'dateship:desc';
+        this.filter.sort = 'dateship:desc';
       }
-      this.fetchDataApproval()
+      this.fetchData()
     }
   }
 
-  getNameStaffApproval() {
+  getNameStaff() {
     this.ordersApprovalStore.orders.forEach((item:Order) => {
         item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
         item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
@@ -176,14 +181,15 @@ export class OrdersApprovalListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        this.ordersApprovalStore.updateState(idOrder,5).subscribe(() => {
+        this.ordersApprovalStore.updateState(idOrder,6).subscribe(() => {
           this.toastr.success("Cancel order #" + idOrder + " successfully")
           let totalStore = this.ordersApprovalStore.orders.length;
           if(totalStore == 1) {
-            this.filter2.pageindex = this.filter2.pageindex - 1;
-            this.paginator.pageIndex = this.filter2.pageindex - 1;
+            this.filter.pageindex = this.filter.pageindex - 1;
+            this.paginator.pageIndex = this.filter.pageindex - 1;
           }
-          this.fetchDataApproval()
+          this.fetchData()
+          this.cancelEvent.emit();
         }, (error: HttpErrorResponse) => {
           if(error.status == 400) {
             this.toastr.error("Bad Request")
@@ -196,24 +202,38 @@ export class OrdersApprovalListComponent implements OnInit {
     });
   }
 
-  deliveryOrder(idOrder) {
+  pickUpOrder(idOrder) {
     this.ordersApprovalStore.updateState(idOrder,3).subscribe(() => {
-      this.toastr.success("Delivery order #" + idOrder + " successfully")
+      this.toastr.success("Pick up order #" + idOrder + " successfully")
       let totalStore = this.ordersApprovalStore.orders.length;
       if(totalStore == 1) {
-        this.filter2.pageindex = this.filter2.pageindex - 1;
-        this.paginator.pageIndex = this.filter2.pageindex - 1;
+        this.filter.pageindex = this.filter.pageindex - 1;
+        this.paginator.pageIndex = this.filter.pageindex - 1;
       }
-      this.fetchDataApproval()
+      this.fetchData()
+      this.pickupEvent.emit();
     }, (error: HttpErrorResponse) => {
-      if(error.status == 400) {
+      if(error.status == 500) {
         this.toastr.error("Bad Request")
       }
-      else if (error.status == 404) {
+      else if (error.status == 505) {
         this.toastr.error("Not found order #" + idOrder)
       }
     })
   }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
+      width: '900px',
+      data: { 
+       idOrder:idOrder
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(res => {
+    
+    });
+    }
 
 
 }
