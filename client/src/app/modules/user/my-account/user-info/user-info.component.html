@@ -3,8 +3,7 @@
         <h3 class="fieldset-title">Profile</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                <img *ngIf="imageUrl == null" class="img-responsive" src="assets/img/profile-default.png" alt="">
-                <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
+                <img class="img-responsive" [src]="imageUrl">
                 <!-- <img *ngIf="loading" class="loading" src="assets/loading.gif"> -->
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
@@ -100,8 +99,7 @@
         <h3 class="fieldset-title">Profile</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                <img *ngIf="imageUrl == null" class="img-responsive" src="assets/img/profile-default.png" alt="">
-                <img *ngIf="imageUrl != null" class="img-responsive" [src]="imageUrl" alt="">
+                <img class="img-responsive" [src]="imageUrl" alt="">
             </figure>
             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                 <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">

@@ -8,7 +8,6 @@ import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confir
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
-import { StaffAddFormComponent } from '../staff-add-form/staff-add-form.component';
 import { StaffDetailFormComponent } from '../staff-detail-form/staff-detail-form.component';
 import { StaffFormComponent } from '../staff-form/staff-form.component';
 
@@ -188,9 +187,9 @@ export class StaffListComponent implements OnInit {
     });
   }
 
-  AddAccoutStaff() {
+  addAccoutStaff() {
     const dialogRef = this.dialog.open(StaffFormComponent, {
-      width: '800px',
+      width: '600px',
       data: { 
          account: { },
          staff: { }
@@ -217,7 +216,7 @@ export class StaffListComponent implements OnInit {
     });
   }
 
-  ViewDetailStaff(idStaff) {
+  viewDetailStaff(idStaff) {
     if(!this.staffStore.accstaff.find(p => p.id == idStaff)) {
       this.toastr.error("Cannot find the staff #" + idStaff)
     }
@@ -226,7 +225,7 @@ export class StaffListComponent implements OnInit {
       this.staffStore.getById(idStaff).subscribe(res => {
         if(res) {
           const dialogRef = this.dialog.open(StaffDetailFormComponent, {
-            width: '800px',
+            width: '600px',
             data: { 
               staff: res,
               account: res2
@@ -247,6 +246,7 @@ editStaff(idStaff) {
     this.staffStore.getById(idStaff).subscribe(res => {
       if(res) {
         this.getStaff= res;
+        
         this.accountsStore.getById(idStaff).subscribe(acc =>{
           if (res){
             this.account = acc;
@@ -255,18 +255,15 @@ editStaff(idStaff) {
           }
         })
         const dialogRef = this.dialog.open(StaffFormComponent, {
-          width: '800px',
+          width: '600px',
           data: { 
             typeform: 1, 
             staff: this.getStaff
           }
         });
         
-        dialogRef.afterClosed().subscribe(res => {
-          if(res) {
-            var index = this.accountsStore.accounts.findIndex(p => p.id == res.id)
-            this.accountsStore.accounts.splice(index, 1, res)
-          }
+        dialogRef.afterClosed().subscribe(() => {
+          this.fetchData()
         });
       }
     })

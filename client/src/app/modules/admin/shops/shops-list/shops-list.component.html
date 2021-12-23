@@ -1,22 +1,11 @@
 <div class="container">
     <form #formShopInfo="ngForm" (ngSubmit)="UpdateShopInfo(formShopInfo)" >
         <fieldset class="fieldset">
-            <h3 class="fieldset-title">Shop's Information</h3>
+            <h4 class="fieldset-title">MANGO CLOTHES</h4>
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Name <strong class="required">*</strong></label>
-                        <div class="col-md-10 col-sm-9 col-xs-12">
-                            <input type="text" name="name" #name="ngModel" matInput [(ngModel)]="shopinfo.name" class="form-control" required>
-                            <mat-error *ngIf="name?.touched && name?.invalid && name?.errors?.required">
-                                Name field is required
-                            </mat-error>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email <strong class="required">*</strong></label>
+                        <label class="col-md-10 col-sm-9 col-xs-12 control-label">Email <strong class="required">*</strong></label>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="email" #email="ngModel" matInput [(ngModel)]="shopinfo.email" class="form-control" required>
                             <mat-error *ngIf="email?.touched && email?.invalid && email?.errors?.required">
@@ -29,7 +18,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Establishment<strong class="required">*</strong></label>
+                        <label class="col-md-10 col-sm-9 col-xs-12 col-xs-12 control-label">Establishment<strong class="required">*</strong></label>
                             <div class="col-md-10 col-sm-9 col-xs-12 dob">
                                 <input class="form-control" [(ngModel)]="shopinfo.dateCreate" name="dateCreate" #datecreate="ngModel" matInput [matDatepicker]="dateCreate" [value]="shopinfo.dateCreate">
                                 <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateCreate"></mat-datepicker-toggle>

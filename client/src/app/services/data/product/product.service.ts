@@ -104,6 +104,12 @@ export class ProductService extends DataService {
     })
   }
 
+  deleteImageProduct(idImage) {
+    return this.http.get(GlobalConstants.apiUrl + this.routeAPI + "/DeleteImageProduct/" + idImage, {
+      headers: this.authorizationHeader()
+    })
+  }
+
   getImagesByIdProduct(id) {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetImagesByIdProduct/" + id, {
       headers: this.authorizationHeader()

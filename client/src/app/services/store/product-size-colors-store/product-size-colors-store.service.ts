@@ -29,8 +29,7 @@ export class ProductSizeColorsStoreService {
   }
 
   getItemsOfProductForClientPage(id) {
-    this.productService.getItemsOfProductForClientPage(id)
-      .subscribe(res => this.productitems = res)
+    return this.productService.getItemsOfProductForClientPage(id)
   }
 
   getItemPSC(psc) {

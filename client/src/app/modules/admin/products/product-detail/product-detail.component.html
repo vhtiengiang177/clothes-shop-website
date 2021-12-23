@@ -52,16 +52,6 @@
             </div>
         </div>
     </div>
-    
-    <div *ngIf="listImages?.length > 0" class="row image-list">
-        <div class="col-md-3 text-center" *ngFor="let image of listImages">
-            <!-- <img src="../../../../../assets/product.jpg"> -->
-            <img src="{{ image.url }}">
-            <div>
-                <button class="btn btn-sm btn-danger"><fa name="trash"></fa></button>
-            </div>
-        </div>
-    </div>
     <div class="row button-add">
         <button mat-button (click)="openImagesForm()" class="btn btn-secondary">Images</button>
         <button mat-button (click)="addItem()" class="btn btn-add">Add Item Product</button>

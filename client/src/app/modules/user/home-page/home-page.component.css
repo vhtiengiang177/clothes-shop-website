@@ -26,6 +26,7 @@
 
 .product-item {
     margin: 10px;
+	overflow: visible;
 }
 
 .primary-btn-custom {

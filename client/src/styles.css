@@ -19,7 +19,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 13px;
   }
    .btn-add:hover {
-    background-color: #b3ebff;
+    background-color: #b3ebff !important;
     color: #000;
     border: 1px solid #b3ebff;
   }
@@ -44,6 +44,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .pwd{
 	position: relative;
+}
+
+.image-product {
+	object-fit: contain;
+	width: 250px !important;
+	height: 300px !important;
+	max-width: 250px !important;
+	height: 300px !important;
 }
 
 html, body { height: 100%; }

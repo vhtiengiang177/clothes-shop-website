@@ -52,8 +52,8 @@
                     <div class="carousel-cell product-item" *ngFor="let product of productTopNew">
                         <div>
                             <div class="pi-pic">
-                                <img class="image" [routerLink]="['/product-detail', product.id]"
-                                    src="assets/product.jpg" alt="">
+                                <img class="image image-product" [routerLink]="['/product-detail', product.id]"
+                                [src]="product.imageUrl">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
                                 </ul>
@@ -128,8 +128,7 @@
                         <div class="carousel-cell product-item" *ngFor="let product of productTopBestSellers">
                             <div>
                                 <div class="pi-pic">
-                                    <img class="image" [routerLink]="['/product-detail', product.id]"
-                                        src="assets/product.jpg" alt="">
+                                    <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
                                     </ul>

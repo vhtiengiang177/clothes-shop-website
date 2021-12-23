@@ -88,14 +88,28 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                if (_unitOfWork.AccountsRepository.IsExistEmail(createAccountParams.Account.Email))
                 {
-                    _unitOfWork.AccountsRepository.CreateAccount(createAccountParams.Account, createAccountParams.Customer, createAccountParams.Staff);
-                    return Ok();
+                    return BadRequest("Email already exist!");
                 }
-                catch 
+                else
                 {
-                    return BadRequest(ModelState);
+                    Random generator = new Random();
+                    int verificationCode = generator.Next(100000, 1000000);
+
+                    Account account = new Account();
+                    account.Email = createAccountParams.Account.Email;
+                    account.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
+                    account.IdTypeAccount = 4;
+                    account.VerificationCode = verificationCode;
+
+
+                    _unitOfWork.AccountsRepository.CreateAccount(account, null, createAccountParams.Staff);
+                    if (_unitOfWork.Save() == false)
+                    {
+                        return BadRequest("Failed.");
+                    }
+                    return Ok();
                 }
             }
             else return BadRequest(ModelState);
@@ -191,7 +205,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                     Account account = new Account();
                     account.Email = customerAccountParams.Email;
-                    account.Password = customerAccountParams.Password;
+                    account.Password = _accountsService.MD5Hash(customerAccountParams.Password);
                     account.IdTypeAccount = 4;
                     account.VerificationCode = verificationCode;
 
@@ -332,6 +346,31 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest("Something went wrong!");
         }
 
+        [HttpPost("AdminEditImageAccount")]
+        public async Task<IActionResult> AdminEditImageAccount(IFormFile file, [FromQuery] int userId)
+        {
+            var user = _unitOfWork.StaffRepository.GetStaffByID(userId);
+
+            var result = await _imageService.AddImageAsync(file);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            if (!string.IsNullOrEmpty(user.PublicId))
+            {
+                var resultDelete = await _imageService.DeleteImageAsync(user.PublicId);
+                if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
+            }
+
+            user.Image = result.SecureUrl.AbsoluteUri;
+            user.PublicId = result.PublicId;
+
+            _unitOfWork.StaffRepository.UpdateStaff(user);
+
+            if (_unitOfWork.Save())
+                return Ok(user.Image);
+
+            return BadRequest("Something went wrong!");
+        }
+
         [HttpPost("ChangePassword")]
         public IActionResult ChangePassword([FromBody] ParamsPassword paramsPassword)
         {
@@ -340,9 +379,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
             var account = _unitOfWork.AccountsRepository.GetAccountByID(int.Parse(userId));
 
-            if (account.Password != paramsPassword.OldPassword)
+            if (account.Password != _accountsService.MD5Hash(paramsPassword.OldPassword))
                 return BadRequest("Incorrect Old Password");
-            account.Password = paramsPassword.NewPassword;
+            account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
 
             _unitOfWork.AccountsRepository.UpdateAccount(account);
             _unitOfWork.Save();

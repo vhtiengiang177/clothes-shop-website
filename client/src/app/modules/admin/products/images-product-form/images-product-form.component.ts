@@ -28,7 +28,11 @@ export class ImagesProductFormComponent implements OnInit {
 
   getImages() {
     this.productsStore.getImagesByIdProduct(this.idProduct).subscribe(res => {
-      this.listImages.next(res)
+      if (res) {
+        this.listImages.next(res)
+        console.log(res);
+        
+      }
     })
   }
 
@@ -52,11 +56,14 @@ export class ImagesProductFormComponent implements OnInit {
     var reader  = new FileReader()
     reader.onload = (event: Event) => {
       var image: Image = {
-        url: reader.result.toString()
+        id: 0,
+        url: reader.result.toString(),
+        name: fileToUpload.name
       }
       this.listImages.next(this.listImages.getValue().concat(image))
     }
     reader.readAsDataURL(fileToUpload);
+    
   }
 
   save() {
@@ -66,9 +73,26 @@ export class ImagesProductFormComponent implements OnInit {
       formData.set('file', file, file.name);
       this.productsStore.addImageProduct(this.idProduct, formData).toPromise()
       this.loading = false
-      this.toastr.success("Upload successfully")
-      this.dialogRef.close()
     });
+    
+    this.toastr.success("Upload successfully")
   }
 
+  deleteImage(index) {
+    var item = this.listImages.getValue()[index]
+    console.log("file to upload array");
+    console.log(this.fileToUploadUpdate);
+    
+    
+    if (item.id != 0) {
+      this.productsStore.deleteImageProduct(item.id).toPromise()
+    }
+    else {
+      console.log(item.name);
+      this.fileToUploadUpdate = this.fileToUploadUpdate.filter(file => file.name !== item.name)
+    }
+    
+    console.log(this.fileToUploadUpdate);
+    this.listImages.getValue().splice(index, 1)
+  }
 }

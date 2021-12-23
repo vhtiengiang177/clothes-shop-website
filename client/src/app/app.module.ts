@@ -40,7 +40,6 @@ import { FooterComponent } from './modules/admin/layout/footer/footer.component'
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
 import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
-import { StaffAddFormComponent } from './modules/admin/staff/staff-add-form/staff-add-form.component';
 import { OrdersProcessListComponent } from './modules/admin/orders/orders-process-list/orders-process-list.component';
 import { OrdersApprovalListComponent } from './modules/admin/orders/orders-approval-list/orders-approval-list.component';
 import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-delivery-list/orders-delivery-list.component';
@@ -105,7 +104,6 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     StaffFormComponent,
     PromotionFormComponent,
     StaffFormComponent,
-    StaffAddFormComponent,
     OrdersProcessListComponent,
     OrdersApprovalListComponent,
     OrdersDeliveryListComponent,
@@ -144,7 +142,6 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     PromotionFormComponent,
     StaffFormComponent,
     ProductAddCartFormComponent,
-    StaffAddFormComponent,
     StaffDetailFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,

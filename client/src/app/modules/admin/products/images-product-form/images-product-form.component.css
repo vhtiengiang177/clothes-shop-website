@@ -1,10 +1,20 @@
-.image-list {
-    margin-top: 10px;
-    padding: 5px;
-    display: inline;
-  }
 
 .size-image {
-    max-width: 100px;
-    width: 100px;
+    max-width: 150px;
+    object-fit: contain;
+    width: 150px;
+}
+
+.btn-delete {
+  position: absolute;
+   cursor: pointer;
+   right: 2px;
+   top: 2px;
+}
+
+.image-product-log {
+  width: 160px;
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
 }

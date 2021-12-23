@@ -44,6 +44,7 @@ export class ProductAddCartFormComponent implements OnInit {
   cart: Cart = {}
   isOpenByCart: boolean = false
   outOfStock = false
+  imageMain: string = ""
 
   constructor(public dialogRef: MatDialogRef<ProductAddCartFormComponent>,private route: ActivatedRoute,
     private router: Router,
@@ -62,11 +63,11 @@ export class ProductAddCartFormComponent implements OnInit {
         this.oldSelected.idProduct = this.product.id
         this.fetchItem()
         this.getImages(this.product.id)
-        this.productSizeColorsStore.productitems$.subscribe(res => {
-          if (res) {
-            this.getNameSizeColor()
-          }
-        })
+        // this.productSizeColorsStore.productitems$.subscribe(res => {
+        //   if (res) {
+            
+        //   }
+        // })
         this.isVisible = true
       }, (error: HttpErrorResponse) => {
         this.toastr.error("Something went wrong!")
@@ -92,7 +93,12 @@ export class ProductAddCartFormComponent implements OnInit {
   }
 
   fetchItem() {
-    this.productSizeColorsStore.getItemsOfProductForClientPage(this.product.id)
+    this.productSizeColorsStore.getItemsOfProductForClientPage(this.product.id).subscribe(res => {
+      this.productSizeColorsStore.productitems = res
+      if (this.productSizeColorsStore.productitems) {
+        this.getNameSizeColor()
+      }
+    })
   }
 
   getNameSizeColor() {
@@ -124,6 +130,9 @@ export class ProductAddCartFormComponent implements OnInit {
   getImages(id) {
     this.productsStore.getImagesByIdProduct(id).subscribe(res => {
       this.listImages = res
+      if (this.listImages.length > 0) {
+        this.imageMain = this.listImages[0].url
+      }
     })
   }
 
@@ -261,5 +270,9 @@ export class ProductAddCartFormComponent implements OnInit {
         this.toastr.warning("Please select a color and a size of the product")
       } 
     }
+  }
+
+  clickImage(image) {
+    this.imageMain = image.url
   }
 }

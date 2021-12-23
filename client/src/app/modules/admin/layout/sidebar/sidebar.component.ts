@@ -37,9 +37,21 @@ export class SidebarComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentRouter = event.url;
-        // if (this.currentRouter == "/admin/products")
-        //   this.clickProductsList()
-        // else this.clickDashboard()
+        if (this.currentRouter.startsWith("/admin/products"))
+          this.clickProductsList()
+        else if (this.currentRouter.startsWith("/admin/categories"))
+          this.clickCategoriesList()
+        else if (this.currentRouter.startsWith("/admin/customers"))
+          this.clickCustomersList()
+        else if (this.currentRouter.startsWith("/admin/staffs"))
+          this.clickStaffList()
+        else if (this.currentRouter.startsWith("/admin/orders"))
+          this.clickOrdersList()
+        else if (this.currentRouter.startsWith("/admin/promotions"))
+          this.clickPromotionsList()
+        else if (this.currentRouter.startsWith("/admin/shops"))
+          this.clickShops()
+        else this.clickDashboard()
       }
     });
   }
@@ -153,117 +165,117 @@ export class SidebarComponent implements OnInit {
     this.isAccountShow = false
   }
 
-  clickOrdersProcessList()
-  {
-    this.isOrderShow = true;
-    this.isOrdersProcessActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrdersProcessList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrdersProcessActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrderApprovalActive = false
-    this.isOrdersDeliveryActive = false    
-    this.isOrdersCompletedActive = false
-    this.isOrdersCancelledActive = false
-    this.isOrdersReturnActive = false
-  }
+  //   this.isOrderApprovalActive = false
+  //   this.isOrdersDeliveryActive = false    
+  //   this.isOrdersCompletedActive = false
+  //   this.isOrdersCancelledActive = false
+  //   this.isOrdersReturnActive = false
+  // }
 
-  clickOrdersNavItem() {
-    this.isOrderShow = !this.isOrderShow
-  }
+  // clickOrdersNavItem() {
+  //   this.isOrderShow = !this.isOrderShow
+  // }
 
-  clickOrderApprovalList()
-  {
-    this.isOrderShow = true;
-    this.isOrderApprovalActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrderApprovalList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrderApprovalActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrdersProcessActive = false
-    this.isOrdersDeliveryActive = false    
-    this.isOrdersCompletedActive = false
-    this.isOrdersCancelledActive = false
-    this.isOrdersReturnActive = false
-  }
+  //   this.isOrdersProcessActive = false
+  //   this.isOrdersDeliveryActive = false    
+  //   this.isOrdersCompletedActive = false
+  //   this.isOrdersCancelledActive = false
+  //   this.isOrdersReturnActive = false
+  // }
 
-  clickOrdersDeliveryList()
-  {
-    this.isOrderShow = true;
-    this.isOrdersDeliveryActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrdersDeliveryList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrdersDeliveryActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrdersProcessActive = false
-    this.isOrderApprovalActive = false    
-    this.isOrdersCompletedActive = false
-    this.isOrdersCancelledActive = false
-    this.isOrdersReturnActive = false
-  }
+  //   this.isOrdersProcessActive = false
+  //   this.isOrderApprovalActive = false    
+  //   this.isOrdersCompletedActive = false
+  //   this.isOrdersCancelledActive = false
+  //   this.isOrdersReturnActive = false
+  // }
 
-  clickOrdersCompletedList()
-  {
-    this.isOrderShow = true;
-    this.isOrdersCompletedActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrdersCompletedList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrdersCompletedActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrdersProcessActive = false
-    this.isOrderApprovalActive = false    
-    this.isOrdersDeliveryActive = false
-    this.isOrdersCancelledActive = false
-    this.isOrdersReturnActive = false
-  }
+  //   this.isOrdersProcessActive = false
+  //   this.isOrderApprovalActive = false    
+  //   this.isOrdersDeliveryActive = false
+  //   this.isOrdersCancelledActive = false
+  //   this.isOrdersReturnActive = false
+  // }
 
-  clickOrdersCancelledList()
-  {
-    this.isOrderShow = true;
-    this.isOrdersCancelledActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrdersCancelledList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrdersCancelledActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrdersProcessActive = false
-    this.isOrderApprovalActive = false    
-    this.isOrdersDeliveryActive = false
-    this.isOrdersCompletedActive = false
-    this.isOrdersReturnActive = false
-  }
+  //   this.isOrdersProcessActive = false
+  //   this.isOrderApprovalActive = false    
+  //   this.isOrdersDeliveryActive = false
+  //   this.isOrdersCompletedActive = false
+  //   this.isOrdersReturnActive = false
+  // }
 
-  clickOrdersReturnList()
-  {
-    this.isOrderShow = true;
-    this.isOrdersReturnActive = true;
-    //false
-    this.isDashboardActive = false
-    this.isProductsListActive = false    
-    this.isCategoriesListActive = false
-    this.isCustomerListActive = false
-    this.isStaffListActive = false
+  // clickOrdersReturnList()
+  // {
+  //   this.isOrderShow = true;
+  //   this.isOrdersReturnActive = true;
+  //   //false
+  //   this.isDashboardActive = false
+  //   this.isProductsListActive = false    
+  //   this.isCategoriesListActive = false
+  //   this.isCustomerListActive = false
+  //   this.isStaffListActive = false
 
-    this.isOrdersProcessActive = false
-    this.isOrderApprovalActive = false    
-    this.isOrdersDeliveryActive = false
-    this.isOrdersCancelledActive = false
-    this.isOrdersCompletedActive = false
-  }
+  //   this.isOrdersProcessActive = false
+  //   this.isOrderApprovalActive = false    
+  //   this.isOrdersDeliveryActive = false
+  //   this.isOrdersCancelledActive = false
+  //   this.isOrdersCompletedActive = false
+  // }
 
   clickShops(){
     this.isShopsActive = true

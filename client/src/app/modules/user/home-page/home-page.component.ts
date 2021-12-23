@@ -33,19 +33,31 @@ export class HomePageComponent implements OnInit {
     private cartStore: CartsStoreService) { 
       this.cartStore.get()
       this.productsStore.getTopBestSellers().subscribe(p => {
-      this.productTopBestSellers = p
-      this.productTopBestSellers.forEach(pc => {
-        var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
-        if(categories.length == 1) {
-          pc.category = categories[0].name
-        }
-      });
+        this.productTopBestSellers = p
+        this.productTopBestSellers.forEach(pc => {
+          var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
+          pc.imageUrl = "assets/product.jpg"
+          this.productsStore.getImagesByIdProduct(pc.id).subscribe(res => {
+            if (res) {
+              pc.imageUrl = res[0].url
+            }
+          })
+          if(categories.length == 1) {
+            pc.category = categories[0].name
+          }
+        });
     })
 
     this.productsStore.getTopNewProducts().subscribe(p => {
       this.productTopNew = p
       this.productTopNew.forEach(pc => {
         var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
+        pc.imageUrl = "assets/product.jpg"
+        this.productsStore.getImagesByIdProduct(pc.id).subscribe(res => {
+          if (res) {
+            pc.imageUrl = res[0].url
+          }
+        })
         if(categories.length == 1) {
           pc.category = categories[0].name
         }

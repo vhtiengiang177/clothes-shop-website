@@ -19,3 +19,7 @@
 .badge-out {
     padding-bottom: 10px;
 }
+
+.image-carousel {
+    max-width: 200px !important;
+}

@@ -1,16 +1,18 @@
 <h2 mat-dialog-title>Product Images</h2>
 <mat-dialog-content class="mat-typography">
-    <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+    <div class="text-center">
         <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;" multiple>
-        <button matTooltip="Allowed file extensions: .jpg, .png" matTooltipPosition="below" type="button" (click)="file.click()" class="btn-small primary-btn">Choose Image</button>
+        <button matTooltip="Allowed file extensions: .jpg, .png" matTooltipPosition="below" type="button" (click)="file.click()" class="btn-small btn-add">Choose Image</button>
         &nbsp; &nbsp;
         <span class="required">&nbsp; &nbsp;{{ messageErrorImage }}</span>
     </div>
-    <div class="row image-list">
-        <div class="col-md-3 text-center" *ngFor="let image of listImages | async">
-            <img class="size-image" src="{{ image.url }}">
-            <div>
-                <button class="btn btn-sm btn-danger"><fa name="trash"></fa></button>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="text-center" *ngFor="let image of listImages | async; index as i">
+            <div class="image-product-log">
+                <img class="size-image" src="{{ image.url }}">
+                <button class="btn btn-sm btn-danger btn-delete" (click)="deleteImage(i)"><fa name="trash"></fa></button>
             </div>
         </div>
     </div>
@@ -18,5 +20,5 @@
 <mat-dialog-actions align="end">
     <img *ngIf="loading" class="loading" src="assets/loading.gif">
     <button mat-button mat-dialog-close class="btn btn-cancel">Cancel</button> &nbsp;
-    <button mat-button (click)="save()" cdkFocusInitial class="btn btn-save">Save</button>
+    <button mat-button (click)="save()" cdkFocusInitial class="btn btn-add">Save</button>
 </mat-dialog-actions>

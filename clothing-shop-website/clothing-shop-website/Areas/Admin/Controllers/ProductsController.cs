@@ -437,6 +437,25 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return Ok(lImages);
         }
 
-        
+        [HttpGet("DeleteImageProduct/{idImage}")]
+        public async Task<IActionResult> DeleteImageProduct(int idImage)
+        {
+
+            var image = _unitOfWork.ImagesRepository.GetByID(idImage);
+
+            if (image.PublicId != null)
+            {
+                var result = await _imageService.DeleteImageAsync(image.PublicId);
+
+                if (result.Error != null) return BadRequest(result.Error.Message);
+            }
+            
+            _unitOfWork.ImagesRepository.Delete(image);
+            if (_unitOfWork.Save())
+            {
+                return Ok();
+            }
+            else return BadRequest("Failed to delete image");
+        }
     }
 }

@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-1">
                 <button name="btn btn-secondary" type="button" class="btn btn-reset" (click)="reloadProduct()">
                     <fa name="refresh"></fa>
                 </button>
@@ -89,7 +89,7 @@
                         <div class="col-lg-4 col-sm-6" *ngFor="let product of productsStore.products$ | async">
                             <div  class="product-item">
                                 <div class="pi-pic">
-                                    <img class="image" [routerLink]="['/product-detail', product.id]" src="assets/product.jpg">
+                                    <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
                                     </ul>
