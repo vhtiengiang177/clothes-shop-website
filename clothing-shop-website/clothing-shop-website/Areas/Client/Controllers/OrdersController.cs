@@ -180,7 +180,7 @@ namespace clothing_shop_website.Areas.Client
                 var order = _unitOfWork.OrdersRepository.GetOrderByID(id);
                 IQueryable<OrderDetail> lOrderItems;
 
-                lOrderItems =_unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
+               //lOrderItems =_unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
 
                 if (order == null)
                     return NotFound();
@@ -204,12 +204,12 @@ namespace clothing_shop_website.Areas.Client
                 }
                 if (state == 6 || state == 7)
                 {
-                    foreach (var item in lOrderItems)
-                    {
-                        var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
-                        ProductItem.Stock -= item.Quantity;
-                        _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
-                    }
+                    //foreach (var item in lOrderItems)
+                    //{
+                    //    var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
+                    //    ProductItem.Stock -= item.Quantity;
+                    //    _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
+                    //}
                     order.DateCancel = DateTime.Now;
                 }
 
