@@ -35,7 +35,7 @@ export class OrdersDeliveryListComponent implements OnInit {
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
       this.staffStore.staff$.subscribe(res => {
-        if(res.length == 0) {
+        if(res.length < this.staffStore.totalData) {
           this.staffStore.getAllStaff()
         }
         else {

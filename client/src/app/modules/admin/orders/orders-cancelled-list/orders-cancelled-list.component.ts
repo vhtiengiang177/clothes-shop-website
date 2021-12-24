@@ -40,7 +40,7 @@ export class OrdersCancelledListComponent implements OnInit {
     private accountStore: AccountsStoreService,
     private toastr: ToastrService) { 
       this.staffStore.staff$.subscribe(res => {
-        if(res.length == 0) {
+        if(res.length < this.staffStore.totalData) {
           this.staffStore.getAllStaff()
         }
         else {
@@ -179,8 +179,9 @@ export class OrdersCancelledListComponent implements OnInit {
             
           }
         })
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
+        if (item.idStaff != null) {
+          item.staff = item.idStaff + " - " + this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName  
+        }
     }) 
   }
 

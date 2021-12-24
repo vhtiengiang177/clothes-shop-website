@@ -71,7 +71,7 @@
             <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.dateCancel |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.cancelByName }}</a></td>
-            <td>{{ order.idStaff }}-{{ order.staff }}</td>
+            <td>{{ order.staff }}</td>
             <td (click)="viewDetailOrder(order.id)" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
           </tr>
         </tbody>
