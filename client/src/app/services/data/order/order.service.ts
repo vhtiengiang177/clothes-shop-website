@@ -51,6 +51,11 @@ export class OrderService extends DataService{
     })
   }
 
+  getAllOrderByState(state) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrdersByStateUser/" + state, {
+      headers: this.authorizationHeader()
+    })
+  }
   getAllOrderDetailByOrder(id) {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrderDetailByOrder/" + id, {
       headers: this.authorizationHeader()

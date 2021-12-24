@@ -55,6 +55,18 @@ export class OrdersApprovalStoreService {
         });
   }
 
+  async getAllOrderByState(state) {
+    await this.orderService.getAllOrderByState(state)
+      .subscribe(res => {
+        this.orders = res.data;
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+  }
+
   updateState(id,state) {
     return this.orderService.updateState(id,state)
   }

@@ -1,0 +1,48 @@
+
+<div class="container">
+    <div class="row" *ngIf="ordersApprovalStore.orders.length > 0" class="shopping-cart spad">
+        <div class="col-lg-12">
+            <div class="cart-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="p-name">Orders</th>
+                            <th>Date Order</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of ordersApprovalStore.orders$ | async; index as i">
+                            <td>{{ i+1 }}</td>
+                            <td >
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5 class="name-item">#{{ item.id }} &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" class="btn btn-success"disabled>Approval</button></h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 stock">
+                                        <!-- <span *ngIf="item.stock !== 0"> </span>
+                                        <h5 class="badge-out" *ngIf="item.stock === 0"><span class="badge badge-warning">Out of stock</span></h5> -->
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td > {{ item.dateOrder |  date: 'dd/MM/yyyy'}}</td>
+                            <td >{{ item.totalQuantity }}</td>
+
+                            <td class="total-price first-row">{{ item.totalAmount | currency: 'VND'}}</td>
+                            <td class="close-td first-row"><button type="button" class="btn btn-primary" > Detail</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="center" *ngIf="ordersApprovalStore.orders.length == 0">
+        <img src="../../../../assets/order-history-empty.png">
+    </div>
+</div>
