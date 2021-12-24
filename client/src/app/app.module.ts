@@ -66,6 +66,15 @@ import { ImagesProductFormComponent } from './modules/admin/products/images-prod
 import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
 import { NgChartsModule, ThemeService } from 'ng2-charts';
+import { ChartTopProductComponent } from './modules/admin/charts/chart-top-product/chart-top-product.component';
+import { OrdersHistoryPageComponent } from './modules/user/orders-history-page/orders-history-page.component';
+import { OrdersApprovalComponent } from './modules/user/orders-history/orders-approval/orders-approval.component';
+import { OrdersPickupComponent } from './modules/user/orders-history/orders-pickup/orders-pickup.component';
+import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
+import { OrdersCompletedComponent } from './modules/user/orders-history/orders-completed/orders-completed.component';
+import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
+import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
+import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
 
 
 @NgModule({
@@ -130,7 +139,16 @@ import { NgChartsModule, ThemeService } from 'ng2-charts';
     PromotionPageComponent,
     ImagesProductFormComponent,
     OrdersDetailFormComponent,
-    OrdersPickupListComponent
+    OrdersPickupListComponent,
+    ChartTopProductComponent,
+    OrdersHistoryPageComponent,
+    OrdersApprovalComponent,
+    OrdersPickupComponent,
+    OrdersDeliveryComponent,
+    OrdersCompletedComponent,
+    OrdersCancelledComponent,
+    OrdersReturnComponent,
+    OrdersProcessComponent
    
   ],
   entryComponents: [
@@ -146,6 +164,7 @@ import { NgChartsModule, ThemeService } from 'ng2-charts';
     DeliveryAddressFormComponent,
     ImagesProductFormComponent,
     OrdersDetailFormComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -162,6 +181,7 @@ import { NgChartsModule, ThemeService } from 'ng2-charts';
     NgChartsModule
   ],
   exports: [
+
  ],
   providers: [
     AuthService,
@@ -169,4 +189,5 @@ import { NgChartsModule, ThemeService } from 'ng2-charts';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

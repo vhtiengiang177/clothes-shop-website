@@ -74,6 +74,11 @@
                             <fa class="mr-2 text-gray-400" name="sitemap" size="sm"></fa>
                             Admin
                         </button>
+                        <button *ngIf="authService.getCurrentUser().idTypeAccount == 4" class="dropdown-item" [routerLink]="['/my-orders-history']">
+                            <fa class="mr-2 text-gray-400" name="cart-arrow-down" size="sm"></fa>
+                            Orders History
+                        </button>
+
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" (click)="logout()">
                             <fa class="mr-2 text-gray-400" name="sign-out" size="sm"></fa>

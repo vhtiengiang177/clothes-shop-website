@@ -34,6 +34,14 @@ import { ShopsListComponent } from './modules/admin/shops/shops-list/shops-list.
 import { DeliveryAddressComponent } from './modules/user/my-account/delivery-address/delivery-address.component';
 import { ChangePasswordComponent } from './modules/user/my-account/change-password/change-password.component';
 import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
+import { OrdersHistoryPageComponent } from './modules/user/orders-history-page/orders-history-page.component';
+import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
+import { OrdersApprovalComponent } from './modules/user/orders-history/orders-approval/orders-approval.component';
+import { OrdersCompletedComponent } from './modules/user/orders-history/orders-completed/orders-completed.component';
+import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
+import { OrdersPickupComponent } from './modules/user/orders-history/orders-pickup/orders-pickup.component';
+import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
+import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
 
 
 const routes: Routes = [
@@ -184,6 +192,49 @@ const routes: Routes = [
         component: ChangePasswordComponent,
         canActivate: [AuthGuard]
       }
+    ]
+  },
+  {
+    path: 'my-orders-history',
+    component: OrdersHistoryPageComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: OrdersProcessComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-approval',
+        component: OrdersApprovalComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-pickup',
+        component: OrdersPickupComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-delivery',
+        component: OrdersDeliveryComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-completed',
+        component: OrdersCompletedComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-cancelled',
+        component: OrdersCancelledComponent,
+        canActivate: [AuthGuard]
+      }, 
+      {
+        path: 'orders-return',
+        component: OrdersReturnComponent,
+        canActivate: [AuthGuard]
+      }, 
+      
     ]
   }
 ];
