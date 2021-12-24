@@ -54,4 +54,11 @@ export class OrdersCompletedStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
+
+  async getAllOrdersByCustomerAndState(state) {
+    await this.orderService.getAllOrdersByCustomerAndState(state)
+      .subscribe(res => {
+        this.orders = res.data;
+      })
+  }
 }

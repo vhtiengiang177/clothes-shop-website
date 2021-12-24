@@ -37,7 +37,7 @@
                                     <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
                                 </li>
                                 <li class="total-price">SUBTOTAL<span>{{ subTotalPrice | currency: 'VND'}}</span></li>
-                                <li class="total-price">DISCOUNT<span>{{ discount | currency: 'VND'}}</span></li>
+                                <li class="total-price">DISCOUNT<span>- {{ discount | currency: 'VND'}}</span></li>
                                 <li class="total-price">TOTAL<span>{{ totalPrice | currency: 'VND'}}</span></li>
                             </ul>
                             <div>Promotion:</div>

@@ -37,9 +37,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             var user = await _unitOfWork.AccountsRepository.Login(account.Email,_accountService.MD5Hash(account.Password));
             string firstNameUser = "";
-            if (user != null)
+            if (user != null && user.State == 1)
             {
-                if (user.IdTypeAccount == 4 && user.State == 1) // Customer
+                if (user.IdTypeAccount == 4) // Customer
                 {
                     var customer = _unitOfWork.CustomersRepository.GetCustomerByID(user.Id);
                     firstNameUser = customer.FirstName;

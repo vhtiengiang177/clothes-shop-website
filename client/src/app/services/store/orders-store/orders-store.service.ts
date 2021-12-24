@@ -25,4 +25,16 @@ export class OrdersStoreService {
   create(orderDetail, idAddress, idPromotion) {
     return this.orderService.createOrder(orderDetail, idAddress, idPromotion)
   }
+
+  getEarningInDay() {
+    return this.orderService.getEarningInDay()
+  }
+
+  getTotalBuyProductsInDay() {
+    return this.orderService.getTotalBuyProductsInDay()
+  }
+
+  getProcessOrder() {
+    return this.orderService.getProcessOrder()
+  }
 }

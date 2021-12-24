@@ -1,6 +1,7 @@
 ﻿using Domain.Entity;
 using Domain.Infrastructure.Persistent.Repository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,6 +93,44 @@ namespace Infrastructure.Persistent.Repository
             _dbContext.Remove(Order);
         }
 
-       
+       public double GetEarningInDay()
+        {
+            double totalEarning = 0;
+            var listOrder = _dbContext.Orders.Where(item => item.State == 5 && item.DateShip != null).ToList();
+
+            foreach (var order in listOrder)
+            {
+                var dateship = order.DateShip.HasValue ? order.DateShip?.ToShortDateString() : "";
+                if (dateship != "" && dateship == DateTime.Now.ToShortDateString())
+                {
+                    totalEarning += order.TotalAmount;
+                }
+            }
+
+            return totalEarning;
+        }
+
+        public int GetTotalBuyProductsInDay()
+        {
+            int totalBuy = 0;
+            var listOrder = _dbContext.Orders.Where(item => item.State == 5 && item.DateShip == DateTime.Now).ToList();
+
+            foreach (var order in listOrder)
+            {
+                totalBuy += order.TotalQuantity;
+            }
+
+            return totalBuy;
+        }
+
+        public int GetProcessOrder()
+        {
+            int task = 0;
+            var listOrder = _dbContext.Orders.Where(item => item.State == 1).ToList();
+
+            task = listOrder.Count();
+
+            return task;
+        }
     }
 }

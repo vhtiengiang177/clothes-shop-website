@@ -25,6 +25,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "angular-font-awesome": "^3.1.2",
     "angular-responsive-carousel": "^2.1.2",
+    "angularx-social-login": "^2.3.1",
     "bootstrap": "^4.4.1",
     "chart.js": "^3.7.0",
     "chartjs-plugin-datalabels": "^2.0.0",

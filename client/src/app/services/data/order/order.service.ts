@@ -77,4 +77,22 @@ export class OrderService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getEarningInDay() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetEarningInDay", {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getTotalBuyProductsInDay() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetTotalBuyProductsInDay", {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getProcessOrder() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetProcessOrder", {
+      headers: this.authorizationHeader()
+    })
+  }
 }

@@ -49,10 +49,9 @@ export class OrdersDetailFormComponent implements OnInit {
   static readonly importForm = 1;
   static readonly deleteForm = 2;
 
-    constructor(public dialogRef: MatDialogRef<OrdersDetailFormComponent>,public dialog: MatDialog,
+    constructor(public dialogRef: MatDialogRef<OrdersDetailFormComponent>,
+    public dialog: MatDialog,
      @Inject(MAT_DIALOG_DATA) public data: OrderDetailForm,
-    private route: ActivatedRoute,
-    private router: Router,
     private productsStore: ProductsStoreService,
     private promotionsStore: PromotionsStoreService,
     private deliveryStore: DeliveryStoreService,
@@ -64,14 +63,13 @@ export class OrdersDetailFormComponent implements OnInit {
     private staffStore: StaffStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private deliveryAddressService: DeliveryAddressService,
-    private addressAPI: AddressApiService,
-    private toastr: ToastrService) { 
+    private addressAPI: AddressApiService) { 
     
         this.id = data.idOrder;
         this.orderStore.getById(data.idOrder).subscribe(res => {
           this.isVisible = true;
           this.order = res;
-         
+          
           this.fetchOrder()
           
           this.orderDetailStore.orderdetails$.subscribe(res => {
@@ -90,49 +88,34 @@ export class OrdersDetailFormComponent implements OnInit {
             }
           })
 
-          this.deliveryStore.deliveryaddress$.subscribe(res => {
-            if(res) {
-              this.deliveryStore.getById(this.order.idAddress).subscribe(address => {
-                if (address) {
-                  this.addressAPI.getWard(address.districtId).subscribe(res => {
-                    this.ward = res.data.find(obj => obj.WardCode === address.wardCode).WardName
-                    this.addressAPI.getDistrict(address.provinceId).subscribe(res => {
-                      this.district = res.data.find(obj => obj.DistrictID === address.districtId).DistrictName
-                      this.addressAPI.getProvince().subscribe(res => {
-                        this.province = res.data.find(obj => obj.ProvinceID === address.provinceId).ProvinceName
-                        this.address =  address.address + ", " + this.ward + ", " + this.district + ", " + this.province + "."
-                      })
-                    })
+          this.deliveryStore.getById(this.order.idAddress).subscribe(address => {
+            if (address) {
+              this.addressAPI.getWard(address.districtId).subscribe(res => {
+                this.ward = res.data.find(obj => obj.WardCode === address.wardCode).WardName
+                this.addressAPI.getDistrict(address.provinceId).subscribe(res => {
+                  this.district = res.data.find(obj => obj.DistrictID === address.districtId).DistrictName
+                  this.addressAPI.getProvince().subscribe(res => {
+                    this.province = res.data.find(obj => obj.ProvinceID === address.provinceId).ProvinceName
+                    this.address =  address.address + ", " + this.ward + ", " + this.district + ", " + this.province + "."
                   })
-                }
+                })
               })
             }
           })
 
-          this.promotionsStore.promotions$.subscribe(res => {
-            if(res) {
-              this.promotionsStore.getById(this.order.idPromotion).subscribe(promotion => {
-                if (promotion) {
-                  this.promotion = promotion.name + " - " + (promotion.value * 100) + " % "
-                }
-              })
-            }
-          })
-
-          this.staffStore.staff$.subscribe(res => {
-            if(res.length == 0) {
-              this.staffStore.getAllStaff()
-            }
-            else {
-              this.getNameStaff(this.order.idShipper,this.order.idStaff)
-            }
-          })
-
-
-        }, (error: HttpErrorResponse) => {
-          if(error.status == 404) {
-            this.router.navigate(['admin/not-found'])
+          if (this.order.idPromotion != null) {
+            this.promotionsStore.promotions$.subscribe(res => {
+              if(res) {
+                this.promotionsStore.getById(this.order.idPromotion).subscribe(promotion => {
+                  if (promotion) {
+                    this.promotion = promotion.name + " - " + (promotion.value * 100) + " % "
+                  }
+                })
+              }
+            })
           }
+
+          this.getNameStaff(this.order.idShipper, this.order.idStaff)
         })
     }
     
@@ -140,10 +123,8 @@ export class OrdersDetailFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  
   fetchOrder() {
     this.orderDetailStore.get(this.id)
-    this.deliveryStore.getAllDeliveryAddress()
   }
 
   getNameEntity() {
@@ -170,16 +151,17 @@ export class OrdersDetailFormComponent implements OnInit {
     })
   }
 
-  getNameStaff(idShipper,idEmployee) {
-    var shipper = this.staffStore.staff.filter(x => x.idAccount ==  idShipper)[0]
-    this.shipper = shipper.idAccount + " - " + shipper.firstName + " " + shipper.lastName
+  getNameStaff(idShipper, idEmployee) {
+    if (idShipper != null) {
+      this.staffStore.getById(idShipper).subscribe(res => {
+        this.shipper = res.idAccount + " - " + res.lastName + " " + res.firstName
+      })
+    }
 
-    var employee = this.staffStore.staff.filter(x => x.idAccount ==  idEmployee)[0]
-    this.employee = employee.idAccount + " - " + employee.firstName + " " + employee.lastName
+    if (idEmployee != null) {
+      this.staffStore.getById(idEmployee).subscribe(res => {
+        this.employee = res.idAccount + " - " + res.lastName + " " + res.firstName
+      })
+    }
   }
-
-
-     
-
-
 }

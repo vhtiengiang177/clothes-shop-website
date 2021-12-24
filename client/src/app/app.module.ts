@@ -74,7 +74,7 @@ import { OrdersCompletedComponent } from './modules/user/orders-history/orders-c
 import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
 import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
 import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
-
+import { OrderDetailUserFormComponent } from './modules/user/orders-history/order-detail-user-form/order-detail-user-form.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +146,8 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     OrdersCompletedComponent,
     OrdersCancelledComponent,
     OrdersReturnComponent,
-    OrdersProcessComponent
+    OrdersProcessComponent,
+    OrderDetailUserFormComponent
    
   ],
   entryComponents: [
@@ -161,8 +162,8 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
     ImagesProductFormComponent,
-    OrdersDetailFormComponent
-   
+    OrdersDetailFormComponent,
+    OrderDetailUserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -180,7 +181,7 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
   ],
   exports: [
 
- ],
+  ],
   providers: [
     AuthService,
     ThemeService

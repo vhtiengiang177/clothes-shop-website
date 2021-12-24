@@ -54,16 +54,9 @@ export class OrdersReturnListComponent implements OnInit {
     private orderStore: OrdersProcessingStoreService,
     private toastr: ToastrService) {
 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersReturnStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+      this.ordersReturnStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
 
@@ -180,9 +173,16 @@ export class OrdersReturnListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersReturnStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
+      if (item.idShipper != null) {
+        this.staffStore.getById(item.idShipper).subscribe((res:Staff) => {
+          item.shipper = res.idAccount + " - " + res.firstName
+        })
+      }
+      if (item.idStaff != null) {
+        this.staffStore.getById(item.idStaff).subscribe(res => {
+          item.staff = res.idAccount + " - " + res.firstName
+        })
+      }
     }) 
   }
 

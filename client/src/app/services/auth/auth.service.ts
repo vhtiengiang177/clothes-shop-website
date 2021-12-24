@@ -1,14 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
-import { AppError } from 'src/app/_shared/errors/app-error';
-import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
-import { AccountParams } from '../model/account/account-params.model';
-import { VerifyResponse } from '../model/account/verify-response.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -59,9 +53,9 @@ export class AuthService {
   }
 
   getCurrentUser(){
-    let jwtHelper = new JwtHelperService();
-    let token = localStorage.getItem('token');
-    
-    return jwtHelper.decodeToken(token);
+      let jwtHelper = new JwtHelperService();
+      let token = localStorage.getItem('token');
+      
+      return jwtHelper.decodeToken(token);
   }
 }

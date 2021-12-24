@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Order <strong>#{{ order.id }}</strong></h3>
-                <div class="row">
+                <div *ngIf="order.dateOrder" class="row">
                     <div class="col-md-3 title-item">
                         Date Order:
                     </div>
-                    <div *ngIf="order.dateOrder" class="col-md-8">
+                    <div class="col-md-8">
                         {{ order.dateOrder | date: 'dd/MM/yyyy' }}
                     </div>
                 </div>
@@ -18,6 +18,9 @@
                     <div *ngIf="order.datePayment" class="col-md-8">
                         {{ order.datePayment | date: 'dd/MM/yyyy' }}
                     </div>
+                    <div *ngIf="!order.datePayment" class="col-md-8">
+                        N/A
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 title-item">
@@ -25,6 +28,9 @@
                     </div>
                     <div *ngIf="order.dateShip" class="col-md-8">
                         {{ order.dateShip | date: 'dd/MM/yyyy' }}
+                    </div>
+                    <div *ngIf="!order.dateShip" class="col-md-8">
+                        N/A
                     </div>
                 </div>
                 <div class="row">
@@ -47,8 +53,8 @@
                     <div class="col-md-3 title-item">
                         Fee Delivery:
                     </div>
-                    <div *ngIf="order.feeDelivery" class="col-md-8">
-                        {{ order.feeDelivery | currency: 'VND'}} 
+                    <div class="col-md-8">
+                        {{ order.feeDelivery | currency: 'VND'}}
                     </div>
                 </div>
                 <div class="row">
@@ -59,35 +65,35 @@
                         {{ order.totalQuantity }} items
                     </div>
                 </div>
-                <div class="row">
+                <div *ngIf="promotion" class="row">
                     <div class="col-md-3 title-item">
                         Promotion:
                     </div>
-                    <div *ngIf="promotion" class="col-md-8">
+                    <div class="col-md-8">
                         {{ promotion }} 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 title-item">
-                        Total Amout:
+                        Total Amount:
                     </div>
                     <div *ngIf="order.totalAmount" class="col-md-8">
                         {{ order.totalAmount | currency: 'VND'}}
                     </div>
                 </div>
-                <div class="row">
+                <div *ngIf="shipper" class="row">
                     <div class="col-md-3 title-item">
                         Shipper:
                     </div>
-                    <div *ngIf="shipper" class="col-md-8">
+                    <div class="col-md-8">
                         {{ shipper }} 
                     </div>
                 </div>
-                <div class="row">
+                <div *ngIf="employee" class="row">
                     <div class="col-md-3 title-item">
-                        Emloyee:
+                        Employee:
                     </div>
-                    <div *ngIf="employee" class="col-md-8">
+                    <div class="col-md-8">
                         {{ employee }} 
                     </div>
                 </div>
@@ -122,5 +128,5 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Exit</button> &nbsp;
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-secondary">Exit</button> &nbsp;
 </mat-dialog-actions>

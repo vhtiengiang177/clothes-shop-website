@@ -14,6 +14,7 @@ import { SharedService } from 'src/app/_shared/constant/share-service';
   encapsulation: ViewEncapsulation.None
 })
 export class OrdersHistoryPageComponent implements OnInit {
+  isCancelledEvent: boolean = false
 
   constructor() { 
      
@@ -23,5 +24,8 @@ export class OrdersHistoryPageComponent implements OnInit {
     
   }
   
+  cancelledEvent(){
+    this.isCancelledEvent = !this.isCancelledEvent
+  }
  
 }

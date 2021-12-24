@@ -14,8 +14,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="ordersDeliveryStore.orders.length > 0">
-                        <tr class="trow" *ngFor="let item of ordersDeliveryStore.orders$ | async; index as i">
+                    <tbody *ngIf="ordersCompletedStore.orders.length > 0">
+                        <tr class="trow" *ngFor="let item of ordersCompletedStore.orders$ | async; index as i">
                             <td>{{ i+1 }}</td>
                             <td >
                                 <div class="row">
@@ -27,13 +27,10 @@
                             <td> {{ item.dateOrder |  date: 'dd/MM/yyyy' }}</td>
                             <td >{{ item.totalQuantity }}</td>
                             <td>{{ item.totalAmount | currency: 'VND'}}</td>
-                            <td><button type="button" class="btn btn-info button-action">Detail</button></td>&nbsp;&nbsp;
-                        </tr>
-                        <tr class="trow estimate">
-                            <td colspan="7" class="stock">Estimated delivery date: 3-5 workdays</td>
+                            <td><button (click)="viewDetailOrder(item.id)" type="button" class="btn btn-info button-action">Detail</button></td>&nbsp;&nbsp;
                         </tr>
                     </tbody>
-                    <tbody *ngIf="ordersDeliveryStore.orders.length == 0">
+                    <tbody *ngIf="ordersCompletedStore.orders.length == 0">
                         <tr>
                             <td colspan="7">You have not ordered the product yet</td>
                         </tr>

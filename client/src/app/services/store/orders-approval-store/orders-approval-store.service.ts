@@ -68,11 +68,20 @@ export class OrdersApprovalStoreService {
   }
 
   async getAllOrdersByCustomerAndState() {
+    var listOrder: Order[] = []
     await this.orderService.getAllOrdersByCustomerAndState(2)
       .subscribe(res => {
-        this.orders = res.data;
+        res.data.forEach(item => {
+          listOrder.push(item)
+        })
         this.orderService.getAllOrdersByCustomerAndState(3).subscribe(res => {
-          this.orders.push(res.data)
+          res.data.forEach(item => {
+            listOrder.push(item)
+          })
+          
+          this.orders = listOrder
+          console.log(this.orders);
+          
         })
       })
   }

@@ -30,6 +30,7 @@ export class HeaderUserComponent implements OnInit {
   logout() {
     this.isUserInformation = false
     this.authService.logout()
+    
     //this.fetchCart()
     if(this.route.snapshot['_routerState'].url != '/')    
       this.router.navigate(['/']);

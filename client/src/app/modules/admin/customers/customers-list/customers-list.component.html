@@ -54,15 +54,15 @@
         <tbody class="table-body" *ngIf="customersStore.totalData > 0">
           <tr *ngFor="let acccustomer of customersStore.acccustomer$ | async; index as i">
             <td>{{ i+1 }}</td>
-            <td>{{ acccustomer.idAccount }}</td>
+            <td>{{ acccustomer.id }}</td>
             <td>{{ acccustomer.email }}</td>
             <td *ngIf="acccustomer.state == 2">Blocked</td>
             <td *ngIf="acccustomer.state == 1">Active</td>
             
-            <td ><fa  name="info-circle"></fa></td>
-            <td (click)="blockAccount(acccustomer.idAccount)" *ngIf="acccustomer.state == 1"><fa class="edit-icon" name="lock"></fa></td>
-            <td (click)="unblockAccount(acccustomer.idAccount)" *ngIf="acccustomer.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
-            <td (click)="deleteAccount(acccustomer.idAccount)"><fa class="delete-icon" name="trash"></fa></td>
+            <!-- <td ><fa  name="info-circle"></fa></td> -->
+            <td (click)="blockAccount(acccustomer.id)" *ngIf="acccustomer.state == 1"><fa class="edit-icon" name="lock"></fa></td>
+            <td (click)="unblockAccount(acccustomer.id)" *ngIf="acccustomer.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
+            <td (click)="deleteAccount(acccustomer.id)"><fa class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>
         <tbody *ngIf="customersStore.totalData == 0">

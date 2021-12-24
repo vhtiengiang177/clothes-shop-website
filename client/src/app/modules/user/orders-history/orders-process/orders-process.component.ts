@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
 import { OrdersProcessingStoreService } from 'src/app/services/store/orders-processing-store/orders-processing-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { OrderDetailUserFormComponent } from '../order-detail-user-form/order-detail-user-form.component';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./orders-process.component.css']
 })
 export class OrdersProcessComponent implements OnInit {
+  @Output('cancel-event') approvalEvent = new EventEmitter();
 
   constructor(private ordersProcessStore: OrdersProcessingStoreService, 
     public dialog: MatDialog,
@@ -45,6 +47,15 @@ export class OrdersProcessComponent implements OnInit {
             this.toastr.error("Not found order #" + idOrder)
           }
         })
+      }
+    });
+  }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrderDetailUserFormComponent, {
+      width: '800px',
+      data: { 
+       idOrder: idOrder
       }
     });
   }

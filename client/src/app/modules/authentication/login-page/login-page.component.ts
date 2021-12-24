@@ -40,8 +40,6 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['/verification'], {state: { idAccount, account }});
         }
       }, (error: HttpErrorResponse) => {
-        console.log(error);
-        
         this.toastr.error(error.error);
       });
     }
@@ -50,4 +48,5 @@ export class LoginPageComponent implements OnInit {
   fetchCart() {
     this.cartStore.get()
   }
+
 }

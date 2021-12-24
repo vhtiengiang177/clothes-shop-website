@@ -11,6 +11,7 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
 import {MatTabsModule} from '@angular/material/tabs';
 import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupStoreService } from 'src/app/services/store/orders-pickup-store/orders-pickup-store.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 
 @Component({
@@ -33,19 +34,14 @@ export class OrdersPickupListComponent implements OnInit {
 
   staff: Staff = {}
 
-  constructor(private ordersPickupStore: OrdersPickupStoreService, public dialog: MatDialog,
+  constructor(private ordersPickupStore: OrdersPickupStoreService, 
+    public dialog: MatDialog,
     private staffStore: StaffStoreService,
-    private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersPickupStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+    private toastr: ToastrService,
+    private authService: AuthService) { 
+      this.ordersPickupStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
 
@@ -163,9 +159,16 @@ export class OrdersPickupListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersPickupStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
+      if (item.idShipper != null) {
+        this.staffStore.getById(item.idShipper).subscribe((res:Staff) => {
+          item.shipper = res.idAccount + " - " + res.firstName
+        })
+      }
+      if (item.idStaff != null) {
+        this.staffStore.getById(item.idStaff).subscribe(res => {
+          item.staff = res.idAccount + " - " + res.firstName
+        })
+      }
     }) 
   }
 
@@ -199,27 +202,30 @@ export class OrdersPickupListComponent implements OnInit {
     });
   }
 
-  deliveryOrder(idOrder) {
-    this.ordersPickupStore.updateState(idOrder,4).subscribe(() => {
-      this.toastr.success("Delivery order #" + idOrder + " successfully")
-      let totalStore = this.ordersPickupStore.orders.length;
-      if(totalStore == 1) {
-        this.filter.pageindex = this.filter.pageindex - 1;
-        this.paginator.pageIndex = this.filter.pageindex - 1;
-      }
-      this.fetchData()
-      this.deliveryEvent.emit();
-    }, (error: HttpErrorResponse) => {
-      if(error.status == 500) {
-        this.toastr.error("Bad Request")
-      }
-      else if (error.status == 505) {
-        this.toastr.error("Not found order #" + idOrder)
-      }
-    })
+  deliveryOrder(order) {
+    if (this.authService.getCurrentUser().id == order.idShipper) {
+      this.ordersPickupStore.updateState(order.id, 4).subscribe(() => {
+        this.toastr.success("Delivery order #" + order.id + " successfully")
+        let totalStore = this.ordersPickupStore.orders.length;
+        if(totalStore == 1) {
+          this.filter.pageindex = this.filter.pageindex - 1;
+          this.paginator.pageIndex = this.filter.pageindex - 1;
+        }
+        this.fetchData()
+        this.deliveryEvent.emit();
+      }, (error: HttpErrorResponse) => {
+        if(error.status == 400) {
+          this.toastr.error("Bad Request")
+        }
+        else if (error.status == 404) {
+          this.toastr.error("Not found order #" + order.id)
+        }
+      })
+    }
+    else {
+      this.toastr.warning("You cannot deliver this order")
+    }
   }
-
-
  
   viewDetailOrder(idOrder) {
     const dialogRef = this.dialog.open(OrdersDetailFormComponent, {
@@ -232,7 +238,5 @@ export class OrdersPickupListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
     
     });
-    }
-
-
+  }
 }

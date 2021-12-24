@@ -199,7 +199,7 @@ namespace clothing_shop_website.Areas.Client
                         order.DateShip = DateTime.Now;
                         break;
                     case 5: // completed
-                        if (order.DatePayment != null)
+                        if (order.DatePayment == null)
                         {
                             order.DatePayment = DateTime.Now;
                         }
