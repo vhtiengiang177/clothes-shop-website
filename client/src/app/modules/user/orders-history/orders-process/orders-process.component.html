@@ -1,6 +1,6 @@
-<section *ngIf="ordersProcessStore.orders.length > 0" class="shopping-cart spad">
+
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="ordersProcessStore.orders.length > 0" class="shopping-cart spad">
         <div class="col-lg-12">
             <div class="cart-table">
                 <table>
@@ -42,8 +42,7 @@
             </div>
         </div>
     </div>
+    <div class="row" *ngIf="ordersProcessStore.orders.length == 0" class="shopping-cart spad">
+        <img src="../../../../assets/order-history-empty.png">
+    </div>
 </div>
-</section>
-<section class="center" *ngIf="ordersProcessStore.orders.length == 0">
-    <img src="../../../../assets/empty-cart.png">
-</section>

@@ -70,7 +70,7 @@
                             <fa class="mr-2 text-gray-400" name="cart-arrow-down" size="sm"></fa>
                             Orders History
                         </button> -->
-                        <button class="dropdown-item" [routerLink]="['/my-orders-history']">
+                        <button *ngIf="authService.getCurrentUser().idTypeAccount == 4" class="dropdown-item" [routerLink]="['/my-orders-history']">
                             <fa class="mr-2 text-gray-400" name="cart-arrow-down" size="sm"></fa>
                             Orders History
                         </button>
