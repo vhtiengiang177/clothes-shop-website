@@ -1,35 +1,15 @@
-.img-right {
-    text-align: right;
+.title-item {
+  text-align: end;
+  font-weight: bold;
 }
 
-.image-list {
-  background-color: gainsboro;
-  margin-top: 10px;
+.card-title {
+  border-bottom: solid gainsboro 1px;
   padding: 5px;
 }
-.btn-add {
-    background-color: #0093c9;
-    color: #fff;
-    border: 1px solid #0093c9;
-    margin-left: 14px;
-    font-size: 13px;
-  }
-   .btn-add:hover {
-    background-color: #b3ebff;
-    color: #000;
-    border: 1px solid #b3ebff;
-  }
 
-  .button-add {
-    display: flex;
-    justify-content: flex-end;
-    padding: 4px;
+@media (max-width: 768px) {
+  .title-item {
+      text-align: left;
   }
-
-  .edit-icon {
-    color: mediumpurple
-  }
-  
-  .delete-icon {
-    color:salmon
-  }
+}

@@ -33,7 +33,7 @@
               <table id="producttable" class="table table-striped table-hover table-sm ">
                 <thead class="dt-header">
                   <tr>
-                    <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+                    <th></th>
                     <th (click)="sortID()">ID
                       <fa *ngIf="filter.sort == null" name="sort-down"></fa>
                       <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
@@ -81,7 +81,7 @@
                 </tbody>
                 <tbody *ngIf="ordersPickupStore.totalData == 0">
                   <tr>
-                    <td class="no-data" colspan="6">No data available in table</td>
+                    <td class="no-data" colspan="9">No data available in table</td>
                   </tr>
                 </tbody>
               </table>

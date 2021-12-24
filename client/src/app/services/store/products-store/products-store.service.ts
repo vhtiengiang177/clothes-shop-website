@@ -134,9 +134,9 @@ export class ProductsStoreService {
         this.products.forEach(item => {
           item.imageUrl = "assets/product.jpg"
           this.productService.getImagesByIdProduct(item.id).subscribe(res => {
-            if (res) {
-              if (res[0]) {
-                item.imageUrl = res[0].url
+            if (res.length != 0) {
+              if (res[0].url) {
+                item.imageUrl = res[0].url 
               }
             }
           })

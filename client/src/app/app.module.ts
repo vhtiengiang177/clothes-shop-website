@@ -46,7 +46,6 @@ import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-deliv
 import { OrdersCompletedListComponent } from './modules/admin/orders/orders-completed-list/orders-completed-list.component';
 import { OrdersCancelledListComponent } from './modules/admin/orders/orders-cancelled-list/orders-cancelled-list.component';
 import { OrdersReturnListComponent } from './modules/admin/orders/orders-return-list/orders-return-list.component';
-import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orders-detail.component';
 import { DeliveryListComponent } from './modules/admin/delivery/delivery-list/delivery-list.component';
 import { ProductDetailPageComponent } from './modules/user/product-detail-page/product-detail-page.component';
 import { CartPageComponent } from './modules/user/cart-page/cart-page.component';
@@ -66,6 +65,7 @@ import { PromotionPageComponent } from './modules/user/promotion-page/promotion-
 import { ImagesProductFormComponent } from './modules/admin/products/images-product-form/images-product-form.component';
 import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
+import { NgChartsModule, ThemeService } from 'ng2-charts';
 
 
 @NgModule({
@@ -110,7 +110,6 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     OrdersCompletedListComponent,
     OrdersCancelledListComponent,
     OrdersReturnListComponent,
-    OrdersDetailComponent,
     DeliveryListComponent,
     CartPageComponent,
     DeliveryListComponent,
@@ -159,12 +158,14 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     BrowserAnimationsModule,
     BrowserModule, 
-    IvyCarouselModule
+    IvyCarouselModule,
+    NgChartsModule
   ],
   exports: [
  ],
   providers: [
-    AuthService
+    AuthService,
+    ThemeService
   ],
   bootstrap: [AppComponent]
 })

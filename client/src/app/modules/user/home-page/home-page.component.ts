@@ -38,8 +38,10 @@ export class HomePageComponent implements OnInit {
           var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
           pc.imageUrl = "assets/product.jpg"
           this.productsStore.getImagesByIdProduct(pc.id).subscribe(res => {
-            if (res) {
-              pc.imageUrl = res[0].url
+            if (res.length != 0) {
+              if (res[0].url) {
+                pc.imageUrl = res[0].url 
+              }
             }
           })
           if(categories.length == 1) {
@@ -54,8 +56,10 @@ export class HomePageComponent implements OnInit {
         var categories = this.categoriesStore.categories.filter(c => c.id == pc.idCategory)
         pc.imageUrl = "assets/product.jpg"
         this.productsStore.getImagesByIdProduct(pc.id).subscribe(res => {
-          if (res) {
-            pc.imageUrl = res[0].url
+          if (res.length != 0) {
+            if (res[0].url) {
+              pc.imageUrl = res[0].url 
+            }
           }
         })
         if(categories.length == 1) {

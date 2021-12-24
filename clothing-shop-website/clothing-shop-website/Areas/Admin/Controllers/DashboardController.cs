@@ -12,5 +12,11 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             return Ok();
         }
+
+        //[HttpGet]
+        //public IActionResult GetSalesInMonths()
+        //{
+
+        //}
     }
 }

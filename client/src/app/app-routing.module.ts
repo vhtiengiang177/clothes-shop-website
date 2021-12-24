@@ -1,4 +1,3 @@
-import { OrdersDetailComponent } from './modules/admin/orders/orders-detail/orders-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -111,41 +110,6 @@ const routes: Routes = [
   {
     path: 'admin/orders-return',
     component: OrdersReturnListComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-process/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-approval/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-delivery/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-completed/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-cancelled/:id',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard, AdminAuthGuard]
-  },
-  {
-    path: 'admin/orders-return/:id',
-    component: OrdersDetailComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {

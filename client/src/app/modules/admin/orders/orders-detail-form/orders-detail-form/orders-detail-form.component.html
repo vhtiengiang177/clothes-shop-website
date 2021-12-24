@@ -1,10 +1,10 @@
 <mat-dialog-content class="mat-typography">
     <div class="container" *ngIf="isVisible">
-        <div class="row detail-center">
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
                 <h3>Order <strong>#{{ order.id }}</strong></h3>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Date Order:
                     </div>
                     <div *ngIf="order.dateOrder" class="col-md-8">
@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Date Payment:
                     </div>
                     <div *ngIf="order.datePayment" class="col-md-8">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Date Ship:
                     </div>
                     <div *ngIf="order.dateShip" class="col-md-8">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Customer:
                     </div>
                     <div *ngIf="customer" class="col-md-8">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Address:
                     </div>
                     <div *ngIf="address" class="col-md-8">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Fee Delivery:
                     </div>
                     <div *ngIf="order.feeDelivery" class="col-md-8">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Total Quantity:
                     </div>
                     <div *ngIf="order.totalQuantity" class="col-md-8">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Promotion:
                     </div>
                     <div *ngIf="promotion" class="col-md-8">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Total Amout:
                     </div>
                     <div *ngIf="order.totalAmount" class="col-md-8">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Shipper:
                     </div>
                     <div *ngIf="shipper" class="col-md-8">
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 title-item">
+                    <div class="col-md-3 title-item">
                         Emloyee:
                     </div>
                     <div *ngIf="employee" class="col-md-8">

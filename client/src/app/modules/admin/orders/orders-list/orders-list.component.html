@@ -5,7 +5,7 @@
     <br>
     <div class="row">
       <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Processing">
+        <mat-tab *ngIf="authService.getCurrentUser().idTypeAccount != 3" label="Processing">
           <app-orders-process-list (approval-event)=approvalEvent() (cancel-event)="cancelledEvent()">     
           </app-orders-process-list>
         </mat-tab>

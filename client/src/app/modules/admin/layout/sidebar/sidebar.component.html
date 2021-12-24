@@ -136,10 +136,18 @@
         </div>
     </li> -->
 
-    <li (click)="clickOrdersList()" 
+    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickOrdersList()" 
     [ngClass]="{ 'active': isOrdersListActive }" 
     [routerLink]="['/admin/orders']" 
     class="nav-item nav-color">
+    <a class="nav-link">
+        <fa name="tasks"></fa>
+        <span>Orders</span></a>
+    </li>
+
+    <li *ngIf="authService.getCurrentUser().idTypeAccount == 3" (click)="clickOrdersList()" 
+    [routerLink]="['/admin/orders']" 
+    class="nav-item nav-color active">
     <a class="nav-link">
         <fa name="tasks"></fa>
         <span>Orders</span></a>

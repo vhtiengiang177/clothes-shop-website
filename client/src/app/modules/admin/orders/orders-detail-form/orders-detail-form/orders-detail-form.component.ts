@@ -94,16 +94,16 @@ export class OrdersDetailFormComponent implements OnInit {
             if(res) {
               this.deliveryStore.getById(this.order.idAddress).subscribe(address => {
                 if (address) {
-                  this.addressAPI.getProvince().subscribe(res => {
-                    this.province = res.data.find(obj => obj.ProvinceID === address.provinceId).ProvinceName
-                  })
-                  this.addressAPI.getDistrict(address.provinceId).subscribe(res => {
-                    this.district = res.data.find(obj => obj.DistrictID === address.districtId).DistrictName
-                  })
                   this.addressAPI.getWard(address.districtId).subscribe(res => {
                     this.ward = res.data.find(obj => obj.WardCode === address.wardCode).WardName
+                    this.addressAPI.getDistrict(address.provinceId).subscribe(res => {
+                      this.district = res.data.find(obj => obj.DistrictID === address.districtId).DistrictName
+                      this.addressAPI.getProvince().subscribe(res => {
+                        this.province = res.data.find(obj => obj.ProvinceID === address.provinceId).ProvinceName
+                        this.address =  address.address + ", " + this.ward + ", " + this.district + ", " + this.province + "."
+                      })
+                    })
                   })
-                  this.address =  address.address + ", " + this.ward + ", " + this.district + ", " + this.province + "."
                 }
               })
             }
