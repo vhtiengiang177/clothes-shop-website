@@ -117,16 +117,18 @@ namespace clothing_shop_website.Areas.Client
 
         }
 
-        [AllowAnonymous]
-        [HttpGet("GetAllOrdersByCustomerAndState")]
-        public async Task<IActionResult> GetAllOrdersByCustomerAndState(int customerId,int state)
+      
+        [HttpGet("GetAllOrdersByStateUser/{id}")]
+        public async Task<IActionResult> GetAllOrdersByCustomerAndState(int id)
         {
             try
             {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
                 IQueryable<Order> lOrderItems;
-                if (customerId > 0 && state>0)
+                if (id >0)
                 {
-                    lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrdersByCustomerAndState(customerId, state);
+                    lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrdersByCustomerAndState(Convert.ToInt32(userId), id);
 
                     var response = new ResponseJSON<Order>
                     {
@@ -177,6 +179,9 @@ namespace clothing_shop_website.Areas.Client
             try
             {
                 var order = _unitOfWork.OrdersRepository.GetOrderByID(id);
+                IQueryable<OrderDetail> lOrderItems;
+
+                lOrderItems =_unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
 
                 if (order == null)
                     return NotFound();
@@ -200,6 +205,12 @@ namespace clothing_shop_website.Areas.Client
                 }
                 if (state == 6 || state == 7)
                 {
+                    foreach (var item in lOrderItems)
+                    {
+                        var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
+                        ProductItem.Stock -= item.Quantity;
+                        _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
+                    }
                     order.DateCancel = DateTime.Now;
                 }
 

@@ -19,6 +19,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         Task<IQueryable<Order>> GetAllOrdersByCustomerAndState(int customerID, int state);
         Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order);
          Task<IQueryable<Order>> GetAllOrders();
+        IQueryable<OrderDetail> GetAllOrderDetailByOrder2(int order);
 
     }
 }

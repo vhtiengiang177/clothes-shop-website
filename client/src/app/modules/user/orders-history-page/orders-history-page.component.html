@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <!-- Search -->    
+      </div>
+      <br>
+      <div class="row">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Processing">
+            <app-orders-process >     
+            </app-orders-process>
+          </mat-tab>
+          <mat-tab label="Approval">
+              <app-orders-approval></app-orders-approval>
+        
+          </mat-tab>
+          <mat-tab label="Pick Up">
+            <app-orders-pickup-list [approvalListEvent]="isPickupEvent" (delivery-event)=deliveryEvent() ></app-orders-pickup-list>
+          </mat-tab>
+          <mat-tab label="Delivery">
+            <app-orders-delivery-list  [pickupListEvent]="isDeliveryEvent" (completed-event)=completedEvent()  (return-event)=returnEvent()></app-orders-delivery-list> 
+          </mat-tab>
+          <mat-tab label="Completed">
+            <app-orders-completed-list  [deliveryListEvent]="isCompletedEvent" ></app-orders-completed-list>   
+          </mat-tab>
+          <mat-tab label="Cancelled">
+            <app-orders-cancelled-list [cancelledListEvent]="isCancelledEvent"></app-orders-cancelled-list>
+          </mat-tab>
+          <mat-tab label="Return Refund">
+              <app-orders-return-list  [returnListEvent]="isReturnEvent" ></app-orders-return-list>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+</div>

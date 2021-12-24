@@ -67,6 +67,15 @@ import { PromotionPageComponent } from './modules/user/promotion-page/promotion-
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
+import { ChartTopProductComponent } from './modules/admin/charts/chart-top-product/chart-top-product.component';
+import { OrdersHistoryPageComponent } from './modules/user/orders-history-page/orders-history-page.component';
+import { OrdersApprovalComponent } from './modules/user/orders-history/orders-approval/orders-approval.component';
+import { OrdersPickupComponent } from './modules/user/orders-history/orders-pickup/orders-pickup.component';
+import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
+import { OrdersCompletedComponent } from './modules/user/orders-history/orders-completed/orders-completed.component';
+import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
+import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
+import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
 
 
 @NgModule({
@@ -133,7 +142,16 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     PromotionPageComponent,
     DeliveryAddressFormComponent,
     OrdersDetailFormComponent,
-    OrdersPickupListComponent
+    OrdersPickupListComponent,
+    ChartTopProductComponent,
+    OrdersHistoryPageComponent,
+    OrdersApprovalComponent,
+    OrdersPickupComponent,
+    OrdersDeliveryComponent,
+    OrdersCompletedComponent,
+    OrdersCancelledComponent,
+    OrdersReturnComponent,
+    OrdersProcessComponent
    
   ],
   entryComponents: [
@@ -149,6 +167,7 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
     OrdersDetailFormComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -163,13 +182,16 @@ import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-
     BrowserModule, 
     IvyCarouselModule,
     MatTabsModule
-
+  
   ],
   exports: [
+
  ],
   providers: [
     AuthService
+  
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
