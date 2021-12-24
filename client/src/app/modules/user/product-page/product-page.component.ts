@@ -86,42 +86,21 @@ export class ProductPageComponent implements OnInit {
   }
 
   filterPrice() {
-    if (this.minPrice > this.maxPrice) {
+    if (this.minPrice > this.maxPrice && (this.maxPrice != null || this.minPrice != null)) {
       this.toastr.warning("Minimum price should not be greater than maximum")
     }
     else {
-      if (this.minPrice >= 0) {
+      if (this.minPrice < 0 || this.maxPrice < 0) {
+        this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
+      }
+      else if (this.minPrice >= 0 || this.maxPrice >= 0) {
         this.filter.minprice = this.minPrice
         this.filter.maxprice = this.maxPrice
         this.filter.pageindex = 1
         this.paginator.pageIndex = 0;
         this.fetchData()
       }
-      else this.toastr.warning("Minimum price should be at least 0 VND")
-    }
-  }
-
-  checkMinPrice() {
-    if(this.minPrice < 0) 
-    {
-      this.minPrice = null;
-    }
-    if(this.maxPrice) {
-      if(this.minPrice > this.maxPrice) {
-        this.minPrice = this.maxPrice;
-      }
-    }
-  }
-  
-  checkMaxPrice() {
-    if(this.maxPrice < 0) 
-    {
-      this.maxPrice = null;
-    }
-    if(this.minPrice) {
-      if(this.maxPrice < this.minPrice) {
-        this.maxPrice = this.minPrice;
-      }
+      else this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
     }
   }
 

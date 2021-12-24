@@ -22,12 +22,6 @@ export class StaffDetailFormComponent implements OnInit {
     private staffStore: StaffStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
-      console.log(data);
-
-      // if (data.staff.idAccount)
-      // {
-       
-      // }
       
     }
 

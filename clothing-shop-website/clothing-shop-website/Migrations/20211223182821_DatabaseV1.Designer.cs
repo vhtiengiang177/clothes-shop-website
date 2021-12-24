@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211222185321_Database")]
-    partial class Database
+    [Migration("20211223182821_DatabaseV1")]
+    partial class DatabaseV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace clothing_shop_website.Migrations
                             Id = 1,
                             Email = "Admin@gmail.com",
                             IdTypeAccount = 1,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -68,7 +68,7 @@ namespace clothing_shop_website.Migrations
                             Id = 2,
                             Email = "Admin2@gmail.com",
                             IdTypeAccount = 1,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -77,7 +77,7 @@ namespace clothing_shop_website.Migrations
                             Id = 3,
                             Email = "Staff@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -86,7 +86,7 @@ namespace clothing_shop_website.Migrations
                             Id = 4,
                             Email = "Staff2@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -95,7 +95,7 @@ namespace clothing_shop_website.Migrations
                             Id = 5,
                             Email = "Shipper@gmail.com",
                             IdTypeAccount = 3,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -104,7 +104,7 @@ namespace clothing_shop_website.Migrations
                             Id = 6,
                             Email = "Shipper2@gmail.com",
                             IdTypeAccount = 3,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -113,7 +113,7 @@ namespace clothing_shop_website.Migrations
                             Id = 7,
                             Email = "Customer@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -122,7 +122,7 @@ namespace clothing_shop_website.Migrations
                             Id = 8,
                             Email = "Customer2@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -131,7 +131,7 @@ namespace clothing_shop_website.Migrations
                             Id = 9,
                             Email = "Customer3@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 1,
                             VerificationCode = 1
                         },
@@ -140,7 +140,7 @@ namespace clothing_shop_website.Migrations
                             Id = 10,
                             Email = "Staff3@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 0,
                             VerificationCode = 1
                         },
@@ -149,7 +149,7 @@ namespace clothing_shop_website.Migrations
                             Id = 11,
                             Email = "Shipper3@gmail.com",
                             IdTypeAccount = 2,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 0,
                             VerificationCode = 1
                         },
@@ -158,7 +158,7 @@ namespace clothing_shop_website.Migrations
                             Id = 12,
                             Email = "Customer4@gmail.com",
                             IdTypeAccount = 4,
-                            Password = "123456789Abc!",
+                            Password = "4bb0a94f21769c3b9d68cd8256a87104",
                             State = 0,
                             VerificationCode = 1
                         });
@@ -656,158 +656,6 @@ namespace clothing_shop_website.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Log_Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 1,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 1,
-                            IdSize = 2,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 1,
-                            IdSize = 3,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 2,
-                            IdProduct = 2,
-                            IdSize = 2,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 3,
-                            IdProduct = 2,
-                            IdSize = 2,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 4,
-                            IdProduct = 3,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 2,
-                            IdProduct = 4,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 3,
-                            IdProduct = 5,
-                            IdSize = 2,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 4,
-                            IdProduct = 5,
-                            IdSize = 2,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 6,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 7,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 8,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 9,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 10,
-                            IdSize = 1,
-                            Quantity = 100
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CreatedById = 1,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = 1,
-                            IdProduct = 11,
-                            IdSize = 1,
-                            Quantity = 100
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entity.Order", b =>
@@ -876,178 +724,6 @@ namespace clothing_shop_website.Migrations
                     b.HasIndex("IdStaff");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 1,
-                            IdCustomer = 7,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 1,
-                            TotalAmount = 10830000.0,
-                            TotalProductPrice = 12000000.0,
-                            TotalQuantity = 20
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 2,
-                            IdCustomer = 7,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 2,
-                            TotalAmount = 15420000.0,
-                            TotalProductPrice = 17100000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 3,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 3,
-                            TotalAmount = 7320000.0,
-                            TotalProductPrice = 8100000.0,
-                            TotalQuantity = 20
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 4,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 5,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 1,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 1,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 2,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 10,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 8,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 6,
-                            TotalAmount = 17310000.0,
-                            TotalProductPrice = 19200000.0,
-                            TotalQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 11,
-                            DateOrder = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DatePayment = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateShip = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FeeDelivery = 30000.0,
-                            IdAddress = 4,
-                            IdCustomer = 9,
-                            IdPromotion = 1,
-                            IdShipper = 5,
-                            IdStaff = 3,
-                            State = 3,
-                            TotalAmount = 15420000.0,
-                            TotalProductPrice = 17100000.0,
-                            TotalQuantity = 30
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entity.OrderDetail", b =>
@@ -1088,98 +764,6 @@ namespace clothing_shop_website.Migrations
                     b.HasIndex("SizeId");
 
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            IdOrder = 1,
-                            IdProduct = 1,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 10,
-                            UnitPrice = 320000.0
-                        },
-                        new
-                        {
-                            IdOrder = 1,
-                            IdProduct = 2,
-                            IdSize = 2,
-                            IdColor = 2,
-                            Quantity = 10,
-                            UnitPrice = 280000.0
-                        },
-                        new
-                        {
-                            IdOrder = 2,
-                            IdProduct = 3,
-                            IdSize = 1,
-                            IdColor = 4,
-                            Quantity = 15,
-                            UnitPrice = 250000.0
-                        },
-                        new
-                        {
-                            IdOrder = 2,
-                            IdProduct = 4,
-                            IdSize = 1,
-                            IdColor = 2,
-                            Quantity = 15,
-                            UnitPrice = 320000.0
-                        },
-                        new
-                        {
-                            IdOrder = 3,
-                            IdProduct = 5,
-                            IdSize = 2,
-                            IdColor = 3,
-                            Quantity = 10,
-                            UnitPrice = 220000.0
-                        },
-                        new
-                        {
-                            IdOrder = 3,
-                            IdProduct = 6,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 10,
-                            UnitPrice = 195000.0
-                        },
-                        new
-                        {
-                            IdOrder = 4,
-                            IdProduct = 7,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 15,
-                            UnitPrice = 320000.0
-                        },
-                        new
-                        {
-                            IdOrder = 4,
-                            IdProduct = 8,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 15,
-                            UnitPrice = 320000.0
-                        },
-                        new
-                        {
-                            IdOrder = 5,
-                            IdProduct = 3,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 15,
-                            UnitPrice = 250000.0
-                        },
-                        new
-                        {
-                            IdOrder = 5,
-                            IdProduct = 4,
-                            IdSize = 1,
-                            IdColor = 1,
-                            Quantity = 15,
-                            UnitPrice = 320000.0
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entity.Product", b =>
@@ -1583,30 +1167,18 @@ namespace clothing_shop_website.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedById = 3,
+                            CreatedById = 1,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tet Duong Lich",
-                            EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TDL001",
-                            StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "MEGA SALE 31-12",
+                            EndDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "NEWYEAR3112",
+                            StartDate = new DateTime(2021, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
-                            Value = 0.10000000000000001
+                            Value = 0.20000000000000001
                         },
                         new
                         {
                             Id = 2,
-                            CreatedById = 3,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Happy BirthDay Customer",
-                            EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BIRDAY",
-                            StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            State = 1,
-                            Value = 0.14999999999999999
-                        },
-                        new
-                        {
-                            Id = 3,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Women's Day 8-3",
@@ -1614,29 +1186,29 @@ namespace clothing_shop_website.Migrations
                             Name = "WOMANDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 2,
-                            Value = 0.14999999999999999
+                            Value = 0.10000000000000001
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedById = 2,
+                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tet Holiday 2022",
+                            EndDate = new DateTime(2021, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "TET999",
+                            StartDate = new DateTime(2022, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            State = 2,
+                            Value = 0.20000000000000001
                         },
                         new
                         {
                             Id = 4,
                             CreatedById = 3,
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tet Am Lich",
-                            EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "TET999",
-                            StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            State = 2,
-                            Value = 0.20000000000000001
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedById = 3,
-                            CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Women Viet Nam 20-10",
-                            EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Women Viet Nam 20-10-2021",
+                            EndDate = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "WOMANVN",
-                            StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 3,
                             Value = 0.10000000000000001
                         });

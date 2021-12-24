@@ -2745,6 +2745,12 @@ ol {
     padding-left: 20px;
     padding-bottom: 5px;
 }
+
+.order-table table {
+    width: 100%;
+    min-width: 480px;
+}
+
 /*---------------------
   Check Out
 -----------------------*/
@@ -3627,7 +3633,7 @@ ol {
 }
 
 .center {
-    justify-content: right;
+    justify-content: center;
     padding-left: 100px;
     padding-right: 100px;
 }

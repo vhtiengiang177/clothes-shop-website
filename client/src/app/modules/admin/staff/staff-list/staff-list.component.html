@@ -32,7 +32,7 @@
         &nbsp;
         <button 
         mat-raised-button 
-        (click)="AddAccoutStaff()"
+        (click)="addAccoutStaff()"
         class="btn btn-primary btn-add">Add Staff</button>
        
       </div>
@@ -64,7 +64,7 @@
             <td *ngIf="accstaff.state == 1">Active</td>
             
             <td *ngIf="accstaff.state == 2">Blocked</td>
-            <td (click)="ViewDetailStaff(accstaff.id)"><fa  name="info-circle"></fa></td>
+            <td (click)="viewDetailStaff(accstaff.id)"><fa  name="info-circle"></fa></td>
             <td (click)="blockAccount(accstaff.id)" *ngIf="accstaff.state == 1"><fa class="edit-icon" name="lock"></fa></td>
             <td (click)="unblockAccount(accstaff.id)" *ngIf="accstaff.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
             <td (click)="editStaff(accstaff.id)"><fa class="edit-icon" name="edit"></fa></td>

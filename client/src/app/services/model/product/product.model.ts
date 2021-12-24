@@ -11,5 +11,6 @@ export interface Product {
     createdById?: number,
     modifiedById?: number,
     idCategory?: number,
-    category?: string
+    category?: string,
+    imageUrl?: string
 }

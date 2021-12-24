@@ -27,7 +27,6 @@ namespace clothing_shop_website.Areas.Client
             _ordersService = ordersService;
         }
 
-        [AllowAnonymous]
         [HttpGet("GetAllOrdersByState")]
         public async Task<IActionResult> GetOrdersByStates([FromQuery] FilterParamsOrder filterParams)
         {

@@ -5,6 +5,8 @@ import { MatDialog, MatDialogRef, MatSelect, MAT_DIALOG_DATA } from '@angular/ma
 import { ToastrService } from 'ngx-toastr';
 import { StaffForm } from 'src/app/services/model/staff/staff-form.model';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { AccountService } from 'src/app/services/data/account/account.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-staff-form',
@@ -12,13 +14,14 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
   styleUrls: ['./staff-form.component.css']
 })
 export class StaffFormComponent implements OnInit {
+  oldEmail: string = ""
+
 
   constructor(public dialogRef: MatDialogRef<StaffFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: StaffForm,
     private staffStore: StaffStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
-      console.log(data);
       
     }
 
@@ -29,7 +32,7 @@ export class StaffFormComponent implements OnInit {
     if (this.checkValidate()) {
       if (this.data.typeform === 0) {
         this.staffStore.create(this.data.staff).subscribe(res => {
-          this.dialogRef.close(res);
+          this.dialogRef.close(res)
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
             this.toastr.error("It looks like something went wrong")
@@ -58,4 +61,7 @@ export class StaffFormComponent implements OnInit {
     return true
   }
 
+  compareSelected(c1, c2) {
+    return c1 && c2 && c1 === c2.toString();
+  }
 }

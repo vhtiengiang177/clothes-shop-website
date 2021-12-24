@@ -2,27 +2,34 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div *ngIf="promotionsStore.promotions.length > 0" class="order-table">
+            <div *ngIf="promotionsStore.promotions.length > 0" class="order-table table-promotion">
                 <table>
+                    <thead >
+                        <tr>
+                            <th></th>
+                            <th class="p-name">PROMOTIONS</th>
+                            <th>VALUE</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr class="tr-delivery" *ngFor="let item of promotionsStore.promotions$  | async; index as i">
                             <td>{{ i+1 }}</td>
                             <td class="cart-title first-row">
                                 <div class="row">
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-12">
                                         <h5 class="name-item">{{ item.name }}</h5>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-8 stock">
-                                        {{ description }}
+                                    <div class="col-sm-12 stock">
+                                        {{ item.description }}
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-8 stock">
-                                        {{ item.startDate }} - {{ item.endDate }}
+                                    <div class="col-sm-12 stock">
+                                        {{ item.startDate | date: 'dd/MM/yyyy'}} - {{ item.endDate | date: 'dd/MM/yyyy'}}
                                     </div>
                                 </div>
                             </td>

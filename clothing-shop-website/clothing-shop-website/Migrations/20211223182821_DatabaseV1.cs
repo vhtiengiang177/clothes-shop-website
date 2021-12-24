@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clothing_shop_website.Migrations
 {
-    public partial class Database : Migration
+    public partial class DatabaseV1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -465,33 +465,11 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "ColorCode", "Name", "State" },
                 values: new object[,]
                 {
-                    { 5, null, "Gray", 0 },
+                    { 1, null, "White", 1 },
+                    { 2, null, "Black", 1 },
                     { 3, null, "Blue", 1 },
                     { 4, null, "Red", 1 },
-                    { 1, null, "White", 1 },
-                    { 2, null, "Black", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Log_Products",
-                columns: new[] { "Id", "CreatedById", "CreatedDate", "IdColor", "IdProduct", "IdSize", "Quantity" },
-                values: new object[,]
-                {
-                    { 9, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 5, 2, 100 },
-                    { 15, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 11, 1, 100 },
-                    { 14, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 10, 1, 100 },
-                    { 13, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 9, 1, 100 },
-                    { 11, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 7, 1, 100 },
-                    { 10, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 6, 1, 100 },
-                    { 8, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 5, 2, 100 },
-                    { 12, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 8, 1, 100 },
-                    { 6, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 3, 1, 100 },
-                    { 5, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 2, 100 },
-                    { 4, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 2, 100 },
-                    { 7, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 4, 1, 100 },
-                    { 3, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 3, 100 },
-                    { 2, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 2, 100 },
-                    { 1, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1, 100 }
+                    { 5, null, "Gray", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -499,11 +477,10 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "CreatedById", "CreatedDate", "Description", "EndDate", "LastModified", "ModifiedById", "Name", "StartDate", "State", "Value" },
                 values: new object[,]
                 {
-                    { 1, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tet Duong Lich", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TDL001", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.10000000000000001 },
-                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Happy BirthDay Customer", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "BIRDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.14999999999999999 },
-                    { 3, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women's Day 8-3", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.14999999999999999 },
-                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tet Am Lich", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TET999", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
-                    { 5, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women Viet Nam 20-10", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANVN", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 }
+                    { 3, 2, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tet Holiday 2022", new DateTime(2021, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "TET999", new DateTime(2022, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.20000000000000001 },
+                    { 4, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women Viet Nam 20-10-2021", new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANVN", new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 0.10000000000000001 },
+                    { 1, 1, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "MEGA SALE 31-12", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "NEWYEAR3112", new DateTime(2021, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0.20000000000000001 },
+                    { 2, 3, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Women's Day 8-3", new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "WOMANDAY", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0.10000000000000001 }
                 });
 
             migrationBuilder.InsertData(
@@ -539,32 +516,28 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "Name", "Point", "State" },
                 values: new object[,]
                 {
+                    { 2, "Silver ", 0, 1 },
                     { 1, "Gold", 0, 1 },
-                    { 2, "Silver ", 0, 1 }
+                    { 3, "Bronze", 0, 1 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "TypeCustomers",
-                columns: new[] { "Id", "Name", "Point", "State" },
-                values: new object[] { 3, "Bronze", 0, 1 });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "Email", "IdTypeAccount", "Password", "State", "VerificationCode" },
                 values: new object[,]
                 {
-                    { 1, "Admin@gmail.com", 1, "123456789Abc!", 1, 1 },
-                    { 8, "Customer2@gmail.com", 4, "123456789Abc!", 1, 1 },
-                    { 7, "Customer@gmail.com", 4, "123456789Abc!", 1, 1 },
-                    { 6, "Shipper2@gmail.com", 3, "123456789Abc!", 1, 1 },
-                    { 5, "Shipper@gmail.com", 3, "123456789Abc!", 1, 1 },
-                    { 11, "Shipper3@gmail.com", 2, "123456789Abc!", 0, 1 },
-                    { 10, "Staff3@gmail.com", 2, "123456789Abc!", 0, 1 },
-                    { 4, "Staff2@gmail.com", 2, "123456789Abc!", 1, 1 },
-                    { 3, "Staff@gmail.com", 2, "123456789Abc!", 1, 1 },
-                    { 2, "Admin2@gmail.com", 1, "123456789Abc!", 1, 1 },
-                    { 9, "Customer3@gmail.com", 4, "123456789Abc!", 1, 1 },
-                    { 12, "Customer4@gmail.com", 4, "123456789Abc!", 0, 1 }
+                    { 1, "Admin@gmail.com", 1, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 8, "Customer2@gmail.com", 4, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 7, "Customer@gmail.com", 4, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 6, "Shipper2@gmail.com", 3, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 5, "Shipper@gmail.com", 3, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 11, "Shipper3@gmail.com", 2, "4bb0a94f21769c3b9d68cd8256a87104", 0, 1 },
+                    { 10, "Staff3@gmail.com", 2, "4bb0a94f21769c3b9d68cd8256a87104", 0, 1 },
+                    { 4, "Staff2@gmail.com", 2, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 3, "Staff@gmail.com", 2, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 2, "Admin2@gmail.com", 1, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 9, "Customer3@gmail.com", 4, "4bb0a94f21769c3b9d68cd8256a87104", 1, 1 },
+                    { 12, "Customer4@gmail.com", 4, "4bb0a94f21769c3b9d68cd8256a87104", 0, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -639,15 +612,15 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "IdColor", "IdCustomer", "IdProduct", "IdSize", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 9, 9, 1, 20 },
-                    { 1, 9, 8, 1, 20 },
-                    { 1, 9, 7, 1, 20 },
-                    { 1, 8, 6, 1, 20 },
-                    { 3, 8, 5, 2, 20 },
                     { 1, 7, 1, 1, 20 },
                     { 2, 7, 2, 2, 20 },
                     { 4, 7, 3, 1, 20 },
-                    { 2, 8, 4, 1, 20 }
+                    { 2, 8, 4, 1, 20 },
+                    { 3, 8, 5, 2, 20 },
+                    { 1, 8, 6, 1, 20 },
+                    { 1, 9, 9, 1, 20 },
+                    { 1, 9, 8, 1, 20 },
+                    { 1, 9, 7, 1, 20 }
                 });
 
             migrationBuilder.InsertData(
@@ -655,48 +628,14 @@ namespace clothing_shop_website.Migrations
                 columns: new[] { "Id", "Address", "DistrictId", "FirstName", "IdCustomer", "LastName", "Phone", "ProvinceId", "State", "WardCode" },
                 values: new object[,]
                 {
-                    { 1, "50/1 Dang Van Bi Street", 3695, "Tuan", 7, "Vo Anh", "0324407774", 202, 1, "90767" },
                     { 6, "KTX Khu B", 3695, "Anh", 9, "Tran Thi Mai", "0324407776", 202, 1, "90767" },
                     { 5, "50/1 Dang Van Bi Street", 3695, "An", 9, "Tran Van", "0324407775", 202, 1, "90767" },
-                    { 4, "46/64", 3695, "Bao", 8, "Le Nguyen Gia", "0324407771", 202, 1, "90767" },
                     { 3, "KTX D2", 3695, "Nhu", 8, "Huynh", "0324407772", 202, 1, "90767" },
-                    { 8, "56/16", 3695, "Hiep", 12, "Nguyen Duc", "0324407777", 202, 1, "90767" },
                     { 7, "KTX D2", 3695, "Huyen", 12, "Nguyen Thi", "0324407777", 202, 1, "90767" },
-                    { 2, "KTX Khu B", 3695, "Tu", 7, "Vo Anh", "0324407773", 202, 1, "90767" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "CustomerIdAccount", "DateCancel", "DateOrder", "DatePayment", "DateShip", "DeliveryAddressId", "FeeDelivery", "IdAddress", "IdCustomer", "IdPromotion", "IdShipper", "IdStaff", "State", "TotalAmount", "TotalProductPrice", "TotalQuantity" },
-                values: new object[,]
-                {
-                    { 11, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 9, 1, 5, 3, 3, 15420000.0, 17100000.0, 30 },
-                    { 10, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 6, 17310000.0, 19200000.0, 30 },
-                    { 9, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 2, 17310000.0, 19200000.0, 30 },
-                    { 8, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
-                    { 7, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 1, 17310000.0, 19200000.0, 30 },
-                    { 5, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 5, 17310000.0, 19200000.0, 30 },
-                    { 4, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 4, 8, 1, 5, 3, 4, 17310000.0, 19200000.0, 30 },
-                    { 3, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 3, 8, 1, 5, 3, 3, 7320000.0, 8100000.0, 20 },
-                    { 2, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 2, 7, 1, 5, 3, 2, 15420000.0, 17100000.0, 30 },
-                    { 1, null, null, new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 30000.0, 1, 7, 1, 5, 3, 1, 10830000.0, 12000000.0, 20 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetails",
-                columns: new[] { "IdColor", "IdOrder", "IdProduct", "IdSize", "ColorId", "ProductId", "Quantity", "SizeId", "UnitPrice" },
-                values: new object[,]
-                {
-                    { 1, 1, 1, 1, null, null, 10, null, 320000.0 },
-                    { 2, 1, 2, 2, null, null, 10, null, 280000.0 },
-                    { 4, 2, 3, 1, null, null, 15, null, 250000.0 },
-                    { 2, 2, 4, 1, null, null, 15, null, 320000.0 },
-                    { 3, 3, 5, 2, null, null, 10, null, 220000.0 },
-                    { 1, 3, 6, 1, null, null, 10, null, 195000.0 },
-                    { 1, 4, 7, 1, null, null, 15, null, 320000.0 },
-                    { 1, 4, 8, 1, null, null, 15, null, 320000.0 },
-                    { 1, 5, 3, 1, null, null, 15, null, 250000.0 },
-                    { 1, 5, 4, 1, null, null, 15, null, 320000.0 }
+                    { 2, "KTX Khu B", 3695, "Tu", 7, "Vo Anh", "0324407773", 202, 1, "90767" },
+                    { 1, "50/1 Dang Van Bi Street", 3695, "Tuan", 7, "Vo Anh", "0324407774", 202, 1, "90767" },
+                    { 4, "46/64", 3695, "Bao", 8, "Le Nguyen Gia", "0324407771", 202, 1, "90767" },
+                    { 8, "56/16", 3695, "Hiep", 12, "Nguyen Duc", "0324407777", 202, 1, "90767" }
                 });
 
             migrationBuilder.CreateIndex(

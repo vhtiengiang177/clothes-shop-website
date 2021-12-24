@@ -3,5 +3,6 @@ export interface Image {
     url?: string,
     publicId?: string,
     isMain?: boolean,
-    idProduct?: number
+    idProduct?: number,
+    name?: string
 }

@@ -35,7 +35,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> Login([FromBody] Account account)
         {
-            var user = await _unitOfWork.AccountsRepository.Login(account.Email, account.Password);
+            var user = await _unitOfWork.AccountsRepository.Login(account.Email,_accountService.MD5Hash(account.Password));
             string firstNameUser = "";
             if (user != null)
             {

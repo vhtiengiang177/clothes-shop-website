@@ -34,7 +34,7 @@ export class LogproductFormComponent implements OnInit {
   }
   isMatComplete = true
 
-  constructor(public dialogRef: MatDialogRef<ProductFormComponent>,
+  constructor(public dialogRef: MatDialogRef<LogproductFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductSizeColorForm,
     private productsStore: ProductsStoreService,
     private sizesStore: SizesStoreService,

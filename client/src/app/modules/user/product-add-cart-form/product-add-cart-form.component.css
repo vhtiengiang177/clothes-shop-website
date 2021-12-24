@@ -28,3 +28,7 @@
 	font-weight: bold;
 	margin-right: 10px;
 }
+
+.image-carousel {
+    max-width: 200px !important;
+}

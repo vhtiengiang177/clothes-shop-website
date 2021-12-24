@@ -12,6 +12,7 @@ import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-s
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { ImagesProductFormComponent } from '../images-product-form/images-product-form.component';
 import { LogproductFormComponent } from '../logproduct-form/logproduct-form.component';
 
 @Component({
@@ -135,6 +136,19 @@ export class ProductDetailComponent implements OnInit {
             this.toastr.error("Not found item at " + stt)
           }
         })
+      }
+    });
+  }
+
+  openImagesForm() {
+    const dialogRef = this.dialog.open(ImagesProductFormComponent, {
+      width: "700px",
+      data: this.id 
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+
       }
     });
   }

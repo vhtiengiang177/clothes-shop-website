@@ -113,6 +113,10 @@ export class ProductsStoreService {
     return this.productService.addImageProduct(id, file)
   }
 
+  deleteImageProduct(id) {
+    return this.productService.deleteImageProduct(id)
+  }
+
   getImagesByIdProduct(idProduct) {
     let result = new Subject<Image[]>();
     this.productService.getImagesByIdProduct(idProduct).subscribe(res => {
@@ -127,6 +131,16 @@ export class ProductsStoreService {
       .subscribe(res => {
         this.products = res.data;
         this.totalData = res.totalData;
+        this.products.forEach(item => {
+          item.imageUrl = "assets/product.jpg"
+          this.productService.getImagesByIdProduct(item.id).subscribe(res => {
+            if (res) {
+              if (res[0]) {
+                item.imageUrl = res[0].url
+              }
+            }
+          })
+        })
       },
         (error: AppError) => {
           if (error instanceof BadRequestError)

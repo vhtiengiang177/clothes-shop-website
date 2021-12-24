@@ -19,12 +19,20 @@
                 <div class="col-lg-6">
                     <div class="product-pic-zoom">
                         <ng-container *ngIf="listImages.length == 0; else second">
-                            <img class="product-big-img image" src="../../../../assets/product.jpg" alt="">
+                            <img class="product-big-img image image-product" src="assets/product.jpg" alt="">
                         </ng-container>
-                        <ng-template>
-                            <img class="product-big-img image" src="this.listImages[0].url">
+                        <ng-template #second>
+                            <img class="product-big-img image image-product" [src]="imageMain">
                         </ng-template>
                     </div>
+                    <carousel 
+                        [cellsToShow]="3"
+                        [cellsToScroll]="1"
+                        [overflowCellsLimit]="4">
+                        <div class="carousel-cell product-item" *ngFor="let image of listImages">
+                            <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
+                        </div>                      
+                    </carousel>
                 </div>
                 <div class="col-lg-6">
                     <div class="product-details">

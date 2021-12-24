@@ -24,7 +24,7 @@ export class UserInfoComponent implements OnInit {
   customer: Customer = {}
   staff: Staff = {}
   typeaccount: number
-  imageUrl: string = null
+  imageUrl: string = "assets/img/profile-default.png"
   oldImageUrl: string
   loading: boolean = false
   messageErrorImage: string = ""
@@ -143,7 +143,6 @@ export class UserInfoComponent implements OnInit {
         }
         else this.toastr.success("Update profile successfully")
       })
-
       
       if (this.imageUrl != this.oldImageUrl) 
         this.updateImage()
@@ -152,5 +151,6 @@ export class UserInfoComponent implements OnInit {
 
   deleteImage() {
     this.imageUrl = this.oldImageUrl
+    // SEND API DELETE IMAGE
   }
 }

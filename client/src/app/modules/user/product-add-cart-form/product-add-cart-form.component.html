@@ -3,12 +3,22 @@
             <div class="row display-detail">
                 <div class="row">
                     <div class="col-md-5">
-                        <ng-container *ngIf="listImages.length == 0; else second">
-                            <img class="product-big-img image-form" src="../../../../assets/product.jpg" alt="">
-                        </ng-container>
-                        <ng-template>
-                            <img class="product-big-img image-form" src="this.listImages[0].url">
-                        </ng-template>
+                        <div class="product-pic-zoom">
+                            <ng-container *ngIf="listImages.length == 0; else second">
+                                <img class="product-big-img image image-product" src="assets/product.jpg" alt="">
+                            </ng-container>
+                            <ng-template #second>
+                                <img class="product-big-img image image-product" [src]="imageMain">
+                            </ng-template>
+                        </div>
+                        <carousel 
+                            [cellsToShow]="3"
+                            [cellsToScroll]="1"
+                            [overflowCellsLimit]="4">
+                            <div class="carousel-cell product-item" *ngFor="let image of listImages">
+                                <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
+                            </div>                      
+                        </carousel>
                     </div>
                     <div class="col-md-6">
                         <div class="product-details">

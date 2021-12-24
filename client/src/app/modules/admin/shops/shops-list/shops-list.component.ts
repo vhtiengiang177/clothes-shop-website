@@ -26,17 +26,13 @@ export class ShopsListComponent implements OnInit {
     shop.subscribe(res => {
       if(res.length != 0) {
         this.shopinfo = res[0]
-        console.log(this.shopinfo);
         
         this.address = this.shopinfo.address + ", " + this.shopinfo.wards + ", " + this.shopinfo.district + ", " + this.shopinfo.province + "."
-        console.log(this.address);
-        
       }
     })
   }
 
   UpdateShopInfo(formShopInfo) {
-    console.log(formShopInfo);
     if (formShopInfo.valid) {
       this.shopinfo.name = formShopInfo.value.name
       this.shopinfo.datecreate = formShopInfo.value.dateCreate

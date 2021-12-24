@@ -37,6 +37,7 @@ export class ProductDetailPageComponent implements OnInit {
   isEnabled = true
   cart: Cart = {}
   outOfStock = false
+  imageMain: string = ""
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -56,11 +57,11 @@ export class ProductDetailPageComponent implements OnInit {
           ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name : ""
         this.fetchItem()
         this.getImages(this.product.id)
-        this.productSizeColorsStore.productitems$.subscribe(res => {
-          if (res) {
-            this.getNameSizeColor()
-          }
-        })
+        // this.productSizeColorsStore.productitems$.subscribe(res => {
+        //   if (res) {
+        //     this.getNameSizeColor()
+        //   }
+        // })
         this.isVisible = true
       }, (error: HttpErrorResponse) => {
         if (error.status == 404) {
@@ -74,7 +75,12 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   fetchItem() {
-    this.productSizeColorsStore.getItemsOfProductForClientPage(this.product.id)
+    this.productSizeColorsStore.getItemsOfProductForClientPage(this.product.id).subscribe(res => {
+      this.productSizeColorsStore.productitems = res
+      if (this.productSizeColorsStore.productitems) {
+        this.getNameSizeColor()
+      }
+    })
   }
 
   getNameSizeColor() {
@@ -106,6 +112,9 @@ export class ProductDetailPageComponent implements OnInit {
   getImages(id) {
     this.productsStore.getImagesByIdProduct(id).subscribe(res => {
       this.listImages = res
+      if (this.listImages.length > 0) {
+        this.imageMain = this.listImages[0].url
+      }
     })
   }
 
@@ -215,4 +224,7 @@ export class ProductDetailPageComponent implements OnInit {
     }
   }
 
+  clickImage(image) {
+    this.imageMain = image.url
+  }
 }

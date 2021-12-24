@@ -40,7 +40,6 @@ import { FooterComponent } from './modules/admin/layout/footer/footer.component'
 import { ConfirmFormComponent } from './modules/common/confirm-form/confirm-form.component';
 import { PromotionFormComponent } from './modules/admin/promotions/promotion-form/promotion-form.component';
 import { StaffFormComponent } from './modules/admin/staff/staff-form/staff-form.component';
-import { StaffAddFormComponent } from './modules/admin/staff/staff-add-form/staff-add-form.component';
 import { OrdersProcessListComponent } from './modules/admin/orders/orders-process-list/orders-process-list.component';
 import { OrdersApprovalListComponent } from './modules/admin/orders/orders-approval-list/orders-approval-list.component';
 import { OrdersDeliveryListComponent } from './modules/admin/orders/orders-delivery-list/orders-delivery-list.component';
@@ -64,7 +63,7 @@ import { ChangePasswordComponent } from './modules/user/my-account/change-passwo
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { DeliveryAddressFormComponent } from './modules/user/my-account/delivery-address-form/delivery-address-form.component';
 import { PromotionPageComponent } from './modules/user/promotion-page/promotion-page.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ImagesProductFormComponent } from './modules/admin/products/images-product-form/images-product-form.component';
 import { OrdersDetailFormComponent } from './modules/admin/orders/orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupListComponent } from './modules/admin/orders/orders-pickup-list/orders-pickup-list.component';
 import { ChartTopProductComponent } from './modules/admin/charts/chart-top-product/chart-top-product.component';
@@ -114,7 +113,6 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     StaffFormComponent,
     PromotionFormComponent,
     StaffFormComponent,
-    StaffAddFormComponent,
     OrdersProcessListComponent,
     OrdersApprovalListComponent,
     OrdersDeliveryListComponent,
@@ -140,7 +138,7 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
     PromotionPageComponent,
-    DeliveryAddressFormComponent,
+    ImagesProductFormComponent,
     OrdersDetailFormComponent,
     OrdersPickupListComponent,
     ChartTopProductComponent,
@@ -162,10 +160,10 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     PromotionFormComponent,
     StaffFormComponent,
     ProductAddCartFormComponent,
-    StaffAddFormComponent,
     StaffDetailFormComponent,
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
+    ImagesProductFormComponent,
     OrdersDetailFormComponent
    
   ],
@@ -180,9 +178,7 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     BrowserAnimationsModule,
     BrowserModule, 
-    IvyCarouselModule,
-    MatTabsModule
-  
+    IvyCarouselModule
   ],
   exports: [
 
