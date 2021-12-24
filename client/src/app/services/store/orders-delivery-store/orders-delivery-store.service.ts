@@ -58,4 +58,11 @@ export class OrdersDeliveryStoreService {
   updateState(id,state) {
     return this.orderService.updateState(id,state)
   }
+
+  async getAllOrdersByCustomerAndState(state) {
+    await this.orderService.getAllOrdersByCustomerAndState(state)
+      .subscribe(res => {
+        this.orders = res.data;
+      })
+  }
 }

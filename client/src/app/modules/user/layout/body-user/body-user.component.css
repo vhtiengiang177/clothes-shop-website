@@ -2541,6 +2541,7 @@ ol {
 .cart-table table tr td {
 	text-align: center;
 	padding-bottom: 34px;
+	padding-top: 10px;
 }
 
 .cart-table table tr td.first-row {

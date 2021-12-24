@@ -38,8 +38,8 @@ export class OrderService extends DataService{
     return query;
   }
 
-  updateState(idState,newState) {
-    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/UpdateState/" + idState + "/"+ newState, idState,
+  updateState(id,newState) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/UpdateState/" + id + "/"+ newState, id,
     {
       headers: this.authorizationHeader()
     })
@@ -58,6 +58,12 @@ export class OrderService extends DataService{
   }
   getAllOrderDetailByOrder(id) {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrderDetailByOrder/" + id, {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getAllOrdersByCustomerAndState(idState) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllOrdersByStateUser/" + idState, {
       headers: this.authorizationHeader()
     })
   }

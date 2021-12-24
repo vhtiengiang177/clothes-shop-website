@@ -194,7 +194,7 @@ export class OrdersProcessListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        this.ordersProcessStore.updateState(idOrder,5).subscribe(() => {
+        this.ordersProcessStore.updateState(idOrder, 6).subscribe(() => {
           this.toastr.success("Cancel order #" + idOrder + " successfully")
           let totalStore = this.ordersProcessStore.orders.length;
           if(totalStore == 1) {

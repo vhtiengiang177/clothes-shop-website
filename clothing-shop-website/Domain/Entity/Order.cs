@@ -22,6 +22,7 @@ namespace Domain.Entity
         public int? IdPromotion { get; set; }
         public int? IdStaff { get; set; }
         public int? IdShipper { get; set; }
+        public int? CancelBy { get; set; }
 
         public DeliveryAddress DeliveryAddress { get; set; }
         public Customer Customer { get; set; }

@@ -15,11 +15,14 @@ export class OrdersApprovalComponent implements OnInit {
   constructor(private ordersApprovalStore: OrdersApprovalStoreService, public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) {
-    this.fetchData()  }
+    this.fetchData()  
+  }
 
   ngOnInit() {
   }
+
   fetchData() {
-    this.ordersApprovalStore.getAllOrderByState(2);
+    // get state 2 and 3
+    this.ordersApprovalStore.getAllOrdersByCustomerAndState();
   }
 }

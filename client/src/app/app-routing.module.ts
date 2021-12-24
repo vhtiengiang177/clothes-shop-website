@@ -39,7 +39,6 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
 import { OrdersApprovalComponent } from './modules/user/orders-history/orders-approval/orders-approval.component';
 import { OrdersCompletedComponent } from './modules/user/orders-history/orders-completed/orders-completed.component';
 import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
-import { OrdersPickupComponent } from './modules/user/orders-history/orders-pickup/orders-pickup.component';
 import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
 import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
 
@@ -207,11 +206,6 @@ const routes: Routes = [
       {
         path: 'orders-approval',
         component: OrdersApprovalComponent,
-        canActivate: [AuthGuard]
-      }, 
-      {
-        path: 'orders-pickup',
-        component: OrdersPickupComponent,
         canActivate: [AuthGuard]
       }, 
       {

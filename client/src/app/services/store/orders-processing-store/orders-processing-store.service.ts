@@ -48,24 +48,21 @@ export class OrdersProcessingStoreService {
       .subscribe(res => {
         this.orders = res.data;
         this.totalData = res.totalData;
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        });
+      });
   }
 
   async getAllOrderByState(state) {
     await this.orderService.getAllOrderByState(state)
       .subscribe(res => {
         this.orders = res.data;
-      },
-        (error: AppError) => {
-          if (error instanceof BadRequestError)
-            this.toastr.error("That's an error", "Bad Request")
-          else this.toastr.error("An unexpected error occurred.")
-        });
+      });
+  }
+
+  async getAllOrdersByCustomerAndState(state) {
+    await this.orderService.getAllOrdersByCustomerAndState(state)
+      .subscribe(res => {
+        this.orders = res.data;
+      })
   }
 
   updateState(id,state) {

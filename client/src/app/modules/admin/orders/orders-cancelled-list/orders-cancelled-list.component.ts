@@ -3,9 +3,13 @@ import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
+import { Account } from 'src/app/services/model/account/account.model';
+import { Customer } from 'src/app/services/model/customer/customer.model';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
+import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
+import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
 import { OrdersCancelledStoreService } from 'src/app/services/store/orders-cancelled-store/orders-cancelled-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
@@ -32,6 +36,8 @@ export class OrdersCancelledListComponent implements OnInit {
 
   constructor(private ordersCancelledStore: OrdersCancelledStoreService, public dialog: MatDialog,
     private staffStore: StaffStoreService,
+    private customerStore: CustomersStoreService,
+    private accountStore: AccountsStoreService,
     private toastr: ToastrService) { 
       this.staffStore.staff$.subscribe(res => {
         if(res.length == 0) {
@@ -160,7 +166,19 @@ export class OrdersCancelledListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersCancelledStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
+        this.accountStore.getById(item.cancelBy).subscribe((res:Account) => {
+          if (res.idTypeAccount == 4) {
+            this.customerStore.getCustomerById(res.id).subscribe((res: Customer) => {
+              item.cancelByName = "KH: " + res.idAccount + " - " + res.firstName
+            })
+          }
+          else {
+            this.staffStore.getById(res.id).subscribe((res:Staff) => {
+              item.cancelByName = "NV: " + res.idAccount + " - " + res.firstName
+            })
+            
+          }
+        })
         item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
         
     }) 

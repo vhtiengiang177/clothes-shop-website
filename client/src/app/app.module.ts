@@ -69,7 +69,6 @@ import { NgChartsModule, ThemeService } from 'ng2-charts';
 import { ChartTopProductComponent } from './modules/admin/charts/chart-top-product/chart-top-product.component';
 import { OrdersHistoryPageComponent } from './modules/user/orders-history-page/orders-history-page.component';
 import { OrdersApprovalComponent } from './modules/user/orders-history/orders-approval/orders-approval.component';
-import { OrdersPickupComponent } from './modules/user/orders-history/orders-pickup/orders-pickup.component';
 import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
 import { OrdersCompletedComponent } from './modules/user/orders-history/orders-completed/orders-completed.component';
 import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
@@ -143,7 +142,6 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
     ChartTopProductComponent,
     OrdersHistoryPageComponent,
     OrdersApprovalComponent,
-    OrdersPickupComponent,
     OrdersDeliveryComponent,
     OrdersCompletedComponent,
     OrdersCancelledComponent,

@@ -19,5 +19,7 @@ export interface Order {
     staff?: string,
     customer?: string,
     promotion?: string,
-    delivery?: string
+    delivery?: string,
+    cancelBy?: number,
+    cancelByName?: string
 }

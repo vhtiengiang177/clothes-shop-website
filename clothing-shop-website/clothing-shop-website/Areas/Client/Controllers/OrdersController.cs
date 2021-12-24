@@ -178,39 +178,57 @@ namespace clothing_shop_website.Areas.Client
             try
             {
                 var order = _unitOfWork.OrdersRepository.GetOrderByID(id);
+                if (order == null) return NotFound();
+
+                var userIdString = User.FindFirst("id").Value;
+                if (userIdString == null) return BadRequest();
+
+                var userId = int.Parse(userIdString);
+
                 IQueryable<OrderDetail> lOrderItems;
 
-               //lOrderItems =_unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
-
-                if (order == null)
-                    return NotFound();
-
-                var userId = User.FindFirst("id").Value;
-                if (userId == null) return BadRequest();
-
-
-                if (state == 3 || state == 4 || state == 5)
-                    order.IdShipper = int.Parse(userId);
-                else
-                    order.IdStaff = int.Parse(userId);
-
-                if (state == 4)
+                switch (state)
                 {
-                    order.DateShip = DateTime.Now;
-                }
-                if (state == 5)
-                {
-                    order.DatePayment = DateTime.Now;
-                }
-                if (state == 6 || state == 7)
-                {
-                    //foreach (var item in lOrderItems)
-                    //{
-                    //    var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
-                    //    ProductItem.Stock -= item.Quantity;
-                    //    _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
-                    //}
-                    order.DateCancel = DateTime.Now;
+                    case 2: // approval
+                        order.IdStaff = userId;
+                        break;
+                    case 3: // pick up
+                        order.IdShipper = userId;
+                        break;
+                    case 4: // delivery
+                        order.DateShip = DateTime.Now;
+                        break;
+                    case 5: // completed
+                        if (order.DatePayment != null)
+                        {
+                            order.DatePayment = DateTime.Now;
+                        }
+                        break;
+                    case 6: // cancelled
+                        order.CancelBy = userId;
+                        order.DateCancel = DateTime.Now;
+
+                        lOrderItems = _unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
+
+                        foreach (var item in lOrderItems)
+                        {
+                            var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
+                            ProductItem.Stock += item.Quantity;
+                            _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
+                        }
+                        break;
+                    case 7: // return refund
+                        order.CancelBy = userId;
+                        order.DateCancel = DateTime.Now;
+
+                        lOrderItems = _unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
+                        foreach (var item in lOrderItems)
+                        {
+                            var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
+                            ProductItem.Stock += item.Quantity;
+                            _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
+                        }
+                        break;
                 }
 
                 order.State = state;
@@ -218,6 +236,62 @@ namespace clothing_shop_website.Areas.Client
                 _unitOfWork.Save();
 
                 return Ok(order);
+
+                /////////////////////////////////
+                //IQueryable<OrderDetail> lOrderItems;
+
+                //lOrderItems =_unitOfWork.OrdersRepository.GetAllOrderDetailByOrder2(order.Id);
+
+                //if (order == null)
+                //    return NotFound();
+
+                //var userId = User.FindFirst("id").Value;
+                //if (userId == null) return BadRequest();
+
+                //var typeUser = int.Parse(User.FindFirst("idTypeAccount").Value);
+
+                //if (typeUser != 4)
+                //{
+                //    if (state == 3 || state == 4 || state == 5) // Pick up, delivery, completed
+                //        order.IdShipper = int.Parse(userId);
+                //    else if (state == 6)
+                //    {
+                //        order.IdStaff = int.Parse(userId);
+                //        order.CancelBy = int.Parse(userId);
+                //    }
+                //    else
+                //        order.IdStaff = int.Parse(userId);
+                //}
+                //else
+                //{
+                //    if (state == 6) // Cancel 
+                //    {
+                //        order.CancelBy = int.Parse(userId);
+                //    }
+                //}
+
+                //if (state == 4)
+                //{
+                //    order.DateShip = DateTime.Now;
+                //}
+                //if (state == 5)
+                //{
+                //    if (order.DatePayment == null)
+                //    {
+                //        order.DatePayment = DateTime.Now;
+                //    }
+                //}
+                //if (state == 6 || state == 7)
+                //{
+                //    //foreach (var item in lOrderItems)
+                //    //{
+                //    //    var ProductItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(item.IdProduct, item.IdSize, item.IdColor);
+                //    //    ProductItem.Stock -= item.Quantity;
+                //    //    _unitOfWork.ProductSizeColorsRepository.Update(ProductItem);
+                //    //}
+                //    order.DateCancel = DateTime.Now;
+                //}
+
             }
             catch
             {

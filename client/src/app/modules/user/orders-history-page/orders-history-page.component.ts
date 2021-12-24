@@ -14,21 +14,8 @@ import { SharedService } from 'src/app/_shared/constant/share-service';
   encapsulation: ViewEncapsulation.None
 })
 export class OrdersHistoryPageComponent implements OnInit {
-  @ViewChild('paginator', { static: false}) paginator: MatPaginator;
-  email: string
-  customer: Customer = {}
-  staff: Staff = {}
-  typeaccount: number
-  name: string
-  imageUrl: string = null
-  clickProfile: boolean = false
-  clickAddress: boolean = false
-  clickChangePass: boolean = false
 
-  constructor(private route: ActivatedRoute,
-    private authService: AuthService, 
-    private accountService: AccountService,
-    private sharedService: SharedService) { 
+  constructor() { 
      
   }
 

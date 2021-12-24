@@ -67,6 +67,16 @@ export class OrdersApprovalStoreService {
         });
   }
 
+  async getAllOrdersByCustomerAndState() {
+    await this.orderService.getAllOrdersByCustomerAndState(2)
+      .subscribe(res => {
+        this.orders = res.data;
+        this.orderService.getAllOrdersByCustomerAndState(3).subscribe(res => {
+          this.orders.push(res.data)
+        })
+      })
+  }
+
   updateState(id,state) {
     return this.orderService.updateState(id,state)
   }

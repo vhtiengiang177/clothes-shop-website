@@ -53,10 +53,7 @@
               <fa *ngIf="filter.sort == 'datepayment:asc'" name="sort-up"></fa>
             </th>
           <th>Cancel/Return</th>
-          <th (click)="sortIdShipper()">Shipper
-              <fa *ngIf="filter.sort == 'idshipper:desc'" name="sort-down"></fa>
-              <fa *ngIf="filter.sort == 'idshipper:asc'" name="sort-up"></fa>
-            </th>
+          <th>Cancel By</th>
           <th (click)="sortIdEmployee()">Employee
               <fa *ngIf="filter.sort == 'idemployee:desc'" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'idemployee:asc'" name="sort-up"></fa>
@@ -73,7 +70,7 @@
             <td><a>{{ order.dateShip |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.datePayment |  date: 'dd/MM/yyyy' }}</a></td>
             <td><a>{{ order.dateCancel |  date: 'dd/MM/yyyy' }}</a></td>
-            <td><a>{{ order.idShipper }}-{{ order.shipper }}</a></td>
+            <td><a>{{ order.cancelByName }}</a></td>
             <td>{{ order.idStaff }}-{{ order.staff }}</td>
             <td (click)="viewDetailOrder(order.id)" type="button" class="btn btn-info button-action">View Detail</td>&nbsp;&nbsp;
           </tr>
