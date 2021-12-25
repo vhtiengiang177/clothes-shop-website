@@ -75,7 +75,7 @@ import { OrdersCancelledComponent } from './modules/user/orders-history/orders-c
 import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
 import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
 import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-amount/chart-total-amount.component';
-
+import { OrderDetailUserFormComponent } from './modules/user/orders-history/order-detail-user-form/order-detail-user-form.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +148,7 @@ import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-am
     OrdersCancelledComponent,
     OrdersReturnComponent,
     OrdersProcessComponent,
+    OrderDetailUserFormComponent,
     ChartTotalAmountComponent
    
   ],
@@ -163,8 +164,8 @@ import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-am
     PromotionDetailComponent,
     DeliveryAddressFormComponent,
     ImagesProductFormComponent,
-    OrdersDetailFormComponent
-   
+    OrdersDetailFormComponent,
+    OrderDetailUserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -182,7 +183,7 @@ import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-am
   ],
   exports: [
 
- ],
+  ],
   providers: [
     AuthService,
     ThemeService

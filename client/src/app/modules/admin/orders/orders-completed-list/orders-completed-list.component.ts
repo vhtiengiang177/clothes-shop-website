@@ -33,19 +33,11 @@ export class OrdersCompletedListComponent implements OnInit {
   constructor(private ordersCompletedStore: OrdersCompletedStoreService, public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersCompletedStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+      this.ordersCompletedStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
-
       this.fetchData()
     }
 
@@ -161,10 +153,17 @@ export class OrdersCompletedListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersCompletedStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
-    }) 
+      if (item.idShipper != null) {
+        this.staffStore.getById(item.idShipper).subscribe((res:Staff) => {
+          item.shipper = res.idAccount + " - " + res.firstName
+        })
+      }
+      if (item.idStaff != null) {
+        this.staffStore.getById(item.idStaff).subscribe(res => {
+          item.staff = res.idAccount + " - " + res.firstName
+        })
+      }
+  }) 
   }
 
   viewDetailOrder(idOrder) {

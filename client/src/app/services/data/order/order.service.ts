@@ -78,6 +78,30 @@ export class OrderService extends DataService{
     })
   }
 
+  getEarningInDay() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetEarningInDay", {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getTotalBuyProductsInDay() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetTotalBuyProductsInDay", {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getTotalBuyProductsInMonth() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetTotalBuyProductsInMonth", {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getProcessOrder() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetProcessOrder", {
+      headers: this.authorizationHeader()
+    })
+  }
+
   getDataChartAmount(choose){
     var params = {
       choose

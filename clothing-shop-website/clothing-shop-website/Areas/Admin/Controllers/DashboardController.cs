@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Persistent;
+using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Mvc;
 
 namespace clothing_shop_website.Areas.Admin.Controllers
 {
@@ -7,16 +9,43 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     [ApiController]
     public class DashboardController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Index()
+        private UnitOfWork _unitOfWork;
+
+        public DashboardController(DataDbContext dbContext)
         {
-            return Ok();
+            _unitOfWork = new UnitOfWork(dbContext);
         }
 
-        //[HttpGet]
-        //public IActionResult GetSalesInMonths()
-        //{
+        [HttpGet("GetEarningInDay")]
+        public IActionResult GetEarningInDay()
+        {
+            var totalEarningInDay = _unitOfWork.OrdersRepository.GetEarningInDay();
 
-        //}
+            return Ok(totalEarningInDay);
+        }
+
+        [HttpGet("GetTotalBuyProductsInDay")]
+        public IActionResult GetTotalBuyProductsInDay()
+        {
+            var totalBuyInDay = _unitOfWork.OrdersRepository.GetTotalBuyProductsInDay();
+
+            return Ok(totalBuyInDay);
+        }
+
+        [HttpGet("GetTotalBuyProductsInMonth")]
+        public IActionResult GetTotalBuyProductsInMonth()
+        {
+            var totalBuyInDay = _unitOfWork.OrdersRepository.GetTotalBuyProductsInMonth();
+
+            return Ok(totalBuyInDay);
+        }
+
+        [HttpGet("GetProcessOrder")]
+        public IActionResult GetProcessOrder()
+        {
+            var task = _unitOfWork.OrdersRepository.GetProcessOrder();
+
+            return Ok(task);
+        }
     }
 }

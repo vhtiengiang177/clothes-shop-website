@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild,Input,Output,EventEmitter } from '@angular
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
+import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
@@ -34,16 +35,9 @@ export class OrdersDeliveryListComponent implements OnInit {
   constructor(private ordersDeliveryStore: OrdersDeliveryStoreService, public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersDeliveryStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+      this.ordersDeliveryStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
 
@@ -161,9 +155,16 @@ export class OrdersDeliveryListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersDeliveryStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
+      if (item.idShipper != null) {
+        this.staffStore.getById(item.idShipper).subscribe((res:Staff) => {
+          item.shipper = res.idAccount + " - " + res.firstName
+        })
+      }
+      if (item.idStaff != null) {
+        this.staffStore.getById(item.idStaff).subscribe(res => {
+          item.staff = res.idAccount + " - " + res.firstName
+        })
+      }
     }) 
   }
 

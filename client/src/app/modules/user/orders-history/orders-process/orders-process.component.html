@@ -27,7 +27,7 @@
                             <td> {{ item.dateOrder |  date: 'dd/MM/yyyy' }}</td>
                             <td >{{ item.totalQuantity }}</td>
                             <td>{{ item.totalAmount | currency: 'VND'}}</td>
-                            <td><button type="button" class="btn btn-info button-action"> Detail</button></td>&nbsp;&nbsp;
+                            <td><button (click)="viewDetailOrder(item.id)" type="button" class="btn btn-info button-action"> Detail</button></td>&nbsp;&nbsp;
                             <td><button type="button" class="btn btn-danger button-action" (click)="cancelOrder(item.id)">Cancel</button></td>
                         </tr>
                     </tbody>

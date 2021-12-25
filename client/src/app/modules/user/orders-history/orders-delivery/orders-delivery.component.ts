@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-Delivery-store/orders-Delivery-store.service';
+import { OrderDetailUserFormComponent } from '../order-detail-user-form/order-detail-user-form.component';
 
 @Component({
   selector: 'app-orders-delivery',
@@ -8,12 +10,24 @@ import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-Delive
 })
 export class OrdersDeliveryComponent implements OnInit {
 
-  constructor(private ordersDeliveryStore: OrdersDeliveryStoreService) { }
+  constructor(private ordersDeliveryStore: OrdersDeliveryStoreService,
+    private dialog: MatDialog) { 
+    this.fetchData()
+  }
 
   ngOnInit() {
   }
 
   fetchData() {
     this.ordersDeliveryStore.getAllOrdersByCustomerAndState(4);
+  }
+
+  viewDetailOrder(idOrder) {
+    const dialogRef = this.dialog.open(OrderDetailUserFormComponent, {
+      width: '800px',
+      data: { 
+       idOrder: idOrder
+      }
+    });
   }
 }

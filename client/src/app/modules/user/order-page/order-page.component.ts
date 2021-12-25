@@ -150,7 +150,7 @@ export class OrderPageComponent implements OnInit {
         this.toastr.success("Order successfully!")
         this.cartsStore.deleteItemsInCart(this.cartsStore.carts).subscribe(() => {
           this.cartsStore.get()
-          this.router.navigate(['shopping-cart'])
+          this.router.navigate(['/my-orders-history'])
         })
         
       }, error => {

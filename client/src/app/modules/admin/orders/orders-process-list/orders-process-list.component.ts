@@ -31,18 +31,6 @@ export class OrdersProcessListComponent implements OnInit {
   constructor(private ordersProcessStore: OrdersProcessingStoreService, public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersProcessStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
-        }
-      })
 
       this.fetchData()
     }
@@ -156,14 +144,6 @@ export class OrdersProcessListComponent implements OnInit {
     }
   }
 
-  getNameStaff() {
-    this.ordersProcessStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
-    }) 
-  }
-
   approvalOrder(idOrder) {
     this.ordersProcessStore.updateState(idOrder,2).subscribe(() => {
       this.toastr.success("Approval order #" + idOrder + " successfully")
@@ -221,10 +201,6 @@ export class OrdersProcessListComponent implements OnInit {
        idOrder:idOrder
       }
     });
-    
-    dialogRef.afterClosed().subscribe(res => {
-    
-    });
-    }
+  }
 
 }

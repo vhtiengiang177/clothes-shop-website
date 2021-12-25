@@ -6,22 +6,22 @@
   <div class="row center">
     <mat-tab-group animationDuration="0ms">
       <mat-tab label="Processing">
-        <app-orders-process></app-orders-process>
+        <app-orders-process (cancel-event)="cancelledEvent()"></app-orders-process>
       </mat-tab>
       <mat-tab label="Approval">
         <app-orders-approval></app-orders-approval>
       </mat-tab>
       <mat-tab label="Delivery">
-        <app-orders-delivery-list></app-orders-delivery-list>
+        <app-orders-delivery></app-orders-delivery>
       </mat-tab>
       <mat-tab label="Completed">
-        <app-orders-completed-list></app-orders-completed-list>
+        <app-orders-completed></app-orders-completed>
       </mat-tab>
       <mat-tab label="Cancelled">
-        <app-orders-cancelled-list></app-orders-cancelled-list>
+        <app-orders-cancelled [cancelledListEvent]="isCancelledEvent"></app-orders-cancelled>
       </mat-tab>
       <mat-tab label="Return Refund">
-        <app-orders-return-list></app-orders-return-list>
+        <app-orders-return></app-orders-return>
       </mat-tab>
     </mat-tab-group>
   </div>

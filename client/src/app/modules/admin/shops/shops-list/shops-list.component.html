@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-10 col-sm-9 col-xs-12 control-label">Email <strong class="required">*</strong></label>
+                        <strong><label class="col-md-10 col-sm-9 col-xs-12 control-label">Email <strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="email" #email="ngModel" matInput [(ngModel)]="shopinfo.email" class="form-control" required>
                             <mat-error *ngIf="email?.touched && email?.invalid && email?.errors?.required">
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-10 col-sm-9 col-xs-12 col-xs-12 control-label">Establishment<strong class="required">*</strong></label>
+                        <strong><label class="col-md-10 col-sm-9 col-xs-12 col-xs-12 control-label">Establishment<strong class="required">*</strong></label></strong>
                             <div class="col-md-10 col-sm-9 col-xs-12 dob">
                                 <input class="form-control" [(ngModel)]="shopinfo.dateCreate" name="dateCreate" #datecreate="ngModel" matInput [matDatepicker]="dateCreate" [value]="shopinfo.dateCreate">
                                 <mat-datepicker-toggle class="p-viewer" matSuffix [for]="dateCreate"></mat-datepicker-toggle>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone<strong class="required">*</strong></label>
+                        <strong><label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone<strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="phone" #phone="ngModel" matInput [(ngModel)]="shopinfo.phone" class="form-control" required>
                             <mat-error *ngIf="phone?.touched && phone?.invalid && phone?.errors?.required" >
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Address<strong class="required">*</strong></label>
+                        <strong><label class="col-md-2 col-sm-3 col-xs-12 control-label">Address<strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="address" #address="ngModel" matInput [(ngModel)]="shopinfo.address" class="form-control" required>
                             <mat-error *ngIf="address?.touched && address?.invalid && address?.errors?.required" >
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">District<strong class="required">*</strong></label>
+                        <strong><label class="col-md-2 col-sm-3 col-xs-12 control-label">District<strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="district" #district="ngModel" matInput [(ngModel)]="shopinfo.district" class="form-control" required>
                             <mat-error *ngIf="district?.touched && district?.invalid && district?.errors?.required" >
@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Wards<strong class="required">*</strong></label>
+                        <strong><label class="col-md-2 col-sm-3 col-xs-12 control-label">Wards<strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="wards" #wards="ngModel" matInput [(ngModel)]="shopinfo.wards" class="form-control" required>
                             <mat-error *ngIf="wards?.touched && wards?.invalid && wards?.errors?.required">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="col-md-2 col-sm-3 col-xs-12 control-label">Province<strong class="required">*</strong></label>
+                        <strong><label class="col-md-2 col-sm-3 col-xs-12 control-label">Province<strong class="required">*</strong></label></strong>
                         <div class="col-md-10 col-sm-9 col-xs-12">
                             <input type="text" name="province" #province="ngModel" matInput [(ngModel)]="shopinfo.province" class="form-control" required>
                             <mat-error *ngIf="province?.touched && province?.invalid && province?.errors?.required">
@@ -90,7 +90,7 @@
         <hr>
         <div class="form-group">
             <div >
-                <input class="btn btn-primary" type="submit" value="Update Information">
+                <input class="btn btn-add" type="submit" value="Update Information">
             </div>
         </div>
     </form>

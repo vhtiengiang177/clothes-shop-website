@@ -27,7 +27,7 @@
                             <td> {{ item.dateOrder |  date: 'dd/MM/yyyy' }}</td>
                             <td >{{ item.totalQuantity }}</td>
                             <td>{{ item.totalAmount | currency: 'VND'}}</td>
-                            <td><button type="button" class="btn btn-info button-action">Detail</button></td>&nbsp;&nbsp;
+                            <td><button (click)="viewDetailOrder(item.id)" type="button" class="btn btn-info button-action">Detail</button></td>&nbsp;&nbsp;
                         </tr>
                         <tr class="trow estimate">
                             <td colspan="7" class="stock">Estimated delivery date: 3-5 workdays</td>

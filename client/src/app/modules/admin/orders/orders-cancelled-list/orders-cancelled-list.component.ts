@@ -39,16 +39,9 @@ export class OrdersCancelledListComponent implements OnInit {
     private customerStore: CustomersStoreService,
     private accountStore: AccountsStoreService,
     private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersCancelledStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+      this.ordersCancelledStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
 
@@ -180,7 +173,9 @@ export class OrdersCancelledListComponent implements OnInit {
           }
         })
         if (item.idStaff != null) {
-          item.staff = item.idStaff + " - " + this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName  
+          this.staffStore.getById(item.idStaff).subscribe(res => {
+            item.staff = res.idAccount + " - " + res.firstName
+          })
         }
     }) 
   }
@@ -192,10 +187,6 @@ export class OrdersCancelledListComponent implements OnInit {
        idOrder:idOrder
       }
     });
-    
-    dialogRef.afterClosed().subscribe(res => {
-    
-    });
-    }
+  }
 
 }

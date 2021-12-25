@@ -1,0 +1,90 @@
+<h3>Order #{{ order.id }}</h3>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <div class="checkout-form">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3><strong>Information</strong></h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div *ngIf="order.dateOrder" class="row">
+                            <div class="col-md-5 title-item">
+                                <strong>Date Order:</strong>
+                            </div>
+                            <div class="col-md-7">
+                                {{ order.dateOrder | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                        <div *ngIf="order.datePayment" class="row">
+                            <div class="col-md-5 title-item">
+                                <strong>Date Payment:</strong>
+                            </div>
+                            <div class="col-md-7">
+                                {{ order.datePayment | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                        <div *ngIf="order.dateShip" class="row">
+                            <div class="col-md-5 title-item">
+                                <strong>Date Ship:</strong>
+                            </div>
+                            <div class="col-md-7">
+                                {{ order.dateShip | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                        <div  class="row">
+                            <div class="col-md-5 title-item">
+                               <strong>Fee Delivery:</strong> 
+                            </div>
+                            <div *ngIf="order.feeDelivery" class="col-md-7">
+                                {{ order.feeDelivery | currency: 'VND'}}
+                            </div>
+                            <div *ngIf="!order.feeDelivery" class="col-md-7">
+                                0 VND
+                            </div>
+                        </div>
+                        <div *ngIf="promotion" class="row">
+                            <div class="col-md-5 title-item">
+                                <strong> Promotion:</strong> 
+                            </div>
+                            <div class="col-md-7">
+                                {{ promotion }} 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 title-item">
+                                <strong>Delivery Address:</strong>
+                            </div>
+                            <div class="col-md-7">
+                                <ul>
+                                    <li>Name: {{ deliveryAddress.lastName }}  {{ this.deliveryAddress.firstName }}</li>
+                                    <li>Phone: {{ deliveryAddress.phone }}</li>
+                                    <li>Address: {{ address }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="place-order">
+                    <h3><strong>Your Order</strong></h3>
+                    <div class="order-total detail-form">
+                        <ul class="order-table">
+                            <li>Product <span>Total</span></li>
+                            <li *ngFor="let item of orderDetailStore.orderdetails$ | async" class="fw-normal">
+                                {{ item?.product }} x {{ item.quantity }} ({{ item.size }}/{{ item.color }})
+                                <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
+                            </li>
+                            <li class="total-price">SUBTOTAL<span>{{ order.totalProductPrice | currency: 'VND'}}</span></li>
+                            <li class="total-price">DISCOUNT<span> - {{ discount | currency: 'VND'}}</span></li>
+                            <li class="total-price">TOTAL<span>{{ order.totalAmount | currency: 'VND' }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-secondary">Exit</button> &nbsp;
+</mat-dialog-actions>

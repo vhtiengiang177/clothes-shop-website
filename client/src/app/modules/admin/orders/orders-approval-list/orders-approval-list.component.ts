@@ -37,16 +37,9 @@ export class OrdersApprovalListComponent implements OnInit {
     private authService : AuthService,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
-      this.staffStore.staff$.subscribe(res => {
-        if(res.length < this.staffStore.totalData) {
-          this.staffStore.getAllStaff()
-        }
-        else {
-          this.ordersApprovalStore.orders$.subscribe(res => {
-            if (res) {
-              this.getNameStaff()
-            }
-          })
+      this.ordersApprovalStore.orders$.subscribe(res => {
+        if (res) {
+          this.getNameStaff()
         }
       })
 
@@ -165,9 +158,11 @@ export class OrdersApprovalListComponent implements OnInit {
 
   getNameStaff() {
     this.ordersApprovalStore.orders.forEach((item:Order) => {
-        item.shipper = this.staffStore.staff.filter(x => x.idAccount == item.idShipper)[0].firstName
-        item.staff = this.staffStore.staff.filter(x => x.idAccount == item.idStaff)[0].firstName
-        
+      if (item.idStaff != null) {
+        this.staffStore.getById(item.idStaff).subscribe(res => {
+          item.staff = res.idAccount + " - " + res.firstName
+        })
+      }
     }) 
   }
   

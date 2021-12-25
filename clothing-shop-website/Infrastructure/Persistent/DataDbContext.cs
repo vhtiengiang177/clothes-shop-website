@@ -350,9 +350,9 @@ namespace Infrastructure.Persistent
 
             modelBuilder.Entity<Promotion>().HasData(
                new Promotion() { Id = 1, Name = "NEWYEAR3112", Description = "MEGA SALE 31-12", Value = 0.2, StartDate = new DateTime(2021, 12, 31), EndDate = new DateTime(2021, 1, 1), State = 1, CreatedDate = createdDate, CreatedById = 1 },
-               new Promotion() { Id = 2, Name = "WOMANDAY", Description = "Women's Day 8-3", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 2, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 3, Name = "TET999", Description = "Tet Holiday 2022", Value = 0.2, StartDate = new DateTime(2022, 1, 26), EndDate = new DateTime(2021, 1, 29), State = 2, CreatedDate = createdDate, CreatedById = 2 },
-               new Promotion() { Id = 4, Name = "WOMANVN", Description = "Women Viet Nam 20-10-2021", Value = 0.1, StartDate = new DateTime(2021, 10, 20), EndDate = new DateTime(2021, 10, 21), State = 3, CreatedDate = createdDate, CreatedById = 3 });
+               new Promotion() { Id = 2, Name = "WOMANDAY", Description = "Women's Day 8-3", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+               new Promotion() { Id = 3, Name = "TET999", Description = "Tet Holiday 2022", Value = 0.2, StartDate = new DateTime(2022, 1, 26), EndDate = new DateTime(2021, 1, 29), State = 1, CreatedDate = createdDate, CreatedById = 2 },
+               new Promotion() { Id = 4, Name = "WOMANVN", Description = "Women Viet Nam 20-10-2021", Value = 0.1, StartDate = new DateTime(2021, 10, 20), EndDate = new DateTime(2021, 10, 21), State = 1, CreatedDate = createdDate, CreatedById = 3 });
 
             modelBuilder.Entity<Cart>().HasData(
                new Cart() { IdCustomer = 7, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 20 },
