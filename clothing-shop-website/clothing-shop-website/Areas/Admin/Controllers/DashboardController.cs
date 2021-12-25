@@ -32,6 +32,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return Ok(totalBuyInDay);
         }
 
+        [HttpGet("GetTotalBuyProductsInMonth")]
+        public IActionResult GetTotalBuyProductsInMonth()
+        {
+            var totalBuyInDay = _unitOfWork.OrdersRepository.GetTotalBuyProductsInMonth();
+
+            return Ok(totalBuyInDay);
+        }
+
         [HttpGet("GetProcessOrder")]
         public IActionResult GetProcessOrder()
         {

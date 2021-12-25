@@ -21,19 +21,20 @@ export class DashboardComponent implements OnInit {
       this.earning = res
     })
 
-    orderStore.getTotalBuyProductsInDay().subscribe(res => {
+    orderStore.getTotalBuyProductsInMonth().subscribe(res => {
       this.totalBuy = res
     })
 
     orderStore.getProcessOrder().subscribe(res => {
       this.task = res
     })
+
     interval(5000).subscribe(x => {
       orderStore.getEarningInDay().subscribe(res => {
         this.earning = res
       })
 
-      orderStore.getTotalBuyProductsInDay().subscribe(res => {
+      orderStore.getTotalBuyProductsInMonth().subscribe(res => {
         this.totalBuy = res
       })
 

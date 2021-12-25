@@ -23,6 +23,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         double GetEarningInDay();
         int GetTotalBuyProductsInDay();
         int GetProcessOrder();
+        int GetTotalBuyProductsInMonth();
 
     }
 }

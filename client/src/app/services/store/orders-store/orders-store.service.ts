@@ -34,6 +34,10 @@ export class OrdersStoreService {
     return this.orderService.getTotalBuyProductsInDay()
   }
 
+  getTotalBuyProductsInMonth() {
+    return this.orderService.getTotalBuyProductsInMonth()
+  }
+
   getProcessOrder() {
     return this.orderService.getProcessOrder()
   }

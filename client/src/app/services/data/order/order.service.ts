@@ -90,6 +90,12 @@ export class OrderService extends DataService{
     })
   }
 
+  getTotalBuyProductsInMonth() {
+    return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetTotalBuyProductsInMonth", {
+      headers: this.authorizationHeader()
+    })
+  }
+
   getProcessOrder() {
     return this.http.get<any>(GlobalConstants.apiUrl + "/admin/dashboard/GetProcessOrder", {
       headers: this.authorizationHeader()

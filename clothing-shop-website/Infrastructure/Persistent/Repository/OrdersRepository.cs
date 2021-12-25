@@ -132,5 +132,18 @@ namespace Infrastructure.Persistent.Repository
 
             return task;
         }
+
+        public int GetTotalBuyProductsInMonth()
+        {
+            int totalBuy = 0;
+            var listOrder = _dbContext.Orders.Where(item => item.DateShip >= DateTime.Parse("2021-12-01") && item.DateShip <= DateTime.Parse("2021-12-31")).ToList();
+
+            foreach (var order in listOrder)
+            {
+                totalBuy += order.TotalQuantity;
+            }
+
+            return totalBuy;
+        }
     }
 }
