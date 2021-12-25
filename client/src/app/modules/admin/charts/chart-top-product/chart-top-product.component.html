@@ -1,0 +1,20 @@
+<div class="container">
+    <div>  
+        <div  class="row"> 
+        <div class="chart">
+            <canvas baseChart
+            [data]="pieChartData"
+            [type]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins">
+            </canvas>
+        </div>
+        </div>
+  </div>
+  <div class="row">
+    <label class="title">CHART TOP 5 PRODUCTS BEST SELLER OF SHOP</label>
+</div>
+  <div class="button-row">
+    <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+  </div>
+</div>

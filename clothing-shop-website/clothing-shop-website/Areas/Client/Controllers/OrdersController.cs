@@ -364,5 +364,62 @@ namespace clothing_shop_website.Areas.Client
 
             return BadRequest(ModelState);
         }
+
+        [HttpGet("GetDataChartAmout")]
+        public IActionResult GetDataChartAmout([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate, [FromQuery] int choose)
+        {
+            try
+            {
+                var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(fromDate, toDate);
+                double[] arrData = new double[1];
+
+                switch (choose)
+                {
+                    case 1:
+                        arrData = new double[8];
+                        int day = 0;
+                        DateTime date = new DateTime();
+                        foreach ( var item in lOrders)
+                        {
+                            day += 1;
+                            DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
+                            if ((date == null ) || (date != updatedTime))
+                            {
+                                date = updatedTime;
+                                day+= 1;
+                            }
+                            arrData[day] += item.TotalAmount;   
+                        }
+                        break;
+                    case 2:
+                         arrData = new double[13];
+                        foreach (var item in lOrders)
+                        {
+                            DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
+
+                            arrData[updatedTime.Month] += item.TotalAmount;
+                               
+                        }
+                        break;
+                    case 3:
+                         arrData = new double[3];
+                        foreach (var item in lOrders)
+                        {
+                             DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
+
+                             arrData[updatedTime.Year] += item.TotalAmount;
+                        }
+                        break;
+                       
+                }
+                return Ok(arrData);
+
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
+
 }

@@ -77,4 +77,15 @@ export class OrderService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getDataChartAmount(fromdate,todate,choose){
+    var params = {
+      fromdate,
+      todate,
+      choose
+    }
+    return this.http.post<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetDataChartAmout" + this.convertToQueryString(params), {
+      headers: this.authorizationHeader()
+    })
+  }
 }

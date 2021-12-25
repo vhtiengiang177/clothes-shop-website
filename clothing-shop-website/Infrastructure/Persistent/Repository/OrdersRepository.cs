@@ -1,6 +1,7 @@
 ﻿using Domain.Entity;
 using Domain.Infrastructure.Persistent.Repository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,12 @@ namespace Infrastructure.Persistent.Repository
                 _dbContext.Attach(Order);
             }
             _dbContext.Remove(Order);
+        }
+
+        public IQueryable<Order> GetDataAmount(DateTime fromDate,DateTime toDate)
+        {
+            var lorders = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment>= fromDate && o.DatePayment<=toDate);
+            return lorders.AsQueryable();
         }
 
        

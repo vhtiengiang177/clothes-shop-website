@@ -20,6 +20,7 @@ namespace Domain.Infrastructure.Persistent.Repository
         Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order);
          Task<IQueryable<Order>> GetAllOrders();
         IQueryable<OrderDetail> GetAllOrderDetailByOrder2(int order);
+        IQueryable<Order> GetDataAmount(DateTime fromDate, DateTime toDate);
 
     }
 }
