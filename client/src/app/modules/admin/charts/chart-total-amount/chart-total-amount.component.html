@@ -3,12 +3,12 @@
   <br>
     <div>  
         <div class="row">
-          <mat-form-field>
+          <!-- <mat-form-field>
             <input  matInput [matDatepicker]="date" placeholder="Choose a date" (dateChange)="updateMY()" [formControl]="serializedDate">
             <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
             <mat-datepicker  #date></mat-datepicker>
-          </mat-form-field>
-          &ensp;&ensp;&ensp;&ensp;
+          </mat-form-field> -->
+          <!-- &ensp;&ensp;&ensp;&ensp;
           <mat-form-field>
             <mat-label>Choose a month</mat-label>
             <mat-select>
@@ -16,13 +16,19 @@
                 {{month.name}}
               </mat-option>
             </mat-select>
-          </mat-form-field>
-          &ensp;&ensp;&ensp;&ensp;
+          </mat-form-field> -->
+          <!-- &ensp;&ensp;&ensp;&ensp; -->
           <mat-form-field>
-            <mat-label>Choose a year</mat-label>
-            <mat-select >
-              <mat-option *ngFor="let year of yearList" [value]="year.id">
-                {{year.name}}
+            <mat-label>Choose a view</mat-label>
+            <mat-select [(value)] = "view">
+              <mat-option (click)="ClickView()" [value]="1" >
+                Week
+              </mat-option>
+              <mat-option (click)="ClickView()" [value]="2">
+                Month
+              </mat-option>              
+              <mat-option (click)="ClickView()" [value]="3">
+                Year
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -45,6 +51,6 @@
     <label class="title">CHART TOTAL AMOUNT OF SHOP</label>
 </div>
   <div class="button-row">
-    <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+    <button mat-button mat-raised-button color="primary" (click)="updateChart()">Update</button>
   </div>
 </div>

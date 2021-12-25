@@ -22,6 +22,7 @@ export class ChartTotalAmountComponent implements OnInit {
   lastdate:Date
   firstDate:Date
   dataAmount: number[]=[]
+  view: number = 1
   //date: any
   //date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -44,23 +45,24 @@ export class ChartTotalAmountComponent implements OnInit {
     ];
 
     this.yearList = [
-    {id: 0, name: 'All years'},
-    {id: 1, name:'2020'},
-    {id: 2, name:'2021'}
+    {id: 0, name: 'View by day'},
+    {id: 1, name:'View by month'},
+    {id: 2, name:'View by year'}
     ]
-   // this.date = new Date().toLocaleDateString();
-    this.disableSelect=!this.disableSelect;
-    this. getFromDateToDate();
-    // this.orderService.getDataChartAmount(this.firstDate,this.lastdate,1).subscribe(p=>{
-    //   this.dataAmount = p;
-    // })
+   
+  
+  
+    this.orderService.getDataChartAmount(1).subscribe(p=>{
+      this.dataAmount = p;
+    })
    }
 
   ngOnInit() {
-    // this.orderService.getDataChartAmount(this.firstDate,this.lastdate,1).subscribe(p=>{
-    //   this.dataAmount = p;
-    // })
-    //this.randomize();
+    this.orderService.getDataChartAmount(1).subscribe(p=>{
+      this.dataAmount = p;
+      this.updateChart(1);
+    })
+    
   }
   
   @ViewChild(BaseChartDirective,{ static: true}) chart: BaseChartDirective | undefined;
@@ -90,7 +92,7 @@ export class ChartTotalAmountComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['20/12', '21/12', '22/12', '23/12', '24/12', '25/12', '26/12' ],
+    labels: ['Mon','Tue','Wed','Thur','Fri','Sar','Sun' ],
     datasets: [
       { data: [ 100000,200000,400000,500000,100000,700000,400000], label: 'Total Amount' }
     ]
@@ -105,11 +107,23 @@ export class ChartTotalAmountComponent implements OnInit {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    this.barChartData.labels = [ '20/12', '21/12', '22/12', '23/12', '24/12', '25/12', '26/12']
+  public updateChart(choose): void {
+    if (choose == 1)
+    {
+      this.barChartData.labels = [ 'Mon','Tue','Wed','Thur','Fri','Sar','Sun']
+    }
+    if (choose == 2)
+    {
+      this.barChartData.labels = [ 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    }
+    if (choose == 3)
+    {
+      this.barChartData.labels = [ '2020','2021']
+    }
     // Only Change 3 values
+    console.log(this.dataAmount);
+    
     this.barChartData.datasets[0].data =this.dataAmount;
-     
 
     this.chart.update();
   }
@@ -125,5 +139,14 @@ export class ChartTotalAmountComponent implements OnInit {
 
      this.firstDate = new Date(curr.setDate(first));
      this.lastdate = new Date(curr.setDate(last))
+  }
+
+  ClickView() {
+    console.log(this.view);
+    
+    this.orderService.getDataChartAmount(this.view).subscribe(p=>{
+      this.dataAmount = p;
+      this.updateChart(this.view);
+    })
   }
 }

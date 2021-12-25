@@ -365,17 +365,21 @@ namespace clothing_shop_website.Areas.Client
             return BadRequest(ModelState);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetDataChartAmout")]
-        public IActionResult GetDataChartAmout([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate, [FromQuery] int choose)
+        public IActionResult GetDataChartAmout([FromQuery] int choose)
         {
             try
             {
-                var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(fromDate, toDate);
+                
                 double[] arrData = new double[1];
 
                 switch (choose)
                 {
                     case 1:
+                        DateTime fromDate = new DateTime(2021, 12, 20);
+                        DateTime toDate = new DateTime(2021, 12, 26);
+                        var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(fromDate, toDate);
                         arrData = new double[8];
                         int day = 0;
                         DateTime date = new DateTime();
@@ -392,22 +396,28 @@ namespace clothing_shop_website.Areas.Client
                         }
                         break;
                     case 2:
-                         arrData = new double[13];
-                        foreach (var item in lOrders)
+                        DateTime fromDate2 = new DateTime(2021, 01, 01);
+                        DateTime toDate2 = new DateTime(2021, 12, 31);
+                        var lOrders2 = _unitOfWork.OrdersRepository.GetDataAmount(fromDate2, toDate2);
+                        arrData = new double[12];
+                        foreach (var item in lOrders2)
                         {
                             DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
 
-                            arrData[updatedTime.Month] += item.TotalAmount;
+                            arrData[updatedTime.Month-1] += item.TotalAmount;
                                
                         }
                         break;
                     case 3:
-                         arrData = new double[3];
-                        foreach (var item in lOrders)
+                        DateTime fromDate3 = new DateTime(2020, 01, 01);
+                        DateTime toDate3 = new DateTime(2021, 12, 31);
+                        var lOrders3 = _unitOfWork.OrdersRepository.GetDataAmount(fromDate3, toDate3);
+                        arrData = new double[2];
+                        foreach (var item in lOrders3)
                         {
                              DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
 
-                             arrData[updatedTime.Year] += item.TotalAmount;
+                             arrData[1] += item.TotalAmount;
                         }
                         break;
                        

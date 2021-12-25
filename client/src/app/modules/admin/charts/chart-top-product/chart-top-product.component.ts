@@ -21,8 +21,9 @@ export class ChartTopProductComponent implements OnInit{
 
   ngOnInit() {
     this.productsStore.getTopBestSellers().subscribe(p => {
+      this.randomize();
     }) 
-   this.randomize();
+  
   }
 
 
