@@ -380,19 +380,13 @@ namespace clothing_shop_website.Areas.Client
                         DateTime fromDate = new DateTime(2021, 12, 20);
                         DateTime toDate = new DateTime(2021, 12, 26);
                         var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(fromDate, toDate);
-                        arrData = new double[8];
+                        arrData = new double[7];
                         int day = 0;
                         DateTime date = new DateTime();
-                        foreach ( var item in lOrders)
+                        foreach (var item in lOrders)
                         {
-                            day += 1;
                             DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
-                            if ((date == null ) || (date != updatedTime))
-                            {
-                                date = updatedTime;
-                                day+= 1;
-                            }
-                            arrData[day] += item.TotalAmount;   
+                            arrData[5] += item.TotalAmount;
                         }
                         break;
                     case 2:

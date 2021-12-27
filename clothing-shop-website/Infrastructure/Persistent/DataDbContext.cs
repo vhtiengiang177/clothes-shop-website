@@ -388,6 +388,20 @@ namespace Infrastructure.Persistent
             //   new OrderDetail() { IdOrder = 4, IdProduct = 8, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 320000 },
             //   new OrderDetail() { IdOrder = 5, IdProduct = 3, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 250000 },
             //   new OrderDetail() { IdOrder = 5, IdProduct = 4, IdSize = 1, IdColor = 1, Quantity = 15, UnitPrice = 320000 });
+
+            //modelBuilder.Entity<Image>().HasData(
+            //    new Image() { Id = 1, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377326/upkgtzzikelofkm59hym.jpg", PublicId = "upkgtzzikelofkm59hym", State = 1, IdProduct = 7 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377339/nyui0gbxjklueygs79t3.jpg", PublicId = "nyui0gbxjklueygs79t3", State = 1, IdProduct = 8 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377352/hwyrx7fngep248l9sgok.jpg", PublicId = "hwyrx7fngep248l9sgok", State = 1, IdProduct = 6 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377360/wljzh5o9z4lijmkpz6g9.jpg", PublicId = "wljzh5o9z4lijmkpz6g9", State = 1, IdProduct = 5 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377369/vhaaahd0swocol1jmdzb.jpg", PublicId = "vhaaahd0swocol1jmdzb", State = 1, IdProduct = 4 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377386/zrziv9gpeusmhtxsfkjt.jpg", PublicId = "zrziv9gpeusmhtxsfkjt", State = 1, IdProduct = 3 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377387/gspnzsvax2tzcrnqu6qz.jpg", PublicId = "gspnzsvax2tzcrnqu6qz", State = 1, IdProduct = 3 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377387/jyekdiysmfp2y4jdy4py.jpg", PublicId = "jyekdiysmfp2y4jdy4py", State = 1, IdProduct = 3 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377395/hbsloasmry0visw71kom.jpg", PublicId = "hbsloasmry0visw71kom", State = 1, IdProduct = 2 },
+            //    new Image() { Id = 2, Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377407/rg2fwfca5dcqfdkarnxv.jpg", PublicId = "rg2fwfca5dcqfdkarnxv", State = 1, IdProduct = 1 }
+            //);
+        
         }
     }
 }
