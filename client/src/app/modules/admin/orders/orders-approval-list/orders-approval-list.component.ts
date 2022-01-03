@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, ViewChild,Output } from '@angul
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
@@ -34,7 +34,7 @@ export class OrdersApprovalListComponent implements OnInit {
   staff: Staff = {}
 
   constructor(private ordersApprovalStore: OrdersApprovalStoreService, public dialog: MatDialog,
-    private authService : AuthService,
+    private authService : AuthAppService,
     private staffStore: StaffStoreService,
     private toastr: ToastrService) { 
       this.ordersApprovalStore.orders$.subscribe(res => {

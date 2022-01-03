@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { Account } from 'src/app/services/model/account/account.model';
 import { AccountsStoreService } from 'src/app/services/store/accounts-store/accounts-store.service';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
@@ -23,7 +23,7 @@ export class VerificationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router, 
-    private authService: AuthService,
+    private authService: AuthAppService,
     private toastr: ToastrService,
     private cartStore: CartsStoreService) { 
 

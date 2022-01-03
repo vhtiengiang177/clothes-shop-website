@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   isUserInformation: boolean = false;
   
-  constructor(private authService: AuthService,
+  constructor(private authService: AuthAppService,
     private router: Router,
     private route: ActivatedRoute) { }
 

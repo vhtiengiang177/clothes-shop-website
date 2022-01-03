@@ -53,3 +53,7 @@
 .center-table {
     justify-content: center;
 }
+
+.image-empty-delivery {
+    max-width: 100%;
+}

@@ -58,7 +58,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim("id", user.Id.ToString()),
                     new Claim("firstNameUser", firstNameUser),
-                    new Claim("idTypeAccount", user.IdTypeAccount.ToString())
+                    new Claim("idTypeAccount", user.IdTypeAccount.ToString()),
+                    new Claim("provider", "ACCOUNT")
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -126,7 +127,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim("id", user.Id.ToString()),
                     new Claim("firstNameUser", firstNameUser),
-                    new Claim("idTypeAccount", user.IdTypeAccount.ToString())
+                    new Claim("idTypeAccount", user.IdTypeAccount.ToString()),
+                    new Claim("provider", "ACCOUNT")
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -180,6 +182,55 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
             }
             return BadRequest("Not Found"); // Fix sang return NotFound
+        }
+
+        [HttpPost("LoginWithGoogle")]
+        public async Task<ActionResult> LoginWithGoogle([FromBody] GoogleUser user)
+        {
+            Account accountGoogle = _unitOfWork.AccountsRepository.IsExistEmailGoogle(user.Email);
+
+            if (accountGoogle == null)
+            {
+                Account account = new Account();
+                account.Email = user.Email;
+                account.Password = null;
+                account.IdTypeAccount = 4;
+                account.VerificationCode = 1;
+
+                Customer customer = new Customer();
+                customer.LastName = user.LastName;
+                customer.FirstName = user.FirstName;
+                customer.Image = user.PhotoUrl;
+
+
+                accountGoogle = _unitOfWork.AccountsRepository.CreateAccount(account, customer, null);
+                if (_unitOfWork.Save() == false)
+                {
+                    return BadRequest("Failed.");
+                }
+            }
+
+            var claims = new[] {
+                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim("id", accountGoogle.Id.ToString()),
+                    new Claim("firstNameUser", user.FirstName),
+                    new Claim("idTypeAccount", accountGoogle.IdTypeAccount.ToString()),
+                    new Claim("provider", "GOOGLE")
+                    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddDays(10),
+                signingCredentials: signIn);
+
+            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
         }
     }
 }

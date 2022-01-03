@@ -17,5 +17,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Task<Account> Login(string username, string password);
         bool IsExistEmail(string email);
         bool VerifyAccount(int VerificationCode, Account account);
+        Account IsExistEmailGoogle(string email);
     }
 }

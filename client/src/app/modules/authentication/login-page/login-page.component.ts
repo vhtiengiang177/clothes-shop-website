@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   email: string;
   passwordVisibility: boolean = false
   
-  constructor(private authService: AuthService, 
+  constructor(private authService: AuthAppService, 
     private router: Router,
     private route: ActivatedRoute, 
     private toastr: ToastrService,
@@ -49,4 +50,7 @@ export class LoginPageComponent implements OnInit {
     this.cartStore.get()
   }
 
+  socialSignIn() {
+    this.authService.signInWithGoogle()
+  }
 }

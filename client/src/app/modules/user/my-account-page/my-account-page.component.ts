@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/data/account/account.service';
 import { Customer } from 'src/app/services/model/customer/customer.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
@@ -24,7 +24,7 @@ export class MyAccountPageComponent implements OnInit {
   clickChangePass: boolean = false
 
   constructor(private route: ActivatedRoute,
-    private authService: AuthService, 
+    private authService: AuthAppService, 
     private accountService: AccountService,
     private sharedService: SharedService) { 
     let path = route.snapshot.children[0].routeConfig.path

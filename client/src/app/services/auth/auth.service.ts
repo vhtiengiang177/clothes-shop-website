@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { map } from 'rxjs/operators';
 import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthAppService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private authSocialService: AuthService, private router: Router) { 
   }
 
   login(account) {
@@ -57,5 +59,16 @@ export class AuthService {
       let token = localStorage.getItem('token');
       
       return jwtHelper.decodeToken(token);
+  }
+
+  signInWithGoogle(): void {
+    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user) => {
+      this.http.post(GlobalConstants.apiUrl + '/authentication/LoginWithGoogle', user, {
+        responseType: "text"
+      }).subscribe(res => {
+        localStorage.setItem('token', res)
+        this.router.navigate(['/']);
+      });
+    });
   }
 }

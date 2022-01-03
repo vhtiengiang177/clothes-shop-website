@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/data/account/account.service';
 import { Account } from 'src/app/services/model/account/account.model';
 import { Customer } from 'src/app/services/model/customer/customer.model';
@@ -30,7 +30,7 @@ export class UserInfoComponent implements OnInit {
   messageErrorImage: string = ""
   fileToUploadUpdate: File
 
-  constructor(private authService: AuthService, 
+  constructor(private authService: AuthAppService, 
     private accountService: AccountService,
     private sharedService: SharedService,
     private staffStore: StaffStoreService,

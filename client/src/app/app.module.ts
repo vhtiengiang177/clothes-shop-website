@@ -22,7 +22,7 @@ import { NavbarUserComponent } from './modules/user/layout/navbar-user/navbar-us
 import { HeaderUserComponent } from './modules/user/layout/header-user/header-user.component';
 import { ProductPageComponent } from './modules/user/product-page/product-page.component';
 import { LoginPageComponent } from './modules/authentication/login-page/login-page.component';
-import { AuthService } from './services/auth/auth.service';
+import { AuthAppService } from './services/auth/auth.service';
 import { RegisterPageComponent } from './modules/authentication/register-page/register-page.component';
 import { NoAccessComponent } from './_shared/components/no-access/no-access.component';
 import { VerificationComponent } from './modules/authentication/verification/verification.component';
@@ -76,6 +76,20 @@ import { OrdersReturnComponent } from './modules/user/orders-history/orders-retu
 import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
 import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-amount/chart-total-amount.component';
 import { OrderDetailUserFormComponent } from './modules/user/orders-history/order-detail-user-form/order-detail-user-form.component';
+import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+
+ 
+ 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("939694652913-p6h9011mt29v2c7agtj7f4m8618mo74j.apps.googleusercontent.com")
+  }
+]);
+ 
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -179,14 +193,19 @@ import { OrderDetailUserFormComponent } from './modules/user/orders-history/orde
     BrowserAnimationsModule,
     BrowserModule, 
     IvyCarouselModule,
-    NgChartsModule
+    NgChartsModule,
+    SocialLoginModule
   ],
   exports: [
 
   ],
   providers: [
-    AuthService,
-    ThemeService
+    AuthAppService,
+    ThemeService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

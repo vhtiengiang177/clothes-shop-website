@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -24,7 +24,7 @@ export class OrdersListComponent implements OnInit {
     public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService,
-    private authService : AuthService) { 
+    private authService : AuthAppService) { 
 
     }
 

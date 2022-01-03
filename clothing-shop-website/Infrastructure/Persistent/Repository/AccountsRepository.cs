@@ -97,5 +97,14 @@ namespace Infrastructure.Persistent.Repository
             }
             else return false;
         }
+
+        public Account IsExistEmailGoogle(string email)
+        {
+            var listUser = _dbContext.Accounts.Where(a => a.Email == email && a.State == 1);
+            if (listUser.Count() > 0) {
+                return listUser.First();
+            }
+            return null;
+        }
     }
 }

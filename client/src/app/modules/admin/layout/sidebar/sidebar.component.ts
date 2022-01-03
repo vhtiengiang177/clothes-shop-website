@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
   currentRouter: string
 
   constructor(private router: Router,
-    private authService : AuthService) {
+    private authService : AuthAppService) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentRouter = event.url;

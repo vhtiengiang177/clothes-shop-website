@@ -11,7 +11,7 @@ import { StaffStoreService } from 'src/app/services/store/staff-store/staff-stor
 import {MatTabsModule} from '@angular/material/tabs';
 import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 import { OrdersPickupStoreService } from 'src/app/services/store/orders-pickup-store/orders-pickup-store.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class OrdersPickupListComponent implements OnInit {
     public dialog: MatDialog,
     private staffStore: StaffStoreService,
     private toastr: ToastrService,
-    private authService: AuthService) { 
+    private authService: AuthAppService) { 
       this.ordersPickupStore.orders$.subscribe(res => {
         if (res) {
           this.getNameStaff()

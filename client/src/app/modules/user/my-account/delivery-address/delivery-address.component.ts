@@ -34,7 +34,7 @@ export class DeliveryAddressComponent implements OnInit {
         if (res.length > 0) {
           this.selectedDelivery.emit(res[0])
         }
-        else this.selectedDelivery.emit({})
+        else this.selectedDelivery.emit(null)
       }
     })
   }

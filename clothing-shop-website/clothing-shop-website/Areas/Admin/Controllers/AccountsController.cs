@@ -377,19 +377,30 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             var userId = User.FindFirst("id").Value;
             if (userId == null) return BadRequest("Something went wrong!");
 
+            var provider = User.FindFirst("provider").Value;
+
             var account = _unitOfWork.AccountsRepository.GetAccountByID(int.Parse(userId));
 
-            if (account.Password != _accountsService.MD5Hash(paramsPassword.OldPassword))
-                return BadRequest("Incorrect Old Password");
-            account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
+
+            if (account.Password == null)
+            {
+                if (provider == "GOOGLE")
+                {
+                    account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
+                }
+            }
+            else
+            {
+                if (account.Password != _accountsService.MD5Hash(paramsPassword.OldPassword))
+                    return BadRequest("Incorrect Old Password");
+                account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
+            }
 
             _unitOfWork.AccountsRepository.UpdateAccount(account);
-            _unitOfWork.Save();
-            return Ok();
-            // TEST ONLY
-            // if (_unitOfWork.Save())
-            //     return Ok();
-            // else return BadRequest("Something went wrong!");
+
+            if (_unitOfWork.Save())
+                return Ok();
+            else return BadRequest("Something went wrong!");
         }
     }
 }

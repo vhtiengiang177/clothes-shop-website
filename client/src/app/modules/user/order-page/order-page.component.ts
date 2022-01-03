@@ -35,7 +35,7 @@ export class OrderPageComponent implements OnInit {
   totalPrice: number = 0
   subTotalPrice: number = 0
   discount: number = 0
-  deliveryAddress: DeliveryAddress = {}
+  deliveryAddress: DeliveryAddress = null
   listOrderDetail: OrderDetail[] = []
   listPromotion: Promotion[] = []
   promotion: Promotion = null
@@ -161,7 +161,7 @@ export class OrderPageComponent implements OnInit {
   }
 
   checkValidate() {
-    if (this.deliveryAddress == {}) {
+    if (this.deliveryAddress == null) {
       this.toastr.warning("Please selected a delivery address before place order")
       return false
     } 
