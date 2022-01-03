@@ -77,7 +77,8 @@ import { OrdersProcessComponent } from './modules/user/orders-history/orders-pro
 import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-amount/chart-total-amount.component';
 import { OrderDetailUserFormComponent } from './modules/user/orders-history/order-detail-user-form/order-detail-user-form.component';
 import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
-
+import { ChartTotalOrdersComponent } from './modules/admin/charts/chart-total-orders/chart-total-orders.component';
+import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
  
  
 let config = new AuthServiceConfig([
@@ -163,7 +164,9 @@ export function provideConfig() {
     OrdersReturnComponent,
     OrdersProcessComponent,
     OrderDetailUserFormComponent,
-    ChartTotalAmountComponent
+    ChartTotalAmountComponent,
+    ChartTotalOrdersComponent,
+    AboutUsPageComponent
    
   ],
   entryComponents: [

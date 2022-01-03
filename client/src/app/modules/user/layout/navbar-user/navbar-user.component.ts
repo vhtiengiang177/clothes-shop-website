@@ -13,6 +13,7 @@ export class NavbarUserComponent implements OnInit {
   isProductsActive: boolean = false
   isContactActive: boolean = false
   isPromotionActive: boolean = false
+  isAboutUsActive: boolean = false
   isOpenMenu: string = "none"
 
   constructor(private categoriesStore: CategoriesStoreService,
@@ -24,6 +25,8 @@ export class NavbarUserComponent implements OnInit {
             this.clickProductsPage()
           else if (this.currentRouter == "/contact")
             this.clickContactPage()
+          else if (this.currentRouter == "/about-us")
+            this.clickAboutUsPage()
           else if (this.currentRouter == "/login" || this.currentRouter == "/register")
             this.clickLogin()
           else if (this.currentRouter == "/promotions")
@@ -41,6 +44,7 @@ export class NavbarUserComponent implements OnInit {
     this.isHomeActive = false
     this.isContactActive = false
     this.isPromotionActive = false
+    this.isAboutUsActive = false
   }
 
   clickHomePage() {
@@ -55,6 +59,16 @@ export class NavbarUserComponent implements OnInit {
     this.isHomeActive = false
     this.isProductsActive = false
     this.isPromotionActive = false
+    this.isAboutUsActive = false
+  }
+
+  
+  clickAboutUsPage() {
+    this.isAboutUsActive = true
+    this.isContactActive = false
+    this.isHomeActive = false
+    this.isProductsActive = false
+    this.isPromotionActive = false
   }
 
   clickPromotionPage() {
@@ -62,6 +76,7 @@ export class NavbarUserComponent implements OnInit {
     this.isContactActive = false
     this.isHomeActive = false
     this.isProductsActive = false
+    this.isAboutUsActive = false
   }
 
   clickLogin() {
@@ -69,6 +84,7 @@ export class NavbarUserComponent implements OnInit {
     this.isHomeActive = false
     this.isProductsActive = false
     this.isPromotionActive = false
+    this.isAboutUsActive = false
   }
 
   clickMenu() {
