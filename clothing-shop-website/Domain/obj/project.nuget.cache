@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "oGNipR/WIMuI1HelukWPQHzDqW+tBq4ZqrxhotoJSNV+kUvDHfy6LrL1x4yrh/H2WXO1rBkOCPZyI15YoLuQMQ==",
+  "dgSpecHash": "OF/JX7LUSgLMCqoE3ygHkVI31eczWkaap3w7p+siErTEZ/2r+723GOMHyj0Q0VAzwXOl6LQKFlupjRaUfth+og==",
   "success": true,
   "projectFilePath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Hong Duc\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Hong Duc\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Hong Duc\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

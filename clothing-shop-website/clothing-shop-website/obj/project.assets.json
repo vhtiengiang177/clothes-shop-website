@@ -6085,7 +6085,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vhtie\\.nuget\\packages\\": {}
+    "C:\\Users\\Hong Duc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6093,11 +6093,11 @@
       "projectUniqueName": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
       "projectName": "clothing-shop-website",
       "projectPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\clothing-shop-website.csproj",
-      "packagesPath": "C:\\Users\\vhtie\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Hong Duc\\.nuget\\packages\\",
       "outputPath": "D:\\TienGiang\\KLTN\\Clothes Shop\\clothing-shop-website\\clothing-shop-website\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vhtie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hong Duc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6190,6 +6190,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.10, 3.1.10]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.22, 3.1.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -6198,7 +6216,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

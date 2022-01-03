@@ -75,14 +75,9 @@ D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.pdb
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.genruntimeconfig.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csprojAssemblyReference.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.AssemblyInfoInputs.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.AssemblyInfo.cs
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csproj.CoreCompileInputs.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cs
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.pdb
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\appsettings.json
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\clothing-shop-website.exe
@@ -91,6 +86,7 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\clothing-shop-website.runtimeconfig.dev.json
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\clothing-shop-website.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\clothing-shop-website.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
@@ -110,6 +106,7 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
@@ -129,6 +126,7 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
@@ -145,15 +143,16 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Infrastructure.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Infrastructure.pdb
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Domain.pdb
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csproj.AssemblyReference.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.GeneratedMSBuildEditorConfig.editorconfig
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.AssemblyInfoInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.AssemblyInfo.cs
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csproj.CoreCompileInputs.cache
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cs
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cache
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\staticwebassets\clothing-shop-website.StaticWebAssets.Manifest.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\staticwebassets\clothing-shop-website.StaticWebAssets.xml
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\scopedcss\bundle\clothing-shop-website.styles.css
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.RazorTargetAssemblyInfo.cache
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csproj.CopyComplete
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
+D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.pdb
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.genruntimeconfig.cache
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
-D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
-D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
-D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
-D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll

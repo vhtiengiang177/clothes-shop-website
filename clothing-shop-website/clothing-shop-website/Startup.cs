@@ -30,7 +30,7 @@ namespace clothing_shop_website
             services.AddControllers();
 
             // Giang
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109\TIENGIANG; Initial Catalog=clothingdb; User ID=sa; PWD=123456aA",
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=HONGDUC109; Integrated Security = True; Initial Catalog=clothingdb;",
             b => b.MigrationsAssembly("clothing-shop-website")));
 
             // Thao
