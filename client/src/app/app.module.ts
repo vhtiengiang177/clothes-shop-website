@@ -79,6 +79,7 @@ import { OrderDetailUserFormComponent } from './modules/user/orders-history/orde
 import { ChartTotalOrdersComponent } from './modules/admin/charts/chart-total-orders/chart-total-orders.component';
 import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

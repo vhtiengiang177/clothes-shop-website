@@ -128,7 +128,7 @@ export class ChartTotalAmountComponent implements OnInit {
     // Only Change 3 values
     console.log(this.dataAmount);
     
-    this.barChartData.datasets[0].data =this.dataAmount;
+    this.barChartData.datasets[0].data = this.dataAmount;
 
     this.chart.update();
   }

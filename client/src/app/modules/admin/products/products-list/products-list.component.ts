@@ -1,3 +1,4 @@
+import { Product } from './../../../../services/model/product/product.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
@@ -7,12 +8,21 @@ import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confir
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { Injectable } from '@angular/core';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import * as faker from 'faker';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css']
 })
+
+@Injectable()
 export class ProductsListComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   
@@ -23,6 +33,10 @@ export class ProductsListComponent implements OnInit {
   };
   static readonly addForm = 0;
   static readonly editForm = 1;
+
+  importProducts: Product[] = [];
+  product: Product
+  data: [][];
 
 
   constructor(private productsStore: ProductsStoreService,
@@ -216,5 +230,81 @@ export class ProductsListComponent implements OnInit {
       this.fetchData()
     }
   }
+
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    
+    const myworksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const myworkbook: XLSX.WorkBook = { Sheets: { 'data': myworksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(myworkbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_exported'+ EXCEL_EXTENSION);
+  }
+
+  exportAsXLSX():void {
+    this.exportAsExcelFile(this.productsStore.products, 'product_data');
+  }
+
+  public importFromFile(bstr: string): XLSX.AOA2SheetOpts {
+    /* read workbook */
+    const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+    /* grab first sheet */
+    const wsname: string = wb.SheetNames[0];
+    const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const data = <XLSX.AOA2SheetOpts>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
+
+    return data;
+  }
+
+  onFileChange(evt: any) {
+    const target : DataTransfer =  <DataTransfer>(evt.target);
+    
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const bstr: string = e.target.result;
+
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+      const wsname : string = wb.SheetNames[0];
+
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      console.log(ws);
+
+      this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+
+      console.log(this.data);
+
+      let x = this.data.slice(1);
+      console.log(x);
+
+    };
+
+    reader.readAsBinaryString(target.files[0]);
+
+  }
+
+  addProductExcel(product)
+  {
+      this.productsStore.create(product).subscribe(res => {
+      }, (error:HttpErrorResponse) => {
+        if(error.status == 400) {
+          this.toastr.error("It looks like something went wrong")
+        }
+      })
+  }
+
+
 
 }
