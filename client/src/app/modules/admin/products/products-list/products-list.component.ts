@@ -293,6 +293,82 @@ export class ProductsListComponent implements OnInit {
 
     reader.readAsBinaryString(target.files[0]);
 
+    for (var item of this.data){
+      let i =1;
+      for (var item2 of item)
+      {
+        if (i==1)
+        {
+          this.product.sku = item2;
+          i++
+        }
+        if (i==2)
+        {
+          this.product.name = item2;
+          i++
+        }  
+        if (i==3)
+        {
+          this.product.description = item2;
+          i++
+        }  
+        if (i==4)
+        {
+          this.product.unitPrice = item2;
+          i++
+        }  
+        if (i==5)
+        {
+          this.product.state = item2;
+          i++
+        }  
+        if (i==6)
+        {
+          this.product.idCategory = item2;
+        }  
+      }
+      this.addProductExcel(this.product);
+    }
+
+  //   this.data.forEach(element => {
+  //     let i =1;
+  //     element.forEach(cell=>{
+        
+  //       if (i==1)
+  //       {
+  //         this.product.sku = cell;
+  //         i++
+  //       }
+  //       if (i==2)
+  //       {
+  //         this.product.name = cell;
+  //         i++
+  //       }  
+  //       if (i==3)
+  //       {
+  //         this.product.description = cell;
+  //         i++
+  //       }  
+  //       if (i==4)
+  //       {
+  //         this.product.unitPrice =cell;
+  //         i++
+  //       }  
+  //       if (i==5)
+  //       {
+  //         this.product.state = cell;
+  //         i++
+  //       }  
+  //       if (i==6)
+  //       {
+  //         this.product.idCategory = cell;
+  //       }  
+       
+       
+  //     })
+  //     this.addProductExcel(this.product);
+    
+  // });
   }
 
   addProductExcel(product)
