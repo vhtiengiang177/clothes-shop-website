@@ -3,21 +3,7 @@
   <br>
     <div>  
         <div class="row">
-          <!-- <mat-form-field>
-            <input  matInput [matDatepicker]="date" placeholder="Choose a date" (dateChange)="updateMY()" [formControl]="serializedDate">
-            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-            <mat-datepicker  #date></mat-datepicker>
-          </mat-form-field> -->
-          <!-- &ensp;&ensp;&ensp;&ensp;
-          <mat-form-field>
-            <mat-label>Choose a month</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let month of monthList" [value]="month.id">
-                {{month.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
-          <!-- &ensp;&ensp;&ensp;&ensp; -->
+          &ensp;&ensp;&ensp;&ensp;
           <mat-form-field>
             <mat-label>Choose a view</mat-label>
             <mat-select [(value)] = "view">
@@ -26,16 +12,29 @@
               </mat-option>
               <mat-option (click)="ClickView()" [value]="2">
                 Month
-              </mat-option>              
+              </mat-option>
               <mat-option (click)="ClickView()" [value]="3">
+                Quater
+              </mat-option>                  
+              <mat-option (click)="ClickView()" [value]="4">
                 Year
               </mat-option>
             </mat-select>
           </mat-form-field>
           &ensp;
-        <a><fa class="edit-icon" name="refresh" (click)="updateChart()"></fa></a>
+        <!-- <a><fa class="edit-icon" name="refresh" (click)="updateChart()"></fa></a> -->
+        <mat-form-field>
+          <mat-label>Choose a year</mat-label>
+          <mat-select [(value)] = "viewYear">
+            <mat-option (click)="ClickViewYear()" [value]="1" >
+              2021
+            </mat-option>
+            <mat-option (click)="ClickViewYear()" [value]="2">
+              2022
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         </div>
-        
         <div  class="row"> 
           <div class="chart">
               <canvas baseChart
@@ -51,6 +50,6 @@
     <label class="title">CHART TOTAL AMOUNT OF SHOP</label>
 </div>
   <div class="button-row">
-    <button class="btn btn-add" mat-button mat-raised-button color="primary" (click)="updateChart()">Update</button>
+    <!-- <button mat-button mat-raised-button color="primary" (click)="updateChart()">Update</button> -->
   </div>
 </div>

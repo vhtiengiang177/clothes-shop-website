@@ -1,19 +1,20 @@
+// import { Color } from './../../../../services/model/product/color.model';
 import { Year } from './../../../../services/model/chart/Year.model';
 import { Month } from './../../../../services/model/chart/month.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartType, Color } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import {FormControl} from '@angular/forms';
 import { OrderService } from 'src/app/services/data/order/order.service';
+import { ChartOrders } from 'src/app/services/model/chart/chart-orders.model';
 
 @Component({
-  selector: 'app-chart-total-amount',
-  templateUrl: './chart-total-amount.component.html',
-  styleUrls: ['./chart-total-amount.component.css']
+  selector: 'app-chart-total-orders',
+  templateUrl: './chart-total-orders.component.html',
+  styleUrls: ['./chart-total-orders.component.css']
 })
-
-export class ChartTotalAmountComponent implements OnInit {
+export class ChartTotalOrdersComponent implements OnInit {
 
   monthList: Month[]=[]
   yearList: Year[]=[]
@@ -21,53 +22,38 @@ export class ChartTotalAmountComponent implements OnInit {
   disableSelect:boolean
   lastdate:Date
   firstDate:Date
-  dataAmount: number[]=[]
+  dataCompleted: number[]=[]
+  dataCancelReturn: number[]=[]
+  listOrders: ChartOrders
   view: number = 1
   viewYear: number = 2
-  //date: any
-  //date = new FormControl(new Date());
+ 
   serializedDate = new FormControl((new Date()).toISOString());
 
   constructor(private orderService: OrderService) {
     this.yearList = [
       {id: 0, name: '2021'},
       {id: 1, name: '2022'},
-      // {id: 2, name: 'Febrary'},
-      // {id: 3, name: 'March'},
-      // {id: 4, name: 'April'},
-      // {id: 5, name: 'May'},
-      // {id: 6, name: 'June'},
-      // {id: 7, name: 'July'},
-      // {id: 8, name: 'August'},
-      // {id: 9, name: 'September'},
-      // {id: 10, name: 'October'},
-      // {id: 11, name: 'November'},
-      // {id: 12, name: 'December'}
     ];
 
-    // this.yearList = [
-    // {id: 0, name: 'View by day'},
-    // {id: 1, name:'View by month'},
-    // {id: 2, name:'View by year'}
-    // ]
-   
-  
-  
-    this.orderService.getDataChartAmount(1,2022).subscribe(p=>{
-      this.dataAmount = p;
+    this.orderService.getDataChartOrders(1,2022).subscribe(p=>{
+      this.listOrders = p;
+      this.dataCompleted = p.ordersCompleted;
+      this.dataCancelReturn = p.ordersCancelReturn;
     })
    }
 
   ngOnInit() {
-    this.orderService.getDataChartAmount(1,2022).subscribe(p=>{
-      this.dataAmount = p;
+    this.orderService.getDataChartOrders(1,2022).subscribe(p=>{
+      this.dataCompleted =  p.ordersCompleted;
+      this.dataCancelReturn = p.ordersCancelReturn;
       this.updateChart(1);
     })
     
   }
   
   @ViewChild(BaseChartDirective,{ static: true}) chart: BaseChartDirective | undefined;
-
+  
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -95,9 +81,18 @@ export class ChartTotalAmountComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: ['Mon','Tue','Wed','Thur','Fri','Sar','Sun' ],
     datasets: [
-      { data: [ 100000,200000,400000,500000,100000,700000,400000], label: 'Total Amount', backgroundColor: '#FFCC66',hoverBorderColor:'#FF6633', borderColor:'#FF6633',hoverBackgroundColor:'#FFCC33' }
-    ]
+      { data: [ 100000,200000,400000,500000,100000,700000,400000], label: 'Completed',
+        backgroundColor: '#33CC66', hoverBorderColor:'#33CC66', borderColor:'#33CC66',hoverBackgroundColor:'#33CC33' },
+      { data: [  200000,100000,300000,300000,200000,400000,100000 ], label: 'Cancel/Return',
+       backgroundColor: '#FF6633', hoverBorderColor:'#FF6633', borderColor:'#FF6633',hoverBackgroundColor:'#FF0000'  },
+    ],
+   
   };
+
+  // public barChartColors: Color[] = [
+  //   { backgroundColor: 'red' },
+  //   { backgroundColor: 'green' },
+  // ]
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -126,19 +121,19 @@ export class ChartTotalAmountComponent implements OnInit {
       this.barChartData.labels = [ '2021','2022']
     }
     // Only Change 3 values
-    console.log(this.dataAmount);
+    //console.log(this.dataAmount);
     
-    this.barChartData.datasets[0].data =this.dataAmount;
-
+    this.barChartData.datasets[0].data =this.dataCompleted;
+    this.barChartData.datasets[1].data =this.dataCancelReturn;
     this.chart.update();
   }
-
 
   ClickView() {
     console.log(this.view);
     
-    this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{
-      this.dataAmount = p;
+    this.orderService.getDataChartOrders(this.view,this.viewYear).subscribe(p=>{
+      this.dataCompleted = p.ordersCompleted;
+      this.dataCancelReturn = p.ordersCancelReturn;
       this.updateChart(this.view);
     })
   }
@@ -146,9 +141,11 @@ export class ChartTotalAmountComponent implements OnInit {
   ClickViewYear() {
     console.log(this.viewYear);
     
-    this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{
-      this.dataAmount = p;
+    this.orderService.getDataChartOrders(this.view,this.viewYear).subscribe(p=>{
+      this.dataCompleted = p.ordersCompleted;
+      this.dataCancelReturn = p.ordersCancelReturn;
       this.updateChart(this.view);
     })
   }
+
 }

@@ -33,8 +33,10 @@
                    [routerLink]="['/contact']">
                     <a>Contact</a>
                 </li>
-                <li>
-                    <a>About Us</a>
+                <li (click)="clickAboutUsPage()" 
+                [ngClass]="{ 'active': isAboutUsActive }"
+                [routerLink]="['/about-us']">
+                 <a>About Us</a>
                 </li>
             </ul>
         </nav>

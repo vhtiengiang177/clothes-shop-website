@@ -367,56 +367,200 @@ namespace clothing_shop_website.Areas.Client
 
         [AllowAnonymous]
         [HttpGet("GetDataChartAmout")]
-        public IActionResult GetDataChartAmout([FromQuery] int choose)
+        public IActionResult GetDataChartAmout([FromQuery] int choose, [FromQuery] int year)
         {
             try
             {
-                
+                if (year == 1)
+                    year = 2021;
+                if (year == 2)
+                    year = 2022;
                 double[] arrData = new double[1];
 
                 switch (choose)
                 {
-                    case 1:
-                        DateTime fromDate = new DateTime(2021, 12, 20);
-                        DateTime toDate = new DateTime(2021, 12, 26);
-                        var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(fromDate, toDate);
+                    case 1://day
+                        var lOrders = _unitOfWork.OrdersRepository.GetDataAmount(choose,year);
                         arrData = new double[7];
-                        int day = 0;
-                        DateTime date = new DateTime();
-                        foreach (var item in lOrders)
+                        double day = -1;
+                        DateTime fromDate = _unitOfWork.OrdersRepository.StartOfWeek(DateTime.Now, DayOfWeek.Monday);
+                       
+                        foreach ( var item in lOrders)
                         {
-                            DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
-                            arrData[5] += item.TotalAmount;
+                            DateTime updatedTime = (Convert.ToDateTime(item.DatePayment)).Date;
+
+                            day = (updatedTime - fromDate).TotalDays;
+                            
+                            switch (day)
+                            {
+                                case 0:
+                                    arrData[0] += item.TotalAmount;
+                                    break;
+                                case 1:
+                                    arrData[1] += item.TotalAmount;
+                                    break;
+                                case 2:
+                                    arrData[2] += item.TotalAmount;
+                                    break;
+                                case 3:
+                                    arrData[3] += item.TotalAmount;
+                                    break;
+                                case 4:
+                                    arrData[4] += item.TotalAmount;
+                                    break;
+                                case 5:
+                                    arrData[5] += item.TotalAmount;
+                                    break;
+                                case 6:
+                                    arrData[6] += item.TotalAmount;
+                                    break;
+                            }    
                         }
                         break;
-                    case 2:
-                        DateTime fromDate2 = new DateTime(2021, 01, 01);
-                        DateTime toDate2 = new DateTime(2021, 12, 31);
-                        var lOrders2 = _unitOfWork.OrdersRepository.GetDataAmount(fromDate2, toDate2);
+                    case 2://month
+                        var lOrders2 = _unitOfWork.OrdersRepository.GetDataAmount(choose, year);
                         arrData = new double[12];
                         foreach (var item in lOrders2)
                         {
                             DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
-
                             arrData[updatedTime.Month-1] += item.TotalAmount;
-                               
                         }
                         break;
-                    case 3:
-                        DateTime fromDate3 = new DateTime(2020, 01, 01);
-                        DateTime toDate3 = new DateTime(2021, 12, 31);
-                        var lOrders3 = _unitOfWork.OrdersRepository.GetDataAmount(fromDate3, toDate3);
-                        arrData = new double[2];
+                    case 3://quater
+                        var lOrders3 = _unitOfWork.OrdersRepository.GetDataAmount(choose, year);
+                        arrData = new double[4];
                         foreach (var item in lOrders3)
                         {
                              DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
-
-                             arrData[1] += item.TotalAmount;
+                            if ((updatedTime.Month == 1) || (updatedTime.Month == 2) || (updatedTime.Month == 3))
+                                arrData[0] += item.TotalAmount;
+                            if ((updatedTime.Month == 4) || (updatedTime.Month == 5) || (updatedTime.Month == 6))
+                                arrData[1] += item.TotalAmount;
+                            if ((updatedTime.Month == 7) || (updatedTime.Month == 8) || (updatedTime.Month == 9))
+                                arrData[2] += item.TotalAmount;
+                            if ((updatedTime.Month == 10) || (updatedTime.Month == 11) || (updatedTime.Month == 12))
+                                arrData[3] += item.TotalAmount;
                         }
                         break;
-                       
+                    case 4://year
+                        var lOrders4 = _unitOfWork.OrdersRepository.GetDataAmount(choose, 2021);
+                        arrData = new double[2];
+                        foreach (var item in lOrders4)
+                        {
+                            DateTime updatedTime = Convert.ToDateTime(item.DatePayment);
+                            if (updatedTime.Year == 2021)
+                                arrData[0] += item.TotalAmount;
+                            if (updatedTime.Year == 2022)
+                                arrData[1] += item.TotalAmount;
+                        }
+                        break;
+
                 }
                 return Ok(arrData);
+
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetDataChartOrders")]
+        public IActionResult GetDataChartOrders([FromQuery] int choose, [FromQuery] int year)
+        {
+            try
+            {
+                if (year == 1)
+                    year = 2021;
+                if (year == 2)
+                    year = 2022;
+
+                double[] arrDataCompleted = new double[1];
+                double[] arrDataCancelReturn = new double[1];
+
+                ChartOrders list = new ChartOrders();
+
+                switch (choose)
+                {
+                    case 1://day
+                        arrDataCompleted = new double[7];
+                        arrDataCancelReturn = new double[7];
+                        DateTime fromDate = _unitOfWork.OrdersRepository.StartOfWeek(DateTime.Now, DayOfWeek.Monday);
+
+                       for (int day = 1; day < 8; day++)
+                        {
+                            arrDataCompleted[day - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate.AddDays(day-1), fromDate.AddDays(day));
+                            arrDataCancelReturn[day - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCancelReturn(fromDate.AddDays(day - 1), fromDate.AddDays(day));
+                        }     
+
+                        break;
+                    case 2://month
+                        arrDataCompleted = new double[12];
+                        arrDataCancelReturn = new double[12];
+
+                        for (int month = 1; month < 13; month++)
+                        {
+                            var fromDate2 = new DateTime(year,month , 1);
+                            var toDate = fromDate2.AddMonths(1).AddDays(-1);
+                            arrDataCompleted[month - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate2,toDate);
+                            arrDataCancelReturn[month - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCancelReturn(fromDate2,toDate);
+                        }
+                        break;
+                    case 3://quater
+                        arrDataCompleted = new double[4];
+                        arrDataCancelReturn = new double[4];
+
+                        int startMonth = 0;
+
+                        for (int quater = 1; quater < 5; quater++)
+                        {
+                            switch(quater)
+                            {
+                                case 1:
+                                    startMonth = 1;
+                                    break;
+                                case 2:
+                                    startMonth = 4;
+                                    break;
+                                case 3:
+                                    startMonth = 7;
+                                    break;
+                                case 4:
+                                    startMonth = 10;
+                                    break;
+                            }    
+                            var fromDate2 = new DateTime(year, startMonth, 1);
+                            var toDate = fromDate2.AddMonths(3).AddDays(-1);
+                            arrDataCompleted[quater - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate2, toDate);
+                            arrDataCancelReturn[quater - 1] = _unitOfWork.OrdersRepository.GetDataOrdersCancelReturn(fromDate2, toDate);
+                        }
+
+                        break;
+                    case 4://year
+                        arrDataCompleted = new double[2];
+                        arrDataCancelReturn = new double[2];
+
+                        DateTime fromDate3 = new DateTime(2021, 1, 1);
+                        DateTime toDate3 = new DateTime(2021, 12, 31);
+                        arrDataCompleted[0] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate3, toDate3);
+                        arrDataCancelReturn[0] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate3, toDate3);
+
+                        DateTime fromDate4 = new DateTime(2022, 1, 1);
+                        DateTime toDate4 = new DateTime(2021, 12, 31);
+                        arrDataCompleted[1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate4, toDate4);
+                        arrDataCancelReturn[1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate4, toDate4);
+                        break;
+
+                }
+
+                var response = new ChartOrders
+                {
+                    OrdersCompleted = arrDataCompleted,
+                    OrdersCancelReturn = arrDataCancelReturn
+                };
+
+                return Ok(response);
 
             }
             catch

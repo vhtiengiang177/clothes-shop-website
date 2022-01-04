@@ -41,6 +41,8 @@ import { OrdersCompletedComponent } from './modules/user/orders-history/orders-c
 import { OrdersDeliveryComponent } from './modules/user/orders-history/orders-delivery/orders-delivery.component';
 import { OrdersCancelledComponent } from './modules/user/orders-history/orders-cancelled/orders-cancelled.component';
 import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
+import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
+import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
 
 
 const routes: Routes = [
@@ -141,7 +143,16 @@ const routes: Routes = [
     path: 'check-out',
     component: OrderPageComponent,
     canActivate: [AuthGuard, ClientAuthGuard]
-  }, {
+  }, 
+  {
+    path: 'contact',
+    component: ContactPageComponent
+  },
+  {
+    path: 'about-us',
+    component: AboutUsPageComponent
+  },
+  {
     path: 'promotions',
     component: PromotionPageComponent
   },
