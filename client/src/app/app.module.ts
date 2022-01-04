@@ -76,6 +76,8 @@ import { OrdersReturnComponent } from './modules/user/orders-history/orders-retu
 import { OrdersProcessComponent } from './modules/user/orders-history/orders-process/orders-process.component';
 import { ChartTotalAmountComponent } from './modules/admin/charts/chart-total-amount/chart-total-amount.component';
 import { OrderDetailUserFormComponent } from './modules/user/orders-history/order-detail-user-form/order-detail-user-form.component';
+import { ChartTotalOrdersComponent } from './modules/admin/charts/chart-total-orders/chart-total-orders.component';
+import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +151,9 @@ import { OrderDetailUserFormComponent } from './modules/user/orders-history/orde
     OrdersReturnComponent,
     OrdersProcessComponent,
     OrderDetailUserFormComponent,
-    ChartTotalAmountComponent
+    ChartTotalAmountComponent,
+    ChartTotalOrdersComponent,
+    AboutUsPageComponent
    
   ],
   entryComponents: [

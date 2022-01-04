@@ -18,13 +18,16 @@ namespace Domain.Infrastructure.Persistent.Repository
         void DeleteOrder(Order Order);
         Task<IQueryable<Order>> GetAllOrdersByCustomerAndState(int customerID, int state);
         Task<IQueryable<OrderDetail>> GetAllOrderDetailByOrder(int order);
-         Task<IQueryable<Order>> GetAllOrders();
+        Task<IQueryable<Order>> GetAllOrders();
         IQueryable<OrderDetail> GetAllOrderDetailByOrder2(int order);
-        IQueryable<Order> GetDataAmount(DateTime fromDate, DateTime toDate);
+        IQueryable<Order> GetDataAmount(int choose, int year);
         double GetEarningInDay();
         int GetTotalBuyProductsInDay();
         int GetProcessOrder();
         int GetTotalBuyProductsInMonth();
+        DateTime StartOfWeek(DateTime dt, DayOfWeek startOfWeek);
+        int GetDataOrdersCompleted(DateTime fromDate, DateTime toDate);
+        int GetDataOrdersCancelReturn(DateTime fromDate, DateTime toDate);
 
     }
 }

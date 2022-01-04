@@ -2,6 +2,7 @@
 using Domain.Infrastructure.Persistent.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,12 +146,61 @@ namespace Infrastructure.Persistent.Repository
 
             return totalBuy;
         }
-        public IQueryable<Order> GetDataAmount(DateTime fromDate,DateTime toDate)
+
+        public IQueryable<Order> GetDataAmount(int choose,int year)
         {
-            var lorders = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment>= fromDate && o.DatePayment<=toDate);
+            var lorders = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= DateTime.Now && o.DatePayment <= DateTime.Now);
+
+            switch (choose)
+            {
+                case 1:
+                    DateTime fromDate = StartOfWeek(DateTime.Now,DayOfWeek.Monday);
+                    DateTime toDate = StartOfWeek(DateTime.Now, DayOfWeek.Sunday).AddDays(6);
+                    var lorders1 = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= fromDate && o.DatePayment <= toDate);
+                    lorders1 = lorders1.OrderBy(o => o.DatePayment);
+                    lorders = lorders1;
+                    break;
+                case 2:
+                    DateTime fromDate2 = new DateTime(year, 1, 1);
+                    DateTime toDate2 = new DateTime(year, 12, 31);
+                     var lorders2 = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= fromDate2 && o.DatePayment <= toDate2);
+                    lorders = lorders2;
+                    break;
+                case 3:
+                    DateTime fromDate3 = new DateTime(year, 1, 1);
+                    DateTime toDate3 = new DateTime(year, 12, 31);
+                    var lorders3 = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= fromDate3 && o.DatePayment <= toDate3);
+                    lorders = lorders3;
+                    break;
+                case 4:
+                    DateTime fromDate4 = new DateTime(year, 1, 1);
+                    DateTime toDate4 = new DateTime(year+1, 12, 31);
+                    var lorders4 = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= fromDate4 && o.DatePayment <= toDate4);
+                    lorders = lorders4;
+                    break;
+            }    
             return lorders.AsQueryable();
         }
 
-       
+        public DateTime StartOfWeek(DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            return dt.AddDays(-1 * diff).Date;
+        }
+
+        public int GetDataOrdersCompleted(DateTime fromDate, DateTime toDate)
+        {
+            int countOrders = _dbContext.Orders.Where(o => o.State == 5 && o.DatePayment >= fromDate && o.DatePayment <= toDate).Count();
+            return countOrders;
+        }
+
+        public int GetDataOrdersCancelReturn(DateTime fromDate, DateTime toDate)
+        {
+            int countOrders = _dbContext.Orders.Where(o => o.State == 6 || o.State == 7 && o.DatePayment >= fromDate && o.DatePayment <= toDate).Count();
+            return countOrders;
+        }
+
+
+
     }
 }
