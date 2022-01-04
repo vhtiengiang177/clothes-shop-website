@@ -60,7 +60,7 @@ export class ChartTotalOrdersComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10
+        min: 0
       }
     },
     plugins: {
@@ -121,10 +121,12 @@ export class ChartTotalOrdersComponent implements OnInit {
       this.barChartData.labels = [ '2021','2022']
     }
     // Only Change 3 values
-    //console.log(this.dataAmount);
+    console.log(this.dataCompleted);
+    console.log(this.dataCancelReturn);
     
-    this.barChartData.datasets[0].data =this.dataCompleted;
-    this.barChartData.datasets[1].data =this.dataCancelReturn;
+    this.barChartData.datasets[0].data = this.dataCompleted;
+    this.barChartData.datasets[1].data = this.dataCancelReturn;
+    console.log(this.barChartData.datasets[0].data);
     this.chart.update();
   }
 
