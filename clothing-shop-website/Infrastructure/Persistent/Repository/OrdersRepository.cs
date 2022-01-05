@@ -196,8 +196,9 @@ namespace Infrastructure.Persistent.Repository
 
         public int GetDataOrdersCancelReturn(DateTime fromDate, DateTime toDate)
         {
-            int countOrders = _dbContext.Orders.Where(o => o.State == 6 || o.State == 7 && o.DatePayment >= fromDate && o.DatePayment <= toDate).Count();
-            return countOrders;
+            int countOrderCancels = _dbContext.Orders.Where(o => o.State == 6  && o.DateCancel >= fromDate && o.DateCancel <= toDate).Count();
+            int countOrderReturns = _dbContext.Orders.Where(o =>  o.State == 7 && o.DateCancel >= fromDate && o.DateCancel <= toDate).Count();
+            return countOrderCancels+ countOrderReturns;
         }
 
 
