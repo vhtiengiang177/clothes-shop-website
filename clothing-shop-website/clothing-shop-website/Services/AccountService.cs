@@ -104,5 +104,23 @@ namespace clothing_shop_website.Services
 
             return strBuilder.ToString();
         }
+
+        public void SendResetPasswordCode(string email, string firstName, string code)
+        {
+            var subject = "[MANGO CLOTHES] Reset Your Password";
+            var body = @"<div> Hello " + firstName + ",</div> <br/>" +
+
+                        "<div> We're sending you this email because you requested a password reset. Click on this link "
+                        + "to create a new password. </div>"
+                        + "<br/>"
+                        + "Your code: <strong>" + code + "</strong>"
+                        + "<br/>"
+                        + "If you didn't request a password reset, you can ignore this email. Your password will not be changed."
+                        + "<br/><br/>" +
+
+            "Thanks & Best Regards, <br/> Mango Clothes.";
+            SendEmail(email, body, subject);
+        }
+
     }
 }

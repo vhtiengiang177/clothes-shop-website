@@ -35,9 +35,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         [HttpGet("GetTotalBuyProductsInMonth")]
         public IActionResult GetTotalBuyProductsInMonth()
         {
-            var totalBuyInDay = _unitOfWork.OrdersRepository.GetTotalBuyProductsInMonth();
+            var totalBuyInMonth = _unitOfWork.OrdersRepository.GetTotalBuyProductsInMonth();
 
-            return Ok(totalBuyInDay);
+            return Ok(totalBuyInMonth);
         }
 
         [HttpGet("GetProcessOrder")]

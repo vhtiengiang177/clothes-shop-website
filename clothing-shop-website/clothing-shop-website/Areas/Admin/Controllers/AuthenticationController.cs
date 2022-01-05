@@ -23,19 +23,19 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private IConfiguration _configuration;
         private UnitOfWork _unitOfWork;
-        private AccountService _accountService;
+        private AccountService _accountsService;
 
         public AuthenticationController(IConfiguration configuration, DataDbContext dataDbContext, AccountService accountsService)
         {
             this._configuration = configuration;
             _unitOfWork = new UnitOfWork(dataDbContext);
-            _accountService = accountsService;
+            _accountsService = accountsService;
         }
 
         [HttpPost]
         public async Task<ActionResult> Login([FromBody] Account account)
         {
-            var user = await _unitOfWork.AccountsRepository.Login(account.Email,_accountService.MD5Hash(account.Password));
+            var user = await _unitOfWork.AccountsRepository.Login(account.Email, _accountsService.MD5Hash(account.Password));
             string firstNameUser = "";
             if (user != null && user.State == 1)
             {
@@ -82,7 +82,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
                 else
                 {
-                    _accountService.SendVerificationCode(user, firstNameUser);
+                    _accountsService.SendVerificationCode(user, firstNameUser);
 
                     var response = new
                     {
@@ -176,7 +176,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     _unitOfWork.AccountsRepository.UpdateAccount(user);
                     _unitOfWork.Save();
 
-                    _accountService.SendVerificationCode(user, firstNameUser);
+                    _accountsService.SendVerificationCode(user, firstNameUser);
 
                     return Ok("Resend successfully. Check your email account!");
                 }
@@ -185,9 +185,9 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPost("LoginWithGoogle")]
-        public async Task<ActionResult> LoginWithGoogle([FromBody] GoogleUser user)
+        public ActionResult LoginWithGoogle([FromBody] GoogleUser user)
         {
-            Account accountGoogle = _unitOfWork.AccountsRepository.IsExistEmailGoogle(user.Email);
+            Account accountGoogle = _unitOfWork.AccountsRepository.IsExistEmailActivate(user.Email);
 
             if (accountGoogle == null)
             {
@@ -231,6 +231,70 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 signingCredentials: signIn);
 
             return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+        }
+
+        [HttpGet("SendEmailResetPassword")]
+        public ActionResult SendEmailResetPassword([FromQuery] string email)
+        {
+            var isExistsEmail = _unitOfWork.AccountsRepository.IsExistEmail(email);
+
+            if (isExistsEmail == false)
+            {
+                return BadRequest("Email account does not exist");
+            }
+            else
+            {
+                var account = _unitOfWork.AccountsRepository.GetAccountByEmail(email);
+
+                if (account.State == 0)
+                {
+                    return BadRequest("Email account has been locked. If you want to unlock, please contact mango.clothes2021@gmail.com");
+                }
+                else if (account.State == 2)
+                {
+                    return BadRequest("Email account does not exist");
+                }
+                else
+                {
+                    var firstName = _unitOfWork.AccountsRepository.GetFirstNameByEmail(email);
+
+                    var randomString = Guid.NewGuid().ToString("n").Substring(0, 8);
+
+                    if (account != null)
+                    {
+                        account.ResetPasswordCode = randomString;
+                        _unitOfWork.AccountsRepository.UpdateAccount(account);
+                        _accountsService.SendResetPasswordCode(email, firstName, randomString);
+                        _unitOfWork.Save();
+                    }
+
+                    return Ok();
+                }
+
+            }
+        }
+
+        [HttpPost("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordParams resetPasswordParams)
+        {
+            var account = _unitOfWork.AccountsRepository.GetAccountByEmail(resetPasswordParams.Email);
+
+            if (account.Password == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (account.ResetPasswordCode != resetPasswordParams.ResetCode)
+                    return BadRequest("Incorrect Reset Code");
+                account.Password = _accountsService.MD5Hash(resetPasswordParams.Password);
+            }
+
+            _unitOfWork.AccountsRepository.UpdateAccount(account);
+
+            if (_unitOfWork.Save())
+                return Ok();
+            else return BadRequest("Something went wrong!");
         }
     }
 }

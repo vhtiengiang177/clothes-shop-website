@@ -98,13 +98,35 @@ namespace Infrastructure.Persistent.Repository
             else return false;
         }
 
-        public Account IsExistEmailGoogle(string email)
+        public Account IsExistEmailActivate(string email)
         {
             var listUser = _dbContext.Accounts.Where(a => a.Email == email && a.State == 1);
             if (listUser.Count() > 0) {
                 return listUser.First();
             }
             return null;
+        }
+
+        public string GetFirstNameByEmail(string email)
+        {
+            var account = _dbContext.Accounts.Where(a => a.Email == email && a.State == 1).FirstOrDefault();
+            var firstName = "";
+
+            if (account.IdTypeAccount == 4)
+            {
+                firstName = _dbContext.Customers.Where(c => c.IdAccount == account.Id).Select(s => s.FirstName).FirstOrDefault();
+            }
+            else
+            {
+                firstName = _dbContext.Staff.Where(c => c.IdAccount == account.Id).Select(s => s.FirstName).FirstOrDefault();
+            }
+
+            return firstName;
+        }
+
+        public Account GetAccountByEmail(string email)
+        {
+            return _dbContext.Accounts.FirstOrDefault(p => p.Email == email);
         }
     }
 }

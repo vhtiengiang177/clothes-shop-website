@@ -30,10 +30,7 @@ export class AccountsStoreService {
 
   async get(){
     await this.accountService.get()
-            .subscribe(res => this.accounts = res,
-              () => {
-                this.toastr.error("An unexpected error occurred.", "List Accounts")
-              });
+            .subscribe(res => this.accounts = res);
   }
 
   updateAccount(account) {
@@ -68,5 +65,9 @@ export class AccountsStoreService {
 
   changePassword(params) {
     return this.accountService.changePassword(params)
+  }
+
+  getByEmail(email){
+    return this.accountService.getByEmail(email)
   }
 }

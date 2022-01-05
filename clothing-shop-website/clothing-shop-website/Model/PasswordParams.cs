@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace clothing_shop_website.Model
 {
-    public class ParamsPassword
+    public class PasswordParams
     {
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }

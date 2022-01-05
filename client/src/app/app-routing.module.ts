@@ -43,6 +43,8 @@ import { OrdersCancelledComponent } from './modules/user/orders-history/orders-c
 import { OrdersReturnComponent } from './modules/user/orders-history/orders-return/orders-return.component';
 import { ContactPageComponent } from './modules/user/contact-page/contact-page.component';
 import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
+import { ForgotPasswordPageComponent } from './modules/authentication/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './modules/authentication/reset-password-page/reset-password-page.component';
 
 
 const routes: Routes = [
@@ -168,6 +170,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterPageComponent,
+    canActivate: [ActivatedLogin]
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordPageComponent,
+    canActivate: [ActivatedLogin]
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordPageComponent,
     canActivate: [ActivatedLogin]
   }, 
   {

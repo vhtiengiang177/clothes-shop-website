@@ -72,4 +72,8 @@ export class AccountService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getByEmail(email){
+    return this.http.get(GlobalConstants.apiUrl + this.routeAPI + "/GetAccountByEmail/" + email)
+  }
 }

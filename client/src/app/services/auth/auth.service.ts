@@ -46,6 +46,14 @@ export class AuthAppService {
     }));
   }
 
+  sendEmailResetPassword(email) {
+    return this.http.get(GlobalConstants.apiUrl + "/authentication/SendEmailResetPassword?email=" + email)
+  }
+
+  resetPassword(params) {
+    return this.http.post<any>(GlobalConstants.apiUrl + "/authentication/ResetPassword", params)
+  }
+
   isLoggedIn() {
     let jwtHelper = new JwtHelperService();
     let token = localStorage.getItem('token');
