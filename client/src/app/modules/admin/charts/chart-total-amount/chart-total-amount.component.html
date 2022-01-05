@@ -7,16 +7,16 @@
             <mat-form-field>
               <mat-label>Choose a view</mat-label>
               <mat-select [(value)] = "view">
-                <mat-option (click)="ClickView()" [value]="1" >
+                <mat-option (click)="clickView()" [value]="1" >
                   Week
                 </mat-option>
-                <mat-option (click)="ClickView()" [value]="2">
+                <mat-option (click)="clickView()" [value]="2">
                   Month
                 </mat-option>
-                <mat-option (click)="ClickView()" [value]="3">
+                <mat-option (click)="clickView()" [value]="3">
                   Quater
                 </mat-option>                  
-                <mat-option (click)="ClickView()" [value]="4">
+                <mat-option (click)="clickView()" [value]="4">
                   Year
                 </mat-option>
               </mat-select>
@@ -26,10 +26,10 @@
             <mat-form-field>
               <mat-label>Choose a year</mat-label>
               <mat-select [(value)] = "viewYear">
-                <mat-option (click)="ClickViewYear()" [value]="1" >
+                <mat-option (click)="clickViewYear()" [value]="1" >
                   2021
                 </mat-option>
-                <mat-option (click)="ClickViewYear()" [value]="2">
+                <mat-option (click)="clickViewYear()" [value]="2">
                   2022
                 </mat-option>
               </mat-select>

@@ -262,7 +262,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                     if (account != null)
                     {
-                        account.ResetPasswordCode = randomString;
+                        account.ResetPasswordCode = randomString.ToUpper();
                         _unitOfWork.AccountsRepository.UpdateAccount(account);
                         _accountsService.SendResetPasswordCode(email, firstName, randomString);
                         _unitOfWork.Save();
@@ -288,6 +288,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 if (account.ResetPasswordCode != resetPasswordParams.ResetCode)
                     return BadRequest("Incorrect Reset Code");
                 account.Password = _accountsService.MD5Hash(resetPasswordParams.Password);
+                account.ResetPasswordCode = null;
             }
 
             _unitOfWork.AccountsRepository.UpdateAccount(account);

@@ -135,7 +135,7 @@ export class ChartTotalAmountComponent implements OnInit {
   }
 
 
-  ClickView() {
+  clickView() {
     console.log(this.view);
     
     this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{
@@ -144,7 +144,7 @@ export class ChartTotalAmountComponent implements OnInit {
     })
   }
 
-  ClickViewYear() {
+  clickViewYear() {
     console.log(this.viewYear);
     
     this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{
