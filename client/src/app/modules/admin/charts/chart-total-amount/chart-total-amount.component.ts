@@ -74,7 +74,8 @@ export class ChartTotalAmountComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10
+        min: 50000,
+        suggestedMax: '1000000'
       }
     },
     plugins: {
@@ -95,7 +96,7 @@ export class ChartTotalAmountComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: ['Mon','Tue','Wed','Thur','Fri','Sar','Sun' ],
     datasets: [
-      { data: [ 100000,200000,400000,500000,100000,700000,400000], label: 'Total Amount', backgroundColor: '#FFCC66',hoverBorderColor:'#FF6633', borderColor:'#FF6633',hoverBackgroundColor:'#FFCC33' }
+      { data: [], label: 'Total Amount', backgroundColor: '#FFCC66', hoverBorderColor:'#FF6633', borderColor:'#FF6633', hoverBackgroundColor:'#FFCC33' }
     ]
   };
 
@@ -134,7 +135,7 @@ export class ChartTotalAmountComponent implements OnInit {
   }
 
 
-  ClickView() {
+  clickView() {
     console.log(this.view);
     
     this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{
@@ -143,7 +144,7 @@ export class ChartTotalAmountComponent implements OnInit {
     })
   }
 
-  ClickViewYear() {
+  clickViewYear() {
     console.log(this.viewYear);
     
     this.orderService.getDataChartAmount(this.view,this.viewYear).subscribe(p=>{

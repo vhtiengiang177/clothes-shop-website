@@ -67,11 +67,26 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-
         [HttpGet("GetAccountByID/{id}")]
         public IActionResult GetAccountByID(int id)
         {
             var account = _unitOfWork.AccountsRepository.GetAccountByID(id);
+
+            if (account == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(account);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetAccountByEmail/{email}")]
+        public IActionResult GetAccountByEmail(string email)
+        {
+            var account = _unitOfWork.AccountsRepository.GetAccountByEmail(email);
 
             if (account == null)
             {
@@ -372,7 +387,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPost("ChangePassword")]
-        public IActionResult ChangePassword([FromBody] ParamsPassword paramsPassword)
+        public IActionResult ChangePassword([FromBody] PasswordParams passwordParams)
         {
             var userId = User.FindFirst("id").Value;
             if (userId == null) return BadRequest("Something went wrong!");
@@ -386,14 +401,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 if (provider == "GOOGLE")
                 {
-                    account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
+                    account.Password = _accountsService.MD5Hash(passwordParams.NewPassword);
                 }
             }
             else
             {
-                if (account.Password != _accountsService.MD5Hash(paramsPassword.OldPassword))
+                if (account.Password != _accountsService.MD5Hash(passwordParams.OldPassword))
                     return BadRequest("Incorrect Old Password");
-                account.Password = _accountsService.MD5Hash(paramsPassword.NewPassword);
+                account.Password = _accountsService.MD5Hash(passwordParams.NewPassword);
             }
 
             _unitOfWork.AccountsRepository.UpdateAccount(account);
@@ -402,5 +417,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return Ok();
             else return BadRequest("Something went wrong!");
         }
+
     }
 }

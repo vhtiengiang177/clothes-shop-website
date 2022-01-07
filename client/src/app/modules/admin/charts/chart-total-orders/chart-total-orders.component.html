@@ -1,55 +1,59 @@
 <div class="container">
-    <br>
-    <br>
-      <div>  
-          <div class="row">
-            &ensp;&ensp;&ensp;&ensp;
-            <mat-form-field>
-              <mat-label>Choose a view</mat-label>
-              <mat-select [(value)] = "view">
-                <mat-option (click)="ClickView()" [value]="1" >
-                  Week
-                </mat-option>
-                <mat-option (click)="ClickView()" [value]="2">
-                  Month
-                </mat-option>
-                <mat-option (click)="ClickView()" [value]="3">
-                  Quater
-                </mat-option>                  
-                <mat-option (click)="ClickView()" [value]="4">
-                  Year
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            &ensp;
-          <!-- <a><fa class="edit-icon" name="refresh" (click)="updateChart()"></fa></a> -->
-          <mat-form-field>
-            <mat-label>Choose a year</mat-label>
-            <mat-select [(value)] = "viewYear">
-              <mat-option (click)="ClickViewYear()" [value]="1" >
-                2021
-              </mat-option>
-              <mat-option (click)="ClickViewYear()" [value]="2">
-                2022
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          </div>
-          <div  class="row"> 
-            <div class="chart">
-                <canvas baseChart
-                [data]="barChartData"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [type]="barChartType">
-                </canvas>
+  <div class="row">
+    <div class="col-12" style="padding: 50px;">
+      <br>
+      <br>
+        <div>  
+            <div class="row">
+              <div class="col-3">
+                <mat-form-field>
+                  <mat-label>Choose a view</mat-label>
+                  <mat-select [(value)] = "view">
+                    <mat-option (click)="clickView()" [value]="1" >
+                      Week
+                    </mat-option>
+                    <mat-option (click)="clickView()" [value]="2">
+                      Month
+                    </mat-option>
+                    <mat-option (click)="clickView()" [value]="3">
+                      Quater
+                    </mat-option>                  
+                    <mat-option (click)="clickView()" [value]="4">
+                      Year
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field>
+                  <mat-label>Choose a year</mat-label>
+                  <mat-select [(value)] = "viewYear">
+                    <mat-option (click)="clickViewYear()" [value]="1" >
+                      2021
+                    </mat-option>
+                    <mat-option (click)="clickViewYear()" [value]="2">
+                      2022
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
+            <div  class="row"> 
+              <div class="chart">
+                  <canvas baseChart
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [type]="barChartType">
+                  </canvas>
+              </div>
+            </div>
+      </div>
+      <div class="title">CHART TOTAL ORDERS OF SHOP</div>
+      <div class="button-row">
+        <!-- <button mat-button mat-raised-button color="primary" (click)="updateChart()">Update</button> -->
+      </div>
     </div>
-    <div class="row">
-      <label class="title">CHART TOTAL ORDERS OF SHOP</label>
   </div>
-    <div class="button-row">
-      <!-- <button mat-button mat-raised-button color="primary" (click)="updateChart()">Update</button> -->
-    </div>
-  </div>
+    
+</div>

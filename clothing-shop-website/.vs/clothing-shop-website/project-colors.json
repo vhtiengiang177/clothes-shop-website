@@ -5,7 +5,22 @@
       "ProjectGuid": "36297cb9-1976-4bc1-b2b7-6a19a4fcc6b5",
       "DisplayName": "clothing-shop-website",
       "ColorIndex": 0
+    },
+    "d4b5be43-9fd8-4e08-9014-8c6a15d46d12": {
+      "ProjectGuid": "d4b5be43-9fd8-4e08-9014-8c6a15d46d12",
+      "DisplayName": "Infrastructure",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "174e042e-8f22-49fa-9a3d-8fd7b3411885": {
+      "ProjectGuid": "174e042e-8f22-49fa-9a3d-8fd7b3411885",
+      "DisplayName": "Domain",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }

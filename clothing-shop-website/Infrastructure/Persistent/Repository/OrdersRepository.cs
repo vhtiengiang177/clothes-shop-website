@@ -137,7 +137,9 @@ namespace Infrastructure.Persistent.Repository
         public int GetTotalBuyProductsInMonth()
         {
             int totalBuy = 0;
-            var listOrder = _dbContext.Orders.Where(item => item.DateShip >= DateTime.Parse("2021-12-01") && item.DateShip <= DateTime.Parse("2021-12-31")).ToList();
+            var listOrderHasDateShip = _dbContext.Orders.Where(item => item.DateShip.HasValue).ToList();
+            var listOrder = listOrderHasDateShip.Where(item => item.DateShip.Value.Month >= DateTime.Now.Month 
+                && item.DateShip.Value.Year <= DateTime.Now.Year).ToList();
 
             foreach (var order in listOrder)
             {
