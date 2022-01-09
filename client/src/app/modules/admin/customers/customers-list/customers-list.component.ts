@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FilterParamsAccounts } from 'src/app/services/model/account/filter-params-accounts.model';
 import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
+import { CustomerDetailFormComponent } from '../customer-detail-form/customer-detail-form.component';
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -176,5 +177,25 @@ export class CustomersListComponent implements OnInit {
     });
   }
 
+  viewDetail(id) {
+    if (!this.customersStore.acccustomer.find(p => p.id == id)) {
+      this.toastr.error("Cannot find the customer #" + id)
+    }
+    else {
+      this.accountsStore.getById(id).subscribe(res2 => {
+        this.customersStore.getCustomerById(id).subscribe(res => {
+          if (res) {
+            const dialogRef = this.dialog.open(CustomerDetailFormComponent, {
+              width: '600px',
+              data: {
+                staff: res,
+                account: res2
+              }
+            });
+          }
+        })
+      })
+    }
+  }
 
 }

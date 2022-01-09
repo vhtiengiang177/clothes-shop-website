@@ -20,15 +20,13 @@ body {
   
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 8px;
-    
-
+    margin: 10px;
+    width: 400px;
   }
   
   .about-section {
     padding: 50px;
     text-align: center;
-    background-color: #e9c13b;
     color: white;
   }
   .img{
@@ -72,3 +70,7 @@ body {
       display: block;
     }
   }
+
+.color-title {
+  color: #e9c13b;
+}

@@ -80,6 +80,7 @@ import { ChartTotalOrdersComponent } from './modules/admin/charts/chart-total-or
 import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page/about-us-page.component';
 import { ForgotPasswordPageComponent } from './modules/authentication/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './modules/authentication/reset-password-page/reset-password-page.component';
+import { CustomerDetailFormComponent } from './modules/admin/customers/customer-detail-form/customer-detail-form.component';
  
  
 let config = new AuthServiceConfig([
@@ -168,8 +169,8 @@ export function provideConfig() {
     ChartTotalOrdersComponent,
     AboutUsPageComponent,
     ForgotPasswordPageComponent,
-    ResetPasswordPageComponent
-   
+    ResetPasswordPageComponent,
+    CustomerDetailFormComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -184,7 +185,8 @@ export function provideConfig() {
     DeliveryAddressFormComponent,
     ImagesProductFormComponent,
     OrdersDetailFormComponent,
-    OrderDetailUserFormComponent
+    OrderDetailUserFormComponent,
+    CustomerDetailFormComponent
   ],
   imports: [
     BrowserModule,

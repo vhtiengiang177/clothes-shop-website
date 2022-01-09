@@ -105,13 +105,9 @@ export class ProductPageComponent implements OnInit {
   }
 
   searchEvent(value) {
-    this.filter = {
-      pageindex: 1,
-      pagesize: this.filter.pagesize,
-      sort: this.filter.sort,
-      content: value,
-      idcategories: this.filter.idcategories
-    }
+    this.filter.pageindex = 1
+    this.filter.content = value
+
     this.paginator.pageIndex = 0;
 
     this.fetchData()

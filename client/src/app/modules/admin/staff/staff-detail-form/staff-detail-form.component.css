@@ -6,7 +6,6 @@ mat-form-field {
     width: 100%;
 }
 
-
 .btn-add {
     background-color: #0093c9;
     color: #fff;
@@ -19,3 +18,9 @@ mat-form-field {
     color: #000;
     border: 1px solid #b3ebff;
   }
+
+.image-staff {
+    width: 200px;
+    height: 200px;
+    display: block
+}

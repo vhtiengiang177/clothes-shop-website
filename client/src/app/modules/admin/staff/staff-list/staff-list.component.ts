@@ -17,16 +17,16 @@ import { StaffFormComponent } from '../staff-form/staff-form.component';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-  @ViewChild('paginator', { static: false}) paginator: MatPaginator;
+  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
   filter: FilterParamsAccounts = {
     pageindex: 1,
     pagesize: 5,
     sort: null
   };
-  
+
   getStaff: Staff = {}
-  account: Account ={}
- 
+  account: Account = {}
+
   constructor(private staffStore: StaffStoreService, public dialog: MatDialog,
     private toastr: ToastrService,
     private accountsStore: AccountsStoreService) { }
@@ -39,7 +39,7 @@ export class StaffListComponent implements OnInit {
     this.filter.pageindex = +pageEvent.pageIndex + 1;
     this.fetchData()
   }
-  
+
   fetchData() {
     this.staffStore.getAll(this.filter);
   }
@@ -55,8 +55,8 @@ export class StaffListComponent implements OnInit {
   }
 
   sortID() {
-    if(this.staffStore.totalData !== 0) {
-      if(this.filter.sort != 'id:asc') {
+    if (this.staffStore.totalData !== 0) {
+      if (this.filter.sort != 'id:asc') {
         this.filter.sort = 'id:asc';
       }
       else {
@@ -67,8 +67,8 @@ export class StaffListComponent implements OnInit {
   }
 
   sortEmail() {
-    if(this.staffStore.totalData !== 0) {
-      if(this.filter.sort != 'email:asc') {
+    if (this.staffStore.totalData !== 0) {
+      if (this.filter.sort != 'email:asc') {
         this.filter.sort = 'email:asc';
       }
       else {
@@ -79,8 +79,8 @@ export class StaffListComponent implements OnInit {
   }
 
   sortState() {
-    if(this.staffStore.totalData !== 0) {
-      if(this.filter.sort != 'state:asc') {
+    if (this.staffStore.totalData !== 0) {
+      if (this.filter.sort != 'state:asc') {
         this.filter.sort = 'state:asc';
       }
       else {
@@ -90,29 +90,29 @@ export class StaffListComponent implements OnInit {
     }
   }
 
- 
-  
+
+
   blockAccount(idAccount) {
     const dialogRef = this.dialog.open(ConfirmFormComponent, {
       data: {
         text: "Do you want to block the employee",
         id: idAccount,
-        
+
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
         this.accountsStore.block(idAccount).subscribe(() => {
           this.toastr.success("Block employee #" + idAccount + " successfully")
           let totalStore = this.accountsStore.accounts.length;
-          if(totalStore == 1) {
+          if (totalStore == 1) {
             this.filter.pageindex = this.filter.pageindex - 1;
             this.paginator.pageIndex = this.filter.pageindex - 1;
           }
           this.fetchData()
         }, (error: HttpErrorResponse) => {
-          if(error.status == 400) {
+          if (error.status == 400) {
             this.toastr.error("Bad Request")
           }
           else if (error.status == 404) {
@@ -128,22 +128,22 @@ export class StaffListComponent implements OnInit {
       data: {
         text: "Do you want to unblock the employee",
         id: idAccount,
-        
+
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
         this.accountsStore.unblock(idAccount).subscribe(() => {
           this.toastr.success("Unblock employee #" + idAccount + " successfully")
           let totalStore = this.accountsStore.accounts.length;
-          if(totalStore == 1) {
+          if (totalStore == 1) {
             this.filter.pageindex = this.filter.pageindex - 1;
             this.paginator.pageIndex = this.filter.pageindex - 1;
           }
           this.fetchData()
         }, (error: HttpErrorResponse) => {
-          if(error.status == 400) {
+          if (error.status == 400) {
             this.toastr.error("Bad Request")
           }
           else if (error.status == 404) {
@@ -161,22 +161,22 @@ export class StaffListComponent implements OnInit {
         text: "Do you want to delete the employee",
         id: idAccount,
         remindtext: "Warning: When delete the employee, the employee will be delete out of system"
-        
+
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
         this.accountsStore.delete(idAccount).subscribe(() => {
           this.toastr.success("Delete employee #" + idAccount + " successfully")
           let totalStore = this.accountsStore.accounts.length;
-          if(totalStore == 1) {
+          if (totalStore == 1) {
             this.filter.pageindex = this.filter.pageindex - 1;
             this.paginator.pageIndex = this.filter.pageindex - 1;
           }
           this.fetchData()
         }, (error: HttpErrorResponse) => {
-          if(error.status == 400) {
+          if (error.status == 400) {
             this.toastr.error("Bad Request")
           }
           else if (error.status == 404) {
@@ -190,17 +190,17 @@ export class StaffListComponent implements OnInit {
   addAccoutStaff() {
     const dialogRef = this.dialog.open(StaffFormComponent, {
       width: '600px',
-      data: { 
-         account: { },
-         staff: { }
+      data: {
+        account: {},
+        staff: {}
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
-        if(this.filter.sort == null && this.filter.pageindex == 1) {
-          this.staffStore.accstaff.splice(this.filter.pagesize - 1,1);
-          this.staffStore.accstaff.splice(0,0,res);
+      if (res) {
+        if (this.filter.sort == null && this.filter.pageindex == 1) {
+          this.staffStore.accstaff.splice(this.filter.pagesize - 1, 1);
+          this.staffStore.accstaff.splice(0, 0, res);
           this.staffStore.totalData = this.staffStore.totalData + 1;
         }
         else {
@@ -217,57 +217,57 @@ export class StaffListComponent implements OnInit {
   }
 
   viewDetailStaff(idStaff) {
-    if(!this.staffStore.accstaff.find(p => p.id == idStaff)) {
+    if (!this.staffStore.accstaff.find(p => p.id == idStaff)) {
       this.toastr.error("Cannot find the staff #" + idStaff)
     }
     else {
       this.accountsStore.getById(idStaff).subscribe(res2 => {
+        this.staffStore.getById(idStaff).subscribe(res => {
+          if (res) {
+            const dialogRef = this.dialog.open(StaffDetailFormComponent, {
+              width: '600px',
+              data: {
+                staff: res,
+                account: res2
+              }
+            });
+          }
+        })
+      })
+    }
+  }
+
+  editStaff(idStaff) {
+    if (!this.staffStore.accstaff.find(p => p.id == idStaff)) {
+      this.toastr.error("Cannot find the staff #" + idStaff)
+    }
+    else {
+
       this.staffStore.getById(idStaff).subscribe(res => {
-        if(res) {
-          const dialogRef = this.dialog.open(StaffDetailFormComponent, {
-            width: '600px',
-            data: { 
-              staff: res,
-              account: res2
+        if (res) {
+          this.getStaff = res;
+
+          this.accountsStore.getById(idStaff).subscribe(acc => {
+            if (res) {
+              this.account = acc;
+              this.getStaff.email = this.account.email;
+              this.getStaff.typeStaff = this.account.idTypeAccount;
             }
+          })
+          const dialogRef = this.dialog.open(StaffFormComponent, {
+            width: '600px',
+            data: {
+              typeform: 1,
+              staff: this.getStaff
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+            this.fetchData()
           });
         }
       })
-    })
+    }
   }
-}
-
-editStaff(idStaff) {
-  if(!this.staffStore.accstaff.find(p => p.id == idStaff)) {
-    this.toastr.error("Cannot find the staff #" + idStaff)
-  }
-  else {
-    
-    this.staffStore.getById(idStaff).subscribe(res => {
-      if(res) {
-        this.getStaff= res;
-        
-        this.accountsStore.getById(idStaff).subscribe(acc =>{
-          if (res){
-            this.account = acc;
-            this.getStaff.email = this.account.email;
-            this.getStaff.typeStaff = this.account.idTypeAccount;
-          }
-        })
-        const dialogRef = this.dialog.open(StaffFormComponent, {
-          width: '600px',
-          data: { 
-            typeform: 1, 
-            staff: this.getStaff
-          }
-        });
-        
-        dialogRef.afterClosed().subscribe(() => {
-          this.fetchData()
-        });
-      }
-    })
-  }
-}
 
 }

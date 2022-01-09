@@ -103,23 +103,40 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_unitOfWork.AccountsRepository.IsExistEmail(createAccountParams.Account.Email))
+                if (_unitOfWork.AccountsRepository.IsExistEmailActivate(createAccountParams.Account.Email) != null)
                 {
                     return BadRequest("Email already exist!");
                 }
                 else
                 {
+                    var oldAccount = _unitOfWork.AccountsRepository.GetAccountByEmail(createAccountParams.Account.Email);
+                    
                     Random generator = new Random();
                     int verificationCode = generator.Next(100000, 1000000);
 
-                    Account account = new Account();
-                    account.Email = createAccountParams.Account.Email;
-                    account.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
-                    account.IdTypeAccount = 4;
-                    account.VerificationCode = verificationCode;
 
+                    if (oldAccount == null)
+                    {
+                        Account account = new Account();
+                        account.Email = createAccountParams.Account.Email;
+                        account.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
+                        account.IdTypeAccount = 4;
+                        account.VerificationCode = verificationCode;
 
-                    _unitOfWork.AccountsRepository.CreateAccount(account, null, createAccountParams.Staff);
+                        _unitOfWork.AccountsRepository.CreateAccount(account, null, createAccountParams.Staff);
+                    }
+                    else
+                    {
+                        oldAccount.Email = createAccountParams.Account.Email;
+                        oldAccount.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
+                        oldAccount.IdTypeAccount = 4;
+                        oldAccount.VerificationCode = verificationCode;
+
+                        _unitOfWork.AccountsRepository.UpdateAccount(oldAccount);
+                        createAccountParams.Staff.IdAccount = oldAccount.Id;
+                        _unitOfWork.StaffRepository.UpdateStaff(createAccountParams.Staff);
+                    }
+
                     if (_unitOfWork.Save() == false)
                     {
                         return BadRequest("Failed.");

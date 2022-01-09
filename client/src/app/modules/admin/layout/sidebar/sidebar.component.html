@@ -162,7 +162,7 @@
         <span>Promotions</span></a>
     </li>
 
-    <li *ngIf="authService.getCurrentUser().idTypeAccount != 3" (click)="clickShops()" 
+    <li *ngIf="authService.getCurrentUser().idTypeAccount == 1" (click)="clickShops()" 
     [ngClass]="{ 'active': isShopsActive }" 
     [routerLink]="['/admin/shops']" 
     class="nav-item nav-color">
