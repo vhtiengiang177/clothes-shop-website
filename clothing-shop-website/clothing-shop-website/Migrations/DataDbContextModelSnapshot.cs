@@ -286,9 +286,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -354,9 +351,6 @@ namespace clothing_shop_website.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ColorCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -622,9 +616,6 @@ namespace clothing_shop_website.Migrations
                     b.Property<int>("IdProduct")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
                     b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
@@ -639,6 +630,88 @@ namespace clothing_shop_website.Migrations
                     b.HasIndex("IdProduct");
 
                     b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IdProduct = 7,
+                            PublicId = "upkgtzzikelofkm59hym",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377326/upkgtzzikelofkm59hym.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IdProduct = 8,
+                            PublicId = "nyui0gbxjklueygs79t3",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377339/nyui0gbxjklueygs79t3.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IdProduct = 6,
+                            PublicId = "hwyrx7fngep248l9sgok",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377352/hwyrx7fngep248l9sgok.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IdProduct = 5,
+                            PublicId = "wljzh5o9z4lijmkpz6g9",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377360/wljzh5o9z4lijmkpz6g9.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IdProduct = 4,
+                            PublicId = "vhaaahd0swocol1jmdzb",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377369/vhaaahd0swocol1jmdzb.jpg"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IdProduct = 3,
+                            PublicId = "zrziv9gpeusmhtxsfkjt",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377386/zrziv9gpeusmhtxsfkjt.jpg"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IdProduct = 3,
+                            PublicId = "gspnzsvax2tzcrnqu6qz",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377387/gspnzsvax2tzcrnqu6qz.jpg"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IdProduct = 3,
+                            PublicId = "jyekdiysmfp2y4jdy4py",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377387/jyekdiysmfp2y4jdy4py.jpg"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IdProduct = 2,
+                            PublicId = "hbsloasmry0visw71kom",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377395/hbsloasmry0visw71kom.jpg"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IdProduct = 1,
+                            PublicId = "rg2fwfca5dcqfdkarnxv",
+                            State = 1,
+                            Url = "https://res.cloudinary.com/djl6vmqt7/image/upload/v1640377407/rg2fwfca5dcqfdkarnxv.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entity.Log_Product", b =>

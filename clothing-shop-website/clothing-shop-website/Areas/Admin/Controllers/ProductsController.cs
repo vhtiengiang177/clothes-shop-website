@@ -415,12 +415,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
             var lImages = _unitOfWork.ProductsRepository.GetImagesByIdProduct(id);
 
-            if (lImages.Count() == 0)
-            {
-                imageObj.IsMain = true;
-            }
-            else imageObj.IsMain = false;
-
             var image = _unitOfWork.ImagesRepository.Create(imageObj);
 
             if (_unitOfWork.Save())
