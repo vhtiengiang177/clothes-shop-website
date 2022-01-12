@@ -62,13 +62,12 @@
             <td>{{ accstaff.id }}</td>
             <td><a>{{ accstaff.email }}</a></td>
             <td *ngIf="accstaff.state == 1">Active</td>
-            
             <td *ngIf="accstaff.state == 2">Blocked</td>
             <td (click)="viewDetailStaff(accstaff.id)"><fa  name="info-circle"></fa></td>
-            <td (click)="blockAccount(accstaff.id)" *ngIf="accstaff.state == 1"><fa class="edit-icon" name="lock"></fa></td>
-            <td (click)="unblockAccount(accstaff.id)" *ngIf="accstaff.state == 2"><fa class="edit-icon" name="unlock"></fa></td>
             <td (click)="editStaff(accstaff.id)"><fa class="edit-icon" name="edit"></fa></td>
-            <td (click)="deleteAccount(accstaff.id)"><fa class="delete-icon" name="trash"></fa></td>
+            <td *ngIf="accstaff.state == 1" ><fa (click)="blockAccount(accstaff.id)" *ngIf="accstaff.idTypeAccount != 1" class="edit-icon" name="lock"></fa></td>
+            <td *ngIf="accstaff.state == 2"><fa (click)="unblockAccount(accstaff.id)" *ngIf="accstaff.idTypeAccount != 1" class="edit-icon" name="unlock"></fa></td>
+            <td><fa *ngIf="accstaff.idTypeAccount != 1" (click)="deleteAccount(accstaff.id)" class="delete-icon" name="trash"></fa></td>
           </tr>
         </tbody>
         <tbody *ngIf="staffStore.totalData == 0">
