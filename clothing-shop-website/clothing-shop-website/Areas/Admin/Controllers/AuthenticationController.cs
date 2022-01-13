@@ -254,19 +254,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 {
                     return BadRequest("Email account does not exist");
                 }
-                else if (account.Password == null)
-                {
-                    return BadRequest("This account hasn't been initialized");
-                }
                 else
                 {
                     var firstName = _unitOfWork.AccountsRepository.GetFirstNameByEmail(email);
 
-                    var randomString = Guid.NewGuid().ToString("n").Substring(0, 8);
+                    var randomString = Guid.NewGuid().ToString("n").Substring(0, 8).ToUpper();
 
                     if (account != null)
                     {
-                        account.ResetPasswordCode = randomString.ToUpper();
+                        account.ResetPasswordCode = randomString;
                         _unitOfWork.AccountsRepository.UpdateAccount(account);
                         _accountsService.SendResetPasswordCode(email, firstName, randomString);
                         _unitOfWork.Save();
@@ -283,17 +279,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             var account = _unitOfWork.AccountsRepository.GetAccountByEmail(resetPasswordParams.Email);
 
-            if (account.Password == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                if (account.ResetPasswordCode != resetPasswordParams.ResetCode)
-                    return BadRequest("Incorrect Reset Code");
-                account.Password = _accountsService.MD5Hash(resetPasswordParams.Password);
-                account.ResetPasswordCode = null;
-            }
+            if (account.ResetPasswordCode != resetPasswordParams.ResetCode)
+                return BadRequest("Incorrect Reset Code");
+            account.Password = _accountsService.MD5Hash(resetPasswordParams.Password);
+            account.ResetPasswordCode = null;
 
             _unitOfWork.AccountsRepository.UpdateAccount(account);
 
