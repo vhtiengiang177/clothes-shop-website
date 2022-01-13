@@ -192,27 +192,14 @@ export class StaffListComponent implements OnInit {
       width: '600px',
       data: {
         account: {},
-        staff: {}
+        staff: {},
+        typeform: 0
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        if (this.filter.sort == null && this.filter.pageindex == 1) {
-          this.staffStore.accstaff.splice(this.filter.pagesize - 1, 1);
-          this.staffStore.accstaff.splice(0, 0, res);
-          this.staffStore.totalData = this.staffStore.totalData + 1;
-        }
-        else {
-          this.filter = {
-            pageindex: 1,
-            pagesize: this.filter.pagesize,
-            sort: null
-          }
-          this.fetchData()
-        }
-        this.paginator.pageIndex = 0;
-      }
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchData()
+      this.paginator.pageIndex = 0;
     });
   }
 
@@ -252,19 +239,21 @@ export class StaffListComponent implements OnInit {
               this.account = acc;
               this.getStaff.email = this.account.email;
               this.getStaff.typeStaff = this.account.idTypeAccount;
+
+              const dialogRef = this.dialog.open(StaffFormComponent, {
+                width: '600px',
+                data: {
+                  typeform: 1,
+                  staff: this.getStaff
+                }
+              });
+    
+              dialogRef.afterClosed().subscribe(() => {
+                this.fetchData()
+              });
             }
           })
-          const dialogRef = this.dialog.open(StaffFormComponent, {
-            width: '600px',
-            data: {
-              typeform: 1,
-              staff: this.getStaff
-            }
-          });
-
-          dialogRef.afterClosed().subscribe(() => {
-            this.fetchData()
-          });
+          
         }
       })
     }

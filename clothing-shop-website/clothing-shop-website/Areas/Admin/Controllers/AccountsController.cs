@@ -103,46 +103,111 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_unitOfWork.AccountsRepository.IsExistEmailActivate(createAccountParams.Account.Email) != null)
+                var oldAccount = _unitOfWork.AccountsRepository.GetAccountByEmail(createAccountParams.Email);
+
+                if (createAccountParams.TypeForm==0 && oldAccount != null)
                 {
-                    return BadRequest("Email already exist!");
+                    return BadRequest("Email is exist.");
+                }
+
+                Random generator = new Random();
+                int verificationCode = generator.Next(100000, 1000000);
+
+                if (oldAccount == null
+                    )
+                {
+                    if (_unitOfWork.AccountsRepository.IsExistCardIdentity(createAccountParams.CardIdentity))
+                        return BadRequest("Card Identity is exist.");
+
+                    if (_unitOfWork.AccountsRepository.IsExistPhone(createAccountParams.Phone))
+                        return BadRequest("Phone is exist.");
+
+                    Account account = new Account();
+                    account.Email = createAccountParams.Email;
+                    account.Password = _accountsService.MD5Hash(createAccountParams.CardIdentity);
+                    account.IdTypeAccount = createAccountParams.IdTypeAccount;
+                    account.VerificationCode = verificationCode;
+
+                    Staff staff = new Staff();
+                    staff.FirstName = createAccountParams.FirstName;
+                    staff.LastName = createAccountParams.LastName;
+                    staff.Phone = createAccountParams.Phone;
+                    staff.CardIdentity = createAccountParams.CardIdentity;
+
+                     _unitOfWork.AccountsRepository.CreateAccount(account, null, staff);
+                    return Ok();
                 }
                 else
                 {
-                    var oldAccount = _unitOfWork.AccountsRepository.GetAccountByEmail(createAccountParams.Account.Email);
-                    
-                    Random generator = new Random();
-                    int verificationCode = generator.Next(100000, 1000000);
-
-
-                    if (oldAccount == null)
+                    if (oldAccount.State == 2)
                     {
-                        Account account = new Account();
-                        account.Email = createAccountParams.Account.Email;
-                        account.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
-                        account.IdTypeAccount = 4;
-                        account.VerificationCode = verificationCode;
-
-                        _unitOfWork.AccountsRepository.CreateAccount(account, null, createAccountParams.Staff);
+                        return BadRequest("This account has been blocked");
+                    }
+                    else if (oldAccount.State == 0)
+                    {
+                        oldAccount.State = 1;
+                        oldAccount.Password =  _accountsService.MD5Hash(createAccountParams.CardIdentity);
+                        oldAccount.VerificationCode = verificationCode;
                     }
                     else
                     {
-                        oldAccount.Email = createAccountParams.Account.Email;
-                        oldAccount.Password = _accountsService.MD5Hash(createAccountParams.Account.Password);
-                        oldAccount.IdTypeAccount = 4;
-                        oldAccount.VerificationCode = verificationCode;
-
-                        _unitOfWork.AccountsRepository.UpdateAccount(oldAccount);
-                        createAccountParams.Staff.IdAccount = oldAccount.Id;
-                        _unitOfWork.StaffRepository.UpdateStaff(createAccountParams.Staff);
+                        if (createAccountParams.NewEmail != "")
+                        {
+                            var checkAccount = _unitOfWork.AccountsRepository.IsExistEmailActivate(createAccountParams.NewEmail);
+                            if (checkAccount != null)
+                            {
+                                return BadRequest("Email already exist!");
+                            }
+                            else
+                            {
+                                oldAccount.Email = createAccountParams.NewEmail;
+                                oldAccount.VerificationCode = verificationCode;
+                            }
+                        }
+                        if (createAccountParams.NewCard != "")
+                        {
+                            var checkCardAccount = _unitOfWork.AccountsRepository.IsExistCardIdentity(createAccountParams.NewCard);
+                            if (checkCardAccount)
+                            {
+                                return BadRequest("Card Identity already exist!");
+                            }
+                            else
+                            {
+                                createAccountParams.CardIdentity = createAccountParams.NewCard;
+                            }
+                        }
+                        if (createAccountParams.NewPhone != "")
+                        {
+                            var checkPhoneAccount = _unitOfWork.AccountsRepository.IsExistPhone(createAccountParams.NewPhone);
+                            if (checkPhoneAccount)
+                            {
+                                return BadRequest("Phone already exist!");
+                            }
+                            else
+                            {
+                                createAccountParams.Phone = createAccountParams.NewPhone;
+                            }
+                        }
                     }
 
-                    if (_unitOfWork.Save() == false)
-                    {
-                        return BadRequest("Failed.");
-                    }
-                    return Ok();
+                    oldAccount.IdTypeAccount = createAccountParams.IdTypeAccount;
+
+                    _unitOfWork.AccountsRepository.UpdateAccount(oldAccount);
+
+                    Staff staff = new Staff();
+                    staff.FirstName = createAccountParams.FirstName;
+                    staff.LastName = createAccountParams.LastName;
+                    staff.Phone = createAccountParams.Phone;
+                    staff.CardIdentity = createAccountParams.CardIdentity;
+                    staff.IdAccount = oldAccount.Id;
+                    _unitOfWork.StaffRepository.UpdateStaff(staff);
                 }
+
+                if (_unitOfWork.Save() == false)
+                {
+                    return BadRequest("Failed.");
+                }
+                return Ok();
             }
             else return BadRequest(ModelState);
         }

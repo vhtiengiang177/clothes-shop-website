@@ -35,18 +35,16 @@ namespace Infrastructure.Persistent.Repository
                 var result = _dbContext.Accounts.Add(account);
                 _dbContext.SaveChanges();
 
-                var idAccount = _dbContext.Accounts.OrderByDescending(s => s.Id).FirstOrDefault().Id;
-
                 if (account.IdTypeAccount == 4)
                 {
-                    customer.IdAccount = idAccount;
+                    customer.IdAccount = result.Entity.Id;
                     _dbContext.Customers.Add(customer);
                     _dbContext.SaveChanges();
 
                 }
                 else
                 {
-                    staff.IdAccount = idAccount;
+                    staff.IdAccount = result.Entity.Id;
                     _dbContext.Staff.Add(staff);
                     _dbContext.SaveChanges();
                 }
@@ -57,6 +55,21 @@ namespace Infrastructure.Persistent.Repository
                 throw;
             }
         }
+
+        public bool IsExistCardIdentity(string card)
+        {
+            if (_dbContext.Staff.Where(a => a.CardIdentity == card).Count() > 0)
+                return true;
+            return false;
+        }
+
+        public bool IsExistPhone(string phone)
+        {
+            if (_dbContext.Staff.Where(a => a.Phone == phone).Count() > 0)
+                return true;
+            return false;
+        }
+
         public void UpdateAccount(Account account)
         {
             _dbContext.Attach(account);

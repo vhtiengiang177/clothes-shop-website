@@ -47,6 +47,10 @@ export class AccountsStoreService {
       return result.asObservable()
   }
 
+  createAccount(accountparams) {
+    return this.accountService.createAccount(accountparams)
+  }
+
   delete(id) {
     return this.accountService.delete(id)
   }

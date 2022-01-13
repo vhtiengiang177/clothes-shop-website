@@ -60,13 +60,13 @@ export class ChartTotalOrdersComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 0,
-        suggestedMax: '40'
+        
+        min: 0
       }
     },
     plugins: {
       legend: {
-        display: true
+        display: true,
       },
       datalabels: {
         anchor: 'end',
@@ -82,11 +82,12 @@ export class ChartTotalOrdersComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: ['Mon','Tue','Wed','Thur','Fri','Sar','Sun' ],
     datasets: [
-      { data: [], label: 'Completed',
-        backgroundColor: '#9de8aa', hoverBorderColor:'#9de8aa', borderColor:'#9de8aa',hoverBackgroundColor:'#84ce90' },
-      { data: [], label: 'Cancel/Return',
-       backgroundColor: '#ff6b6b', hoverBorderColor:'#ff6b6b', borderColor:'#ff6b6b',hoverBackgroundColor:'#ef3e3e'  },
-    ]
+      { data: [ 100000,200000,400000,500000,100000,700000,400000], label: 'Completed',
+        backgroundColor: '#33CC66', hoverBorderColor:'#33CC66', borderColor:'#33CC66',hoverBackgroundColor:'#33CC33' },
+      { data: [  200000,100000,300000,300000,200000,400000,100000 ], label: 'Cancel/Return',
+       backgroundColor: '#FF6633', hoverBorderColor:'#FF6633', borderColor:'#FF6633',hoverBackgroundColor:'#FF0000'  },
+    ],
+   
   };
 
   // public barChartColors: Color[] = [
@@ -130,7 +131,7 @@ export class ChartTotalOrdersComponent implements OnInit {
     this.chart.update();
   }
 
-  clickView() {
+  ClickView() {
     console.log(this.view);
     
     this.orderService.getDataChartOrders(this.view,this.viewYear).subscribe(p=>{
@@ -140,7 +141,7 @@ export class ChartTotalOrdersComponent implements OnInit {
     })
   }
 
-  clickViewYear() {
+  ClickViewYear() {
     console.log(this.viewYear);
 
     if ((this.view == 1) && this.viewYear == 1) {

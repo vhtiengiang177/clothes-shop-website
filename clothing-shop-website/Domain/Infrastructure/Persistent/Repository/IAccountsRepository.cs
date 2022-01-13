@@ -20,5 +20,8 @@ namespace Domain.Infrastructure.Persistent.Repository
         Account IsExistEmailActivate(string email);
         string GetFirstNameByEmail(string email);
         Account GetAccountByEmail(string email);
+        bool IsExistCardIdentity(string card);
+        bool IsExistPhone(string phone);
+        
     }
 }
