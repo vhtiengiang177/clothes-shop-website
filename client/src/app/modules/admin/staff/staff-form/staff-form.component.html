@@ -1,4 +1,4 @@
-<h2 *ngIf="this.data.typeform === 0" mat-dialog-title>Add Satff</h2>
+<h2 *ngIf="this.data.typeform === 0" mat-dialog-title>Add Staff</h2>
 <h2 *ngIf="this.data.typeform === 1" mat-dialog-title>Edit Staff <strong>#{{ data.staff.idAccount }}</strong></h2>
 <mat-dialog-content class="mat-typography">
     <div class="row detail-center"> 
@@ -43,8 +43,8 @@
                 </div>
                 <div class="col-6">
                     <mat-form-field appearance="fill">
-                        <mat-label>Phone </mat-label>
-                        <input [(ngModel)]="data.staff.phone" #phone ="ngModel" matInput type="text" >
+                        <mat-label>Phone</mat-label>
+                        <input [(ngModel)]="data.staff.phone" #phone ="ngModel" matInput type="text" required>
                         <mat-error class="error-required" *ngIf="phone.touched && phone.invalid && phone.errors?.required">
                         Phone is <strong>required</strong>
                         </mat-error>
@@ -62,7 +62,7 @@
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Role</mat-label>
-                        <mat-select compare [ngModel]="data.staff.typeStaff" #typeStaff="ngModel" name="data.staff.typeStaff" [compareWith]="compareSelected" required>
+                        <mat-select compare [(ngModel)]="data.staff.typeStaff" #typeStaff="ngModel" name="data.staff.typeStaff" [compareWith]="compareSelected" required>
                             <mat-option value="1">Admin</mat-option>
                             <mat-option value="2">Employee</mat-option>
                             <mat-option value="3">Shipper</mat-option>

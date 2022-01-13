@@ -17,10 +17,15 @@ export class ChartTopProductComponent implements OnInit {
 
 
   constructor(private productsStore: ProductsStoreService) {
+    this.productsStore.getTopBestSellers().subscribe(p => {
+      this.productTopBestSellers=p;
+      this.randomize();
+    })
   }
 
   ngOnInit() {
     this.productsStore.getTopBestSellers().subscribe(p => {
+      this.productTopBestSellers=p;
       this.randomize();
     })
 
@@ -66,7 +71,7 @@ export class ChartTopProductComponent implements OnInit {
   public randomize(): void {
     let dataLabels: string[] = [];
     let dateQuantity: number[] = [];
-    this.productsStore.products.forEach(pc => {
+    this.productTopBestSellers.forEach(pc => {
       dataLabels.push(pc.name);
       dateQuantity.push(pc.totalBuy);
     })
