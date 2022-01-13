@@ -254,6 +254,10 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 {
                     return BadRequest("Email account does not exist");
                 }
+                else if (account.Password == null)
+                {
+                    return BadRequest("This account hasn't been initialized");
+                }
                 else
                 {
                     var firstName = _unitOfWork.AccountsRepository.GetFirstNameByEmail(email);

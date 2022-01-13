@@ -1,81 +1,80 @@
 <mat-dialog-content class="mat-typography">
-        <div *ngIf="isVisible" class="container">
-            <div class="row display-detail">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="product-pic-zoom">
-                            <ng-container *ngIf="listImages.length == 0; else second">
-                                <img class="product-big-img image image-product" src="assets/product.jpg" alt="">
-                            </ng-container>
-                            <ng-template #second>
-                                <img class="product-big-img image image-product" [src]="imageMain">
-                            </ng-template>
-                        </div>
-                        <carousel 
-                            [cellsToShow]="3"
-                            [cellsToScroll]="1"
-                            [overflowCellsLimit]="4">
-                            <div class="carousel-cell product-item" *ngFor="let image of listImages">
-                                <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
-                            </div>                      
-                        </carousel>
+    <div *ngIf="isVisible" class="container">
+        <div class="row display-detail">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="product-pic-zoom">
+                        <ng-container *ngIf="listImages.length == 0; else second">
+                            <img class="product-big-img image image-product" src="assets/product.jpg" alt="">
+                        </ng-container>
+                        <ng-template #second>
+                            <img class="product-big-img image image-product" [src]="imageMain">
+                        </ng-template>
                     </div>
-                    <div class="col-md-6">
-                        <div class="product-details">
-                            <div class="pd-title">
-                                <h2>{{ product.name }}</h2>
-                                <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                    <carousel [cellsToShow]="3" [cellsToScroll]="1" [overflowCellsLimit]="4">
+                        <div class="carousel-cell product-item" *ngFor="let image of listImages">
+                            <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
+                        </div>
+                    </carousel>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-details">
+                        <div class="pd-title">
+                            <h2>{{ product.name }}</h2>
+                            <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                        </div>
+                        <div class="pd-desc">
+                            <p>{{ product.description }}</p>
+                            <h4>{{ product.unitPrice | currency: 'VND'}}</h4>
+                        </div>
+                        <div class="pd-color">
+                            <span class="font-color">Color:</span>
+                            <div class="pd-size-choose">
+                                <mat-radio-group name="opColor" class="example-radio-group"
+                                    [(ngModel)]="selectedSizeColor.idColor">
+                                    <mat-radio-button name="opColor" class="example-radio-button"
+                                        *ngFor="let item of listColors" [value]="item.id"
+                                        (change)="colorChange($event)">
+                                        {{ item.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
                             </div>
-                            <div class="pd-desc">
-                                <p>{{ product.description }}</p>
-                                <h4>{{ product.unitPrice | currency: 'VND'}}</h4>
+                        </div>
+                        <div class="pd-color">
+                            <span class="font-color">Size:</span>
+                            <div class="pd-size-choose">
+                                <mat-radio-group name="opSize" class="example-radio-group"
+                                    [(ngModel)]="selectedSizeColor.idSize">
+                                    <mat-radio-button name="opSize" class="example-radio-button"
+                                        *ngFor="let item of listSizes" [value]="item.id" (change)="sizeChange($event)">
+                                        {{ item.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
                             </div>
-                            <div class="pd-color">
-                                <span class="font-color">Color:</span>
-                                <div class="pd-size-choose">
-                                    <mat-radio-group name="opColor" class="example-radio-group" [(ngModel)]="selectedSizeColor.idColor">
-                                        <mat-radio-button name="opColor" class="example-radio-button"
-                                            *ngFor="let item of listColors"
-                                            [value]="item.id"
-                                            (change)="colorChange($event)">
-                                            {{ item.name }}
-                                        </mat-radio-button>
-                                    </mat-radio-group>
+                        </div>
+                        <h4 class="badge-out" *ngIf="outOfStock"><span class="badge badge-warning">Out of stock</span>
+                        </h4>
+                        <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
+                            <span class="font-color">Stock:</span>
+                            <span>{{ selectedSizeColor.stock }}</span>
+                        </div>
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <div class="quantity">
+                                    <input class="input-quantity" type="number" [(ngModel)]="quantity" min="1"
+                                        [max]="selectedSizeColor.stock">
                                 </div>
                             </div>
-                            <div class="pd-color">
-                                <span class="font-color">Size:</span>
-                                <div class="pd-size-choose">
-                                    <mat-radio-group name="opSize" class="example-radio-group" [(ngModel)]="selectedSizeColor.idSize">
-                                        <mat-radio-button name="opSize" class="example-radio-button"
-                                            *ngFor="let item of listSizes"
-                                            [value]="item.id"
-                                            (change)="sizeChange($event)">
-                                            {{ item.name }}
-                                        </mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
-                            </div>
-                            <h4 class="badge-out" *ngIf="outOfStock"><span class="badge badge-warning">Out of stock</span></h4>
-                            <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
-                                <span class="font-color">Stock:</span>
-                                <span>{{ selectedSizeColor.stock }}</span>
-                            </div>
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <div class="quantity">
-                                        <input class="input-quantity" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
-                                    </div>
-                                </div>
-                               <button *ngIf="!isOpenByCart" (click)="addToCart()"  class="primary-btn pd-cart">Add To Cart</button>
-                            </div>
+                            <button *ngIf="!isOpenByCart" (click)="addToCart()" class="primary-btn pd-cart">Add To
+                                Cart</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Back</button> 
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Back</button>
     <button *ngIf="isOpenByCart" mat-button (click)="addToCart()" class="btn btn-add">Update</button>
 </mat-dialog-actions>

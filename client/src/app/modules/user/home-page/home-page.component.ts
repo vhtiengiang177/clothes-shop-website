@@ -84,7 +84,7 @@ export class HomePageComponent implements OnInit {
 
   addToCart(product) {
     this.dialog.open(ProductAddCartFormComponent, {
-      width: '1000px',
+      width: '800px',
       data: { 
         idProduct: product.id,
         idColor: null,

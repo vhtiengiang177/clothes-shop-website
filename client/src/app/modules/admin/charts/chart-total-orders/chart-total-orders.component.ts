@@ -142,6 +142,10 @@ export class ChartTotalOrdersComponent implements OnInit {
 
   clickViewYear() {
     console.log(this.viewYear);
+
+    if ((this.view == 1) && this.viewYear == 1) {
+      this.view = 3
+    }
     
     this.orderService.getDataChartOrders(this.view,this.viewYear).subscribe(p=>{
       this.dataCompleted = p.ordersCompleted;

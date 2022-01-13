@@ -3,11 +3,11 @@
   <br>
     <div>  
         <div class="row">
-          <div class="col-3">
+          <div class="col-4 col-sm-6 col-md-6">
             <mat-form-field>
               <mat-label>Choose a view</mat-label>
               <mat-select [(value)] = "view">
-                <mat-option (click)="clickView()" [value]="1" >
+                <mat-option *ngIf="viewYear == 2" (click)="clickView()" [value]="1" >
                   Week
                 </mat-option>
                 <mat-option (click)="clickView()" [value]="2">
@@ -22,7 +22,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-3">
+          <div class="col-4 col-sm-6 col-md-6">
             <mat-form-field>
               <mat-label>Choose a year</mat-label>
               <mat-select [(value)] = "viewYear">
