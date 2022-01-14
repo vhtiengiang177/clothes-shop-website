@@ -39,6 +39,8 @@ namespace clothing_shop_website.Areas.Client
 
                 lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrdersByState(filterParams.IdState);
 
+                lOrderItems = _ordersService.FilterOrder(filterParams, lOrderItems);
+
                 var lOrder = _ordersService.SortListOrder(filterParams.Sort, lOrderItems);
 
                 var response = new ResponseJSON<Order>
