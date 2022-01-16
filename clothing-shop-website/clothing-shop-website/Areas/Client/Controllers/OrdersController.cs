@@ -43,6 +43,8 @@ namespace clothing_shop_website.Areas.Client
                     lOrderItems = _ordersService.FilterOrder(filterParams, lOrderItems);
                 }
 
+                lOrderItems = _ordersService.FilterOrder(filterParams, lOrderItems);
+
                 var lOrder = _ordersService.SortListOrder(filterParams.Sort, lOrderItems);
 
                 var response = new ResponseJSON<Order>
