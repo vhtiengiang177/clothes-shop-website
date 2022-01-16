@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit {
           this.clickCategoriesList()
         else if (this.currentRouter.startsWith("/admin/customers"))
           this.clickCustomersList()
-        else if (this.currentRouter.startsWith("/admin/staffs"))
+        else if (this.currentRouter.startsWith("/admin/staff"))
           this.clickStaffList()
         else if (this.currentRouter.startsWith("/admin/orders"))
           this.clickOrdersList()
@@ -131,7 +131,7 @@ export class SidebarComponent implements OnInit {
     this.isCategoriesListActive = false
     this.isOrdersListActive = false
     this.isCustomerListActive = false
-    this.isPromotionsListActive=false
+    this.isPromotionsListActive= false
 
     this.isProductShow = false
   }

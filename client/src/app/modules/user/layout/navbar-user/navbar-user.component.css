@@ -22,12 +22,12 @@
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 767px) {
     .mobile-menu-wrap {
         display: none;
     }
   }
 
-  .mobile-menu-wrap {
-    display: none;
+.mobile-menu-wrap {
+    display: none !important;
 }

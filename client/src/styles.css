@@ -54,6 +54,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	height: 300px !important;
 }
 
+.mobile-menu-wrap {
+    display: none !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

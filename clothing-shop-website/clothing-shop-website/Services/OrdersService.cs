@@ -54,11 +54,11 @@ namespace clothing_shop_website.Services
             return lOrder;
         }
 
-        //public IQueryable<Order> FilterOrder(FilterParamsOrder filterParams, IQueryable<Order> lOrder)
-        //{
-        //    if (filterParams.Content != null)
-        //        lOrder = lOrder.Where(p => p..ToLower().Contains(filterParams.Content.ToLower()));
-        //    return lOrder.AsQueryable();
-        //}
+        public IQueryable<Order> FilterOrder(FilterParamsOrder filterParams, IQueryable<Order> lOrder)
+        {
+            if (filterParams.Content != null)
+                lOrder = lOrder.Where(p => p.Id.ToString() == filterParams.Content);
+            return lOrder.AsQueryable();
+        }
     }
 }
