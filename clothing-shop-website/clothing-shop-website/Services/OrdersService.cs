@@ -57,9 +57,8 @@ namespace clothing_shop_website.Services
         public IQueryable<Order> FilterOrder(FilterParamsOrder filterParams, IQueryable<Order> lOrder)
         {
             if (filterParams.Content != null)
-                lOrder = lOrder.Where(p => p.Id.ToString().ToLower().Contains(filterParams.Content.ToLower()));
+                lOrder = lOrder.Where(p => p.Id.ToString() == filterParams.Content);
             return lOrder.AsQueryable();
-
         }
     }
 }

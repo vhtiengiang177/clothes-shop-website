@@ -38,6 +38,10 @@ namespace clothing_shop_website.Areas.Client
                 IQueryable<Order> lOrderItems;
 
                 lOrderItems = await _unitOfWork.OrdersRepository.GetAllOrdersByState(filterParams.IdState);
+                if (filterParams.Content != "")
+                {
+                    lOrderItems = _ordersService.FilterOrder(filterParams, lOrderItems);
+                }
 
                 lOrderItems = _ordersService.FilterOrder(filterParams, lOrderItems);
 
