@@ -68,8 +68,6 @@ D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cs
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.MvcApplicationPartsAssemblyInfo.cache
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\staticwebassets\clothing-shop-website.StaticWebAssets.Manifest.cache
-D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\staticwebassets\clothing-shop-website.StaticWebAssets.xml
-D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\scopedcss\bundle\clothing-shop-website.styles.css
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.RazorTargetAssemblyInfo.cache
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.csproj.CopyComplete
 D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
@@ -156,3 +154,4 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\D
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.dll
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.pdb
 D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\clothing-shop-website\obj\Debug\netcoreapp3.1\clothing-shop-website.genruntimeconfig.cache
+D:\KLTN_TLCN\finalproject\clothing-shop-website\clothing-shop-website\bin\Debug\netcoreapp3.1\clothing-shop-website.StaticWebAssets.xml

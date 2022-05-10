@@ -20,6 +20,8 @@ namespace Domain.Entity
         public int? ModifiedById { get; set; }
         public int? IdCategory { get; set; }
         public Category Category { get; set; }
+        public int? idPromotion { get; set; }
+        public Promotion Promotion { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Product_Size_Color> Product_Sizes_Color { get; set; }
     }

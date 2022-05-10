@@ -15,6 +15,7 @@ namespace Domain.Entity
         public int TotalQuantity { get; set; }
         public double TotalProductPrice { get; set; }
         public double TotalAmount { get; set; }
+        public double TotalPromotion { get; set; }
         public int State { get; set; } = 1;
         public double FeeDelivery { get; set; }  
         public int IdAddress { get; set; }

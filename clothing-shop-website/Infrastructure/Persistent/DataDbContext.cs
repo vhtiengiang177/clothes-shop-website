@@ -150,6 +150,10 @@ namespace Infrastructure.Persistent
                 entity.HasMany<Image>(e => e.Images)
                       .WithOne(image => image.Product);
 
+                entity.HasOne<Promotion>(e => e.Promotion)
+                        .WithMany(promotion => promotion.Products)
+                        .HasForeignKey(e => e.idPromotion);
+
             });
 
 

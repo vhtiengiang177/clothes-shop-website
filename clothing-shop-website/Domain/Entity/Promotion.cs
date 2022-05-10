@@ -19,5 +19,6 @@ namespace Domain.Entity
         public int CreatedById { get; set; }
         public int? ModifiedById { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
