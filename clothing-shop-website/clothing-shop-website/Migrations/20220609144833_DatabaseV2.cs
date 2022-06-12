@@ -6,18 +6,19 @@ namespace clothing_shop_website.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "CancelBy",
-                table: "Orders",
-                type: "int",
-                nullable: true);
+            migrationBuilder.AddColumn<double>(
+                name: "PricePromotion",
+                table: "Products",
+                type: "float",
+                nullable: false,
+                defaultValue: 0.0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CancelBy",
-                table: "Orders");
+                name: "PricePromotion",
+                table: "Products");
         }
     }
 }

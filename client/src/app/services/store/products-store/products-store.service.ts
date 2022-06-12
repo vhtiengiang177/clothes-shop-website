@@ -1,14 +1,18 @@
+import { Favorite } from './../../model/favorite/favorite.model';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { FavoriteService } from '../../data/favorite/favorite.service';
 import { ProductService } from '../../data/product/product.service';
 import { FilterParamsProduct } from '../../model/product/filter-params-product.model';
 import { Image } from '../../model/product/image.model';
 import { LogProduct } from '../../model/product/log-product.model';
 import { ProductSizeColor } from '../../model/product/product-size-color.model';
 import { Product } from '../../model/product/product.model';
+import { FavoriteStoreService } from '../favorite-store/favorite-store.service';
+import { AuthAppService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +26,15 @@ export class ProductsStoreService {
   readonly totalData$ = this._totalData.asObservable();
 
   constructor(private productService: ProductService,
+    private favoriteService: FavoriteService,
+    private authService: AuthAppService,
+    private favoriteStore: FavoriteStoreService,
+
     private toastr: ToastrService) {
-    if (this.products.length == 0) {
-      let filter: FilterParamsProduct = {};
-      this.getProductsForClientPage(filter);
-    }
+      if (this.products.length == 0) {
+        let filter: FilterParamsProduct = {};
+        this.getProductsForClientPage(filter);
+      }
   }
 
   get products(): Product[] {
@@ -84,6 +92,15 @@ export class ProductsStoreService {
       return result.asObservable()
   }
 
+  getFavoriteProducts() {
+      let result = new Subject<Product[]>();
+      this.productService.getFavoriteProducts()
+        .subscribe(res => {
+          result.next(res)
+        })
+        return result.asObservable()
+    }
+
   create(productObj) {
     let result = new Subject<Product>();
     this.productService.create("/createproduct", productObj).subscribe(res => {
@@ -131,6 +148,42 @@ export class ProductsStoreService {
       .subscribe(res => {
         this.products = res.data;
         this.totalData = res.totalData;
+        
+        this.products.forEach(item => {
+          item.imageUrl = "assets/product.jpg"
+          this.productService.getImagesByIdProduct(item.id).subscribe(res => {
+            if (res.length != 0) {
+              if (res[0].url) {
+                item.imageUrl = res[0].url 
+              }
+            }
+          });
+        item.isFavorite = false
+          
+        if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+          let favorite: Favorite
+          this.favoriteService.getItemFavorite(item.id).subscribe(res => {
+            favorite = res;
+            if (favorite != null){
+                item.isFavorite=true
+              }
+          });
+          
+          }
+        })
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+  }
+
+  async getProductsSaleOffForClientPage(filterParams: FilterParamsProduct) {
+    await this.productService.getProductsSaleOffForClientPage(filterParams)
+      .subscribe(res => {
+        this.products = res.data;
+        this.totalData = res.totalData;
         this.products.forEach(item => {
           item.imageUrl = "assets/product.jpg"
           this.productService.getImagesByIdProduct(item.id).subscribe(res => {
@@ -148,4 +201,6 @@ export class ProductsStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
+
+  
 }

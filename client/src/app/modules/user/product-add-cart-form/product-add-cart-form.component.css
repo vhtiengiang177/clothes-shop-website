@@ -36,3 +36,15 @@
 mat-dialog-content {
     max-height: none;
 }
+
+.img-heart-2 {
+    width: 52px;
+    height: 52px;
+  }
+
+.btn-heart {
+    width: 52px;
+    height: 52px;
+    padding: 0px;
+    border: #ffffff;
+  }

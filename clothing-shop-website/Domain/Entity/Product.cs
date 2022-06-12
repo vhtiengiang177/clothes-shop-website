@@ -13,6 +13,7 @@ namespace Domain.Entity
         public string Description { get; set; }
         public int TotalBuy { get; set; } = 0;
         public double UnitPrice { get; set; }
+        public double PricePromotion { get; set; }
         public int State { get; set; } = 1;
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }
@@ -20,7 +21,7 @@ namespace Domain.Entity
         public int? ModifiedById { get; set; }
         public int? IdCategory { get; set; }
         public Category Category { get; set; }
-        public int? idPromotion { get; set; }
+        public int? idPromotion { get; set; } 
         public Promotion Promotion { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Product_Size_Color> Product_Sizes_Color { get; set; }

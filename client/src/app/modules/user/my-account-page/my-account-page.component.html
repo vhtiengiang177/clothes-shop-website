@@ -15,6 +15,7 @@
         					<li class="active" (click)="clickProfileItem()" [ngClass]="{ 'active': clickProfile }" ><a [routerLink]="['/my-account']"><span class="fa fa-user"></span> Profile</a></li>
         					<li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickAddressItem()" [ngClass]="{ 'active': clickAddress }"><a [routerLink]="['/my-account/delivery-address']"><span class="fa fa-cog"></span> Delivery Address</a></li>
         					<li (click)="clickChangePassItem()" [ngClass]="{ 'active': clickChangePass }"><a [routerLink] ="['/my-account/change-password']"><span class="fa fa-credit-card"></span> Change Password</a></li>
+                            <li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickFavoriteItem()" [ngClass]="{ 'active': clickFavorite }"><a [routerLink] ="['/my-account/favorite']"><span class="fa fa-heart-o"></span> Favorite</a></li>
         				</ul>
         			</nav>
                 </div>

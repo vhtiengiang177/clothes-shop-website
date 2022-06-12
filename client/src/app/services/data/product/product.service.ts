@@ -40,6 +40,17 @@ export class ProductService extends DataService {
       }))
   }
 
+  getProductsSaleOffForClientPage(params) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetProductsSaleOffForClientPage" + this.convertToQueryStringProduct(params), {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
+
   delete(productId) {
     return this.http.put(GlobalConstants.apiUrl + "/products" + "/DeleteProduct/" + productId, productId,
     {
@@ -60,6 +71,17 @@ export class ProductService extends DataService {
 
   getTopNewProducts() {
     return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetTopNewProducts", {
+      headers: this.authorizationHeader()
+    })
+    .pipe(catchError((error: Response) => {
+      if(error.status == 400)
+        return throwError(new BadRequestError(error))
+      return throwError(new AppError(error))
+    }))
+  }
+
+  getFavoriteProducts() {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetFavoriteProducts", {
       headers: this.authorizationHeader()
     })
     .pipe(catchError((error: Response) => {

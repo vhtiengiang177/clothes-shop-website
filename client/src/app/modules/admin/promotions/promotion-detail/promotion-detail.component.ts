@@ -17,7 +17,6 @@ import { Order } from 'src/app/services/model/order/order.model';
 })
 export class PromotionDetailComponent implements OnInit {
 
- 
   constructor(public dialogRef: MatDialogRef<PromotionDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PromotionForm,
     private promotionsStore: PromotionsStoreService,

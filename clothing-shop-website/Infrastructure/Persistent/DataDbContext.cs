@@ -32,6 +32,7 @@ namespace Infrastructure.Persistent
         public DbSet<Staff> Staff { get; set; }
         public DbSet<TypeAccount> TypeAccounts { get; set; }
         public DbSet<TypeCustomer> TypeCustomers { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -212,6 +213,14 @@ namespace Infrastructure.Persistent
                 entity.HasMany<Customer>(e => e.Customers)
                         .WithOne(customer => customer.TypeCustomer)
                         .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Favorite>(entity => {
+                entity.HasKey(e => new { e.IdAccount, e.IdProduct });
+
+                entity.HasOne<Customer>(e => e.Customer)
+                    .WithMany(f => f.Favorites)
+                    .HasForeignKey(e => e.IdAccount);
             });
 
             SeedData(modelBuilder);

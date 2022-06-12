@@ -9,5 +9,6 @@ export interface Cart {
     nameProduct?: string,
     stock?: number,
     unitPrice?: number
-    state?: number
+    state?: number,
+    pricePromotion?: number
 }

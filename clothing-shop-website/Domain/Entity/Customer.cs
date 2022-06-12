@@ -19,5 +19,6 @@ namespace Domain.Entity
         public virtual TypeCustomer TypeCustomer { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<DeliveryAddress> DeliveryAddresses { get; set; }
+        public virtual ICollection<Favorite> Favorites { get; set; }
     }
 }

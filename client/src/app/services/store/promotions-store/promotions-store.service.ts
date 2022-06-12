@@ -77,4 +77,12 @@ export class PromotionsStoreService {
     return this.promotionService.getById("/GetPromotionByID", id)
   }
 
+  applyPromotion(idPromotion,idProduct) {
+    return this.promotionService.applyPromotion(idPromotion,idProduct)
+  }
+
+  deleteApplyPromotion(idProduct) {
+    return this.promotionService.deleteApplyPromotion(idProduct)
+  }
+
 }

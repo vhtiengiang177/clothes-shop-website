@@ -117,6 +117,52 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetProductsSaleOffForClientPage")]
+        public async Task<IActionResult> GetProductsSaleOffForClientPage([FromQuery] FilterParamsProduct filterParams)
+        {
+            try
+            {
+                int currentPageIndex = filterParams.PageIndex ?? 1;
+                int currentPageSize = filterParams.PageSize ?? 5;
+
+                IQueryable<Product> lProductItems;
+
+                if (filterParams.IdCategories != null)
+                {
+                    if (filterParams.IdCategories.Count() != 0
+                        || filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
+                    {
+                        lProductItems = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(filterParams.IdCategories);
+                    }
+                    else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                }
+                else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+
+                lProductItems = lProductItems.Where(x => x.idPromotion != null);
+
+                // Check product is empty or not. Empty => Remove 
+                lProductItems = lProductItems.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0);
+
+                lProductItems = _productsService.FilterProduct(filterParams, lProductItems);
+
+                var lProduct = _productsService.SortListProducts(filterParams.Sort, lProductItems);
+
+                var response = new ResponseJSON<Product>
+                {
+                    TotalData = lProduct.Count(),
+                    Data = lProduct.Skip((currentPageIndex - 1) * currentPageSize).Take(currentPageSize).ToList()
+                };
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetProductByID/{id}", Name = "GetProductByID")]
         public IActionResult GetProductByID(int id)
         {
@@ -152,6 +198,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     oldProduct.Name = product.Name;
                     oldProduct.TotalBuy = 0;
                     oldProduct.UnitPrice = product.UnitPrice;
+                    oldProduct.PricePromotion = product.PricePromotion;
                     oldProduct.State = 1;
                     oldProduct.CreatedById = product.CreatedById;
                     oldProduct.CreatedDate = product.CreatedDate;
@@ -191,6 +238,11 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                     productObj.ModifiedById = int.Parse(userId);
                     productObj.LastModified = DateTime.Now;
+                    if (productObj.idPromotion != null)
+                    {
+                        Promotion promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(productObj.idPromotion ?? default(int));
+                        productObj.PricePromotion = productObj.UnitPrice * (1 - promotion.Value);
+                    }    
 
                     _unitOfWork.ProductsRepository.UpdateProduct(productObj);
                     if (!_unitOfWork.Save())
@@ -386,6 +438,34 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     return Ok(lProduct);
                 }
                 else return NotFound();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("GetFavoriteProducts")]
+        public async Task<IActionResult> GetFavoriteProducts()
+        {
+            try
+            {
+                IQueryable<Favorite> lFavoriteItems;
+
+                List<Product> lProductItems2 = new List<Product>();
+
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                lFavoriteItems = await _unitOfWork.FavoritesRepository.GetAllItemsInFavorite(Int32.Parse(userId));
+
+                foreach (var item in lFavoriteItems)
+                {
+                    Product product = _unitOfWork.ProductsRepository.GetProductByID(item.IdProduct);
+                    lProductItems2.Add(product);
+                }
+
+                return Ok(lProductItems2);
             }
             catch
             {

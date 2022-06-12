@@ -25,7 +25,8 @@
                         </div>
                         <div class="pd-desc">
                             <p>{{ product.description }}</p>
-                            <h4>{{ product.unitPrice | currency: 'VND'}}</h4>
+                            <h4>{{ product.pricePromotion | currency: 'VND'}}</h4>
+                            <h5 *ngIf="product.idPromotion"><del>{{ product.unitPrice | currency: 'VND'}}</del></h5>
                         </div>
                         <div class="pd-color">
                             <span class="font-color">Color:</span>
@@ -65,8 +66,9 @@
                                         [max]="selectedSizeColor.stock">
                                 </div>
                             </div>
-                            <button *ngIf="!isOpenByCart" (click)="addToCart()" class="primary-btn pd-cart">Add To
-                                Cart</button>
+                            <button *ngIf="!isOpenByCart" (click)="addToCart()" class="primary-btn pd-cart">Add To Cart</button>
+                            <button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button>
+                            <button class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button>
                         </div>
                     </div>
                 </div>
@@ -75,6 +77,6 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Back</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="loadData()" class="btn btn-cancel">Back</button>
     <button *ngIf="isOpenByCart" mat-button (click)="addToCart()" class="btn btn-add">Update</button>
 </mat-dialog-actions>

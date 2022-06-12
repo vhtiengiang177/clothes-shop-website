@@ -35,6 +35,7 @@ export class OrderPageComponent implements OnInit {
   totalPrice: number = 0
   subTotalPrice: number = 0
   discount: number = 0
+  totalPromotion: number = 0
   deliveryAddress: DeliveryAddress = null
   listOrderDetail: OrderDetail[] = []
   listPromotion: Promotion[] = []
@@ -78,6 +79,7 @@ export class OrderPageComponent implements OnInit {
         cart.state = this.product.state
         cart.unitPrice = this.product.unitPrice
         cart.nameProduct = this.product.name
+        cart.pricePromotion = this.product.pricePromotion
         var psc: ProductSizeColor = {
           idProduct: cart.idProduct,
           idColor: cart.idColor,
@@ -103,11 +105,14 @@ export class OrderPageComponent implements OnInit {
   }
 
   countTotalPrice() {
+    this.totalPromotion = 0
     this.subTotalPrice = 0
     this.cartsStore.carts.forEach(item => {
       this.subTotalPrice += item.unitPrice * item.quantity
+      this.totalPromotion += item.pricePromotion * item.quantity
     })
-    this.totalPrice = this.subTotalPrice
+    this.totalPrice = this.totalPromotion
+    this.discount = this.subTotalPrice - this.totalPromotion
   }
 
   getNameSizeColor(item: Cart) {
@@ -141,6 +146,7 @@ export class OrderPageComponent implements OnInit {
           idSize: item.idSize,
           idColor: item.idColor,
           unitPrice: item.unitPrice,
+          pricePromotion: item.pricePromotion,
           quantity: item.quantity
         }
         this.listOrderDetail.push(orderDetail)
@@ -175,12 +181,12 @@ export class OrderPageComponent implements OnInit {
 
   selectedPromotion() {
     if (this.promotion != null) {
-      this.discount = this.subTotalPrice * this.promotion.value
+      this.discount += this.subTotalPrice * this.promotion.value
       this.totalPrice = this.subTotalPrice - this.discount
     }
     else {
-      this.totalPrice = this.subTotalPrice
-      this.discount = 0
+      this.totalPrice = this.totalPromotion
+      this.discount = this.subTotalPrice - this.totalPromotion
     }
   }
 

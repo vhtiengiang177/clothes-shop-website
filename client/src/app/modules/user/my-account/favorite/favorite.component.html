@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <fieldset class="fieldset">
+                    <h1 class="fieldset-title">My Favorite({{listProduct.length}})</h1>
+                </fieldset>
+                <div *ngIf="listProduct.length != 0" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                    <button  type="button" style="float: right;" class="btn btn-danger button-action" (click)="deleteAllFavorite()">Delete All</button>
+                </div>
+            </div>
+            
+            <br>
+            <div class="product-list">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6" *ngFor="let product of listProduct ">
+                        <div  class="product-item">
+                            <div class="pi-pic">
+                                <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
+                                <ul>
+                                    <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
+                                    <li><button class="btn-heart"><img  (click)="deleteFavorite(product.id)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li>
+                                </ul>
+                                <div *ngIf="product.idPromotion" class="ribbon-wrapper">
+                                    <div class="ribbon">SALE</div>
+                                  </div>
+                            </div>
+                            <div [routerLink]="['/product-detail', product.id]" class="pi-text">
+                                <div class="catagory-name">Towel</div>
+                                <a href="#">
+                                    <h5>{{ product.name }}</h5>
+                                </a>
+                                <div class="product-price">{{ product.pricePromotion | currency: 'VND' }} </div>
+                                <h6 *ngIf="product.idPromotion"><del>{{ product.unitPrice | currency: 'VND'}}</del></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <img *ngIf="listProduct.length == 0" class="image" src="assets/img/common/no-products-found.gif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

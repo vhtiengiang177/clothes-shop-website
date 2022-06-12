@@ -1,12 +1,17 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
+import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
 import { Category } from 'src/app/services/model/category/category.model';
+import { Favorite } from 'src/app/services/model/favorite/favorite.model';
 import { FilterParamsProduct } from 'src/app/services/model/product/filter-params-product.model';
 import { ProductSizeColor } from 'src/app/services/model/product/product-size-color.model';
 import { Product } from 'src/app/services/model/product/product.model';
 import { CategoriesStoreService } from 'src/app/services/store/categories-store/categories-store.service';
 import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-store.service';
+import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
@@ -31,16 +36,22 @@ export class ProductPageComponent implements OnInit {
   sortSelected = 'name:asc' 
   minPrice: number;
   maxPrice: number;
+  product: Product
+  isWhiteHeart: boolean = true
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
+    private favoriteService: FavoriteService,
+    private authService: AuthAppService, 
+    private favoriteStore: FavoriteStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) {
-      if(this.productsStore.products.length != 6) {
-        this.fetchData()
-      }
+      this.fetchData()
+      // if(this.productsStore.products.length != 6) {
+      //   this.fetchData()
+      // }
   }
 
   ngOnInit() {
@@ -54,6 +65,10 @@ export class ProductPageComponent implements OnInit {
 
   fetchData() {
     this.productsStore.getProductsForClientPage(this.filter);
+  }
+
+  fetchFavorite(){
+    this.favoriteStore.getAllItemsInFavorite()
   }
 
   sort() {
@@ -129,7 +144,7 @@ export class ProductPageComponent implements OnInit {
   addToCart(product) {
     console.log(product.id);
     
-    this.dialog.open(ProductAddCartFormComponent, {
+    const dialogRef=this.dialog.open(ProductAddCartFormComponent, {
       width: '800px',
       data: { 
         idProduct: product.id,
@@ -137,5 +152,30 @@ export class ProductPageComponent implements OnInit {
         idSize: null
       }
     });
+    dialogRef.afterClosed().subscribe(() => {
+        this.fetchData()
+   });
+  }
+
+  changeHeart(product,state) {
+    if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+      if (state === 1){
+        this.favoriteService.deleteItemInFavorite(product.id).subscribe(() => {
+          this.productsStore.products.find(p=>p.id === product.id).isFavorite = false
+          this.fetchFavorite();
+        }, (e: HttpErrorResponse) => {
+          if (e.status == 400)
+            this.toastr.error(e.error)
+        })} else{
+          this.favoriteService.addItemInFavorite(product.id).subscribe(() => {
+            this.productsStore.products.find(p=>p.id === product.id).isFavorite = true
+            this.fetchFavorite();
+          }, (e: HttpErrorResponse) => {
+            if (e.status == 400)
+              this.toastr.error(e.error)
+          })
+        }
+         
+    }
   }
 }

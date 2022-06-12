@@ -335,8 +335,8 @@ namespace clothing_shop_website.Areas.Client
                     _unitOfWork.OrderDetailRepository.Create(orderDetail);
                     _unitOfWork.Save();
                     totalQuantity += orderDetail.Quantity;
-                    totalProductPrice += orderDetail.UnitPrice;
-                    totalAmount += orderDetail.UnitPrice;
+                    totalProductPrice += orderDetail.UnitPrice * orderDetail.Quantity;
+                    totalAmount += orderDetail.PricePromotion * orderDetail.Quantity;
                     var productItem = _unitOfWork.ProductsRepository.GetItemByIdPSC(orderDetail.IdProduct, orderDetail.IdSize, orderDetail.IdColor);
                     productItem.Stock -= orderDetail.Quantity;
                     if (productItem.Stock < 0)

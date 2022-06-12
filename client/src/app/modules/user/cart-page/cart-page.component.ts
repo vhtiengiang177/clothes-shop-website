@@ -50,6 +50,7 @@ export class CartPageComponent implements OnInit {
         cart.state = this.product.state
         cart.unitPrice = this.product.unitPrice
         cart.nameProduct = this.product.name
+        cart.pricePromotion = this.product.pricePromotion
         var psc: ProductSizeColor = {
           idProduct: cart.idProduct,
           idColor: cart.idColor,
@@ -114,7 +115,7 @@ export class CartPageComponent implements OnInit {
   countTotalPrice() {
     this.totalPrice = 0
     this.cartsStore.carts.forEach(item => {
-      this.totalPrice += item.unitPrice * item.quantity
+      this.totalPrice += item.pricePromotion * item.quantity
     })
   }
 

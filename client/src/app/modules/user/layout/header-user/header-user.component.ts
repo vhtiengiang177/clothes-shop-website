@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
+import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
 
 @Component({
   selector: 'app-header-user',
@@ -15,10 +16,14 @@ export class HeaderUserComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authService : AuthAppService,
+    private favoriteStore: FavoriteStoreService,
     private cartStore: CartsStoreService) {
       this.cartStore.carts$.subscribe(res => {
         if (res && this.numOfCart != res.length) {
           this.fetchCart()
+          if(authService.isLoggedIn()){
+            this.fetchFavorite()
+          }
           this.numOfCart = res.length
         }
       })
@@ -42,5 +47,9 @@ export class HeaderUserComponent implements OnInit {
 
   fetchCart() {
     this.cartStore.get()
+  }
+
+  fetchFavorite(){
+    this.favoriteStore.getAllItemsInFavorite()
   }
 }

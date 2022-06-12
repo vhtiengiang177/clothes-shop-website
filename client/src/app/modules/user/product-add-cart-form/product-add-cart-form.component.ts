@@ -15,6 +15,8 @@ import { ProductSizeColorsStoreService } from 'src/app/services/store/product-si
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
+import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
 
 @Component({
   selector: 'app-product-add-cart-form',
@@ -53,6 +55,8 @@ export class ProductAddCartFormComponent implements OnInit {
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
+    private favoriteService: FavoriteService,
+    private favoriteStore: FavoriteStoreService,
     private cartsStoreService: CartsStoreService,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: ProductSizeColor) {
@@ -69,6 +73,11 @@ export class ProductAddCartFormComponent implements OnInit {
         //   }
         // })
         this.isVisible = true
+        this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
+          if (res.length != 0){
+            this.product.isFavorite = true
+          }
+        });
       }, (error: HttpErrorResponse) => {
         this.toastr.error("Something went wrong!")
         this.dialogRef.close(false)
@@ -275,4 +284,33 @@ export class ProductAddCartFormComponent implements OnInit {
   clickImage(image) {
     this.imageMain = image.url
   }
+
+  changeHeart() {
+    if (this.product.isFavorite){
+      this.favoriteService.deleteItemInFavorite(this.product.id).subscribe(res => {
+        this.product.isFavorite = false;
+        this.fetchFavorite();
+      }, (e: HttpErrorResponse) => {
+        if (e.status == 400)
+          this.toastr.error(e.error)
+      })
+    }else{
+      this.favoriteService.addItemInFavorite(this.product.id).subscribe(res => {
+        this.product.isFavorite = true;
+        this.fetchFavorite();
+      }, (e: HttpErrorResponse) => {
+        if (e.status == 400)
+          this.toastr.error(e.error)
+      })
+    }
+  }
+
+  fetchFavorite(){
+    this.favoriteStore.getAllItemsInFavorite()
+  }
+
+  loadData(){
+    this.dialogRef.close();
+  }
+
 }

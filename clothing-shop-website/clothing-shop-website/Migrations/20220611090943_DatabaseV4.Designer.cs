@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20220109141847_DatabaseV4")]
+    [Migration("20220611090943_DatabaseV4")]
     partial class DatabaseV4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -608,6 +608,19 @@ namespace clothing_shop_website.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Entity.Favorite", b =>
+                {
+                    b.Property<int>("IdAccount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdAccount", "IdProduct");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("Domain.Entity.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -801,6 +814,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<double>("TotalProductPrice")
                         .HasColumnType("float");
 
+                    b.Property<double>("TotalPromotion")
+                        .HasColumnType("float");
+
                     b.Property<int>("TotalQuantity")
                         .HasColumnType("int");
 
@@ -834,7 +850,16 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("ColorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdPromotion")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PricePromotion")
+                        .HasColumnType("float");
+
                     b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PromotionId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -851,6 +876,8 @@ namespace clothing_shop_website.Migrations
                     b.HasIndex("ColorId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("PromotionId");
 
                     b.HasIndex("SizeId");
 
@@ -885,6 +912,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("PricePromotion")
+                        .HasColumnType("float");
+
                     b.Property<string>("Sku")
                         .HasColumnType("nvarchar(450)");
 
@@ -897,6 +927,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
+                    b.Property<int?>("idPromotion")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdCategory");
@@ -904,6 +937,8 @@ namespace clothing_shop_website.Migrations
                     b.HasIndex("Sku")
                         .IsUnique()
                         .HasFilter("[Sku] IS NOT NULL");
+
+                    b.HasIndex("idPromotion");
 
                     b.ToTable("Products");
 
@@ -916,6 +951,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Avocado Dress Set is so pretty",
                             IdCategory = 1,
                             Name = "Avocado Dress Set",
+                            PricePromotion = 0.0,
                             Sku = "123456789",
                             State = 1,
                             TotalBuy = 100,
@@ -929,6 +965,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Ally Babydoll Dress is so pretty",
                             IdCategory = 1,
                             Name = "Ally Babydoll Dress",
+                            PricePromotion = 0.0,
                             Sku = "123456788",
                             State = 1,
                             TotalBuy = 10,
@@ -942,6 +979,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Baggy Jean is so pretty",
                             IdCategory = 2,
                             Name = "Baggy Jean",
+                            PricePromotion = 0.0,
                             Sku = "123456787",
                             State = 1,
                             TotalBuy = 200,
@@ -955,6 +993,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Short Jean is so pretty",
                             IdCategory = 2,
                             Name = "Short Jean",
+                            PricePromotion = 0.0,
                             Sku = "123456786",
                             State = 1,
                             TotalBuy = 300,
@@ -968,6 +1007,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Mori Shirt is so pretty",
                             IdCategory = 3,
                             Name = "Mori Shirt",
+                            PricePromotion = 0.0,
                             Sku = "123456785",
                             State = 1,
                             TotalBuy = 400,
@@ -981,6 +1021,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Yasmin Shirt is so pretty",
                             IdCategory = 3,
                             Name = "Yasmin Shirt",
+                            PricePromotion = 0.0,
                             Sku = "123456784",
                             State = 1,
                             TotalBuy = 500,
@@ -994,6 +1035,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Aokosor Sweaters is so pretty",
                             IdCategory = 4,
                             Name = "Aokosor Sweaters",
+                            PricePromotion = 0.0,
                             Sku = "123456783",
                             State = 1,
                             TotalBuy = 10,
@@ -1007,6 +1049,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Hoodie is so pretty",
                             IdCategory = 4,
                             Name = "Hoodie",
+                            PricePromotion = 0.0,
                             Sku = "123456782",
                             State = 1,
                             TotalBuy = 10,
@@ -1020,6 +1063,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Mella Khaki Pant is so pretty",
                             IdCategory = 5,
                             Name = "Mella Khaki Pant",
+                            PricePromotion = 0.0,
                             Sku = "123456781",
                             State = 0,
                             TotalBuy = 10,
@@ -1033,6 +1077,7 @@ namespace clothing_shop_website.Migrations
                             Description = "Mochi Pants is so pretty",
                             IdCategory = 5,
                             Name = "Mochi Pants",
+                            PricePromotion = 0.0,
                             Sku = "123456780",
                             State = 0,
                             TotalBuy = 10,
@@ -1046,6 +1091,7 @@ namespace clothing_shop_website.Migrations
                             Description = "T-Shirt is so pretty",
                             IdCategory = 3,
                             Name = "T-Shirts",
+                            PricePromotion = 0.0,
                             Sku = "123456779",
                             State = 0,
                             TotalBuy = 10,
@@ -1646,6 +1692,17 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("Domain.Entity.Favorite", b =>
+                {
+                    b.HasOne("Domain.Entity.Customer", "Customer")
+                        .WithMany("Favorites")
+                        .HasForeignKey("IdAccount")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("Domain.Entity.Image", b =>
                 {
                     b.HasOne("Domain.Entity.Product", "Product")
@@ -1701,6 +1758,10 @@ namespace clothing_shop_website.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
+                    b.HasOne("Domain.Entity.Promotion", "Promotion")
+                        .WithMany()
+                        .HasForeignKey("PromotionId");
+
                     b.HasOne("Domain.Entity.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId");
@@ -1710,6 +1771,8 @@ namespace clothing_shop_website.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Promotion");
 
                     b.Navigation("Size");
                 });
@@ -1721,7 +1784,13 @@ namespace clothing_shop_website.Migrations
                         .HasForeignKey("IdCategory")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Domain.Entity.Promotion", "Promotion")
+                        .WithMany("Products")
+                        .HasForeignKey("idPromotion");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Promotion");
                 });
 
             modelBuilder.Entity("Domain.Entity.Product_Size_Color", b =>
@@ -1785,6 +1854,8 @@ namespace clothing_shop_website.Migrations
 
                     b.Navigation("DeliveryAddresses");
 
+                    b.Navigation("Favorites");
+
                     b.Navigation("Orders");
                 });
 
@@ -1803,6 +1874,8 @@ namespace clothing_shop_website.Migrations
             modelBuilder.Entity("Domain.Entity.Promotion", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Domain.Entity.Size", b =>

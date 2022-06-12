@@ -67,7 +67,7 @@ export class HomePageComponent implements OnInit {
         }
       })
     })
-    var dealDate = new Date('2022-02-01 00:00:00')
+    var dealDate = new Date('2023-02-01 00:00:00')
     interval(1000).subscribe(x => {
       var today = new Date()
       var newTotalSecsLeft = dealDate.getTime() - today.getTime()

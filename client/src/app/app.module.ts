@@ -81,6 +81,9 @@ import { AboutUsPageComponent } from './modules/user/about-us-page/about-us-page
 import { ForgotPasswordPageComponent } from './modules/authentication/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './modules/authentication/reset-password-page/reset-password-page.component';
 import { CustomerDetailFormComponent } from './modules/admin/customers/customer-detail-form/customer-detail-form.component';
+import { PromotionProductComponent } from './modules/admin/promotions/promotion-product/promotion-product.component';
+import { SearchProductPromotionComponent } from './modules/admin/promotions/search-product-promotion/search-product-promotion.component';
+import { FavoriteComponent } from './modules/user/my-account/favorite/favorite.component';
  
  
 let config = new AuthServiceConfig([
@@ -170,7 +173,10 @@ export function provideConfig() {
     AboutUsPageComponent,
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
-    CustomerDetailFormComponent
+    CustomerDetailFormComponent,
+    PromotionProductComponent,
+    SearchProductPromotionComponent,
+    FavoriteComponent
   ],
   entryComponents: [
     ProductFormComponent,

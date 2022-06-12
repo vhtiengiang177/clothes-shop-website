@@ -222,5 +222,102 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPut("ApplyPromotionForProduct/{idPromotion}&&{idProduct}")]
+        public IActionResult ApplyPromotionForProduct(int idPromotion, int idProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                //var userId = User.FindFirst("id").Value;
+                //if (userId == null) return BadRequest();
+
+                Product product = _unitOfWork.ProductsRepository.GetProductByID(idProduct);
+                Promotion promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(idPromotion);
+                //product.ModifiedById = int.Parse(userId);
+                product.LastModified = DateTime.Now;
+                product.idPromotion = idPromotion;
+                product.PricePromotion = product.UnitPrice * (1 - promotion.Value);
+                _unitOfWork.ProductsRepository.UpdateProduct(product);
+                _unitOfWork.Save();
+
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("DeletePromotionForProduct/{idProduct}")]
+        public IActionResult DeletePromotionForProduct(int idProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                //var userId = User.FindFirst("id").Value;
+                //if (userId == null) return BadRequest();
+
+                Product product = _unitOfWork.ProductsRepository.GetProductByID(idProduct);
+                //product.ModifiedById = int.Parse(userId);
+                product.LastModified = DateTime.Now;
+                product.idPromotion = default(int?);
+                product.PricePromotion = product.UnitPrice;
+                _unitOfWork.ProductsRepository.UpdateProduct(product);
+                _unitOfWork.Save();
+
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("ApplyPromotionForAllProduct")]
+        public IActionResult ApplyPromotionForAllProduct([FromQuery] int[] idCatcegories,int idPromotion)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                List<Product> lProduct = new List<Product>();
+                lProduct = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(idCatcegories).ToList();
+                
+                foreach(Product product in lProduct)
+                {
+                    product.ModifiedById = int.Parse(userId);
+                    product.LastModified = DateTime.Now;
+                    product.idPromotion = idPromotion;
+                    _unitOfWork.ProductsRepository.UpdateProduct(product);
+                    _unitOfWork.Save();
+                }
+
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("DeletePromotionForAllProduct")]
+        public IActionResult DeletePromotionForAllProduct([FromQuery] int[] idCatcegories)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
+
+                List<Product> lProduct = new List<Product>();
+                lProduct = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(idCatcegories).ToList();
+
+                foreach (Product product in lProduct)
+                {
+                    product.ModifiedById = int.Parse(userId);
+                    product.LastModified = DateTime.Now;
+                    product.idPromotion = null;
+                    _unitOfWork.ProductsRepository.UpdateProduct(product);
+                    _unitOfWork.Save();
+                }
+
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 }

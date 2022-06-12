@@ -229,4 +229,33 @@ export class PromotionsListComponent implements OnInit {
   }
 }
 
+addProductPromotion() {
+  const dialogRef = this.dialog.open(PromotionFormComponent, {
+    width: '500px',
+    data: { 
+      typeform: PromotionsListComponent.addForm, 
+      promotion: { }
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    if(res) {
+      if(this.filter.sort == null && this.filter.pageindex == 1) {
+        this.promotionsStore.promotions.splice(this.filter.pagesize - 1,1);
+        this.promotionsStore.promotions.splice(0,0,res);
+        this.promotionsStore.totalData = this.promotionsStore.totalData + 1;
+      }
+      else {
+        this.filter = {
+          pageindex: 1,
+          pagesize: this.filter.pagesize,
+          sort: null
+        }
+        this.fetchData()
+      }
+      this.paginator.pageIndex = 0;
+    }
+  });
+}
+
 }

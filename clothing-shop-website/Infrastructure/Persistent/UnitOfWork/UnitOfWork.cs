@@ -15,6 +15,7 @@ namespace Infrastructure.Persistent.UnitOfWork
         private IOrdersRepository _ordersRepository;
         private IDeliveryAddressRepository _deliveryAddressRepository;
         private IPromotionsRepository _promotionsRepository;
+        private IFavoritesRepository    _favoritesRepository;
         private IRepository<Category> _categoriesRepository;
         private IRepository<Color> _colorsRepository;
         private IRepository<Size> _sizesRepository;
@@ -102,6 +103,15 @@ namespace Infrastructure.Persistent.UnitOfWork
                 if (_promotionsRepository == null)
                     _promotionsRepository = new PromotionsRepository(_dbContext);
                 return _promotionsRepository;
+            }
+        }
+        public IFavoritesRepository FavoritesRepository
+        {
+            get
+            {
+                if (_favoritesRepository == null)
+                    _favoritesRepository = new FavoritesRepository(_dbContext);
+                return _favoritesRepository;
             }
         }
 

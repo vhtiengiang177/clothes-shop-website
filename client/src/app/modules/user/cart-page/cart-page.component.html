@@ -39,13 +39,16 @@
 
                                     </div>
                                 </td>
-                                <td class="p-price first-row">{{ item.unitPrice  | currency: 'VND'}}</td>
+                                <td>
+                                   <div class="p-price first-row">{{ item.pricePromotion  | currency: 'VND'}}</div> 
+                                   <div *ngIf="item.pricePromotion !== item.unitPrice"><del>{{ item.unitPrice  | currency: 'VND'}}</del></div> 
+                                </td>
                                 <td class="qua-col first-row">
                                     <div class="quantity">
                                         <input class="input-quantity" (change)="changeQuantity($event.target.value, item)" type="number" [(ngModel)]="item.quantity" min="1" [max]="item.stock">
                                     </div>
                                 </td>
-                                <td class="total-price first-row">{{ item.unitPrice * item.quantity | currency: 'VND'}}</td>
+                                <td class="total-price first-row">{{ item.pricePromotion * item.quantity | currency: 'VND'}}</td>
                                 <td class="close-td first-row"><fa name="close" (click)="removeItem(item, i)"></fa></td>
                             </tr>
                         </tbody>

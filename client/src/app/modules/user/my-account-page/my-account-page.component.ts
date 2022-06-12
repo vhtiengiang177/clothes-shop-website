@@ -22,6 +22,7 @@ export class MyAccountPageComponent implements OnInit {
   clickProfile: boolean = false
   clickAddress: boolean = false
   clickChangePass: boolean = false
+  clickFavorite: boolean = false
 
   constructor(private route: ActivatedRoute,
     private authService: AuthAppService, 
@@ -32,6 +33,8 @@ export class MyAccountPageComponent implements OnInit {
       this.clickAddressItem()
     else if (path == 'change-password')
       this.clickChangePassItem()
+    else if (path == 'favorite')
+      this.clickFavoriteItem()
     else this.clickProfileItem()
      
     this.typeaccount = authService.getCurrentUser().idTypeAccount
@@ -63,6 +66,7 @@ export class MyAccountPageComponent implements OnInit {
 
     this.clickAddress = false
     this.clickChangePass = false
+    this.clickFavorite = false
   }
 
   clickAddressItem() {
@@ -70,6 +74,15 @@ export class MyAccountPageComponent implements OnInit {
 
     this.clickProfile = false
     this.clickChangePass = false
+    this.clickFavorite = false
+  }
+
+  clickFavoriteItem() {
+    this.clickFavorite = true
+
+    this.clickProfile = false
+    this.clickChangePass = false
+    this.clickAddress = false
   }
 
   clickChangePassItem() {
@@ -77,5 +90,6 @@ export class MyAccountPageComponent implements OnInit {
 
     this.clickProfile = false
     this.clickAddress = false
+    this.clickFavorite = false
   }
 }

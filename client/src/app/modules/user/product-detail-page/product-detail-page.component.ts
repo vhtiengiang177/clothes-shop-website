@@ -15,6 +15,10 @@ import { ColorsStoreService } from 'src/app/services/store/colors-store/colors-s
 import { ProductSizeColorsStoreService } from 'src/app/services/store/product-size-colors-store/product-size-colors-store.service';
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
+import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
+import { Favorite } from 'src/app/services/model/favorite/favorite.model';
+import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-product-detail-page',
@@ -25,6 +29,7 @@ export class ProductDetailPageComponent implements OnInit {
   id: number
   product: Product
   isVisible: boolean = false
+  isWhiteHeart: boolean = true
   listImages: Image[] = []
   selectedSizeColor: ProductSizeColor = {
     idColor: null,
@@ -46,7 +51,10 @@ export class ProductDetailPageComponent implements OnInit {
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
+    private authService: AuthAppService, 
     private cartsStoreService: CartsStoreService,
+    private favoriteService: FavoriteService,
+    private favoriteStore: FavoriteStoreService,
     private toastr: ToastrService) {
     this.route.params.subscribe((param) => {
       this.id = param['id']
@@ -63,6 +71,11 @@ export class ProductDetailPageComponent implements OnInit {
         //   }
         // })
         this.isVisible = true
+        this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
+          if (res.length != 0){
+            this.product.isFavorite = true
+          }
+        });
       }, (error: HttpErrorResponse) => {
         if (error.status == 404) {
           this.router.navigate(['/not-found'])
@@ -196,6 +209,32 @@ export class ProductDetailPageComponent implements OnInit {
     // } 
   }
 
+  changeHeart() {
+    if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+      if (this.product.isFavorite){
+        this.favoriteService.deleteItemInFavorite(this.product.id).subscribe(() => {
+          this.product.isFavorite = false;
+          this.fetchFavorite();
+        }, (e: HttpErrorResponse) => {
+          if (e.status == 400)
+            this.toastr.error(e.error)
+        })
+      }else{
+        this.favoriteService.addItemInFavorite(this.product.id).subscribe(() => {
+          this.product.isFavorite = true;
+          this.fetchFavorite();
+        }, (e: HttpErrorResponse) => {
+          if (e.status == 400)
+            this.toastr.error(e.error)
+        })
+      }
+    }
+  }
+
+  fetchFavorite(){
+    this.favoriteStore.getAllItemsInFavorite()
+  }
+
   addToCart(){
     if (this.selectedSizeColor.idColor != null && this.selectedSizeColor.idSize != null) {
       if (this.quantity < 1 || this.quantity == null) {
@@ -227,4 +266,5 @@ export class ProductDetailPageComponent implements OnInit {
   clickImage(image) {
     this.imageMain = image.url
   }
+
 }

@@ -12,5 +12,8 @@ export interface Product {
     modifiedById?: number,
     idCategory?: number,
     category?: string,
-    imageUrl?: string
+    imageUrl?: string,
+    idPromotion?: number,
+    pricePromotion:number,
+    isFavorite:Boolean
 }

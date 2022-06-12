@@ -80,7 +80,7 @@ export class OrderDetailUserFormComponent implements OnInit {
               this.promotionsStore.getById(this.order.idPromotion).subscribe(promotion => {
                 if (promotion) {
                   this.promotion = promotion.name + " - " + (promotion.value * 100) + " % "
-                  this.discount = promotion.value * this.order.totalProductPrice
+                  this.discount = this.order.totalProductPrice - this.order.totalAmount
                 }
               })
             }

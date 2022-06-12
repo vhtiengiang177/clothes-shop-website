@@ -44,4 +44,18 @@ export class PromotionService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  applyPromotion(idPromotion,idProduct) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/ApplyPromotionForProduct/" + idPromotion + "&&"+ idProduct,idPromotion,
+    {
+       headers: this.authorizationHeader()
+    })
+  }
+
+  deleteApplyPromotion(idProduct) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/DeletePromotionForProduct/" + idProduct,idProduct,
+    {
+       headers: this.authorizationHeader()
+    })
+  }
 }

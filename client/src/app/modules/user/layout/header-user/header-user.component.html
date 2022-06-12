@@ -13,6 +13,12 @@
             <div class="col-lg-3 text-right col-md-3">
                 <ul class="nav-right">
                     <li class="cart-icon" *ngIf="authService.isLoggedIn() && authService.getCurrentUser().idTypeAccount == 4">
+                        <a href="/my-account/favorite">
+                            <fa name="heart-o"></fa>
+                            <span>{{ favoriteStore.totalData }}</span>
+                        </a>
+                    </li>
+                    <li class="cart-icon" *ngIf="authService.isLoggedIn() && authService.getCurrentUser().idTypeAccount == 4">
                         <a href="/shopping-cart">
                             <fa name="shopping-cart"></fa>
                             <span>{{ cartStore.totalData }}</span>

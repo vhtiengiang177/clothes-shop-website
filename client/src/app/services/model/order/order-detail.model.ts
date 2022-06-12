@@ -8,5 +8,6 @@ export interface OrderDetail {
     product?: string,
     delivery?: string,
     color?: string,
-    size?: string
+    size?: string,
+    pricePromotion?: number
 }

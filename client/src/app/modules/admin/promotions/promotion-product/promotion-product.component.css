@@ -1,0 +1,94 @@
+.dt-header{
+    background-color: rgb(81 69 255);
+    color: white;
+  }
+  
+  a {
+    text-decoration: none !important;
+    color: #000;
+  }
+  
+  .table-body {
+  background-color: white;
+  color: #171717;
+  }
+  
+  .table-body tr:hover {
+    background-color: rgb(215, 190, 255) !important;
+    color: #fafafa !important
+    }
+
+  .edit-icon {
+    color: mediumpurple
+  }
+  
+  .delete-icon {
+    color:salmon
+  }
+  
+  .no-data {
+    text-align: center;
+    background-color: white;
+  }
+  
+  .mat-paginator {
+    background-color: transparent;
+      border-radius: 20px;
+  }
+  
+  .disabled {
+    pointer-events: none;
+    /* for "disabled" effect */
+    opacity: 0.5;
+  }
+  
+  .paging-custom {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (min-width: 1200px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1200px !important;
+        font-size: 16px !important;
+    }
+  }
+  
+  .btn-add {
+    background-color: #0093c9;
+    color: #fff;
+    border: 1px solid #0093c9;
+  }
+   .btn-add:hover {
+    background-color: #b3ebff;
+    color: #000;
+    border: 1px solid #b3ebff;
+  }
+  
+  .button-add {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+  }
+  
+  .container {
+    padding-top: 2%;
+  }
+  
+.row {
+  display: inline !important;
+}
+
+.action-add-product-promotion {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(25, 198, 45);
+  }
+
+  .action-delete-product-promotion {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(215, 63, 29);
+  }

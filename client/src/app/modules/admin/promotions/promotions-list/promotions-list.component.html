@@ -34,6 +34,7 @@
         mat-raised-button 
         (click)="addPromotion()"
         class="btn btn-primary btn-add">Add Promotion</button>
+       
       </div>
           
       <table id="producttable" class="table table-striped table-hover table-sm ">
@@ -71,9 +72,10 @@
             <td><a>{{ promotion.value }}</a></td>
             <td>{{ promotion.startDate |  date: 'dd/MM/yyyy' }}</td>
             <td>{{ promotion.endDate|  date: 'dd/MM/yyyy' }}</td>
-            <td (click)="ViewDetailPromotion(promotion.id)"><fa  name="info-circle"></fa></td>
-            <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit"></fa></td>
-            <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash"></fa></td>
+            <td ><a [routerLink]="['/admin/promotions', promotion.id]"><fa class="apply-icon" name="check-circle" title="Apply promotion for products"></fa></a></td>
+            <td (click)="ViewDetailPromotion(promotion.id)"><fa  name="info-circle" title="View detail promotion"></fa></td>
+            <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit" title="Edit promotion"></fa></td>
+            <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash" title="Delete promotion"></fa></td>
           </tr>
         </tbody>
         <tbody *ngIf="promotionsStore.totalData == 0">

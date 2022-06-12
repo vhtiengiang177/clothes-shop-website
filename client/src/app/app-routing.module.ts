@@ -1,3 +1,5 @@
+import { FavoriteComponent } from './modules/user/my-account/favorite/favorite.component';
+import { PromotionProductComponent } from './modules/admin/promotions/promotion-product/promotion-product.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
@@ -84,6 +86,11 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
+    path: 'admin/promotions/:id',
+    component: PromotionProductComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
     path: 'admin/shops',
     component: ShopsListComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
@@ -158,6 +165,10 @@ const routes: Routes = [
     path: 'promotions',
     component: PromotionPageComponent
   },
+  // {
+  //   path: 'promotion-product/:id',
+  //   component: PromotionProductComponent
+  // },
   {
     path: 'product-detail/:id',
     component: ProductDetailPageComponent
@@ -213,7 +224,12 @@ const routes: Routes = [
         path: 'change-password',
         component: ChangePasswordComponent,
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'favorite',
+        component: FavoriteComponent,
+        canActivate: [AuthGuard]
+      }, 
     ]
   },
   {
