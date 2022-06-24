@@ -1195,6 +1195,7 @@ ol {
 	transition: all 0.3s;
 	text-align: center;
 	width: 100%;
+	cursor: pointer;
 }
 
 .product-item .pi-pic ul li {
@@ -2415,7 +2416,6 @@ ol {
 	color: #252525;
 	font-weight: 700;
 	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text h5 span {

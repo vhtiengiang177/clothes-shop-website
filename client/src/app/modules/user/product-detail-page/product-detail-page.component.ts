@@ -1,3 +1,6 @@
+import { ReviewService } from './../../../services/data/review/review.service';
+import { ReviewStoreService } from './../../../services/store/review-store/review-store.service';
+import { Review } from './../../../services/model/review/review.model';
 import { CartsStoreService } from 'src/app/services/store/carts-store/carts-store.service';
 
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,6 +22,9 @@ import { FavoriteService } from 'src/app/services/data/favorite/favorite.service
 import { Favorite } from 'src/app/services/model/favorite/favorite.model';
 import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
 import { AuthAppService } from 'src/app/services/auth/auth.service';
+import { SharedService } from 'src/app/_shared/constant/share-service';
+import { CustomerService } from 'src/app/services/data/customer/customer.service';
+import { CustomersStoreService } from 'src/app/services/store/customers-store/customers-store.service';
 
 @Component({
   selector: 'app-product-detail-page',
@@ -28,6 +34,7 @@ import { AuthAppService } from 'src/app/services/auth/auth.service';
 export class ProductDetailPageComponent implements OnInit {
   id: number
   product: Product
+  listReviews: Review[] = []
   isVisible: boolean = false
   isWhiteHeart: boolean = true
   listImages: Image[] = []
@@ -43,11 +50,16 @@ export class ProductDetailPageComponent implements OnInit {
   cart: Cart = {}
   outOfStock = false
   imageMain: string = ""
+  arr: any[] = [];
+	index:number = -1;
+  name: string
+  imageUrl: string = null
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
+    private sharedService: SharedService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
@@ -55,7 +67,17 @@ export class ProductDetailPageComponent implements OnInit {
     private cartsStoreService: CartsStoreService,
     private favoriteService: FavoriteService,
     private favoriteStore: FavoriteStoreService,
+    private reviewStore: ReviewStoreService,
+    private reviewService: ReviewService,
+    private customerService: CustomerService,
+    private customerStore: CustomersStoreService,
+    
     private toastr: ToastrService) {
+    this.arr = [1, 2, 3, 4, 5];
+    
+    sharedService.changeEmitted$.subscribe(res => {
+        this.imageUrl = res
+      })
     this.route.params.subscribe((param) => {
       this.id = param['id']
       this.productsStore.getById(param['id']).subscribe(res => {
@@ -76,6 +98,23 @@ export class ProductDetailPageComponent implements OnInit {
             this.product.isFavorite = true
           }
         });
+
+        this.reviewService.getReviewByProduct(this.product.id).subscribe(res => {
+          if (res.length != 0){
+            this.listReviews = res
+            this.listReviews.forEach(item => {
+              item.image = this.customerStore.customer.filter(s => s.idAccount == item.idUser).length > 0
+                ? this.customerStore.customer.filter(s => s.idAccount == item.idUser).pop().image : ""
+            
+            this.customerStore.getCustomerById(item.idUser).subscribe(customer => {
+                  if (customer) {
+                    item.lastName =  customer.firstName + " "
+                    item.firstName = customer.lastName
+                  }
+                })
+            })
+          }
+        });
       }, (error: HttpErrorResponse) => {
         if (error.status == 404) {
           this.router.navigate(['/not-found'])
@@ -87,6 +126,11 @@ export class ProductDetailPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClickItem(index) {
+		//console.log(index);
+		this.index = index;
+	}
+  
   fetchItem() {
     this.productSizeColorsStore.getItemsOfProductForClientPage(this.product.id).subscribe(res => {
       this.productSizeColorsStore.productitems = res
@@ -94,6 +138,10 @@ export class ProductDetailPageComponent implements OnInit {
         this.getNameSizeColor()
       }
     })
+  }
+
+  fetchReviews(){
+    this.reviewStore.getReviewsOfProduct(this.product.id)
   }
 
   getNameSizeColor() {

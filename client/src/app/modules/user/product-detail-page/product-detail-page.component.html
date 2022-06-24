@@ -38,14 +38,27 @@
                 <div class="col-lg-6">
                     <div class="product-details">
                         <div class="pd-title">
+                            <span>{{ product.category}}</span>
                             <h3>{{ product.name }}</h3>
-                            <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
-                            <i class="ion-heart"></i>
+                            <!-- <a href="#" class="heart-icon"> <fa name="heart-o"></fa></a>
+                            <a><button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></a>
+                            <a><button class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></a> -->
+                           
                         </div>
+                        <div class="pd-rating" >
+                            <ul>
+                                <li class="at-rating" *ngFor="let i of arr;let in=index" (click)="onClickItem(in)">
+                                    <i *ngIf="i > product.avgRating" class="fa fa-star-o"></i>
+                                    <i *ngIf="i <= product.avgRating" class="fa fa-star"></i>
+                                </li>
+                                <span>  ({{listReviews.length}} reviews)</span>
+                            </ul>
+                            
+                        </div>
+                        
                         <div class="pd-desc">
                             <p>{{ product.description }}</p>
-                            <h4>{{ product.pricePromotion | currency: 'VND'}}</h4>
-                            <h6 *ngIf="product.idPromotion"><del>{{ product.unitPrice | currency: 'VND'}}</del></h6>
+                            <h4>{{ product.pricePromotion | currency: 'VND'}} <span *ngIf="product.idPromotion">{{ product.unitPrice | currency: 'VND'}}</span></h4>
                         </div>
                         <div class="pd-color">
                             <h6>Color:</h6>
@@ -101,33 +114,63 @@
                 <div class="tab-item">
                     <ul class="nav" role="tablist">
                         <li>
-                            <a class="active" role="tab">SPECIFICATIONS</a>
+                            <a  class="active" data-toggle="tab"  data-target="#tab1" role="tab">SPECIFICATIONS</a>
                         </li>
+                        <!-- <li>
+                            <a data-toggle="tab"  data-target="#tab2" role="tab">REVIEW(2)</a>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="tab-item-content">
                     <div class="tab-content">
-                        <div class="specification-table">
-                            <table>
-                                <tr>
-                                    <td class="p-catagory">Total Buy</td>
-                                    <td>
-                                        <div class="p-price">{{ product.totalBuy }}</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-catagory">Category</td>
-                                    <td>
-                                        <div class="p-code">{{ product.category }}</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-catagory">Sku</td>
-                                    <td>
-                                        <div class="p-code">{{ product.sku }}</div>
-                                    </td>
-                                </tr>
-                            </table>
+                        <div class="tab-pane fade-in active" id="tab1" role="tabpanel">
+                            <div class="specification-table">
+                                <table>
+                                    <tr>
+                                        <td class="p-catagory">Total Buy</td>
+                                        <td>
+                                            <div class="p-price">{{ product.totalBuy }}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-catagory">Category</td>
+                                        <td>
+                                            <div class="p-code">{{ product.category }}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-catagory">Sku</td>
+                                        <td>
+                                            <div class="p-code">{{ product.sku }}</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade-in active" id="tab2" role="tabpanel">
+                            <div class="customer-review-option">
+                                <h4> {{ listReviews.length }} Comments</h4>
+                                <div class="comment-option" *ngFor="let review of listReviews">
+                                    <div class="co-item">
+                                        <div class="avatar-pic">
+                                            <img  src="assets/img/profile-default.png" alt="">
+                                        </div>
+                                        <div class="avatar-text">
+                                            <h5>{{ review.firstName}} {{ review.lastName }}<span>{{ review.date | date: 'dd/MM/yyyy' }}</span></h5>
+                                            <div>
+                                                <ul>
+                                                    <li class="at-rating" *ngFor="let i of arr;let in=index" (click)="onClickItem(in)">
+                                                        <i *ngIf="i > review.rating" class="fa fa-star-o"></i>
+                                                        <i *ngIf="i <= review.rating " class="fa fa-star"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="at-reply">{{ review.comment }}</div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

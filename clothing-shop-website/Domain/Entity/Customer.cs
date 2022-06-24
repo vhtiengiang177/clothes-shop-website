@@ -20,5 +20,6 @@ namespace Domain.Entity
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<DeliveryAddress> DeliveryAddresses { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

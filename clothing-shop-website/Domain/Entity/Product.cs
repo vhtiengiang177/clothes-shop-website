@@ -23,7 +23,9 @@ namespace Domain.Entity
         public Category Category { get; set; }
         public int? idPromotion { get; set; } 
         public Promotion Promotion { get; set; }
+        public int? AvgRating { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Product_Size_Color> Product_Sizes_Color { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

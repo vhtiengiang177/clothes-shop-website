@@ -13,6 +13,7 @@ import { ProductSizeColor } from '../../model/product/product-size-color.model';
 import { Product } from '../../model/product/product.model';
 import { FavoriteStoreService } from '../favorite-store/favorite-store.service';
 import { AuthAppService } from '../../auth/auth.service';
+import { CategoriesStoreService } from '../categories-store/categories-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class ProductsStoreService {
 
   constructor(private productService: ProductService,
     private favoriteService: FavoriteService,
+    private categoriesStore: CategoriesStoreService,
     private authService: AuthAppService,
     private favoriteStore: FavoriteStoreService,
 
@@ -158,18 +160,21 @@ export class ProductsStoreService {
               }
             }
           });
-        item.isFavorite = false
+          item.isFavorite = false
+          if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+            let favorite: Favorite
+            this.favoriteService.getItemFavorite(item.id).subscribe(res => {
+              favorite = res;
+              if (favorite != null){
+                  item.isFavorite=true
+                }
+            });
+            
+            };
           
-        if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
-          let favorite: Favorite
-          this.favoriteService.getItemFavorite(item.id).subscribe(res => {
-            favorite = res;
-            if (favorite != null){
-                item.isFavorite=true
-              }
-          });
+          item.category = this.categoriesStore.categories.filter(s => s.id == item.idCategory).length > 0
+            ? this.categoriesStore.categories.filter(s => s.id == item.idCategory).pop().name : ""
           
-          }
         })
       },
         (error: AppError) => {
@@ -185,6 +190,9 @@ export class ProductsStoreService {
         this.products = res.data;
         this.totalData = res.totalData;
         this.products.forEach(item => {
+          item.category = this.categoriesStore.categories.filter(s => s.id == item.idCategory).length > 0
+            ? this.categoriesStore.categories.filter(s => s.id == item.idCategory).pop().name : ""
+            
           item.imageUrl = "assets/product.jpg"
           this.productService.getImagesByIdProduct(item.id).subscribe(res => {
             if (res.length != 0) {

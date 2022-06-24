@@ -4,14 +4,16 @@ using Infrastructure.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace clothing_shop_website.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613181300_DatabaseV5")]
+    partial class DatabaseV5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -889,9 +891,6 @@ namespace clothing_shop_website.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AvgRating")
-                        .HasColumnType("int");
-
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
@@ -1378,7 +1377,7 @@ namespace clothing_shop_website.Migrations
 
                     b.HasIndex("IdProduct");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Domain.Entity.ShopInfo", b =>

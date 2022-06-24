@@ -15,5 +15,6 @@ export interface Product {
     imageUrl?: string,
     idPromotion?: number,
     pricePromotion:number,
-    isFavorite:Boolean
+    isFavorite:Boolean,
+    avgRating?: number
 }

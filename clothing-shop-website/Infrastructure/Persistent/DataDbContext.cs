@@ -33,6 +33,7 @@ namespace Infrastructure.Persistent
         public DbSet<TypeAccount> TypeAccounts { get; set; }
         public DbSet<TypeCustomer> TypeCustomers { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -221,6 +222,22 @@ namespace Infrastructure.Persistent
                 entity.HasOne<Customer>(e => e.Customer)
                     .WithMany(f => f.Favorites)
                     .HasForeignKey(e => e.IdAccount);
+            });
+
+            modelBuilder.Entity<Review>(entity => {
+                entity.HasKey(e => new { e.IdUser,e.IdProduct,e.IdOrder });
+
+                entity.HasOne<Product>(e => e.Product)
+                    .WithMany(f => f.Reviews)
+                    .HasForeignKey(e => e.IdProduct);
+
+                entity.HasOne<Customer>(e => e.Customer)
+                    .WithMany(f => f.Reviews)
+                    .HasForeignKey(e => e.IdUser);
+
+                entity.HasOne<Order>(e => e.Order)
+                    .WithMany(f => f.Reviews)
+                    .HasForeignKey(e => e.IdOrder);
             });
 
             SeedData(modelBuilder);
