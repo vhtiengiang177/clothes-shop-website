@@ -56,9 +56,11 @@
                                 [src]="product.imageUrl">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
+                                    <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
+                                    <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
                                 </ul>
                                 <div class="ribbon-wrapper">
-                                    <div class="ribbon">NEW</div>
+                                    <div class="ribbon-new">NEW</div>
                                   </div>
                             </div>
                             <div [routerLink]="['/product-detail', product.id]" class="pi-text">
@@ -66,9 +68,8 @@
                                 <a>
                                     <h5>{{ product.name }}</h5>
                                 </a>
-                                <div class="product-price">
-                                    {{ product.unitPrice | currency: 'VND' }}
-                                </div>
+                                <div class="product-price">{{ product.pricePromotion | currency: 'VND' }} </div>
+                                <h6 *ngIf="product.idPromotion"><del>{{ product.unitPrice | currency: 'VND'}}</del></h6>
                             </div>
                         </div>
                     </div>
@@ -134,16 +135,20 @@
                                     <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
+                                        <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
+                                        <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
                                     </ul>
+                                    <div *ngIf="product.idPromotion" class="ribbon-wrapper">
+                                        <div class="ribbon-sale">SALE</div>
+                                      </div>
                                 </div>
                                 <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                     <div class="catagory-name">{{ product.category }}</div>
                                     <a>
                                         <h5>{{ product.name }}</h5>
                                     </a>
-                                    <div class="product-price">
-                                        {{ product.unitPrice | currency: 'VND' }}
-                                    </div>
+                                    <div class="product-price">{{ product.pricePromotion | currency: 'VND' }} </div>
+                                    <h6 *ngIf="product.idPromotion"><del>{{ product.unitPrice | currency: 'VND'}}</del></h6>
                                 </div>
                             </div>
                         </div>

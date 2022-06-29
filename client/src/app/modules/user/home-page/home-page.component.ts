@@ -6,6 +6,9 @@ import { CategoriesStoreService } from 'src/app/services/store/categories-store/
 import { ProductsStoreService } from 'src/app/services/store/products-store/products-store.service';
 import { ProductAddCartFormComponent } from '../product-add-cart-form/product-add-cart-form.component';
 import { interval } from 'rxjs';
+import { Favorite } from 'src/app/services/model/favorite/favorite.model';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
+import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
 
 @Component({
   selector: 'app-home-page',
@@ -30,6 +33,8 @@ export class HomePageComponent implements OnInit {
   constructor(private productsStore: ProductsStoreService, 
     public dialog: MatDialog,
     private categoriesStore: CategoriesStoreService,
+    private favoriteService: FavoriteService,
+    private authService: AuthAppService,
     private cartStore: CartsStoreService) { 
       this.cartStore.get()
       this.productsStore.getTopBestSellers().subscribe(p => {
@@ -44,6 +49,19 @@ export class HomePageComponent implements OnInit {
               }
             }
           })
+
+          pc.isFavorite = false
+          if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+            let favorite: Favorite
+            this.favoriteService.getItemFavorite(pc.id).subscribe(res => {
+              favorite = res;
+              if (favorite != null){
+                  pc.isFavorite=true
+                }
+            });
+            
+            };
+
           if(categories.length == 1) {
             pc.category = categories[0].name
           }
@@ -62,6 +80,19 @@ export class HomePageComponent implements OnInit {
             }
           }
         })
+        
+        pc.isFavorite = false
+        if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+          let favorite: Favorite
+          this.favoriteService.getItemFavorite(pc.id).subscribe(res => {
+            favorite = res;
+            if (favorite != null){
+                pc.isFavorite=true
+              }
+          });
+          
+          };
+
         if(categories.length == 1) {
           pc.category = categories[0].name
         }

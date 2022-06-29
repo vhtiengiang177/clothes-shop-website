@@ -62,7 +62,7 @@
 	top: -3px;
 	left: -3px;
 }
-	.ribbon {
+	.ribbon-new {
 	  font: bold 15px sans-serif;
 	  color: #333;
 	  text-align: center;
@@ -78,6 +78,24 @@
 	  background-color: #007bff;
 	  color: #fff;
 	}
+
+	.ribbon-sale {
+		font: bold 15px sans-serif;
+		color: #333;
+		text-align: center;
+		-webkit-transform: rotate(-45deg);
+		-moz-transform:    rotate(-45deg);
+		-ms-transform:     rotate(-45deg);
+		-o-transform:      rotate(-45deg);
+		position: relative;
+		padding: 7px 0;
+		top: 15px;
+		left: -30px;
+		width: 120px;
+		background-color: #ff0004;
+		color: #fff;
+	  }
+	
   
   
 
@@ -91,3 +109,15 @@ carousel {
 	background-position: top center;
 	background-image: url("../../../../assets/img/time-bg.png");
 }
+
+.img-heart-2 {
+	width: 58px;
+	height: 58px;
+  }
+
+  .btn-heart {
+	width: 52px;
+	height: 40px;
+	padding: 0px;
+	border: #ffffff;
+  }

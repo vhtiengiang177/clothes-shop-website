@@ -307,6 +307,13 @@ namespace Infrastructure.Persistent
               new DeliveryAddress() { Id = 7, FirstName = "Huyen", LastName = "Nguyen Thi", Phone = "0324407777", Address = "KTX D2", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 12, State = 1 },
               new DeliveryAddress() { Id = 8, FirstName = "Hiep", LastName = "Nguyen Duc", Phone = "0324407777", Address = "56/16", WardCode = "90767", DistrictId = 3695, ProvinceId = 202, IdCustomer = 12, State = 1 });
 
+            modelBuilder.Entity<Promotion>().HasData(
+              new Promotion() { Id = 1, Name = "NEWYEAR3112", Description = "MEGA SALE 31-12", Value = 0.2, StartDate = new DateTime(2021, 12, 31), EndDate = new DateTime(2021, 1, 1), State = 1, CreatedDate = createdDate, CreatedById = 1 },
+              new Promotion() { Id = 2, Name = "WOMANDAY", Description = "Women's Day 8-3", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
+              new Promotion() { Id = 3, Name = "TET999", Description = "Tet Holiday 2022", Value = 0.2, StartDate = new DateTime(2022, 1, 26), EndDate = new DateTime(2021, 1, 29), State = 1, CreatedDate = createdDate, CreatedById = 2 },
+              new Promotion() { Id = 4, Name = "WOMANVN", Description = "Women Viet Nam 20-10-2021", Value = 0.1, StartDate = new DateTime(2021, 10, 20), EndDate = new DateTime(2021, 10, 21), State = 1, CreatedDate = createdDate, CreatedById = 3 });
+
+
             modelBuilder.Entity<Category>().HasData(
                 new Category() { Id = 1, Name = "Dress", CreatedById = 1, CreatedDate = createdDate, State = 1 },
                 new Category() { Id = 2, Name = "Denim", CreatedById = 1, CreatedDate = createdDate, State = 1 },
@@ -329,17 +336,17 @@ namespace Infrastructure.Persistent
                new Size() { Id = 5, Name = "XXL", State = 1 });
 
             modelBuilder.Entity<Product>().HasData(
-              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 100, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 100000 },
-              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 200000 },
-              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 200, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 300000 },
-              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 300, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 400000 },
-              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 400, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 500000 },
-              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 500, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 600000 },
-              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4, UnitPrice = 700000 },
-              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 4, UnitPrice = 100000 },
-              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 800000 },
-              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 900000 },
-              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 100000 });
+              new Product() { Id = 1, Sku = "123456789", Name = "Avocado Dress Set", Description = "Avocado Dress Set is so pretty", TotalBuy = 100, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 100000, idPromotion = 1,PricePromotion = 80000, AvgRating = 5 },
+              new Product() { Id = 2, Sku = "123456788", Name = "Ally Babydoll Dress", Description = "Ally Babydoll Dress is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 1, UnitPrice = 200000, PricePromotion = 200000, AvgRating = 4 },
+              new Product() { Id = 3, Sku = "123456787", Name = "Baggy Jean", Description = "Baggy Jean is so pretty", TotalBuy = 200, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 300000, PricePromotion = 300000, AvgRating = 4 },
+              new Product() { Id = 4, Sku = "123456786", Name = "Short Jean", Description = "Short Jean is so pretty", TotalBuy = 300, State = 1, CreatedDate = createdDate, CreatedById = 4, IdCategory = 2, UnitPrice = 400000, PricePromotion = 400000, AvgRating = 5 },
+              new Product() { Id = 5, Sku = "123456785", Name = "Mori Shirt", Description = "Mori Shirt is so pretty", TotalBuy = 400, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 500000, idPromotion = 1, PricePromotion = 400000, AvgRating = 3 },
+              new Product() { Id = 6, Sku = "123456784", Name = "Yasmin Shirt", Description = "Yasmin Shirt is so pretty", TotalBuy = 500, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 600000, idPromotion = 1, PricePromotion = 480000, AvgRating = 3 },
+              new Product() { Id = 7, Sku = "123456783", Name = "Aokosor Sweaters", Description = "Aokosor Sweaters is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDate, CreatedById = 3, IdCategory = 4, UnitPrice = 700000, idPromotion = 1, PricePromotion = 560000, AvgRating = 2 },
+              new Product() { Id = 8, Sku = "123456782", Name = "Hoodie", Description = "Hoodie is so pretty", TotalBuy = 10, State = 1, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 4, UnitPrice = 100000, idPromotion = 1, PricePromotion = 80000, AvgRating = 4 },
+              new Product() { Id = 9, Sku = "123456781", Name = "Mella Khaki Pant", Description = "Mella Khaki Pant is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 800000, PricePromotion = 80000, AvgRating = 1 },
+              new Product() { Id = 10, Sku = "123456780", Name = "Mochi Pants", Description = "Mochi Pants is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDateNew, CreatedById = 3, IdCategory = 5, UnitPrice = 900000, PricePromotion = 900000, AvgRating = 5 },
+              new Product() { Id = 11, Sku = "123456779", Name = "T-Shirts", Description = "T-Shirt is so pretty", TotalBuy = 10, State = 0, CreatedDate = createdDate, CreatedById = 3, IdCategory = 3, UnitPrice = 100000,  PricePromotion = 100000 });
 
 
             modelBuilder.Entity<Product_Size_Color>().HasData(
@@ -377,13 +384,7 @@ namespace Infrastructure.Persistent
             //  new Log_Product() { Id = 14, IdProduct = 10, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, Quantity = 100 },
             //  new Log_Product() { Id = 15, IdProduct = 11, IdSize = 1, IdColor = 1, CreatedDate = createdDate, CreatedById = 1, Quantity = 100 });
 
-
-            modelBuilder.Entity<Promotion>().HasData(
-               new Promotion() { Id = 1, Name = "NEWYEAR3112", Description = "MEGA SALE 31-12", Value = 0.2, StartDate = new DateTime(2021, 12, 31), EndDate = new DateTime(2021, 1, 1), State = 1, CreatedDate = createdDate, CreatedById = 1 },
-               new Promotion() { Id = 2, Name = "WOMANDAY", Description = "Women's Day 8-3", Value = 0.1, StartDate = createdDate, EndDate = endDate, State = 1, CreatedDate = createdDate, CreatedById = 3 },
-               new Promotion() { Id = 3, Name = "TET999", Description = "Tet Holiday 2022", Value = 0.2, StartDate = new DateTime(2022, 1, 26), EndDate = new DateTime(2021, 1, 29), State = 1, CreatedDate = createdDate, CreatedById = 2 },
-               new Promotion() { Id = 4, Name = "WOMANVN", Description = "Women Viet Nam 20-10-2021", Value = 0.1, StartDate = new DateTime(2021, 10, 20), EndDate = new DateTime(2021, 10, 21), State = 1, CreatedDate = createdDate, CreatedById = 3 });
-
+           
             modelBuilder.Entity<Cart>().HasData(
                new Cart() { IdCustomer = 7, IdProduct = 1, IdSize = 1, IdColor = 1, Quantity = 20 },
                new Cart() { IdCustomer = 7, IdProduct = 2, IdSize = 2, IdColor = 2, Quantity = 20 },

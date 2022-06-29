@@ -30,7 +30,6 @@ export class ProductsStoreService {
     private favoriteService: FavoriteService,
     private categoriesStore: CategoriesStoreService,
     private authService: AuthAppService,
-    private favoriteStore: FavoriteStoreService,
 
     private toastr: ToastrService) {
       if (this.products.length == 0) {
