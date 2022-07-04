@@ -185,7 +185,7 @@
                                     <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
-                                        <li><button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product.id)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
+                                        <li><button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product.id)"  class="img-heart-2" src="assets/img/heart-regular.png" alt=""></button></li>
                                         <li><button class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product.id)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li>
                                     </ul>
                                     <div *ngIf="product.idPromotion" class="ribbon-wrapper">

@@ -43,6 +43,7 @@ export class MyAccountPageComponent implements OnInit {
       if(this.typeaccount == 4) {
         this.customer = res
         this.name = this.customer.lastName + " " + this.customer.firstName
+        console.log(this.customer.image)
         this.imageUrl = this.customer.image
       }
       else {

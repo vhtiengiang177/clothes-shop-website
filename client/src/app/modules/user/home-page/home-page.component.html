@@ -56,7 +56,7 @@
                                 [src]="product.imageUrl">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                    <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
+                                    <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart-regular.png" alt=""></button></li>
                                     <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
                                 </ul>
                                 <div class="ribbon-wrapper">
@@ -76,9 +76,9 @@
                 </carousel>
                 </div>
             </div>
-            <!-- <div class="col-lg-3  offset-lg-1">
+            <div class="col-lg-3">
                 <div class="product-large set-poster2"></div>
-            </div> -->
+            </div>
         </div>
     </div>
 </section>
@@ -109,14 +109,14 @@
         </div>
     </div>
 </section>
-
+<br/>
 <section class="women-banner spad" *ngIf="productTopBestSellers.length > 0">
     <div class="container-fluid">
         <div class="row">
-            <!-- <div class="col-lg-3">
+            <div class="col-lg-3">
                 <div class="product-large set-poster1"></div>
-            </div> -->
-            <div class="col-lg-8 offset-lg-1">
+            </div>
+            <div class="col-lg-8">
                 <div class="filter-control">
                     BEST SELLER
                 </div>
@@ -135,7 +135,7 @@
                                     <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                        <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
+                                        <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart-regular.png" alt=""></button></li>
                                         <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
                                     </ul>
                                     <div *ngIf="product.idPromotion" class="ribbon-wrapper">
