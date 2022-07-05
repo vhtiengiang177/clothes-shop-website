@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PromotionForm } from 'src/app/services/model/promotion/promotion-form.model';
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -38,12 +39,21 @@ export class PromotionFormComponent implements OnInit {
     end: new FormControl()
   });
 
+  hideSelect = new FormControl(false);
+  checkHide: Boolean
+
   constructor(public dialogRef: MatDialogRef<PromotionFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PromotionForm,
     private promotionsStore: PromotionsStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
       console.log(data);
+      this.checkHide = true
+      if (this.data.promotion.state !=2)
+      {
+        this.checkHide = false
+      }
+      
 
       if(!this.data.promotion.startDate) {
         this.data.promotion.startDate = new Date();
@@ -60,6 +70,12 @@ export class PromotionFormComponent implements OnInit {
 
   save() {
     if (this.checkValidate()) {
+      if (this.checkHide == true) {
+        this.data.promotion.state = 2
+      }else{
+        this.data.promotion.state = 1
+      }
+
       if (this.data.typeform === 0) {
         this.promotionsStore.create(this.data.promotion).subscribe(res => {
           this.dialogRef.close(res);

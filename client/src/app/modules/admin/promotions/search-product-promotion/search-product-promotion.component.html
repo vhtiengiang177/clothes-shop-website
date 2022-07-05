@@ -18,9 +18,9 @@
             <span *ngIf="!isAdvance" (click)="searchFilter()">
                 <fa class="icon-size" name="chevron-circle-down"></fa>
             </span>
-            <!-- <span *ngIf="isAdvance" (click)="searchFilter()">
+            <span *ngIf="isAdvance" (click)="searchFilter()">
                 <fa class="icon-size" name="chevron-circle-up"></fa>
-            </span> -->
+            </span>
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
                 <input matInput type="number" min="0" [(ngModel)]="minPrice" (change)="checkMinPrice()">
             </mat-form-field>
         </div> -->
-        <div class="form-group col-md-3">
+        <!-- <div class="form-group col-md-3">
             <mat-form-field>
                 <mat-label>State</mat-label>
                 <mat-select [(ngModel)]="actions" #selectCategory name="actions" multiple>
@@ -62,13 +62,9 @@
                         </span>
                     </mat-select-trigger>
                     <mat-option *ngFor="let action of actions" [value]="action">{{action}}</mat-option>
-                    <!-- <mat-option [value]="{id: 0, name: 'All'}" (click)="selectedAllCategories()">All</mat-option>
-                    <mat-option (click)="selectedCategories(categories)"
-                        *ngFor="let category of categoriesStore.categories$ | async" [value]="category">
-                        {{category.name}}</mat-option> -->
                 </mat-select>
             </mat-form-field>
-        </div> 
+        </div>  -->
     </div>
     <div class="row inline">
         <div class="div-reset">

@@ -1,5 +1,7 @@
+import { Review } from 'src/app/services/model/review/review.model';
+import { OrderDetail } from 'src/app/services/model/order/order-detail.model';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddressApiService } from 'src/app/services/data/address-api/address-api.service';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
 import { OrderDetailForm } from 'src/app/services/model/order/order-detail-form.model';
@@ -13,6 +15,8 @@ import { ProductsStoreService } from 'src/app/services/store/products-store/prod
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
+import { ReviewPageComponent } from '../../review-page/review-page/review-page.component';
+import { ReviewStoreService } from 'src/app/services/store/review-store/review-store.service';
 
 @Component({
   selector: 'app-order-detail-user-form',
@@ -32,9 +36,11 @@ export class OrderDetailUserFormComponent implements OnInit {
   ward: string = ""
   discount: number = 0
   deliveryAddress: DeliveryAddress
+  review: Review
 
   constructor(public dialogRef: MatDialogRef<OrderDetailUserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OrderDetailForm,
+    private dialog: MatDialog,
     private deliveryStore: DeliveryStoreService,
     private orderStore: OrdersProcessingStoreService,
     private promotionsStore: PromotionsStoreService,
@@ -43,6 +49,7 @@ export class OrderDetailUserFormComponent implements OnInit {
     private staffStore: StaffStoreService,
     private productsStore: ProductsStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
+    private reviewStore: ReviewStoreService,
     private colorsStore: ColorsStoreService,
     private sizesStore: SizesStoreService) {
       this.id = data.idOrder;
@@ -50,7 +57,6 @@ export class OrderDetailUserFormComponent implements OnInit {
         this.order = res;
 
         this.fetchOrder()
-
         this.orderDetailStore.orderdetails$.subscribe(res => {
           if (res) {
             this.getNameEntity()
@@ -133,6 +139,21 @@ export class OrderDetailUserFormComponent implements OnInit {
       this.staffStore.getById(idEmployee).subscribe(res => {
         this.employee = res.idAccount + " - " + res.lastName + " " + res.firstName
       })
+    }
+  }
+
+  reviewOrder(item: OrderDetail) {
+    this.reviewStore.getReviewsOfProduct(item.idProduct);
+    this.review = this.reviewStore.reviews.find(x=>x.idOrder == item.idOrder && x.idProduct == item.idProduct);
+    if (this.order.state == 5 && this.review==null){
+      const dialogRef = this.dialog.open(ReviewPageComponent, {
+        width: '650px',
+        data: { 
+         idOrder: item.idOrder,
+         idProduct: item.idProduct,
+         descriptionDetailOrder: item.product + 'x' + item.quantity + item.size + item.color+ 'Total:'+ item.quantity * item.unitPrice + 'VND'
+        }
+      });
     }
   }
 }

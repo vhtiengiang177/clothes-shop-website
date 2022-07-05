@@ -1,0 +1,43 @@
+.detail-form {
+    padding-bottom: 0px !important;
+}
+
+
+.review{
+	height: 80px;
+  }
+  
+  .img-product{
+	float: left;
+	height: 70px;
+	width: 80px;
+  }
+
+  .info-product{
+	float: left;
+	height: 30px;
+	width: 500px;
+  }
+
+  .using{
+	color: blue;
+	cursor: pointer;
+  }
+
+  .rating-list li {
+    width: 50px;
+    float: right;
+    color: #ddd;
+    padding: 10px 5px;
+  
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+  }
+  
+  .rating-list {
+    display: inline-block;
+    list-style: none;
+  }

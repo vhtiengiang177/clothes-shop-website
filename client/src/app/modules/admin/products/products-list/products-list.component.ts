@@ -100,20 +100,6 @@ export class ProductsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
-        // if(this.filter.sort == null && this.filter.pageindex == 1) {
-        //   this.productsStore.products.splice(this.filter.pagesize - 1,1);
-        //   this.productsStore.products.splice(0,0,res);
-        //   this.productsStore.totalData = this.productsStore.totalData + 1;
-        // }
-        // else {
-        //   this.filter = {
-        //     pageindex: 1,
-        //     pagesize: this.filter.pagesize,
-        //     sort: null
-        //   }
-        //   this.fetchData()
-        // }
-        // this.paginator.pageIndex = 0;
         this.router.navigate(['admin/products/' + res.id])
       }
     });

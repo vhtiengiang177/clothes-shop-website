@@ -53,7 +53,7 @@ export class OrdersProcessComponent implements OnInit {
 
   viewDetailOrder(idOrder) {
     const dialogRef = this.dialog.open(OrderDetailUserFormComponent, {
-      width: '800px',
+      width: '1000px',
       data: { 
        idOrder: idOrder
       }

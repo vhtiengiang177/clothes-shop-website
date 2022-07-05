@@ -1,8 +1,9 @@
+import { FilterProductPromotion } from './../../../../services/model/promotion/filter-params-product-promotion.model';
 import { PromotionService } from './../../../../services/data/promotion/promotion.service';
 import { Product } from './../../../../services/model/product/product.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
+import { MatDialog, MatGridTileHeaderCssMatStyler, MatPaginator, PageEvent } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmFormComponent } from 'src/app/modules/common/confirm-form/confirm-form.component';
@@ -26,14 +27,7 @@ const EXCEL_EXTENSION = '.xlsx';
   templateUrl: './promotion-product.component.html',
   styleUrls: ['./promotion-product.component.css']
 })
-// export class PromotionProductComponent implements OnInit {
 
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 export class PromotionProductComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   
@@ -50,7 +44,7 @@ export class PromotionProductComponent implements OnInit {
   product: Product
   promotion: Promotion
   data: [][];
-
+  filterProductPromotion: FilterProductPromotion
 
   constructor(private productsStore: ProductsStoreService,
     private promotionsStore: PromotionsStoreService,
@@ -63,16 +57,6 @@ export class PromotionProductComponent implements OnInit {
         this.id = param['id']
         this.promotionsStore.getById(param['id']).subscribe(res => {
           this.promotion = res;
-          // this.isVisible = true;
-          // this.product = res;
-          // this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name
-          // this.fetchItem()
-          // this.getImages(this.product.id)
-          // this.productSizeColorsStore.productitems$.subscribe(res => {
-          //     if (res) {
-          //       this.getNameSizeColor()
-          //     }
-          //   })
         }, (error: HttpErrorResponse) => {
           if(error.status == 404) {
             this.router.navigate(['admin/not-found'])
@@ -95,7 +79,6 @@ export class PromotionProductComponent implements OnInit {
     this.productsStore.getAll(this.filter);
   }
 
-
   reloadProduct() {
     this.filter = {
       pageindex: 1,
@@ -116,6 +99,12 @@ export class PromotionProductComponent implements OnInit {
       content: $event.content,
       idcategories: $event.idcategories
     }
+
+    this.filterProductPromotion = {
+      idCategories: $event.idcategories,
+      idPromotion: this.promotion.id
+    }
+
     this.paginator.pageIndex = 0;
 
     this.fetchData()
@@ -294,13 +283,7 @@ export class PromotionProductComponent implements OnInit {
   applyPromotion(idProduct) {
     this.promotionsStore.applyPromotion(this.promotion.id,idProduct).subscribe(() => {
       this.toastr.success("Apply promotion #" + this.promotion.id + " successfully")
-      // let totalStore = this.ordersApprovalStore.orders.length;
-      // if(totalStore == 1) {
-      //   this.filter.pageindex = this.filter.pageindex - 1;
-      //   this.paginator.pageIndex = this.filter.pageindex - 1;
-      // }
       this.fetchData()
-      // this.pickupEvent.emit();
     }, (error: HttpErrorResponse) => {
       if(error.status == 500) {
         this.toastr.error("Bad Request")
@@ -314,13 +297,7 @@ export class PromotionProductComponent implements OnInit {
   deleteApplyPromotion(idProduct) {
     this.promotionsStore.deleteApplyPromotion(idProduct).subscribe(() => {
       this.toastr.success("Reject promotion #" + this.promotion.id + " successfully")
-      // let totalStore = this.ordersApprovalStore.orders.length;
-      // if(totalStore == 1) {
-      //   this.filter.pageindex = this.filter.pageindex - 1;
-      //   this.paginator.pageIndex = this.filter.pageindex - 1;
-      // }
       this.fetchData()
-      // this.pickupEvent.emit();
     }, (error: HttpErrorResponse) => {
       if(error.status == 500) {
         this.toastr.error("Bad Request")
@@ -331,6 +308,32 @@ export class PromotionProductComponent implements OnInit {
     })
   }
 
+  applyAllOroductPromotion() {
+    this.promotionsStore.applyAllProductPromotion(this.filterProductPromotion).subscribe(() => {
+      this.toastr.success("Apply promotion #" + this.promotion.id + "for products successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 500) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 505) {
+        this.toastr.error("Not found promotion #" + this.promotion.id)
+      }
+    })
+  }
 
+  deletePromotionForAllProduct(idPromotion) {
+    this.promotionsStore.deletePromotionForAllProduct(idPromotion).subscribe(() => {
+      this.toastr.success("Delete promotion #" + this.promotion.id + " successfully")
+      this.fetchData()
+    }, (error: HttpErrorResponse) => {
+      if(error.status == 500) {
+        this.toastr.error("Bad Request")
+      }
+      else if (error.status == 505) {
+        this.toastr.error("Not found product of promotion #" + this.promotion.id)
+      }
+    })
+  }
 
 }

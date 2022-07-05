@@ -37,20 +37,31 @@ namespace clothing_shop_website.Areas.Client.Controllers
             }
         }
 
-        [HttpPost("CreateReview")]
-        public async Task<IActionResult> CreateReview([FromBody] List<Review> lRevieParams)
+
+        [HttpPost("AddReview")]
+        public IActionResult AddReview(Review review)
         {
-            try
+            if (ModelState.IsValid)
             {
-               
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
 
+                review.IdUser = int.Parse(userId);
+                review.Date = DateTime.Now;
+                _unitOfWork.ReviewsRepository.CreateReview(review);
+                _unitOfWork.Save();
+
+                Product product = _unitOfWork.ProductsRepository.GetProductByID(review.IdProduct);
+                product.AvgRating = _unitOfWork.ReviewsRepository.GetAvgRating(review.IdProduct);
+                _unitOfWork.Save();
+
+                if (!_unitOfWork.Save())
+                {
+                    return BadRequest();
+                }
                 return Ok();
-
             }
-            catch
-            {
-                return BadRequest();
-            }
+            return BadRequest(ModelState);
         }
 
     }

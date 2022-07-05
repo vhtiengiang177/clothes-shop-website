@@ -27,6 +27,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _promotionsService = promotionsService;
         }
 
+
+
         [HttpGet("GetAllPromotions")]
         public async Task<IActionResult> GetAllPromotions([FromQuery] FilterParamsPromotion filterParams)
         {
@@ -69,13 +71,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 lPromotionItems = await _unitOfWork.PromotionsRepository.GetPromotionsEffective();
 
-                var response = new ResponseJSON<Promotion>
-                {
-                    TotalData = lPromotionItems.Count(),
-                    Data = lPromotionItems.ToList()
-                };
-
-                return Ok(response);
+                return Ok(lPromotionItems);
             }
             catch
             {
@@ -214,6 +210,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
                 _unitOfWork.Save();
 
+
+
                 return Ok();
             }
             catch
@@ -222,18 +220,17 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpPut("ApplyPromotionForProduct/{idPromotion}&&{idProduct}")]
         public IActionResult ApplyPromotionForProduct(int idPromotion, int idProduct)
         {
             if (ModelState.IsValid)
             {
-                //var userId = User.FindFirst("id").Value;
-                //if (userId == null) return BadRequest();
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
 
                 Product product = _unitOfWork.ProductsRepository.GetProductByID(idProduct);
                 Promotion promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(idPromotion);
-                //product.ModifiedById = int.Parse(userId);
+                product.ModifiedById = int.Parse(userId);
                 product.LastModified = DateTime.Now;
                 product.idPromotion = idPromotion;
                 product.PricePromotion = product.UnitPrice * (1 - promotion.Value);
@@ -245,17 +242,16 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [AllowAnonymous]
         [HttpPut("DeletePromotionForProduct/{idProduct}")]
         public IActionResult DeletePromotionForProduct(int idProduct)
         {
             if (ModelState.IsValid)
             {
-                //var userId = User.FindFirst("id").Value;
-                //if (userId == null) return BadRequest();
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
 
                 Product product = _unitOfWork.ProductsRepository.GetProductByID(idProduct);
-                //product.ModifiedById = int.Parse(userId);
+                product.ModifiedById = int.Parse(userId);
                 product.LastModified = DateTime.Now;
                 product.idPromotion = default(int?);
                 product.PricePromotion = product.UnitPrice;
@@ -269,21 +265,32 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         [AllowAnonymous]
         [HttpPut("ApplyPromotionForAllProduct")]
-        public IActionResult ApplyPromotionForAllProduct([FromQuery] int[] idCatcegories,int idPromotion)
+        public async Task<IActionResult> ApplyPromotionForAllProduct([FromQuery] FilterParamProductPromotion filterParams)
         {
             if (ModelState.IsValid)
             {
-                var userId = User.FindFirst("id").Value;
-                if (userId == null) return BadRequest();
+                //var userId = User.FindFirst("id").Value;
+                //if (userId == null) return BadRequest();
 
-                List<Product> lProduct = new List<Product>();
-                lProduct = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(idCatcegories).ToList();
-                
-                foreach(Product product in lProduct)
+                IQueryable<Product> lProductItems;
+
+                if (filterParams.IdCategories != null)
                 {
-                    product.ModifiedById = int.Parse(userId);
+                    if (filterParams.IdCategories.Count() != 0
+                        && filterParams.IdCategories.Count() != _unitOfWork.CategoriesRepository.Count())
+                    {
+                        lProductItems = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(filterParams.IdCategories);
+                    }
+                    else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+                }
+                else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
+
+
+                foreach (Product product in lProductItems)
+                {
+                    //product.ModifiedById = int.Parse(userId);
                     product.LastModified = DateTime.Now;
-                    product.idPromotion = idPromotion;
+                    product.idPromotion = filterParams.IdPromotion;
                     _unitOfWork.ProductsRepository.UpdateProduct(product);
                     _unitOfWork.Save();
                 }
@@ -293,17 +300,15 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             return BadRequest(ModelState);
         }
 
-        [AllowAnonymous]
-        [HttpPut("DeletePromotionForAllProduct")]
-        public IActionResult DeletePromotionForAllProduct([FromQuery] int[] idCatcegories)
+        [HttpPut("DeletePromotionForAllProduct/{idPromotion}")]
+        public async Task<IActionResult> DeletePromotionForAllProduct(int idPromotion)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.FindFirst("id").Value;
                 if (userId == null) return BadRequest();
 
-                List<Product> lProduct = new List<Product>();
-                lProduct = _unitOfWork.ProductsRepository.GetProductsByCategoriesID(idCatcegories).ToList();
+                IQueryable<Product> lProduct = await _unitOfWork.PromotionsRepository.GetProductByIdPromotion(idPromotion);
 
                 foreach (Product product in lProduct)
                 {

@@ -40,7 +40,7 @@
       <table id="producttable" class="table table-striped table-hover table-sm ">
         <thead class="dt-header">
           <tr>
-            <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+            <th>STT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
             <th (click)="sortID()">ID
               <fa *ngIf="filter.sort == null" name="sort-down"></fa>
               <fa *ngIf="filter.sort == 'id:asc'" name="sort-up"></fa>
@@ -61,7 +61,7 @@
                 <fa *ngIf="filter.sort == 'enddate:desc'" name="sort-down"></fa>
                 <fa *ngIf="filter.sort == 'enddate:asc'" name="sort-up"></fa>
             </th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
           </tr>
         </thead>
         <tbody class="table-body" *ngIf="promotionsStore.totalData > 0">

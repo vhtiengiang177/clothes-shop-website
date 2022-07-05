@@ -51,6 +51,12 @@ namespace Infrastructure.Persistent.Repository
             return  lPromotion.AsQueryable();
         }
 
+        public async Task<IQueryable<Product>> GetProductByIdPromotion(int idPromotion)
+        {
+            var lProduct = await _dbContext.Products.Where(p => p.idPromotion == idPromotion).ToListAsync();
+            return lProduct.AsQueryable();
+        }
+
         public Promotion GetPromotionInactiveByCode(string Code)
         {
             return _dbContext.Promotions.FirstOrDefault(p => p.Name == Code && p.State == 0);
