@@ -190,7 +190,7 @@ export class ProductsStoreService {
         this.totalData = res.totalData;
         this.products.forEach(item => {
           item.category = this.categoriesStore.categories.filter(s => s.id == item.idCategory).length > 0
-            ? this.categoriesStore.categories.filter(s => s.id == item.idCategory).pop().name : ""
+            ? this.categoriesStore.categories.filter(s => s.id == item.idCategory)[0].name : ""
             
           item.imageUrl = "assets/product.jpg"
           this.productService.getImagesByIdProduct(item.id).subscribe(res => {

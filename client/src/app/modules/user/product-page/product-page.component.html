@@ -94,16 +94,13 @@
                                 <div class="pi-pic">
                                     <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
-                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                        <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></li>
-                                        <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li>
+                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li> &nbsp;
+                                        <li class="background-heart-item" *ngIf = "!product.isFavorite"><button class="btn-heart-background"><i (click)="changeHeart(product, 0)" class="fa fa-heart-o heart-icon" aria-hidden="true"></i></button></li>
+                                        <li class="background-heart-item" *ngIf = "product.isFavorite"><button class="btn-heart"><i (click)="changeHeart(product, 1)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                     </ul>
                                     <div *ngIf="product.idPromotion" class="ribbon-wrapper">
                                         <div class="ribbon">SALE</div>
-                                      </div>
-                                      <!-- <div class="icon">
-                                         <a href="#" class="heart-icon"> <fa name="heart-o"></fa></a> 
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                     <div class="catagory-name">{{product.category}}</div>

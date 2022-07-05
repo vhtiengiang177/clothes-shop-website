@@ -14,98 +14,87 @@
 
 <section *ngIf="isVisible" class="product-shop spad page-details">
     <div class="container">
-        <div class="row display-detail">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="product-pic-zoom">
-                        <ng-container *ngIf="listImages.length == 0; else second">
-                            <img class="product-big-img image image-product" src="assets/product.jpg" alt="">
-                        </ng-container>
-                        <ng-template #second>
-                            <img class="product-big-img image image-product" [src]="imageMain">
-                        </ng-template>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-pic-zoom">
+                    <ng-container *ngIf="listImages.length == 0; else second">
+                        <img class="product-big-img image img-main" src="assets/product.jpg" alt="">
+                    </ng-container>
+                    <ng-template #second>
+                        <img class="product-big-img image img-main" [src]="imageMain">
+                    </ng-template>
+                </div>
+                <carousel 
+                    [cellsToShow]="3"
+                    [cellsToScroll]="1"
+                    [overflowCellsLimit]="4">
+                    <div class="carousel-cell product-item" *ngFor="let image of listImages">
+                        <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
+                    </div>                      
+                </carousel>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-details">
+                    <div class="pd-title">
+                        <span>{{ product.category}}</span>
+                        <h3>{{ product.name }}</h3>
+                    </div>
+                    <div class="pd-rating" >
+                        <ul>
+                            <li class="at-rating" *ngFor="let i of arr;let in=index" (click)="onClickItem(in)">
+                                <i *ngIf="i > product.avgRating" class="fa fa-star-o"></i>
+                                <i *ngIf="i <= product.avgRating" class="fa fa-star"></i>
+                            </li>
+                            <span> ({{listReviews.length}} reviews)</span>
+                        </ul>
                         
                     </div>
-                    <carousel 
-                        [cellsToShow]="3"
-                        [cellsToScroll]="1"
-                        [overflowCellsLimit]="4">
-                        <div class="carousel-cell product-item" *ngFor="let image of listImages">
-                            <img class="image image-carousel" (click)="clickImage(image)" [src]="image.url">
-                        </div>                      
-                    </carousel>
-                </div>
-                <div class="col-lg-6">
-                    <div class="product-details">
-                        <div class="pd-title">
-                            <span>{{ product.category}}</span>
-                            <h3>{{ product.name }}</h3>
-                            <!-- <a href="#" class="heart-icon"> <fa name="heart-o"></fa></a>
-                            <a><button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button></a>
-                            <a><button class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></a> -->
-                           
+                    
+                    <div class="pd-desc">
+                        <p>{{ product.description }}</p>
+                        <h4>{{ product.pricePromotion | currency: 'VND'}} <span *ngIf="product.idPromotion">{{ product.unitPrice | currency: 'VND'}}</span></h4>
+                    </div>
+                    <h6 class="title-item">Color:</h6>
+                    <div class="pd-color">
+                        <div class="pd-size-choose">
+                            <mat-radio-group class="example-radio-group">
+                                <mat-radio-button class="example-radio-button"
+                                    *ngFor="let item of listColors"
+                                    [value]="item.id"
+                                    (change)="colorChange($event)">
+                                    {{ item.name }}
+                                </mat-radio-button>
+                            </mat-radio-group>
                         </div>
-                        <div class="pd-rating" >
-                            <ul>
-                                <li class="at-rating" *ngFor="let i of arr;let in=index" (click)="onClickItem(in)">
-                                    <i *ngIf="i > product.avgRating" class="fa fa-star-o"></i>
-                                    <i *ngIf="i <= product.avgRating" class="fa fa-star"></i>
-                                </li>
-                                <span>  ({{listReviews.length}} reviews)</span>
-                            </ul>
-                            
+                    </div>
+                    <h6 class="title-item">Size:</h6>
+                    <div class="pd-color">
+                        <div class="pd-size-choose">
+                            <mat-radio-group class="example-radio-group">
+                                <mat-radio-button class="example-radio-button"
+                                    *ngFor="let item of listSizes"
+                                    [value]="item.id"
+                                    (change)="sizeChange($event)">
+                                    {{ item.name }}
+                                </mat-radio-button>
+                            </mat-radio-group>
                         </div>
-                        
-                        <div class="pd-desc">
-                            <p>{{ product.description }}</p>
-                            <h4>{{ product.pricePromotion | currency: 'VND'}} <span *ngIf="product.idPromotion">{{ product.unitPrice | currency: 'VND'}}</span></h4>
-                        </div>
-                        <div class="pd-color">
-                            <h6>Color:</h6>
-                            <div class="pd-size-choose">
-                                <mat-radio-group class="example-radio-group">
-                                    <mat-radio-button class="example-radio-button"
-                                        *ngFor="let item of listColors"
-                                        [value]="item.id"
-                                        (change)="colorChange($event)">
-                                        {{ item.name }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <div class="pd-color">
-                            <h6>Size:</h6>
-                            <div class="pd-size-choose">
-                                <mat-radio-group class="example-radio-group">
-                                    <mat-radio-button class="example-radio-button"
-                                        *ngFor="let item of listSizes"
-                                        [value]="item.id"
-                                        (change)="sizeChange($event)">
-                                        {{ item.name }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <h4 class="badge-out" *ngIf="outOfStock"><span class="badge badge-warning">Out of stock</span></h4>
-                        <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
-                            <h6>Stock:</h6> 
-                            <span>{{ selectedSizeColor.stock }}</span>
-                        </div>
-                        <div class="product__details__button">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <div class="quantity">
-                                        <input class="input-quantity" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
-                                    </div>
+                    </div>
+                    <h4 class="badge-out" *ngIf="outOfStock"><span class="badge badge-warning">Out of stock</span></h4>
+                    <div *ngIf="selectedSizeColor.stock != null" class="pd-color">
+                        <h6>Stock:</h6> 
+                        <span>{{ selectedSizeColor.stock }}</span>
+                    </div>
+                    <div class="product__details__button">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <div class="quantity">
+                                    <input class="input-quantity" type="number" [(ngModel)]="quantity" min="1" [max]="selectedSizeColor.stock">
                                 </div>
-                            <button (click)="addToCart()" class="primary-btn pd-cart">Add To Cart</button>&nbsp;&nbsp;
-                            <button class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart.jpg" alt=""></button>
-                            <button class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart()"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button>
                             </div>
-                            <ul>
-                                <li><a href="#"><span></span></a></li>
-                                <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
-                            </ul>
+                            <button (click)="addToCart()" class="primary-btn pd-cart">Add To Cart</button>&nbsp;&nbsp;
+                            <button class="btn-heart" *ngIf = "!product.isFavorite"><i (click)="changeHeart()" class="fa fa-heart-o heart-icon" aria-hidden="true"></i></button>
+                            <button class="btn-heart" *ngIf = "product.isFavorite"><i (click)="changeHeart()" class="fa fa-heart heart-icon" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>

@@ -51,7 +51,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	width: 250px !important;
 	height: 300px !important;
 	max-width: 250px !important;
-	height: 300px !important;
 }
 
 .mobile-menu-wrap {
@@ -68,4 +67,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .container, .container-sm {
         max-width: 360px;
     }
+}
+
+.btn-heart {
+	padding: 0px;
+	border: 1px solid #e5e5e5;
+    background-color: transparent; 
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+  }
+
+.heart-icon {
+    color:#eb0734;
+    font-size: 25px !important;
+}
+
+.btn-heart-background {
+    padding: 0px;
+	border: 1px solid #f2f2f2;
+    background-color: #f2f2f2; 
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+}
+
+.background-heart-item {
+    background-color: transparent !important;
 }

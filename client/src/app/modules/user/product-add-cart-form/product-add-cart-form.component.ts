@@ -63,15 +63,13 @@ export class ProductAddCartFormComponent implements OnInit {
       this.id = this.data.idProduct
       this.productsStore.getById(this.id).subscribe(res => {
         this.product = res;
+        console.log(res)
         this.selectedSizeColor.idProduct = this.product.id
         this.oldSelected.idProduct = this.product.id
         this.fetchItem()
         this.getImages(this.product.id)
-        // this.productSizeColorsStore.productitems$.subscribe(res => {
-        //   if (res) {
-            
-        //   }
-        // })
+        this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0
+          ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory)[0].name : ""
         this.isVisible = true
         this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
           if (res.length != 0){

@@ -42,9 +42,10 @@ mat-dialog-content {
     height: 52px;
   }
 
-.btn-heart {
-    width: 52px;
-    height: 52px;
-    padding: 0px;
-    border: #ffffff;
-  }
+
+
+  .img-main {
+	object-fit: contain;
+	width: 250px;
+	max-width: 250px;
+}

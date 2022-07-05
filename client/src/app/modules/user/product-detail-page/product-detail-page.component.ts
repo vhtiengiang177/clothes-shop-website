@@ -84,7 +84,7 @@ export class ProductDetailPageComponent implements OnInit {
         this.product = res;
         this.selectedSizeColor.idProduct = this.product.id
         this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0
-          ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).pop().name : ""
+          ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory)[0].name : ""
         this.fetchItem()
         this.getImages(this.product.id)
         // this.productSizeColorsStore.productitems$.subscribe(res => {
@@ -104,7 +104,7 @@ export class ProductDetailPageComponent implements OnInit {
             this.listReviews = res
             this.listReviews.forEach(item => {
               item.image = this.customerStore.customer.filter(s => s.idAccount == item.idUser).length > 0
-                ? this.customerStore.customer.filter(s => s.idAccount == item.idUser).pop().image : ""
+                ? this.customerStore.customer.filter(s => s.idAccount == item.idUser)[0].image : ""
             
             this.customerStore.getCustomerById(item.idUser).subscribe(customer => {
                   if (customer) {
