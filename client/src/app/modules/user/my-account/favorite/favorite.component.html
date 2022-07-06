@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="row">
                 <fieldset class="fieldset">
-                    <h1 class="fieldset-title">My Favorite({{listProduct.length}})</h1>
+                    <h1 class="fieldset-title">My Favorites ({{listProduct.length}})</h1>
                 </fieldset>
                 <div *ngIf="listProduct.length != 0" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
                     <button  type="button" style="float: right;" class="btn btn-danger button-action" (click)="deleteAllFavorite()">Delete All</button>
@@ -18,15 +18,15 @@
                             <div class="pi-pic">
                                 <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                 <ul>
-                                    <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
-                                    <li class="background-heart-item"><button class="btn-heart"><i (click)="deleteFavorite(product.id)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
+                                    <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>&nbsp;
+                                    <li class="background-heart-item"><button class="btn-heart-background"><i (click)="deleteFavorite(product.id)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                 </ul>
                                 <div *ngIf="product.idPromotion" class="ribbon-wrapper">
                                     <div class="ribbon">SALE</div>
                                   </div>
                             </div>
                             <div [routerLink]="['/product-detail', product.id]" class="pi-text">
-                                <div class="catagory-name">Towel</div>
+                                <div class="catagory-name">{{ product.category }}</div>
                                 <a href="#">
                                     <h5>{{ product.name }}</h5>
                                 </a>

@@ -86,8 +86,11 @@ export class UserInfoComponent implements OnInit {
     
     const formData = new FormData();
     formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
-    this.accountService.addImageAccount(formData).toPromise()
-    this.sharedService.emitChange(this.imageUrl)
+    this.accountService.addImageAccount(formData).subscribe(() => {
+      this.sharedService.emitChange(this.imageUrl)
+    });
+    
+    this.sharedService.emitChange(true)
   }
 
   updateStaffProfile(formStaff) {

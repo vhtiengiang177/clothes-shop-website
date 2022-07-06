@@ -139,6 +139,7 @@ export class ProductPageComponent {
       pagesize: this.filter.pagesize,
       sort: this.filter.sort
     }
+    this.filter.content = null
     // this.paginator.pageIndex = 0;
     this.fetchData()
   }

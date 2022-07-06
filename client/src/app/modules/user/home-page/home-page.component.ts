@@ -147,8 +147,8 @@ export class HomePageComponent implements OnInit {
             this.toastr.error(e.error)
         })} else{
           this.favoriteService.addItemInFavorite(product.id).subscribe(() => {
-            this.productTopNew.find(p=>p.id === product.id).isFavorite = false
-            this.productTopBestSellers.find(p=>p.id === product.id).isFavorite = false
+            this.productTopNew.find(p=>p.id === product.id).isFavorite = true
+            this.productTopBestSellers.find(p=>p.id === product.id).isFavorite = true
             this.fetchFavorite();
           }, (e: HttpErrorResponse) => {
             if (e.status == 400)

@@ -4,8 +4,9 @@
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
-                        <img *ngIf="imageUrl == null" class="img-profile img-circle img-responsive center-block" src="assets/img/profile-default.png" alt="">
-                        <img *ngIf="imageUrl != null"  class="img-profile img-circle img-responsive center-block" [src]="imageUrl" alt="">
+                        <img *ngIf="isImageLoading == false && imageUrl == null" class="img-profile img-circle img-responsive center-block" src="assets/img/profile-default.png" alt="">
+                        <img *ngIf="isImageLoading == false && imageUrl != null"  class="img-profile img-circle img-responsive center-block" [src]="imageUrl" alt="">
+                        <img *ngIf="isImageLoading" class="img-profile img-circle img-responsive center-block btn-heart-background" src="assets/img/spinner-loading.gif" alt="">
                         <ul class="meta list list-unstyled">
                             <li class="name"> {{ name }} </li>
                         </ul>
@@ -15,7 +16,7 @@
         					<li class="active" (click)="clickProfileItem()" [ngClass]="{ 'active': clickProfile }" ><a [routerLink]="['/my-account']"><span class="fa fa-user"></span> Profile</a></li>
         					<li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickAddressItem()" [ngClass]="{ 'active': clickAddress }"><a [routerLink]="['/my-account/delivery-address']"><span class="fa fa-cog"></span> Delivery Address</a></li>
         					<li (click)="clickChangePassItem()" [ngClass]="{ 'active': clickChangePass }"><a [routerLink] ="['/my-account/change-password']"><span class="fa fa-credit-card"></span> Change Password</a></li>
-                            <li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickFavoriteItem()" [ngClass]="{ 'active': clickFavorite }"><a [routerLink] ="['/my-account/favorite']"><span class="fa fa-heart-o"></span> Favorite</a></li>
+                            <li *ngIf="authService.getCurrentUser().idTypeAccount == 4" (click)="clickFavoriteItem()" [ngClass]="{ 'active': clickFavorite }"><a [routerLink] ="['/my-account/favorite']"><span class="fa fa-heart-o"></span> My Favorites</a></li>
         				</ul>
         			</nav>
                 </div>
