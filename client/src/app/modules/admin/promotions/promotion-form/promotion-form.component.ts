@@ -73,7 +73,7 @@ export class PromotionFormComponent implements OnInit {
       if (this.checkHide == true) {
         this.data.promotion.state = 2
       }else{
-        this.data.promotion.state = 1
+        this.data.promotion.state = 3
       }
 
       if (this.data.typeform === 0) {

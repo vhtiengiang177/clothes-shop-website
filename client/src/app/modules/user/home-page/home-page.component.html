@@ -56,12 +56,12 @@
                                 [src]="product.imageUrl">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                    <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart-regular.png" alt=""></button></li>
-                                    <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
+                                    <li class="background-heart-item" *ngIf = "!product.isFavorite"><button class="btn-heart-background"><i (click)="changeHeart(product, 0)" class="fa fa-heart-o heart-icon" aria-hidden="true"></i></button></li>
+                                    <li class="background-heart-item" *ngIf = "product.isFavorite"><button class="btn-heart"><i (click)="changeHeart(product, 1)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                 </ul>
-                                <div class="ribbon-wrapper">
+                                <!-- <div class="ribbon-wrapper">
                                     <div class="ribbon-new">NEW</div>
-                                  </div>
+                                  </div> -->
                             </div>
                             <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                 <div class="catagory-name">{{ product.category }}</div>
@@ -135,12 +135,12 @@
                                     <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                     <ul>
                                         <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
-                                        <!-- <li><button  class="btn-heart" *ngIf = "!product.isFavorite"><img  (click)="changeHeart(product,0)"  class="img-heart-2" src="assets/img/heart-regular.png" alt=""></button></li>
-                                        <li><button  class="btn-heart" *ngIf = "product.isFavorite"><img  (click)="changeHeart(product,1)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li> -->
+                                        <li class="background-heart-item" *ngIf = "!product.isFavorite"><button class="btn-heart-background"><i (click)="changeHeart(product, 0)" class="fa fa-heart-o heart-icon" aria-hidden="true"></i></button></li>
+                                        <li class="background-heart-item" *ngIf = "product.isFavorite"><button class="btn-heart"><i (click)="changeHeart(product, 1)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                     </ul>
-                                    <div *ngIf="product.idPromotion" class="ribbon-wrapper">
+                                    <!-- <div *ngIf="product.idPromotion" class="ribbon-wrapper">
                                         <div class="ribbon-sale">SALE</div>
-                                      </div>
+                                      </div> -->
                                 </div>
                                 <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                                     <div class="catagory-name">{{ product.category }}</div>

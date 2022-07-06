@@ -23,5 +23,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         IQueryable<Image> GetImagesByIdProduct(int productID);
         public Product_Size_Color GetItemByIdPSC(int idProduct, int idSize, int idColor);
         int CheckCountItemOfProduct(int productID);
+        Task<IQueryable<Product>> GetProductsByIdPromotion(int idPromotion);
     }
 }

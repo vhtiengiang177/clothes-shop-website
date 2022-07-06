@@ -110,6 +110,13 @@ namespace Infrastructure.Persistent.Repository
             return countItems;
         }
 
-       
+        public async Task<IQueryable<Product>> GetProductsByIdPromotion(int idPromotion)
+        {
+            var lProduct = await _dbContext.Products.Where(p => p.idPromotion == idPromotion).ToListAsync();
+
+            return lProduct.AsQueryable();
+        }
+
+
     }
 }

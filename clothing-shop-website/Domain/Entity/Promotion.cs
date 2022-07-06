@@ -13,11 +13,13 @@ namespace Domain.Entity
         public double Value { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int State { get; set; } = 1;
+        public int State { get; set; } = 3; //0: Đã xóa     1:Hết hạn       2: Còn hạn - Ẩn trên client page(apply sản phẩm)    3:Còn hạn - Hiện trên client page(apply hóa đơn)
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModified { get; set; }
         public int CreatedById { get; set; }
         public int? ModifiedById { get; set; }
+        public string? Image { get; set; }
+        public string? PublicId { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }

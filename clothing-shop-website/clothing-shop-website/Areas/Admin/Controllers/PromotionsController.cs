@@ -27,8 +27,6 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _promotionsService = promotionsService;
         }
 
-
-
         [HttpGet("GetAllPromotions")]
         public async Task<IActionResult> GetAllPromotions([FromQuery] FilterParamsPromotion filterParams)
         {
@@ -132,7 +130,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     oldPromotion.Name = promotion.Name;
                     oldPromotion.Description = promotion.Description;
                     oldPromotion.Value = promotion.Value;
-                    oldPromotion.State = 1;
+                    oldPromotion.State = 3;
                     oldPromotion.StartDate = promotion.StartDate;
                     oldPromotion.EndDate = promotion.EndDate;
                     oldPromotion.CreatedById = promotion.CreatedById;
@@ -192,7 +190,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         }
 
         [HttpPut("DeletePromotion/{id}", Name = "DeletePromotion")]
-        public IActionResult DeletePromotion(int id)
+        public async Task<IActionResult> DeletePromotion(int id)
         {
             try
             {
@@ -210,7 +208,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
                 _unitOfWork.Save();
 
-
+                IQueryable<Product> lProducts = await _unitOfWork.ProductsRepository.GetProductsByIdPromotion(id);
+                foreach (Product product in lProducts)
+                {
+                    product.idPromotion = null;
+                    product.PricePromotion = product.UnitPrice;
+                    _unitOfWork.ProductsRepository.UpdateProduct(product);
+                    _unitOfWork.Save();
+                }    
 
                 return Ok();
             }

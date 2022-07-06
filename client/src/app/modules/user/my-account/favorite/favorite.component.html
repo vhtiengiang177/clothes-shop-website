@@ -19,7 +19,7 @@
                                 <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
                                 <ul>
                                     <li (click)="addToCart(product)" class="quick-view"><a >ADD TO CART</a></li>
-                                    <li><button class="btn-heart"><img  (click)="deleteFavorite(product.id)"  class="img-heart-2" src="assets/img/heart-2.jpg" alt=""></button></li>
+                                    <li class="background-heart-item"><button class="btn-heart"><i (click)="deleteFavorite(product.id)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                 </ul>
                                 <div *ngIf="product.idPromotion" class="ribbon-wrapper">
                                     <div class="ribbon">SALE</div>

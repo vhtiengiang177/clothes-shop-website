@@ -51,6 +51,12 @@ namespace Infrastructure.Persistent.Repository
             return  lPromotion.AsQueryable();
         }
 
+        public async Task<IQueryable<Promotion>> GetPromotionsNotEffective()
+        {
+            var lPromotion = await _dbContext.Promotions.Where(p => p.EndDate <= DateTime.Today).ToListAsync();
+            return lPromotion.AsQueryable();
+        }
+
         public async Task<IQueryable<Product>> GetProductByIdPromotion(int idPromotion)
         {
             var lProduct = await _dbContext.Products.Where(p => p.idPromotion == idPromotion).ToListAsync();

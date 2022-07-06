@@ -9,6 +9,9 @@ import { interval } from 'rxjs';
 import { Favorite } from 'src/app/services/model/favorite/favorite.model';
 import { AuthAppService } from 'src/app/services/auth/auth.service';
 import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home-page',
@@ -34,8 +37,10 @@ export class HomePageComponent implements OnInit {
     public dialog: MatDialog,
     private categoriesStore: CategoriesStoreService,
     private favoriteService: FavoriteService,
+    private favoriteStore: FavoriteStoreService,
     private authService: AuthAppService,
-    private cartStore: CartsStoreService) { 
+    private cartStore: CartsStoreService,
+    private toastr: ToastrService) { 
       this.cartStore.get()
       this.productsStore.getTopBestSellers().subscribe(p => {
         this.productTopBestSellers = p
@@ -122,6 +127,36 @@ export class HomePageComponent implements OnInit {
         idSize: null
       }
     });
+  }
+
+  fetchFavorite(){
+    this.favoriteStore.getAllItemsInFavorite()
+    this.productsStore.getTopBestSellers()
+    this.productsStore.getTopNewProducts()
+  }
+
+  changeHeart(product,state) {
+    if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+      if (state === 1){
+        this.favoriteService.deleteItemInFavorite(product.id).subscribe(() => {
+            this.productTopNew.find(p=>p.id === product.id).isFavorite = false
+            this.productTopBestSellers.find(p=>p.id === product.id).isFavorite = false
+            this.fetchFavorite();
+        }, (e: HttpErrorResponse) => {
+          if (e.status == 400)
+            this.toastr.error(e.error)
+        })} else{
+          this.favoriteService.addItemInFavorite(product.id).subscribe(() => {
+            this.productTopNew.find(p=>p.id === product.id).isFavorite = false
+            this.productTopBestSellers.find(p=>p.id === product.id).isFavorite = false
+            this.fetchFavorite();
+          }, (e: HttpErrorResponse) => {
+            if (e.status == 400)
+              this.toastr.error(e.error)
+          })
+        }
+         
+    }
   }
 
 }
