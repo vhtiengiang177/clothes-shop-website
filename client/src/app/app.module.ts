@@ -84,6 +84,7 @@ import { CustomerDetailFormComponent } from './modules/admin/customers/customer-
 import { PromotionProductComponent } from './modules/admin/promotions/promotion-product/promotion-product.component';
 import { SearchProductPromotionComponent } from './modules/admin/promotions/search-product-promotion/search-product-promotion.component';
 import { FavoriteComponent } from './modules/user/my-account/favorite/favorite.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
  
  
 let config = new AuthServiceConfig([
@@ -207,7 +208,8 @@ export function provideConfig() {
     BrowserModule, 
     IvyCarouselModule,
     NgChartsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    InfiniteScrollModule
   ],
   exports: [
 
