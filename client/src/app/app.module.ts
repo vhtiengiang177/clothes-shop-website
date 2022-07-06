@@ -84,6 +84,7 @@ import { CustomerDetailFormComponent } from './modules/admin/customers/customer-
 import { PromotionProductComponent } from './modules/admin/promotions/promotion-product/promotion-product.component';
 import { SearchProductPromotionComponent } from './modules/admin/promotions/search-product-promotion/search-product-promotion.component';
 import { FavoriteComponent } from './modules/user/my-account/favorite/favorite.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReviewPageComponent } from './modules/user/review-page/review-page/review-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
  
@@ -213,6 +214,7 @@ export function provideConfig() {
     IvyCarouselModule,
     NgChartsModule,
     SocialLoginModule,
+    InfiniteScrollModule,
     MatCheckboxModule 
   ],
   exports: [

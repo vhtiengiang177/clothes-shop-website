@@ -42,7 +42,6 @@
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
-                    
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <mat-form-field>
@@ -66,11 +65,11 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-7 col-md-7 text-right">
+                        <!-- <div class="col-lg-7 col-md-7 text-right">
                             <mat-paginator #paginator [length]="productsStore.totalData" [(pageSize)]="filter.pagesize"
                                 (page)="onPaginate($event)" showFirstLastButtons>
                             </mat-paginator>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
@@ -88,34 +87,47 @@
                     </div>
                 </div>
                 <div class="product-list">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6" *ngFor="let product of productsStore.products$ | async">
-                            <div  class="product-item">
-                                <div class="pi-pic">
-                                    <img class="image image-product" [routerLink]="['/product-detail', product.id]" [src]="product.imageUrl">
-                                    <ul>
-                                        <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li> &nbsp;
-                                        <li class="background-heart-item" *ngIf = "!product.isFavorite"><button class="btn-heart-background"><i (click)="changeHeart(product, 0)" class="fa fa-heart-o heart-icon" aria-hidden="true"></i></button></li>
-                                        <li class="background-heart-item" *ngIf = "product.isFavorite"><button class="btn-heart"><i (click)="changeHeart(product, 1)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
-                                    </ul>
-                                    <div *ngIf="product.idPromotion" class="ribbon-wrapper">
-                                        <div class="ribbon">SALE</div>
+                    <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+                        (scrolled)="onScrollDown()">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6" *ngFor="let product of productsStore.productsList$ | async">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img class="image image-product" [routerLink]="['/product-detail', product.id]"
+                                            [src]="product.imageUrl">
+                                        <ul>
+                                            <li (click)="addToCart(product)" class="quick-view"><a>ADD TO CART</a></li>
+                                            &nbsp;
+                                            <li class="background-heart-item" *ngIf="!product.isFavorite"><button
+                                                    class="btn-heart-background"><i (click)="changeHeart(product, 0)"
+                                                        class="fa fa-heart-o heart-icon"
+                                                        aria-hidden="true"></i></button></li>
+                                            <li class="background-heart-item" *ngIf="product.isFavorite"><button
+                                                    class="btn-heart-background"><i (click)="changeHeart(product, 1)"
+                                                        class="fa fa-heart heart-icon" aria-hidden="true"></i></button>
+                                            </li>
+                                        </ul>
+                                        <div *ngIf="product.idPromotion" class="ribbon-wrapper">
+                                            <div class="ribbon">SALE</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div [routerLink]="['/product-detail', product.id]" class="pi-text">
-                                    <div class="catagory-name">{{product.category}}</div>
-                                    <a href="#">
-                                        <h5>{{ product.name }}</h5>
-                                    </a>
-                                    <div class="product-price">
-                                        {{ product.pricePromotion | currency: 'VND' }} 
-                                        <span *ngIf="product.idPromotion">{{ product.unitPrice | currency: 'VND'}}</span>
+                                    <div [routerLink]="['/product-detail', product.id]" class="pi-text">
+                                        <div class="catagory-name">{{product.category}}</div>
+                                        <a href="#">
+                                            <h5>{{ product.name }}</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            {{ product.pricePromotion | currency: 'VND' }}
+                                            <span *ngIf="product.idPromotion">{{ product.unitPrice | currency:
+                                                'VND'}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div style="text-align: center;">
-                            <img *ngIf="productsStore.products.length == 0" class="image" src="assets/img/common/no-products-found.gif">
+                            <div style="text-align: center;">
+                                <img *ngIf="productsStore.productsList$.length == 0" class="image"
+                                    src="assets/img/common/no-products-found.gif">
+                            </div>
                         </div>
                     </div>
                 </div>

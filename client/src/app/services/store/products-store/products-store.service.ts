@@ -23,6 +23,9 @@ export class ProductsStoreService {
   private readonly _products = new BehaviorSubject<Product[]>([])
   readonly products$ = this._products.asObservable()
 
+  private readonly _productsList = new BehaviorSubject<Product[]>([])
+  readonly productsList$ = this._productsList.asObservable()
+
   private readonly _totalData = new BehaviorSubject<number>(0);
   readonly totalData$ = this._totalData.asObservable();
 
@@ -32,10 +35,10 @@ export class ProductsStoreService {
     private authService: AuthAppService,
 
     private toastr: ToastrService) {
-      if (this.products.length == 0) {
-        let filter: FilterParamsProduct = {};
-        this.getProductsForClientPage(filter);
-      }
+      // if (this.products.length == 0) {
+      //   let filter: FilterParamsProduct = {};
+      //   this.getProductsForClientPage(filter);
+      // }
   }
 
   get products(): Product[] {
@@ -44,6 +47,14 @@ export class ProductsStoreService {
 
   set products(val: Product[]) {
     this._products.next(val);
+  }
+
+  get productsList(): Product[] {
+    return this._productsList.getValue();
+  }
+
+  set productsList(val: Product[]) {
+    this._productsList.next(val);
   }
 
   get totalData(): number {
@@ -175,6 +186,52 @@ export class ProductsStoreService {
             ? this.categoriesStore.categories.filter(s => s.id == item.idCategory).pop().name : ""
           
         })
+      },
+        (error: AppError) => {
+          if (error instanceof BadRequestError)
+            this.toastr.error("That's an error", "Bad Request")
+          else this.toastr.error("An unexpected error occurred.")
+        });
+  }
+
+  async getProductsForClientPageLoadMore(filterParams: FilterParamsProduct, _method) { 
+    await this.productService.getProductsForClientPage(filterParams)
+      .subscribe(res => {
+        res.data.forEach(item => {
+          item.imageUrl = "assets/product.jpg"
+          this.productService.getImagesByIdProduct(item.id).subscribe(res => {
+            if (res.length != 0) {
+              if (res[0].url) {
+                item.imageUrl = res[0].url 
+              }
+            }
+          });
+          item.isFavorite = false
+          if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+            let favorite: Favorite
+            this.favoriteService.getItemFavorite(item.id).subscribe(res => {
+              favorite = res;
+              if (favorite != null){
+                  item.isFavorite = true
+                }
+            });
+            
+            };
+          
+          item.category = this.categoriesStore.categories.filter(s => s.id == item.idCategory).length > 0
+            ? this.categoriesStore.categories.filter(s => s.id == item.idCategory)[0].name : ""
+          
+        })
+
+        if (_method == "push") {
+          this.productsList.push(...res.data);
+          console.log(this.productsList)
+        }
+        else {
+          this.productsList = res.data;
+        }
+        console.log(this.productsList)
+        this.totalData = res.totalData;
       },
         (error: AppError) => {
           if (error instanceof BadRequestError)

@@ -36,6 +36,7 @@
     "jquery": "^3.3.1",
     "ng-starrating": "^1.0.20",
     "ng2-charts": "^3.0.0-rc.7",
+    "ngx-infinite-scroll": "^6.0.1",
     "ngx-star-rating": "^2.1.0",
     "ngx-toastr": "^11.3.3",
     "rxjs": "~6.4.0",

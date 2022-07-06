@@ -23,7 +23,6 @@ import { ProductAddCartFormComponent } from '../product-add-cart-form/product-ad
 })
 export class ProductPageComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
-
   filter: FilterParamsProduct = {
     pageindex: 1,
     pagesize: 6,
@@ -31,6 +30,8 @@ export class ProductPageComponent implements OnInit {
     idcategories: []
   };
 
+  throttle = 400;
+  scrollDistance = 1;
   categoriesOptions: Category[] = []
   removable = true;
   sortSelected = 'name:asc' 
@@ -48,23 +49,24 @@ export class ProductPageComponent implements OnInit {
     private favoriteStore: FavoriteStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) {
-      this.fetchData()
-      // if(this.productsStore.products.length != 6) {
-      //   this.fetchData()
-      // }
+      this.productsStore.productsList = []
+      this.fetchData("equal")
+      
   }
 
   ngOnInit() {
   }
 
-  onPaginate(pageEvent: PageEvent) {
-    this.filter.pagesize = +pageEvent.pageSize;
-    this.filter.pageindex = +pageEvent.pageIndex + 1;
-    this.fetchData()
-  }
+  // onPaginate(pageEvent: PageEvent) {
+  //   this.filter.pagesize = +pageEvent.pageSize;
+  //   this.filter.pageindex = +pageEvent.pageIndex + 1;
+  //   this.fetchData()
+  // }
 
-  fetchData() {
-    this.productsStore.getProductsForClientPage(this.filter);
+  fetchData(_method = "equal") {
+    console.log(this.filter)
+    this.productsStore.getProductsForClientPageLoadMore(this.filter, _method);
+
   }
 
   fetchFavorite(){
@@ -73,6 +75,8 @@ export class ProductPageComponent implements OnInit {
 
   sort() {
     if (this.sortSelected != this.filter.sort) {
+      this.filter.pagesize = this.productsStore.productsList.length
+      this.filter.pageindex = 1
       this.filter.sort = this.sortSelected
       this.fetchData()
     }
@@ -176,6 +180,15 @@ export class ProductPageComponent implements OnInit {
           })
         }
          
+    }
+  }
+
+  
+  onScrollDown(ev) {
+    console.log("scrolled down!!", ev);
+    if (this.productsStore.totalData > this.productsStore.productsList.length) {
+      this.filter.pageindex++;
+      this.fetchData("push")
     }
   }
 }
