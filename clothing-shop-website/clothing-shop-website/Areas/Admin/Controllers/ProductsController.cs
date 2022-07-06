@@ -94,6 +94,25 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
                 else lProductItems = await _unitOfWork.ProductsRepository.GetAllProducts();
 
+                IQueryable<Promotion> lPromotions = await _unitOfWork.PromotionsRepository.GetPromotionsNotEffective();
+                foreach(Promotion promotion in lPromotions)
+                {
+                    promotion.State = 1; //Khuyến mãi hết hạn
+                    _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
+                    _unitOfWork.Save();
+                    foreach(Product product in lProductItems)
+                    {
+                        if (product.idPromotion == promotion.Id)
+                        {
+                            product.idPromotion = null;
+                            product.PricePromotion = product.UnitPrice;
+                            _unitOfWork.ProductsRepository.UpdateProduct(product);
+                            _unitOfWork.Save();
+                        }
+                    }    
+                }    
+
+
                 // Check product is empty or not. Empty => Remove 
                 lProductItems = lProductItems.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0);
 
@@ -407,7 +426,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 var lProduct = _unitOfWork.ProductsRepository.GetTopProductBestSellers();
 
                 // Check product is empty or not. Empty => Remove 
-                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(6);
+                lProduct = lProduct.Where(item => _unitOfWork.ProductsRepository.CheckCountItemOfProduct(item.Id) > 0).Take(5);
 
                 if (lProduct.Count() >= 3)
                 {

@@ -550,12 +550,12 @@ namespace clothing_shop_website.Areas.Client
                         DateTime fromDate3 = new DateTime(2021, 1, 1);
                         DateTime toDate3 = new DateTime(2021, 12, 31);
                         arrDataCompleted[0] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate3, toDate3);
-                        arrDataCancelReturn[0] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate3, toDate3);
+                        arrDataCancelReturn[0] = _unitOfWork.OrdersRepository.GetDataOrdersCancelReturn(fromDate3, toDate3);
 
                         DateTime fromDate4 = new DateTime(2022, 1, 1);
                         DateTime toDate4 = new DateTime(2022, 12, 31);
                         arrDataCompleted[1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate4, toDate4);
-                        arrDataCancelReturn[1] = _unitOfWork.OrdersRepository.GetDataOrdersCompleted(fromDate4, toDate4);
+                        arrDataCancelReturn[1] = _unitOfWork.OrdersRepository.GetDataOrdersCancelReturn(fromDate4, toDate4);
                         break;
 
                 }

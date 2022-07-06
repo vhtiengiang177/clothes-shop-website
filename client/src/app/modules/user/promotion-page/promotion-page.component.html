@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div *ngFor="let promotion of promotionsStore.promotions$ | async">
-                <div class="voucher" *ngIf = "promotion.state == 1">
+                <div class="voucher" *ngIf = "promotion.state == 3">
                     <div class="column left" >
                         <img  src="assets/voucher-1.png" alt="" style="width:100px;;">
                     </div>
