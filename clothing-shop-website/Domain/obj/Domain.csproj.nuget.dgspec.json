@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj": {}
+    "D:\\KLTN\\clothes-shop-website\\clothing-shop-website\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj": {
+    "D:\\KLTN\\clothes-shop-website\\clothing-shop-website\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\KLTN\\clothes-shop-website\\clothing-shop-website\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Thao\\.nuget\\packages\\",
-        "outputPath": "D:\\KLTN_TLCN\\finalproject\\clothing-shop-website\\Domain\\obj\\",
+        "projectPath": "D:\\KLTN\\clothes-shop-website\\clothing-shop-website\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\KLTN\\clothes-shop-website\\clothing-shop-website\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Thao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
