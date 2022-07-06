@@ -1,0 +1,40 @@
+<h3>Order #{{ data.idOrder }}</h3>
+<br/>
+<mat-dialog-content class="mat-typography">
+    <div class="checkout-form">
+        <div style="padding: 20px;">
+            <div class="row">
+                <div class="review">
+                    <div class="img-product" >
+                        <img  [src] = "imgProduct" alt="" style="width:50px;;">
+                    </div>
+                    <div class="info-product" >
+                        <h5 style="color: red;"> {{ this.description }} </h5>
+                        <h5>Total:  ₫2,000,000</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="width: 500px;" >
+                        <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block" >
+                          <li (click)="countStar(star)"
+                              [ngClass]="{'selected': (star <= selectedValue)}">
+                            <i class="fa fa-star fa-2x"></i>
+                          </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <textarea [(ngModel)]="review.comment" matInput style="width: 500px;"></textarea>
+                <br>
+            </div>
+            <br>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Cancel</button> &nbsp;
+    <button mat-button (click)="save()" class="btn btn-add">Save</button>
+</mat-dialog-actions>

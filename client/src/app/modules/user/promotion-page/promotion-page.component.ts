@@ -52,10 +52,21 @@ export class PromotionPageComponent implements OnInit {
     private categoriesStore: CategoriesStoreService,
     private sizesStore: SizesStoreService,
     private colorsStore: ColorsStoreService,
+    private promotionsStore: PromotionsStoreService,
     public dialog: MatDialog,
     private toastr: ToastrService) {
-      
         this.fetchData();
+        var dealDate = new Date('2023-02-01 00:00:00')
+    interval(1000).subscribe(x => {
+      var today = new Date()
+      var newTotalSecsLeft = dealDate.getTime() - today.getTime()
+      newTotalSecsLeft = Math.ceil(newTotalSecsLeft / 1000) 
+      
+      this.days = (Math.floor(newTotalSecsLeft / 60 / 60 / 24)).toString()
+      this.hours = (Math.floor(newTotalSecsLeft / 60 / 60) % 24).toString()
+      this.minutes = (Math.floor(newTotalSecsLeft / 60) % 60).toString()
+      this.seconds = (Math.floor(newTotalSecsLeft) % 60).toString()
+    });
       
   }
 
@@ -70,6 +81,7 @@ export class PromotionPageComponent implements OnInit {
 
   fetchData() {
     this.productsStore.getProductsSaleOffForClientPage(this.filter);
+    this.promotionsStore.getPromotionsEffective();
   }
 
   sort() {
@@ -144,7 +156,6 @@ export class PromotionPageComponent implements OnInit {
 
   addToCart(product) {
     console.log(product.id);
-    
     this.dialog.open(ProductAddCartFormComponent, {
       width: '800px',
       data: { 
@@ -154,5 +165,4 @@ export class PromotionPageComponent implements OnInit {
       }
     });
   }
-
 }

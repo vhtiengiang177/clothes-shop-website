@@ -1,11 +1,11 @@
 export interface Review {
     idProduct: number,
-    idUser: number,
+    idUser?: number,
     idOrder: number,
     comment: string,
     rating: number,
-    date: Date,
-    image:string,
-    lastName: string,
-    firstName: string
+    date?: Date,
+    image?:string,
+    lastName?: string,
+    firstName?: string
 }

@@ -85,6 +85,8 @@ import { PromotionProductComponent } from './modules/admin/promotions/promotion-
 import { SearchProductPromotionComponent } from './modules/admin/promotions/search-product-promotion/search-product-promotion.component';
 import { FavoriteComponent } from './modules/user/my-account/favorite/favorite.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ReviewPageComponent } from './modules/user/review-page/review-page/review-page.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
  
  
 let config = new AuthServiceConfig([
@@ -177,7 +179,8 @@ export function provideConfig() {
     CustomerDetailFormComponent,
     PromotionProductComponent,
     SearchProductPromotionComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ReviewPageComponent
   ],
   entryComponents: [
     ProductFormComponent,
@@ -193,7 +196,9 @@ export function provideConfig() {
     ImagesProductFormComponent,
     OrdersDetailFormComponent,
     OrderDetailUserFormComponent,
-    CustomerDetailFormComponent
+    CustomerDetailFormComponent,
+    ReviewPageComponent
+
   ],
   imports: [
     BrowserModule,
@@ -209,7 +214,8 @@ export function provideConfig() {
     IvyCarouselModule,
     NgChartsModule,
     SocialLoginModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatCheckboxModule 
   ],
   exports: [
 

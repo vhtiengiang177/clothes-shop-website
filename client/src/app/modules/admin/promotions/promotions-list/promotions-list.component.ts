@@ -179,8 +179,6 @@ export class PromotionsListComponent implements OnInit {
     }
   }
 
-  
-
   deletePromotion(idPromotion) {
     const dialogRef = this.dialog.open(ConfirmFormComponent, {
       data: {

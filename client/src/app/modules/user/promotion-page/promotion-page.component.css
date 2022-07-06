@@ -1,74 +1,76 @@
-.name-item {
-    font-weight: bold;
-    padding-top: 5px;
-}
+.column {
+	float: left;
+	padding: 10px;
+	height: 125px;
+  }
+  
+.right {
+	width: 130px;
+  }
 
-.stock {
-    font-size: small;
-    font-style: italic;
-}
-
-.table-promotion {
-    padding: 20px;
-}
-
-.set-poster1 {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: top center;
-	background-image: url("../../../../assets/img/poster3.gif");
-}
-
-.set-poster2 {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: top center;
-	background-image: url("../../../../assets/img/poster2.gif");
-}
-
-.hero-items {
-    height: 725px;
-}
-
-.owl-carousel1 {
-    display: flex;
-}
-
-.owl-carousel {
-    display: unset !important;
-}
-
-.product-item {
-    margin: 10px;
-	overflow: visible;
-}
-
-.primary-btn-custom {
-	display: inline-block;
-	font-size: 14px;
-	font-weight: 700;
-	padding: 12px 30px;
-	color: #ffffff;
-	background: #e7ab3c;
-	text-transform: uppercase;
-    border: none;
-}
-
-.btn-shop-now {
-    text-align: end;
-}
-
-.category-menu {
-    justify-content: center;
-}
-
-.image-category {
+  .left{
+	width: 130px;
+	border-right: 3px dotted gray;
+  }
+  
+  .middle {
+	width: 260px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+	content: "";
+	display: table;
+	clear: both;
 	width: 100px;
-	height: 100px;
-	object-fit: scale-down;
+  }
+
+  .logo-img{
+	width: 80px;
+	object-fit: cover;
+  }
+
+  .voucher{
+	margin: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+	height: 135px;
+  }
+
+  .review{
+	height: 50px;
+  }
+  
+  .img-product{
+	float: left;
+	height: 50px;
+	width: 50px;
+  }
+
+  .info-product{
+	float: left;
+	height: 30px;
+	width: 500px;
+  }
+
+  .using{
+	color: blue;
+	cursor: pointer;
+  }
+  * {
+	box-sizing: border-box;
+  }
+  .custome-search-client {
+    padding-bottom: 30px;
 }
 
-.ribbon-wrapper {
+.div-reset {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px;
+    padding-right: 30px;
+  }
+
+  .ribbon-wrapper {
 	width: 85px;
 	height: 88px;
 	overflow: hidden;
@@ -89,10 +91,10 @@
 	  top: 15px;
 	  left: -30px;
 	  width: 120px;
-	  background-color:#ff0004;
+	  background-color: #ff0004;
 	  color: #fff;
 	}
-	
+
 	.img-heart-2 {
 		width: 58px;
 		height: 58px;

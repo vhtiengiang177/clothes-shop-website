@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { GlobalConstants } from 'src/app/_shared/constant/global-constant';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { Review } from '../../model/review/review.model';
 import { DataService } from '../data.service'
 
 @Injectable({
@@ -21,6 +22,13 @@ export class ReviewService extends DataService{
     return this.http.put(GlobalConstants.apiUrl + "/promotions" + "/DeletePromotion/" + promotionId, promotionId,
     {
       headers: this.authorizationHeader()
+    })
+  }
+
+  addReview(review: Review){
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddReview",review,
+    {
+       headers: this.authorizationHeader()
     })
   }
 

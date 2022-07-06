@@ -85,4 +85,15 @@ export class PromotionsStoreService {
     return this.promotionService.deleteApplyPromotion(idProduct)
   }
 
+  applyAllProductPromotion(params){
+    return this.promotionService.applyPromotionForAllProduct(params)
+  }
+
+  deletePromotionForAllProduct(idPromotion) {
+    return this.promotionService.deletePromotionForAllProduct(idPromotion)
+  }
+
+  getPromotionsEffective(){
+    return this.promotionService.getPromotionsEffective()
+  }
 }

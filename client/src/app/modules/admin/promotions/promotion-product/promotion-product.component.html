@@ -23,12 +23,12 @@
       &nbsp;
       <button 
       mat-raised-button 
-      (click)="addProduct()"
+      (click)="applyAllOroductPromotion()"
       class="btn btn-success button-action">Apply All</button>
       &nbsp;
       <button 
       mat-raised-button 
-      (click)="addProduct()"
+      (click)="deletePromotionForAllProduct(promotion.id)"
       class="btn btn-danger button-action">Delete All</button>
       <!-- <button *ngIf="this.product.idPromotion != promotion.id" type="button" class="btn btn-success button-action" (click)="applyPromotion(product.id)">Apply</button>
       <button *ngIf="this.product.idPromotion === promotion.id" type="button" class="btn btn-danger button-action" (click)="deleteApplyPromotion(product.id)">Delete</button> -->
@@ -61,19 +61,6 @@
             <fa *ngIf="filter.sort == 'name:desc'" name="sort-down"></fa>
             <fa *ngIf="filter.sort == 'name:asc'" name="sort-up"></fa>
           </th>
-          <!-- <th (click)="sortName()">Name
-            <fa *ngIf="filter.sort == 'name:desc'" name="sort-down"></fa>
-            <fa *ngIf="filter.sort == 'name:asc'" name="sort-up"></fa>
-          </th> -->
-          <!-- <th (click)="sortTotalBuy()">Total Buy
-            <fa *ngIf="filter.sort == 'totalbuy:desc'" name="sort-down"></fa>
-            <fa *ngIf="filter.sort == 'totalbuy:asc'" name="sort-up"></fa>
-          </th>
-          <th (click)="sortPrice()">Price
-            <fa *ngIf="filter.sort == 'price:desc'" name="sort-down"></fa>
-            <fa *ngIf="filter.sort == 'price:asc'" name="sort-up"></fa>
-          </th> -->
-          <th>Note</th>
           <th colspan="2">Action</th>
         </tr>
       </thead>
@@ -82,17 +69,6 @@
           <td>{{ product.id }}</td>
           <td>{{ product.sku }}</td>
           <td>{{ product.name }}</td>
-          <!-- <td>{{ product.totalBuy }}</td>
-          <!-- <td>{{ product.createdDate |  date: 'dd/MM/yyyy' }}</td> -->
-          <!-- <td>{{ product.unitPrice |  currency: 'VND' }}</td> --> 
-          <!-- <td (click)="editProduct(product.id)" class="action-add-product-promotion">Apply</td> -->
-          <!-- <td (click)="deleteProduct(product.id)" class="action-delete-product-promotion">Delete</td> -->
-          <!-- <td *ngIf="this.product.idPromotion != promotion.id && !!this.product.idPromotion; else blank">Applied another promotion</td>
-          <td #blank></td> -->
-
-          <!-- <td *ngIf="this.product.idPromotion">Applied another promotion</td>
-          <td *ngIf="this.product.idPromotion === promotion.id || !this.product.idPromotion"></td> -->
-          <td></td>
           <button *ngIf="this.product.idPromotion != promotion.id" type="button" class="btn btn-success button-action" (click)="applyPromotion(product.id)">Apply</button>
           <button *ngIf="this.product.idPromotion === promotion.id" type="button" class="btn btn-danger button-action" (click)="deleteApplyPromotion(product.id)">Delete</button>
         </tr>

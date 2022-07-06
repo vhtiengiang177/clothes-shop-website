@@ -28,7 +28,6 @@
                             <td >{{ item.totalQuantity }}</td>
                             <td>{{ item.totalAmount | currency: 'VND'}}</td>
                             <td><button (click)="viewDetailOrder(item.id)" type="button" class="btn btn-info button-action">Detail</button></td>&nbsp;&nbsp;
-                            <td><button (click)="viewDetailOrder(item.id)" type="button" class="btn btn-success">Review</button></td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="ordersCompletedStore.orders.length == 0">

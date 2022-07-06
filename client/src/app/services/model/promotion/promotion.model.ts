@@ -11,5 +11,6 @@ export interface Promotion {
     createdById: number,
     modifiedById: number,
     staffCreate: string,
-    staffModify: string
+    staffModify: string,
+    
 }

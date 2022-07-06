@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { OrdersCompletedStoreService } from 'src/app/services/store/orders-completed-store/orders-completed-store.service';
+import { ReviewPageComponent } from '../../review-page/review-page/review-page.component';
 import { OrderDetailUserFormComponent } from '../order-detail-user-form/order-detail-user-form.component';
 
 @Component({
@@ -24,7 +25,16 @@ export class OrdersCompletedComponent implements OnInit {
 
   viewDetailOrder(idOrder) {
     const dialogRef = this.dialog.open(OrderDetailUserFormComponent, {
-      width: '800px',
+      width: '1000px',
+      data: { 
+       idOrder: idOrder
+      }
+    });
+  }
+
+  reviewOrder(idOrder) {
+    const dialogRef = this.dialog.open(ReviewPageComponent, {
+      width: '650px',
       data: { 
        idOrder: idOrder
       }
