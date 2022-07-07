@@ -23,6 +23,7 @@ export class MyAccountPageComponent implements OnInit {
   clickAddress: boolean = false
   clickChangePass: boolean = false
   clickFavorite: boolean = false
+  isImageLoading: boolean = false
 
   constructor(private route: ActivatedRoute,
     private authService: AuthAppService, 
@@ -54,7 +55,16 @@ export class MyAccountPageComponent implements OnInit {
     })
 
     sharedService.changeEmitted$.subscribe(res => {
-      this.imageUrl = res
+      console.log(res)
+      if (res == true) {
+        this.isImageLoading = true
+      }
+      else {
+        accountService.getAccountInfo(authService.getCurrentUser().id).subscribe(res => {
+          this.imageUrl = res.image
+          this.isImageLoading = false
+        })
+      }
     })
   }
 

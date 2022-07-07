@@ -21,7 +21,7 @@ import { ProductAddCartFormComponent } from '../product-add-cart-form/product-ad
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-export class ProductPageComponent implements OnInit {
+export class ProductPageComponent {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsProduct = {
     pageindex: 1,
@@ -50,11 +50,7 @@ export class ProductPageComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrService) {
       this.productsStore.productsList = []
-      this.fetchData("equal")
-      
-  }
-
-  ngOnInit() {
+      this.fetchData()
   }
 
   // onPaginate(pageEvent: PageEvent) {
@@ -87,7 +83,9 @@ export class ProductPageComponent implements OnInit {
       this.categoriesOptions.push(value)
       this.filter.idcategories.push(value.id)
       this.filter.pageindex = 1
-      this.paginator.pageIndex = 0;
+      // this.paginator.pageIndex = 0;
+      console.log("get product by category ")
+      console.log(this.filter)
       this.fetchData()
     }
   }
@@ -99,7 +97,7 @@ export class ProductPageComponent implements OnInit {
       this.categoriesOptions.splice(index, 1);
       this.filter.idcategories.splice(index, 1);
       this.filter.pageindex = 1
-      this.paginator.pageIndex = 0;
+      // this.paginator.pageIndex = 0;
       this.fetchData()
     }
   }
@@ -116,7 +114,7 @@ export class ProductPageComponent implements OnInit {
         this.filter.minprice = this.minPrice
         this.filter.maxprice = this.maxPrice
         this.filter.pageindex = 1
-        this.paginator.pageIndex = 0;
+        // this.paginator.pageIndex = 0;
         this.fetchData()
       }
       else this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
@@ -127,7 +125,7 @@ export class ProductPageComponent implements OnInit {
     this.filter.pageindex = 1
     this.filter.content = value
 
-    this.paginator.pageIndex = 0;
+    // this.paginator.pageIndex = 0;
 
     this.fetchData()
   }
@@ -141,7 +139,8 @@ export class ProductPageComponent implements OnInit {
       pagesize: this.filter.pagesize,
       sort: this.filter.sort
     }
-    this.paginator.pageIndex = 0;
+    this.filter.content = null
+    // this.paginator.pageIndex = 0;
     this.fetchData()
   }
 
@@ -165,14 +164,14 @@ export class ProductPageComponent implements OnInit {
     if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
       if (state === 1){
         this.favoriteService.deleteItemInFavorite(product.id).subscribe(() => {
-          this.productsStore.products.find(p=>p.id === product.id).isFavorite = false
+          this.productsStore.productsList.find(p=>p.id === product.id).isFavorite = false
           this.fetchFavorite();
         }, (e: HttpErrorResponse) => {
           if (e.status == 400)
             this.toastr.error(e.error)
         })} else{
           this.favoriteService.addItemInFavorite(product.id).subscribe(() => {
-            this.productsStore.products.find(p=>p.id === product.id).isFavorite = true
+            this.productsStore.productsList.find(p=>p.id === product.id).isFavorite = true
             this.fetchFavorite();
           }, (e: HttpErrorResponse) => {
             if (e.status == 400)
@@ -182,7 +181,6 @@ export class ProductPageComponent implements OnInit {
          
     }
   }
-
   
   onScrollDown(ev) {
     console.log("scrolled down!!", ev);
