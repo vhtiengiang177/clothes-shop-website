@@ -1,4 +1,5 @@
-﻿using clothing_shop_website.Model;
+﻿using clothing_shop_website.Interface;
+using clothing_shop_website.Model;
 using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
@@ -20,11 +21,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private PromotionsService _promotionsService;
+        private IImageService _imageService;
 
-        public PromotionsController(DataDbContext dbContext, PromotionsService promotionsService)
+        public PromotionsController(DataDbContext dbContext, PromotionsService promotionsService, IImageService imageService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _promotionsService = promotionsService;
+            _imageService = imageService;
         }
 
         [HttpGet("GetAllPromotions")]
@@ -50,6 +53,26 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 };
 
                 return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+
+        [HttpGet("GetAllPromotionsNotFilter")]
+        public async Task<IActionResult> GetAllPromotionsNotFilter()
+        {
+            try
+            {
+
+                IQueryable<Promotion> lPromotionItems;
+
+                lPromotionItems = await _unitOfWork.PromotionsRepository.GetAllPromotions();
+
+                return Ok(lPromotionItems);
             }
             catch
             {
@@ -125,6 +148,11 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 Promotion result = new Promotion();
 
+                if (promotion.IsMainBanner == 1)
+                {
+                    _unitOfWork.PromotionsRepository.RemoveOldMainBanner(promotion.Id);
+                }
+
                 if (oldPromotion != null)
                 {
                     oldPromotion.Name = promotion.Name;
@@ -135,6 +163,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     oldPromotion.EndDate = promotion.EndDate;
                     oldPromotion.CreatedById = promotion.CreatedById;
                     oldPromotion.CreatedDate = promotion.CreatedDate;
+                    oldPromotion.IsMainBanner = promotion.IsMainBanner;
                     oldPromotion.LastModified = null;
                     oldPromotion.ModifiedById = null;
 
@@ -170,6 +199,11 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                     promotion.ModifiedById = int.Parse(userId);
                     promotion.LastModified = DateTime.Now;
+
+                    if (promotion.IsMainBanner == 1)
+                    {
+                        _unitOfWork.PromotionsRepository.RemoveOldMainBanner(promotion.Id);
+                    }    
 
                     _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
                     if (_unitOfWork.Save())
@@ -274,8 +308,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var userId = User.FindFirst("id").Value;
-                //if (userId == null) return BadRequest();
+                var userId = User.FindFirst("id").Value;
+                if (userId == null) return BadRequest();
 
                 IQueryable<Product> lProductItems;
 
@@ -293,7 +327,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
                 foreach (Product product in lProductItems)
                 {
-                    //product.ModifiedById = int.Parse(userId);
+                    product.ModifiedById = int.Parse(userId);
                     product.LastModified = DateTime.Now;
                     product.idPromotion = filterParams.IdPromotion;
                     _unitOfWork.ProductsRepository.UpdateProduct(product);
@@ -327,6 +361,33 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return Ok();
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpPost("AddImagePromotion/{idPromotion}")]
+        public async Task<IActionResult> AddImagePromotion(IFormFile file,int idPromotion)
+        {
+           
+                var promotion = _unitOfWork.PromotionsRepository.GetPromotionByID(idPromotion);
+
+                var result = await _imageService.AddImageAsync(file);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+
+                if (!string.IsNullOrEmpty(promotion.PublicId))
+                {
+                    var resultDelete = await _imageService.DeleteImageAsync(promotion.PublicId);
+                    if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
+                }
+
+                promotion.Image = result.SecureUrl.AbsoluteUri;
+                promotion.PublicId = result.PublicId;
+
+                    _unitOfWork.PromotionsRepository.UpdatePromotion(promotion);
+
+                if (_unitOfWork.Save())
+                    return Ok(promotion.Image);
+            
+
+            return BadRequest("Something went wrong!");
         }
 
     }

@@ -87,11 +87,7 @@ export class ProductDetailPageComponent implements OnInit {
           ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory)[0].name : ""
         this.fetchItem()
         this.getImages(this.product.id)
-        // this.productSizeColorsStore.productitems$.subscribe(res => {
-        //   if (res) {
-        //     this.getNameSizeColor()
-        //   }
-        // })
+        
         this.isVisible = true
         this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
           if (res.length != 0){
@@ -103,15 +99,14 @@ export class ProductDetailPageComponent implements OnInit {
           if (res.length != 0){
             this.listReviews = res
             this.listReviews.forEach(item => {
-              item.image = this.customerStore.customer.filter(s => s.idAccount == item.idUser).length > 0
-                ? this.customerStore.customer.filter(s => s.idAccount == item.idUser)[0].image : ""
-            
-            this.customerStore.getCustomerById(item.idUser).subscribe(customer => {
-                  if (customer) {
-                    item.lastName =  customer.firstName + " "
-                    item.firstName = customer.lastName
-                  }
-                })
+              this.customerStore.getCustomerById(item.idUser).subscribe(customer => {
+                    if (customer) {
+                      item.lastName =  customer.firstName + " "
+                      item.firstName = customer.lastName
+                      item.image = customer.image;
+                      console.log('customer:',customer)
+                    }
+                  })
             })
           }
         });

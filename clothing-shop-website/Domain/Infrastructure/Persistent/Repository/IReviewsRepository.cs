@@ -14,5 +14,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Task<IQueryable<Review>> GetReviews();
         int GetCountReview(int idProduct);
         int GetAvgRating(int idProduct);
+        Task<IQueryable<Review>> GetReviewsByIdOrder(int orderId);
     }
 }

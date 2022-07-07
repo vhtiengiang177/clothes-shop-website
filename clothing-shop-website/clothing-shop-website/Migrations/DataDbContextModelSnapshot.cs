@@ -803,6 +803,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<int?>("IdStaff")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsFeedback")
+                        .HasColumnType("bit");
+
                     b.Property<int>("State")
                         .HasColumnType("int");
 
@@ -1293,6 +1296,9 @@ namespace clothing_shop_website.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IsMainBanner")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -1330,6 +1336,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "MEGA SALE 31-12",
                             EndDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsMainBanner = 0,
                             Name = "NEWYEAR3112",
                             StartDate = new DateTime(2021, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
@@ -1342,6 +1349,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Women's Day 8-3",
                             EndDate = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsMainBanner = 0,
                             Name = "WOMANDAY",
                             StartDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
@@ -1354,6 +1362,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tet Holiday 2022",
                             EndDate = new DateTime(2021, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsMainBanner = 0,
                             Name = "TET999",
                             StartDate = new DateTime(2022, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,
@@ -1366,6 +1375,7 @@ namespace clothing_shop_website.Migrations
                             CreatedDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Women Viet Nam 20-10-2021",
                             EndDate = new DateTime(2021, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsMainBanner = 0,
                             Name = "WOMANVN",
                             StartDate = new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             State = 1,

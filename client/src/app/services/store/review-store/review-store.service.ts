@@ -29,7 +29,6 @@ export class ReviewStoreService {
      private toastr: ToastrService) {
     if (this.reviews.length == 0) {
       let filter: FilterParamsPromotions = {};
-      this.customerService.getAllCustomer();
     }
    }
 
@@ -61,6 +60,4 @@ export class ReviewStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
-
-
 }

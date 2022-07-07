@@ -20,6 +20,7 @@ namespace Domain.Entity
         public int? ModifiedById { get; set; }
         public string? Image { get; set; }
         public string? PublicId { get; set; }
+        public int? IsMainBanner { get; set; } = 0; //0: img bình thường    1:img dùng làm banner
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }

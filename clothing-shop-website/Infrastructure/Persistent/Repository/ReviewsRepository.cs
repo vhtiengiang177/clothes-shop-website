@@ -22,6 +22,13 @@ namespace Infrastructure.Persistent.Repository
             return lReview.AsQueryable();
         }
 
+        public async Task<IQueryable<Review>> GetReviewsByIdOrder(int orderId)
+        {
+            var lReview = await _dbContext.Reviews.Where(p => p.IdOrder == orderId).ToListAsync();
+
+            return lReview.AsQueryable();
+        }
+
         public Review CreateReview(Review review)
         {
             var result = _dbContext.Reviews.Add(review);

@@ -68,5 +68,15 @@ namespace Infrastructure.Persistent.Repository
             return _dbContext.Promotions.FirstOrDefault(p => p.Name == Code && p.State == 0);
         }
 
+        public void RemoveOldMainBanner(int idPromotion)
+        {
+            Promotion promotion = _dbContext.Promotions.Where(p => p.IsMainBanner == 1 && p.Id !=  idPromotion).FirstOrDefault();
+            if (promotion != null)
+            {
+                promotion.IsMainBanner = 0;
+                UpdatePromotion(promotion);
+            }
+        }
+
     }
 }

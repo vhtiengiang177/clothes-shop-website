@@ -12,5 +12,6 @@ export interface Promotion {
     modifiedById: number,
     staffCreate: string,
     staffModify: string,
-    
+    image?: string,
+    isMainBanner: number
 }

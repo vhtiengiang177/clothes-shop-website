@@ -1,40 +1,77 @@
-<h3>Order #{{ data.idOrder }}</h3>
+<h3 *ngIf="order.isFeedback === true">Product Customer Review Form 
+    <span class="state-done" >Done</span>
+</h3>
+<h3 *ngIf="order.isFeedback === false">Product Customer Review Form 
+    <span class="state-not-done" >Not Done</span>
+</h3>
+<p>Thank you for taking time to provide feedback. We appreciate hearing from you and will review your comments carefully.</p>
 <br/>
 <mat-dialog-content class="mat-typography">
-    <div class="checkout-form">
-        <div style="padding: 20px;">
-            <div class="row">
-                <div class="review">
-                    <div class="img-product" >
-                        <img  [src] = "imgProduct" alt="" style="width:50px;;">
-                    </div>
-                    <div class="info-product" >
-                        <h5 style="color: red;"> {{ this.description }} </h5>
-                        <h5>Total:  ₫2,000,000</h5>
-                    </div>
+    <div class="checkout-form" *ngFor="let product of lProduct;index as i">
+        <div class="review-form">
+            <div class="row" style="margin-top: 10px;margin-left: 10px;padding-top: 10px;">
+                <div class="img-product" >
+                        <img [src]="product.imageUrl" alt="" style="width:110px;;">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div style="width: 500px;" >
+                <div class=".info-review">
+                    <div>
+                        <h2 style="margin: 0px;"> <strong>{{product.name}} </strong></h2>
+                        <p style="font-size: 12px;margin: 0px;">Your current rating of this product*</p>
+                    </div>
+                    <div *ngIf="order.isFeedback === false" class="rating-form" >
                         <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block" >
-                          <li (click)="countStar(star)"
-                              [ngClass]="{'selected': (star <= selectedValue)}">
+                        <li  (click)="countStar(star,i)"
+                            [ngClass]="{'selected': (star <= selectedValueArr[i])}">
                             <i class="fa fa-star fa-2x"></i>
-                          </li> 
+                        </li> 
                         </ul>
                     </div>
+                    <div *ngIf="order.isFeedback === true" class="rating-form" >
+                        <ul class="list-inline rating-list-1" *ngFor="let star of stars" style="display: inline-block" >
+                        <li  
+                            [ngClass]="{'selected': (star <= selectedValueArr[i])}">
+                            <i class="fa fa-star fa-2x"></i>
+                        </li> 
+                        </ul>
+                    </div>
+                    <textarea *ngIf="order.isFeedback === false"  placeholder="Write your review..." [(ngModel)]="commentArr[i]" matInput class="area-form"></textarea>
+                    <textarea *ngIf="order.isFeedback === true" disabled [(ngModel)]="commentArr[i]" matInput class="area-form"></textarea>
                 </div>
-            </div>
-            <div class="row">
-                <textarea [(ngModel)]="review.comment" matInput style="width: 500px;"></textarea>
-                <br>
             </div>
             <br>
         </div>
+
+        <!-- <div class="review-form"">
+            <div class="column left" >
+                <img [src]="product.imageUrl" alt="" style="width:100px;;">
+            </div>
+            <div class="column middle" >
+                <div class="info-product" >
+                    <h5 style="color: red;"> {{product.name}} </h5>
+                </div>
+                <div class="row" style="margin-top: 10px;margin-left: 10px;">
+                    <div class="col-sm-12">
+                        <div style="width: 500px;text-align: center;" >
+                            <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block" >
+                              <li (click)="countStar(star,i)"
+                                  [ngClass]="{'selected': (star <= selectedValueArr[i])}">
+                                <i class="fa fa-star fa-2x"></i>
+                              </li> 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;margin-left: 10px;">
+                    <textarea [(ngModel)]="commentArr[i]" matInput style="width: 500px;"></textarea>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+        </div> -->
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close cdkFocusInitial class="btn btn-cancel">Cancel</button> &nbsp;
-    <button mat-button (click)="save()" class="btn btn-add">Save</button>
+    <button *ngIf="order.isFeedback === false" mat-button (click)="save()" class="btn btn-success button-action">Submit</button>
 </mat-dialog-actions>

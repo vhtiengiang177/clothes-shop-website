@@ -22,7 +22,7 @@
                                     <li class="background-heart-item"><button class="btn-heart"><i (click)="deleteFavorite(product.id)" class="fa fa-heart heart-icon" aria-hidden="true"></i></button></li>
                                 </ul>
                                 <div *ngIf="product.idPromotion" class="ribbon-wrapper">
-                                    <div class="ribbon">SALE</div>
+                                    <div class="ribbon">Sale Off</div>
                                   </div>
                             </div>
                             <div [routerLink]="['/product-detail', product.id]" class="pi-text">

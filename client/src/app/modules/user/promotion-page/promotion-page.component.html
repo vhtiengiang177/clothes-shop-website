@@ -1,41 +1,62 @@
 <section class="hero-section">
-    <carousel 
-        cellsToShow="1"
-        loop="true"
-        autoplay="true"
-        autoplayInterval="4000"
-        height="500"
-        cellWidth="90%"
-        [images]="images">
-    </carousel>
+    <!-- <img  src="assets/banner-summer-sale.png" alt="" style="width:100%;;"> -->
+    <img  [src]="imgPromotionBanner" alt="" style="width:100%;;">
 </section>
-<section class="product-shop spad page-details">
-    <div style="text-align: center;"><h3><strong>List Voucher</strong> </h3></div>
-    <div class="container">
-        <div class="row">
-            <div *ngFor="let promotion of promotionsStore.promotions$ | async">
+<section class="product-shop spad page-details" >
+    <div style="text-align: center;margin:10px;">
+        <h3><strong>List Voucher</strong></h3>
+    </div>
+    <div class="container" >
+        <div class="row" >
+            <div *ngFor="let promotion of lPromotion">
                 <div class="voucher" *ngIf = "promotion.state == 3">
                     <div class="column left" >
                         <img  src="assets/voucher-1.png" alt="" style="width:100px;;">
                     </div>
                     <div class="column middle" >
-                        <h5 style="padding-bottom: 5px;"><strong>{{promotion.name}}</strong></h5>
-                        <h6 style="padding-bottom: 5px;">{{promotion.description}}</h6>
-                        <p style="color: red;">HSD: {{promotion.endDate |  date: 'dd/MM/yyyy'}}</p>
+                        <h5 style="padding-bottom: 5px;"><strong>CODE: {{promotion.name}}
+                             <span style="color: white;background-color: rgb(34, 189, 34); border-radius: 10px;border-color: aliceblue;padding: 2px;margin: 2px;font-size: 12px;">Valid</span></strong>
+                        </h5> 
+                       
+                        <h6>{{promotion.description}}</h6>
+                        <p style="color: red; font-size: 13px;"><strong>Expires: {{promotion.startDate |  date: 'dd/MM/yyyy'}} - {{promotion.endDate |  date: 'dd/MM/yyyy'}}</strong></p>
                     </div>
                     <div class="column right">
-                          <h6 class="using" [routerLink]="['/products']">Shopping now</h6>
-                        <br>
-                        <br>
-                        <p style="color: red;">Available</p>
+                          <div  style="float: right;"><i style="font-size:36px;cursor: pointer" class="fa fa-shopping-cart" [routerLink]="['/products']"></i></div>
                     </div>
                     <br>
                 </div>
             </div>
+            
+        </div>
+        <div *ngIf = "countVoucher == 0" style="display: flex;justify-content: center;" class="row">
+            <img  src="assets\paty.png" alt="" style="width:600px;height: auto;float: center;">
         </div>
     </div>
 </section>
-<section>
+<section style="margin:10px;">
+    <div  style="text-align: center;margin:10px;"><h3><strong>Promotions For You</strong> </h3></div>
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let promotion of promotionsStore.promotions$ | async">
+                <div *ngIf = "promotion.state == 2" style="margin:20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);">
+                    <div style="width:500px;height: 250px;">
+                        <img  [src]="promotion.image" alt="" style="width:500px;height: 250px;">
+                        <br>
+                    </div>
+                    <h4 style="margin: 10px;text-align: center;"><b>{{promotion.name}}</b></h4>
+                    <h6 style="margin: 5px;text-align: center;">{{promotion.description}}</h6>
+                    <p style="color: red; margin: 5px;text-align: center;"><strong> Expires: {{promotion.startDate |  date: 'dd/MM/yyyy'}} - {{promotion.endDate |  date: 'dd/MM/yyyy'}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf = "countPromotion == 0" style="display: flex;justify-content: center;" class="row">
+            <img  src="assets\not-found-promotion.png" alt="" style="width:600px;height: auto;float: center;">
+        </div>
+    </div>
+</section>
+
+<!-- <section>
     <div class="container">
         <div style="text-align: center;"><h3><strong>Products Sale</strong> </h3></div>
         <div class="product-list">
@@ -52,9 +73,6 @@
                             <div *ngIf="product.idPromotion" class="ribbon-wrapper">
                                 <div class="ribbon">SALE</div>
                               </div>
-                              <!-- <div class="icon">
-                                 <a href="#" class="heart-icon"> <fa name="heart-o"></fa></a> 
-                            </div> -->
                         </div>
                         <div [routerLink]="['/product-detail', product.id]" class="pi-text">
                             <div class="catagory-name">{{product.category}}</div>
@@ -75,4 +93,4 @@
         </div>
     </div>
     
-</section>
+</section> -->

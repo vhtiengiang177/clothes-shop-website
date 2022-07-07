@@ -18,5 +18,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         Promotion GetPromotionInactiveByCode(string Code);
         Task<IQueryable<Product>> GetProductByIdPromotion(int idPromotion);
         Task<IQueryable<Promotion>> GetPromotionsNotEffective();
+        void RemoveOldMainBanner(int idPromotion);
     }
 }

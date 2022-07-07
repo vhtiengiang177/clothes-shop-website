@@ -1,3 +1,4 @@
+import { PromotionService } from './../../../../services/data/promotion/promotion.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSelect, MAT_DIALOG_DATA } from '@angular/material';
@@ -40,28 +41,40 @@ export class PromotionFormComponent implements OnInit {
   });
 
   hideSelect = new FormControl(false);
-  checkHide: Boolean
+  typePromotion: Boolean
+  mainBanner: Boolean
+  messageErrorImage: string = ""
+  fileToUploadUpdate: File
+  oldImageUrl: string= "assets/No_image_available.png"
+  loading: boolean = false
+  imageUrl: string = "assets/No_image_available.png"
 
   constructor(public dialogRef: MatDialogRef<PromotionFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PromotionForm,
     private promotionsStore: PromotionsStoreService,
+    private promotionService: PromotionService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
       console.log(data);
-      this.checkHide = true
+      this.typePromotion = true 
       if (this.data.promotion.state !=2)
       {
-        this.checkHide = false
+        this.typePromotion = false
       }
-      
+
+      if (this.data.promotion.isMainBanner == 1){
+        this.mainBanner = true
+      }
 
       if(!this.data.promotion.startDate) {
         this.data.promotion.startDate = new Date();
       }
-  
       if(!this.data.promotion.endDate) {
         this.data.promotion.endDate = new Date();
         this.data.promotion.endDate.setDate(this.data.promotion.endDate.getDate() + 1);
+      }
+      if (this.data.promotion.image){
+        this.imageUrl = this.data.promotion.image;
       }
     }
 
@@ -70,14 +83,23 @@ export class PromotionFormComponent implements OnInit {
 
   save() {
     if (this.checkValidate()) {
-      if (this.checkHide == true) {
+      if (this.typePromotion == true) {
         this.data.promotion.state = 2
       }else{
         this.data.promotion.state = 3
       }
 
+      if (this.mainBanner == true) {
+        this.data.promotion.isMainBanner = 1
+      }else{
+        this.data.promotion.isMainBanner = 0
+      }
+
+
       if (this.data.typeform === 0) {
         this.promotionsStore.create(this.data.promotion).subscribe(res => {
+          if (this.oldImageUrl != this.imageUrl)
+              this.updateImage()
           this.dialogRef.close(res);
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -87,6 +109,8 @@ export class PromotionFormComponent implements OnInit {
       }
       else if (this.data.typeform === 1) {
         this.promotionsStore.update(this.data.promotion).subscribe(res => {
+          if (this.oldImageUrl != this.imageUrl)
+              this.updateImage()
           this.dialogRef.close(res)
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -119,4 +143,37 @@ export class PromotionFormComponent implements OnInit {
     }
   }
 
+  public uploadFile = (files) => {
+    if (files.length === 0)
+      return
+    let fileToUpload = <File>files[0];
+    if (fileToUpload.type != "image/jpeg" && fileToUpload.type != "image/png") {
+      this.messageErrorImage = "Invalid image file format"
+      return
+    }
+    this.messageErrorImage = ""
+    this.readFile(fileToUpload)
+    this.fileToUploadUpdate = fileToUpload
+  }
+
+  readFile(fileToUpload) {
+    var reader  = new FileReader()
+    reader.onload = (event: Event) => {
+      this.imageUrl = reader.result.toString()
+    }
+    reader.readAsDataURL(fileToUpload);
+  }
+
+  deleteImage() {
+    this.imageUrl = this.oldImageUrl
+    // SEND API DELETE IMAGE
+  }
+
+  updateImage() {
+    console.log(this.fileToUploadUpdate);
+    
+    const formData = new FormData();
+    formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
+    this.promotionService.addImagePromotion(formData,this.data.promotion.id).toPromise()
+  }
 }
