@@ -22,8 +22,8 @@ export class OrdersStoreService {
     this._orders.next(val);
   }
 
-  create(orderDetail, idAddress, idPromotion) {
-    return this.orderService.createOrder(orderDetail, idAddress, idPromotion)
+  create(orderDetail, idAddress, idPromotion, paymentMethod) {
+    return this.orderService.createOrder(orderDetail, idAddress, idPromotion, paymentMethod)
   }
 
   getEarningInDay() {
