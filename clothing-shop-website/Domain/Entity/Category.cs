@@ -12,6 +12,8 @@ namespace Domain.Entity
         public DateTime? LastModified { get; set; }
         public int CreatedById { get; set; }
         public int? ModifiedById { get; set; }
+        public string? Image { get; set; }
+        public string? PublicId { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

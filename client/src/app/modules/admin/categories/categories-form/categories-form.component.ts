@@ -12,6 +12,12 @@ import { CategoriesStoreService } from 'src/app/services/store/categories-store/
 })
 export class CategoriesFormComponent implements OnInit {
 
+  messageErrorImage: string = ""
+  fileToUploadUpdate: File
+  oldImageUrl: string= "assets/No_image_available.png"
+  loading: boolean = false
+  imageUrl: string = "assets/No_image_available.png"
+
   constructor(public dialogRef: MatDialogRef<CategoriesFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CategoryForm,
     private categoriesStore: CategoriesStoreService,
@@ -55,4 +61,38 @@ export class CategoriesFormComponent implements OnInit {
     }
     return true
   }
+  
+  public uploadFile = (files) => {
+    if (files.length === 0)
+      return
+    let fileToUpload = <File>files[0];
+    if (fileToUpload.type != "image/jpeg" && fileToUpload.type != "image/png") {
+      this.messageErrorImage = "Invalid image file format"
+      return
+    }
+    this.messageErrorImage = ""
+    this.readFile(fileToUpload)
+    this.fileToUploadUpdate = fileToUpload
+  }
+
+  readFile(fileToUpload) {
+    var reader  = new FileReader()
+    reader.onload = (event: Event) => {
+      this.imageUrl = reader.result.toString()
+    }
+    reader.readAsDataURL(fileToUpload);
+  }
+
+  deleteImage() {
+    this.imageUrl = this.oldImageUrl
+    // SEND API DELETE IMAGE
+  }
+
+  // updateImage() {
+  //   console.log(this.fileToUploadUpdate);
+    
+  //   const formData = new FormData();
+  //   formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
+  //   this.promotionService.addImagePromotion(formData,this.data.promotion.id).toPromise()
+  // }
 }

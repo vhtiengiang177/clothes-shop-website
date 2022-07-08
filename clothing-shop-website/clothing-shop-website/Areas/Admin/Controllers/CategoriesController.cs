@@ -1,4 +1,5 @@
-﻿using clothing_shop_website.Model;
+﻿using clothing_shop_website.Interface;
+using clothing_shop_website.Model;
 using clothing_shop_website.Services;
 using Domain.Entity;
 using Infrastructure.Persistent;
@@ -20,10 +21,12 @@ namespace clothing_shop_website.Areas.Admin.Controllers
     {
         private UnitOfWork _unitOfWork;
         private CategoriesService _categoriesService;
-        public CategoriesController(DataDbContext dbContext, CategoriesService categoriesService)
+        private IImageService _imageService;
+        public CategoriesController(DataDbContext dbContext, CategoriesService categoriesService, IImageService imageService)
         {
             _unitOfWork = new UnitOfWork(dbContext);
             _categoriesService = categoriesService;
+            _imageService = imageService;
         }
 
         [AllowAnonymous]
@@ -172,6 +175,32 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpPost("AddImageCategory/{idCategory}")]
+        public async Task<IActionResult> AddImageCategory(IFormFile file, int idCategory)
+        {
+
+            var category = _unitOfWork.CategoriesRepository.GetByID(idCategory);
+
+            var result = await _imageService.AddImageAsync(file);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            if (!string.IsNullOrEmpty(category.PublicId))
+            {
+                var resultDelete = await _imageService.DeleteImageAsync(category.PublicId);
+                if (resultDelete.Error != null) return BadRequest("Upload Image Failed");
+            }
+
+            category.Image = result.SecureUrl.AbsoluteUri;
+            category.PublicId = result.PublicId;
+
+            _unitOfWork.CategoriesRepository.Update(category);
+
+            if (_unitOfWork.Save())
+                return Ok(category.Image);
+
+            return BadRequest("Something went wrong!");
         }
 
     }
