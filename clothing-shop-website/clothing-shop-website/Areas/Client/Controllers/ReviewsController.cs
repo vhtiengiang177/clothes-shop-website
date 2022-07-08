@@ -1,6 +1,7 @@
 ﻿using Domain.Entity;
 using Infrastructure.Persistent;
 using Infrastructure.Persistent.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,6 +47,8 @@ namespace clothing_shop_website.Areas.Client.Controllers
                 var userId = User.FindFirst("id").Value;
                 if (userId == null) return BadRequest();
 
+                Customer customer = _unitOfWork.CustomersRepository.GetCustomerByID(int.Parse(userId));
+
                 review.IdUser = int.Parse(userId);
                 review.Date = DateTime.Now;
                 _unitOfWork.ReviewsRepository.CreateReview(review);
@@ -55,13 +58,27 @@ namespace clothing_shop_website.Areas.Client.Controllers
                 product.AvgRating = _unitOfWork.ReviewsRepository.GetAvgRating(review.IdProduct);
                 _unitOfWork.Save();
 
-                if (!_unitOfWork.Save())
-                {
-                    return BadRequest();
-                }
                 return Ok();
             }
             return BadRequest(ModelState);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetReviewsByidOrder/{idOrder}")]
+        public async Task<IActionResult> GetReviewsByidOrder(int idOrder)
+
+        {
+            IQueryable<Review> lReviews;
+            lReviews = await _unitOfWork.ReviewsRepository.GetReviewsByIdOrder(idOrder);
+
+            if (lReviews == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(lReviews);
+            }
         }
 
     }

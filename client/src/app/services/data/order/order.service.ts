@@ -122,4 +122,17 @@ export class OrderService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  updateFeedbackOrder(idOrder) {
+    return this.http.put(GlobalConstants.apiUrl + this.routeAPI + "/UpdateFeedbackOrder/" + idOrder,
+    {
+      headers: this.authorizationHeader()
+    })
+  }
+
+  getOrderById(idOrder) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetOrderByID/"+idOrder , {
+      headers: this.authorizationHeader()
+    })
+  }
 }

@@ -57,7 +57,21 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <mat-checkbox class="example-margin" [(ngModel)]="checkHide">Hide promotion in web client</mat-checkbox>
+            <mat-checkbox style="float: left;" class="example-margin" [(ngModel)]="typePromotion">Promotion</mat-checkbox>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;" *ngIf ="typePromotion === true">
+        <div class="col-8">
+            <figure>
+                <img class="img-responsive" [src]="imageUrl" style="width: 400px;height: 150px;margin-left: 20px;float: left;">
+                <!-- <img *ngIf="loading" class="loading" src="assets/loading.gif"> -->
+            </figure>
+        </div>
+        <div class="col-4" style="text-align: center;">
+                <mat-checkbox style="float: left;margin-left: 15px;" class="example-margin" [(ngModel)]="mainBanner">Main Banner</mat-checkbox>
+                <input type="file" #file (change)="uploadFile(file.files)" class="file-uploader pull-left" style="display:none;">
+                <button matTooltip="Allowed file extensions: .jpg, .png" matTooltipPosition="below" type="button" (click)="file.click()" style="font-size: 15px;float: left;" class="btn btn-add">Choose Image</button>
+                <span class="required">&nbsp; &nbsp;{{ messageErrorImage }}</span>
         </div>
     </div>
 </mat-dialog-content>

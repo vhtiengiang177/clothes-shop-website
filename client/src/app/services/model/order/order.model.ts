@@ -21,5 +21,6 @@ export interface Order {
     promotion?: string,
     delivery?: string,
     cancelBy?: number,
-    cancelByName?: string
+    cancelByName?: string,
+    isFeedback?: boolean
 }

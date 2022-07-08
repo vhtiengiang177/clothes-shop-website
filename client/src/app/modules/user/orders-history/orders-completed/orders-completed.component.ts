@@ -32,12 +32,30 @@ export class OrdersCompletedComponent implements OnInit {
     });
   }
 
+  // reviewOrder(item: OrderDetail) {
+  //   this.reviewStore.getReviewsOfProduct(item.idProduct);
+  //   this.review = this.reviewStore.reviews.find(x=>x.idOrder == item.idOrder && x.idProduct == item.idProduct);
+  //   if (this.order.state == 5 && this.review==null){
+  //     const dialogRef = this.dialog.open(ReviewPageComponent, {
+  //       width: '650px',
+  //       data: { 
+  //        idOrder: item.idOrder,
+  //        idProduct: item.idProduct,
+  //        descriptionDetailOrder: item.product + 'x' + item.quantity + item.size + item.color+ 'Total:'+ item.quantity * item.unitPrice + 'VND'
+  //       }
+  //     });
+  //   }
+  // }
+
   reviewOrder(idOrder) {
-    const dialogRef = this.dialog.open(ReviewPageComponent, {
-      width: '650px',
-      data: { 
-       idOrder: idOrder
-      }
-    });
+      const dialogRef = this.dialog.open(ReviewPageComponent, {
+        width: '700px',
+
+        data: { 
+         idOrder: idOrder,
+         idProduct: '',
+         descriptionDetailOrder: ''
+        }
+      });
   }
 }

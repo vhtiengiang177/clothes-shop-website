@@ -24,6 +24,7 @@ namespace Domain.Entity
         public int? IdStaff { get; set; }
         public int? IdShipper { get; set; }
         public int? CancelBy { get; set; }
+        public bool? IsFeedback { get; set; } = false;
 
         public DeliveryAddress DeliveryAddress { get; set; }
         public Customer Customer { get; set; }

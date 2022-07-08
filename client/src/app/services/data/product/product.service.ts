@@ -159,4 +159,15 @@ export class ProductService extends DataService {
 
     return query;
   }
+
+  getProductsByIdOrder(idOrder) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetProductsByIdOrder/" + idOrder, {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
 }

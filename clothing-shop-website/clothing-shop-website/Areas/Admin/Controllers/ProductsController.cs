@@ -550,5 +550,21 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
             else return BadRequest("Failed to delete image");
         }
+
+        [AllowAnonymous]
+        [HttpGet("GetProductsByIdOrder/{idOrder}")]
+        public async Task<IActionResult> GetProductsByIdOrder(int idOrder)
+        {
+            try
+            {
+                IQueryable<Product> lProducts;
+                lProducts = await _unitOfWork.ProductsRepository.GetProductsByIdOrder(idOrder);
+                return Ok(lProducts);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }

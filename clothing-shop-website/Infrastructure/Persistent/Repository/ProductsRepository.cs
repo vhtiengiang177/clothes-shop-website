@@ -117,6 +117,24 @@ namespace Infrastructure.Persistent.Repository
             return lProduct.AsQueryable();
         }
 
-
+        public async Task<IQueryable<Product>> GetProductsByIdOrder(int idOrder)
+        {
+            List<Product> lProduct = new List<Product>();
+            var lOrderDetail = await _dbContext.OrderDetails.Where(p => p.IdOrder == idOrder).ToListAsync();
+            foreach(var item in lOrderDetail)
+            {
+                int count = 0;
+                if (lProduct.Count() > 0)
+                {
+                    count = lProduct.Where(p => p.Id == item.IdProduct).Count();
+                }    
+                if (count == 0)
+                {
+                    Product productItem = _dbContext.Products.Where(p => p.Id == item.IdProduct).FirstOrDefault();
+                    lProduct.Add(productItem);
+                }    
+            }    
+            return lProduct.AsQueryable();
+        }
     }
 }

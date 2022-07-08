@@ -101,4 +101,26 @@ export class PromotionService extends DataService{
         return throwError(new AppError(error))
       }))
   }
+
+  addImagePromotion(file,idPromotion) {
+    let headers = this.authorizationHeader()
+    headers = headers.append('Content-Disposition', 'mulipart/form-data');
+
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImagePromotion/"+idPromotion, file, {
+      headers: headers,
+      responseType: "text"
+    })
+  }
+
+  getAllPromotions(){
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetAllPromotionsNotFilter" ,
+    {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
 }

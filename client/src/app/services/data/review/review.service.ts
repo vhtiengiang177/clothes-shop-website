@@ -52,4 +52,11 @@ export class ReviewService extends DataService{
       headers: this.authorizationHeader()
     })
   }
+
+  getReviewByOrder(idOrder) {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetReviewsByidOrder/"+idOrder,
+    {
+      headers: this.authorizationHeader()
+    })
+  }
 }

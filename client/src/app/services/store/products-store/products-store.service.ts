@@ -265,6 +265,4 @@ export class ProductsStoreService {
           else this.toastr.error("An unexpected error occurred.")
         });
   }
-
-  
 }

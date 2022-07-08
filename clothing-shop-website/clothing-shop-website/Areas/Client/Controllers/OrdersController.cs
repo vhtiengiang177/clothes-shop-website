@@ -579,6 +579,36 @@ namespace clothing_shop_website.Areas.Client
                 return BadRequest();
             }
         }
+
+        [AllowAnonymous]
+        [HttpPut("UpdateFeedbackOrder/{idOrder}")]
+        public IActionResult UpdateFeedbackOrder(int idOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Order order = _unitOfWork.OrdersRepository.GetOrderByID(idOrder);
+                    order.IsFeedback = true;
+
+                    _unitOfWork.OrdersRepository.UpdateOrder(order);
+                    if (_unitOfWork.Save())
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 
 }

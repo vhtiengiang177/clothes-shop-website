@@ -27,7 +27,9 @@ export class PromotionsListComponent implements OnInit {
   static readonly deleteForm = 2;
 
   constructor(private promotionsStore: PromotionsStoreService, public dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) { 
+      
+    }
 
   ngOnInit() {
   }
@@ -126,7 +128,7 @@ export class PromotionsListComponent implements OnInit {
 
   addPromotion() {
     const dialogRef = this.dialog.open(PromotionFormComponent, {
-      width: '500px',
+      width: '700px',
       data: { 
         typeform: PromotionsListComponent.addForm, 
         promotion: { }
@@ -161,7 +163,7 @@ export class PromotionsListComponent implements OnInit {
       this.promotionsStore.getById(idPromotion).subscribe(res => {
         if(res) {
           const dialogRef = this.dialog.open(PromotionFormComponent, {
-            width: '500px',
+            width: '700px',
             data: { 
               typeform: PromotionsListComponent.editForm, 
               promotion: res
