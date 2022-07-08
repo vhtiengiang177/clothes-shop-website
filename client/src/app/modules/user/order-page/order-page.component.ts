@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { $ } from 'protractor';
-import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/services/model/cart/cart.model';
 import { DeliveryAddress } from 'src/app/services/model/customer/delivery-address.model';
 import { OrderDetail } from 'src/app/services/model/order/order-detail.model';
@@ -22,6 +20,7 @@ import { ProductsStoreService } from 'src/app/services/store/products-store/prod
 import { PromotionsStoreService } from 'src/app/services/store/promotions-store/promotions-store.service';
 import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-store.service';
 import { ConfirmFormComponent } from '../../common/confirm-form/confirm-form.component';
+import { OrderPaymentFormComponent } from '../order-payment-form/order-payment-form.component';
 
 @Component({
   selector: 'app-order-page',
@@ -40,7 +39,9 @@ export class OrderPageComponent implements OnInit {
   listOrderDetail: OrderDetail[] = []
   listPromotion: Promotion[] = []
   promotion: Promotion = null
-  
+  VNDtoUSD = 0;
+  paymentChecked: number;
+
   constructor(private cartsStore: CartsStoreService,
     private productsStore: ProductsStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
@@ -51,6 +52,7 @@ export class OrderPageComponent implements OnInit {
     private promotionsStore: PromotionsStoreService,
     private router: Router,
     private dialog: MatDialog) {
+      this.paymentChecked = 0;
       this.cartsStore.carts$.subscribe(res => {
         this.getInfoCart()
       })
@@ -67,9 +69,10 @@ export class OrderPageComponent implements OnInit {
           })
         }
       })
-     }
+  }
 
   ngOnInit() {
+    
   }
 
   getInfoCart() {
@@ -113,6 +116,8 @@ export class OrderPageComponent implements OnInit {
     })
     this.totalPrice = this.totalPromotion
     this.discount = this.subTotalPrice - this.totalPromotion
+    this.VNDtoUSD = this.totalPrice * 0.000043;
+    
   }
 
   getNameSizeColor(item: Cart) {
@@ -152,17 +157,31 @@ export class OrderPageComponent implements OnInit {
         this.listOrderDetail.push(orderDetail)
       })
       var idPromotion = this.promotion ? this.promotion.id : null
-      this.orderStore.create(this.listOrderDetail, this.deliveryAddress.id, idPromotion).subscribe(res => {
-        this.toastr.success("Order successfully!")
-        this.cartsStore.deleteItemsInCart(this.cartsStore.carts).subscribe(() => {
-          this.cartsStore.get()
-          this.router.navigate(['/my-orders-history'])
+      console.log(this.paymentChecked)
+      if (this.paymentChecked == 1) {
+        const dialogRef = this.dialog.open(OrderPaymentFormComponent, {
+          width: '400px',
+          data: {
+            value: this.VNDtoUSD.toString(),
+            listOrderDetail: this.listOrderDetail,
+            idAddress: this.deliveryAddress.id,
+            idPromotion: idPromotion
+          }
+        });
+      }
+      else {
+        this.orderStore.create(this.listOrderDetail, this.deliveryAddress.id, idPromotion, 0).subscribe(() => {
+          this.toastr.success("Order successfully!")
+          this.cartsStore.deleteItemsInCart(this.cartsStore.carts).subscribe(() => {
+            this.cartsStore.get()
+            this.router.navigate(['/my-orders-history'])
+          })
+          
+        }, error => {
+          console.log(error);
+          this.dialogDeleteProductOutOfStock(error.error)
         })
-        
-      }, error => {
-        console.log(error);
-        this.dialogDeleteProductOutOfStock(error.error)
-      })
+      }
     }
   }
 
@@ -188,6 +207,8 @@ export class OrderPageComponent implements OnInit {
       this.totalPrice = this.totalPromotion
       this.discount = this.subTotalPrice - this.totalPromotion
     }
+    
+    this.VNDtoUSD = this.totalPrice * 0.000043;
   }
 
   getProductOutOfStock(item: Product) {

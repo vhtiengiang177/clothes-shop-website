@@ -138,7 +138,7 @@ namespace clothing_shop_website.Areas.Client
                     var response = new ResponseJSON<Order>
                     {
                         TotalData = lOrderItems.Count(),
-                        Data = lOrderItems.ToList()
+                        Data = lOrderItems.Reverse().ToList()
                     };
 
                     return Ok(response);
@@ -306,7 +306,7 @@ namespace clothing_shop_website.Areas.Client
         }
 
         [HttpPost("AddOrder")]
-        public IActionResult AddOrder(OrderDetail[] orderDetails, [FromQuery] int idAddress, [FromQuery] int? idPromotion)
+        public IActionResult AddOrder(OrderDetail[] orderDetails, [FromQuery] int idAddress, [FromQuery] int? idPromotion, [FromQuery] int paymentMethod)
         {
             if (ModelState.IsValid)
             {
@@ -314,11 +314,16 @@ namespace clothing_shop_website.Areas.Client
                 if (userId == null) return BadRequest();
 
                 var order = new Order();
+                var dateTimeNow = DateTime.Now;
                 order.IdCustomer = int.Parse(userId);
                 order.State = 1;
-                order.DateOrder = DateTime.Now;
+                order.DateOrder = dateTimeNow;
                 order.FeeDelivery = 0;
                 order.IdAddress = idAddress;
+                if (paymentMethod == 1)
+                {
+                    order.DatePayment = dateTimeNow;
+                }
 
                 var result = _unitOfWork.OrdersRepository.CreateOrder(order);
                 _unitOfWork.Save();

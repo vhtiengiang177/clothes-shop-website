@@ -50,23 +50,35 @@
                                         {{promotion.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <div class="payment-check">
+                            <!-- <div class="payment-check">
                                 <div class="pc-item">
                                     <label for="pc-check">
                                         Note <strong class="required">*</strong>: Payment after delivery
                                     </label>
                                 </div>
-                                <!-- <div class="pc-item">
+                                <div class="pc-item">
+                                    <mat-radio-button ></mat-radio-button>
+                                    <mat-radio-button (change)="selectedDeliveryAddress(item.id)" [value]="item.id" [checked]="i === 0"></mat-radio-button>
                                     <label for="pc-paypal">
                                         Paypal
                                         <input type="checkbox" id="pc-paypal">
                                         <span class="checkmark"></span>
                                     </label>
-                                </div> -->
+                                </div>
+                            </div> -->
+                            <div>Payment:</div>
+                            <br/>
+                            <div class="pc-item">
+                                <mat-radio-group name="optPayment" [(ngModel)]="paymentChecked">
+                                    <mat-radio-button name="optPayment" [value]="0">Cash on delivery (COD)</mat-radio-button><br/>
+                                    <mat-radio-button name="optPayment" [value]="1">Online payment</mat-radio-button>
+                                </mat-radio-group>
                             </div>
+                            <br/>
                             <div class="order-btn">
                                 <button type="submit" (click)="order()" class="site-btn place-btn">Place Order</button>
-                            </div>
+
+                            </div> 
                         </div>
                     </div>
                 </div>

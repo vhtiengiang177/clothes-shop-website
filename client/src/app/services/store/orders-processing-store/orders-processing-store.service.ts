@@ -72,8 +72,4 @@ export class OrdersProcessingStoreService {
   getById(id) {
     return this.orderService.getById("/GetOrderByID", id)
   }
-
-
-
-
 }
