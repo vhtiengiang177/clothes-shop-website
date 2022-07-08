@@ -21,7 +21,6 @@ D:\TienGiang\KLTN\Clothes Shop\clothing-shop-website\Domain\obj\Debug\netcoreapp
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.dll
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
-D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.AssemblyReference.cache
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.GeneratedMSBuildEditorConfig.editorconfig
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs

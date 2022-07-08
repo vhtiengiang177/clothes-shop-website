@@ -14,7 +14,7 @@ namespace Domain.Infrastructure.Persistent.Repository
          IQueryable<Customer>  GetAllCustomersByIDType(int TypeID);
          void UpdateCustomer(Customer Customer);
          void DeleteCustomer(int accountId);
-         public Customer GetCustomerByID(int CustomerID);
+         Customer GetCustomerByID(int CustomerID);
          IQueryable<Customer> GetlCustomersByTypeCustomerID(int[] idTypeCustomers);
         IQueryable<Account> GetAllAccountCustomers();
 
