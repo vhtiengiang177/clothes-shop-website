@@ -31,7 +31,7 @@
                                 {{ order.dateShip | date: 'dd/MM/yyyy' }}
                             </div>
                         </div>
-                        <div  class="row">
+                        <!-- <div  class="row">
                             <div class="col-md-5 title-item">
                                <strong>Fee Delivery:</strong> 
                             </div>
@@ -41,7 +41,7 @@
                             <div *ngIf="!order.feeDelivery" class="col-md-7">
                                 0 VND
                             </div>
-                        </div>
+                        </div> -->
                         <div *ngIf="promotion" class="row">
                             <div class="col-md-5 title-item">
                                 <strong> Promotion:</strong> 
@@ -60,6 +60,17 @@
                                     <li>Phone: {{ deliveryAddress.phone }}</li>
                                     <li>Address: {{ address }}</li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 title-item">
+                                <strong>Payment Method:</strong>
+                            </div>
+                            <div class="col-md-7" *ngIf="order.datePayment == order.dateOrder">
+                                Paypal
+                            </div>
+                            <div class="col-md-7" *ngIf="order.datePayment != order.dateOrder">
+                                Cash on Delivery
                             </div>
                         </div>
                     </div>

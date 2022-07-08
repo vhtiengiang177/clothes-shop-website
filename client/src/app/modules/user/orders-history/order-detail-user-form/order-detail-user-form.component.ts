@@ -109,22 +109,22 @@ export class OrderDetailUserFormComponent implements OnInit {
       this.productsStore.getById(item.idProduct).subscribe(res => {
         item.product = res.name
       })
-      item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize).pop().name
-      item.color = this.colorsStore.colors.filter(c => c.id == item.idColor).pop().name
+      item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize)[0].name
+      item.color = this.colorsStore.colors.filter(c => c.id == item.idColor)[0].name
     })
   }
 
   
   getNameSizeColor() {
     this.productSizeColorsStore.productitems.forEach(item => {
-      item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize).pop().name
-      item.color = this.colorsStore.colors.filter(c => c.id == item.idColor).pop().name
+      item.size = this.sizesStore.sizes.filter(s => s.id == item.idSize)[0].name
+      item.color = this.colorsStore.colors.filter(c => c.id == item.idColor)[0].name
     })
   }
 
   getNameProduct() {
     this.productsStore.products.forEach(item => {
-      item.name = this.productsStore.products.filter(s=>s.id==item.id).pop.name;
+      item.name = this.productsStore.products.filter(s=>s.id==item.id)[0].name;
     })
   }
 
