@@ -98,8 +98,7 @@ export class PromotionFormComponent implements OnInit {
 
       if (this.data.typeform === 0) {
         this.promotionsStore.create(this.data.promotion).subscribe(res => {
-          if (this.oldImageUrl != this.imageUrl)
-              this.updateImage()
+          this.updateImage(res.id)
           this.dialogRef.close(res);
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -110,7 +109,7 @@ export class PromotionFormComponent implements OnInit {
       else if (this.data.typeform === 1) {
         this.promotionsStore.update(this.data.promotion).subscribe(res => {
           if (this.oldImageUrl != this.imageUrl)
-              this.updateImage()
+              this.updateImage(this.data.promotion.id)
           this.dialogRef.close(res)
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -169,11 +168,11 @@ export class PromotionFormComponent implements OnInit {
     // SEND API DELETE IMAGE
   }
 
-  updateImage() {
+  updateImage(id) {
     console.log(this.fileToUploadUpdate);
     
     const formData = new FormData();
     formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
-    this.promotionService.addImagePromotion(formData,this.data.promotion.id).toPromise()
+    this.promotionService.addImagePromotion(formData, id).toPromise()
   }
 }

@@ -34,6 +34,7 @@ export class PromotionPageComponent implements OnInit {
     private toastr: ToastrService) {
       console.log('length: ',promotionsStore.promotions.length);
       promotionService.getAllPromotions().subscribe(res => {
+        console.log(res)
             this.countVoucher = 0;
             this.countPromotion = 0;
             this.lPromotion = res;

@@ -27,3 +27,4 @@ D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.dll
 D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
+D:\KLTN\clothes-shop-website\clothing-shop-website\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.AssemblyReference.cache

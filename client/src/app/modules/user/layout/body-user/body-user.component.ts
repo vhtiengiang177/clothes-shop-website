@@ -9,11 +9,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class BodyUserComponent implements OnInit {
 
   constructor() { 
-
   }
 
   ngOnInit() {
-
   }
 
+  onActivate(event) {
+    window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+     });
+ }
 }
