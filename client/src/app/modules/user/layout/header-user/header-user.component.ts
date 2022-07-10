@@ -20,9 +20,10 @@ export class HeaderUserComponent implements OnInit {
     private cartStore: CartsStoreService) {
       this.cartStore.carts$.subscribe(res => {
         if (res && this.numOfCart != res.length) {
-          this.fetchCart()
+          
           if(authService.isLoggedIn()){
             this.fetchFavorite()
+            this.fetchCart()
           }
           this.numOfCart = res.length
         }

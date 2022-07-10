@@ -103,7 +103,8 @@ export class ProductPageComponent {
   }
 
   filterPrice() {
-    if (this.minPrice > this.maxPrice && (this.maxPrice != null || this.minPrice != null)) {
+    if (Number(this.minPrice) > Number(this.maxPrice) && (this.maxPrice != null || this.minPrice != null)) {
+      console.log('Min Max',this.minPrice,this.maxPrice);
       this.toastr.warning("Minimum price should not be greater than maximum")
     }
     else {

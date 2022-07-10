@@ -41,7 +41,10 @@ export class HomePageComponent implements OnInit {
     private authService: AuthAppService,
     private cartStore: CartsStoreService,
     private toastr: ToastrService) { 
-      this.cartStore.get()
+      if (this.authService.isLoggedIn() && this.authService.getCurrentUser().idTypeAccount == 4){
+        this.cartStore.get()
+      }
+      
       this.productsStore.getTopBestSellers().subscribe(p => {
         this.productTopBestSellers = p
         this.productTopBestSellers.forEach(pc => {

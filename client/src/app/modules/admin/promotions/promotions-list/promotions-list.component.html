@@ -72,8 +72,8 @@
             <td><a>{{ promotion.value }}</a></td>
             <td>{{ promotion.startDate |  date: 'dd/MM/yyyy' }}</td>
             <td>{{ promotion.endDate|  date: 'dd/MM/yyyy' }}</td>
-            <td *ngIf = "promotion.state == 3"><a [routerLink]="['/admin/promotions', promotion.id]"><fa class="apply-icon" name="check-circle" title="Apply promotion for products"></fa></a></td>
-            <td *ngIf = "promotion.state != 3"><a [routerLink]="['/admin/promotions', promotion.id]"><fa hidden class="apply-icon" name="check-circle" title="Apply promotion for products"></fa></a></td>
+            <td *ngIf = "promotion.state == 2"><a [routerLink]="['/admin/promotions', promotion.id]"><fa class="apply-icon" name="check-circle" title="Apply promotion for products"></fa></a></td>
+            <td *ngIf = "promotion.state != 2"><a [routerLink]="['/admin/promotions', promotion.id]"><fa hidden class="apply-icon" name="check-circle" title="Apply promotion for products"></fa></a></td>
             <td (click)="ViewDetailPromotion(promotion.id)"><fa  name="info-circle" title="View detail promotion"></fa></td>
             <td (click)="editPromotion(promotion.id)"><fa class="edit-icon" name="edit" title="Edit promotion"></fa></td>
             <td (click)="deletePromotion(promotion.id)"><fa class="delete-icon" name="trash" title="Delete promotion"></fa></td>
