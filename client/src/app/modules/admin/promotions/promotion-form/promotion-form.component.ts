@@ -74,6 +74,7 @@ export class PromotionFormComponent implements OnInit {
         this.data.promotion.endDate.setDate(this.data.promotion.endDate.getDate() + 1);
       }
       if (this.data.promotion.image){
+        this.oldImageUrl = this.data.promotion.image;
         this.imageUrl = this.data.promotion.image;
       }
     }

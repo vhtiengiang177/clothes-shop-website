@@ -26,7 +26,7 @@ export class FavoriteStoreService {
   constructor(private favoriteService: FavoriteService, 
     private toastr: ToastrService) {
       if (this.favorites.length == 0) {
-        this.getAllItemsInFavorite();
+        // this.getAllItemsInFavorite();
       }
    }
 

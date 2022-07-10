@@ -34,10 +34,21 @@ export class CategoryService extends DataService {
 
     return query;
   }
+
   delete(categoryId) {
     return this.http.put(GlobalConstants.apiUrl + "/categories" + "/DeleteCategory/" + categoryId, categoryId,
     {
       headers: this.authorizationHeader()
+    })
+  }
+
+  addImageCategory(file,idCategory) {
+    let headers = this.authorizationHeader()
+    headers = headers.append('Content-Disposition', 'mulipart/form-data');
+
+    return this.http.post(GlobalConstants.apiUrl + this.routeAPI + "/AddImageCategory/"+idCategory, file, {
+      headers: headers,
+      responseType: "text"
     })
   }
 }

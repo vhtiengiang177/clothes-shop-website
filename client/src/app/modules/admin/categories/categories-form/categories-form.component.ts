@@ -1,3 +1,4 @@
+import { CategoryService } from './../../../../services/data/category/category.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSelect, MAT_DIALOG_DATA } from '@angular/material';
@@ -21,9 +22,15 @@ export class CategoriesFormComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CategoriesFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CategoryForm,
     private categoriesStore: CategoriesStoreService,
+    private categoryService: CategoryService,
     public dialog: MatDialog,
     private toastr: ToastrService) { 
       console.log(data);
+
+      if (data.category.image != null){
+        this.oldImageUrl = data.category.image;
+        this.imageUrl = data.category.image;
+      }
       
     }
 
@@ -34,6 +41,7 @@ export class CategoriesFormComponent implements OnInit {
     if (this.checkValidate()) {
       if (this.data.typeform === 0) {
         this.categoriesStore.create(this.data.category).subscribe(res => {
+          this.updateImage(res.id);
           this.dialogRef.close(res);
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -43,6 +51,8 @@ export class CategoriesFormComponent implements OnInit {
       }
       else if (this.data.typeform === 1) {
         this.categoriesStore.update(this.data.category).subscribe(res => {
+          if (this.oldImageUrl != this.imageUrl)
+              this.updateImage(this.data.category.id)
           this.dialogRef.close(res)
         }, (error:HttpErrorResponse) => {
           if(error.status == 400) {
@@ -88,11 +98,11 @@ export class CategoriesFormComponent implements OnInit {
     // SEND API DELETE IMAGE
   }
 
-  // updateImage() {
-  //   console.log(this.fileToUploadUpdate);
+  updateImage(idCategory) {
+    console.log(this.fileToUploadUpdate);
     
-  //   const formData = new FormData();
-  //   formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
-  //   this.promotionService.addImagePromotion(formData,this.data.promotion.id).toPromise()
-  // }
+    const formData = new FormData();
+    formData.append('file', this.fileToUploadUpdate, this.fileToUploadUpdate.name);
+    this.categoryService.addImageCategory(formData,idCategory).toPromise()
+  }
 }
