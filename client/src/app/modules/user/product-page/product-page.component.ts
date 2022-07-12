@@ -191,9 +191,6 @@ export class ProductPageComponent {
         idSize: null
       }
     });
-    dialogRef.afterClosed().subscribe(() => {
-        // this.fetchData()
-   });
   }
 
   changeHeart(product,state) {

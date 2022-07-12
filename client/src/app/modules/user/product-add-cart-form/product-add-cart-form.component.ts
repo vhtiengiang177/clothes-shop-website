@@ -291,6 +291,7 @@ export class ProductAddCartFormComponent implements OnInit {
     if (this.product.isFavorite){
       this.favoriteService.deleteItemInFavorite(this.product.id).subscribe(res => {
         this.product.isFavorite = false;
+        this.productsStore.productsList.find(x => x.id == this.data.idProduct).isFavorite = false;
         this.fetchFavorite();
       }, (e: HttpErrorResponse) => {
         if (e.status == 400)
@@ -299,6 +300,8 @@ export class ProductAddCartFormComponent implements OnInit {
     }else{
       this.favoriteService.addItemInFavorite(this.product.id).subscribe(res => {
         this.product.isFavorite = true;
+        this.productsStore.productsList.find(x => x.id == this.data.idProduct).isFavorite = true;
+        console.log (this.productsStore.productsList.find(x => x.id == this.data.idProduct))
         this.fetchFavorite();
       }, (e: HttpErrorResponse) => {
         if (e.status == 400)
