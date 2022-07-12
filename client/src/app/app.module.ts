@@ -88,6 +88,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReviewPageComponent } from './modules/user/review-page/review-page/review-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OrderPaymentFormComponent } from './modules/user/order-payment-form/order-payment-form.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
  
  
 let config = new AuthServiceConfig([
@@ -217,7 +218,8 @@ export function provideConfig() {
     NgChartsModule,
     SocialLoginModule,
     InfiniteScrollModule,
-    MatCheckboxModule 
+    MatCheckboxModule, 
+    NgxSliderModule
   ],
   exports: [
 

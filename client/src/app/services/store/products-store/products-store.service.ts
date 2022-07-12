@@ -146,6 +146,15 @@ export class ProductsStoreService {
     return this.productService.deleteImageProduct(id)
   }
 
+  getMaxPriceOfProduct() {
+    let result = new Subject<any>();
+    this.productService.getMaxPriceOfProduct().subscribe(res => {
+      result.next(res)
+    })
+
+    return result.asObservable()
+  }
+
   getImagesByIdProduct(idProduct) {
     let result = new Subject<Image[]>();
     this.productService.getImagesByIdProduct(idProduct).subscribe(res => {

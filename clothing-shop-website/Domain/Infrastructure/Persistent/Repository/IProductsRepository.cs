@@ -25,5 +25,6 @@ namespace Domain.Infrastructure.Persistent.Repository
         int CheckCountItemOfProduct(int productID);
         Task<IQueryable<Product>> GetProductsByIdPromotion(int idPromotion);
         Task<IQueryable<Product>> GetProductsByIdOrder(int idOrder);
+        double GetMaxPriceOfProduct();
     }
 }

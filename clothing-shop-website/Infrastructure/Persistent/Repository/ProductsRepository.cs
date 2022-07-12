@@ -136,5 +136,14 @@ namespace Infrastructure.Persistent.Repository
             }    
             return lProduct.AsQueryable();
         }
+
+        public double GetMaxPriceOfProduct()
+        {
+            double maxPrice = 0;
+                
+            maxPrice = _dbContext.Products.OrderByDescending(x => x.PricePromotion).First().PricePromotion;
+
+            return maxPrice;
+        }
     }
 }

@@ -170,4 +170,15 @@ export class ProductService extends DataService {
         return throwError(new AppError(error))
       }))
   }
+
+  getMaxPriceOfProduct() {
+    return this.http.get<any>(GlobalConstants.apiUrl + this.routeAPI + "/GetMaxPriceOfProduct/", {
+      headers: this.authorizationHeader()
+    })
+      .pipe(catchError((error: Response) => {
+        if(error.status == 400)
+          return throwError(new BadRequestError(error))
+        return throwError(new AppError(error))
+      }))
+  }
 }

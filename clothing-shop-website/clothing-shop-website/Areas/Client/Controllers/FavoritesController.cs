@@ -96,7 +96,9 @@ namespace clothing_shop_website.Areas.Client.Controllers
             if (ModelState.IsValid)
             {
                 var userId = User.FindFirst("id").Value;
-                if (userId == null) return BadRequest();
+                var typeAccount = User.FindFirst("idTypeAccount").Value;
+                if (userId == null) return BadRequest("Register or login to favorite this item");
+                if (int.Parse(typeAccount) != 4) return BadRequest("Staff cannot use this function");
 
                 var item = _unitOfWork.FavoritesRepository.GetItemInFavorite(Int32.Parse(userId), idProduct);
                 if (item == null)
