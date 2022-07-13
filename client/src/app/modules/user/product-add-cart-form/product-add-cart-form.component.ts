@@ -17,6 +17,7 @@ import { SizesStoreService } from 'src/app/services/store/sizes-store/sizes-stor
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FavoriteService } from 'src/app/services/data/favorite/favorite.service';
 import { FavoriteStoreService } from 'src/app/services/store/favorite-store/favorite-store.service';
+import { AuthAppService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-product-add-cart-form',
@@ -58,6 +59,7 @@ export class ProductAddCartFormComponent implements OnInit {
     private favoriteService: FavoriteService,
     private favoriteStore: FavoriteStoreService,
     private cartsStoreService: CartsStoreService,
+    private authService : AuthAppService,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: ProductSizeColor) {
       this.id = this.data.idProduct
@@ -71,11 +73,13 @@ export class ProductAddCartFormComponent implements OnInit {
         this.product.category = this.categoriesStore.categories.filter(s => s.id == this.product.idCategory).length > 0
           ? this.categoriesStore.categories.filter(s => s.id == this.product.idCategory)[0].name : ""
         this.isVisible = true
-        this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
-          if (res.length != 0){
-            this.product.isFavorite = true
-          }
-        });
+        if (authService.isLoggedIn() && authService.getCurrentUser().idTypeAccount == 4) {
+          this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
+            if (res.length != 0){
+              this.product.isFavorite = true
+            }
+          });
+        }
       }, (error: HttpErrorResponse) => {
         this.toastr.error("Something went wrong!")
         this.dialogRef.close(false)
@@ -287,6 +291,7 @@ export class ProductAddCartFormComponent implements OnInit {
     if (this.product.isFavorite){
       this.favoriteService.deleteItemInFavorite(this.product.id).subscribe(res => {
         this.product.isFavorite = false;
+        this.productsStore.productsList.find(x => x.id == this.data.idProduct).isFavorite = false;
         this.fetchFavorite();
       }, (e: HttpErrorResponse) => {
         if (e.status == 400)
@@ -295,6 +300,8 @@ export class ProductAddCartFormComponent implements OnInit {
     }else{
       this.favoriteService.addItemInFavorite(this.product.id).subscribe(res => {
         this.product.isFavorite = true;
+        this.productsStore.productsList.find(x => x.id == this.data.idProduct).isFavorite = true;
+        console.log (this.productsStore.productsList.find(x => x.id == this.data.idProduct))
         this.fetchFavorite();
       }, (e: HttpErrorResponse) => {
         if (e.status == 400)

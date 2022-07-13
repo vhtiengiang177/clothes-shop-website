@@ -566,5 +566,19 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 return BadRequest();
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet("GetMaxPriceOfProduct")]
+        public IActionResult GetMaxPriceOfProduct()
+        {
+            try
+            {
+                return Ok(_unitOfWork.ProductsRepository.GetMaxPriceOfProduct());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }

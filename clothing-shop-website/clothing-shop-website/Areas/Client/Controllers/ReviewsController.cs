@@ -77,7 +77,7 @@ namespace clothing_shop_website.Areas.Client.Controllers
             }
             else
             {
-                return Ok(lReviews);
+                return Ok(lReviews.Reverse().ToList());
             }
         }
 

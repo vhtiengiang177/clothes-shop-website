@@ -24,17 +24,15 @@ export class ContactPageComponent implements OnInit {
   }
 
   getShopInfos() {
-    // const iframe = this.hostElement.nativeElement.querySelector('iframe');
-    // iframe.src = this.dynamic_address;
     this.shopInfosStore.shopinfos$.subscribe(res => {
       if(res.length != 0) {
         this.shopinfo = res[0]
         
         this.address = this.shopinfo.address + ", " + this.shopinfo.wards + ", " + this.shopinfo.district + ", " + this.shopinfo.province + "."
-        this.dynamic_address = "https://maps.google.com/maps?q=" + encodeURIComponent(this.address) + "&output=embed";
+        // this.dynamic_address = "https://maps.google.com/maps?q=" + encodeURIComponent(this.address) + "&output=embed";
         
-        this.hostElement.nativeElement.querySelector('iframe').src = this.dynamic_address;
-        console.log(this.dynamic_address);
+        // this.hostElement.nativeElement.querySelector('iframe').src = this.dynamic_address;
+        // console.log(this.dynamic_address);
       }
     })
     

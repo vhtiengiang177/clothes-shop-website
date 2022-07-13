@@ -27,7 +27,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="filter-widget">
+                <!-- <div class="filter-widget">
                     <h4 class="fw-title">Price</h4>
                     <div class="filter-range-wrap">
                         <div class="range-slider">
@@ -38,7 +38,16 @@
                         </div>
                     </div>
                     <button class="btn filter-btn" (click)="filterPrice()">Filter</button>
+                </div> -->
+
+                <div class="filter-widget">
+                    <h4 class="fw-title">Price Range</h4>
+                    <div class="filter-range-wrap custom-slider">    
+                        <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+                    </div>
+                    <button class="btn filter-btn" (click)="filterPrice()">Filter</button>
                 </div>
+
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">

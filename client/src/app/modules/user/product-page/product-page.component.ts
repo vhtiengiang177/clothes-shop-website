@@ -1,3 +1,4 @@
+import { Options } from '@angular-slider/ngx-slider';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, PageEvent } from '@angular/material';
@@ -29,7 +30,6 @@ export class ProductPageComponent {
     sort: 'name:asc',
     idcategories: []
   };
-
   throttle = 400;
   scrollDistance = 1;
   categoriesOptions: Category[] = []
@@ -39,6 +39,14 @@ export class ProductPageComponent {
   maxPrice: number;
   product: Product
   isWhiteHeart: boolean = true
+  minValue: number = 0; // min value of price range
+  maxValue: number = 0; // max value of price range
+  options: Options = {
+    floor: 0,
+    ceil: 0,
+    step: 10000
+  };
+  maxPriceOfProduct = 0;
 
   constructor(private productsStore: ProductsStoreService,
     private categoriesStore: CategoriesStoreService,
@@ -50,6 +58,7 @@ export class ProductPageComponent {
     public dialog: MatDialog,
     private toastr: ToastrService) {
       this.productsStore.productsList = []
+      this.getMaxPriceOfProduct()
       this.fetchData()
   }
 
@@ -58,6 +67,20 @@ export class ProductPageComponent {
   //   this.filter.pageindex = +pageEvent.pageIndex + 1;
   //   this.fetchData()
   // }
+
+  getMaxPriceOfProduct() {
+    this.productsStore.getMaxPriceOfProduct().subscribe(res => {
+      console.log(res);
+      
+      this.options = {
+        floor: 0,
+        ceil: res,
+        step: 10000
+      };
+      this.maxValue = res;
+      this.maxPriceOfProduct = res
+    })
+  }
 
   fetchData(_method = "equal") {
     console.log(this.filter)
@@ -103,23 +126,35 @@ export class ProductPageComponent {
   }
 
   filterPrice() {
-    if (Number(this.minPrice) > Number(this.maxPrice) && (this.maxPrice != null || this.minPrice != null)) {
-      console.log('Min Max',this.minPrice,this.maxPrice);
-      this.toastr.warning("Minimum price should not be greater than maximum")
+    // if (Number(this.minPrice) > Number(this.maxPrice) && (this.maxPrice != null || this.minPrice != null)) {
+    //   console.log('Min Max',this.minPrice,this.maxPrice);
+    //   this.toastr.warning("Minimum price should not be greater than maximum")
+    // }
+    // else {
+    //   if (this.minPrice < 0 || this.maxPrice < 0) {
+    //     this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
+    //   }
+    //   else if (this.minPrice >= 0 || this.maxPrice >= 0) {
+    //     this.filter.minprice = this.minPrice
+    //     this.filter.maxprice = this.maxPrice
+    //     this.filter.pageindex = 1
+    //     // this.paginator.pageIndex = 0;
+    //     this.fetchData()
+    //   }
+    //   else this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
+    // }
+
+    if (this.minValue == 0 && this.maxPrice == this.maxPriceOfProduct) {
+      this.filter.minprice = null;
+      this.filter.maxprice = null;
     }
     else {
-      if (this.minPrice < 0 || this.maxPrice < 0) {
-        this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
-      }
-      else if (this.minPrice >= 0 || this.maxPrice >= 0) {
-        this.filter.minprice = this.minPrice
-        this.filter.maxprice = this.maxPrice
-        this.filter.pageindex = 1
-        // this.paginator.pageIndex = 0;
-        this.fetchData()
-      }
-      else this.toastr.warning("Minimum/Maximum price should be at least 0 VND")
+      this.filter.minprice = this.minValue;
+      this.filter.maxprice = this.maxValue
+      this.filter.pageindex = 1
     }
+    
+    this.fetchData()
   }
 
   searchEvent(value) {
@@ -156,9 +191,6 @@ export class ProductPageComponent {
         idSize: null
       }
     });
-    dialogRef.afterClosed().subscribe(() => {
-        this.fetchData()
-   });
   }
 
   changeHeart(product,state) {
