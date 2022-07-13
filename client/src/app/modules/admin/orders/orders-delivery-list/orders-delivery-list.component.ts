@@ -7,7 +7,7 @@ import { Account } from 'src/app/services/model/account/account.model';
 import { FilterParamsOrders } from 'src/app/services/model/order/filter-params-orders.model';
 import { Order } from 'src/app/services/model/order/order.model';
 import { Staff } from 'src/app/services/model/staff/staff.model';
-import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-Delivery-store/orders-Delivery-store.service';
+import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-delivery-store/orders-delivery-store.service';
 import { StaffStoreService } from 'src/app/services/store/staff-store/staff-store.service';
 import { OrdersDetailFormComponent } from '../orders-detail-form/orders-detail-form/orders-detail-form.component';
 

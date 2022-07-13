@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-Delivery-store/orders-Delivery-store.service';
+import { OrdersDeliveryStoreService } from 'src/app/services/store/orders-delivery-store/orders-delivery-store.service';
 import { OrderDetailUserFormComponent } from '../order-detail-user-form/order-detail-user-form.component';
 
 @Component({

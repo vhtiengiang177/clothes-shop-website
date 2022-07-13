@@ -1,5 +1,5 @@
 // import { Color } from './../../../../services/model/product/color.model';
-import { Year } from './../../../../services/model/chart/Year.model';
+import { Year } from './../../../../services/model/chart/year.model';
 import { Month } from './../../../../services/model/chart/month.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType, Color } from 'chart.js';
