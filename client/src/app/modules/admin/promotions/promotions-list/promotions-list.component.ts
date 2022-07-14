@@ -18,7 +18,7 @@ export class PromotionsListComponent implements OnInit {
 
   filter: FilterParamsPromotions = {
     pageindex: 1,
-    pagesize: 5,
+    pagesize: 10,
     sort: null
   };
 

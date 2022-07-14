@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { AppError } from 'src/app/_shared/errors/app-error';
 import { BadRequestError } from 'src/app/_shared/errors/bad-request-error';
+import { AuthAppService } from '../../auth/auth.service';
 import { CartService } from '../../data/cart/cart.service';
 import { ProductService } from '../../data/product/product.service';
 import { Cart } from '../../model/cart/cart.model';
@@ -24,8 +25,9 @@ export class CartsStoreService {
   constructor(private cartService: CartService, 
     private productsStore: ProductsStoreService,
     private productSizeColorsStore: ProductSizeColorsStoreService,
+    private authService : AuthAppService,
     private toastr: ToastrService) {
-    if (this.carts.length == 0) {
+    if ((this.carts.length == 0) && ((authService.isLoggedIn()))) {
       this.get()
     }
    }

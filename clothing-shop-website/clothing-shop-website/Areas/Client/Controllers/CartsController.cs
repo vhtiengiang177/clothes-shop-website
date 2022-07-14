@@ -26,6 +26,7 @@ namespace clothing_shop_website.Areas.Client
             _unitOfWork = new UnitOfWork(dbContext);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllItemsInCart")]
         public async Task<IActionResult> GetAllItemsInCart()
         {

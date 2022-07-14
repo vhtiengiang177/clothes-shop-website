@@ -28,7 +28,7 @@ export class ProductsListComponent implements OnInit {
   
   filter: FilterParamsProduct = {
     pageindex: 1,
-    pagesize: 5,
+    pagesize: 10,
     sort: null
   };
   static readonly addForm = 0;

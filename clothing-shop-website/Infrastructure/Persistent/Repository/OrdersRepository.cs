@@ -97,12 +97,12 @@ namespace Infrastructure.Persistent.Repository
        public double GetEarningInDay()
         {
             double totalEarning = 0;
-            var listOrder = _dbContext.Orders.Where(item => item.State == 5 && item.DateShip != null).ToList();
+            var listOrder = _dbContext.Orders.Where(item => item.State == 5 && item.DatePayment != null).ToList();
 
             foreach (var order in listOrder)
             {
-                var dateship = order.DateShip.HasValue ? order.DateShip?.ToShortDateString() : "";
-                if (dateship != "" && dateship == DateTime.Now.ToShortDateString())
+                var datepayment = order.DateShip.HasValue ? order.DatePayment?.ToShortDateString() : "";
+                if (datepayment != "" && datepayment == DateTime.Now.ToShortDateString())
                 {
                     totalEarning += order.TotalAmount;
                 }

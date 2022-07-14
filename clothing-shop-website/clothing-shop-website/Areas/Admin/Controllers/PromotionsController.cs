@@ -30,13 +30,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             _imageService = imageService;
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllPromotions")]
         public async Task<IActionResult> GetAllPromotions([FromQuery] FilterParamsPromotion filterParams)
         {
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
-                int currentPageSize = filterParams.PageSize ?? 5;
+                int currentPageSize = filterParams.PageSize ?? 10;
 
                 IQueryable<Promotion> lPromotionItems;
 
@@ -61,7 +62,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
 
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetAllPromotionsNotFilter")]
         public async Task<IActionResult> GetAllPromotionsNotFilter()
         {

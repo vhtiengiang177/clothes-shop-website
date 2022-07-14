@@ -84,9 +84,11 @@
                             <li>Product 
                                 <span>Total</span>
                             </li>
-                            <li style="cursor: pointer;" (click)="reviewOrder(item)" *ngFor="let item of orderDetailStore.orderdetails$ | async" class="fw-normal">
+                            <li *ngFor="let item of orderDetailStore.orderdetails$ | async" class="fw-normal">
                                 {{ item?.product }} x {{ item.quantity }} ({{ item.size }}/{{ item.color }})
-                                <span>{{ item.quantity * item.unitPrice | currency:'VND' }}</span>
+                                <span>&nbsp;{{ item.quantity * item.pricePromotion | currency:'VND' }} </span>
+                                <span *ngIf="item.pricePromotion<item.unitPrice" style="color: #b2b2b2;text-decoration: line-through;font-size: 12px;">{{ item.quantity * item.unitPrice | currency:'VND' }} </span>
+                                
                             </li>
                             <li class="total-price">SUBTOTAL<span>{{ order.totalProductPrice | currency: 'VND'}}</span></li>
                             <li class="total-price">DISCOUNT<span> - {{ discount | currency: 'VND'}}</span></li>
@@ -95,7 +97,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </mat-dialog-content>

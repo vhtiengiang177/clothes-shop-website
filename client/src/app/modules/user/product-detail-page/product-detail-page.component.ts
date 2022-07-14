@@ -89,11 +89,14 @@ export class ProductDetailPageComponent implements OnInit {
         this.getImages(this.product.id)
         
         this.isVisible = true
-        this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
-          if (res.length != 0){
-            this.product.isFavorite = true
-          }
-        });
+        if (authService.isLoggedIn()) {
+          this.favoriteService.getItemFavorite(this.product.id).subscribe(res => {
+            if (res.length != 0){
+              this.product.isFavorite = true
+            }
+          });
+        }
+        
 
         this.reviewService.getReviewByProduct(this.product.id).subscribe(res => {
           if (res.length != 0){

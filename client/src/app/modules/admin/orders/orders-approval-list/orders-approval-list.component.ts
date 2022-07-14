@@ -26,7 +26,7 @@ export class OrdersApprovalListComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsOrders = {
     pageindex: 1,
-    pagesize: 5,
+    pagesize: 10,
     idState: 2,
     sort: null
   };

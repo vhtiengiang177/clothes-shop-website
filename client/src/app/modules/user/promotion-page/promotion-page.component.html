@@ -8,7 +8,7 @@
     </div>
     <div class="container" >
         <div class="row" >
-            <div *ngFor="let promotion of lPromotion">
+            <div *ngFor="let promotion of promotionsStore.promotions$ | async;">
                 <div class="voucher" *ngIf = "promotion.state == 3">
                     <div class="column left" >
                         <img  src="assets/voucher-1.png" alt="" style="width:100px;;">
@@ -38,7 +38,7 @@
     <div  style="text-align: center;margin:10px;"><h3><strong>Promotions For You</strong> </h3></div>
     <div class="container">
         <div class="row">
-            <div *ngFor="let promotion of promotionsStore.promotions$ | async">
+            <div *ngFor="let promotion of promotionsStore.promotions$ | async;">
                 <div *ngIf = "promotion.state == 2" style="margin:20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);">
                     <div style="width:500px;height: 250px;">
                         <img  [src]="promotion.image" alt="" style="width:500px;height: 250px;">

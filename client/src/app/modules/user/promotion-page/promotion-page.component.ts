@@ -23,7 +23,6 @@ export class PromotionPageComponent implements OnInit {
   removable = true;
   sortSelected = 'name:asc' 
   imgPromotionBanner: string
-  lPromotion: Promotion[]=[]
   countVoucher: number
   countPromotion: number
   
@@ -33,14 +32,13 @@ export class PromotionPageComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrService) {
       console.log('length: ',promotionsStore.promotions.length);
-      promotionService.getAllPromotions().subscribe(res => {
+      promotionsStore.getAllPromotionsPage().subscribe(res => {
         console.log(res)
             this.countVoucher = 0;
             this.countPromotion = 0;
-            this.lPromotion = res;
-            this.imgPromotionBanner = this.lPromotion.find(p=>p.isMainBanner == 1).image;
-            this.countVoucher = this.lPromotion.filter(p=>p.state ==3).length
-            this.countPromotion = this.lPromotion.filter(p=>p.state ==2).length
+            this.imgPromotionBanner = res.find(p=>p.isMainBanner == 1).image;
+            this.countVoucher = res.filter(p=>p.state ==3).length
+            this.countPromotion = res.filter(p=>p.state ==2).length
         })
       }
       

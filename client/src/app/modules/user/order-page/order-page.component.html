@@ -34,8 +34,9 @@
                                 <li>Product <span>Total</span></li>
                                 <li *ngFor="let item of cartsStore.carts$ | async" class="fw-normal">
                                     {{ item.nameProduct }} x {{ item.quantity }} ({{ item.nameSize }}/{{ item.nameColor }})
-                                    <span>{{ item.quantity * item.pricePromotion | currency:'VND' }}</span>&nbsp;&nbsp;
-                                    <span *ngIf="item.pricePromotion !== item.unitPrice"><del>{{ item.quantity * item.unitPrice | currency:'VND' }}</del></span>&nbsp;&nbsp;
+                                    <span>&nbsp;{{ item.quantity * item.pricePromotion | currency:'VND' }} </span>
+                                <span *ngIf="item.pricePromotion<item.unitPrice" style="color: #b2b2b2;text-decoration: line-through;font-size: 12px;">{{ item.quantity * item.unitPrice | currency:'VND' }} </span>
+                                
                                 </li>
                                 <li class="total-price">SUBTOTAL<span>{{ subTotalPrice | currency: 'VND'}}</span></li>
                                 <li class="total-price">DISCOUNT<span>- {{ discount | currency: 'VND'}}</span></li>

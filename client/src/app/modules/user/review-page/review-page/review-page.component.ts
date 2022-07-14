@@ -60,8 +60,8 @@ export class ReviewPageComponent implements OnInit {
           console.log('order:', this.order);
 
           if (this.order.isFeedback === false){
-            this.selectedValueArr.push(5);
-            this.commentArr.push('');
+            // this.selectedValueArr.push(5);
+            // this.commentArr.push('');
           }else{
             this.reviewService.getReviewByOrder(data.idOrder).subscribe(res =>{
               this.lReview = res;
@@ -87,6 +87,11 @@ export class ReviewPageComponent implements OnInit {
                   console.log('review:', this.review);
                   this.selectedValueArr.push(this.review.rating);
                   this.commentArr.push(this.review.comment);
+                }
+
+                if (this.order.isFeedback === false){
+                  this.selectedValueArr.push(5);
+                  this.commentArr.push('');
                 }
               }
             }

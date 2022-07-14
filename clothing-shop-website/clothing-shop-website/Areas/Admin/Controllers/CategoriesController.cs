@@ -36,7 +36,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
-                int currentPageSize = filterParams.PageSize ?? 5;
+                int currentPageSize = filterParams.PageSize ?? 10;
 
                 IQueryable<Category> lCatesgories;
 

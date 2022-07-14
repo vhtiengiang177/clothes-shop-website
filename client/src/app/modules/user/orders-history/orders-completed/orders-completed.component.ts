@@ -49,7 +49,7 @@ export class OrdersCompletedComponent implements OnInit {
 
   reviewOrder(idOrder) {
       const dialogRef = this.dialog.open(ReviewPageComponent, {
-        width: '700px',
+        width: '800px',
 
         data: { 
          idOrder: idOrder,

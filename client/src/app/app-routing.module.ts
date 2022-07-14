@@ -165,10 +165,6 @@ const routes: Routes = [
     path: 'promotions',
     component: PromotionPageComponent
   },
-  // {
-  //   path: 'promotion-product/:id',
-  //   component: PromotionProductComponent
-  // },
   {
     path: 'product-detail/:id',
     component: ProductDetailPageComponent

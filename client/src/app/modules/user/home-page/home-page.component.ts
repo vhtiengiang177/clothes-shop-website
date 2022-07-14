@@ -45,6 +45,7 @@ export class HomePageComponent implements OnInit {
         this.cartStore.get()
       }
       
+      console.log(this.categoriesStore.categories);
       this.productsStore.getTopBestSellers().subscribe(p => {
         this.productTopBestSellers = p
         this.productTopBestSellers.forEach(pc => {

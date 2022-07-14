@@ -30,10 +30,13 @@ namespace clothing_shop_website
             services.AddControllers();
 
             // Giang
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Integrated Security = True; Initial Catalog=clothingdb;",
-            b => b.MigrationsAssembly("clothing-shop-website")));
+            //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Integrated Security = True; Initial Catalog=clothingdb;",
+            //b => b.MigrationsAssembly("clothing-shop-website")));
 
             // Thao
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=SSRSUser; PWD=Vv@123456789",
+            b => b.MigrationsAssembly("clothing-shop-website")));
+
             //services.AddDbContext<DataDbContext>(options => options.UseSqlServer(@"Data Source=localhost; Initial Catalog=clothingdb; User ID=sa; PWD=kimdong",
             //b => b.MigrationsAssembly("clothing-shop-website")));
 

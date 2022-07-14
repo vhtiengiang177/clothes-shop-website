@@ -46,14 +46,14 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             }
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetAllAccountCustomers")]
         public IActionResult GetAllAccountCustomers([FromQuery] FilterParamsAccount filterParams)
         {
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
-                int currentPageSize = filterParams.PageSize ?? 5;
+                int currentPageSize = filterParams.PageSize ?? 10;
 
                 IQueryable<Account> lCustomerItems;
 

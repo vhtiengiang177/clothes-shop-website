@@ -27,7 +27,7 @@ namespace Infrastructure.Persistent.Repository
 
         public Product GetProductByID(int productID)
         {
-            return _dbContext.Products.FirstOrDefault(p => p.Id == productID && p.State > 0);
+            return _dbContext.Products.FirstOrDefault(p => p.Id == productID);
         }
         public Product CreateProduct(Product product)
         {

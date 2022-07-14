@@ -16,7 +16,7 @@ export class CategoriesListComponent implements OnInit {
   @ViewChild('paginator', { static: false}) paginator: MatPaginator;
   filter: FilterParamsCategories = {
     pageindex: 1,
-    pagesize: 5,
+    pagesize: 10,
     sort: null
   };
   static readonly addForm = 0;

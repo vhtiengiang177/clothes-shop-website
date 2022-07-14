@@ -20,7 +20,7 @@ export class StaffListComponent implements OnInit {
   @ViewChild('paginator', { static: false }) paginator: MatPaginator;
   filter: FilterParamsAccounts = {
     pageindex: 1,
-    pagesize: 5,
+    pagesize: 10,
     sort: null
   };
 

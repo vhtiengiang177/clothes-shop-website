@@ -38,7 +38,7 @@ namespace clothing_shop_website.Areas.Admin.Controllers
             try
             {
                 int currentPageIndex = filterParams.PageIndex ?? 1;
-                int currentPageSize = filterParams.PageSize ?? 5;
+                int currentPageSize = filterParams.PageSize ?? 10;
 
                 IQueryable<Product> lProductItems;
 
@@ -217,12 +217,13 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                     oldProduct.Name = product.Name;
                     oldProduct.TotalBuy = 0;
                     oldProduct.UnitPrice = product.UnitPrice;
-                    oldProduct.PricePromotion = product.PricePromotion;
+                    oldProduct.PricePromotion = product.UnitPrice;
                     oldProduct.State = 1;
                     oldProduct.CreatedById = product.CreatedById;
                     oldProduct.CreatedDate = product.CreatedDate;
                     oldProduct.Description = product.Description;
                     oldProduct.IdCategory = product.IdCategory;
+                    oldProduct.AvgRating = 5;
                     oldProduct.LastModified = null;
                     oldProduct.ModifiedById = null;
                     _unitOfWork.ProductsRepository.UpdateProduct(oldProduct);
@@ -230,6 +231,8 @@ namespace clothing_shop_website.Areas.Admin.Controllers
                 }
                 else
                 {
+                    product.PricePromotion = product.UnitPrice;
+                    product.AvgRating = 5;
                     result = _unitOfWork.ProductsRepository.CreateProduct(product);
                 }
                 

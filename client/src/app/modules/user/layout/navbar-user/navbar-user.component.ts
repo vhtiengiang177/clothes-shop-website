@@ -30,7 +30,7 @@ export class NavbarUserComponent implements OnInit {
           else if (this.currentRouter == "/login" || this.currentRouter == "/register")
             this.clickLogin()
           else if (this.currentRouter == "/promotions")
-            this.clickPromotionPage
+            this.clickPromotionPage()
           else this.clickHomePage()
         }
       });
@@ -62,7 +62,6 @@ export class NavbarUserComponent implements OnInit {
     this.isAboutUsActive = false
   }
 
-  
   clickAboutUsPage() {
     this.isAboutUsActive = true
     this.isContactActive = false
